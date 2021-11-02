@@ -37,4 +37,4 @@ Check app license <a href = "LICENSE">here</a>
 Click <a href = "CONTRIBUTING.md">here</a> to learn how to contribute.
 
 ## XDA Thread
-Check xda thread <a href = "https://forums.xda-developers.com">here</a>.
+Check xda thread <a href = "https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/">here</a>.
