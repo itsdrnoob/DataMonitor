@@ -4,7 +4,7 @@
 [![License](https://shields.io/badge/release-v1.0-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
 
 <div align="center">
-<img src="images/icon.png" width="20%" height="20%"></img>
+<img src="https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/icon.png" width="20%" height="20%"></img>
 
 # Data Monitor
 Track all your data usage - at one place
@@ -23,12 +23,12 @@ Track all your data usage - at one place
 - Light-weight and Open Source
 
 ## Screenshots
-![Home light](images/ss_all_light.png)<br><br>
-![Home light](images/ss_all_dark.png)
+![Home light](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_light.png)<br><br>
+![Home light](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_dark.png)
 <br><br>
 
 ## Download
-Check <a href = "">releases</a>
+Check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.0">releases</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>
