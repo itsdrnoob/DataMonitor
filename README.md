@@ -24,11 +24,12 @@ Track all your data usage - at one place
 
 ## Screenshots
 ![Home light](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_light.png)<br><br>
-![Home light](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_dark.png)
+![Home Dark](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_dark.png)
 <br><br>
 
 ## Download
-Check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.0">releases</a>
+[<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=7161016148664832361)<br><br>
+Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.0">releases</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>
