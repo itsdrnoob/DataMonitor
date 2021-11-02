@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh_data_usage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/background"
+    tools:context=".ui.fragments.SystemDataUsageFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/top_bar_scrolling"
+            android:elevation="@dimen/elevation_small"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/margin_mid_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/data_usage_session"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_mid_large"
+                android:layout_weight="1"
+                android:background="@drawable/selectable_item_plain_background"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_arrow_down_14"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/text_primary"
+                android:elevation="@dimen/elevation_default"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_large"
+                android:text="@string/label_today"
+                android:textSize="@dimen/text_mid_large" />
+
+            <TextView
+                android:id="@+id/data_usage_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_mid_large"
+                android:layout_weight="1"
+                android:background="@drawable/selectable_item_plain_background"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_arrow_down_14"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/text_primary"
+                android:elevation="@dimen/elevation_default"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_mid_large"
+                android:text="@string/label_mobile_data"
+                android:textSize="@dimen/text_mid_large" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/apps_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_loading_apps"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/app_data_usage_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/radius_large"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/app_data_usage_item" />
+
+        <TextView
+            android:id="@+id/empty_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation_small"
+            android:drawablePadding="@dimen/margin_small"
+            android:gravity="center"
+            android:visibility="visible"
+            android:alpha="0"
+            android:textColor="@color/error"
+            android:drawableStart="@drawable/ic_sad"
+            android:drawableTint="@color/error"
+            android:text="@string/label_app_data_usage_session_empty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/layout_list_loading"
+            layout="@layout/app_data_usage_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

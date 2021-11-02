@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.PreferenceHeader>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="Donate in crypto"
+            app:allowDividerBelow="false"
+            app:allowDividerAbove="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="Bitcoin"
+                android:icon="@drawable/ic_bitcoin"
+                android:key="bitcoin"
+                app:summary="@string/btc_address"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="Ethereum"
+                android:icon="@drawable/ic_ethereum"
+                android:key="ethereum"
+                app:summary="@string/eth_address"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="Litecoin"
+                android:icon="@drawable/ic_litecoin"
+                android:key="litecoin"
+                app:summary="@string/ltc_address"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="UPI"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="BHIM-UPI"
+                app:summary="Donate via UPI"
+                android:key="bhim"
+                android:icon="@drawable/ic_bhim"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+    </com.drnoob.datamonitor.core.base.PreferenceHeader>
+</PreferenceScreen>

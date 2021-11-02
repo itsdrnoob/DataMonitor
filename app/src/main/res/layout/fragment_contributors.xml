@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/contribute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/label_want_to_contribute"
+            android:drawableStart="@drawable/ic_info"
+            android:drawablePadding="@dimen/margin_mid_large"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:elevation="@dimen/elevation_default"
+            android:clickable="true"
+            android:background="@drawable/banner_background"
+            android:paddingTop="@dimen/margin_mid_large"
+            android:paddingBottom="@dimen/margin_mid_large"/>
+
+        <fragment
+            android:id="@+id/contributors_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            class="com.drnoob.datamonitor.ui.fragments.ContributorsFragment$Contributors"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+
+
+    <color name="primary">#087AFF</color>
+    <color name="primary_variant">#002F66</color>
+    <color name="background">#F6F6F6</color>
+    <color name="surface">@color/white</color>
+    <color name="on_background">#001329</color>
+    <color name="on_surface">#001733</color>
+    <color name="text_primary">#001733</color>
+    <color name="text_secondary">#6E7987</color>
+    <color name="error">#FF1111</color>
+    <color name="error_95">#FFE5E6</color>
+    <color name="on_error">@color/white</color>
+    <color name="green">#00FF38</color>
+    <color name="top_bar_scrolling">#AEFFFFFF</color>
+    <color name="top_bar_still">#00FFFFFF</color>
+    <color name="graph_divider_primary">#D6D6D6</color>
+    <color name="graph_divider_secondary">#E6E6E6</color>
+    <color name="color_loading_background">#F1F1F1</color>
+    <color name="mobile_data_usage_background_home">#FFD6D6</color>
+    <color name="data_usage_home_stroke">@color/white</color>
+    <color name="wifi_usage_bg_home">#D6FFDF</color>
+    <color name="usage_wifi_ripple">#99FFAF</color>
+    <color name="usage_mobile_ripple">#FF9999</color>
+    <color name="bottom_sheet">@color/background</color>
+    <color name="switch_off">#EBEBEB</color>
+    <color name="switch_on_thumb">@color/white</color>
+    <color name="switch_off_thumb">@color/white</color>
+    <color name="bottom_sheet_handle">#AFBAC9</color>
+    <color name="ripple">@color/graph_divider_secondary</color>
+    <color name="widget_background">#EFFFFFFF</color>
+    <color name="info_banner_bg">#F0FFF9</color>
+    <color name="error_banner_bg">#FFE5E6</color>
+</resources>

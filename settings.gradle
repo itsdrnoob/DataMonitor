@@ -1,0 +1,2 @@
+rootProject.name = "Data Monitor"
+include ':app'

@@ -1,0 +1,49 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.DataMonitor" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/surface</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="snackbarStyle">@style/Theme.SnackBar</item>
+        <item name="snackbarTextViewStyle">@style/Theme.SnackBar.Text</item>
+    </style>
+
+    <style name="ThemeOverlay.DataUsage.AppWidgetContainer" parent="">
+        <item name="appWidgetBackgroundColor">@color/light_blue_900</item>
+        <item name="appWidgetTextColor">@color/light_blue_200</item>
+    </style>
+
+    <style name="Theme.SnackBar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:layout_margin">10dp</item>
+        <item name="backgroundTint">@color/bottom_sheet</item>
+    </style>
+
+    <style name="Theme.SnackBar.Text" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_splash</item>
+        <item name="android:statusBarColor">@color/surface</item>
+    </style>
+
+</resources>

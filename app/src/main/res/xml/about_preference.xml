@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.PreferenceHeader
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/support_and_development"
+            app:iconSpaceReserved="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/github"
+                app:icon="@drawable/ic_github"
+                app:summary="@string/github_summary"
+                android:key="github"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent android:action="android.intent.action.VIEW"
+                    android:data="@string/github_source"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/xda"
+                app:icon="@drawable/ic_xda"
+                android:key="xda"
+                app:summary="@string/xda_summary"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent android:action="android.intent.action.VIEW"
+                    android:data="@string/xda_thread"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/report"
+                app:icon="@drawable/ic_bug"
+                android:key="report"
+                app:summary="@string/report_summary"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent android:action="android.intent.action.VIEW"
+                    android:data="@string/github_issue"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+    </com.drnoob.datamonitor.core.base.PreferenceHeader>
+
+</PreferenceScreen>

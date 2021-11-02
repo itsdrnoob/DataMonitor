@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/usage_wifi_ripple">
+    <item android:id="@+id/item_ripple">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/wifi_usage_bg_home"/>
+            <corners android:radius="30dp"/>
+            <stroke android:color="@color/data_usage_home_stroke"
+                android:width="2dp"/>
+        </shape>
+        <color android:color="@color/wifi_usage_bg_home"/>
+    </item>
+
+</ripple>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/bottom_menu_home">
+
+    <fragment
+        android:id="@+id/bottom_menu_setup"
+        android:name="com.drnoob.datamonitor.ui.fragments.SetupFragment"
+        android:label="@string/setup"
+        tools:layout="@layout/fragment_setup" >
+    </fragment>
+    <fragment
+        android:id="@+id/bottom_menu_home"
+        android:name="com.drnoob.datamonitor.ui.fragments.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home_test" >
+    </fragment>
+    <fragment
+        android:id="@+id/bottom_menu_app_data_usage"
+        android:name="com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment"
+        android:label="@string/app_data_usage"
+        tools:layout="@layout/fragment_app_data_usage">
+    </fragment>
+    <fragment
+        android:id="@+id/bottom_menu_settings"
+        android:name="com.drnoob.datamonitor.ui.fragments.SettingsFragment"
+        android:label="@string/settings">
+    </fragment>
+
+    <fragment
+        android:id="@+id/system_data_usage"
+        android:name="com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment"
+        tools:layout="@layout/fragment_system_data_usage"
+        android:label="@string/app_data_usage"/>
+</navigation>

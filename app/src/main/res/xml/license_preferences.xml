@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.PreferenceHeader>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:title="@string/app_license_header"
+            android:key="app_license"
+            android:icon="@drawable/ic_license"
+            app:widgetLayout="@layout/preference_right_arrow"/>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:title="@string/oss_licenses"
+            android:key="oss_license"
+            android:icon="@drawable/ic_open_source"
+            app:widgetLayout="@layout/preference_right_arrow"/>
+
+    </com.drnoob.datamonitor.core.base.PreferenceHeader>
+</PreferenceScreen>

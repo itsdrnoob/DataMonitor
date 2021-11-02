@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_margin">0dp</dimen>
+
+    <dimen name="elevation_default">2dp</dimen>
+    <dimen name="margin_null">0dp</dimen>
+    <dimen name="elevation_null">0dp</dimen>
+    <dimen name="margin_extra_small">5dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_medium">15dp</dimen>
+    <dimen name="radius_large">100dp</dimen>
+    <dimen name="margin_large">30dp</dimen>
+    <dimen name="margin_mid_large">20dp</dimen>
+    <dimen name="margin_extra_large">50dp</dimen>
+    <dimen name="elevation_small">1dp</dimen>
+    <dimen name="update_btn_medium">3dp</dimen>
+    <dimen name="margin_negative_small">-10dp</dimen>
+    <dimen name="margin_negative_extra_small">-5dp</dimen>
+    <dimen name="widget_padding_small">2.5dp</dimen>
+    <dimen name="overview_max_height">350dp</dimen>
+    <dimen name="text_extra_small">10sp</dimen>
+    <dimen name="text_large">22sp</dimen>
+    <dimen name="text_mid_large">16sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+</resources>

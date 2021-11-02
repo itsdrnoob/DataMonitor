@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background">
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="45dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/bottom_sheet_handle_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_mid_large"
+        android:text="@string/title_add_data_plan"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view3" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_mid_large"
+        android:layout_marginTop="@dimen/margin_mid_large"
+        android:text="@string/heading_data_reset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <RadioGroup
+        android:id="@+id/data_reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <RadioButton
+            android:id="@+id/daily"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:buttonTint="@color/primary"
+            android:checked="true"
+            android:paddingLeft="@dimen/margin_large"
+            android:text="@string/daily" />
+
+        <RadioButton
+            android:id="@+id/monthly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:buttonTint="@color/primary"
+            android:paddingLeft="@dimen/margin_large"
+            android:text="@string/monthly" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_mid_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/heading_data_limit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data_reset" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/data_limit"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/text_input_background"
+        android:gravity="center"
+        android:hint="@string/data_limit_placeholder"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:layout_constraintBottom_toBottomOf="@+id/data_limit"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/data_limit"
+        app:layout_constraintTop_toTopOf="@+id/data_limit">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/data_type_switcher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_base"
+            app:tabGravity="fill"
+            app:tabBackground="@drawable/tabs_selector"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/text_secondary">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/data_type_mb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_type_mb"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/data_type_gb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_type_gb"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/footer"
+        layout="@layout/bottom_sheet_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintTop_toBottomOf="@+id/data_limit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

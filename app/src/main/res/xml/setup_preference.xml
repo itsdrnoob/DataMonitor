@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.drnoob.datamonitor.core.base.PreferenceHeader
+        android:title="@string/title_setup"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:icon="@drawable/ic_widget"
+            android:key="setup_widget"
+            android:title="@string/setup_widget"
+            app:widgetLayout="@layout/preference_right_arrow"/>
+
+        <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+            android:icon="@drawable/ic_notification"
+            android:key="setup_notification"
+            android:title="@string/setup_notification" />
+
+    </com.drnoob.datamonitor.core.base.PreferenceHeader>
+
+    <com.drnoob.datamonitor.core.base.PreferenceHeader
+        android:title="@string/title_configure"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false">
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/setup_widget_title"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_widget_refresh_interval"
+                app:iconSpaceReserved="false"
+                android:key="widget_refresh_interval"
+                android:summary="@string/refresh_interval_placeholder"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_show_remaining_data"
+                app:iconSpaceReserved="false"
+                android:key="remaining_data_info"
+                android:defaultValue="true"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_refresh_widget"
+                android:summary="@string/refresh_widget_summary"
+                android:key="refresh_widget"
+                app:iconSpaceReserved="false"/>
+
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/setup_notification_title"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_notification_refresh_interval"
+                app:iconSpaceReserved="false"
+                android:key="notification_refresh_interval"
+                android:summary="@string/refresh_interval_placeholder"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_show_mobile_usage"
+                android:key="show_mobile_data_notification"
+                app:iconSpaceReserved="false"
+                android:defaultValue="true"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_show_wifi_usage"
+                android:key="show_wifi_notification"
+                app:iconSpaceReserved="false"
+                android:defaultValue="true"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/monitor_data"
+            app:iconSpaceReserved="false"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false">
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_data_alert"
+                android:key="data_usage_alert"
+                app:iconSpaceReserved="false"
+                app:summary="@string/data_alert_summary"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_data_alert_trigger_level"
+                android:key="data_warning_trigger_level"
+                app:summary="@string/label_data_trigger_level"
+                app:iconSpaceReserved="false"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/settings_general"
+            app:iconSpaceReserved="false"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_add_data_plan"
+                android:key="add_data_plan"
+                app:iconSpaceReserved="false"
+                app:widgetLayout="@layout/preference_right_arrow"
+                app:summary="@string/add_data_plan_summary"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_usage_reset_time"
+                android:key="data_usage_reset_time"
+                app:iconSpaceReserved="false"
+                app:widgetLayout="@layout/preference_right_arrow"
+                app:summary="@string/usage_reset_time_placeholder"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+    </com.drnoob.datamonitor.core.base.PreferenceHeader>
+
+</PreferenceScreen>

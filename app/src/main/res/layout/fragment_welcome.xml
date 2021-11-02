@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="@dimen/margin_mid_large"
+        app:cardElevation="@dimen/elevation_default">
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_mid_large"
+        android:gravity="center"
+        android:text="Hey there, \n Welcome to Data Monitor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
+
+    <TextView
+        android:id="@+id/get_started"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_extra_large"
+        android:layout_marginStart="@dimen/margin_extra_large"
+        android:layout_marginTop="@dimen/margin_extra_large"
+        android:layout_marginEnd="@dimen/margin_extra_large"
+        android:background="@drawable/button_primary_default"
+        android:gravity="center"
+        android:clickable="true"
+        android:text="Get started"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/skip_setup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_extra_large"
+        android:background="@drawable/button_secondary_default"
+        android:gravity="center"
+        android:text="Skip setup"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/margin_small"
+        android:clickable="true"
+        android:layout_marginStart="@dimen/margin_extra_large"
+        android:layout_marginEnd="@dimen/margin_extra_large"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+</LinearLayout>

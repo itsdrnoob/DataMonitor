@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+
+
+    <color name="primary">#006AE5</color>
+    <color name="background">#000000</color>
+    <color name="surface">#1B1E22</color>
+    <color name="on_background">#E5F1FF</color>
+    <color name="on_surface">#001733</color>
+    <color name="text_primary">#E5F1FF</color>
+    <color name="text_secondary">#788491</color>
+    <color name="error">#E50000</color>
+    <color name="error_95">#FFE5E6</color>
+    <color name="on_error">@color/white</color>
+    <color name="green">#00CC2D</color>
+    <color name="top_bar_scrolling">#AE050505</color>
+    <color name="top_bar_still">#00FFFFFF</color>
+    <color name="graph_divider_primary">#878787</color>
+    <color name="graph_divider_secondary">#5C5C5C</color>
+    <color name="color_loading_background">#D43C4752</color>
+    <color name="mobile_data_usage_background_home">#050505</color>
+    <color name="data_usage_home_stroke">#CCE3FF</color>
+    <color name="wifi_usage_bg_home">#050505</color>
+    <color name="usage_wifi_ripple">#001733</color>
+    <color name="usage_mobile_ripple">#001733</color>
+    <color name="bottom_sheet">#22252A</color>
+    <color name="switch_off">#656565</color>
+    <color name="switch_on_thumb">@color/white</color>
+    <color name="switch_off_thumb">#A6A6A6</color>
+    <color name="bottom_sheet_handle">#6E7987</color>
+    <color name="ripple">@color/graph_divider_secondary</color>
+    <color name="widget_background">#DB000000</color>
+    <color name="info_banner_bg">#003D25</color>
+    <color name="error_banner_bg">#3D0000</color>
+</resources>

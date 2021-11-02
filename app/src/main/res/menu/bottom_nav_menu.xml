@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bottom_menu_home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"/>
+
+    <item android:id="@+id/bottom_menu_setup"
+        android:title="@string/setup"
+        android:icon="@drawable/ic_setup"/>
+
+    <item android:id="@+id/bottom_menu_app_data_usage"
+        android:title="@string/app_data_usage"
+        android:icon="@drawable/ic_app_data_usage"/>
+
+    <item android:id="@+id/bottom_menu_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
+</menu>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.PreferenceCategory
+        android:title="@string/support_and_development"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false">
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="itsdrnoob"
+            android:summary="@string/itsdrnoob_summary"
+            android:title="@string/itsdrnoob"
+            app:icon="@drawable/itsdrnoob"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_itsdrnoob" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+    </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+<!--    <com.drnoob.datamonitor.core.base.PreferenceCategory-->
+<!--        android:title="@string/label_translators"-->
+<!--        app:allowDividerAbove="false"-->
+<!--        app:allowDividerBelow="false">-->
+
+<!--    </com.drnoob.datamonitor.core.base.PreferenceCategory>-->
+
+</PreferenceScreen>
