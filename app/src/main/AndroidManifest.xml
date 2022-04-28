@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +25,7 @@
         <activity android:name=".ui.activities.SetupActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
+            android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +35,11 @@
         </activity>
         <activity android:name=".ui.activities.ContainerActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             tools:ignore="LockedOrientationActivity" />
 
-        <receiver android:name=".Widget.DataUsageWidget">
+        <receiver android:name=".Widget.DataUsageWidget"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.intent.action.SCREEN_ON" />
@@ -51,24 +56,40 @@
         <service
             android:name=".utils.NotificationService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
         <service
             android:name=".utils.DataUsageMonitor"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
 
-        <receiver android:name=".utils.DataUsageMonitor$DataMonitor">
+        <receiver android:name=".utils.DataUsageMonitor$DataMonitor"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".utils.NotificationService$NotificationRemover">
+
+        <service
+            android:name=".utils.AppDataUsageMonitor"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".utils.AppDataUsageMonitor$AppDataMonitor"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".utils.NotificationService$NotificationRemover"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".utils.NotificationService$NotificationUpdater">
+        <receiver android:name=".utils.NotificationService$NotificationUpdater"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_OFF" />
                 <action android:name="android.intent.action.SCREEN_ON" />
@@ -82,17 +103,20 @@
             android:fitsSystemWindows="true"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
+            android:exported="false"
             tools:ignore="LockedOrientationActivity">
         </activity>
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.License"
             android:screenOrientation="portrait"
+            android:exported="false"
             tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/Theme.License"
             android:screenOrientation="portrait"
+            android:exported="false"
             tools:ignore="LockedOrientationActivity"/>
     </application>
 

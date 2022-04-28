@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView9"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="@dimen/margin_mid_large"-->
+    <!--        android:layout_marginTop="@dimen/margin_mid_large"-->
+    <!--        android:text="Limit app data usage"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ProgressBar
+        android:id="@+id/load_apps_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:elevation="1dp"
+        android:hapticFeedbackEnabled="true"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingBottom="150dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/app_data_usage_item" />
+
+    <FrameLayout
+        android:id="@+id/delete_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_extra_small"
+        android:background="@drawable/selectable_item_plain_background"
+        android:backgroundTint="@color/error"
+        android:clickable="true"
+        android:padding="@dimen/margin_medium"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/delete"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Deleted"-->
+        <!--            android:alpha="0"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:layout_alignParentStart="true"-->
+        <!--            android:layout_centerVertical="true"-->
+        <!--            android:layout_gravity="center_vertical"-->
+        <!--            android:padding="@dimen/margin_medium"-->
+        <!--            android:textColor="@color/white"/>-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/undo"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Undo"-->
+        <!--            android:alpha="0"-->
+        <!--            android:layout_gravity="end|center_vertical"-->
+        <!--            android:padding="@dimen/margin_medium"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            android:layout_centerVertical="true"-->
+        <!--            android:textColor="@color/white"/>-->
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end|center_vertical"
+            android:alpha="1"
+            android:src="@drawable/ic_trail_arrow_left"
+            android:visibility="visible"
+            app:tint="@color/white" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/app_data_limit_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:background="@drawable/banner_background"
+        android:backgroundTint="@color/warning_banner_bg"
+        android:drawableStart="@drawable/ic_info"
+        android:drawablePadding="@dimen/margin_mid_large"
+        android:drawableTint="@color/warning"
+        android:elevation="@dimen/elevation_default"
+        android:gravity="center_vertical"
+        android:padding="@dimen/margin_medium"
+        android:text="No apps added. Click the below button to add an appication."
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/add_app_fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_app_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_mid_large"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:text="Add Application"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

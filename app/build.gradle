@@ -50,5 +50,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.0.0'
     implementation "com.github.skydoves:progressview:1.1.2"
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+//    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
 }

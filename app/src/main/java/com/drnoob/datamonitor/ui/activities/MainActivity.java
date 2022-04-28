@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
 
                 DatabaseHandler databaseHandler = new DatabaseHandler(MainActivity.this);
-                if (databaseHandler.getUsageList().size() > 0) {
+                if (databaseHandler.getUsageList() != null && databaseHandler.getUsageList().size() > 0) {
 
                 } else {
                     FetchApps fetchApps = new FetchApps(this);
@@ -236,11 +236,16 @@ public class MainActivity extends AppCompatActivity {
                 NotificationManager.IMPORTANCE_LOW);
         NotificationChannel warningChannel = new NotificationChannel(DATA_USAGE_WARNING_CHANNEL_ID, DATA_USAGE_WARNING_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel appWarningChannel = new NotificationChannel(APP_DATA_USAGE_WARNING_CHANNEL_ID, APP_DATA_USAGE_WARNING_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH);
         warningChannel.enableVibration(true);
         warningChannel.enableLights(true);
+        appWarningChannel.enableVibration(true);
+        appWarningChannel.enableLights(true);
         List<NotificationChannel> channels = new ArrayList<>();
         channels.add(usageChannel);
         channels.add(warningChannel);
+        channels.add(appWarningChannel);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannels(channels);

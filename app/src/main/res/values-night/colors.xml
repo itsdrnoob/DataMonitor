@@ -23,6 +23,9 @@
     <color name="error">#E50000</color>
     <color name="error_95">#FFE5E6</color>
     <color name="on_error">@color/white</color>
+    <color name="warning">#E5C100</color>
+    <color name="warning_95">#FFFBE5</color>
+    <color name="on_warning">@color/white</color>
     <color name="green">#00CC2D</color>
     <color name="top_bar_scrolling">#AE050505</color>
     <color name="top_bar_still">#00FFFFFF</color>
@@ -43,4 +46,5 @@
     <color name="widget_background">#DB000000</color>
     <color name="info_banner_bg">#003D25</color>
     <color name="error_banner_bg">#3D0000</color>
+    <color name="warning_banner_bg">#4D4000</color>
 </resources>

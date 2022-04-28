@@ -85,7 +85,6 @@
     <string name="monitor_data">Monitor data usage</string>
     <string name="setup_data_alert">Data usage alert</string>
     <string name="data_alert_summary">Notify you when data limit is reached</string>
-    <string name="setup_data_alert_trigger_level">Data warning trigger level</string>
     <string name="settings_general">General</string>
     <string name="setup_add_data_plan">Add data plan</string>
     <string name="add_data_plan_summary">Add or update your data plan</string>
@@ -157,6 +156,7 @@
     <string name="label_add_data_plan_first">Please add a data plan first</string>
     <string name="title_data_warning_notification">Data usage warning</string>
     <string name="body_data_warning_notification">You\'ve used up %1$d%% of your data limit</string>
+    <string name="body_app_data_warning_notification">%1$s has used up it\'s data quota</string>
     <string name="title_data_usage_notification">Data usage today</string>
     <string name="body_data_usage_notification_loading">Loading...</string>
     <string name="label_data_remaining">%1$s remaining</string>
@@ -180,5 +180,7 @@
     <string name="overview_0_5gb">0.5 GB</string>
     <string name="overview_0gb">0 GB</string>
     <string name="label_translators">Translators</string>
+    <string name="setup_app_data_usage_alert">App data usage alert</string>
+    <string name="title_app_data_limit">App data limit</string>
 
 </resources>

@@ -26,6 +26,10 @@ public class Values {
     public static final int DATA_USAGE_WARNING_NOTIFICATION_ID = 0x00A0;
     public static final String DATA_USAGE_WARNING_CHANNEL_ID = "DataUsage.Warning";
     public static final String DATA_USAGE_WARNING_CHANNEL_NAME = "Data Usage Warning";
+    public static final int APP_DATA_USAGE_WARNING_NOTIFICATION_ID = 0x00BE; // 190
+    public static final String APP_DATA_USAGE_WARNING_CHANNEL_ID = "AppDataUsage.Warning";
+    public static final String APP_DATA_USAGE_WARNING_CHANNEL_NAME = "App Data Usage Warning";
+
 
     public static final int SESSION_TODAY = 0x000A;
     public static final int SESSION_YESTERDAY = 0x0014;
@@ -50,6 +54,8 @@ public class Values {
     public static final int CONTRIBUTORS_FRAGMENT = 0x0082;
     public static final int DONATE_FRAGMENT = 0x008C;
     public static final int APP_LICENSE = 0x0096;
+    public static final int APP_DATA_LIMIT = 0x00AA;
+
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
     public static final int BOTTOM_NAVBAR_ITEM_SETUP = 1;
@@ -57,7 +63,7 @@ public class Values {
     public static final int BOTTOM_NAVBAR_ITEM_SETTINGS = 3;
 
     public static final String SETUP_VALUE = "SETUP_VALUE";
-    public static final int USAGE_ACCESS_DISABLED = 0x00AA; //170
+    public static final int USAGE_ACCESS_DISABLED = 0x00B4;
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";

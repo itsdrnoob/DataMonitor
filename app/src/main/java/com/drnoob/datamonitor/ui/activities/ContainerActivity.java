@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
 import com.drnoob.datamonitor.ui.fragments.AboutFragment;
+import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
@@ -36,6 +37,7 @@ import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
 import org.jetbrains.annotations.NotNull;
 
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
@@ -86,6 +88,11 @@ public class ContainerActivity extends AppCompatActivity {
             case APP_LICENSE:
                 fragment = new LicenseFragment();
                 title = getString(R.string.app_license_header);
+                break;
+
+            case APP_DATA_LIMIT:
+                fragment = new AppDataLimitFragment();
+                title = getString(R.string.title_app_data_limit);
                 break;
         }
 
