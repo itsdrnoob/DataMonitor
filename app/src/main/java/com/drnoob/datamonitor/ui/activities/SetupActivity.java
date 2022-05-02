@@ -212,6 +212,20 @@ public class SetupActivity extends AppCompatActivity {
                 oemSkinWarning.setText(getContext().getString(R.string.oem_skin_warning, getContext().getString(R.string.oem_skin_miui)));
             }
 
+
+            Intent OemSettingsIntent = new Intent("android.settings.APP_BATTERY_SETTINGS");
+            Uri OemSettingsUri = Uri.fromParts("package", getContext().getPackageName(), null);
+            OemSettingsIntent.setData(OemSettingsUri);
+            OemSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            if (OemSettingsIntent.resolveActivity(getActivity().getPackageManager()) == null) {
+                // No OEM Battery Settings Intent found
+                oemSettings.setVisibility(View.GONE);
+            }
+            else {
+
+            }
+
             String oem = Build.BRAND;
             
             extraOptimisation.setOnClickListener(new View.OnClickListener() {
@@ -234,11 +248,7 @@ public class SetupActivity extends AppCompatActivity {
             oemSettings.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent("android.settings.APP_BATTERY_SETTINGS");
-                    Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
-                    intent.setData(uri);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    startActivity(OemSettingsIntent);
                 }
             });
 
