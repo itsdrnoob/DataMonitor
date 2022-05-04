@@ -66,7 +66,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.ParseException;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
-import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
@@ -920,7 +920,7 @@ public class SetupFragment extends Fragment {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
                     startActivity(new Intent(getContext(), ContainerActivity.class)
-                            .putExtra(GENERAL_FRAGMENT_ID, APP_DATA_LIMIT));
+                            .putExtra(GENERAL_FRAGMENT_ID, APP_DATA_LIMIT_FRAGMENT));
                     return false;
                 }
             });
