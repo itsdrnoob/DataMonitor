@@ -93,10 +93,19 @@
                 app:summary="@string/data_alert_summary"/>
 
             <com.drnoob.datamonitor.core.base.Preference
-                android:title="@string/setup_data_alert_trigger_level"
+                android:title="@string/title_data_warning_trigger"
                 android:key="data_warning_trigger_level"
                 app:summary="@string/label_data_trigger_level"
                 app:iconSpaceReserved="false"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/setup_app_data_usage_alert"
+                android:key="app_data_limit"
+                app:summary="Notify when an app has consumed a specific amount of data"
+                app:iconSpaceReserved="false"
+                app:isPreferenceVisible="false"
+                android:fragment="com.drnoob.datamonitor.ui.fragments.DonateFragment"
                 app:widgetLayout="@layout/preference_right_arrow"/>
 
         </com.drnoob.datamonitor.core.base.PreferenceCategory>

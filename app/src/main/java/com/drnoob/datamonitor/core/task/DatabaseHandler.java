@@ -36,7 +36,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG = DatabaseHandler.class.getSimpleName();
     private static final String DATABASE_NAME = "appDataUsage";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
 
     public DatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +47,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.e(TAG, "onCreate: ");
         String createTable = "CREATE TABLE app_data_usage(uid INTEGER PRIMARY KEY, app_name TEXT," +
                 "package_name TEXT, system_app BOOLEAN)";
+//        String createTable2 = "CREATE TABLE app_data_monitor_list(uid INTEGER PRIMARY KEY, app_name TEXT," +
+//                "package_name TEXT, system_app BOOLEAN)";
         db.execSQL(createTable);
+//        db.execSQL(createTable2);
     }
 
     @Override
@@ -107,5 +110,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         return database.update("app_data_usage", values, "uid =?",
                 new String[]{String.valueOf(model.getUid())});
+    }
+
+    public void createAppDataMonitorList(AppDataUsageModel model) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("uid", model.getUid());
+        values.put("app_name", model.getAppName());
+        values.put("package_name", model.getPackageName());
+        values.put("system_app", model.isSystemApp());
+
+        try {
+            database.insert("app_data_monitor_list", null, values);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            database.close();
+        }
+    }
+
+    public List<AppDataUsageModel> getAppMonitorList() {
+        List<AppDataUsageModel> mList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM app_data_monitor_list";
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                AppDataUsageModel model = new AppDataUsageModel();
+                model.setUid(cursor.getInt(cursor.getColumnIndex("uid")));
+                model.setAppName(cursor.getString(cursor.getColumnIndex("app_name")));
+                model.setPackageName(cursor.getString(cursor.getColumnIndex("package_name")));
+                model.setIsSystemApp(cursor.getInt(cursor.getColumnIndex("system_app")) != 0);
+
+                mList.add(model);
+            }
+            while (cursor.moveToNext());
+            cursor.close();
+            database.close();
+
+        }
+
+        return mList;
     }
 }

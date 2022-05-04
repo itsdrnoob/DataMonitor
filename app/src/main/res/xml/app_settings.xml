@@ -59,6 +59,7 @@
             app:icon="@drawable/ic_donate"
             android:key="donate"
             app:summary="@string/donate_summay"
+            android:fragment="com.drnoob.datamonitor.ui.fragments.SetupFragment"
             android:widgetLayout="@layout/preference_right_arrow" />
 
     </com.drnoob.datamonitor.core.base.PreferenceCategory>

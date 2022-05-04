@@ -22,4 +22,9 @@
     <dimen name="text_large">22sp</dimen>
     <dimen name="text_mid_large">16sp</dimen>
     <dimen name="text_small">12sp</dimen>
+    <dimen name="ripple_stroke_width">2dp</dimen>
+    <dimen name="ripple_radius">100dp</dimen>
+    <dimen name="padding_medium">15dp</dimen>
+    <dimen name="text_run_diagnostics">20sp</dimen>
+    <dimen name="button_default">55dp</dimen>
 </resources>

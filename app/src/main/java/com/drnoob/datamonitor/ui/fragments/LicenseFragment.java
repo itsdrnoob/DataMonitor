@@ -44,7 +44,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static com.drnoob.datamonitor.core.Values.APP_LICENSE;
+import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 
@@ -107,7 +107,7 @@ public class LicenseFragment extends Fragment {
             mAppLicense.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    startActivity(new Intent(getContext(), ContainerActivity.class).putExtra(GENERAL_FRAGMENT_ID, APP_LICENSE));
+                    startActivity(new Intent(getContext(), ContainerActivity.class).putExtra(GENERAL_FRAGMENT_ID, APP_LICENSE_FRAGMENT));
                     return false;
                 }
             });

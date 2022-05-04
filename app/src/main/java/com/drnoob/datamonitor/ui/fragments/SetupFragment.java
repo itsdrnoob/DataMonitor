@@ -34,7 +34,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -50,6 +49,7 @@ import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.core.Values;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
@@ -66,6 +66,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.ParseException;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
@@ -76,6 +77,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_ALERT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
@@ -124,7 +126,7 @@ public class SetupFragment extends Fragment {
     public static class SetupPreference extends PreferenceFragmentCompat {
         private static final String TAG = SetupPreference.class.getSimpleName();
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
-                mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger;
+                mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowMobileData, mShowWifi,
                 mShowDataWarning;
         private Snackbar snackbar;
@@ -140,6 +142,7 @@ public class SetupFragment extends Fragment {
             mUsageResetTime = (Preference) findPreference("data_usage_reset_time");
             mWidgetRefresh = (Preference) findPreference("refresh_widget");
             mDataWarningTrigger = (Preference) findPreference("data_warning_trigger_level");
+            mAppDataLimit = (Preference) findPreference("app_data_limit");
 
             mSetupNotification = (SwitchPreferenceCompat) findPreference("setup_notification");
             mRemainingDataInfo = (SwitchPreferenceCompat) findPreference("remaining_data_info");
@@ -567,7 +570,7 @@ public class SetupFragment extends Fragment {
 
                     RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
                     TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
-                    TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.data_type_switcher);
+                    TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
                     ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                     TextView cancel = footer.findViewById(R.id.cancel);
                     TextView ok = footer.findViewById(R.id.ok);
@@ -909,6 +912,15 @@ public class SetupFragment extends Fragment {
 
                     dialog.setContentView(dialogView);
                     dialog.show();
+                    return false;
+                }
+            });
+
+            mAppDataLimit.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    startActivity(new Intent(getContext(), ContainerActivity.class)
+                            .putExtra(GENERAL_FRAGMENT_ID, APP_DATA_LIMIT_FRAGMENT));
                     return false;
                 }
             });

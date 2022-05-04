@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.Editable;
@@ -42,7 +41,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -185,7 +183,7 @@ public class HomeFragment extends Fragment {
 
                 RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
                 TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
-                TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.data_type_switcher);
+                TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
                 ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);

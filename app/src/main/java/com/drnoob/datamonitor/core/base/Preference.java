@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,7 +59,6 @@ public class Preference extends androidx.preference.Preference {
             TextView summary = (TextView) holder.findViewById(android.R.id.summary);
             rootLayout.setBackgroundResource(R.drawable.selectable_item_plain_background);
             summary.setTextColor(getContext().getResources().getColor(R.color.text_secondary, null));
-
 
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) rootLayout.getLayoutParams();
             layoutParams.leftMargin = 25;

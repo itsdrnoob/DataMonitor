@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margin_mid_large">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/network_ip_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/network_ip"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/network_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/network_ip_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="127.63.1.1"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/isp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/isp"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/isp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/isp_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="Reliance Jio"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/isp_server_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/isp_server"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/isp_server"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/isp_server_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="Cochin"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/isp_region_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/isp_region"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/isp_region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_toEndOf="@id/isp_region_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/primary"
+                android:text="Kerala"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/max_download_speed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/max_download_speed"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/max_download_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/max_download_speed_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="@string/network_speed_mbps"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/avg_download_speed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/avg_download_speed"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/avg_download_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/avg_download_speed_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="@string/network_speed_mbps"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/max_upload_speed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/max_upload_speed"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/max_upload_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/max_upload_speed_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="@string/network_speed_mbps"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/avg_upload_speed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/avg_upload_speed"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/avg_upload_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/avg_upload_speed_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="@string/network_speed_mbps"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/min_latency_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/min_latency"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/min_latency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/min_latency_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="@string/network_latency_ms"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginBottom="@dimen/margin_extra_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/selectable_item_plain_background"
+            android:padding="@dimen/margin_small"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/avg_latency_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/margin_medium"
+                android:text="@string/avg_latency"
+                android:textSize="@dimen/text_mid_large"/>
+
+            <TextView
+                android:id="@+id/avg_latency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_medium"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/avg_latency_title"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:textColor="@color/primary"
+                android:text="@string/network_speed_mbps"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

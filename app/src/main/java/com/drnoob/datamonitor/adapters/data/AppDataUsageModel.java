@@ -32,6 +32,8 @@ public class AppDataUsageModel implements Serializable {
     private Float mMobileTotal, mWifiTotal;
     private int uid, session, type, progress;
     private Boolean isSystemApp;
+    private Boolean isAppsList;
+    private String dataLimit, dataType;
 
     private List<AppDataUsageModel> list;
 
@@ -56,6 +58,14 @@ public class AppDataUsageModel implements Serializable {
         this.mPackageName = mPackageName;
         this.uid = uid;
         this.isSystemApp = isSystemApp;
+    }
+
+    public AppDataUsageModel(String mAppName, String mPackageName, int uid, Boolean isSystemApp, Boolean isAppsList) {
+        this.mAppName = mAppName;
+        this.mPackageName = mPackageName;
+        this.uid = uid;
+        this.isSystemApp = isSystemApp;
+        this.isAppsList = isAppsList;
     }
 
 
@@ -185,5 +195,29 @@ public class AppDataUsageModel implements Serializable {
 
     public void setList(List<AppDataUsageModel> list) {
         this.list = list;
+    }
+
+    public Boolean isAppsList() {
+        return isAppsList;
+    }
+
+    public void setIsAppsList(Boolean appsList) {
+        isAppsList = appsList;
+    }
+
+    public String getDataLimit() {
+        return dataLimit;
+    }
+
+    public void setDataLimit(String dataLimit) {
+        this.dataLimit = dataLimit;
+    }
+
+    public String getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 }

@@ -12,6 +12,10 @@
         android:title="@string/app_data_usage"
         android:icon="@drawable/ic_app_data_usage"/>
 
+    <item android:id="@+id/bottom_menu_network_diagnostics"
+        android:title="@string/network_diagnostics"
+        android:icon="@drawable/ic_network_diagnostics"/>
+
     <item android:id="@+id/bottom_menu_settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"/>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_background">
 
     <View
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_mid_large"
-        android:text="@string/title_add_data_plan"
+        android:text="@string/title_app_data_limit"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,39 +34,79 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_mid_large"
         android:layout_marginTop="@dimen/margin_mid_large"
-        android:text="@string/heading_data_reset"
+        android:text="App"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <RadioGroup
-        android:id="@+id/data_reset"
+
+    <LinearLayout
+        android:id="@+id/app_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/selectable_item_plain_background"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-        <RadioButton
-            android:id="@+id/daily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:checked="true"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/daily" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/app_icon_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/radius_large"
+            app:cardElevation="0dp">
 
-        <RadioButton
-            android:id="@+id/monthly"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/monthly" />
+            <ImageView
+                android:id="@+id/app_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher_round" />
 
-    </RadioGroup>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:drawableEnd="@drawable/ic_arrow_down_14"
+            android:drawableTint="@color/text_primary"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="Select an app"
+            android:textSize="@dimen/text_mid_large" />
+
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/app_picker"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_marginStart="@dimen/margin_medium"-->
+<!--        android:layout_marginTop="@dimen/margin_small"-->
+<!--        android:layout_marginEnd="@dimen/margin_medium"-->
+<!--        android:background="@drawable/selectable_item_plain_background"-->
+<!--        android:clickable="true"-->
+<!--        android:drawableEnd="@drawable/ic_arrow_down_14"-->
+<!--        android:drawableTint="@color/text_primary"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:paddingStart="@dimen/margin_mid_large"-->
+<!--        android:paddingEnd="@dimen/margin_mid_large"-->
+<!--        android:text="Select Application"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
 
     <TextView
         android:id="@+id/textView10"
@@ -75,42 +116,42 @@
         android:layout_marginTop="@dimen/margin_large"
         android:text="@string/heading_data_limit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/data_reset" />
+        app:layout_constraintTop_toBottomOf="@+id/app_picker" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/data_limit"
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@drawable/text_input_background"
         android:gravity="center"
         android:hint="@string/data_limit_placeholder"
-        android:singleLine="true"
-        android:maxLines="1"
         android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:orientation="horizontal"
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_large"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/data_limit"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
         app:layout_constraintStart_toEndOf="@+id/data_limit"
         app:layout_constraintTop_toTopOf="@+id/data_limit">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/app_type_switcher"
+            android:id="@+id/data_type_switcher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_base"
-            app:tabGravity="fill"
             app:tabBackground="@drawable/tabs_selector"
+            app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/transparent"
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
@@ -119,16 +160,16 @@
             app:tabTextColor="@color/text_secondary">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/app_type_user"
+                android:id="@+id/data_type_mb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/data_type_mb"/>
+                android:text="@string/data_type_mb" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/data_type_gb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/data_type_gb"/>
+                android:text="@string/data_type_gb" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -141,6 +182,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintTop_toBottomOf="@+id/data_limit" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
