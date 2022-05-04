@@ -53,8 +53,9 @@ public class Values {
     public static final int LICENSE_FRAGMENT = 0x0078;
     public static final int CONTRIBUTORS_FRAGMENT = 0x0082;
     public static final int DONATE_FRAGMENT = 0x008C;
-    public static final int APP_LICENSE = 0x0096;
-    public static final int APP_DATA_LIMIT = 0x00AA;
+    public static final int APP_LICENSE_FRAGMENT = 0x0096;
+    public static final int APP_DATA_LIMIT_FRAGMENT = 0x00AA;
+    public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -95,5 +96,16 @@ public class Values {
 
     public static final String USAGE_TYPE_MOBILE_DATA = "Mobile Data";
     public static final String USAGE_TYPE_WIFI = "Wifi";
+
+    public static final String MAX_DOWNLOAD_SPEED = "max_download_speed";
+    public static final String AVG_DOWNLOAD_SPEED = "avg_download_speed";
+    public static final String MAX_UPLOAD_SPEED = "max_upload_speed";
+    public static final String AVG_UPLOAD_SPEED = "avg_upload_speed";
+    public static final String MIN_LATENCY = "min_latency";
+    public static final String AVG_LATENCY = "avg_latency";
+    public static final String NETWORK_IP = "network_ip";
+    public static final String ISP = "isp";
+    public static final String SERVER = "server";
+    public static final String REGION = "region";
 
 }

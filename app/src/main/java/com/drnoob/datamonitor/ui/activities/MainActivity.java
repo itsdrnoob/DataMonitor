@@ -36,16 +36,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
@@ -54,10 +51,6 @@ import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.drnoob.datamonitor.databinding.ActivityMainBinding;
-import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
-import com.drnoob.datamonitor.ui.fragments.HomeFragment;
-import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
-import com.drnoob.datamonitor.ui.fragments.SetupFragment;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -69,11 +62,30 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.drnoob.datamonitor.Common.*;
-import static com.drnoob.datamonitor.core.Values.*;
+import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_VALUE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
+import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.getAppContext;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.onDataLoaded;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.*;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppWifiDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeletedAppsMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeletedAppsWifiDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTetheringDataUsage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,11 +100,11 @@ public class MainActivity extends AppCompatActivity {
     public static String themeSwitch;
     private static Boolean isDataLoading = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(MainActivity.this);
         super.onCreate(savedInstanceState);
+
         try {
             if (isUsageAccessGranted(MainActivity.this)) {
 

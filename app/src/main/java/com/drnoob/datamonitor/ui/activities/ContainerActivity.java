@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.ui.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -33,16 +34,18 @@ import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
+import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
 
 import org.jetbrains.annotations.NotNull;
 
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT;
-import static com.drnoob.datamonitor.core.Values.APP_LICENSE;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
 
 public class ContainerActivity extends AppCompatActivity {
 
@@ -85,14 +88,19 @@ public class ContainerActivity extends AppCompatActivity {
                 break;
 
 
-            case APP_LICENSE:
+            case APP_LICENSE_FRAGMENT:
                 fragment = new LicenseFragment();
                 title = getString(R.string.app_license_header);
                 break;
 
-            case APP_DATA_LIMIT:
+            case APP_DATA_LIMIT_FRAGMENT:
                 fragment = new AppDataLimitFragment();
                 title = getString(R.string.title_app_data_limit);
+                break;
+
+            case NETWORK_STATS_FRAGMENT:
+                fragment = new NetworkStatsFragment();
+                title = getString(R.string.network_stats);
                 break;
         }
 
