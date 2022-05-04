@@ -104,6 +104,7 @@
                 android:key="app_data_limit"
                 app:summary="Notify when an app has consumed a specific amount of data"
                 app:iconSpaceReserved="false"
+                app:isPreferenceVisible="false"
                 android:fragment="com.drnoob.datamonitor.ui.fragments.DonateFragment"
                 app:widgetLayout="@layout/preference_right_arrow"/>
 
