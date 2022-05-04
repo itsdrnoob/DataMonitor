@@ -24,8 +24,8 @@ Track all your data usage - at one place
 - Light-weight and Open Source
 
 ## Screenshots
-![Home light](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_light.png)<br><br>
-![Home Dark](https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/ss_all_dark.png)
+![Home light](https://github.com/itsdrnoob/DataMonitor/blob/29d1595dccb0ebc145be49e74fbdb6b5d11078f4/images/ss_all_light.png)<br><br>
+![Home Dark](https://github.com/itsdrnoob/DataMonitor/blob/29d1595dccb0ebc145be49e74fbdb6b5d11078f4/images/ss_all_dark.png)
 <br><br>
 
 ## Download
