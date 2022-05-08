@@ -67,7 +67,6 @@ import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
 import fr.bmartel.speedtest.model.SpeedTestError;
 import io.ipinfo.api.IPinfo;
-import io.ipinfo.api.errors.RateLimitedException;
 import io.ipinfo.api.model.IPResponse;
 
 import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
@@ -152,50 +151,8 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
         mNetworkChangeMonitor = new NetworkChangeMonitor(Objects.requireNonNull(getActivity()));
 
-//        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo info = cm.getActiveNetworkInfo();
-
-
-//        change();
-
-
         mNetworkChangeMonitor.startMonitor();
         setConnectionStatus();
-
-
-
-//        if (info == null) {
-//            mCurrentConnectionType = "Null";
-//            isNetworkConnected = false;
-//            Snackbar.make(view, getString(R.string.no_network_connection),
-//                    Snackbar.LENGTH_SHORT).setAnchorView(Objects.requireNonNull(getActivity())
-//                    .findViewById(R.id.bottomNavigationView)).show();
-//        }
-//        else {
-//            isNetworkConnected = true;
-//            int currentConnection = info.getType();
-//            switch (currentConnection) {
-//                case ConnectivityManager.TYPE_MOBILE:
-//                    mCurrentConnectionType = "Mobile Data";
-//                    break;
-//
-//                case ConnectivityManager.TYPE_WIFI:
-//                    mCurrentConnectionType = "Wifi";
-//                    break;
-//
-//                case ConnectivityManager.TYPE_BLUETOOTH:
-//                    mCurrentConnectionType = "Bluetooth";
-//                    break;
-//
-//                case ConnectivityManager.TYPE_ETHERNET:
-//                    mCurrentConnectionType = "Ethernet";
-//                    break;
-//
-//                default:
-//                    mCurrentConnectionType = "Unknown";
-//                    break;
-//            }
-//        }
 
         runDiagnostics.setOnClickListener(new View.OnClickListener() {
             @Override
