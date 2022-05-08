@@ -26,7 +26,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -47,6 +50,7 @@ import androidx.fragment.app.Fragment;
 import com.airbnb.lottie.LottieAnimationView;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,6 +59,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import fr.bmartel.speedtest.SpeedTestReport;
@@ -62,7 +67,6 @@ import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
 import fr.bmartel.speedtest.model.SpeedTestError;
 import io.ipinfo.api.IPinfo;
-import io.ipinfo.api.errors.RateLimitedException;
 import io.ipinfo.api.model.IPResponse;
 
 import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
@@ -70,8 +74,6 @@ import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
 import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.ISP;
-import static com.drnoob.datamonitor.core.Values.MAX_DOWNLOAD_SPEED;
-import static com.drnoob.datamonitor.core.Values.MAX_UPLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
 import static com.drnoob.datamonitor.core.Values.NETWORK_IP;
 import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
@@ -84,8 +86,8 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
     private TextView runDiagnostics,
             diagnosticsInfo,
-            currentTest,
-            currentConnectionType;
+            currentTest;
+    public static TextView currentConnectionType;
     private LottieAnimationView rippleView,
             currentTestAnim;
     private ConstraintLayout diagnosticsView;
@@ -103,12 +105,16 @@ public class NetworkDiagnosticsFragment extends Fragment {
     private Float mMaxDownloadSpeed = 0F,
             mMaxUploadSpeed = 0F;
     private Long mMinLatency = 0L;
+    private Boolean isNetworkConnected;
+    private NetworkChangeMonitor mNetworkChangeMonitor;
 
     public native String getApiKey();
 
     private SpeedTest speedTest;
     private SpeedTestSocket downloadSpeedTestSocket,
             uploadSpeedTestSocket;
+
+    private ConnectivityManager.NetworkCallback mNetworkCallback;
 
     static {
         System.loadLibrary("keys");
@@ -126,6 +132,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_network_diagnostics, container, false);
     }
 
+    @SuppressLint("ShowToast")
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -142,50 +149,37 @@ public class NetworkDiagnosticsFragment extends Fragment {
         mUploadSpeeds = new ArrayList<>();
         mLatencies = new ArrayList<>();
 
-        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
-        int currentConnection = info.getType();
-        switch (currentConnection) {
-            case ConnectivityManager.TYPE_MOBILE:
-                mCurrentConnectionType = "Mobile Data";
-                break;
+        mNetworkChangeMonitor = new NetworkChangeMonitor(Objects.requireNonNull(getActivity()));
 
-            case ConnectivityManager.TYPE_WIFI:
-                mCurrentConnectionType = "Wifi";
-                break;
-
-            case ConnectivityManager.TYPE_BLUETOOTH:
-                mCurrentConnectionType = "Bluetooth";
-                break;
-
-            case ConnectivityManager.TYPE_ETHERNET:
-                mCurrentConnectionType = "Ethernet";
-                break;
-
-            default:
-                mCurrentConnectionType = "Unknown";
-                break;
-        }
-        currentConnectionType.setText(getString(R.string.current_connection, mCurrentConnectionType));
+        mNetworkChangeMonitor.startMonitor();
+        setConnectionStatus();
 
         runDiagnostics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                runDiagnostics.setClickable(false);
-                runDiagnostics.setEnabled(false);
-                runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_running_background, null));
-                diagnosticsRunning.setVisibility(View.VISIBLE);
-                runDiagnostics.setText(R.string.connecting);
-                rippleView.pauseAnimation();
-                rippleView.setVisibility(View.INVISIBLE);
+                if (isNetworkConnected) {
+                    runDiagnostics.setClickable(false);
+                    runDiagnostics.setEnabled(false);
+                    runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_running_background, null));
+                    diagnosticsRunning.setVisibility(View.VISIBLE);
+                    runDiagnostics.setText(R.string.connecting);
+                    rippleView.pauseAnimation();
+                    rippleView.setVisibility(View.INVISIBLE);
 //                currentConnectionType.setVisibility(View.GONE);
 
-//                if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
-//                    speedTest = new SpeedTest(getActivity());
-//                }
+                if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
+                    speedTest = new SpeedTest(getActivity());
+                }
 //                new SpeedTest(requireActivity()).execute();
 //                speedTest = new SpeedTest(getActivity());
-                speedTest.execute();
+//                    Log.e(TAG, "onClick: " + speedTest.getStatus() );
+                    speedTest.execute();
+                }
+                else {
+                    Snackbar.make(view, getString(R.string.no_network_connection),
+                            Snackbar.LENGTH_SHORT).setAnchorView(Objects.requireNonNull(getActivity())
+                            .findViewById(R.id.bottomNavigationView)).show();
+                }
 
             }
         });
@@ -209,6 +203,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
             uploadSpeedTestSocket.forceStopTask();
             uploadSpeedTestSocket.closeSocket();
         }
+        mNetworkChangeMonitor.stopMonitor();
         super.onPause();
     }
 
@@ -238,116 +233,134 @@ public class NetworkDiagnosticsFragment extends Fragment {
                             .setToken(new String(Base64.decode(getApiKey(), Base64.DEFAULT)))
                             .build();
 
-                    Log.d(TAG, "doInBackground: " + ipInfo.lookupIP(ip));
-                    ipResponse[0] = ipInfo.lookupIP(ip);
+                    try {
+                        Log.d(TAG, "doInBackground: " + ipInfo.lookupIP(ip));
+                        ipResponse[0] = ipInfo.lookupIP(ip);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     mIpResponse = ipResponse[0];
-                } catch (RateLimitedException | IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        onProgressUpdate("download");
-                    }
-                });
+                if (mIpResponse != null) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            onProgressUpdate("download");
+                        }
+                    });
 
-                downloadSpeedTestSocket = new SpeedTestSocket();
-                downloadSpeedTestSocket.startFixedDownload(activity.getString(R.string.download_test_url), 15000, 1000);
+                    downloadSpeedTestSocket = new SpeedTestSocket();
+                    downloadSpeedTestSocket.startFixedDownload(activity.getString(R.string.download_test_url), 15000, 1000);
 
-                // add a listener to wait for speedtest completion and progress
-                downloadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
+                    // add a listener to wait for speedtest completion and progress
+                    downloadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
 
-                    @Override
-                    public void onCompletion(SpeedTestReport report) {
-                        // Called when download is finished
-                        Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
-                        mDownloadSpeed = ((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8;
+                        @Override
+                        public void onCompletion(SpeedTestReport report) {
+                            // Called when download is finished
+                            Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
+                            mDownloadSpeed = ((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8;
 
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                onProgressUpdate("upload");
-                            }
-                        });
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onProgressUpdate("upload");
+                                }
+                            });
 
-                        uploadSpeedTestSocket = new SpeedTestSocket();
-                        uploadSpeedTestSocket.startFixedUpload(activity.getString(R.string.upload_test_url), 10000000, 10000);
+                            uploadSpeedTestSocket = new SpeedTestSocket();
+                            uploadSpeedTestSocket.startFixedUpload(activity.getString(R.string.upload_test_url), 10000000, 10000);
 
-                        // add a listener to wait for speedtest completion and progress
-                        uploadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
+                            // add a listener to wait for speedtest completion and progress
+                            uploadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
 
-                            @Override
-                            public void onCompletion(SpeedTestReport report) {
-                                // Called when upload is finished
-                                Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
-                                mUploadSpeed = ((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8;
-                                activity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        onProgressUpdate("latency");
-                                    }
-                                });
-
-                                if (!isCancelled()) {
-                                    try {
-                                        String host = "www.google.com";
-                                        int timeout = 10000;
-                                        for (int i = 0; i < 20; i++) {
-                                            long beforeTime = System.currentTimeMillis();
-                                            boolean reachable = InetAddress.getByName(host).isReachable(timeout);
-                                            long afterTime = System.currentTimeMillis();
-                                            long latency = afterTime - beforeTime;
-                                            Log.d(TAG, "latency: " + latency);
-                                            mLatencies.add(latency);
+                                @Override
+                                public void onCompletion(SpeedTestReport report) {
+                                    // Called when upload is finished
+                                    Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
+                                    mUploadSpeed = ((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8;
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            onProgressUpdate("latency");
                                         }
-                                        Long sum = 0L;
-                                        for (int j = 0; j < mLatencies.size(); j++) {
-                                            sum += mLatencies.get(j);
+                                    });
+
+                                    if (!isCancelled()) {
+                                        try {
+                                            String host = "www.google.com";
+                                            int timeout = 10000;
+                                            for (int i = 0; i < 20; i++) {
+                                                long beforeTime = System.currentTimeMillis();
+                                                boolean reachable = InetAddress.getByName(host).isReachable(timeout);
+                                                long afterTime = System.currentTimeMillis();
+                                                long latency = afterTime - beforeTime;
+                                                Log.d(TAG, "latency: " + latency);
+                                                mLatencies.add(latency);
+                                            }
+                                            Long sum = 0L;
+                                            for (int j = 0; j < mLatencies.size(); j++) {
+                                                sum += mLatencies.get(j);
+                                            }
+                                            mLatency = sum / mLatencies.size();
+                                            onPostExecute("complete");
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
                                         }
-                                        mLatency = sum / mLatencies.size();
-                                        onPostExecute("complete");
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
                                     }
+
+                                    onPostExecute("upload");
                                 }
 
-                                onPostExecute("upload");
-                            }
+                                @Override
+                                public void onError(SpeedTestError speedTestError, String errorMessage) {
+                                    // called when a download/upload error occur
+                                    Log.e(TAG, "onError: " + errorMessage);
+                                    onPostExecute("error");
+                                }
 
-                            @Override
-                            public void onError(SpeedTestError speedTestError, String errorMessage) {
-                                // called when a download/upload error occur
-                                Log.e(TAG, "onError: " + errorMessage);
-                            }
-
-                            @Override
-                            public void onProgress(float percent, SpeedTestReport report) {
-                                // Called to notify upload progress
-                                Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
-                                Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
+                                @Override
+                                public void onProgress(float percent, SpeedTestReport report) {
+                                    // Called to notify upload progress
+                                    Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
+                                    Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
 //                                mUploadSpeeds.add(((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8);
-                            }
-                        });
+                                }
+                            });
 
-                        onPostExecute("download");
-                    }
+                            onPostExecute("download");
+                        }
 
-                    @Override
-                    public void onError(SpeedTestError speedTestError, String errorMessage) {
-                        // Called when a download error occur
-                        Log.e(TAG, "onError: " + errorMessage);
-                    }
+                        @Override
+                        public void onError(SpeedTestError speedTestError, String errorMessage) {
+                            // Called when a download error occur
+                            Log.e(TAG, "onError: " + errorMessage);
+                            onPostExecute("error");
+                        }
 
-                    @Override
-                    public void onProgress(float percent, SpeedTestReport report) {
-                        // Called to notify download progress
+                        @Override
+                        public void onProgress(float percent, SpeedTestReport report) {
+                            // Called to notify download progress
 //                    onProgressUpdate(report);
-                        Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
-                        Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
+                            Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
+                            Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
 //                        mDownloadSpeeds.add(((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8);
-                    }
-                });
+                        }
+                    });
+
+                }
+                else {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            onProgressUpdate("connection_error");
+                        }
+                    });
+                }
             }
 
             return null;
@@ -363,35 +376,37 @@ public class NetworkDiagnosticsFragment extends Fragment {
                             DisplayMetrics metrics = new DisplayMetrics();
                             activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-                            currentConnectionType.setText(activity.getString(R.string.connected_server,
-                                    mIpResponse.getCity()));
+                            if (mIpResponse != null) {
+                                currentConnectionType.setText(activity.getString(R.string.connected_server,
+                                        mIpResponse.getCity()));
 
-                            diagnosticsInfo.animate()
-                                    .translationYBy((getView().getPivotY() + 100) * -1)
-                                    .alpha(0f)
-                                    .setListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationEnd(Animator animation) {
-                                            super.onAnimationEnd(animation);
+                                diagnosticsInfo.animate()
+                                        .translationYBy((getView().getPivotY() + 100) * -1)
+                                        .alpha(0f)
+                                        .setListener(new AnimatorListenerAdapter() {
+                                            @Override
+                                            public void onAnimationEnd(Animator animation) {
+                                                super.onAnimationEnd(animation);
 //                                        diagnosticsInfo.setVisibility(View.GONE);
-                                            diagnosticsInfo.setAlpha(1f);
-                                        }
-                                    })
-                                    .start();
+                                                diagnosticsInfo.setAlpha(1f);
+                                            }
+                                        })
+                                        .start();
 
-                            diagnosticsView.animate()
-                                    .translationY(((getView().getPivotY()) - 300) * -1)
-                                    .setListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationEnd(Animator animation) {
-                                            super.onAnimationEnd(animation);
-                                            runDiagnostics.setText(R.string.running_diagnostics);
-                                            currentTest.setText(getString(R.string.testing_download));
-                                            currentTest.setVisibility(View.VISIBLE);
-                                            currentTestAnim.setVisibility(View.VISIBLE);
-                                        }
-                                    })
-                                    .start();
+                                diagnosticsView.animate()
+                                        .translationY(((getView().getPivotY()) - 300) * -1)
+                                        .setListener(new AnimatorListenerAdapter() {
+                                            @Override
+                                            public void onAnimationEnd(Animator animation) {
+                                                super.onAnimationEnd(animation);
+                                                runDiagnostics.setText(R.string.running_diagnostics);
+                                                currentTest.setText(getString(R.string.testing_download));
+                                                currentTest.setVisibility(View.VISIBLE);
+                                                currentTestAnim.setVisibility(View.VISIBLE);
+                                            }
+                                        })
+                                        .start();
+                            }
                             break;
                         case "upload":
                             currentTest.setText(activity.getString(R.string.testing_upload));
@@ -399,6 +414,21 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
                         case "latency":
                             currentTest.setText(activity.getString(R.string.testing_latency));
+                            break;
+
+                        case "connection_error":
+                            Snackbar.make(Objects.requireNonNull(getView()),
+                                    activity.getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(activity.findViewById(R.id.bottomNavigationView))
+                                    .show();
+                            runDiagnostics.setClickable(true);
+                            runDiagnostics.setEnabled(true);
+                            runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
+                            runDiagnostics.setText(R.string.run_diagnostics);
+                            setConnectionStatus();
+                            diagnosticsRunning.setVisibility(View.GONE);
+                            rippleView.playAnimation();
+                            rippleView.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -491,7 +521,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                                     super.onAnimationStart(animation);
                                                     runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
                                                     runDiagnostics.setText(R.string.run_diagnostics);
-                                                    currentConnectionType.setText(activity.getString(R.string.current_connection, mCurrentConnectionType));
+                                                    setConnectionStatus();
                                                     currentTest.setVisibility(View.GONE);
                                                     currentTestAnim.setVisibility(View.GONE);
                                                     diagnosticsRunning.setVisibility(View.GONE);
@@ -510,8 +540,156 @@ public class NetworkDiagnosticsFragment extends Fragment {
                             });
                         }
                     }
+                    else if (o.toString().equalsIgnoreCase("error")) {
+                        if (getContext() != null) {
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    runDiagnostics.setClickable(true);
+                                    runDiagnostics.setEnabled(true);
+                                    diagnosticsInfo.setVisibility(View.VISIBLE);
+                                    diagnosticsInfo.animate()
+                                            .translationY(0)
+                                            .start();
+
+                                    diagnosticsView.animate()
+                                            .translationY(0)
+                                            .setListener(new AnimatorListenerAdapter() {
+                                                @Override
+                                                public void onAnimationStart(Animator animation) {
+                                                    super.onAnimationStart(animation);
+                                                    runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
+                                                    runDiagnostics.setText(R.string.run_diagnostics);
+                                                    currentConnectionType.setText(activity.getString(R.string.current_connection, mCurrentConnectionType));
+                                                    currentTest.setVisibility(View.GONE);
+                                                    currentTestAnim.setVisibility(View.GONE);
+                                                    diagnosticsRunning.setVisibility(View.GONE);
+                                                }
+
+                                                @Override
+                                                public void onAnimationEnd(Animator animation) {
+                                                    super.onAnimationEnd(animation);
+                                                    rippleView.setVisibility(View.VISIBLE);
+                                                    rippleView.playAnimation();
+//                                            currentConnectionType.setVisibility(View.VISIBLE);
+                                                }
+                                            })
+                                            .start();
+                                    Snackbar.make(Objects.requireNonNull(getView()),
+                                            activity.getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
+                                            .setAnchorView(activity.findViewById(R.id.bottomNavigationView))
+                                            .show();
+                                }
+                            });
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    private int getConnectivityStatus(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info != null) {
+            isNetworkConnected = true;
+            return info.getType();
+        }
+        isNetworkConnected = false;
+        return -1;
+    }
+
+    private void setConnectionStatus() {
+        switch (getConnectivityStatus(Objects.requireNonNull(getContext()))) {
+            case ConnectivityManager.TYPE_MOBILE:
+                mCurrentConnectionType = "Mobile Data";
+                break;
+
+            case ConnectivityManager.TYPE_WIFI:
+                mCurrentConnectionType = "Wifi";
+                break;
+
+            case ConnectivityManager.TYPE_BLUETOOTH:
+                mCurrentConnectionType = "Bluetooth";
+                break;
+
+            case ConnectivityManager.TYPE_ETHERNET:
+                mCurrentConnectionType = "Ethernet";
+                break;
+
+            case -1:
+                mCurrentConnectionType = "Disconnected";
+                break;
+
+            default:
+                mCurrentConnectionType = "Unknown";
+                break;
+        }
+        currentConnectionType.setText(getString(R.string.current_connection, mCurrentConnectionType));
+    }
+
+    private class NetworkChangeMonitor extends ConnectivityManager.NetworkCallback {
+        final NetworkRequest networkRequest;
+
+        private ConnectivityManager connectivityManager;
+        private Activity activity;
+
+        public NetworkChangeMonitor(Activity activity) {
+            this.activity = activity;
+            connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+            networkRequest = new NetworkRequest.Builder()
+                    .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                    .addTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH)
+                    .addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
+                    .build();
+        }
+
+        public void startMonitor() {
+            if (connectivityManager != null) {
+                connectivityManager.registerNetworkCallback(networkRequest, this);
+            }
+            else {
+                connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+                startMonitor();
+            }
+        }
+
+        public void stopMonitor() {
+            if (connectivityManager != null) {
+                connectivityManager.unregisterNetworkCallback(this);
+            }
+            else {
+                connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+                stopMonitor();
+            }
+        }
+
+        @Override
+        public void onAvailable(@NonNull Network network) {
+            super.onAvailable(network);
+            Log.d(TAG, "onAvailable: ");
+            isNetworkConnected = true;
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setConnectionStatus();
+                }
+            });
+        }
+
+        @Override
+        public void onLost(@NonNull Network network) {
+            super.onLost(network);
+            Log.d(TAG, "onLost: ");
+            isNetworkConnected = false;
+            speedTest.onPostExecute("error");
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setConnectionStatus();
+                }
+            });
         }
     }
 }
