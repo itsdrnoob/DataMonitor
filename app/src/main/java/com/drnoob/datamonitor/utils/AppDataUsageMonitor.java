@@ -53,7 +53,7 @@ public class AppDataUsageMonitor extends Service {
         startMonitor(this);
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, AppDataMonitor.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
         manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
     }
 
@@ -172,7 +172,7 @@ public class AppDataUsageMonitor extends Service {
 
         private static void setRepeating(Context context) {
             Intent intent = new Intent(context, AppDataUsageMonitor.AppDataMonitor.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
             AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             manager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 60000, pendingIntent);
 
@@ -180,7 +180,7 @@ public class AppDataUsageMonitor extends Service {
 
         private void restartMonitor(Context context) {
             Intent intent = new Intent(context, AppDataUsageMonitor.AppDataMonitor.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
             AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
         }
