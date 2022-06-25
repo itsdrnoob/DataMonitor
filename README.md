@@ -1,7 +1,7 @@
-[![License](https://shields.io/badge/version-v1.5.1-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor)
+[![License](https://shields.io/badge/version-v1.6.0-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor)
 [![License](https://shields.io/badge/platform-android-green.svg)](https://github.com/itsdrnoob/DataMonitor)
-[![License](https://shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![License](https://shields.io/badge/release-v1.5.1-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
+[![License](https://img.shields.io/badge/license-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![License](https://shields.io/badge/release-v1.6.0-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/icon.png" width="20%" height="20%"></img>
@@ -20,6 +20,7 @@ Track all your data usage - at one place
 - Data usage alert
 - Custom mobile data reset time
 - Network diagnostics
+- App usage time
 - No ads or In-app purchases
 - Light-weight and Open Source
 
