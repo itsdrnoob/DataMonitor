@@ -76,7 +76,7 @@ public class DataUsageMonitor extends Service {
         startMonitor(this);
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, DataMonitor.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
         manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
 
     }
@@ -172,7 +172,7 @@ public class DataUsageMonitor extends Service {
 
         private static void setRepeating(Context context) {
             Intent intent = new Intent(context, DataUsageMonitor.DataMonitor.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 //            int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
 //                    .getInt(NOTIFICATION_REFRESH_INTERVAL, 6000);
@@ -182,7 +182,7 @@ public class DataUsageMonitor extends Service {
         private void restartMonitor(Context context) throws ParseException {
             AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             Intent restartIntent = new Intent(context, DataMonitor.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, restartIntent, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, restartIntent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
             int year, month, day;
             String resetTime, endTime;
             Date resetDate, endDate;

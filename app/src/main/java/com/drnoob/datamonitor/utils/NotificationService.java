@@ -82,11 +82,11 @@ public class NotificationService extends Service {
         mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         mUpdaterIntent = new Intent(this, NotificationUpdater.class);
         mUpdaterPendingIntent = PendingIntent.getBroadcast(this, 0, mUpdaterIntent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
                 DATA_USAGE_NOTIFICATION_CHANNEL_ID);
         builder.setSmallIcon(R.drawable.ic_mobile_data);
@@ -173,7 +173,7 @@ public class NotificationService extends Service {
 
                 Intent activityIntent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, 0);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context,
                         DATA_USAGE_NOTIFICATION_CHANNEL_ID);
                 builder.setSmallIcon(R.drawable.ic_mobile_data);
@@ -207,7 +207,7 @@ public class NotificationService extends Service {
 
         private static void setRepeating(Context context) {
             Intent i = new Intent(context, NotificationUpdater.class);
-            PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
                     .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
