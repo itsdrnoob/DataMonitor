@@ -157,6 +157,30 @@
         app:layout_constraintTop_toBottomOf="@+id/app_package" />
 
     <TextView
+        android:id="@+id/app_screen_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_small"
+        android:text="@string/app_label_screen_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_uid" />
+
+    <TextView
+        android:id="@+id/app_background_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_small"
+        android:text="@string/app_label_background_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_screen_time" />
+
+    <TextView
         android:id="@+id/app_open_settings"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_default"
@@ -175,6 +199,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_uid" />
+        app:layout_constraintTop_toBottomOf="@+id/app_background_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

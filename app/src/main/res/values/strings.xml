@@ -212,5 +212,8 @@
     <string name="upload_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/</string>
     <string name="no_network_connection">No network connection detected!</string>
     <string name="connection_error">Connection error. Please check you internet connection</string>
+    <string name="app_label_screen_time">Screen Time : %1$s</string>
+    <string name="app_label_background_time">Background Usage : %1$s</string>
+    <string name="usage_time_label">%1$d %2$s %3$d %4$s</string>
 
 </resources>

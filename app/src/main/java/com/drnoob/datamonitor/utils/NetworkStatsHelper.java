@@ -399,7 +399,7 @@ public class NetworkStatsHelper {
         return data;
     }
 
-    private static Long[] getTimePeriod(Context context, int session) throws ParseException {
+    public static Long[] getTimePeriod(Context context, int session) throws ParseException {
         int year, month, day;
         long resetTimeMillis = 0l,
                 endTimeMillis = 0l;
