@@ -30,8 +30,8 @@ Track all your data usage - at one place
 <br><br>
 
 ## Download
-[<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=14655340768118471654)<br><br>
-Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.5.1">releases</a>
+[<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=15664248565197183654)<br><br>
+Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.6.0">releases</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>
