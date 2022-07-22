@@ -13,13 +13,14 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:cardCornerRadius="@dimen/margin_mid_large"
-        app:cardElevation="@dimen/elevation_default">
+        app:cardElevation="@dimen/elevation_default"
+        android:background="@android:color/transparent">
 
         <ImageView
             android:id="@+id/app_icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/icon"/>
 
     </androidx.cardview.widget.CardView>
 
