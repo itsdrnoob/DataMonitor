@@ -153,10 +153,12 @@ public class DataUsageWidget extends AppWidgetProvider {
                 PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.widget_update, pendingIntent);
 
-        Intent appIntent = new Intent(context, MainActivity.class);
-        appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent appIntent = new Intent(Intent.ACTION_MAIN);
+        appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        appIntent.setComponent(new ComponentName(context.getPackageName(), MainActivity.class.getName()));
+
         PendingIntent appPI = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widget_root, appPI);
+        views.setOnClickPendingIntent(android.R.id.background, appPI);
 
         // Instruct the widget manager to update the widget
 
