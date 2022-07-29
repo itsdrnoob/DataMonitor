@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.drnoob.datamonitor.core.base.PreferenceHeader
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/current_language"
+            app:iconSpaceReserved="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/current_language"
+                android:key="current_language"
+                app:iconSpaceReserved="false"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/available_languages"
+            app:iconSpaceReserved="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:key="available_languages_placeholder"
+                app:iconSpaceReserved="false"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+    </com.drnoob.datamonitor.core.base.PreferenceHeader>
+
+</PreferenceScreen>

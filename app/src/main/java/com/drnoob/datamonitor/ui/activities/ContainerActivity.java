@@ -33,13 +33,18 @@ import com.drnoob.datamonitor.ui.fragments.AboutFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
+import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
+import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
@@ -54,6 +59,13 @@ public class ContainerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MainActivity.setTheme(ContainerActivity.this);
+        String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        if (languageCode.equals("null")) {
+            setLanguage(this, "en");
+        }
+        else {
+            setLanguage(this, languageCode);
+        }
         super.onCreate(savedInstanceState);
         binding = ActivityContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -101,6 +113,11 @@ public class ContainerActivity extends AppCompatActivity {
             case NETWORK_STATS_FRAGMENT:
                 fragment = new NetworkStatsFragment();
                 title = getString(R.string.network_stats);
+                break;
+
+            case APP_LANGUAGE_FRAGMENT:
+                fragment = new LanguageFragment();
+                title = getString(R.string.settings_language);
                 break;
         }
 

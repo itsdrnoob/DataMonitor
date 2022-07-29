@@ -19,13 +19,18 @@
 
 package com.drnoob.datamonitor;
 
+import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Locale;
 
 import static android.content.Context.APP_OPS_SERVICE;
 
@@ -55,5 +60,14 @@ public class Common {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void setLanguage(Activity activity, String languageCode) {
+        Resources res = activity.getResources();
+        Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(languageCode);
+        conf.setLayoutDirection(new Locale(languageCode));
+        res.updateConfiguration(conf, res.getDisplayMetrics());
+
     }
 }
