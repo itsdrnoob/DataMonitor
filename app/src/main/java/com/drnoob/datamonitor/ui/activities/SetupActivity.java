@@ -48,6 +48,8 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.InvocationTargetException;
 
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
+import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
 import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
@@ -60,6 +62,13 @@ public class SetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        if (languageCode.equals("null")) {
+            setLanguage(this, "en");
+        }
+        else {
+            setLanguage(this, languageCode);
+        }
         binding = ActivitySetupBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_DataMonitor);
         setContentView(binding.getRoot());

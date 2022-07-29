@@ -4,8 +4,8 @@
     <string name="add_widget">Add widget</string>
 
 
-    <string name="reset_time">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
-    <string name="widget_mobile_data_usage">%1$s %2$s</string>
+    <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
+    <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
     <string name="notification_mobile_data_usage">Mobile data : %1$s</string>
     <string name="notification_wifi_data_usage">Wifi : %1$s</string>
     <string name="home_mobile_data_sent">%1$s \nSent</string>
@@ -16,7 +16,7 @@
     <string name="label_current_data_warning_trigger_level_limit_not_set">Current trigger level : %1$s%%</string>
     <string name="label_data_trigger_level">When %1$s%% of data is consumed</string>
 
-    <string name="hello_blank_fragment"></string>
+    <string name="hello_blank_fragment" translatable="false"></string>
     <string name="app_label_package_name">Package name : %1$s</string>
     <string name="app_label_uid">Uid : %1$d</string>
     <string name="app_name_placeholder">App Name</string>
@@ -39,7 +39,7 @@
     <string name="title_data_usage">Data usage</string>
     <string name="action_update">Update</string>
     <string name="data_remaining_placeholder">0.00 GB remaining</string>
-    <string name="app_version_placeholder">v1.0</string>
+    <string name="app_version_placeholder" translatable="false">v1.0</string>
     <string name="label_dev">Made with ❤ by Dr.NooB</string>
     <string name="label_loading_apps">Loading apps</string>
     <string name="label_app_data_usage_session_empty">No data available for the selected session</string>
@@ -49,7 +49,7 @@
     <string name="daily">Daily</string>
     <string name="monthly">Monthly</string>
     <string name="heading_data_limit">Data limit</string>
-    <string name="data_limit_placeholder">00.00</string>
+    <string name="data_limit_placeholder" translatable="false">00.00</string>
     <string name="data_type_mb">MB</string>
     <string name="data_type_gb">GB</string>
     <string name="title_data_warning_trigger">Data warning trigger level</string>
@@ -66,7 +66,7 @@
     <string name="widget_setup_step_3">3. Drag and drop the Data Monitor widget onto your Home screen</string>
     <string name="heading_data_usage_today">Today\'s data usage</string>
     <string name="action_add_data_plan_home">Add your data plan to start monitoring</string>
-    <string name="heading_week_overview">This weeks overview</string>
+    <string name="heading_week_overview">This week\'s overview</string>
     <string name="error_loading_overview">Opps... Couldn\'t load this weeks overview \ncome back later and check</string>
     <string name="title_setup">Setup Data monitor</string>
     <string name="setup_widget">Setup widget</string>
@@ -89,7 +89,7 @@
     <string name="setup_add_data_plan">Add data plan</string>
     <string name="add_data_plan_summary">Add or update your data plan</string>
     <string name="setup_usage_reset_time">Data usage reset time</string>
-    <string name="usage_reset_time_placeholder">12:00 am</string>
+    <string name="usage_reset_time_placeholder" translatable="false">12:00 am</string>
     <string name="app_license_header">App License</string>
     <string name="oss_licenses">Opensource Licenses</string>
     <string name="itsdrnoob">Dr.NooB</string>
@@ -106,7 +106,7 @@
     <string name="license">License</string>
     <string name="contributors_summary">Those who are always there</string>
     <string name="donate">Donate</string>
-    <string name="donate_summay">Buy us a coffee, maybe?</string>
+    <string name="donate_summary">Buy us a coffee, maybe?</string>
     <string name="data_reset">Data reset</string>
     <string name="data_limit">Data limit</string>
     <string name="support_and_development">Support and development</string>
@@ -123,21 +123,21 @@
     <string name="eth_address_copied">Ethereum wallet address has been copied to your clipboard</string>
     <string name="ltc_address_copied">Litecoin wallet address has been copied to your clipboard</string>
     <string name="label_system_apps">System Apps</string>
-    <string name="package_system">com.android.systemui</string>
+    <string name="package_system" translatable="false">com.android.systemui</string>
     <string name="home">Home</string>
     <string name="usage_access_permission">Usage Access Permission</string>
     <string name="usage_access_body">Usage assess permission is required to run the app. This is required for collecting data usage stats. No personal data will be collected or stored.</string>
     <string name="action_grant">Grant permission</string>
     <string name="label_tethering">Mobile Hotspot</string>
-    <string name="package_tethering">com.android.tethering</string>
+    <string name="package_tethering" translatable="false">com.android.tethering</string>
     <string name="label_removed">Removed Apps</string>
-    <string name="package_removed">com.android.removed</string>
+    <string name="package_removed" translatable="false">com.android.removed</string>
     <string name="oem_skin_warning">%1$s Please check Extra optimisation tips to make sure the app works properly.</string>
     <string name="oem_skin_miui">Miui detected! </string>
     <string name="battery_optimisation_disabled">Battery optimisation disabled</string>
     <string name="data_plan_saved">Data plan saved</string>
     <string name="upi_app_not_found">No application found to handle this request</string>
-    <string name="upi_unknown_error">An unknown error occured. Please try again or try another method.</string>
+    <string name="upi_unknown_error">An unknown error occurred. Please try again or try another method.</string>
     <string name="label_no_additional_lang">More languages coming soon.. Help us? Click to know how.</string>
     <string name="notification_disabled">Data monitor notification disabled</string>
     <string name="label_widget_refresh_interval_change">Widget will be updated every %1$s</string>
@@ -157,7 +157,7 @@
     <string name="title_data_warning_notification">Data usage warning</string>
     <string name="body_data_warning_notification">You\'ve used up %1$d%% of your data limit</string>
     <string name="body_app_data_warning_notification">%1$s has used up it\'s data quota</string>
-    <string name="title_data_usage_notification">Data usage today</string>
+    <string name="title_data_usage_notification">Data usage today : %1$s</string>
     <string name="body_data_usage_notification_loading">Loading...</string>
     <string name="label_data_remaining">%1$s remaining</string>
     <string name="label_data_remaining_used_excess">%1$s extra used</string>
@@ -173,12 +173,12 @@
     <string name="overview_friday">Fri</string>
     <string name="overview_saturday">Sat</string>
     <string name="overview_sunday">Sun</string>
-    <string name="overview_2gb_plus">2 GB+</string>
-    <string name="overview_2gb">2 GB</string>
-    <string name="overview_1_5gb">1.5 GB</string>
-    <string name="overview_1gb">1 GB</string>
-    <string name="overview_0_5gb">0.5 GB</string>
-    <string name="overview_0gb">0 GB</string>
+    <string name="overview_2gb_plus" translatable="false">2 GB+</string>
+    <string name="overview_2gb" translatable="false">2 GB</string>
+    <string name="overview_1_5gb" translatable="false">1.5 GB</string>
+    <string name="overview_1gb" translatable="false">1 GB</string>
+    <string name="overview_0_5gb" translatable="false">0.5 GB</string>
+    <string name="overview_0gb" translatable="false">0 GB</string>
     <string name="label_translators">Translators</string>
     <string name="setup_app_data_usage_alert">App data usage alert</string>
     <string name="title_app_data_limit">App data limit</string>
@@ -214,6 +214,11 @@
     <string name="connection_error">Connection error. Please check you internet connection</string>
     <string name="app_label_screen_time">Screen Time : %1$s</string>
     <string name="app_label_background_time">Background Usage : %1$s</string>
-    <string name="usage_time_label">%1$d %2$s %3$d %4$s</string>
+    <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
+    <string name="ygorigor_summary">Romanian translator</string>
+    <string name="ygorigor" translatable="false">Igor Sorocean</string>
+    <string name="label_want_to_contribute_language">Can\'t find your language? Help us by translating contents to your local language. Click to know how.</string>
+    <string name="current_language">Current Language</string>
+    <string name="available_languages">Available Languages</string>
 
 </resources>

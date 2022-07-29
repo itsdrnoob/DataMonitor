@@ -56,6 +56,7 @@ public class Values {
     public static final int APP_LICENSE_FRAGMENT = 0x0096;
     public static final int APP_DATA_LIMIT_FRAGMENT = 0x00AA;
     public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
+    public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -84,6 +85,8 @@ public class Values {
     public static final String NOTIFICATION_REFRESH_INTERVAL = "notification_refresh_interval";
     public static final String NOTIFICATION_MOBILE_DATA = "notification_mobile_data";
     public static final String NOTIFICATION_WIFI = "notification_wifi";
+    public static final String APP_LANGUAGE = "app_language";
+    public static final String APP_LANGUAGE_CODE = "app_language_code";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

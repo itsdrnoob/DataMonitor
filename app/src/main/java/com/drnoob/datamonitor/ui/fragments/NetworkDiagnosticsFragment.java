@@ -491,8 +491,13 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             bundle.putString(MIN_LATENCY, String.valueOf(mMinLatency));
                                             bundle.putString(AVG_LATENCY, String.valueOf(mLatency));
                                             bundle.putString(NETWORK_IP, mIpResponse.getIp());
-                                            bundle.putString(ISP, mIpResponse.getOrg().
-                                                    replace(mIpResponse.getOrg().split(" ")[0], ""));
+                                            try {
+                                                bundle.putString(ISP, mIpResponse.getOrg().
+                                                        replace(mIpResponse.getOrg().split(" ")[0], ""));
+                                            }
+                                            catch (NullPointerException e) {
+                                                e.printStackTrace();
+                                            }
                                             bundle.putString(SERVER, mIpResponse.getCity());
                                             bundle.putString(REGION, mIpResponse.getRegion());
 

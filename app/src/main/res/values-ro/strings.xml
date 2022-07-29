@@ -98,7 +98,7 @@
     <string name="license">Licență</string>
     <string name="contributors_summary">Cei care sunt mereu acolo</string>
     <string name="donate">Donați</string>
-    <string name="donate_summay">Cumpără-ne o cafea, poate?</string>
+    <string name="donate_summary">Cumpără-ne o cafea, poate?</string>
     <string name="data_reset">Resetare date</string>
     <string name="data_limit">Limită de date</string>
     <string name="support_and_development">Sprijin și dezvoltare</string>
@@ -146,7 +146,7 @@
     <string name="title_data_warning_notification">Avertisment de utilizare date</string>
     <string name="body_data_warning_notification">Ați folosit %1$d%% din limita de date</string>
     <string name="body_app_data_warning_notification">%1$s a epuizat cota de date</string>
-    <string name="title_data_usage_notification">Utilizarea datelor astăzi</string>
+    <string name="title_data_usage_notification">Utilizarea datelor astăzi : %1$s</string>
     <string name="body_data_usage_notification_loading">Se încarcă...</string>
     <string name="label_data_remaining">%1$s rămas</string>
     <string name="label_data_remaining_used_excess">%1$s extra folosit</string>
@@ -194,4 +194,7 @@
     <string name="connection_error">Eroare de conexiune. Verificați conexiunea la internet</string>
     <string name="app_label_screen_time">Timp ecran: %1$s</string>
     <string name="app_label_background_time">Utilizare în fundal: %1$s</string>
+    <string name="label_want_to_contribute_language">Nu puteți găsi limba dvs.? Ajutați-ne traducând conținutul în limba dvs. locală. Faceți clic pentru a ști cum.</string>
+    <string name="current_language">Limba actuală</string>
+    <string name="available_languages">Limbi disponibile</string>
 </resources>

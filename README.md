@@ -1,7 +1,7 @@
-[![License](https://shields.io/badge/version-v1.6.1-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor)
+[![License](https://shields.io/badge/version-v1.6.9-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor)
 [![License](https://shields.io/badge/platform-android-green.svg)](https://github.com/itsdrnoob/DataMonitor)
 [![License](https://img.shields.io/badge/license-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![License](https://shields.io/badge/release-v1.6.1-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
+[![License](https://shields.io/badge/release-v1.6.9-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/icon.png" width="20%" height="20%"></img>
@@ -30,8 +30,8 @@ Track all your data usage - at one place
 <br><br>
 
 ## Download
-[<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=15664248565197192383)<br><br>
-Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.6.1">releases</a>
+[<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=15664248565197194635)<br><br>
+Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.6.9">releases</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>

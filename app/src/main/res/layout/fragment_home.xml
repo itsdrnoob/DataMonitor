@@ -156,7 +156,7 @@
                             android:layout_marginStart="@dimen/margin_extra_small"
                             android:text="@string/app_data_usage_placeholder"
                             android:textColor="@color/text_primary"
-                            android:textSize="@dimen/text_large"  />
+                            android:textSize="@dimen/text_large" />
 
                     </LinearLayout>
 
@@ -216,8 +216,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/margin_large"
                     android:padding="@dimen/margin_mid_large"
-                    android:textColor="@color/text_primary"
-                    android:text="@string/action_add_data_plan_home" />
+                    android:text="@string/action_add_data_plan_home"
+                    android:textColor="@color/text_primary" />
 
                 <ImageView
                     android:layout_width="14dp"
@@ -233,13 +233,15 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_mid_large"
                 android:layout_marginTop="@dimen/margin_large"
-                android:gravity="center"
+                android:gravity="start|center_vertical"
                 android:text="@string/heading_week_overview"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintEnd_toStartOf="@+id/overview_refresh"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/setup_data_plan" />
 
@@ -247,11 +249,11 @@
                 android:id="@+id/overview_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_refresh"
                 android:layout_marginTop="@dimen/margin_extra_small"
                 android:padding="@dimen/margin_small"
+                android:src="@drawable/ic_refresh"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout12"
                 app:layout_constraintTop_toTopOf="@+id/textView2"
                 app:tint="@color/text_secondary" />
 
@@ -318,16 +320,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            <include layout="@layout/overview_loading"
+            <include
                 android:id="@+id/overview_loading"
+                layout="@layout/overview_loading"
                 android:layout_width="match_parent"
                 android:layout_height="320dp"
-                android:maxHeight="350dp"
                 android:layout_marginStart="@dimen/margin_small"
+                android:maxHeight="350dp"
                 app:layout_constraintBottom_toBottomOf="@+id/overview"
                 app:layout_constraintEnd_toEndOf="@+id/overview"
                 app:layout_constraintStart_toStartOf="@+id/overview"
-                app:layout_constraintTop_toTopOf="@+id/overview"/>
+                app:layout_constraintTop_toTopOf="@+id/overview" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

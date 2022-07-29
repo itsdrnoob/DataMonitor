@@ -92,7 +92,7 @@ public class NotificationService extends Service {
         builder.setSmallIcon(R.drawable.ic_mobile_data);
         builder.setOngoing(true);
         builder.setPriority(NotificationCompat.PRIORITY_LOW);
-        builder.setContentTitle(getString(R.string.title_data_usage_notification));
+        builder.setContentTitle(getString(R.string.title_data_usage_notification, getString(R.string.body_data_usage_notification_loading)));
         builder.setContentText(getString(R.string.body_data_usage_notification_loading));
         builder.setShowWhen(false);
         builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
@@ -131,7 +131,7 @@ public class NotificationService extends Service {
 
     public static class NotificationUpdater extends BroadcastReceiver {
         private static final String TAG = NotificationUpdater.class.getSimpleName();
-        private String mobileDataUsage, wifiDataUsage;
+        private String mobileDataUsage, wifiDataUsage,  totalDataUsage;
         private Long[] mobile, wifi;
 
         @Override
@@ -150,6 +150,11 @@ public class NotificationService extends Service {
                     wifi = getDeviceWifiDataUsage(context, SESSION_TODAY);
                     String[] wifiData = formatData(wifi[0], wifi[1]);
 
+                    long totalSent = mobile[0] + wifi[0];
+                    long totalReceived = mobile[1] + wifi[1];
+
+                    String[] total = formatData(totalSent, totalReceived);
+                    totalDataUsage = context.getResources().getString(R.string.title_data_usage_notification, total[2]);
                     mobileDataUsage = context.getResources().getString(R.string.notification_mobile_data_usage,
                             mobileData[2]);
                     wifiDataUsage = context.getResources().getString(R.string.notification_wifi_data_usage,
@@ -179,7 +184,8 @@ public class NotificationService extends Service {
                 builder.setSmallIcon(R.drawable.ic_mobile_data);
                 builder.setOngoing(true);
                 builder.setPriority(NotificationCompat.PRIORITY_LOW);
-                builder.setContentTitle(context.getString(R.string.title_data_usage_notification));
+//                builder.setContentTitle(context.getString(R.string.title_data_usage_notification));
+                builder.setContentTitle(totalDataUsage);
                 if (showMobileData && showWifi) {
                     builder.setStyle(new NotificationCompat.InboxStyle()
                             .addLine(mobileDataUsage)

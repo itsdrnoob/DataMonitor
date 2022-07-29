@@ -58,7 +58,7 @@
             android:title="@string/donate"
             app:icon="@drawable/ic_donate"
             android:key="donate"
-            app:summary="@string/donate_summay"
+            app:summary="@string/donate_summary"
             android:fragment="com.drnoob.datamonitor.ui.fragments.SetupFragment"
             android:widgetLayout="@layout/preference_right_arrow" />
 

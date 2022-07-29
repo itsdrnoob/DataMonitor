@@ -37,6 +37,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DARK_MODE_TOGGLE;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
@@ -99,22 +100,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mLanguagePicker.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(androidx.preference.Preference preference) {
-//                getActivity().recreate();
-                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root), getString(R.string.label_no_additional_lang),
-                        4000)
-                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                snackbar.getView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        Uri uri = Uri.parse(getContext().getString(R.string.github_contribute_translations));
-                        intent.setData(uri);
-                        startActivity(intent);
-                        snackbar.dismiss();
-                    }
-                });
-//                dismissOnClick(snackbar);
-                snackbar.show();
+                startActivity(new Intent(getContext(), ContainerActivity.class)
+                        .putExtra(GENERAL_FRAGMENT_ID, APP_LANGUAGE_FRAGMENT));
                 return false;
             }
         });
