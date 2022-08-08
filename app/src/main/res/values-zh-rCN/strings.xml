@@ -197,6 +197,7 @@
     <string name="app_label_screen_time">屏幕时间 : %1$s</string>
     <string name="app_label_background_time">后台时间 : %1$s</string>
     <string name="ygorigor_summary">Romanian 译者</string>
+    <string name="johnsonran_summary">简体中文 译者</string>
     <string name="label_want_to_contribute_language">未找到您的语言？点此了解如何帮助我们！</string>
     <string name="current_language">当前语言</string>
     <string name="available_languages">可用语言</string>

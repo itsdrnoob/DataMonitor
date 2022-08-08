@@ -217,6 +217,8 @@
     <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
     <string name="ygorigor_summary">Romanian translator</string>
     <string name="ygorigor" translatable="false">Igor Sorocean</string>
+    <string name="johnsonran_summary">Simplified Chinese translator</string>
+    <string name="johnsonran" translatable="false">JohnsonRan</string>
     <string name="label_want_to_contribute_language">Can\'t find your language? Help us by translating contents to your local language. Click to know how.</string>
     <string name="current_language">Current Language</string>
     <string name="available_languages">Available Languages</string>
