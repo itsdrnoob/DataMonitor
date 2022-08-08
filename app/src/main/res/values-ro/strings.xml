@@ -131,7 +131,7 @@
     <string name="notification_disabled">Notificare monitorizare date dezactivată</string>
     <string name="label_widget_refresh_interval_change">Widget-ul va fi actualizat la fiecare %1$s</string>
     <string name="label_notification_refresh_interval_change">Notificarea va fi actualizată la fiecare %1$s</string>
-    <string name="label_data_usage_reset_interval_change">Utilizarea datelor se va reseta fiecare %1$s la %2$s</string>
+    <string name="label_data_usage_reset_time_change">Utilizarea datelor se va reseta fiecare %1$s la %2$s</string>
     <string name="remaining_data_info_enabled">Informații date rămase activate</string>
     <string name="remaining_data_info_disabled">Informații date rămase dezactivate</string>
     <string name="label_monitoring_no_plan">Adăugați un plan de date pentru a începe monitorizarea</string>

@@ -220,5 +220,7 @@
     <string name="label_want_to_contribute_language">未找到您的語言？點此瞭解如何幫助我們！</string>
     <string name="current_language">當前語言</string>
     <string name="available_languages">可用語言</string>
+    <string name="label_data_usage_reset_time_change">數據使用量將在 %2$s 每 %1$s 重置一次</string>
+    <string name="label_data_usage_reset_date_change">數據使用量將在每月 %1$d%2$s 重置</string>
 
 </resources>
