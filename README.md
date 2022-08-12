@@ -31,6 +31,7 @@ Track all your data usage - at one place
 <br><br>
 
 ## Download
+[<img alt="Get it on Google Play" height="85" src="./images/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.drnoob.datamonitor)<br><br>
 [<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=15664248565197194635)<br><br>
 Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/tag/v1.6.9">releases</a>
 
@@ -45,3 +46,6 @@ Click <a href = "CONTRIBUTING.md">here</a> to learn how to contribute.
 
 ## XDA Thread
 Check xda thread <a href = "https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/">here</a>.
+
+## NOTE
+Play store release differs in signature with Github and other releases. This means that if you have apk from Github or AFH installed, you won't be able to update directly from Play store. If you have the Github variant installed and want to use Playstore one, you have yo uninstall the app and reinstall from Playstore.
