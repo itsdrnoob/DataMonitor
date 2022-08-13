@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/license-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![License](https://shields.io/badge/release-v1.6.9-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
 [![Chat](https://img.shields.io/badge/Telegram%20Chat-blue?logo=telegram)](https://t.me/datamonitor)
+[![Downloads](https://img.shields.io/github/downloads/itsdrnoob/DataMonitor/total)](https://github.com/itsdrnoob/DataMonitor/releases)
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/icon.png" width="20%" height="20%"></img>
