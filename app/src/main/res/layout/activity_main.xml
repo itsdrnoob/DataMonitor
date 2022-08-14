@@ -21,7 +21,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
@@ -41,6 +41,8 @@
         android:layout_height="wrap_content"
         android:background="@color/surface"
         app:elevation="@dimen/elevation_null"
+        app:itemPaddingTop="@dimen/margin_tiny"
+        android:paddingTop="@dimen/margin_tiny"
         app:itemHorizontalTranslationEnabled="true"
         app:itemIconTint="@color/bottom_navbar_icon_color_selector"
         app:itemTextColor="@color/bottom_navbar_icon_color_selector"

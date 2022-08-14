@@ -30,12 +30,6 @@
         tools:layout="@layout/fragment_network_diagnostics">
     </fragment>
     <fragment
-        android:id="@+id/bottom_menu_settings"
-        android:name="com.drnoob.datamonitor.ui.fragments.SettingsFragment"
-        android:label="@string/settings">
-    </fragment>
-
-    <fragment
         android:id="@+id/system_data_usage"
         android:name="com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment"
         tools:layout="@layout/fragment_system_data_usage"
