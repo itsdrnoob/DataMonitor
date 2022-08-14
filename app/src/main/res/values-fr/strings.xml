@@ -160,7 +160,7 @@ Revenez voir plus tard"</string>
     <string name="title_data_warning_notification">"Avertissement de l'utilisation des données"</string>
     <string name="body_data_warning_notification">"Vous avez utilisé %1$s%% de plus que votre limite de données"</string>
     <string name="body_app_data_warning_notification">"%1$s a utilisé plus que son quota de données"</string>
-    <string name="title_data_usage_notification">"Utilisation de données aujourd'hui"</string>
+    <string name="title_data_usage_notification">"Utilisation de données aujourd'hui : %1$s"</string>
     <string name="body_data_usage_notification_loading">"Chargement..."</string>
     <string name="label_data_remaining">"%1$s restant"</string>
     <string name="label_data_remaining_used_excess">"%1$s utilisé en plus"</string>

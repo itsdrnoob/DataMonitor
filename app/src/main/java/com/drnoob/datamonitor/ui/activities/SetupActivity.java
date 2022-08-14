@@ -49,6 +49,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
 import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
@@ -57,17 +58,18 @@ import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 public class SetupActivity extends AppCompatActivity {
     private static final String TAG = SetupActivity.class.getSimpleName();
 
-    ActivitySetupBinding binding;
+    com.drnoob.datamonitor.databinding.ActivitySetupBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
-            setLanguage(this, "en");
+            setLanguage(this, "en", countryCode);
         }
         else {
-            setLanguage(this, languageCode);
+            setLanguage(this, languageCode, countryCode);
         }
         binding = ActivitySetupBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_DataMonitor);
@@ -244,6 +246,9 @@ public class SetupActivity extends AppCompatActivity {
                     Uri uri = null;
                     if (oem.equalsIgnoreCase("android") || oem.equalsIgnoreCase("generic")) {
                         uri = Uri.parse("https://dontkillmyapp.com" + "/google");
+                    }
+                    else if (oem.equalsIgnoreCase("redmi")) {
+                        uri = Uri.parse("https://dontkillmyapp.com" + "/xiaomi");
                     }
                     else {
                         uri = Uri.parse("https://dontkillmyapp.com" + "/" + oem.toLowerCase());

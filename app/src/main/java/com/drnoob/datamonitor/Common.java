@@ -22,12 +22,17 @@ package com.drnoob.datamonitor;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.view.View;
 
+import androidx.preference.PreferenceManager;
+
+import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
+import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
@@ -62,12 +67,21 @@ public class Common {
         return false;
     }
 
-    public static void setLanguage(Activity activity, String languageCode) {
+    public static void setLanguage(Activity activity, String languageCode, String countryCode) {
         Resources res = activity.getResources();
         Configuration conf = res.getConfiguration();
         conf.locale = new Locale(languageCode);
-        conf.setLayoutDirection(new Locale(languageCode));
+        conf.setLayoutDirection(new Locale(languageCode, countryCode));
         res.updateConfiguration(conf, res.getDisplayMetrics());
 
+    }
+
+    public static void refreshService(Context context) {
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
+            context.startService(new Intent(context, LiveNetworkMonitor.class));
+        }
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
+            context.startService(new Intent(context, NotificationService.class));
+        }
     }
 }

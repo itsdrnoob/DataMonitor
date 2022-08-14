@@ -23,12 +23,17 @@ public class Values {
     public static final int DATA_USAGE_NOTIFICATION_ID = 0x0045;
     public static final String DATA_USAGE_NOTIFICATION_CHANNEL_ID = "DataUsage.Notification";
     public static final String DATA_USAGE_NOTIFICATION_CHANNEL_NAME = "Data Usage";
+    public static final String DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP = "Data Usage";
     public static final int DATA_USAGE_WARNING_NOTIFICATION_ID = 0x00A0;
     public static final String DATA_USAGE_WARNING_CHANNEL_ID = "DataUsage.Warning";
     public static final String DATA_USAGE_WARNING_CHANNEL_NAME = "Data Usage Warning";
     public static final int APP_DATA_USAGE_WARNING_NOTIFICATION_ID = 0x00BE; // 190
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_ID = "AppDataUsage.Warning";
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_NAME = "App Data Usage Warning";
+    public static final int NETWORK_SIGNAL_NOTIFICATION_ID = 0x010D;
+    public static final String NETWORK_SIGNAL_CHANNEL_ID = "NetworkSignal.Notification";
+    public static final String NETWORK_SIGNAL_CHANNEL_NAME = "Network Speed Monitor";
+    public static final String NETWORK_SIGNAL_NOTIFICATION_GROUP = "Network Speed Monitor";
 
 
     public static final int SESSION_TODAY = 0x000A;
@@ -37,6 +42,7 @@ public class Values {
     public static final int SESSION_LAST_MONTH = 0x0028;
     public static final int SESSION_THIS_YEAR = 0x0032;
     public static final int SESSION_ALL_TIME = 0x003C;
+    public static final int SESSION_MONTHLY = 0x00A9;
 
     public static final int TYPE_MOBILE_DATA = 0x0046;
     public static final int TYPE_WIFI = 0x0050;
@@ -76,6 +82,7 @@ public class Values {
     public static final String DATA_RESET_MONTHLY = "monthly";
     public static final String DATA_RESET_HOUR = "reset_hour";
     public static final String DATA_RESET_MIN = "reset_min";
+    public static final String DATA_RESET_DATE = "reset_date";
     public static final String DATA_WARNING_TRIGGER_LEVEL = "data_warning_trigger_level";
     public static final String DATA_USAGE_WARNING_SHOWN = "data_usage_warning_shown";
     public static final String DATA_USAGE_ALERT = "data_usage_alert";
@@ -87,6 +94,8 @@ public class Values {
     public static final String NOTIFICATION_WIFI = "notification_wifi";
     public static final String APP_LANGUAGE = "app_language";
     public static final String APP_LANGUAGE_CODE = "app_language_code";
+    public static final String APP_COUNTRY_CODE = "app_country_code";
+    public static final String DAILY_DATA_HOME_ACTION = "daily_data_home_action";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

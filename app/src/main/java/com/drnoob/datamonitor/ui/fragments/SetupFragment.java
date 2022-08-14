@@ -25,15 +25,24 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -47,10 +56,12 @@ import androidx.preference.PreferenceManager;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.core.Values;
+import com.drnoob.datamonitor.core.base.DatePicker;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
+import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -63,6 +74,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Time;
 import java.text.ParseException;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
@@ -70,6 +82,7 @@ import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
@@ -82,11 +95,15 @@ import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
+import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL_SUMMARY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
+import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMajor;
+import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
 
 public class SetupFragment extends Fragment {
 
@@ -113,10 +130,8 @@ public class SetupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setup, container, false);
-
         return view;
     }
-
 
     @Override
     public void onStart() {
@@ -128,7 +143,7 @@ public class SetupFragment extends Fragment {
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowMobileData, mShowWifi,
-                mShowDataWarning;
+                mShowDataWarning, mNetworkSignalNotification;
         private Snackbar snackbar;
 
         @Override
@@ -145,6 +160,7 @@ public class SetupFragment extends Fragment {
             mAppDataLimit = (Preference) findPreference("app_data_limit");
 
             mSetupNotification = (SwitchPreferenceCompat) findPreference("setup_notification");
+            mNetworkSignalNotification = (SwitchPreferenceCompat) findPreference("network_signal_notification");
             mRemainingDataInfo = (SwitchPreferenceCompat) findPreference("remaining_data_info");
             mShowMobileData = (SwitchPreferenceCompat) findPreference("show_mobile_data_notification");
             mShowWifi = (SwitchPreferenceCompat) findPreference("show_wifi_notification");
@@ -158,55 +174,8 @@ public class SetupFragment extends Fragment {
                     String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext()).
                             getInt("data_warning_trigger_level", 85))));
 
-            int hour, minute;
-            hour = PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getInt(DATA_RESET_HOUR, 0);
-            minute = PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getInt(DATA_RESET_MIN, 0);
 
-            int h, m;
-            m = minute;
-            String time;
-
-            // Conversion to 12h clock xD :)
-
-            if (hour >= 12) {
-                if (hour == 12) {
-                    h = 12;
-                } else {
-                    h = (hour - 12);
-                }
-                if (m < 10) {
-                    time = h + ":0" + m + " pm";
-                } else {
-                    time = h + ":" + m + " pm";
-                }
-            } else {
-                if (hour == 0) {
-                    h = 12;
-                } else if (hour < 10) {
-                    h = hour;
-                    if (m < 10) {
-                        time = "0" + h + ":0" + m + " pm";
-                    } else {
-                        time = "0" + h + ":" + m + " pm";
-                    }
-                } else {
-                    h = hour;
-                }
-                if (h < 10) {
-                    time = "0" + h + ":" + m + " am";
-                } else {
-                    time = h + " : " + m + " am";
-                }
-                if (m < 10) {
-                    time = h + ":0" + m + " am";
-                } else {
-                    time = h + ":" + m + " am";
-                }
-            }
-
-            mUsageResetTime.setSummary(time);
+            updateResetData();
 
             mSetupNotification.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
@@ -223,6 +192,29 @@ public class SetupFragment extends Fragment {
                         Log.d(TAG, "onPreferenceClick: Notification stopped");
                         snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
                                 getString(R.string.notification_disabled), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                    }
+                    dismissOnClick(snackbar);
+                    snackbar.show();
+                    return false;
+                }
+            });
+
+            mNetworkSignalNotification.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("network_signal_notification", false);
+                    if (isChecked) {
+                        getContext().startService(new Intent(getContext(), LiveNetworkMonitor.class));
+                        Log.d(TAG, "onPreferenceClick: Notification started");
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                getString(R.string.label_network_signal_notification_enabled), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                    } else {
+                        getContext().stopService(new Intent(getContext(), LiveNetworkMonitor.class));
+                        Log.d(TAG, "onPreferenceClick: Notification stopped");
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                getString(R.string.label_network_signal_notification_disabled), Snackbar.LENGTH_SHORT)
                                 .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                     }
                     dismissOnClick(snackbar);
@@ -633,6 +625,7 @@ public class SetupFragment extends Fragment {
                                 snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
                                         getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                                updateResetData();
                                 dialog.dismiss();
                                 dismissOnClick(snackbar);
                                 snackbar.show();
@@ -685,86 +678,301 @@ public class SetupFragment extends Fragment {
             mUsageResetTime.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    int hour, minute;
+                    int hour, minute, year, month, dayOfMonth;
                     hour = PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getInt(DATA_RESET_HOUR, 0);
                     minute = PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getInt(DATA_RESET_MIN, 0);
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                    .putInt(DATA_RESET_HOUR, hourOfDay).apply();
-                            PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                    .putInt(DATA_RESET_MIN, minute).apply();
 
-                            Intent i = new Intent(getContext(), NotificationUpdater.class);
-                            getContext().sendBroadcast(i);
-                            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
-                            int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
-                            Intent intent = new Intent(getContext(), DataUsageWidget.class);
-                            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-                            getContext().sendBroadcast(intent);
+                    if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                            .equals(DATA_RESET_MONTHLY)) {
+                        BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
+                        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_date_picker, null);
 
-                            int h, m;
-                            m = minute;
-                            String time, interval;
+                        DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.reset_date_picker);
+                        ConstraintLayout footer = dialogView.findViewById(R.id.footer);
+                        TextView cancel = footer.findViewById(R.id.cancel);
+                        TextView ok = footer.findViewById(R.id.ok);
 
-                            // Again :)
+                        int resetDate = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getInt(DATA_RESET_DATE, -1);
 
-                            if (hourOfDay >= 12) {
-                                if (hourOfDay == 12) {
-                                    h = 12;
-                                } else {
-                                    h = (hourOfDay - 12);
+                        if (resetDate > 0) {
+                            datePicker.updateDate(datePicker.getYear(), datePicker.getMonth(), resetDate);
+                        }
+
+                        datePicker.setOnDateChangedListener(new android.widget.DatePicker.OnDateChangedListener() {
+                            @Override
+                            public void onDateChanged(android.widget.DatePicker datePicker, int i, int i1, int i2) {
+                                hapticMinor(getContext());
+                            }
+                        });
+
+                        int yearField = getContext().getResources().getIdentifier("android:id/year", null, null);
+                        int monthField = getContext().getResources().getIdentifier("android:id/month", null, null);
+                        if(yearField != 0){
+                            View yearPicker = datePicker.findViewById(yearField);
+                            if(yearPicker != null){
+                                yearPicker.setVisibility(View.GONE);
+                            }
+                        }
+                        if(monthField != 0){
+                            View monthPicker = datePicker.findViewById(monthField);
+                            if(monthPicker != null){
+                                monthPicker.setVisibility(View.GONE);
+                            }
+                        }
+
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putInt(DATA_RESET_DATE, datePicker.getDayOfMonth()).apply();
+
+                                Intent i = new Intent(getContext(), NotificationUpdater.class);
+                                getContext().sendBroadcast(i);
+                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
+                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                                getContext().sendBroadcast(intent);
+
+                                String date = String.valueOf(datePicker.getDayOfMonth());
+                                String suffix;
+
+                                if (date.endsWith("1")) {
+                                    suffix = "st";
                                 }
-                                if (m < 10) {
-                                    time = h + ":0" + m + " pm";
-                                } else {
-                                    time = h + ":" + m + " pm";
+                                else if (date.endsWith("2")) {
+                                    suffix = "nd";
                                 }
-                            } else {
-                                if (hourOfDay == 0) {
-                                    h = 12;
-                                } else if (hourOfDay < 10) {
-                                    h = hourOfDay;
-                                    if (m < 10) {
-                                        time = "0" + h + ":0" + m + " pm";
+                                else if (date.endsWith("3")) {
+                                    suffix = "rd";
+                                }
+                                else {
+                                    suffix = "th";
+                                }
+
+                                mUsageResetTime.setSummary(getContext().getString(R.string.label_reset_every_month,
+                                        date, suffix));
+
+                                dialog.dismiss();
+
+
+                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                        getString(R.string.label_data_usage_reset_date_change, datePicker.getDayOfMonth(), suffix),
+                                        Snackbar.LENGTH_SHORT)
+                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                                dismissOnClick(snackbar);
+                                snackbar.show();
+
+                            }
+                        });
+
+                        dialog.setContentView(dialogView);
+                        dialog.show();
+                    }
+                    else {
+                        BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
+                        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_time_picker, null);
+
+                        TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.reset_time_picker);
+                        ConstraintLayout footer = dialogView.findViewById(R.id.footer);
+                        TextView cancel = footer.findViewById(R.id.cancel);
+                        TextView ok = footer.findViewById(R.id.ok);
+
+                        int resetHour = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getInt(DATA_RESET_HOUR, -1);
+                        int resetMinute = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getInt(DATA_RESET_MIN, -1);
+
+                        if (resetHour >= 0 && resetMinute >= 0) {
+                            timePicker.setHour(resetHour);
+                            timePicker.setMinute(resetMinute);
+                        }
+
+                        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+                            @Override
+                            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
+                                hapticMinor(getContext());
+                            }
+                        });
+
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putInt(DATA_RESET_HOUR, timePicker.getHour()).apply();
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putInt(DATA_RESET_MIN, timePicker.getMinute()).apply();
+
+                                Intent i = new Intent(getContext(), NotificationUpdater.class);
+                                getContext().sendBroadcast(i);
+                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
+                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                                getContext().sendBroadcast(intent);
+
+                                int h, m;
+                                m = timePicker.getMinute();
+                                String time, interval;
+
+                                int hourOfDay = timePicker.getHour();
+
+                                // Again :)
+
+                                if (hourOfDay >= 12) {
+                                    if (hourOfDay == 12) {
+                                        h = 12;
                                     } else {
-                                        time = "0" + h + ":" + m + " pm";
+                                        h = (hourOfDay - 12);
+                                    }
+                                    if (m < 10) {
+                                        time = h + ":0" + m + " pm";
+                                    } else {
+                                        time = h + ":" + m + " pm";
                                     }
                                 } else {
-                                    h = hourOfDay;
+                                    if (hourOfDay == 0) {
+                                        h = 12;
+                                    } else if (hourOfDay < 10) {
+                                        h = hourOfDay;
+                                        if (m < 10) {
+                                            time = "0" + h + ":0" + m + " pm";
+                                        } else {
+                                            time = "0" + h + ":" + m + " pm";
+                                        }
+                                    } else {
+                                        h = hourOfDay;
+                                    }
+                                    if (h < 10) {
+                                        time = "0" + h + ":" + m + " am";
+                                    } else {
+                                        time = h + ":" + m + " am";
+                                    }
+                                    if (m < 10) {
+                                        time = h + ":0" + m + " am";
+                                    } else {
+                                        time = h + ":" + m + " am";
+                                    }
                                 }
-                                if (h < 10) {
-                                    time = "0" + h + ":" + m + " am";
+                                if (PreferenceManager.getDefaultSharedPreferences(getContext())
+                                        .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
+                                    interval = getString(R.string.month);
                                 } else {
-                                    time = h + ":" + m + " am";
+                                    interval = getString(R.string.day);
                                 }
-                                if (m < 10) {
-                                    time = h + ":0" + m + " am";
+
+                                mUsageResetTime.setSummary(time);
+
+                                dialog.dismiss();
+
+                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                        getString(R.string.label_data_usage_reset_time_change, interval, time), Snackbar.LENGTH_SHORT)
+                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                                dismissOnClick(snackbar);
+                                snackbar.show();
+
+                            }
+                        });
+
+
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putInt(DATA_RESET_HOUR, hourOfDay).apply();
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putInt(DATA_RESET_MIN, minute).apply();
+
+                                Intent i = new Intent(getContext(), NotificationUpdater.class);
+                                getContext().sendBroadcast(i);
+                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
+                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                                getContext().sendBroadcast(intent);
+
+                                int h, m;
+                                m = minute;
+                                String time, interval;
+
+                                // Again :)
+
+                                if (hourOfDay >= 12) {
+                                    if (hourOfDay == 12) {
+                                        h = 12;
+                                    } else {
+                                        h = (hourOfDay - 12);
+                                    }
+                                    if (m < 10) {
+                                        time = h + ":0" + m + " pm";
+                                    } else {
+                                        time = h + ":" + m + " pm";
+                                    }
                                 } else {
-                                    time = h + ":" + m + " am";
+                                    if (hourOfDay == 0) {
+                                        h = 12;
+                                    } else if (hourOfDay < 10) {
+                                        h = hourOfDay;
+                                        if (m < 10) {
+                                            time = "0" + h + ":0" + m + " pm";
+                                        } else {
+                                            time = "0" + h + ":" + m + " pm";
+                                        }
+                                    } else {
+                                        h = hourOfDay;
+                                    }
+                                    if (h < 10) {
+                                        time = "0" + h + ":" + m + " am";
+                                    } else {
+                                        time = h + ":" + m + " am";
+                                    }
+                                    if (m < 10) {
+                                        time = h + ":0" + m + " am";
+                                    } else {
+                                        time = h + ":" + m + " am";
+                                    }
                                 }
-                            }
-                            if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                                    .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
-                                interval = getString(R.string.month);
-                            } else {
-                                interval = getString(R.string.day);
-                            }
+                                if (PreferenceManager.getDefaultSharedPreferences(getContext())
+                                        .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
+                                    interval = getString(R.string.month);
+                                } else {
+                                    interval = getString(R.string.day);
+                                }
 
-                            mUsageResetTime.setSummary(time);
+                                mUsageResetTime.setSummary(time);
 
-                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                    getString(R.string.label_data_usage_reset_interval_change, interval, time), Snackbar.LENGTH_SHORT)
-                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                            dismissOnClick(snackbar);
-                            snackbar.show();
-                        }
-                    }, hour, minute, false);
-                    timePickerDialog.show();
+                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                        getString(R.string.label_data_usage_reset_time_change, interval, time), Snackbar.LENGTH_SHORT)
+                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                                dismissOnClick(snackbar);
+                                snackbar.show();
+                            }
+                        }, hour, minute, false);
+//                        timePickerDialog.show();
+
+                        dialog.setContentView(dialogView);
+                        dialog.show();
+                    }
                     return false;
                 }
             });
@@ -895,8 +1103,8 @@ public class SetupFragment extends Fragment {
                                     int trigger = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
 
                                     if (PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1) * trigger / 100 >
-                                            Double.parseDouble(formatData(getDeviceMobileDataUsage(getContext(), SESSION_TODAY)[0],
-                                                    getDeviceMobileDataUsage(getContext(), SESSION_TODAY)[1])[2]
+                                            Double.parseDouble(formatData(getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1)[0],
+                                                    getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1)[1])[2]
                                                     .replace(" MB", "").replace(" GB", ""))) {
                                         resumeMonitor();
                                     }
@@ -933,6 +1141,86 @@ public class SetupFragment extends Fragment {
 
         public static void resumeMonitor() {
             mContext.startService(new Intent(mContext, DataUsageMonitor.class));
+        }
+
+        private void updateResetData() {
+            String resetTitle, resetSummary;
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_MONTHLY)) {
+                resetTitle = getContext().getString(R.string.setup_usage_reset_date);
+                String date = String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_DATE, 1));
+                String suffix;
+
+                if (date.endsWith("1")) {
+                    suffix = "st";
+                }
+                else if (date.endsWith("2")) {
+                    suffix = "nd";
+                }
+                else if (date.endsWith("3")) {
+                    suffix = "rd";
+                }
+                else {
+                    suffix = "th";
+                }
+
+                resetSummary = (getContext().getString(R.string.label_reset_every_month,
+                        date, suffix));
+            }
+            else {
+                resetTitle = getContext().getString(R.string.setup_usage_reset_time);
+                int hour, minute;
+                hour = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_HOUR, 0);
+                minute = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_MIN, 0);
+
+                int h, m;
+                m = minute;
+
+
+                // Conversion to 12h clock xD :)
+
+                if (hour >= 12) {
+                    if (hour == 12) {
+                        h = 12;
+                    } else {
+                        h = (hour - 12);
+                    }
+                    if (m < 10) {
+                        resetSummary = h + ":0" + m + " pm";
+                    } else {
+                        resetSummary = h + ":" + m + " pm";
+                    }
+                } else {
+                    if (hour == 0) {
+                        h = 12;
+                    } else if (hour < 10) {
+                        h = hour;
+                        if (m < 10) {
+                            resetSummary = "0" + h + ":0" + m + " pm";
+                        } else {
+                            resetSummary = "0" + h + ":" + m + " pm";
+                        }
+                    } else {
+                        h = hour;
+                    }
+                    if (h < 10) {
+                        resetSummary = "0" + h + ":" + m + " am";
+                    } else {
+                        resetSummary = h + " : " + m + " am";
+                    }
+                    if (m < 10) {
+                        resetSummary = h + ":0" + m + " am";
+                    } else {
+                        resetSummary = h + ":" + m + " am";
+                    }
+                }
+            }
+
+            mUsageResetTime.setTitle(resetTitle);
+            mUsageResetTime.setSummary(resetSummary);
         }
     }
 

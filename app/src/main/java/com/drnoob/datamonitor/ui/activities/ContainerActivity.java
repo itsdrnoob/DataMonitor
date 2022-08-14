@@ -36,16 +36,19 @@ import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
+import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
 
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
@@ -60,11 +63,12 @@ public class ContainerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         MainActivity.setTheme(ContainerActivity.this);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
-            setLanguage(this, "en");
+            setLanguage(this, "en", countryCode);
         }
         else {
-            setLanguage(this, languageCode);
+            setLanguage(this, languageCode, countryCode);
         }
         super.onCreate(savedInstanceState);
         binding = ActivityContainerBinding.inflate(getLayoutInflater());
@@ -118,6 +122,11 @@ public class ContainerActivity extends AppCompatActivity {
             case APP_LANGUAGE_FRAGMENT:
                 fragment = new LanguageFragment();
                 title = getString(R.string.settings_language);
+                break;
+
+            case BOTTOM_NAVBAR_ITEM_SETTINGS:
+                fragment = new SettingsFragment();
+                title = getString(R.string.settings);
                 break;
         }
 

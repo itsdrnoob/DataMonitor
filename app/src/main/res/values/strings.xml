@@ -231,5 +231,12 @@
     <string name="cracky5322" translatable="false">Jia-Bin</string>
     <string name="louis_leblanc_summary">French translator</string>
     <string name="louis_leblanc">Louis Leblanc</string>
+    <string name="network_speed_title">Network Speed : %1$s</string>
+    <string name="network_speed_upload">Upload : %1$s</string>
+    <string name="network_speed_download">Download : %1$s</string>
+    <string name="network_signal_notification">Live network speed</string>
+    <string name="label_network_signal_notification_enabled">Live network speed enabled</string>
+    <string name="label_network_signal_notification_disabled">Live network speed disabled</string>
+    <string name="network_signal_summary">Beta feature</string>
 
 </resources>
