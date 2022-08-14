@@ -56,11 +56,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import fr.bmartel.speedtest.SpeedTestReport;
 import fr.bmartel.speedtest.SpeedTestSocket;
@@ -226,7 +230,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
             final IPResponse[] ipResponse = new IPResponse[1];
             if (!isCancelled()) {
                 try {
-                    Scanner scanner = new Scanner(new URL(getString(R.string.api_url)).openStream(), "UTF-8").useDelimiter("\\A");
+                    URL url = new URL(getString(R.string.api_url));
+                    HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+//                    Scanner scanner = new Scanner(new URL(getString(R.string.api_url)).openStream(), "UTF-8").useDelimiter("\\A");
+//                    String ip = scanner.next();
+
+                    Scanner scanner = new Scanner(urlConnection.getInputStream());
                     String ip = scanner.next();
 
                     IPinfo ipInfo = new IPinfo.Builder()
