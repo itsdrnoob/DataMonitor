@@ -78,6 +78,7 @@ import java.util.Locale;
 import java.util.zip.Inflater;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
 import static com.drnoob.datamonitor.Common.refreshService;
 import static com.drnoob.datamonitor.Common.setLanguage;
@@ -96,6 +97,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_NAME
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
@@ -128,6 +130,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(MainActivity.this);
 //        setTheme(R.style.Theme_DataMonitor_MaterialYou);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (!isReadPhoneStateGranted(MainActivity.this)) {
+                startActivity(new Intent(this, SetupActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        .putExtra(SETUP_VALUE, READ_PHONE_STATE_DISABLED));
+                finish();
+            }
+        }
+
         super.onCreate(savedInstanceState);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
@@ -230,7 +242,8 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
 
-            } else {
+            }
+            else {
                 onResume();
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -306,6 +319,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SetupActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         .putExtra(SETUP_VALUE, USAGE_ACCESS_DISABLED));
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                if (!isReadPhoneStateGranted(MainActivity.this)) {
+                    startActivity(new Intent(this, SetupActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            .putExtra(SETUP_VALUE, READ_PHONE_STATE_DISABLED));
+                }
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

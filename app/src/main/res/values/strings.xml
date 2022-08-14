@@ -238,5 +238,9 @@
     <string name="label_network_signal_notification_enabled">Live network speed enabled</string>
     <string name="label_network_signal_notification_disabled">Live network speed disabled</string>
     <string name="network_signal_summary">Beta feature</string>
+    <string name="read_phone_state_permission">Read Phone State Permission</string>
+    <string name="read_phone_state_body">Devices running Android version 9 and lower are required to grant \'Read Phone State\' permission manually. No personal data will be collected or stored.</string>
+    <string name="action_permission_granted">Permission granted</string>
+    <string name="error_permission_denied">Permission denied. Please manually grant the permission.</string>
 
 </resources>

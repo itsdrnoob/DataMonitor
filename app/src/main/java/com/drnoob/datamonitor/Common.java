@@ -60,6 +60,11 @@ public class Common {
         return (mode == AppOpsManager.MODE_ALLOWED);
     }
 
+    public static Boolean isReadPhoneStateGranted(Context context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
     public static Boolean isAppInstalled(Context context, String packageName) {
         PackageManager pm = context.getPackageManager();
         try {

@@ -61,7 +61,14 @@ public class NetworkStatsHelper {
     public static String getSubscriberId(Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            return telephonyManager.getSubscriberId();
+            String subscriberId = "";
+            try {
+                subscriberId =  telephonyManager.getSubscriberId();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return subscriberId;
         } else {
             return null;
         }

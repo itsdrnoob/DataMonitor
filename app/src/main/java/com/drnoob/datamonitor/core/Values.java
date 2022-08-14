@@ -72,6 +72,8 @@ public class Values {
 
     public static final String SETUP_VALUE = "SETUP_VALUE";
     public static final int USAGE_ACCESS_DISABLED = 0x00B4;
+    public static final int READ_PHONE_STATE_DISABLED = 0x00B5;
+    public static final int REQUEST_READ_PHONE_STATE = 2011;
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";
