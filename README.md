@@ -49,4 +49,4 @@ Click <a href = "CONTRIBUTING.md">here</a> to learn how to contribute.
 Check xda thread <a href = "https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/">here</a>.
 
 ## NOTE
-Play store release differs in signature with Github and other releases. This means that if you have apk from Github or AFH installed, you won't be able to update directly from Play store. If you have the Github variant installed and want to use Playstore one, you have yo uninstall the app and reinstall from Playstore.
+Play store release differs in signature with Github and other releases. This means that if you have apk from Github or AFH installed, you won't be able to update directly from Play store. If you have the Github variant installed and want to use Playstore one, you have to uninstall the app and reinstall from Playstore.
