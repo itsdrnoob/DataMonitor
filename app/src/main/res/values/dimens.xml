@@ -27,4 +27,6 @@
     <dimen name="padding_medium">15dp</dimen>
     <dimen name="text_run_diagnostics">20sp</dimen>
     <dimen name="button_default">55dp</dimen>
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="text_widget_title">18sp</dimen>
 </resources>

@@ -3,9 +3,11 @@
     android:initialKeyguardLayout="@layout/data_usage_widget"
     android:initialLayout="@layout/data_usage_widget"
     android:minWidth="180dp"
-    android:minHeight="110dp"
+    android:minHeight="140dp"
+    android:targetCellWidth="3"
+    android:targetCellHeight="2"
     android:previewImage="@drawable/ic_widget_preview"
-    android:resizeMode="none"
+    android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1000"
     android:widgetCategory="home_screen">
 </appwidget-provider>

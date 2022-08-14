@@ -43,7 +43,7 @@
     <color name="switch_off_thumb">#A6A6A6</color>
     <color name="bottom_sheet_handle">#6E7987</color>
     <color name="ripple">@color/graph_divider_secondary</color>
-    <color name="widget_background">#DB000000</color>
+    <color name="widget_background">#B41B1E22</color>  <!--C800234D-->
     <color name="info_banner_bg">#003D25</color>
     <color name="error_banner_bg">#3D0000</color>
     <color name="warning_banner_bg">#4D4000</color>
