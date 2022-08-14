@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -27,10 +28,13 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
+import com.airbnb.lottie.L;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
@@ -70,8 +74,18 @@ public class Common {
     public static void setLanguage(Activity activity, String languageCode, String countryCode) {
         Resources res = activity.getResources();
         Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(languageCode);
-        conf.setLayoutDirection(new Locale(languageCode, countryCode));
+        Locale locale;
+        if (countryCode.equals("rTW")) {
+            locale = Locale.TAIWAN;
+        }
+        else if (countryCode.equals("rCN")) {
+            locale = Locale.CHINESE;
+        }
+        else {
+            locale = new Locale(languageCode, countryCode);
+        }
+        conf.locale = locale;
+        conf.setLayoutDirection(locale);
         res.updateConfiguration(conf, res.getDisplayMetrics());
 
     }
