@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.fragments;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,7 +33,9 @@ import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -41,14 +44,19 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
+import com.drnoob.datamonitor.adapters.data.FragmentViewModel;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -56,6 +64,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.skydoves.progressview.ProgressView;
+import com.skydoves.progressview.ProgressViewOrientation;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -64,20 +73,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.updateOverview;
+import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMajor;
+import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
     private RelativeLayout mSetupDataPlan;
@@ -92,14 +108,26 @@ public class HomeFragment extends Fragment {
     private LinearLayout mMobileDataUsageToday, mWifiUsageToday;
     private static ProgressView mMobileMon, mMobileTue, mMobileWed, mMobileThurs, mMobileFri, mMobileSat, mMobileSun,
             mWifiMon, mWifiTue, mWifiWed, mWifiThurs, mWifiFri, mWifiSat, mWifiSun;
+    private LinearLayout mMonView, mTueView, mWedView, mThursView, mFriView, mSatView, mSunView;
+    private LinearLayout mQuickView;
+    private TextView mQuickViewMobile, mQuickViewWifi;
     private static ConstraintLayout mOverview;
     private static ConstraintLayout mOverviewLoading;
     private static ImageView mRefreshOverview;
     private static Context mContext;
     private static List<OverviewModel> mList = new ArrayList<>();
+    private boolean openQuickView = false;
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    public boolean isOpenQuickView() {
+        return openQuickView;
+    }
+
+    public void setOpenQuickView(boolean openQuickView) {
+        this.openQuickView = openQuickView;
     }
 
     @Override
@@ -132,6 +160,10 @@ public class HomeFragment extends Fragment {
         mOverview = view.findViewById(R.id.overview);
         mOverviewLoading = view.findViewById(R.id.overview_loading);
 
+        mQuickView = view.findViewById(R.id.overview_quick_view);
+        mQuickViewMobile = view.findViewById(R.id.mobile_data_quick_view);
+        mQuickViewWifi = view.findViewById(R.id.wifi_quick_view);
+
         mMobileMon = mOverview.findViewById(R.id.progress_mobile_mon);
         mMobileTue = mOverview.findViewById(R.id.progress_mobile_tue);
         mMobileWed = mOverview.findViewById(R.id.progress_mobile_wed);
@@ -147,6 +179,22 @@ public class HomeFragment extends Fragment {
         mWifiFri = mOverview.findViewById(R.id.progress_wifi_fri);
         mWifiSat = mOverview.findViewById(R.id.progress_wifi_sat);
         mWifiSun = mOverview.findViewById(R.id.progress_wifi_sun);
+
+        mMonView = view.findViewById(R.id.view_mon);
+        mTueView = view.findViewById(R.id.view_tue);
+        mWedView = view.findViewById(R.id.view_wed);
+        mThursView = view.findViewById(R.id.view_thurs);
+        mFriView = view.findViewById(R.id.view_fri);
+        mSatView = view.findViewById(R.id.view_sat);
+        mSunView = view.findViewById(R.id.view_sun);
+
+        mMonView.setOnLongClickListener(this::onLongClick);
+        mTueView.setOnLongClickListener(this::onLongClick);
+        mWedView.setOnLongClickListener(this::onLongClick);
+        mThursView.setOnLongClickListener(this::onLongClick);
+        mFriView.setOnLongClickListener(this::onLongClick);
+        mSatView.setOnLongClickListener(this::onLongClick);
+        mSunView.setOnLongClickListener(this::onLongClick);
 
         mRefreshOverview = view.findViewById(R.id.overview_refresh);
 
@@ -282,17 +330,32 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        NavController controller = Navigation.findNavController(getActivity(), R.id.main_nav_host_fragment);
+        FragmentViewModel viewModel = new ViewModelProvider(getActivity()).get(FragmentViewModel.class);
+
         mMobileDataUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (controller != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                    bundle.putBoolean(DAILY_DATA_HOME_ACTION, true);
+                    viewModel.setCurrentType(TYPE_MOBILE_DATA);
+                    controller.navigate(R.id.bottom_menu_app_data_usage, bundle);
+                }
             }
         });
 
         mWifiUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (controller != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(DATA_USAGE_TYPE, TYPE_WIFI);
+                    bundle.putBoolean(DAILY_DATA_HOME_ACTION, true);
+                    viewModel.setCurrentType(TYPE_WIFI);
+                    controller.navigate(R.id.bottom_menu_app_data_usage, bundle);
+                }
             }
         });
 
@@ -321,7 +384,7 @@ public class HomeFragment extends Fragment {
 
     private void updateData() {
         try {
-            mobile = getDeviceMobileDataUsage(getContext(), SESSION_TODAY);
+            mobile = getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1);
             wifi = getDeviceWifiDataUsage(getContext(), SESSION_TODAY);
 
             String[] mobileData = formatData(mobile[0], mobile[1]);
@@ -360,44 +423,65 @@ public class HomeFragment extends Fragment {
 
             for (int i = 0; i < mList.size(); i++) {
                 model = mList.get(i);
+                long mobileSent = (model.getTotalMobile() / 2l) * 1048576;
+                long mobileReceived = mobileSent;
+                long wifiSent = (model.getTotalWifi() / 2l) * 1048576;
+                long wifiReceived = wifiSent;
+                String data = formatData(mobileSent, mobileReceived)[2];
+                String wifi = formatData(wifiSent, wifiReceived)[2];
                 switch (i) {
                     case 0:
                         mMobileMon.setProgress((model.getTotalMobile() / 25) + 2);  // 500 MB is 20 in the progressBar, so divided by 25. Added 2 to fix margin issue
                         mWifiMon.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileMon.setLabelText(data);
+                        mWifiMon.setLabelText(wifi);
                         break;
 
                     case 1:
                         mMobileTue.setProgress((model.getTotalMobile() / 25) + 2);
                         mWifiTue.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileTue.setLabelText(data);
+                        mWifiTue.setLabelText(wifi);
                         break;
 
                     case 2:
                         mMobileWed.setProgress((model.getTotalMobile() / 25) + 2);
                         mWifiWed.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileWed.setLabelText(data);
+                        mWifiWed.setLabelText(wifi);
                         break;
 
                     case 3:
                         mMobileThurs.setProgress((model.getTotalMobile() / 25) + 2);
                         mWifiThurs.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileThurs.setLabelText(data);
+                        mWifiThurs.setLabelText(wifi);
                         break;
 
                     case 4:
                         mMobileFri.setProgress((model.getTotalMobile() / 25) + 2);
                         mWifiFri.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileFri.setLabelText(data);
+                        mWifiFri.setLabelText(wifi);
                         break;
 
                     case 5:
                         mMobileSat.setProgress((model.getTotalMobile() / 25) + 2);
                         mWifiSat.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileSat.setLabelText(data);
+                        mWifiSat.setLabelText(wifi);
                         break;
 
                     case 6:
                         mMobileSun.setProgress((model.getTotalMobile() / 25) + 2);
                         mWifiSun.setProgress((model.getTotalWifi() / 25) + 2);
+                        mMobileSun.setLabelText(data);
+                        mWifiSun.setLabelText(wifi);
                         break;
                 }
             }
-        } else {
+        }
+        else {
             UpdateOverview updateOverview = new UpdateOverview();
             updateOverview.execute();
         }
@@ -405,6 +489,163 @@ public class HomeFragment extends Fragment {
 
     private static boolean isOverviewAvailable() {
         return mList.size() > 0;
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        setOpenQuickView(true);
+        float translation = getTranslation(view);
+        float finalTranslation = translation;
+        hapticMajor(getContext());
+        if (isOverviewAvailable()) {
+            try {
+                String[] dataUsage = getDataUsage(view);
+                mQuickViewMobile.setText(dataUsage[0]);
+                mQuickViewWifi.setText(dataUsage[1]);
+                mQuickView.setVisibility(View.VISIBLE);
+            }
+            catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (isOpenQuickView()) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
+                            motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                        hapticMinor(getContext());
+                        mQuickView.setVisibility(View.INVISIBLE);
+                        setOpenQuickView(false);
+                    }
+                }
+                return false;
+            }
+        });
+        return false;
+    }
+
+    private String[] getDataUsage(View view) {
+        String mobile, wifi;
+        switch (view.getId()) {
+            case R.id.view_mon:
+                mobile = mMobileMon.getLabelText().toString();
+                wifi = mWifiMon.getLabelText().toString();
+                break;
+
+            case R.id.view_tue:
+                mobile = mMobileTue.getLabelText().toString();
+                wifi = mWifiTue.getLabelText().toString();
+                break;
+
+            case R.id.view_wed:
+                mobile = mMobileWed.getLabelText().toString();
+                wifi = mWifiWed.getLabelText().toString();
+                break;
+
+            case R.id.view_thurs:
+                mobile = mMobileThurs.getLabelText().toString();
+                wifi = mWifiThurs.getLabelText().toString();
+                break;
+
+            case R.id.view_fri:
+                mobile = mMobileFri.getLabelText().toString();
+                wifi = mWifiFri.getLabelText().toString();
+                break;
+
+            case R.id.view_sat:
+                mobile = mMobileSat.getLabelText().toString();
+                wifi = mWifiSat.getLabelText().toString();
+                break;
+
+            case R.id.view_sun:
+                mobile = mMobileSun.getLabelText().toString();
+                wifi = mWifiSun.getLabelText().toString();
+                break;
+
+            default:
+                mobile = getString(R.string.app_data_usage_placeholder);
+                wifi = getString(R.string.app_data_usage_placeholder);
+        }
+        return new String[]{mobile, wifi};
+    }
+
+    private Float getTranslation(View view) {
+        float translation;
+        switch (view.getId()) {
+            case R.id.view_mon:
+                if (mMobileMon.getProgress() > 90 || mWifiMon.getProgress() > 90) {
+                    translation = 230;
+                }
+                else if (mMobileMon.getProgress() < 20 || mWifiMon.getProgress() > 20) {
+                    translation = 230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            case R.id.view_tue:
+                if (mMobileTue.getProgress() > 90 || mWifiTue.getProgress() > 90) {
+                    translation = 230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            case R.id.view_wed:
+                if (mMobileWed.getProgress() > 90 || mWifiWed.getProgress() > 90) {
+                    translation = -230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            case R.id.view_thurs:
+                if (mMobileThurs.getProgress() > 90 || mWifiThurs.getProgress() > 90) {
+                    translation = 230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            case R.id.view_fri:
+                if (mMobileFri.getProgress() > 90 || mWifiFri.getProgress() > 90) {
+                    translation = 230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            case R.id.view_sat:
+                if (mMobileSat.getProgress() > 90 || mWifiSat.getProgress() > 90) {
+                    translation = 230;
+                }
+                else if (mMobileSat.getProgress() < 20 || mWifiSat.getProgress() > 20) {
+                    translation = -230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            case R.id.view_sun:
+                if (mMobileSun.getProgress() > 90 || mWifiSun.getProgress() > 90) {
+                    translation = 230;
+                }
+                else {
+                    translation = 100;
+                }
+                break;
+
+            default:
+                translation = 100;
+        }
+        return translation;
     }
 
     private static class UpdateOverview extends AsyncTask<Object, Object, List<OverviewModel>> {

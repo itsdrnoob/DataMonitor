@@ -283,6 +283,7 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout8">
 
         <LinearLayout
+            android:id="@+id/view_mon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -298,7 +299,7 @@
                 app:progressView_colorBackground="@android:color/transparent"
                 app:progressView_colorGradientEnd="#0DC5FF"
                 app:progressView_colorGradientStart="#3E51FF"
-                app:progressView_orientation="vertical" />
+                app:progressView_orientation="vertical"/>
 
             <com.skydoves.progressview.ProgressView
                 android:id="@+id/progress_wifi_mon"
@@ -316,6 +317,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_tue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -349,6 +351,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_wed"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -382,6 +385,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_thurs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -415,6 +419,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_fri"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -448,6 +453,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_sat"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -481,6 +487,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_sun"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

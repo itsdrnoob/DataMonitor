@@ -34,6 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -100,6 +101,15 @@ public class AppDataUsageFragment extends Fragment {
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
 
+        if (getArguments() != null) {
+            boolean fromHome = getArguments().getBoolean(DAILY_DATA_HOME_ACTION, false);
+            if (fromHome) {
+                type = getArguments().getInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                setType(type);
+                refreshData();
+            }
+        }
+
         setSession(session);
         setType(type);
 
@@ -110,7 +120,8 @@ public class AppDataUsageFragment extends Fragment {
             mLoading.setAlpha(0.0f);
             mAppsView.setAlpha(1.0f);
             onDataLoaded();
-        } else {
+        }
+        else {
             mDataRefresh.setRefreshing(true);
         }
 
