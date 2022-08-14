@@ -338,7 +338,7 @@ public class SystemDataUsageFragment extends Fragment {
                                 model.setType(type);
 
                                 Long total = sent + received;
-                                Long deviceTotal = getDeviceMobileDataUsage(mContext, session)[2];
+                                Long deviceTotal = getDeviceMobileDataUsage(mContext, session, 1)[2];
 
                                 Double p = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 5;
 

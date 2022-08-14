@@ -28,6 +28,7 @@ import android.os.RemoteException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
@@ -43,8 +44,10 @@ import java.util.List;
 
 import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
 import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
 import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
@@ -66,8 +69,8 @@ public class NetworkStatsHelper {
 
     public static Long[] getDeviceWifiDataUsage(Context context, int session) throws ParseException, RemoteException {
         Long[] data;
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
         Long sent, received, total;
 
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
@@ -84,13 +87,13 @@ public class NetworkStatsHelper {
         return data;
     }
 
-    public static Long[] getDeviceMobileDataUsage(Context context, int session) throws ParseException, RemoteException {
+    public static Long[] getDeviceMobileDataUsage(Context context, int session, @Nullable int startDate) throws ParseException, RemoteException {
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
         NetworkStats networkStats = null;
         NetworkStats.Bucket bucket = new NetworkStats.Bucket();
 
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, startDate)[0];
+        Long endTimeMillis = getTimePeriod(context, session, startDate)[1];
         Long sent = 0L,
                 received = 0L,
                 total = 0L;
@@ -120,8 +123,8 @@ public class NetworkStatsHelper {
         Long received = 0L;
         Long total = 0L;
 
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
 
         networkStats = networkStatsManager
                 .querySummary(ConnectivityManager.TYPE_WIFI,
@@ -156,8 +159,8 @@ public class NetworkStatsHelper {
         Long sent = 0L;
         Long received = 0L;
 
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
 
         networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_MOBILE,
                 getSubscriberId(context),
@@ -301,8 +304,8 @@ public class NetworkStatsHelper {
         Long sent = 0L;
         Long received = 0L;
 
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
 
         networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_MOBILE,
                 getSubscriberId(context),
@@ -337,8 +340,8 @@ public class NetworkStatsHelper {
         Long sent = 0L;
         Long received = 0L;
 
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
 
         networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_MOBILE,
                 getSubscriberId(context),
@@ -373,8 +376,8 @@ public class NetworkStatsHelper {
         Long sent = 0L;
         Long received = 0L;
 
-        Long resetTimeMillis = getTimePeriod(context, session)[0];
-        Long endTimeMillis = getTimePeriod(context, session)[1];
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
 
         networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_WIFI,
                 getSubscriberId(context),
@@ -399,7 +402,7 @@ public class NetworkStatsHelper {
         return data;
     }
 
-    public static Long[] getTimePeriod(Context context, int session) throws ParseException {
+    public static Long[] getTimePeriod(Context context, int session, @Nullable int startDate) throws ParseException {
         int year, month, day;
         long resetTimeMillis = 0l,
                 endTimeMillis = 0l;
@@ -417,6 +420,9 @@ public class NetworkStatsHelper {
 
         String startTime, endTime;
         Date resetDate, endDate;
+        Calendar calendar = Calendar.getInstance();
+        int monthlyResetDate = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_DATE, 1);
+        int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
 
         switch (session) {
             case SESSION_TODAY:
@@ -431,7 +437,6 @@ public class NetworkStatsHelper {
                 endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                 endDate = dateFormat.parse(endTime);
                 endTimeMillis = endDate.getTime();
-                Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE, 1);
 //                endTimeMillis = calendar.getTimeInMillis();
 //                endTimeMillis = System.currentTimeMillis();
@@ -455,7 +460,7 @@ public class NetworkStatsHelper {
             case SESSION_THIS_MONTH:
                 year = Integer.parseInt(yearFormat.format(date));
                 month = Integer.parseInt(monthFormat.format(date));
-                day = 1;
+                day = startDate;
                 startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                 resetDate = dateFormat.parse(startTime);
                 resetTimeMillis = resetDate.getTime();
@@ -466,17 +471,56 @@ public class NetworkStatsHelper {
                 break;
 
             case SESSION_LAST_MONTH:
-                year = Integer.parseInt(yearFormat.format(date));
-                month = Integer.parseInt(monthFormat.format(date)) - 1;
-                day = 1;
-                startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-                resetDate = dateFormat.parse(startTime);
-                resetTimeMillis = resetDate.getTime();
+//                year = Integer.parseInt(yearFormat.format(date));
+//                month = Integer.parseInt(monthFormat.format(date)) - 1;
+//                day = 1;
+//                startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+//                resetDate = dateFormat.parse(startTime);
+//                resetTimeMillis = resetDate.getTime();
+//
+//                month = Integer.parseInt(monthFormat.format(date));
+//                endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+//                endDate = dateFormat.parse(endTime);
+//                endTimeMillis = endDate.getTime();
 
-                month = Integer.parseInt(monthFormat.format(date));
-                endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-                endDate = dateFormat.parse(endTime);
-                endTimeMillis = endDate.getTime();
+
+                /**
+                 * When data reset date is ahead of today's date, reducing 1 from the current month will
+                 * only give the month when the current plan started.
+                 * So to get the last month's period, 2 has to be subtracted to get the starting month
+                 * and 1 to get the ending month
+                 * For eg: Today is 4th of August and plan resets on 8th of August, subtracting 2 & 1
+                 * respectively will wive the period of June 8th to July 8th, i.e period of last month.
+                 */
+
+                if (monthlyResetDate >= today) {
+                    // Time period from reset date of previous month till today
+                    year = Integer.parseInt(yearFormat.format(date));
+                    month = Integer.parseInt(monthFormat.format(date)) - 2;
+                    day = monthlyResetDate;
+                    startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    resetDate = dateFormat.parse(startTime);
+                    resetTimeMillis = resetDate.getTime();
+
+                    month = Integer.parseInt(monthFormat.format(date)) - 1;
+                    day = monthlyResetDate;
+                    endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    endDate = dateFormat.parse(endTime);
+                    endTimeMillis = endDate.getTime();
+                }
+                else {
+                    // Reset date is in the current month.
+                    year = Integer.parseInt(yearFormat.format(date));
+                    month = Integer.parseInt(monthFormat.format(date)) - 1;
+                    day = monthlyResetDate;
+                    startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    resetDate = dateFormat.parse(startTime);
+                    resetTimeMillis = resetDate.getTime();
+                    day = monthlyResetDate;
+                    endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    endDate = dateFormat.parse(endTime);
+                    endTimeMillis = endDate.getTime();
+                }
                 break;
 
             case SESSION_THIS_YEAR:
@@ -501,6 +545,37 @@ public class NetworkStatsHelper {
                 endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                 endDate = dateFormat.parse(endTime);
                 endTimeMillis = endDate.getTime();
+                break;
+
+            case SESSION_MONTHLY:
+                if (monthlyResetDate >= today) {
+                    // Time period from reset date of previous month till today
+                    year = Integer.parseInt(yearFormat.format(date));
+                    month = Integer.parseInt(monthFormat.format(date)) - 1;
+                    day = monthlyResetDate;
+                    startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    resetDate = dateFormat.parse(startTime);
+                    resetTimeMillis = resetDate.getTime();
+
+                    month = Integer.parseInt(monthFormat.format(date));
+                    day = today;
+                    endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    endDate = dateFormat.parse(endTime);
+                    endTimeMillis = endDate.getTime();
+                }
+                else {
+                    // Reset date is in the current month.
+                    year = Integer.parseInt(yearFormat.format(date));
+                    month = Integer.parseInt(monthFormat.format(date));
+                    day = monthlyResetDate;
+                    startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    resetDate = dateFormat.parse(startTime);
+                    resetTimeMillis = resetDate.getTime();
+                    day = Integer.parseInt(dayFormat.format(date)) + 1;
+                    endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    endDate = dateFormat.parse(endTime);
+                    endTimeMillis = endDate.getTime();
+                }
                 break;
 
         }

@@ -122,8 +122,8 @@ public class DataUsageMonitor extends Service {
                 triggerLevel = dataLimit.doubleValue() * trigger / 100;
             }
             try {
-                String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY)[0],
-                        getDeviceMobileDataUsage(context, SESSION_TODAY)[1])[2];
+                String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[0],
+                        getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[1])[2];
                 Double totalData = 0d;
                 if (totalRaw.contains(" MB")) {
                     totalRaw = totalRaw.replace(" MB", "");
