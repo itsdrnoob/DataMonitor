@@ -123,4 +123,7 @@ public class Values {
     public static final String SERVER = "server";
     public static final String REGION = "region";
 
+    public static final String UPDATE_VERSION = "update_version";
+    public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
+
 }

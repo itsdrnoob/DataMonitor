@@ -247,5 +247,14 @@
     <string name="telegram_chat">https://t.me/datamonitor</string>
     <string name="rate_app">Rate the app on Google Play</string>
     <string name="rate_app_summary">We\'d appreciate your feedback</string>
+    <string name="check_for_update">Check for update</string>
+    <string name="current_version">Current version: %1$s</string>
+    <string name="new_version">New version: %1$s</string>
+    <string name="label_changelogs">See what\'s new</string>
+    <string name="no_update_available">You are running the latest version!</string>
+    <string name="label_update_available">Update available!</string>
+    <string name="label_download_update">Download update</string>
+    <string name="checking_for_update">Checking for update</string>
+    <string name="new_update_available">A new update is available!</string>
 
 </resources>

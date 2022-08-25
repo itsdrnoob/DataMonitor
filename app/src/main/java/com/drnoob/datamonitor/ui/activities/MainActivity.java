@@ -19,7 +19,6 @@
 
 package com.drnoob.datamonitor.ui.activities;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -29,16 +28,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,20 +45,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
-import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.drnoob.datamonitor.databinding.ActivityMainBinding;
-import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
 import com.drnoob.datamonitor.utils.SharedPreferences;
-import com.google.android.material.navigation.NavigationBarView;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -74,8 +65,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
-import java.util.zip.Inflater;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
 import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
@@ -102,6 +91,7 @@ import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.getAppContext;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.onDataLoaded;
@@ -139,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
-
         super.onCreate(savedInstanceState);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
@@ -297,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        verifyAppVersion();
 //        initializeBottomNavBar();
     }
 
@@ -786,5 +776,14 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
 
+    }
+
+    private void verifyAppVersion() {
+        String updateVersion = SharedPreferences.getAppPrefs(MainActivity.this)
+                .getString(UPDATE_VERSION, BuildConfig.VERSION_NAME);
+        if (updateVersion.equalsIgnoreCase(BuildConfig.VERSION_NAME)) {
+            SharedPreferences.getAppPrefs(MainActivity.this)
+                    .edit().remove(UPDATE_VERSION).apply();
+        }
     }
 }
