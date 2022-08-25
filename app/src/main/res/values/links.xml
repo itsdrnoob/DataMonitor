@@ -5,6 +5,7 @@
     <string name="github_contribute_translations" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/master/CONTRIBUTING.md#translations</string>
     <string name="github_issue" translatable="false">https://github.com/itsdrnoob/DataMonitor/issues/new/choose</string>
     <string name="xda_thread" translatable="false">https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/</string>
+    <string name="play_store" translatable="false">https://play.google.com/store/apps/details?id=com.drnoob.datamonitor</string>
 
     <string name="apache_license_2" translatable="false">http://www.apache.org/licenses/LICENSE-2.0.txt</string>
     <string name="jspeedtest_license" translatable="false">https://github.com/bertrandmartel/speed-test-lib/blob/master/LICENSE.md</string>
