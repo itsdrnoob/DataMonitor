@@ -60,6 +60,7 @@ public class Values {
     public static final int CONTRIBUTORS_FRAGMENT = 0x0082;
     public static final int DONATE_FRAGMENT = 0x008C;
     public static final int APP_LICENSE_FRAGMENT = 0x0096;
+    public static final int OSS_LICENSE_FRAGMENT = 0x00DC;
     public static final int APP_DATA_LIMIT_FRAGMENT = 0x00AA;
     public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
