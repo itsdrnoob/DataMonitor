@@ -119,7 +119,7 @@ public class AboutFragment extends Fragment {
                     updateCheckDialog.show();
                     updateDialog(updateCheckDialog, getContext());
 
-                    CheckForUpdate checkForUpdate = new CheckForUpdate(getContext());
+                    CheckForUpdate checkForUpdate = new CheckForUpdate();
                     checkForUpdate.execute();
 
                     updateCheckDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -171,10 +171,9 @@ public class AboutFragment extends Fragment {
     }
 
     private class CheckForUpdate extends AsyncTask<Void, String, String> {
-        private Context context;
 
-        public CheckForUpdate(Context context) {
-            this.context = context;
+        public CheckForUpdate() {
+
         }
 
         @Override
@@ -198,19 +197,25 @@ public class AboutFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String currentVersion = BuildConfig.VERSION_NAME;
-            String currentVersionNumber = currentVersion.split("v")[1].replace(".", "");
-            String newVersionNumber = s.split("v")[1].replace(".", "");
-            if (!isCancelled()) {
-                if (Float.parseFloat(newVersionNumber) > Float.parseFloat(currentVersionNumber)) {
-                    isUpdateAvailable = true;
-                    updateAvailable(currentVersion, s);
+            if (s != null) {
+                String currentVersion = BuildConfig.VERSION_NAME;
+                String currentVersionNumber = currentVersion.split("v")[1].replace(".", "");
+                String newVersionNumber = s.split("v")[1].replace(".", "");
+                if (!isCancelled()) {
+                    if (Float.parseFloat(newVersionNumber) > Float.parseFloat(currentVersionNumber)) {
+                        isUpdateAvailable = true;
+                        updateAvailable(currentVersion, s);
+                    }
+                    else {
+                        updateCheckDialog.dismiss();
+                        Snackbar.make(Objects.requireNonNull(getView()), getString(R.string.no_update_available), Snackbar.LENGTH_SHORT)
+                                .show();
+                    }
                 }
-                else {
-                    updateCheckDialog.dismiss();
-                    Snackbar.make(getView(), getString(R.string.no_update_available), Snackbar.LENGTH_SHORT)
-                            .show();
-                }
+            }
+            else {
+                updateCheckDialog.dismiss();
+                Snackbar.make(Objects.requireNonNull(getView()), getString(R.string.update_fetch_error), Snackbar.LENGTH_SHORT).show();
             }
         }
     }
@@ -273,7 +278,7 @@ public class AboutFragment extends Fragment {
 
         updateCheckDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         updateCheckDialog.show();
-        updateDialog(updateCheckDialog, getContext());
+        updateDialog(updateCheckDialog, Objects.requireNonNull(getContext()));
     }
 
     public static class SupportAndDevelopment extends PreferenceFragmentCompat {
