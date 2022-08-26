@@ -75,7 +75,6 @@
             android:name=".utils.DataUsageMonitor"
             android:enabled="true"
             android:exported="true" />
-        
         <receiver android:name=".utils.DataUsageMonitor$DataMonitor"
             android:exported="true">
             <intent-filter>
@@ -134,18 +133,6 @@
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
         </activity>
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/Theme.License"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/Theme.License"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            tools:ignore="LockedOrientationActivity"/>
     </application>
 
 </manifest>
