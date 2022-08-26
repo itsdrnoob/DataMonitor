@@ -29,4 +29,6 @@
     <dimen name="button_default">55dp</dimen>
     <dimen name="margin_tiny">2dp</dimen>
     <dimen name="text_widget_title">18sp</dimen>
+    <dimen name="company_logo_height">14dp</dimen>
+    <dimen name="company_logo_width">63dp</dimen>
 </resources>

@@ -40,7 +40,7 @@
     <string name="action_update">更新</string>
     <string name="data_remaining_placeholder">剩餘 0.00 GB</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">Dr.NooB ❤ 用心製作</string>
+    <string name="label_dev">Bitroid Inc. ❤ 用心製作</string>
     <string name="label_loading_apps">載入應用中</string>
     <string name="label_app_data_usage_session_empty">此時間段未使用流量</string>
     <string name="label_want_to_contribute">想為這個軟體提供貢獻嗎？點選這裡瞭解貢獻的方法</string>

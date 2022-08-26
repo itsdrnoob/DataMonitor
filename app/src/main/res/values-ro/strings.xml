@@ -34,7 +34,7 @@
     <string name="title_data_usage">Utilizare date</string>
     <string name="action_update">Actualizare</string>
     <string name="data_remaining_placeholder">Încă 0.00 GB</string>
-    <string name="label_dev">Făcut cu ❤ de Dr.NooB</string>
+    <string name="label_dev">Făcut cu ❤ de Bitroid Inc.</string>
     <string name="label_loading_apps">Se încarcă aplicațiile</string>
     <string name="label_app_data_usage_session_empty">Nu există date disponibile pentru sesiunea selectată</string>
     <string name="label_want_to_contribute">Doriți să contribuiți la monitorizarea datelor. Click aici pentru a afla cum.</string>

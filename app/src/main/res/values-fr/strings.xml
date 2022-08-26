@@ -42,7 +42,7 @@ Reçu"</string>
     <string name="action_update">"Mise-à-jour"</string>
     <string name="data_remaining_placeholder">"0.00 Go restants"</string>
     <string name="app_version_placeholder">"v1.0"</string>
-    <string name="label_dev">"Fait avec ❤ par De.NooB"</string>
+    <string name="label_dev">"Fait avec ❤ par Bitroid Inc."</string>
     <string name="label_loading_apps">"Chargement des applications"</string>
     <string name="label_app_data_usage_session_empty">"Pas de données disponibles pour la session sélectionnée"</string>
     <string name="label_want_to_contribute">"Vous voulez contribuer à Data Moniteur ? Cliquer ici pour savoir comment !"</string>
