@@ -180,6 +180,7 @@ public class LiveNetworkMonitor extends Service {
             speeds = new String[]{"0 KB/s", "0 KB/s", "0 KB/s"};
         }
 
+        Log.e(TAG, "updateNotification: " + speeds[0] + "\n" + speeds[1] + "\n" + speeds[2] );
         String iconPrefix = "ic_signal_";
         String networkType;
         String totalSuffix = speeds[2].split(" ")[1];
@@ -193,10 +194,13 @@ public class LiveNetworkMonitor extends Service {
         if (iconSuffix.contains(".")) {
             iconSuffix = iconSuffix.replace(".", "_");
         }
-        if (networkType.equals("mb_") && Integer.parseInt(iconSuffix) > 200) {
-            iconSuffix = "200_plus";
+        if (!iconSuffix.contains("_")) {
+            if (networkType.equals("mb_") && Integer.parseInt(iconSuffix) > 200) {
+                iconSuffix = "200_plus";
+            }
         }
         String iconName = iconPrefix + networkType + iconSuffix;
+        Log.e(TAG, "updateNotification: " + iconName );
         int iconResID = context.getResources().getIdentifier(iconName , "drawable", context.getPackageName());
         IconCompat icon = IconCompat.createWithResource(context, iconResID);
         mBuilder.setSmallIcon(icon);
