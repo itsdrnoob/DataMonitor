@@ -99,6 +99,8 @@ public class Values {
     public static final String APP_LANGUAGE_CODE = "app_language_code";
     public static final String APP_COUNTRY_CODE = "app_country_code";
     public static final String DAILY_DATA_HOME_ACTION = "daily_data_home_action";
+    public static final String APP_THEME = "app_theme";
+    public static final String APP_THEME_SUMMARY = "app_theme_summary";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

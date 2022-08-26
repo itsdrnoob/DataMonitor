@@ -257,5 +257,13 @@
     <string name="checking_for_update">Checking for update</string>
     <string name="new_update_available">A new update is available!</string>
     <string name="update_fetch_error">Couldn\'t fetch updates</string>
+    <string name="settings_app_theme">App theme</string>
+    <string name="app_theme_summary">Select the app theme</string>
+    <string name="theme_light">Light theme</string>
+    <string name="theme_dark">Dark theme</string>
+    <string name="theme_system">Follow system theme</string>
+    <string name="light_theme_summary">Light theme selected</string>
+    <string name="dark_theme_summary">Dark theme selected</string>
+    <string name="system_theme_summary">Following system theme</string>
 
 </resources>
