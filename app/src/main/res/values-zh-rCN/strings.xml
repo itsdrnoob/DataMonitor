@@ -39,8 +39,8 @@
     <string name="label_dev">Bitroid Inc. ❤ 倾心制作</string>
     <string name="label_loading_apps">加载应用中</string>
     <string name="label_app_data_usage_session_empty">此时间段未使用流量</string>
-    <string name="label_want_to_contribute">想为这个软件做贡献吗？点击这里了解方法</string>
-    <string name="setup_image_footer">微件和/或通知可以让你轻松了解数据使用量</string>
+    <string name="label_want_to_contribute">想为这个软件做些什么吗？点击这里了解！</string>
+    <string name="setup_image_footer">微件或通知可以让你轻松了解数据使用量</string>
     <string name="heading_data_reset">数据重置间隔</string>
     <string name="daily">每天</string>
     <string name="monthly">每月</string>
@@ -84,11 +84,12 @@
     <string name="setup_add_data_plan">添加流量使用计划</string>
     <string name="add_data_plan_summary">添加或更新使用计划</string>
     <string name="setup_usage_reset_time">数据用量重置时间</string>
+    <string name="license_summary">查看此软件使用的许可证</string>
     <string name="app_license_header">应用许可证</string>
     <string name="oss_licenses">开源许可证</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">贡献者</string>
-    <string name="itsdrnoob_summary"><![CDATA[Lead Developer & Designer]]></string>
+    <string name="itsdrnoob_summary"><![CDATA[首席开发者 & 设计师]]></string>
     <string name="settings_appearance">外观</string>
     <string name="settings_dark_mode">深色模式</string>
     <string name="dark_mode_summary">启用深色模式</string>
@@ -96,18 +97,18 @@
     <string name="settings_language">语言</string>
     <string name="language_summary">切换软件语言</string>
     <string name="about">关于</string>
-    <string name="about_summary"><![CDATA[Source, Help & more]]></string>
+    <string name="about_summary"><![CDATA[源码、帮助以及更多]]></string>
     <string name="license">许可</string>
     <string name="contributors_summary">那些陪伴着我的人</string>
     <string name="donate">捐赠</string>
-    <string name="donate_summary">也许，为我们买杯咖啡？</string>
+    <string name="donate_summary">给我买杯咖啡吧！</string>
     <string name="data_reset">数据重置</string>
     <string name="data_limit">数据限制</string>
-    <string name="support_and_development">开发者</string>
+    <string name="support_and_development">开发和支持</string>
     <string name="github">Github</string>
     <string name="github_summary">查看源码</string>
     <string name="xda">Xda 帖子</string>
-    <string name="xda_summary"><![CDATA[Q&A, Help & Troubleshooting]]></string>
+    <string name="xda_summary"><![CDATA[问答、帮助以及问题反馈]]></string>
     <string name="report">捉虫子</string>
     <string name="report_summary">反馈问题或请求新功能</string>
     <string name="setup">配置</string>
@@ -133,7 +134,8 @@
     <string name="notification_disabled">Data monitor 通知已关闭</string>
     <string name="label_widget_refresh_interval_change">微件将每 %1$s 更新</string>
     <string name="label_notification_refresh_interval_change">通知将每 %1$s 更新</string>
-    <string name="label_data_usage_reset_interval_change">数据用量将每 %1$s %2$s 更新</string>
+    <string name="label_data_usage_reset_time_change">数据用量将在每 %1$s %2$s 重置</string>
+    <string name="label_data_usage_reset_date_change">数据用量将在每月的 %1$d%2$s 重置</string>
     <string name="remaining_data_info_enabled">剩余流量信息已启用</string>
     <string name="remaining_data_info_disabled">剩余流量信息已禁用</string>
     <string name="label_monitoring_no_plan">添加一个流量使用计划以继续</string>
@@ -167,9 +169,10 @@
     <string name="label_translators">译者们</string>
     <string name="setup_app_data_usage_alert">数据用量警报</string>
     <string name="title_app_data_limit">数据用量限制</string>
-    <string name="network_diagnostics">网络诊断</string>
-    <string name="run_diagnostics">开始诊断</string>
-    <string name="running_diagnostics">诊断中</string>
+    <string name="network_diagnostics">网速测试</string>
+    <string name="network_diagnostics_info">网速测试可能需要使用 20-30 Mb 数据。请确保您有足够的数据流量，否则可能会收取费用</string>
+    <string name="run_diagnostics">开始测试</string>
+    <string name="running_diagnostics">测试中</string>
     <string name="connecting">连接中</string>
     <string name="testing_download">测试下载速度中</string>
     <string name="testing_upload">测试上传速度中</string>
@@ -198,6 +201,7 @@
     <string name="app_label_background_time">后台时间 : %1$s</string>
     <string name="ygorigor_summary">罗马尼亚语 译者</string>
     <string name="johnsonran_summary">简体中文 译者</string>
+    <string name="hudaifa_abdullah_summary">阿拉伯语 译者</string>
     <string name="label_want_to_contribute_language">未找到您的语言？点此了解如何帮助我们！</string>
     <string name="current_language">当前语言</string>
     <string name="available_languages">可用语言</string>
@@ -217,7 +221,9 @@
     <string name="read_phone_state_body">使用 Android 9 及更低版本的设备需要手动授予 "读取手机状态" 权限。我们不会收集或储存任何个人数据。</string>
     <string name="action_permission_granted">权限已授予</string>
     <string name="error_permission_denied">权限被拒，请手动授予该权限</string>
-    <string name="rate_app">在 Google Play上为本应用评分</string>
+    <string name="telegram_support">Telegram 群组</string>
+    <string name="telegram_summary">加入我们的 Telegram 群组</string>
+    <string name="rate_app">为此应用评分</string>
     <string name="rate_app_summary">我们非常感谢您的反馈</string>
     <string name="check_for_update">检查更新</string>
     <string name="current_version">当前版本: %1$s</string>
@@ -237,6 +243,5 @@
     <string name="light_theme_summary">已选择浅色主题</string>
     <string name="dark_theme_summary">已选择深色主题</string>
     <string name="system_theme_summary">已跟随系统</string>
-    <string name="hudaifa_abdullah_summary">阿拉伯语 译者</string>
 
 </resources>
