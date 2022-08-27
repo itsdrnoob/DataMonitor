@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Data Monitor</string>
-    <string name="appwidget_text">例子</string>
+    <string name="appwidget_text">示例</string>
     <string name="add_widget">添加微件</string>
 
 
@@ -217,5 +217,26 @@
     <string name="read_phone_state_body">使用 Android 9 及更低版本的设备需要手动授予 "读取手机状态" 权限。我们不会收集或储存任何个人数据。</string>
     <string name="action_permission_granted">权限已授予</string>
     <string name="error_permission_denied">权限被拒，请手动授予该权限</string>
+    <string name="rate_app">在 Google Play上为本应用评分</string>
+    <string name="rate_app_summary">我们非常感谢您的反馈</string>
+    <string name="check_for_update">检查更新</string>
+    <string name="current_version">当前版本: %1$s</string>
+    <string name="new_version">最新版本: %1$s</string>
+    <string name="label_changelogs">看看更新了什么</string>
+    <string name="no_update_available">你已经在使用最新版本了！</string>
+    <string name="label_update_available">有可用更新！</string>
+    <string name="label_download_update">下载更新</string>
+    <string name="checking_for_update">检查更新中</string>
+    <string name="new_update_available">有新版本可用了！</string>
+    <string name="update_fetch_error">无法获取更新信息</string>
+    <string name="settings_app_theme">应用主题</string>
+    <string name="app_theme_summary">选择应用主题</string>
+    <string name="theme_light">浅色主题</string>
+    <string name="theme_dark">深色主题</string>
+    <string name="theme_system">跟随系统</string>
+    <string name="light_theme_summary">已选择浅色主题</string>
+    <string name="dark_theme_summary">已选择深色主题</string>
+    <string name="system_theme_summary">已跟随系统</string>
+    <string name="hudaifa_abdullah_summary">阿拉伯语 译者</string>
 
 </resources>
