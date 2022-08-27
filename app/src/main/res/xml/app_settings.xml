@@ -44,7 +44,7 @@
             android:title="@string/license"
             app:icon="@drawable/ic_license"
             android:key="license"
-            app:summary="View app licenses"
+            app:summary="@string/license_summary"
             android:widgetLayout="@layout/preference_right_arrow" />
 
         <com.drnoob.datamonitor.core.base.Preference

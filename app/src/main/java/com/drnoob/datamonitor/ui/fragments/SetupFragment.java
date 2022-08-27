@@ -167,9 +167,9 @@ public class SetupFragment extends Fragment {
             mShowDataWarning = (SwitchPreferenceCompat) findPreference("data_usage_alert");
 
             mWidgetRefreshInterval.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getString(WIDGET_REFRESH_INTERVAL_SUMMARY, "1 Minute"));
+                    .getString(WIDGET_REFRESH_INTERVAL_SUMMARY, getString(R.string.option_1_min)));
             mNotificationRefreshInterval.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY, "1 Minute"));
+                    .getString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY, getString(R.string.option_1_min)));
             mDataWarningTrigger.setSummary(getContext().getString(R.string.label_data_trigger_level,
                     String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext()).
                             getInt("data_warning_trigger_level", 85))));
