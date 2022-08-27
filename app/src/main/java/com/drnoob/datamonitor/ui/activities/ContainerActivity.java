@@ -37,6 +37,7 @@ import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
 import com.drnoob.datamonitor.ui.fragments.OSSLicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
+import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,6 +51,7 @@ import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
@@ -133,6 +135,11 @@ public class ContainerActivity extends AppCompatActivity {
             case BOTTOM_NAVBAR_ITEM_SETTINGS:
                 fragment = new SettingsFragment();
                 title = getString(R.string.settings);
+                break;
+
+            case DATA_USAGE_SYSTEM:
+                fragment = new SystemDataUsageFragment();
+                title = getString(R.string.system_data_usage);
                 break;
         }
 
