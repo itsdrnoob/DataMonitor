@@ -230,7 +230,7 @@
     <string name="cracky5322_summary">Traditional Chinese translator</string>
     <string name="cracky5322" translatable="false">Jia-Bin</string>
     <string name="louis_leblanc_summary">French translator</string>
-    <string name="louis_leblanc">Louis Leblanc</string>
+    <string name="louis_leblanc" translatable="false">Louis Leblanc</string>
     <string name="network_speed_title">Network Speed : %1$s</string>
     <string name="network_speed_upload">Upload : %1$s</string>
     <string name="network_speed_download">Download : %1$s</string>
@@ -244,7 +244,7 @@
     <string name="error_permission_denied">Permission denied. Please manually grant the permission.</string>
     <string name="telegram_support">Telegram Support</string>
     <string name="telegram_summary">Join the telegram support group</string>
-    <string name="telegram_chat">https://t.me/datamonitor</string>
+    <string name="telegram_chat" translatable="false">https://t.me/datamonitor</string>
     <string name="rate_app">Rate the app on Google Play</string>
     <string name="rate_app_summary">We\'d appreciate your feedback</string>
     <string name="check_for_update">Check for update</string>
@@ -265,5 +265,7 @@
     <string name="light_theme_summary">Light theme selected</string>
     <string name="dark_theme_summary">Dark theme selected</string>
     <string name="system_theme_summary">Following system theme</string>
+    <string name="hudaifa_abdullah_summary">Arabic translator</string>
+    <string name="hudaifa_abdullah" translatable="false">Hudaifa Abdullah</string>
 
 </resources>

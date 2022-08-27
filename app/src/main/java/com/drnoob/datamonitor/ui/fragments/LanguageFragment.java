@@ -119,6 +119,7 @@ public class LanguageFragment extends Fragment {
             availableLanguages.add(new LanguageModel("Simplified Chinese", "zh", "rCN"));
             availableLanguages.add(new LanguageModel("Traditional Chinese", "zh", "rTW"));
             availableLanguages.add(new LanguageModel("French", "fr", ""));
+            availableLanguages.add(new LanguageModel("Arabic", "ar", ""));
 
 
             Collections.sort(availableLanguages, new Comparator<LanguageModel>() {
