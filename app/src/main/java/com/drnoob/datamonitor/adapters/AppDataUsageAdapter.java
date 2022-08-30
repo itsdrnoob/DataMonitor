@@ -42,7 +42,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
-import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.NetworkStatsHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.progressview.ProgressView;
@@ -56,7 +55,6 @@ import static com.drnoob.datamonitor.Common.isAppInstalled;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_VALUE;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 

@@ -49,7 +49,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.drnoob.datamonitor.core.Values.*;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
+import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppWifiDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;

@@ -2,8 +2,6 @@ package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 
 public class DatePicker extends android.widget.DatePicker {
     private static final String TAG = DatePicker.class.getSimpleName();

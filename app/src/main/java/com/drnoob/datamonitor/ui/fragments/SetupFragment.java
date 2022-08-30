@@ -25,24 +25,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -74,7 +65,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Time;
 import java.text.ParseException;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
@@ -95,14 +85,11 @@ import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
-import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL_SUMMARY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
-import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMajor;
 import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
 
 public class SetupFragment extends Fragment {

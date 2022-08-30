@@ -20,8 +20,6 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -29,8 +27,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +34,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -47,7 +41,6 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.LanguageModel;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.PreferenceCategory;
-import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
@@ -57,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
@@ -65,7 +57,6 @@ import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragmentTest.context;
 
 public class LanguageFragment extends Fragment {
     private static final String TAG = LanguageFragment.class.getSimpleName();

@@ -28,13 +28,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import com.airbnb.lottie.L;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
