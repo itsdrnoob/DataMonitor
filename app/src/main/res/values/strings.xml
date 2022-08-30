@@ -269,5 +269,8 @@
     <string name="hudaifa_abdullah" translatable="false">Hudaifa Abdullah</string>
     <string name="license_summary">View app licenses</string>
     <string name="network_diagnostics_info">Network diagnostics may use around 20-30 Megabytes of data. Make sure you have sufficient data balance, else network charges may apply.</string>
-
+    <string name="holydemon" translatable="false">HolyDemon</string>
+    <string name="holydemon_summary">Malayalam translator</string>
+    <string name="liviogasp" translatable="false">Liviogasp</string>
+    <string name="liviogasp_summary">Italian translator</string>
 </resources>

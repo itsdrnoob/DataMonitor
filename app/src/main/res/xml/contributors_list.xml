@@ -81,6 +81,22 @@
 
         </com.drnoob.datamonitor.core.base.Preference>
 
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="holydemon"
+            android:summary="@string/holydemon_summary"
+            android:title="@string/holydemon"
+            app:icon="@drawable/holydemon">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="liviogasp"
+            android:summary="@string/liviogasp_summary"
+            android:title="@string/liviogasp"
+            app:icon="@drawable/ic_person">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
 </PreferenceScreen>
