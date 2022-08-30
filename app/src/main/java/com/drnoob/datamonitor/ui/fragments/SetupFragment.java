@@ -166,10 +166,60 @@ public class SetupFragment extends Fragment {
             mShowWifi = (SwitchPreferenceCompat) findPreference("show_wifi_notification");
             mShowDataWarning = (SwitchPreferenceCompat) findPreference("data_usage_alert");
 
-            mWidgetRefreshInterval.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getString(WIDGET_REFRESH_INTERVAL_SUMMARY, getString(R.string.option_1_min)));
-            mNotificationRefreshInterval.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY, getString(R.string.option_1_min)));
+
+            int widgetRefreshInterval = PreferenceManager.getDefaultSharedPreferences(getContext())
+                    .getInt(WIDGET_REFRESH_INTERVAL, 60000);
+            int notificationRefreshInterval = PreferenceManager.getDefaultSharedPreferences(getContext())
+                    .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
+            String widgetRefreshSummary = getString(R.string.option_1_min);
+            String notificationRefreshSummary = getString(R.string.option_1_min);
+
+            switch (widgetRefreshInterval) {
+                case 60000:
+                    widgetRefreshSummary = getString(R.string.option_1_min);
+                    break;
+
+                case 120000:
+                    widgetRefreshSummary = getString(R.string.option_2_min);
+                    break;
+
+                case 300000:
+                    widgetRefreshSummary = getString(R.string.option_5_min);
+                    break;
+
+                case 600000:
+                    widgetRefreshSummary = getString(R.string.option_10_min);
+                    break;
+
+                case 900000:
+                    widgetRefreshSummary = getString(R.string.option_15_min);
+                    break;
+            }
+
+            switch (notificationRefreshInterval) {
+                case 60000:
+                    notificationRefreshSummary = getString(R.string.option_1_min);
+                    break;
+
+                case 120000:
+                    notificationRefreshSummary = getString(R.string.option_2_min);
+                    break;
+
+                case 300000:
+                    notificationRefreshSummary = getString(R.string.option_5_min);
+                    break;
+
+                case 600000:
+                    notificationRefreshSummary = getString(R.string.option_10_min);
+                    break;
+
+                case 900000:
+                    notificationRefreshSummary = getString(R.string.option_15_min);
+                    break;
+            }
+
+            mWidgetRefreshInterval.setSummary(widgetRefreshSummary);
+            mNotificationRefreshInterval.setSummary(notificationRefreshSummary);
             mDataWarningTrigger.setSummary(getContext().getString(R.string.label_data_trigger_level,
                     String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext()).
                             getInt("data_warning_trigger_level", 85))));
