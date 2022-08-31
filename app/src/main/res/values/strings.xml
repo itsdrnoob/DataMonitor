@@ -53,7 +53,7 @@
     <string name="data_limit_placeholder" translatable="false">0.00</string>
     <string name="data_type_mb">MB</string>
     <string name="data_type_gb">GB</string>
-    <string name="title_data_warning_trigger">Trigger level for data warning</string>
+    <string name="title_data_warning_trigger">Data warning trigger level</string>
     <string name="title_add_data_plan">Add data plan</string>
     <string name="title_refresh_interval">Select refresh interval</string>
     <string name="option_1_min">1 minute</string>
@@ -65,11 +65,11 @@
     <string name="widget_setup_step_1">1. Touch and hold an empty space on your home screen.</string>
     <string name="widget_setup_step_2">2. Tap \"Widgets\".</string>
     <string name="widget_setup_step_3">3. Drag and drop the Data Monitor widget onto your home screen.</string>
-    <string name="heading_data_usage_today">Today</string>
+    <string name="heading_data_usage_today">Today\'s data usage</string>
     <string name="action_add_data_plan_home">Add your data plan to start monitoring it</string>
-    <string name="heading_week_overview">This week</string>
-    <string name="error_loading_overview">Could not load this week.\nTry again later.</string>
-    <string name="title_setup">Extra info</string>
+    <string name="heading_week_overview">This week\'s overview</string>
+    <string name="error_loading_overview">Could not load this week\'s overview.\nTry again later.</string>
+    <string name="title_setup">Setup Data monitor</string>
     <string name="setup_widget">Set up the widget</string>
     <string name="setup_notification">Set up notifications</string>
     <string name="title_configure">Configure</string>
@@ -78,21 +78,21 @@
     <string name="refresh_interval_placeholder">1 minute</string>
     <string name="setup_show_remaining_data">Show info about remaining data</string>
     <string name="setup_refresh_widget">Refresh widget</string>
-    <string name="refresh_widget_summary">Refresh the widget if it has problems</string>
-    <string name="setup_notification_title">Notifications</string>
+    <string name="refresh_widget_summary">Refresh the widget if it\'s facing any problem</string>
+    <string name="setup_notification_title">Notification</string>
     <string name="setup_notification_refresh_interval">Refresh interval for notifications</string>
     <string name="setup_show_mobile_usage">Show mobile-data usage</string>
     <string name="setup_show_wifi_usage">Show Wi-Fi usage</string>
     <string name="monitor_data">Monitor data usage</string>
-    <string name="setup_data_alert">Alert for data usage</string>
+    <string name="setup_data_alert">Data usage alert</string>
     <string name="data_alert_summary">Notify when the data limit is reached</string>
     <string name="settings_general">General</string>
     <string name="setup_add_data_plan">Add data plan</string>
     <string name="add_data_plan_summary">Add or update your data plan</string>
     <string name="setup_usage_reset_time">Reset usage time for data</string>
     <string name="usage_reset_time_placeholder" translatable="false">12:00 AM</string>
-    <string name="app_license_header">Copylefted libre app license</string>
-    <string name="oss_licenses">Libre library licenses</string>
+    <string name="app_license_header">App License</string>
+    <string name="oss_licenses">Opensource Licenses</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">Contributors</string>
     <string name="itsdrnoob_summary"><![CDATA[Lead Developer and Designer]]></string>
@@ -126,7 +126,7 @@
     <string name="label_system_apps">System Apps</string>
     <string name="package_system" translatable="false">com.android.systemui</string>
     <string name="home">Home</string>
-    <string name="usage_access_permission">Permission for usage access</string>
+    <string name="usage_access_permission">Usage Access Permission</string>
     <string name="usage_access_body">Required to run the app, since it collects app usage stats.\nNo personal data is collected.</string>
     <string name="action_grant">Grant permission</string>
     <string name="label_tethering">Mobile Hotspot</string>
@@ -135,21 +135,21 @@
     <string name="package_removed" translatable="false">com.android.removed</string>
     <string name="oem_skin_warning">%1$s Please check the extra optimisation tips to ensure the app works properly.</string>
     <string name="oem_skin_miui">MIUI detected.</string>
-    <string name="battery_optimisation_disabled">Battery optimisation off</string>
+    <string name="battery_optimisation_disabled">Battery optimisation disabled</string>
     <string name="data_plan_saved">Data plan saved</string>
     <string name="upi_app_not_found">Install an app that can do this first</string>
     <string name="upi_unknown_error">Unknown error.\nPlease try again or another method.</string>
     <string name="label_no_additional_lang">Click here to help translate the app.</string>
-    <string name="notification_disabled">Data Monitor notification off</string>
-    <string name="label_widget_refresh_interval_change">Update the widget every %1$s?</string>
-    <string name="label_notification_refresh_interval_change">Update the notification every %1$s?</string>
-    <string name="label_data_usage_reset_time_change">Reset data usage every %1$s at %2$s?</string>
+    <string name="notification_disabled">Data monitor notification disabled</string>
+    <string name="label_widget_refresh_interval_change">Widget will be updated every %1$s</string>
+    <string name="label_notification_refresh_interval_change">Notification will be updated every %1$s</string>
+    <string name="label_data_usage_reset_time_change">Reset data usage every %1$s at %2$s</string>
     <string name="label_data_usage_reset_date_change">Data usage will be reset on %1$d%2$s of every month</string>
-    <string name="remaining_data_info_enabled">Remaining data info on</string>
-    <string name="remaining_data_info_disabled">Remaining data info off</string>
-    <string name="label_monitoring_no_plan">Add a data plan to monitor it</string>
+    <string name="remaining_data_info_enabled">Remaining data info enabled</string>
+    <string name="remaining_data_info_disabled">Remaining data info disabled</string>
+    <string name="label_monitoring_no_plan">Add a data plan to start monitoring</string>
     <string name="label_widget_refreshed">Widget refreshed</string>
-    <string name="label_notification_enabled">Data monitor notification on</string>
+    <string name="label_notification_enabled">Data monitor notification enabled</string>
     <string name="label_notification_cannot_disable_both">Cannot turn off both elements</string>
     <string name="label_setup_notification_first">Please set up the notification first</string>
     <string name="label_data_plan_saved">Data plan saved</string>
@@ -193,7 +193,7 @@
     <string name="testing_latency">Testing network latency</string>
     <string name="current_connection">Current connection: %1$s</string>
     <string name="network_stats">Network stats</string>
-    <string name="network_speed_mbps">%1$s Mibit/s</string>
+    <string name="network_speed_mbps">%1$s Mbit/s</string>
     <string name="max_download_speed">Max download speed</string>
     <string name="min_download_speed">Min download speed</string>
     <string name="avg_download_speed">Avg download speed</string>
@@ -212,7 +212,7 @@
     <string name="api_url" translatable="false">https://api.ipify.org</string>
     <string name="download_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/10M.iso</string>
     <string name="upload_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/</string>
-    <string name="no_network_connection">Connect to the Internet first.</string>
+    <string name="no_network_connection">No network connection detected!</string>
     <string name="connection_error">Could not connect.\nPlease ensure you are connected to the Internet.</string>
     <string name="app_label_screen_time">Screen time: %1$s</string>
     <string name="app_label_background_time">Background usage: %1$s</string>
@@ -221,12 +221,12 @@
     <string name="ygorigor" translatable="false">Igor Sorocean</string>
     <string name="johnsonran_summary">Simplified Chinese</string>
     <string name="johnsonran" translatable="false">JohnsonRan</string>
-    <string name="label_want_to_contribute_language">Click here to help translate the app to your language.</string>
+    <string name="label_want_to_contribute_language">Click here to help translate the app into your language.</string>
     <string name="current_language">Current</string>
     <string name="available_languages">Available</string>
     <string name="label_reset_every_month">%1$s%2$s of every month</string>
-    <string name="setup_usage_reset_date">Reset the data usage date</string>
-    <string name="system_data_usage">Data used by the system</string>
+    <string name="setup_usage_reset_date">Data usage reset date</string>
+    <string name="system_data_usage">System data usage</string>
     <string name="cracky5322_summary">Traditional Chinese</string>
     <string name="cracky5322" translatable="false">Jia-Bin</string>
     <string name="louis_leblanc_summary">French</string>
@@ -234,12 +234,12 @@
     <string name="network_speed_title">Network speed: %1$s</string>
     <string name="network_speed_upload">Upload: %1$s</string>
     <string name="network_speed_download">Download: %1$s</string>
-    <string name="network_signal_notification">Network speed now</string>
-    <string name="label_network_signal_notification_enabled">Live network speed on</string>
-    <string name="label_network_signal_notification_disabled">Live network speed off</string>
+    <string name="network_signal_notification">Live network speed</string>
+    <string name="label_network_signal_notification_enabled">Live network speed enabled</string>
+    <string name="label_network_signal_notification_disabled">Live network speed disabled</string>
     <string name="network_signal_summary">Beta feature</string>
-    <string name="read_phone_state_permission">Permission to read device state</string>
-    <string name="read_phone_state_body">On Android 9 and below this must be granted manually. No personal data will is collected.</string>
+    <string name="read_phone_state_permission">Permission to read phone state</string>
+    <string name="read_phone_state_body">Devices running Android version 9 and below must grant this permission manually. No personal data will be collected.</string>
     <string name="action_permission_granted">Permission granted</string>
     <string name="error_permission_denied">Permission denied. Please grant it manually.</string>
     <string name="telegram_support">Telegram support</string>
@@ -247,28 +247,28 @@
     <string name="telegram_chat" translatable="false">https://t.me/datamonitor</string>
     <string name="rate_app">Rate the app on Google Play</string>
     <string name="rate_app_summary">Your feedback is appreciated</string>
-    <string name="check_for_update">Look for new version</string>
+    <string name="check_for_update">Check for updates</string>
     <string name="current_version">Current version: %1$s</string>
     <string name="new_version">New version: %1$s</string>
     <string name="label_changelogs">Find out what\'s new</string>
-    <string name="no_update_available">You are running the newest version.</string>
-    <string name="label_update_available">New version available.</string>
+    <string name="no_update_available">You are running the latest version.</string>
+    <string name="label_update_available">New version is available!</string>
     <string name="label_download_update">Download the new version</string>
-    <string name="checking_for_update">Looking for new versions…</string>
-    <string name="new_update_available">A new version is available.</string>
-    <string name="update_fetch_error">Could not look for new versions</string>
+    <string name="checking_for_update">Checking for updates…</string>
+    <string name="new_update_available">A new version is available!</string>
+    <string name="update_fetch_error">Couldn\'t fetch updates</string>
     <string name="settings_app_theme">Theme</string>
     <string name="app_theme_summary">Select the app theme</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
-    <string name="theme_system">Follow the system</string>
-    <string name="light_theme_summary">Light</string>
-    <string name="dark_theme_summary">Dark</string>
-    <string name="system_theme_summary">Using system theme</string>
+    <string name="theme_system">Follow system theme</string>
+    <string name="light_theme_summary">Light theme selected</string>
+    <string name="dark_theme_summary">Dark theme selected</string>
+    <string name="system_theme_summary">Following system theme</string>
     <string name="hudaifa_abdullah_summary">Arabic</string>
     <string name="hudaifa_abdullah" translatable="false">Hudaifa Abdullah</string>
-    <string name="license_summary">View libre licenses</string>
-    <string name="network_diagnostics_info">Network diagnostics may use around 20–30 MB data. Ensure you have this available in your plan, or it may cost extra.</string>
+    <string name="license_summary">View app licenses</string>
+    <string name="network_diagnostics_info">Network diagnostics may use around 20–30 MB data. Ensure you have this available in your plan, else network charges may apply.</string>
     <string name="holydemon" translatable="false">HolyDemon</string>
     <string name="holydemon_summary">Malayalam</string>
     <string name="liviogasp" translatable="false">Liviogasp</string>
