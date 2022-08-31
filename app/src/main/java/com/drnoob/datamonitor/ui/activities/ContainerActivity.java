@@ -20,7 +20,6 @@
 package com.drnoob.datamonitor.ui.activities;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -36,21 +35,28 @@ import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
+import com.drnoob.datamonitor.ui.fragments.OSSLicenseFragment;
+import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
+import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
 
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.OSS_LICENSE_FRAGMENT;
 
 public class ContainerActivity extends AppCompatActivity {
 
@@ -60,11 +66,12 @@ public class ContainerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         MainActivity.setTheme(ContainerActivity.this);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
-            setLanguage(this, "en");
+            setLanguage(this, "en", countryCode);
         }
         else {
-            setLanguage(this, languageCode);
+            setLanguage(this, languageCode, countryCode);
         }
         super.onCreate(savedInstanceState);
         binding = ActivityContainerBinding.inflate(getLayoutInflater());
@@ -105,6 +112,11 @@ public class ContainerActivity extends AppCompatActivity {
                 title = getString(R.string.app_license_header);
                 break;
 
+            case OSS_LICENSE_FRAGMENT:
+                fragment = new OSSLicenseFragment();
+                title = getString(R.string.oss_licenses);
+                break;
+
             case APP_DATA_LIMIT_FRAGMENT:
                 fragment = new AppDataLimitFragment();
                 title = getString(R.string.title_app_data_limit);
@@ -118,6 +130,16 @@ public class ContainerActivity extends AppCompatActivity {
             case APP_LANGUAGE_FRAGMENT:
                 fragment = new LanguageFragment();
                 title = getString(R.string.settings_language);
+                break;
+
+            case BOTTOM_NAVBAR_ITEM_SETTINGS:
+                fragment = new SettingsFragment();
+                title = getString(R.string.settings);
+                break;
+
+            case DATA_USAGE_SYSTEM:
+                fragment = new SystemDataUsageFragment();
+                title = getString(R.string.system_data_usage);
                 break;
         }
 

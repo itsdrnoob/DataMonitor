@@ -6,182 +6,178 @@
     android:background="@drawable/widget_background"
     android:paddingStart="@dimen/margin_small"
     android:paddingEnd="@dimen/margin_small"
-    android:paddingTop="@dimen/margin_small"
-    android:paddingBottom="@dimen/margin_mid_large"
+    android:paddingTop="@dimen/margin_extra_small"
+    android:paddingBottom="@dimen/margin_small"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.DataUsage.AppWidgetContainer">
 
-    <RelativeLayout
+    <include
+        android:id="@+id/include"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        layout="@layout/layout_widget"/>
 
-        <LinearLayout
-            android:id="@+id/widget_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerInParent="true">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/elevation_default"
-                android:gravity="center">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/widget_main"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_centerInParent="true">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/title_data_usage"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:textColor="@color/text_primary"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="@dimen/elevation_default"-->
+<!--                android:gravity="center">-->
 
-                <TextView
-                    android:id="@+id/widget_update"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/widget_update_button_background"
-                    android:text="@string/action_update"
-                    android:textColor="@color/primary"
-                    android:layout_centerInParent="true"
-                    android:paddingStart="@dimen/margin_medium"
-                    android:paddingEnd="@dimen/margin_medium"
-                    android:paddingTop="@dimen/widget_padding_small"
-                    android:paddingBottom="@dimen/widget_padding_small"
-                    android:layout_marginTop="@dimen/update_btn_medium"
-                    android:textSize="@dimen/text_small"
-                    android:layout_marginBottom="@dimen/margin_null"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:layout_alignParentEnd="true"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="@string/title_data_usage"-->
+<!--                    android:layout_marginStart="@dimen/margin_small"-->
+<!--                    android:textColor="@color/text_primary"-->
+<!--                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>-->
 
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/widget_update"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/widget_update_button_background"-->
+<!--                    android:text="@string/action_update"-->
+<!--                    android:textColor="@color/primary"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:paddingStart="@dimen/margin_medium"-->
+<!--                    android:paddingEnd="@dimen/margin_medium"-->
+<!--                    android:paddingTop="@dimen/widget_padding_small"-->
+<!--                    android:paddingBottom="@dimen/widget_padding_small"-->
+<!--                    android:layout_marginTop="@dimen/update_btn_medium"-->
+<!--                    android:textSize="@dimen/text_small"-->
+<!--                    android:layout_marginBottom="@dimen/margin_null"-->
+<!--                    android:layout_marginEnd="@dimen/margin_small"-->
+<!--                    android:layout_alignParentEnd="true"/>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margin_small">
+<!--            </LinearLayout>-->
 
-                <ImageView
-                    android:id="@+id/widget_data_icon"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="@dimen/margin_null"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:src="@drawable/ic_widget_data"/>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="@dimen/margin_small">-->
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="@dimen/margin_extra_small"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:orientation="vertical">
+<!--                <ImageView-->
+<!--                    android:id="@+id/widget_data_icon"-->
+<!--                    android:layout_width="46dp"-->
+<!--                    android:layout_height="46dp"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginTop="@dimen/margin_null"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="@dimen/margin_small"-->
+<!--                    android:src="@drawable/ic_widget_mobile_data"/>-->
 
-                    <TextView
-                        android:id="@+id/widget_mobile_data_used"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/app_data_usage_placeholder"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/margin_negative_small"
-                        android:textColor="#FF1111"
-                        android:textSize="@dimen/text_large"
-                        android:layout_marginTop="@dimen/margin_null"/>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:padding="@dimen/margin_extra_small"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginStart="@dimen/margin_medium"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/widget_data_usage_remaining"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginStart="@dimen/margin_negative_small"
-                        android:text="@string/data_remaining_placeholder"
-                        android:textSize="@dimen/text_small" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/widget_mobile_data_used"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:text="@string/app_data_usage_placeholder"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_marginStart="@dimen/margin_negative_small"-->
+<!--                        android:textColor="#FF1111"-->
+<!--                        android:textSize="@dimen/text_large"-->
+<!--                        android:layout_marginTop="@dimen/margin_null"/>-->
 
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/widget_data_usage_remaining"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:visibility="gone"-->
+<!--                        android:textColor="@color/text_secondary"-->
+<!--                        android:layout_marginStart="@dimen/margin_negative_small"-->
+<!--                        android:text="@string/data_remaining_placeholder"-->
+<!--                        android:textSize="@dimen/text_small" />-->
 
-            </LinearLayout>
+<!--                </LinearLayout>-->
 
-
-            <ImageView
-                android:id="@+id/widget_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:listDivider"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginStart="@dimen/margin_mid_large"
-                android:layout_marginEnd="@dimen/margin_mid_large"/>
+<!--            </LinearLayout>-->
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/margin_small">
+<!--            <ImageView-->
+<!--                android:id="@+id/widget_divider"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="?android:listDivider"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginTop="@dimen/margin_small"-->
+<!--                android:layout_marginStart="@dimen/margin_mid_large"-->
+<!--                android:layout_marginEnd="@dimen/margin_mid_large"/>-->
 
-                <ImageView
-                    android:id="@+id/widget_wifi_icon"
-                    android:layout_width="48dp"
-                    android:layout_height="44dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="@dimen/margin_null"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_widget_wifi"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="@dimen/margin_extra_small"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:layout_marginTop="@dimen/margin_small">-->
 
-                    <TextView
-                        android:id="@+id/widget_wifi_used"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/app_data_usage_placeholder"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/margin_negative_small"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_large"
-                        android:layout_marginTop="@dimen/margin_null"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/widget_wifi_icon"-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="44dp"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginTop="@dimen/margin_null"-->
+<!--                    android:layout_marginStart="@dimen/margin_small"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:src="@drawable/ic_wifi_widget"/>-->
 
-                    <TextView
-                        android:id="@+id/widget_wifi_usage_remaining"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/margin_negative_small"
-                        android:visibility="gone"
-                        android:textColor="@color/text_secondary"
-                        android:text="@string/data_remaining_placeholder"
-                        android:textSize="@dimen/text_small" />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:padding="@dimen/margin_extra_small"-->
+<!--                    android:layout_marginStart="@dimen/margin_medium"-->
+<!--                    android:orientation="vertical">-->
 
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/widget_wifi_used"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:text="@string/app_data_usage_placeholder"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_marginStart="@dimen/margin_negative_extra_small"-->
+<!--                        android:textColor="@color/green"-->
+<!--                        android:textSize="@dimen/text_large"-->
+<!--                        android:layout_marginTop="@dimen/margin_null"/>-->
 
-            </LinearLayout>
+<!--                </LinearLayout>-->
 
-        </LinearLayout>
+<!--            </LinearLayout>-->
 
-    </RelativeLayout>
+<!--        </LinearLayout>-->
+
+<!--    </RelativeLayout>-->
 
 </LinearLayout>

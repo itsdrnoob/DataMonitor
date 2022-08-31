@@ -28,13 +28,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.text.Spannable;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -44,43 +44,55 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.drnoob.datamonitor.databinding.ActivityMainBinding;
 import com.drnoob.datamonitor.utils.SharedPreferences;
-import com.google.android.material.navigation.NavigationBarView;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
+import static com.drnoob.datamonitor.Common.refreshService;
 import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
+import static com.drnoob.datamonitor.core.Values.APP_THEME;
+import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_VALUE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.getAppContext;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.onDataLoaded;
@@ -108,14 +120,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(MainActivity.this);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (!isReadPhoneStateGranted(MainActivity.this)) {
+                startActivity(new Intent(this, SetupActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        .putExtra(SETUP_VALUE, READ_PHONE_STATE_DISABLED));
+                finish();
+            }
+        }
         super.onCreate(savedInstanceState);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
-            setLanguage(this, "en");
+            setLanguage(this, "en", countryCode);
         }
         else {
-            setLanguage(this, languageCode);
+            setLanguage(this, languageCode, countryCode);
         }
+
+        refreshService(this);
 
         try {
             if (isUsageAccessGranted(MainActivity.this)) {
@@ -133,7 +157,30 @@ public class MainActivity extends AppCompatActivity {
 
 //                AppBarConfiguration configuration = new AppBarConfiguration.Builder(R.id.bottom_menu_home,
 //                        R.id.bottom_menu_setup, R.id.bottom_menu_app_data_usage, R.id.bottom_menu_settings, R.id.system_data_usage).build();
-                NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
+
+
+
+
+//                NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
+
+
+
+
+
+                NavHostFragment navHostFragment = (NavHostFragment)  getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
+                NavController controller = navHostFragment.getNavController();
+                controller.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+                    @Override
+                    public void onDestinationChanged(@NotNull NavController navController, @NotNull NavDestination navDestination, @Nullable Bundle bundle) {
+                        changeBanner(navDestination);
+                    }
+                });   // working
+
+                NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
+
+
+
+
 //        NavigationUI.setupActionBarWithNavController(this, controller, configuration);
 //        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
 
@@ -156,10 +203,10 @@ public class MainActivity extends AppCompatActivity {
                 if (value == DATA_USAGE_SYSTEM) {
                     binding.bottomNavigationView.setVisibility(View.GONE);
                     binding.bottomNavigationView.setSelectedItemId(R.id.bottom_menu_app_data_usage);
-                    getSupportActionBar().setTitle("System data usage");
+                    getSupportActionBar().setTitle(R.string.system_data_usage);
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                     getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow);
-                    controller.navigate(R.id.system_data_usage);
+                    controller.navigate(R.id.system_data_usage);  // >> working
                 }
                 if (value != DATA_USAGE_SYSTEM) {
                     if (!isDataLoading()) {
@@ -168,23 +215,24 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                        if (item.getItemId() == binding.bottomNavigationView.getSelectedItemId()) {
-                            return false;
-                        }
-                        if (item.getItemId() == R.id.bottom_menu_home) {
-                            getSupportActionBar().setTitle(getString(R.string.app_name));
-                        } else {
-                            getSupportActionBar().setTitle(item.getTitle());
-                        }
-                        NavigationUI.onNavDestinationSelected(item, controller);
-                        return true;
-                    }
-                });
+//                binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+//                        if (item.getItemId() == binding.bottomNavigationView.getSelectedItemId()) {
+//                            return false;
+//                        }
+//                        if (item.getItemId() == R.id.bottom_menu_home) {
+//                            getSupportActionBar().setTitle(getString(R.string.app_name));
+//                        } else {
+//                            getSupportActionBar().setTitle(item.getTitle());
+//                        }
+//                        NavigationUI.onNavDestinationSelected(item, controller);
+//                        return true;
+//                    }
+//                });
 
-            } else {
+            }
+            else {
                 onResume();
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -193,9 +241,53 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void initializeBottomNavBar() {
+        NavHostFragment navHostFragment = (NavHostFragment)  getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
+        NavController controller = navHostFragment.getNavController();
+        controller.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NotNull NavController navController, @NotNull NavDestination navDestination, @Nullable Bundle bundle) {
+                changeBanner(navDestination);
+            }
+        });   // working
+
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);  // working
+    }
+
+
+    private void changeBanner(NavDestination navDestination) {
+        String destination = navDestination.getLabel().toString();
+        Spannable banner;
+
+        if (destination.equalsIgnoreCase(getString(R.string.home))) {
+            // Home Fragment
+            getSupportActionBar().setTitle(getString(R.string.app_name));
+        }
+        else if (destination.equalsIgnoreCase(getString(R.string.setup))) {
+            // Setup Fragment
+            getSupportActionBar().setTitle(getString(R.string.setup));
+        }
+        else if (destination.equalsIgnoreCase(getString(R.string.app_data_usage))) {
+            // App data usage Fragment
+            getSupportActionBar().setTitle(getString(R.string.app_data_usage));
+        }
+        else if (destination.equalsIgnoreCase(getString(R.string.network_diagnostics))) {
+            // Network diagnostics Fragment
+            getSupportActionBar().setTitle(getString(R.string.network_diagnostics));
+        }
+        else {
+            // Unknown Fragment
+        }
+
+    }
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
+        verifyAppVersion();
+//        initializeBottomNavBar();
     }
 
     @Override
@@ -218,15 +310,22 @@ public class MainActivity extends AppCompatActivity {
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         .putExtra(SETUP_VALUE, USAGE_ACCESS_DISABLED));
             }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                if (!isReadPhoneStateGranted(MainActivity.this)) {
+                    startActivity(new Intent(this, SetupActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            .putExtra(SETUP_VALUE, READ_PHONE_STATE_DISABLED));
+                }
+            }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
         // Action bar title resets while changing theme in settings, setting current title
-        NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
-        if (controller.getCurrentDestination().getId() == R.id.bottom_menu_settings) {
-            getSupportActionBar().setTitle(getString(R.string.settings));
-        }
+//        NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
+//        if (controller.getCurrentDestination().getId() == R.id.bottom_menu_settings) {
+//            getSupportActionBar().setTitle(getString(R.string.settings));
+//        }
 
     }
 
@@ -241,6 +340,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -248,6 +353,11 @@ public class MainActivity extends AppCompatActivity {
                     value = 0;
                     finish();
                 }
+                break;
+
+            case R.id.toolbar_settings:
+                startActivity(new Intent(MainActivity.this, ContainerActivity.class)
+                        .putExtra(GENERAL_FRAGMENT_ID, BOTTOM_NAVBAR_ITEM_SETTINGS));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -262,6 +372,8 @@ public class MainActivity extends AppCompatActivity {
                 NotificationManager.IMPORTANCE_HIGH);
         NotificationChannel appWarningChannel = new NotificationChannel(APP_DATA_USAGE_WARNING_CHANNEL_ID, APP_DATA_USAGE_WARNING_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel networkSignalChannel = new NotificationChannel(NETWORK_SIGNAL_CHANNEL_ID, NETWORK_SIGNAL_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_LOW);
         warningChannel.enableVibration(true);
         warningChannel.enableLights(true);
         appWarningChannel.enableVibration(true);
@@ -270,6 +382,7 @@ public class MainActivity extends AppCompatActivity {
         channels.add(usageChannel);
         channels.add(warningChannel);
         channels.add(appWarningChannel);
+        channels.add(networkSignalChannel);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannels(channels);
@@ -347,12 +460,15 @@ public class MainActivity extends AppCompatActivity {
         private final Context mContext;
         private final int session;
         private final int type;
+        private int date;
 
         public LoadData(Context mContext, int session, int type) {
             this.mContext = mContext;
             this.session = session;
             this.type = type;
         }
+
+
 
         @Override
         protected void onPreExecute() {
@@ -377,6 +493,8 @@ public class MainActivity extends AppCompatActivity {
                     totalDeletedAppsReceived = 0L,
                     tetheringTotal = 0L,
                     deletedAppsTotal = 0L;
+
+            date = PreferenceManager.getDefaultSharedPreferences(mContext).getInt(DATA_RESET_DATE, 1);
 
             DatabaseHandler handler = new DatabaseHandler(mContext);
             List<AppDataUsageModel> list = handler.getUsageList();
@@ -403,7 +521,7 @@ public class MainActivity extends AppCompatActivity {
                                 model.setType(type);
 
                                 Long total = sent + received;
-                                Long deviceTotal = getDeviceMobileDataUsage(mContext, session)[2];
+                                Long deviceTotal = getDeviceMobileDataUsage(mContext, session, date)[2];
 
                                 // multiplied by 2 just to increase progress a bit.
                                 Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
@@ -448,7 +566,8 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                } else {
+                }
+                else {
                     if (isAppInstalled(mContext, currentData.getPackageName())) {
                         if (type == TYPE_MOBILE_DATA) {
                             try {
@@ -466,7 +585,7 @@ public class MainActivity extends AppCompatActivity {
                                     model.setType(type);
 
                                     Long total = sent + received;
-                                    Long deviceTotal = getDeviceMobileDataUsage(mContext, session)[2];
+                                    Long deviceTotal = getDeviceMobileDataUsage(mContext, session, date)[2];
 
                                     Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
                                     model.setProgress(progress.intValue());
@@ -527,7 +646,7 @@ public class MainActivity extends AppCompatActivity {
             Long deviceTotal = null;
             if (type == TYPE_MOBILE_DATA) {
                 try {
-                    deviceTotal = getDeviceMobileDataUsage(mContext, session)[2];
+                    deviceTotal = getDeviceMobileDataUsage(mContext, session, date)[2];
                     Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
                     model.setProgress(progress.intValue());
 
@@ -647,15 +766,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void setTheme(Activity activity) {
-        Boolean nightMode = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext())
-                .getBoolean("dark_mode_toggle", false);
-        if (nightMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else if (!nightMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        String theme = PreferenceManager.getDefaultSharedPreferences(activity).getString(APP_THEME, "system");
+        switch (theme) {
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+
+            case "light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+
+            case "system":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
         }
 
+    }
+
+    private void verifyAppVersion() {
+        String updateVersion = SharedPreferences.getAppPrefs(MainActivity.this)
+                .getString(UPDATE_VERSION, BuildConfig.VERSION_NAME);
+        if (updateVersion.equalsIgnoreCase(BuildConfig.VERSION_NAME)) {
+            SharedPreferences.getAppPrefs(MainActivity.this)
+                    .edit().remove(UPDATE_VERSION).apply();
+        }
     }
 }

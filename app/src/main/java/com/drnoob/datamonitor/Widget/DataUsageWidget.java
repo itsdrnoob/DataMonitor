@@ -27,6 +27,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
@@ -43,8 +46,9 @@ import java.util.Calendar;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
@@ -55,19 +59,37 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataU
  */
 
 public class DataUsageWidget extends AppWidgetProvider {
-
     private static final String TAG = DataUsageWidget.class.getSimpleName();
-    private static boolean isReceiverRunning = false;
+    public static final String TYPE_MANUAL_REFRESH = "widget_manual_refresh";
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    private static boolean isReceiverRunning = false;
+    private boolean manualRefresh = false;
+
+    public boolean isManualRefresh() {
+        return manualRefresh;
+    }
+
+    public void setManualRefresh(boolean manualRefresh) {
+        this.manualRefresh = manualRefresh;
+    }
+
+    public void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         Long[] mobile = null;
         Long[] wifi = null;
         String mobileData = null;
         String wifiData = null;
+        int date = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_DATE, 1);
 
         try {
-            mobile = getDeviceMobileDataUsage(context, SESSION_TODAY);
+
+            if (PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_MONTHLY)) {
+                mobile = getDeviceMobileDataUsage(context, SESSION_MONTHLY, date);
+            }
+            else {
+                mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
+            }
 
             mobileData = formatData(mobile[0], mobile[1])[2];
 
@@ -86,13 +108,23 @@ public class DataUsageWidget extends AppWidgetProvider {
         views.setTextViewText(R.id.widget_mobile_data_used, mobileData);
         views.setTextViewText(R.id.widget_wifi_used, wifiData);
 
+        if (isManualRefresh()) {
+            views.setViewVisibility(R.id.widget_update, View.INVISIBLE);
+            views.setViewVisibility(R.id.widget_update_progress, View.VISIBLE);
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+
         Log.d(TAG, "updateAppWidget: " + mobileData + "  " + wifiData);
 
         Boolean showRemaining = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("remaining_data_info", true);
+        Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
+        if (dataLimit < 0) {
+            views.setTextViewText(R.id.widget_data_usage_remaining, "");
+            views.setViewVisibility(R.id.widget_data_usage_remaining, View.GONE);
+        }
 
         if (showRemaining) {
-            Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
             if (dataLimit > 0) {
                 if (PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, null)
                         .equals(DATA_RESET_DAILY)) {
@@ -114,7 +146,7 @@ public class DataUsageWidget extends AppWidgetProvider {
                 } else if (PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, null)
                         .equals(DATA_RESET_MONTHLY)) {
                     try {
-                        Long total = getDeviceMobileDataUsage(context, SESSION_THIS_MONTH)[2];
+                        Long total = getDeviceMobileDataUsage(context, SESSION_MONTHLY, date)[2];
                         Long limit = dataLimit.longValue() * 1048576;
                         Long remaining;
                         String remainingData;
@@ -135,22 +167,33 @@ public class DataUsageWidget extends AppWidgetProvider {
                         e.printStackTrace();
                     }
                 }
+                views.setViewVisibility(R.id.widget_data_usage_remaining, View.VISIBLE);
 
             }
-            views.setViewVisibility(R.id.widget_data_usage_remaining, View.VISIBLE);
-        } else {
+
+        }
+        else {
             views.setTextViewText(R.id.widget_data_usage_remaining, "");
             views.setViewVisibility(R.id.widget_data_usage_remaining, View.GONE);
         }
-        views.setTextViewText(R.id.widget_wifi_usage_remaining, "");
+//        views.setTextViewText(R.id.widget_wifi_usage_remaining, "");
+
+
         Intent intent = new Intent(context, DataUsageWidget.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.setType(TYPE_MANUAL_REFRESH);
         int[] ids = AppWidgetManager.getInstance(context)
                 .getAppWidgetIds(new ComponentName(context, DataUsageWidget.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+
+
+//        Intent intent = new Intent(context, WidgetUpdate.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent,
+//                PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+
         views.setOnClickPendingIntent(R.id.widget_update, pendingIntent);
 
         Intent appIntent = new Intent(Intent.ACTION_MAIN);
@@ -162,11 +205,41 @@ public class DataUsageWidget extends AppWidgetProvider {
 
         // Instruct the widget manager to update the widget
 
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+        Log.e(TAG, "updateAppWidget: " + isManualRefresh() );
+        if (isManualRefresh()) {
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e(TAG, "run: " );
+                    views.setViewVisibility(R.id.widget_update, View.VISIBLE);
+                    views.setViewVisibility(R.id.widget_update_progress, View.GONE);
+                    appWidgetManager.updateAppWidget(appWidgetId, views);
+                }
+            }, 750);
+        }
+        else {
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+
+        Log.e(TAG, "updateAppWidget: end" );
+
     }
+
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (intent.getType() != null) {
+            if (intent.getType().equals(TYPE_MANUAL_REFRESH)) {
+                setManualRefresh(true);
+            }
+            else {
+                setManualRefresh(false);
+            }
+        }
+        else {
+            setManualRefresh(false);
+        }
         super.onReceive(context, intent);
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -180,6 +253,7 @@ public class DataUsageWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
+
         for (int appWidgetId : appWidgetIds) {
             try {
                 updateAppWidget(context, appWidgetManager, appWidgetId);
@@ -203,6 +277,11 @@ public class DataUsageWidget extends AppWidgetProvider {
         ComponentName componentName = new ComponentName(context, DataUsageWidget.class);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         appWidgetManager.updateAppWidget(componentName, views);
+    }
+
+    @Override
+    public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
+        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
     }
 
     @Override

@@ -14,11 +14,19 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
+<!--    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"-->
+<!--        tools:ignore="QueryAllPackagesPermission" />-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -67,7 +75,6 @@
             android:name=".utils.DataUsageMonitor"
             android:enabled="true"
             android:exported="true" />
-
         <receiver android:name=".utils.DataUsageMonitor$DataMonitor"
             android:exported="true">
             <intent-filter>
@@ -104,6 +111,20 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".utils.LiveNetworkMonitor$LiveNetworkReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.SCREEN_OFF"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".utils.LiveNetworkMonitor"
+            android:exported="true"
+            android:enabled="true" />
+
         <activity
             android:name=".ui.activities.MainActivity"
             android:fitsSystemWindows="true"
@@ -112,18 +133,6 @@
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
         </activity>
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/Theme.License"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/Theme.License"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            tools:ignore="LockedOrientationActivity"/>
     </application>
 
 </manifest>

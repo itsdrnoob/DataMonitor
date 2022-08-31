@@ -1,8 +1,25 @@
+/*
+ * Copyright (C) 2021 Dr.NooB
+ *
+ * This file is a part of Data Monitor <https://github.com/itsdrnoob/DataMonitor>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.drnoob.datamonitor.ui.fragments;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -10,8 +27,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +34,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -28,7 +41,6 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.LanguageModel;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.PreferenceCategory;
-import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
@@ -38,14 +50,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragmentTest.context;
 
 public class LanguageFragment extends Fragment {
     private static final String TAG = LanguageFragment.class.getSimpleName();
@@ -94,8 +105,14 @@ public class LanguageFragment extends Fragment {
                     spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             currentLanguagePref.setTitle(spannableString);
 
-            availableLanguages.add(new LanguageModel("Romanian", "ro"));
-            availableLanguages.add(new LanguageModel("English", "en"));
+            availableLanguages.add(new LanguageModel("Romanian", "ro", ""));
+            availableLanguages.add(new LanguageModel("English", "en", ""));
+            availableLanguages.add(new LanguageModel("Simplified Chinese", "zh", "rCN"));
+            availableLanguages.add(new LanguageModel("Traditional Chinese", "zh", "rTW"));
+            availableLanguages.add(new LanguageModel("French", "fr", ""));
+            availableLanguages.add(new LanguageModel("Arabic", "ar", ""));
+            availableLanguages.add(new LanguageModel("Malayalam", "ml", ""));
+            availableLanguages.add(new LanguageModel("Italian", "it", ""));
 
 
             Collections.sort(availableLanguages, new Comparator<LanguageModel>() {
@@ -108,6 +125,7 @@ public class LanguageFragment extends Fragment {
             for (int i = 0; i < availableLanguages.size(); i++) {
                 String language = availableLanguages.get(i).getLanguage();
                 String languageCode = availableLanguages.get(i).getLanguageCode();
+                String countryCode = availableLanguages.get(i).getCountryCode();
                 Preference preference = new Preference(getContext());
                 preference.setTitle(language);
                 preference.setIconSpaceReserved(false);
@@ -120,6 +138,7 @@ public class LanguageFragment extends Fragment {
                             SharedPreferences.getUserPrefs(getContext()).edit()
                                     .putString(APP_LANGUAGE, language)
                                     .putString(APP_LANGUAGE_CODE, languageCode)
+                                    .putString(APP_COUNTRY_CODE, countryCode)
                                     .apply();
 //                        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags("ro");
 //                        AppCompatDelegate.setApplicationLocales(appLocale);
@@ -132,7 +151,7 @@ public class LanguageFragment extends Fragment {
 //                        config.setLocale(locale);
 //                        resources.updateConfiguration(config, resources.getDisplayMetrics());
 
-                            setLanguage(getActivity(), languageCode);
+                            setLanguage(getActivity(), languageCode, countryCode);
                             startActivity(new Intent(getActivity(), MainActivity.class)
                                     .putExtra(GENERAL_FRAGMENT_ID, APP_LANGUAGE_FRAGMENT)
                                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP));

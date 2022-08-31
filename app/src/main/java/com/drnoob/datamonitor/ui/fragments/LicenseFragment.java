@@ -36,7 +36,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,6 +46,7 @@ import java.io.InputStreamReader;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.OSS_LICENSE_FRAGMENT;
 
 public class LicenseFragment extends Fragment {
     private static final String TAG = LicenseFragment.class.getSimpleName();
@@ -115,8 +115,8 @@ public class LicenseFragment extends Fragment {
             mOssLicense.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    OssLicensesMenuActivity.setActivityTitle(getContext().getString(R.string.oss_licenses));
-                    startActivity(new Intent(getContext(), OssLicensesMenuActivity.class));
+                    startActivity(new Intent(getActivity(), ContainerActivity.class)
+                            .putExtra(GENERAL_FRAGMENT_ID, OSS_LICENSE_FRAGMENT));
                     return false;
                 }
             });

@@ -8,4 +8,11 @@
             android:src="@drawable/splash"/>
     </item>
 
+    <item
+        android:height="@dimen/company_logo_height"
+        android:width="@dimen/company_logo_width"
+        android:gravity="bottom|center_horizontal"
+        android:bottom="@dimen/margin_extra_large"
+        android:drawable="@drawable/ic_bitroid"/>
+
 </layer-list>

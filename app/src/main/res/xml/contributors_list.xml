@@ -39,6 +39,64 @@
 
         </com.drnoob.datamonitor.core.base.Preference>
 
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="johnsonran"
+            android:summary="@string/johnsonran_summary"
+            android:title="@string/johnsonran"
+            app:icon="@drawable/johnsonran"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_johnsonran" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="cracky5322"
+            android:summary="@string/cracky5322_summary"
+            android:title="@string/cracky5322"
+            app:icon="@drawable/cracky5322"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_cracky5322" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="louis_leblanc"
+            android:summary="@string/louis_leblanc_summary"
+            android:title="@string/louis_leblanc"
+            app:icon="@drawable/ic_person">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="hudaifa_abdullah"
+            android:summary="@string/hudaifa_abdullah_summary"
+            android:title="@string/hudaifa_abdullah"
+            app:icon="@drawable/hudaifa_abdullah">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="holydemon"
+            android:summary="@string/holydemon_summary"
+            android:title="@string/holydemon"
+            app:icon="@drawable/holydemon">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="liviogasp"
+            android:summary="@string/liviogasp_summary"
+            android:title="@string/liviogasp"
+            app:icon="@drawable/ic_person">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
 </PreferenceScreen>

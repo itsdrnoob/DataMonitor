@@ -33,6 +33,16 @@ public class SharedPreferences {
         return preferences;
     }
 
+    public static android.content.SharedPreferences getAppPrefs(Context context) {
+        android.content.SharedPreferences preferences = null;
+        if (context != null) {
+            preferences = context.getSharedPreferences("app_prefs",
+                    Context.MODE_PRIVATE);
+        }
+
+        return preferences;
+    }
+
     public static android.content.SharedPreferences getAppDataLimitPrefs(Context context) {
         android.content.SharedPreferences preferences = null;
         if (context != null) {

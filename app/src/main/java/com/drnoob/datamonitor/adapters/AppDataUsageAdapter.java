@@ -27,9 +27,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +37,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
-import com.drnoob.datamonitor.ui.activities.MainActivity;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.NetworkStatsHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.progressview.ProgressView;
@@ -57,7 +55,7 @@ import static com.drnoob.datamonitor.Common.isAppInstalled;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_VALUE;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 
 public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapter.AppDataUsageViewHolder> {
@@ -116,13 +114,22 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
             @Override
             public void onClick(View v) {
                 if (model.getPackageName().equals(mContext.getString(R.string.package_system))) {
-                    Intent intent = new Intent(mContext, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(DATA_USAGE_VALUE, DATA_USAGE_SYSTEM);
+                    Intent intent = new Intent(mContext, ContainerActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_SYSTEM);
                     intent.putExtra(DATA_USAGE_SESSION, model.getSession());
                     intent.putExtra(DATA_USAGE_TYPE, model.getType());
                     mContext.startActivity(intent);
-                } else {
+                }
+//                else {
+//                    LoadAppDetails loadAppDetails = new LoadAppDetails(model);
+//                    if (!MainActivity.isDataLoading()) {
+//                        loadAppDetails.execute();
+//                    }
+//                }
+
+
+                else {
                     BottomSheetDialog dialog = new BottomSheetDialog(mContext, R.style.BottomSheet);
                     View dialogView = LayoutInflater.from(mContext).inflate(R.layout.app_detail_view, null);
                     dialog.setContentView(dialogView);
@@ -147,23 +154,12 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     appUid.setText(uid);
 
                     if (model.getPackageName() != mContext.getString(R.string.package_tethering)) {
-                        int[] usageTime = getUsageTime(mContext, model.getPackageName(), model.getSession());
-                        Log.e(TAG, "onClick: " + usageTime[0] +  "  " + usageTime[1]);
-                        if (usageTime[1] == -1) {
-
-                            // If value is -1, build version is below Q
-                            appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
-                                    formatTime(usageTime[0] / 60f)));
-//                        appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
-//                                formatTime(Math.round(usageTime[1] / 60))));
-                            appBackgroundTime.setVisibility(View.GONE);
-                        }
-                        else {
-                            appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
-                                    formatTime(usageTime[0] / 60f)));
-                            appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
-                                    formatTime(usageTime[1] / 60f)));
-                        }
+                        appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
+                                mContext.getString(R.string.label_loading)));
+                        appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
+                                mContext.getString(R.string.label_loading)));
+                        LoadScreenTime loadScreenTime = new LoadScreenTime(model, appScreenTime, appBackgroundTime);
+                        loadScreenTime.execute();
                     }
                     else {
                         appScreenTime.setVisibility(View.GONE);
@@ -213,6 +209,45 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
 
     }
 
+    private class LoadScreenTime extends AsyncTask {
+        private AppDataUsageModel model;
+
+        TextView appScreenTime;
+        TextView appBackgroundTime;
+
+        public LoadScreenTime(AppDataUsageModel model, TextView appScreenTime, TextView appBackgroundTime) {
+            this.model = model;
+            this.appScreenTime = appScreenTime;
+            this.appBackgroundTime = appBackgroundTime;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            if (model.getPackageName() != mContext.getString(R.string.package_tethering)) {
+                int[] usageTime = getUsageTime(mContext, model.getPackageName(), model.getSession());
+                if (usageTime[1] == -1) {
+
+                    // If value is -1, build version is below Q
+                    appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
+                            formatTime(usageTime[0] / 60f)));
+                    appBackgroundTime.setVisibility(View.GONE);
+                }
+                else {
+                    appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
+                            formatTime(usageTime[0] / 60f)));
+                    appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
+                            formatTime(usageTime[1] / 60f)));
+                }
+            }
+            else {
+                appScreenTime.setVisibility(View.GONE);
+                appBackgroundTime.setVisibility(View.GONE);
+            }
+            return null;
+        }
+
+    }
+
     private String formatTime(Float minutes) {
         if (minutes < 1 && minutes > 0) {
             return "Less than a minute";
@@ -258,16 +293,15 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
         List<UsageEvents.Event> allEvents = new ArrayList<>();
         HashMap<String, Integer> appScreenTime = new HashMap<>();
         HashMap<String, Integer> appBackgroundTime = new HashMap<>();
-
         UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         UsageEvents usageEvents = null;
         List<UsageStats> usageStats = null;
         try {
-            usageEvents = usageStatsManager.queryEvents(NetworkStatsHelper.getTimePeriod(context, session)[0],
-                    NetworkStatsHelper.getTimePeriod(context, session)[1]);
+            usageEvents = usageStatsManager.queryEvents(NetworkStatsHelper.getTimePeriod(context, session, 1)[0],
+                    NetworkStatsHelper.getTimePeriod(context, session, 1)[1]);
 
-            usageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, NetworkStatsHelper.getTimePeriod(context, session)[0],
-                    NetworkStatsHelper.getTimePeriod(context, session)[1]);
+            usageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, NetworkStatsHelper.getTimePeriod(context, session, 1)[0],
+                    NetworkStatsHelper.getTimePeriod(context, session, 1)[1]);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -339,6 +373,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
         if (appBackgroundTime.get(packageName) == null) {
             appBackgroundTime.put(packageName, 0);
         }
+
 
 //        return appScreenTime.get(packageName);
         return new int[] {appScreenTime.get(packageName), appBackgroundTime.get(packageName)};

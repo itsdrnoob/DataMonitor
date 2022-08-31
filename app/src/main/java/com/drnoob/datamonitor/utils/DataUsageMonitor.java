@@ -20,21 +20,17 @@
 package com.drnoob.datamonitor.utils;
 
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
@@ -49,12 +45,10 @@ import java.util.Date;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
@@ -122,8 +116,8 @@ public class DataUsageMonitor extends Service {
                 triggerLevel = dataLimit.doubleValue() * trigger / 100;
             }
             try {
-                String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY)[0],
-                        getDeviceMobileDataUsage(context, SESSION_TODAY)[1])[2];
+                String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[0],
+                        getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[1])[2];
                 Double totalData = 0d;
                 if (totalRaw.contains(" MB")) {
                     totalRaw = totalRaw.replace(" MB", "");

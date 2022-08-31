@@ -37,8 +37,6 @@ import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
 import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.ISP;
-import static com.drnoob.datamonitor.core.Values.MAX_DOWNLOAD_SPEED;
-import static com.drnoob.datamonitor.core.Values.MAX_UPLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
 import static com.drnoob.datamonitor.core.Values.NETWORK_IP;
 import static com.drnoob.datamonitor.core.Values.REGION;

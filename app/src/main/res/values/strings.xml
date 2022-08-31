@@ -40,11 +40,12 @@
     <string name="action_update">Update</string>
     <string name="data_remaining_placeholder">0.00 GB remaining</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">With ❤ by Dr.NooB</string>
+    <string name="label_dev">With ❤ by Bitroid Inc.</string>
     <string name="label_loading_apps">Loading apps</string>
+    <string name="label_loading">Loading…</string>
     <string name="label_app_data_usage_session_empty">No data available</string>
     <string name="label_want_to_contribute">Click here to find out how to contribute to Data Monitor.</string>
-    <string name="setup_image_footer">Widgets and/or notification provide easy access to the amount of data used.</string>
+    <string name="setup_image_footer">Widgets and/or notification provide easy access to the amount of data used</string>
     <string name="heading_data_reset">Reset counter</string>
     <string name="daily">Daily</string>
     <string name="monthly">Monthly</string>
@@ -142,9 +143,10 @@
     <string name="notification_disabled">Data Monitor notification off</string>
     <string name="label_widget_refresh_interval_change">Update the widget every %1$s?</string>
     <string name="label_notification_refresh_interval_change">Update the notification every %1$s?</string>
-    <string name="label_data_usage_reset_interval_change">Reset the data usage counter every %1$s at %2$s?</string>
+    <string name="label_data_usage_reset_time_change">Reset data usage every %1$s at %2$s?</string>
+    <string name="label_data_usage_reset_date_change">Data usage will be reset on %1$d%2$s of every month</string>
     <string name="remaining_data_info_enabled">Remaining data info on</string>
-    <string name="remaining_data_info_disabled">Remaining data info Off</string>
+    <string name="remaining_data_info_disabled">Remaining data info off</string>
     <string name="label_monitoring_no_plan">Add a data plan to monitor it</string>
     <string name="label_widget_refreshed">Widget refreshed</string>
     <string name="label_notification_enabled">Data monitor notification on</string>
@@ -215,10 +217,60 @@
     <string name="app_label_screen_time">Screen time: %1$s</string>
     <string name="app_label_background_time">Background usage: %1$s</string>
     <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
-    <string name="ygorigor_summary">Romanian translator</string>
+    <string name="ygorigor_summary">Romanian</string>
     <string name="ygorigor" translatable="false">Igor Sorocean</string>
+    <string name="johnsonran_summary">Simplified Chinese</string>
+    <string name="johnsonran" translatable="false">JohnsonRan</string>
     <string name="label_want_to_contribute_language">Click here to help translate the app to your language.</string>
-    <string name="current_language">Current language</string>
-    <string name="available_languages">Available languages</string>
-
+    <string name="current_language">Current</string>
+    <string name="available_languages">Available</string>
+    <string name="label_reset_every_month">%1$s%2$s of every month</string>
+    <string name="setup_usage_reset_date">Reset the data usage date</string>
+    <string name="system_data_usage">Data used by the system</string>
+    <string name="cracky5322_summary">Traditional Chinese</string>
+    <string name="cracky5322" translatable="false">Jia-Bin</string>
+    <string name="louis_leblanc_summary">French</string>
+    <string name="louis_leblanc" translatable="false">Louis Leblanc</string>
+    <string name="network_speed_title">Network speed: %1$s</string>
+    <string name="network_speed_upload">Upload: %1$s</string>
+    <string name="network_speed_download">Download: %1$s</string>
+    <string name="network_signal_notification">Network speed now</string>
+    <string name="label_network_signal_notification_enabled">Live network speed on</string>
+    <string name="label_network_signal_notification_disabled">Live network speed off</string>
+    <string name="network_signal_summary">Beta feature</string>
+    <string name="read_phone_state_permission">Permission to read device state</string>
+    <string name="read_phone_state_body">On Android 9 and below this must be granted manually. No personal data will is collected.</string>
+    <string name="action_permission_granted">Permission granted</string>
+    <string name="error_permission_denied">Permission denied. Please grant it manually.</string>
+    <string name="telegram_support">Telegram support</string>
+    <string name="telegram_summary">Join the support group</string>
+    <string name="telegram_chat" translatable="false">https://t.me/datamonitor</string>
+    <string name="rate_app">Rate the app on Google Play</string>
+    <string name="rate_app_summary">Your feedback is appreciated</string>
+    <string name="check_for_update">Look for new version</string>
+    <string name="current_version">Current version: %1$s</string>
+    <string name="new_version">New version: %1$s</string>
+    <string name="label_changelogs">Find out what\'s new</string>
+    <string name="no_update_available">You are running the newest version.</string>
+    <string name="label_update_available">New version available.</string>
+    <string name="label_download_update">Download the new version</string>
+    <string name="checking_for_update">Looking for new versions…</string>
+    <string name="new_update_available">A new version is available.</string>
+    <string name="update_fetch_error">Could not look for new versions</string>
+    <string name="settings_app_theme">Theme</string>
+    <string name="app_theme_summary">Select the app theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">Follow the system</string>
+    <string name="light_theme_summary">Light</string>
+    <string name="dark_theme_summary">Dark</string>
+    <string name="system_theme_summary">Using system theme</string>
+    <string name="hudaifa_abdullah_summary">Arabic</string>
+    <string name="hudaifa_abdullah" translatable="false">Hudaifa Abdullah</string>
+    <string name="license_summary">View libre licenses</string>
+    <string name="network_diagnostics_info">Network diagnostics may use around 20–30 MB data. Ensure you have this available in your plan, or it may cost extra.</string>
+    <string name="holydemon" translatable="false">HolyDemon</string>
+    <string name="holydemon_summary">Malayalam</string>
+    <string name="liviogasp" translatable="false">Liviogasp</string>
+    <string name="liviogasp_summary">Italian</string>
 </resources>

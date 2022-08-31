@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/license-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![License](https://shields.io/badge/release-v1.6.9-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
 [![Chat](https://img.shields.io/badge/Telegram%20Chat-blue?logo=telegram)](https://t.me/datamonitor)
+[![Downloads](https://img.shields.io/github/downloads/itsdrnoob/DataMonitor/total)](https://github.com/itsdrnoob/DataMonitor/releases)
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/itsdrnoob/DataMonitor/master/images/icon.png" width="20%" height="20%"></img>
@@ -48,4 +49,4 @@ Click <a href = "CONTRIBUTING.md">here</a> to learn how to contribute.
 Check xda thread <a href = "https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/">here</a>.
 
 ## NOTE
-Play store release differs in signature with Github and other releases. This means that if you have apk from Github or AFH installed, you won't be able to update directly from Play store. If you have the Github variant installed and want to use Playstore one, you have yo uninstall the app and reinstall from Playstore.
+Play store release differs in signature with Github and other releases. This means that if you have apk from Github or AFH installed, you won't be able to update directly from Play store. If you have the Github variant installed and want to use Playstore one, you have to uninstall the app and reinstall from Playstore.

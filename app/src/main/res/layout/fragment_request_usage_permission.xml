@@ -103,6 +103,21 @@
             android:text="Previous"
             android:textColor="@color/primary" />
 
+        <TextView
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:visibility="gone"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawablePadding="@dimen/margin_mid_large"
+            android:drawableTint="@color/primary"
+            android:padding="25dp"
+            android:text="@string/action_next"
+            android:textColor="@color/primary" />
+
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
