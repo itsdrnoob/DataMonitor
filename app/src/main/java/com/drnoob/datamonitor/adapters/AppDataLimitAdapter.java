@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2021 Dr.NooB
+ *
+ * This file is a part of Data Monitor <https://github.com/itsdrnoob/DataMonitor>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.drnoob.datamonitor.adapters;
 
 import android.content.Context;
@@ -9,10 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drnoob.datamonitor.R;
@@ -27,7 +44,6 @@ import java.util.List;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
 
 public class AppDataLimitAdapter extends RecyclerView.Adapter<AppDataLimitAdapter.AppDataLimitViewHolder> {

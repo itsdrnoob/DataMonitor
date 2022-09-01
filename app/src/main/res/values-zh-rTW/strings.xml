@@ -1,0 +1,226 @@
+<resources>
+    <string name="app_name">Data Monitor</string>
+    <string name="appwidget_text">範例</string>
+    <string name="add_widget">新增小工具</string>
+
+
+    <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
+    <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
+    <string name="notification_mobile_data_usage">行動資料 : %1$s</string>
+    <string name="notification_wifi_data_usage">Wifi : %1$s</string>
+    <string name="home_mobile_data_sent">%1$s \n已傳送</string>
+    <string name="home_mobile_data_received">%1$s \n已接收</string>
+    <string name="home_wifi_data_sent">%1$s \n已傳送</string>
+    <string name="home_wifi_data_received">%1$s \n已接收</string>
+    <string name="label_current_data_warning_trigger_level_limit_set">目前觸發閾值 : %1$s%% (%2$s)</string>
+    <string name="label_current_data_warning_trigger_level_limit_not_set">目前觸發閾值 : %1$s%%</string>
+    <string name="label_data_trigger_level">目前使用 %1$s%% 流量</string>
+
+    <string name="hello_blank_fragment" translatable="false"></string>
+    <string name="app_label_package_name">包名 : %1$s</string>
+    <string name="app_label_uid">UID : %1$d</string>
+    <string name="app_name_placeholder">軟體名稱</string>
+    <string name="app_data_usage_placeholder">00 MB</string>
+    <string name="label_sent">已傳送</string>
+    <string name="label_received">已接收</string>
+    <string name="action_open_app_settings">開啟應用設定</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_ok">好的</string>
+    <string name="title_app_data_usage_session">時間段</string>
+    <string name="label_today">今天</string>
+    <string name="label_yesterday">昨天</string>
+    <string name="label_this_month">本週</string>
+    <string name="label_last_month">上週</string>
+    <string name="label_this_year">今年</string>
+    <string name="label_all_time">全部</string>
+    <string name="title_app_data_usage_type">選擇型別</string>
+    <string name="label_mobile_data">行動資料</string>
+    <string name="label_wifi">Wifi</string>
+    <string name="title_data_usage">已使用流量</string>
+    <string name="action_update">更新</string>
+    <string name="data_remaining_placeholder">剩餘 0.00 GB</string>
+    <string name="app_version_placeholder" translatable="false">v1.0</string>
+    <string name="label_dev">Bitroid Inc. ❤ 用心製作</string>
+    <string name="label_loading_apps">載入應用中</string>
+    <string name="label_app_data_usage_session_empty">此時間段未使用流量</string>
+    <string name="label_want_to_contribute">想為這個軟體提供貢獻嗎？點選這裡瞭解貢獻的方法</string>
+    <string name="setup_image_footer">小工具或通知可以讓你輕鬆瞭解資料使用量</string>
+    <string name="heading_data_reset">資料重置間隔</string>
+    <string name="daily">每天</string>
+    <string name="monthly">每月</string>
+    <string name="heading_data_limit">流量限制</string>
+    <string name="data_limit_placeholder" translatable="false">00.00</string>
+    <string name="data_type_mb">MB</string>
+    <string name="data_type_gb">GB</string>
+    <string name="title_data_warning_trigger">資料用量警告閾值</string>
+    <string name="title_add_data_plan">新增流量使用計劃</string>
+    <string name="title_refresh_interval">更新間隔</string>
+    <string name="option_1_min">1 分鐘</string>
+    <string name="option_2_min">2 分鐘</string>
+    <string name="option_5_min">5 分鐘</string>
+    <string name="option_10_min">10 分鐘</string>
+    <string name="option_15_min">15 分鐘</string>
+    <string name="title_widget_setup">配置小工具</string>
+    <string name="widget_setup_step_1">1. 在主螢幕上長按空白處</string>
+    <string name="widget_setup_step_2">2. 點選「小工具」</string>
+    <string name="widget_setup_step_3">3. 將 Data Monitor 提供的小工具拖動到桌面上</string>
+    <string name="heading_data_usage_today">今日資料用量</string>
+    <string name="action_add_data_plan_home">新增一個流量使用計劃以繼續</string>
+    <string name="heading_week_overview">本週總覽</string>
+    <string name="error_loading_overview">糟糕... 無法載入本週總覽\n請稍後再試</string>
+    <string name="title_setup">配置 Data Monitor</string>
+    <string name="setup_widget">配置小工具</string>
+    <string name="setup_notification">配置通知</string>
+    <string name="title_configure">配置</string>
+    <string name="setup_widget_title">小工具</string>
+    <string name="setup_widget_refresh_interval">小工具更新間隔</string>
+    <string name="refresh_interval_placeholder">1 分鐘</string>
+    <string name="setup_show_remaining_data">顯示剩餘流量資訊</string>
+    <string name="setup_refresh_widget">更新小工具</string>
+    <string name="refresh_widget_summary">若小工具出現問題，請手動更新它</string>
+    <string name="setup_notification_title">通知</string>
+    <string name="setup_notification_refresh_interval">通知更新間隔</string>
+    <string name="setup_show_mobile_usage">顯示移動資料使用量</string>
+    <string name="setup_show_wifi_usage">顯示 WiFi 使用量</string>
+    <string name="monitor_data">監測資料用量</string>
+    <string name="setup_data_alert">資料用量警報</string>
+    <string name="data_alert_summary">達到用量限制時通知你</string>
+    <string name="settings_general">通用</string>
+    <string name="setup_add_data_plan">新增流量使用計劃</string>
+    <string name="add_data_plan_summary">新增或更新使用計劃</string>
+    <string name="setup_usage_reset_time">資料用量重置時間</string>
+    <string name="usage_reset_time_placeholder" translatable="false">12:00 am</string>
+    <string name="app_license_header">應用許可證</string>
+    <string name="oss_licenses">開源許可證</string>
+    <string name="itsdrnoob">Dr.NooB</string>
+    <string name="contributors">貢獻者</string>
+    <string name="itsdrnoob_summary"><![CDATA[Lead Developer & Designer]]></string>
+    <string name="settings_appearance">外觀</string>
+    <string name="settings_dark_mode">深色模式</string>
+    <string name="dark_mode_summary">啟用深色模式</string>
+    <string name="settings_preferences">偏好設定</string>
+    <string name="settings_language">語言</string>
+    <string name="language_summary">切換軟體語言</string>
+    <string name="about">關於</string>
+    <string name="about_summary"><![CDATA[Source, Help & more]]></string>
+    <string name="license">許可</string>
+    <string name="contributors_summary">那些陪伴著我的人</string>
+    <string name="donate">捐贈</string>
+    <string name="donate_summary">也許，為我們買杯咖啡？</string>
+    <string name="data_reset">資料重置</string>
+    <string name="data_limit">資料限制</string>
+    <string name="support_and_development">開發者</string>
+    <string name="github">Github</string>
+    <string name="github_summary">檢視原始碼</string>
+    <string name="xda">Xda 討論區</string>
+    <string name="xda_summary"><![CDATA[Q&A, Help & Troubleshooting]]></string>
+    <string name="report">回報問題</string>
+    <string name="report_summary">反饋問題或請求新功能</string>
+    <string name="setup">配置</string>
+    <string name="app_data_usage">應用資料用量</string>
+    <string name="settings">設定</string>
+    <string name="btc_address_copied">Bitcoin 錢包地址已複製到剪貼簿</string>
+    <string name="eth_address_copied">Ethereum 錢包地址已複製到剪貼簿</string>
+    <string name="ltc_address_copied">Litecoin 錢包地址已複製到剪貼簿</string>
+    <string name="label_system_apps">系統應用</string>
+    <string name="package_system" translatable="false">com.android.systemui</string>
+    <string name="home">主頁</string>
+    <string name="usage_access_permission">使用情況訪問許可權</string>
+    <string name="usage_access_body">需要使用情況訪問許可權才能使用此軟體。此許可權將只用來收集資料用量，不會做其他用途</string>
+    <string name="action_grant">授予許可權</string>
+    <string name="label_tethering">手機熱點</string>
+    <string name="package_tethering" translatable="false">com.android.tethering</string>
+    <string name="label_removed">已刪除的應用</string>
+    <string name="package_removed" translatable="false">com.android.removed</string>
+    <string name="oem_skin_warning">%1$s 請檢視額外的最佳化建議，以保證應用的正常執行。</string>
+    <string name="oem_skin_miui">檢測到 MIUI！</string>
+    <string name="battery_optimisation_disabled">電池最佳化已關閉</string>
+    <string name="data_plan_saved">使用計劃已儲存</string>
+    <string name="upi_app_not_found">未找到可以處理此請求的應用</string>
+    <string name="upi_unknown_error">發生了一個未知的錯誤。請再試一次或嘗試其他方法。</string>
+    <string name="label_no_additional_lang">更多語言即將到來。想幫助我們？點選瞭解詳情。</string>
+    <string name="notification_disabled">Data monitor 通知已關閉</string>
+    <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新</string>
+    <string name="label_notification_refresh_interval_change">通知將每 %1$s 更新</string>
+    <string name="label_data_usage_reset_interval_change">資料用量將每 %1$s %2$s 更新</string>
+    <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
+    <string name="remaining_data_info_disabled">剩餘流量資訊已禁用</string>
+    <string name="label_monitoring_no_plan">新增一個流量使用計劃以繼續</string>
+    <string name="label_widget_refreshed">小工具已更新</string>
+    <string name="label_notification_enabled">資料監測通知已啟用</string>
+    <string name="label_notification_cannot_disable_both">無法同時禁用兩個元素</string>
+    <string name="label_setup_notification_first">請先配置通知</string>
+    <string name="label_data_plan_saved">使用計劃已儲存</string>
+    <string name="month">月</string>
+    <string name="day">天</string>
+    <string name="label_add_data_plan_first">新增一個流量使用計劃以繼續</string>
+    <string name="title_data_warning_notification">資料用量警告</string>
+    <string name="body_data_warning_notification">您已超過 %1$d%% 資料限制</string>
+    <string name="body_app_data_warning_notification">%1$s 已用完資料配額</string>
+    <string name="title_data_usage_notification">今日資料用量 : %1$s</string>
+    <string name="body_data_usage_notification_loading">載入中...</string>
+    <string name="label_data_remaining">剩餘 %1$s</string>
+    <string name="label_data_remaining_used_excess">超出 %1$s</string>
+    <string name="disable_battery_optimisation">關閉電池最佳化</string>
+    <string name="disable_battery_optimisation_body">禁用對 Data Monitor 的電池最佳化，以防止系統殺死後臺服務。若啟用將阻止應用程式的正常工作，並可能顯示不正確的數值。</string>
+    <string name="extra_optimisation_tips">更多最佳化建議</string>
+    <string name="oem_battery_settings">製造商電池設定</string>
+    <string name="action_next">下一個</string>
+    <string name="overview_monday">週一</string>
+    <string name="overview_tuesday">週二</string>
+    <string name="overview_wednesday">週三</string>
+    <string name="overview_thursday">週四</string>
+    <string name="overview_friday">週五</string>
+    <string name="overview_saturday">週六</string>
+    <string name="overview_sunday">週日</string>
+    <string name="overview_2gb_plus" translatable="false">2 GB+</string>
+    <string name="overview_2gb" translatable="false">2 GB</string>
+    <string name="overview_1_5gb" translatable="false">1.5 GB</string>
+    <string name="overview_1gb" translatable="false">1 GB</string>
+    <string name="overview_0_5gb" translatable="false">0.5 GB</string>
+    <string name="overview_0gb" translatable="false">0 GB</string>
+    <string name="label_translators">譯者們</string>
+    <string name="setup_app_data_usage_alert">資料用量警報</string>
+    <string name="title_app_data_limit">資料用量限制</string>
+    <string name="network_diagnostics">網路診斷</string>
+    <string name="run_diagnostics">開始診斷</string>
+    <string name="running_diagnostics">診斷中</string>
+    <string name="connecting">連線中</string>
+    <string name="testing_download">測試下載速度中</string>
+    <string name="testing_upload">測試上傳速度中</string>
+    <string name="testing_latency">測試網路延遲中</string>
+    <string name="current_connection">連線型別: %1$s</string>
+    <string name="network_stats">網路統計</string>
+    <string name="network_speed_mbps">%1$s Mbps</string>
+    <string name="max_download_speed">最大下載速度</string>
+    <string name="min_download_speed">最小下載速度</string>
+    <string name="avg_download_speed">下載速度峰值</string>
+    <string name="max_upload_speed">最大上傳速度</string>
+    <string name="avg_upload_speed">上傳速度峰值</string>
+    <string name="min_latency">最小延遲</string>
+    <string name="network_latency_ms">%1$s ms</string>
+    <string name="avg_latency">峰值延遲</string>
+    <string name="network_ip">網路 IP</string>
+    <string name="isp">網路提供商</string>
+    <string name="connected_server">已連線到: %1$s</string>
+    <string name="isp_server">伺服器</string>
+    <string name="isp_region">地區</string>
+    <string name="swipe_right_to_delete">向右劃動以刪除一個專案</string>
+    <string name="refresh_list">重新整理列表</string>
+    <string name="api_url" translatable="false">https://api.ipify.org</string>
+    <string name="download_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/10M.iso</string>
+    <string name="upload_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/</string>
+    <string name="no_network_connection">未檢測到網路連線！</string>
+    <string name="connection_error">連線錯誤，請檢查你的網路。</string>
+    <string name="app_label_screen_time">螢幕時間 : %1$s</string>
+    <string name="app_label_background_time">後臺時間 : %1$s</string>
+    <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
+    <string name="ygorigor_summary">羅馬尼亞語譯者</string>
+    <string name="ygorigor" translatable="false">Igor Sorocean</string>
+    <string name="label_want_to_contribute_language">未找到您的語言？點此瞭解如何幫助我們！</string>
+    <string name="current_language">當前語言</string>
+    <string name="available_languages">可用語言</string>
+    <string name="label_data_usage_reset_time_change">數據使用量將在 %2$s 每 %1$s 重置一次</string>
+    <string name="label_data_usage_reset_date_change">數據使用量將在每月 %1$d%2$s 重置</string>
+
+</resources>

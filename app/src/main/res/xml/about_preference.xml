@@ -34,6 +34,18 @@
             </com.drnoob.datamonitor.core.base.Preference>
 
             <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/telegram_support"
+                app:icon="@drawable/ic_telegram"
+                android:key="xda"
+                app:summary="@string/telegram_summary"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent android:action="android.intent.action.VIEW"
+                    android:data="@string/telegram_chat"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+            <com.drnoob.datamonitor.core.base.Preference
                 android:title="@string/report"
                 app:icon="@drawable/ic_bug"
                 android:key="report"
@@ -42,6 +54,18 @@
 
                 <intent android:action="android.intent.action.VIEW"
                     android:data="@string/github_issue"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/rate_app"
+                app:icon="@drawable/ic_play_store"
+                android:key="rate"
+                app:summary="@string/rate_app_summary"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent android:action="android.intent.action.VIEW"
+                    android:data="@string/play_store"/>
 
             </com.drnoob.datamonitor.core.base.Preference>
 

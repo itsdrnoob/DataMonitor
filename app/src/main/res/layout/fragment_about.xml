@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/margin_large"
+        android:clipToPadding="false"
         android:gravity="center_horizontal">
 
         <androidx.cardview.widget.CardView
@@ -24,7 +26,7 @@
                 android:id="@+id/about_app_icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/icon"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -51,6 +53,22 @@
             android:textSize="@dimen/text_small"
             android:text="@string/label_dev"/>
 
+        <TextView
+            android:id="@+id/check_for_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textSize="@dimen/text_small"
+            android:text="@string/check_for_update"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/primary"
+            android:background="@drawable/selectable_item_plain_background"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_extra_small"
+            android:paddingBottom="@dimen/margin_extra_small"/>
+
         <fragment
             android:id="@+id/fragment_about_prefs"
             class="com.drnoob.datamonitor.ui.fragments.AboutFragment$SupportAndDevelopment"
@@ -59,8 +77,5 @@
             android:layout_marginTop="@dimen/margin_mid_large"/>
 
     </LinearLayout>
-
-
-
 
 </androidx.core.widget.NestedScrollView>

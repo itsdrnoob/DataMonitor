@@ -6,12 +6,12 @@
         app:allowDividerAbove="false"
         app:allowDividerBelow="false">
 
-        <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
-            android:icon="@drawable/ic_dark_mode"
-            android:key="dark_mode_toggle"
-            android:title="@string/settings_dark_mode"
-            app:summary="@string/dark_mode_summary"
-            android:defaultValue="false"/>
+        <com.drnoob.datamonitor.core.base.Preference
+            android:icon="@drawable/ic_app_theme"
+            android:key="app_theme"
+            android:title="@string/settings_app_theme"
+            app:summary="Following system theme"
+            android:widgetLayout="@layout/preference_right_arrow" />
 
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
@@ -44,7 +44,7 @@
             android:title="@string/license"
             app:icon="@drawable/ic_license"
             android:key="license"
-            app:summary="View app licenses"
+            app:summary="@string/license_summary"
             android:widgetLayout="@layout/preference_right_arrow" />
 
         <com.drnoob.datamonitor.core.base.Preference

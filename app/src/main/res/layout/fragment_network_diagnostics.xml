@@ -23,7 +23,7 @@
         android:paddingTop="@dimen/margin_mid_large"
         android:paddingEnd="@dimen/margin_medium"
         android:paddingBottom="@dimen/margin_mid_large"
-        android:text="Network diagnostics may use around 20-30 Megabytes of data. Make sure you have sufficient data balance, else network charges may apply."
+        android:text="@string/network_diagnostics_info"
         android:textSize="@dimen/text_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

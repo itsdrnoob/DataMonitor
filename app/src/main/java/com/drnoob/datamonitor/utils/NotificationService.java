@@ -20,7 +20,6 @@
 package com.drnoob.datamonitor.utils;
 
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -28,14 +27,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
@@ -44,10 +41,10 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
 import java.text.ParseException;
-import java.util.Random;
 
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_MOBILE_DATA;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
@@ -98,6 +95,7 @@ public class NotificationService extends Service {
         builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(false);
+        builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
 
         startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
         startUpdater(getApplicationContext());
@@ -144,7 +142,7 @@ public class NotificationService extends Service {
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", true)) {
 
                 try {
-                    mobile = getDeviceMobileDataUsage(context, SESSION_TODAY);
+                    mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
                     String[] mobileData = formatData(mobile[0], mobile[1]);
 
                     wifi = getDeviceWifiDataUsage(context, SESSION_TODAY);
@@ -201,6 +199,7 @@ public class NotificationService extends Service {
                 builder.setAutoCancel(false);
                 builder.setShowWhen(false);
                 builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
                 managerCompat.notify(DATA_USAGE_NOTIFICATION_ID, builder.build());
 

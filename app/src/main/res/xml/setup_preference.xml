@@ -18,6 +18,12 @@
             android:key="setup_notification"
             android:title="@string/setup_notification" />
 
+        <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+            android:icon="@drawable/ic_mobile_data"
+            android:key="network_signal_notification"
+            android:title="@string/network_signal_notification"
+            android:summary="@string/network_signal_summary"/>
+
     </com.drnoob.datamonitor.core.base.PreferenceHeader>
 
     <com.drnoob.datamonitor.core.base.PreferenceHeader

@@ -8,7 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -65,10 +66,10 @@
 
                         <ImageView
                             android:id="@+id/imageView"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginEnd="2dp"
-                            android:src="@drawable/ic_mobile_data"
+                            android:src="@drawable/ic_cell_tower"
                             app:tint="@color/error" />
 
                         <TextView
@@ -143,10 +144,10 @@
 
                         <ImageView
                             android:id="@+id/imageView2"
-                            android:layout_width="20dp"
-                            android:layout_height="18dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginEnd="2dp"
-                            android:src="@drawable/ic_wifi"
+                            android:src="@drawable/ic_nest_wifi"
                             app:tint="@color/green" />
 
                         <TextView
@@ -217,9 +218,12 @@
                     android:layout_marginStart="@dimen/margin_large"
                     android:padding="@dimen/margin_mid_large"
                     android:text="@string/action_add_data_plan_home"
+                    android:layout_toStartOf="@+id/arrow_right"
+                    android:layout_alignParentStart="true"
                     android:textColor="@color/text_primary" />
 
                 <ImageView
+                    android:id="@+id/arrow_right"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:layout_alignParentEnd="true"
@@ -271,7 +275,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableStart="@drawable/ic_mobile_overview"
                     android:drawablePadding="@dimen/margin_extra_small"
                     android:gravity="center_vertical"
@@ -333,6 +337,36 @@
                 app:layout_constraintTop_toTopOf="@+id/overview" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/overview_quick_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mobile_data_quick_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_mobile_overview"
+                android:text="110.65 GB"
+                android:gravity="center"
+                android:layout_margin="@dimen/margin_medium"
+                android:drawablePadding="@dimen/padding_medium"/>
+
+            <TextView
+                android:id="@+id/wifi_quick_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_wifi_overview"
+                android:text="110.65 GB"
+                android:gravity="center"
+                android:layout_margin="@dimen/margin_medium"
+                android:drawablePadding="@dimen/padding_medium"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

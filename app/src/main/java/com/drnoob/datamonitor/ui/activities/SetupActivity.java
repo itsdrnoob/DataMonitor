@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -36,20 +37,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.databinding.ActivitySetupBinding;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
 import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
+import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
+import static com.drnoob.datamonitor.core.Values.REQUEST_READ_PHONE_STATE;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
 import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
@@ -57,17 +64,18 @@ import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 public class SetupActivity extends AppCompatActivity {
     private static final String TAG = SetupActivity.class.getSimpleName();
 
-    ActivitySetupBinding binding;
+    com.drnoob.datamonitor.databinding.ActivitySetupBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
+        String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
-            setLanguage(this, "en");
+            setLanguage(this, "en", countryCode);
         }
         else {
-            setLanguage(this, languageCode);
+            setLanguage(this, languageCode, countryCode);
         }
         binding = ActivitySetupBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_DataMonitor);
@@ -86,8 +94,20 @@ public class SetupActivity extends AppCompatActivity {
                 else if (f instanceof DisableBatteryOptimisationFragment) {
                     binding.setupProgress.setProgress(60);
                 }
-                else if (f instanceof RequestUsagePermissionFragment) {
-                    binding.setupProgress.setProgress(100);
+                else {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        if (f instanceof RequestUsagePermissionFragment) {
+                            binding.setupProgress.setProgress(80);
+                        }
+                        else if (f instanceof RequestPhoneStatePermissionFragment) {
+                            binding.setupProgress.setProgress(100);
+                        }
+                    }
+                    else {
+                        if (f instanceof RequestUsagePermissionFragment) {
+                            binding.setupProgress.setProgress(100);
+                        }
+                    }
                 }
             }
         }, true);
@@ -102,7 +122,12 @@ public class SetupActivity extends AppCompatActivity {
         }
 
         if (value == USAGE_ACCESS_DISABLED) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.setup_fragment_host, new RequestUsagePermissionFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.setup_fragment_host,
+                    new RequestUsagePermissionFragment()).commit();
+        }
+        else if (value == READ_PHONE_STATE_DISABLED) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.setup_fragment_host,
+                    new RequestPhoneStatePermissionFragment()).commit();
         }
         else {
             if (SharedPreferences.getUserPrefs(this).getBoolean(SETUP_COMPLETED, false)) {
@@ -111,7 +136,15 @@ public class SetupActivity extends AppCompatActivity {
 
                     }
                     else {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.setup_fragment_host, new RequestUsagePermissionFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.setup_fragment_host,
+                                new RequestUsagePermissionFragment()).commit();
+                    }
+                    if (isReadPhoneStateGranted(this)) {
+
+                    }
+                    else {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.setup_fragment_host,
+                                new RequestPhoneStatePermissionFragment()).commit();
                     }
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
@@ -138,9 +171,17 @@ public class SetupActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         try {
-            if (isUsageAccessGranted(this)) {
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                if (isUsageAccessGranted(this) && isReadPhoneStateGranted(this)) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                }
+            }
+            else {
+                if (isUsageAccessGranted(this)) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                }
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -177,19 +218,45 @@ public class SetupActivity extends AppCompatActivity {
             skip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        if (isUsageAccessGranted(getContext())) {
-                            startActivity(new Intent(getContext(), MainActivity.class));
-                            getActivity().finish();
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        try {
+                            if (isUsageAccessGranted(getContext())) {
+                                if (isReadPhoneStateGranted(getContext())) {
+                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                    getActivity().finish();
+                                }
+                                else {
+                                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+                                            R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                                            .replace(R.id.setup_fragment_host,
+                                                    new RequestPhoneStatePermissionFragment()).addToBackStack("usage_access").commit();
+                                }
+                            }
+                            else {
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+                                        R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                                        .replace(R.id.setup_fragment_host,
+                                                new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
                         }
-                        else {
-                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
-                                    R.anim.slide_in_left, R.anim.slide_out_right)
-                                    .replace(R.id.setup_fragment_host,
-                                            new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                    }
+                    else {
+                        try {
+                            if (isUsageAccessGranted(getContext())) {
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                getActivity().finish();
+                            }
+                            else {
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                                        R.anim.slide_in_left, R.anim.slide_out_right)
+                                        .replace(R.id.setup_fragment_host,
+                                                new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
                         }
-                    } catch (PackageManager.NameNotFoundException e) {
-                        e.printStackTrace();
                     }
                 }
             });
@@ -245,6 +312,9 @@ public class SetupActivity extends AppCompatActivity {
                     if (oem.equalsIgnoreCase("android") || oem.equalsIgnoreCase("generic")) {
                         uri = Uri.parse("https://dontkillmyapp.com" + "/google");
                     }
+                    else if (oem.equalsIgnoreCase("redmi")) {
+                        uri = Uri.parse("https://dontkillmyapp.com" + "/xiaomi");
+                    }
                     else {
                         uri = Uri.parse("https://dontkillmyapp.com" + "/" + oem.toLowerCase());
                     }
@@ -275,19 +345,45 @@ public class SetupActivity extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        if (isUsageAccessGranted(getContext())) {
-                            startActivity(new Intent(getContext(), MainActivity.class));
-                            getActivity().finish();
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        try {
+                            if (isUsageAccessGranted(getContext())) {
+                                if (isReadPhoneStateGranted(getContext())) {
+                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                    getActivity().finish();
+                                }
+                                else {
+                                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+                                            R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                                            .replace(R.id.setup_fragment_host,
+                                                    new RequestPhoneStatePermissionFragment()).addToBackStack("usage_access").commit();
+                                }
+                            }
+                            else {
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+                                        R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                                        .replace(R.id.setup_fragment_host,
+                                                new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
                         }
-                        else {
-                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
-                                    R.anim.slide_in_left, R.anim.slide_out_right)
-                                    .replace(R.id.setup_fragment_host,
-                                            new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                    }
+                    else {
+                        try {
+                            if (isUsageAccessGranted(getContext())) {
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                getActivity().finish();
+                            }
+                            else {
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                                        R.anim.slide_in_left, R.anim.slide_out_right)
+                                        .replace(R.id.setup_fragment_host,
+                                                new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
                         }
-                    } catch (PackageManager.NameNotFoundException e) {
-                        e.printStackTrace();
                     }
                 }
             });
@@ -329,6 +425,9 @@ public class SetupActivity extends AppCompatActivity {
     }
 
     public static class RequestUsagePermissionFragment extends Fragment {
+        TextView next;
+        TextView btnPrimary;
+        TextView btnSecondary;
         public RequestUsagePermissionFragment() {
 
         }
@@ -336,17 +435,32 @@ public class SetupActivity extends AppCompatActivity {
         @Override
         public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            try {
-                if (isUsageAccessGranted(getContext())) {
-                    startActivity(new Intent(getContext(), MainActivity.class));
-                    getActivity().finish();
-                }
-                else {
-
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
+//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+//                try {
+//                    if (isUsageAccessGranted(getContext())) {
+//                        next.setVisibility(View.VISIBLE);
+////                        if (!isReadPhoneStateGranted(getContext())) {
+////                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+////                                    R.anim.slide_in_left, R.anim.slide_out_right)
+////                                    .replace(R.id.setup_fragment_host,
+////                                            new RequestPhoneStatePermissionFragment()).addToBackStack("usage_access").commit();
+////                        }
+//                    }
+//                } catch (PackageManager.NameNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            else {
+//                try {
+//                    if (isUsageAccessGranted(getContext())) {
+//                        startActivity(new Intent(getContext(), MainActivity.class));
+//                        getActivity().finish();
+//                    }
+//                } catch (PackageManager.NameNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            onResume();
         }
 
         @Nullable
@@ -354,9 +468,10 @@ public class SetupActivity extends AppCompatActivity {
         public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_request_usage_permission, container, false);
 
-            TextView btnPrimary = view.findViewById(R.id.btn_primary);
-            TextView btnSecondary = view.findViewById(R.id.btn_secondary);
+            btnPrimary = view.findViewById(R.id.btn_primary);
+            btnSecondary = view.findViewById(R.id.btn_secondary);
             TextView previous = view.findViewById(R.id.previous);
+            next = view.findViewById(R.id.next);
             FrameLayout footer = view.findViewById(R.id.usage_permission_footer);
 
             if (getActivity().getIntent().getIntExtra(SETUP_VALUE, 0) == USAGE_ACCESS_DISABLED ||
@@ -390,7 +505,195 @@ public class SetupActivity extends AppCompatActivity {
                 }
             });
 
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        try {
+                            if (isUsageAccessGranted(getContext())) {
+                                if (isReadPhoneStateGranted(getContext())) {
+                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                    getActivity().finish();
+                                }
+                                else {
+                                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+                                            R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                                            .replace(R.id.setup_fragment_host,
+                                                    new RequestPhoneStatePermissionFragment()).addToBackStack("usage_access").commit();
+                                }
+                            }
+                            else {
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,
+                                        R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                                        .replace(R.id.setup_fragment_host,
+                                                new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            if (isUsageAccessGranted(getContext())) {
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                getActivity().finish();
+                            }
+                            else {
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                                        R.anim.slide_in_left, R.anim.slide_out_right)
+                                        .replace(R.id.setup_fragment_host,
+                                                new RequestUsagePermissionFragment()).addToBackStack("usage_access").commit();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
             return view;
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                try {
+                    if (isUsageAccessGranted(getContext())) {
+                        next.setVisibility(View.VISIBLE);
+                        btnSecondary.setVisibility(View.GONE);
+                        btnPrimary.setEnabled(false);
+                        btnPrimary.setBackgroundResource(R.drawable.button_primary_default_disabled);
+                        btnPrimary.setText(R.string.action_permission_granted);
+                        btnPrimary.setTextColor(getResources().getColor(R.color.text_secondary, null));
+
+//                        if (!isReadPhoneStateGranted(getContext())) {
+//                            getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+//                                    R.anim.slide_in_left, R.anim.slide_out_right)
+//                                    .replace(R.id.setup_fragment_host,
+//                                            new RequestPhoneStatePermissionFragment()).addToBackStack("usage_access").commit();
+//                        }
+
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                try {
+                    if (isUsageAccessGranted(getContext())) {
+                        startActivity(new Intent(getContext(), MainActivity.class));
+                        getActivity().finish();
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public static class RequestPhoneStatePermissionFragment extends Fragment {
+        TextView btnPrimary;
+        TextView btnSecondary;
+        TextView next;
+        public RequestPhoneStatePermissionFragment() {
+
+        }
+
+        @Override
+        public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (isReadPhoneStateGranted(getContext())) {
+                startActivity(new Intent(getContext(), MainActivity.class));
+                getActivity().finish();
+            }
+            else {
+
+            }
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_request_phone_state_permission, container, false);
+
+            btnPrimary = view.findViewById(R.id.btn_primary);
+            btnSecondary = view.findViewById(R.id.btn_secondary);
+            TextView previous = view.findViewById(R.id.previous);
+            next = view.findViewById(R.id.next);
+            FrameLayout footer = view.findViewById(R.id.usage_permission_footer);
+
+            if (getActivity().getIntent().getIntExtra(SETUP_VALUE, 0) == USAGE_ACCESS_DISABLED ||
+                    SharedPreferences.getUserPrefs(getContext()).getBoolean(SETUP_COMPLETED, false)) {
+                footer.setVisibility(View.GONE);
+            }
+            else {
+                footer.setVisibility(View.VISIBLE);
+            }
+
+            btnPrimary.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE},
+                            REQUEST_READ_PHONE_STATE);
+                }
+            });
+
+            btnSecondary.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().finish();
+                }
+            });
+
+            previous.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            });
+
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isReadPhoneStateGranted(getContext())) {
+                        startActivity(new Intent(getContext(), MainActivity.class));
+                        getActivity().finish();
+                    }
+                }
+            });
+
+            return view;
+        }
+
+        @Override
+        public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            onResume();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            if (isReadPhoneStateGranted(getContext())) {
+                next.setVisibility(View.VISIBLE);
+                btnSecondary.setVisibility(View.GONE);
+                btnPrimary.setEnabled(false);
+                btnPrimary.setBackgroundResource(R.drawable.button_primary_default_disabled);
+                btnPrimary.setText(R.string.action_permission_granted);
+                btnPrimary.setTextColor(getResources().getColor(R.color.text_secondary, null));
+                startActivity(new Intent(getContext(), MainActivity.class));
+                getActivity().finish();
+            }
+            else {
+                Snackbar snackbar = Snackbar.make(getView(), R.string.error_permission_denied, Snackbar.LENGTH_SHORT);
+                FrameLayout footer = getView().findViewById(R.id.usage_permission_footer);
+                if (footer.getVisibility() == View.VISIBLE) {
+                    snackbar.setAnchorView(R.id.usage_permission_footer);
+                }
+                snackbar.show();
+            }
         }
     }
 }

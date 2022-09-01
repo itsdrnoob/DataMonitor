@@ -49,7 +49,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.drnoob.datamonitor.core.Values.*;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
+import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppWifiDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
@@ -100,6 +109,7 @@ public class SystemDataUsageFragment extends Fragment {
         mAdapter = new AppDataUsageAdapter(mList, mContext);
         mAppsView = view.findViewById(R.id.app_data_usage_recycler);
 
+
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
 
@@ -112,14 +122,14 @@ public class SystemDataUsageFragment extends Fragment {
             mLoading.setAlpha(0.0f);
             onDataLoaded();
         } else {
-            LoadData loadData = new LoadData(mContext, getSession(), getType());
+            LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
             loadData.execute();
         }
 
         mDataRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                LoadData loadData = new LoadData(mContext, getSession(), getType());
+                LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
                 loadData.execute();
             }
         });
@@ -135,7 +145,7 @@ public class SystemDataUsageFragment extends Fragment {
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);
 
-                switch (getSession()) {
+                switch (getSession(getContext())) {
                     case SESSION_TODAY:
                         sessions.check(R.id.session_today);
                         break;
@@ -175,31 +185,31 @@ public class SystemDataUsageFragment extends Fragment {
                         String session = null;
                         switch (sessions.getCheckedRadioButtonId()) {
                             case R.id.session_today:
-                                session = USAGE_SESSION_TODAY;
+                                session = getString(R.string.label_today);
                                 break;
 
                             case R.id.session_yesterday:
-                                session = USAGE_SESSION_YESTERDAY;
+                                session = getString(R.string.label_yesterday);
                                 break;
 
                             case R.id.session_this_month:
-                                session = USAGE_SESSION_THIS_MONTH;
+                                session = getString(R.string.label_this_month);
                                 break;
 
                             case R.id.session_last_month:
-                                session = USAGE_SESSION_LAST_MONTH;
+                                session = getString(R.string.label_last_month);
                                 break;
 
                             case R.id.session_this_year:
-                                session = USAGE_SESSION_THIS_YEAR;
+                                session = getString(R.string.label_this_year);
                                 break;
 
                             case R.id.session_all_time:
-                                session = USAGE_SESSION_ALL_TIME;
+                                session = getString(R.string.label_all_time);
                                 break;
                         }
                         mSession.setText(session);
-                        LoadData loadData = new LoadData(mContext, getSession(), getType());
+                        LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
                         loadData.execute();
                         dialog.dismiss();
                     }
@@ -221,7 +231,7 @@ public class SystemDataUsageFragment extends Fragment {
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);
 
-                switch (getType()) {
+                switch (getType(getContext())) {
                     case TYPE_MOBILE_DATA:
                         types.check(R.id.type_mobile);
                         break;
@@ -244,15 +254,15 @@ public class SystemDataUsageFragment extends Fragment {
                         String type = null;
                         switch (types.getCheckedRadioButtonId()) {
                             case R.id.type_mobile:
-                                type = USAGE_TYPE_MOBILE_DATA;
+                                type = getString(R.string.label_mobile_data);
                                 break;
 
                             case R.id.type_wifi:
-                                type = USAGE_TYPE_WIFI;
+                                type = getString(R.string.label_wifi);
                                 break;
                         }
                         mType.setText(type);
-                        LoadData loadData = new LoadData(mContext, getSession(), getType());
+                        LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
                         loadData.execute();
                         dialog.dismiss();
                     }
@@ -338,7 +348,7 @@ public class SystemDataUsageFragment extends Fragment {
                                 model.setType(type);
 
                                 Long total = sent + received;
-                                Long deviceTotal = getDeviceMobileDataUsage(mContext, session)[2];
+                                Long deviceTotal = getDeviceMobileDataUsage(mContext, session, 1)[2];
 
                                 Double p = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 5;
 
@@ -410,48 +420,55 @@ public class SystemDataUsageFragment extends Fragment {
         }
     }
 
-    private int getSession() {
+    private int getSession(Context context) {
         int session = 0;
         String selectedSession = mSession.getText().toString();
-        switch (selectedSession) {
-            case USAGE_SESSION_TODAY:
-                session = SESSION_TODAY;
-                break;
+        String sessionToday = context.getString(R.string.label_today);
+        String sessionYesterday = context.getString(R.string.label_yesterday);
+        String sessionThisMonth = context.getString(R.string.label_this_month);
+        String sessionLastMonth = context.getString(R.string.label_last_month);
+        String sessionThisYear = context.getString(R.string.label_this_year);
+        String sessionAllTime = context.getString(R.string.label_all_time);
 
-            case USAGE_SESSION_YESTERDAY:
-                session = SESSION_YESTERDAY;
-                break;
-
-            case USAGE_SESSION_THIS_MONTH:
-                session = SESSION_THIS_MONTH;
-                break;
-
-            case USAGE_SESSION_LAST_MONTH:
-                session = SESSION_LAST_MONTH;
-                break;
-
-            case USAGE_SESSION_THIS_YEAR:
-                session = SESSION_THIS_YEAR;
-                break;
-
-            case USAGE_SESSION_ALL_TIME:
-                session = SESSION_ALL_TIME;
-                break;
+        if (selectedSession.equalsIgnoreCase(sessionToday)) {
+            session = SESSION_TODAY;
         }
+        else if (selectedSession.equalsIgnoreCase(sessionYesterday)) {
+            session = SESSION_YESTERDAY;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionThisMonth)) {
+            session = SESSION_THIS_MONTH;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionLastMonth)) {
+            session = SESSION_LAST_MONTH;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionThisYear)) {
+            session = SESSION_THIS_YEAR;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionAllTime)) {
+            session = SESSION_ALL_TIME;
+        }
+        else {
+            session = SESSION_TODAY;
+        }
+
         return session;
     }
 
-    private int getType() {
+    private int getType(Context context) {
         int type = 0;
         String selectedType = mType.getText().toString();
-        switch (selectedType) {
-            case USAGE_TYPE_MOBILE_DATA:
-                type = TYPE_MOBILE_DATA;
-                break;
+        String mobileData = context.getString(R.string.label_mobile_data);
+        String wifi = context.getString(R.string.label_wifi);
 
-            case USAGE_TYPE_WIFI:
-                type = TYPE_WIFI;
-                break;
+        if (selectedType.equalsIgnoreCase(mobileData)) {
+            type = TYPE_MOBILE_DATA;
+        }
+        else if (selectedType.equalsIgnoreCase(wifi)) {
+            type = TYPE_WIFI;
+        }
+        else {
+            type = TYPE_MOBILE_DATA;
         }
         return type;
     }

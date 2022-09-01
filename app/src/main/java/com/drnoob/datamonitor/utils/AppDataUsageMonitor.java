@@ -1,10 +1,8 @@
 package com.drnoob.datamonitor.utils;
 
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.app.usage.NetworkStats;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +18,6 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
-import com.drnoob.datamonitor.core.Values;
-import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

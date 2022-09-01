@@ -19,15 +19,22 @@
 
 package com.drnoob.datamonitor;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.view.View;
 
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
+
+import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
+import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Locale;
@@ -51,6 +58,11 @@ public class Common {
         return (mode == AppOpsManager.MODE_ALLOWED);
     }
 
+    public static Boolean isReadPhoneStateGranted(Context context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
     public static Boolean isAppInstalled(Context context, String packageName) {
         PackageManager pm = context.getPackageManager();
         try {
@@ -62,12 +74,31 @@ public class Common {
         return false;
     }
 
-    public static void setLanguage(Activity activity, String languageCode) {
+    public static void setLanguage(Activity activity, String languageCode, String countryCode) {
         Resources res = activity.getResources();
         Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(languageCode);
-        conf.setLayoutDirection(new Locale(languageCode));
+        Locale locale;
+        if (countryCode.equals("rTW")) {
+            locale = Locale.TAIWAN;
+        }
+        else if (countryCode.equals("rCN")) {
+            locale = Locale.CHINESE;
+        }
+        else {
+            locale = new Locale(languageCode, countryCode);
+        }
+        conf.locale = locale;
+        conf.setLayoutDirection(locale);
         res.updateConfiguration(conf, res.getDisplayMetrics());
 
+    }
+
+    public static void refreshService(Context context) {
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
+            context.startService(new Intent(context, LiveNetworkMonitor.class));
+        }
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
+            context.startService(new Intent(context, NotificationService.class));
+        }
     }
 }

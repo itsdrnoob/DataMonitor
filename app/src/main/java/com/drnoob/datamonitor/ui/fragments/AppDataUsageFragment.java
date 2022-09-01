@@ -47,8 +47,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import static com.drnoob.datamonitor.core.Values.*;
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
+import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
 import static com.drnoob.datamonitor.ui.activities.MainActivity.mSystemAppsList;
 import static com.drnoob.datamonitor.ui.activities.MainActivity.mUserAppsList;
 
@@ -100,6 +111,15 @@ public class AppDataUsageFragment extends Fragment {
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
 
+        if (getArguments() != null) {
+            boolean fromHome = getArguments().getBoolean(DAILY_DATA_HOME_ACTION, false);
+            if (fromHome) {
+                type = getArguments().getInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                setType(type);
+                refreshData();
+            }
+        }
+
         setSession(session);
         setType(type);
 
@@ -110,7 +130,8 @@ public class AppDataUsageFragment extends Fragment {
             mLoading.setAlpha(0.0f);
             mAppsView.setAlpha(1.0f);
             onDataLoaded();
-        } else {
+        }
+        else {
             mDataRefresh.setRefreshing(true);
         }
 
@@ -132,7 +153,7 @@ public class AppDataUsageFragment extends Fragment {
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);
 
-                switch (getSession()) {
+                switch (getSession(getContext())) {
                     case SESSION_TODAY:
                         sessions.check(R.id.session_today);
                         break;
@@ -219,7 +240,7 @@ public class AppDataUsageFragment extends Fragment {
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);
 
-                switch (getType()) {
+                switch (getType(getContext())) {
                     case TYPE_MOBILE_DATA:
                         types.check(R.id.type_mobile);
                         break;
@@ -286,9 +307,9 @@ public class AppDataUsageFragment extends Fragment {
 
     @Override
     public void onPause() {
+        viewModel.setCurrentSession(getSession(Objects.requireNonNull(getContext())));
+        viewModel.setCurrentType(getType(getContext()));
         super.onPause();
-        viewModel.setCurrentSession(getSession());
-        viewModel.setCurrentType(getType());
     }
 
     public static Context getAppContext() {
@@ -304,7 +325,8 @@ public class AppDataUsageFragment extends Fragment {
         mList.clear();
         mSystemList.clear();
 
-        MainActivity.LoadData loadData = new MainActivity.LoadData(mContext, getSession(), getType());
+        MainActivity.LoadData loadData = new MainActivity.LoadData(mContext, getSession(mContext),
+                getType(mContext));
         loadData.execute();
 
     }
@@ -327,48 +349,55 @@ public class AppDataUsageFragment extends Fragment {
         }
     }
 
-    public static int getSession() {
+    public static int getSession(Context context) {
         int session = 0;
         String selectedSession = mSession.getText().toString();
-        switch (selectedSession) {
-            case USAGE_SESSION_TODAY:
-                session = SESSION_TODAY;
-                break;
+        String sessionToday = context.getString(R.string.label_today);
+        String sessionYesterday = context.getString(R.string.label_yesterday);
+        String sessionThisMonth = context.getString(R.string.label_this_month);
+        String sessionLastMonth = context.getString(R.string.label_last_month);
+        String sessionThisYear = context.getString(R.string.label_this_year);
+        String sessionAllTime = context.getString(R.string.label_all_time);
 
-            case USAGE_SESSION_YESTERDAY:
-                session = SESSION_YESTERDAY;
-                break;
-
-            case USAGE_SESSION_THIS_MONTH:
-                session = SESSION_THIS_MONTH;
-                break;
-
-            case USAGE_SESSION_LAST_MONTH:
-                session = SESSION_LAST_MONTH;
-                break;
-
-            case USAGE_SESSION_THIS_YEAR:
-                session = SESSION_THIS_YEAR;
-                break;
-
-            case USAGE_SESSION_ALL_TIME:
-                session = SESSION_ALL_TIME;
-                break;
+        if (selectedSession.equalsIgnoreCase(sessionToday)) {
+            session = SESSION_TODAY;
         }
+        else if (selectedSession.equalsIgnoreCase(sessionYesterday)) {
+            session = SESSION_YESTERDAY;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionThisMonth)) {
+            session = SESSION_THIS_MONTH;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionLastMonth)) {
+            session = SESSION_LAST_MONTH;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionThisYear)) {
+            session = SESSION_THIS_YEAR;
+        }
+        else if (selectedSession.equalsIgnoreCase(sessionAllTime)) {
+            session = SESSION_ALL_TIME;
+        }
+        else {
+            session = SESSION_TODAY;
+        }
+
         return session;
     }
 
-    public static int getType() {
+    public static int getType(Context context) {
         int type = 0;
         String selectedType = mType.getText().toString();
-        switch (selectedType) {
-            case USAGE_TYPE_MOBILE_DATA:
-                type = TYPE_MOBILE_DATA;
-                break;
+        String mobileData = context.getString(R.string.label_mobile_data);
+        String wifi = context.getString(R.string.label_wifi);
 
-            case USAGE_TYPE_WIFI:
-                type = TYPE_WIFI;
-                break;
+        if (selectedType.equalsIgnoreCase(mobileData)) {
+            type = TYPE_MOBILE_DATA;
+        }
+        else if (selectedType.equalsIgnoreCase(wifi)) {
+            type = TYPE_WIFI;
+        }
+        else {
+            type = TYPE_MOBILE_DATA;
         }
         return type;
     }

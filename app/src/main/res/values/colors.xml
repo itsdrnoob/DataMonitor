@@ -27,7 +27,7 @@
     <color name="warning">#FFD600</color>
     <color name="warning_95">#FFFBE5</color>
     <color name="on_warning">@color/white</color>
-    <color name="green">#00FF38</color>
+    <color name="green">#00CC2D</color>
     <color name="top_bar_scrolling">#AEFFFFFF</color>
     <color name="top_bar_still">#00FFFFFF</color>
     <color name="graph_divider_primary">#D6D6D6</color>
@@ -44,7 +44,7 @@
     <color name="switch_off_thumb">@color/white</color>
     <color name="bottom_sheet_handle">#AFBAC9</color>
     <color name="ripple">@color/graph_divider_secondary</color>
-    <color name="widget_background">#EFFFFFFF</color>
+    <color name="widget_background">#C8E5F1FF</color>  <!--96FFFFFF-->
     <color name="info_banner_bg">#F0FFF9</color>
     <color name="error_banner_bg">#FFE5E6</color>
     <color name="warning_banner_bg">#FFFBE5</color>

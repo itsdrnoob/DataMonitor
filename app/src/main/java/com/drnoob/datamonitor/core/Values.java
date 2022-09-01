@@ -23,12 +23,17 @@ public class Values {
     public static final int DATA_USAGE_NOTIFICATION_ID = 0x0045;
     public static final String DATA_USAGE_NOTIFICATION_CHANNEL_ID = "DataUsage.Notification";
     public static final String DATA_USAGE_NOTIFICATION_CHANNEL_NAME = "Data Usage";
+    public static final String DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP = "Data Usage";
     public static final int DATA_USAGE_WARNING_NOTIFICATION_ID = 0x00A0;
     public static final String DATA_USAGE_WARNING_CHANNEL_ID = "DataUsage.Warning";
     public static final String DATA_USAGE_WARNING_CHANNEL_NAME = "Data Usage Warning";
     public static final int APP_DATA_USAGE_WARNING_NOTIFICATION_ID = 0x00BE; // 190
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_ID = "AppDataUsage.Warning";
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_NAME = "App Data Usage Warning";
+    public static final int NETWORK_SIGNAL_NOTIFICATION_ID = 0x010D;
+    public static final String NETWORK_SIGNAL_CHANNEL_ID = "NetworkSignal.Notification";
+    public static final String NETWORK_SIGNAL_CHANNEL_NAME = "Network Speed Monitor";
+    public static final String NETWORK_SIGNAL_NOTIFICATION_GROUP = "Network Speed Monitor";
 
 
     public static final int SESSION_TODAY = 0x000A;
@@ -37,6 +42,7 @@ public class Values {
     public static final int SESSION_LAST_MONTH = 0x0028;
     public static final int SESSION_THIS_YEAR = 0x0032;
     public static final int SESSION_ALL_TIME = 0x003C;
+    public static final int SESSION_MONTHLY = 0x00A9;
 
     public static final int TYPE_MOBILE_DATA = 0x0046;
     public static final int TYPE_WIFI = 0x0050;
@@ -54,6 +60,7 @@ public class Values {
     public static final int CONTRIBUTORS_FRAGMENT = 0x0082;
     public static final int DONATE_FRAGMENT = 0x008C;
     public static final int APP_LICENSE_FRAGMENT = 0x0096;
+    public static final int OSS_LICENSE_FRAGMENT = 0x00DC;
     public static final int APP_DATA_LIMIT_FRAGMENT = 0x00AA;
     public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
@@ -66,6 +73,8 @@ public class Values {
 
     public static final String SETUP_VALUE = "SETUP_VALUE";
     public static final int USAGE_ACCESS_DISABLED = 0x00B4;
+    public static final int READ_PHONE_STATE_DISABLED = 0x00B5;
+    public static final int REQUEST_READ_PHONE_STATE = 2011;
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";
@@ -76,6 +85,7 @@ public class Values {
     public static final String DATA_RESET_MONTHLY = "monthly";
     public static final String DATA_RESET_HOUR = "reset_hour";
     public static final String DATA_RESET_MIN = "reset_min";
+    public static final String DATA_RESET_DATE = "reset_date";
     public static final String DATA_WARNING_TRIGGER_LEVEL = "data_warning_trigger_level";
     public static final String DATA_USAGE_WARNING_SHOWN = "data_usage_warning_shown";
     public static final String DATA_USAGE_ALERT = "data_usage_alert";
@@ -87,6 +97,10 @@ public class Values {
     public static final String NOTIFICATION_WIFI = "notification_wifi";
     public static final String APP_LANGUAGE = "app_language";
     public static final String APP_LANGUAGE_CODE = "app_language_code";
+    public static final String APP_COUNTRY_CODE = "app_country_code";
+    public static final String DAILY_DATA_HOME_ACTION = "daily_data_home_action";
+    public static final String APP_THEME = "app_theme";
+    public static final String APP_THEME_SUMMARY = "app_theme_summary";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 
@@ -110,5 +124,8 @@ public class Values {
     public static final String ISP = "isp";
     public static final String SERVER = "server";
     public static final String REGION = "region";
+
+    public static final String UPDATE_VERSION = "update_version";
+    public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
 
 }
