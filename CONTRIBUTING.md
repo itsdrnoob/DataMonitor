@@ -8,7 +8,7 @@ Contributions are always welcome.
 
 ### Translations
 Want to see Data Monitor using your local language? Help us by translating contents to your local language.<br>
-Submit translations using <a href = "https://poeditor.com/join/project/Z4nMRfIJ2s">POEditor</a> or fork the repo.
+Submit translations using <a href = "https://hosted.weblate.org/git/datamonitor/strings/">Weblate</a> or fork the repo.
 
 ### Note
 With each new release the main branch will be renamed to the current release name.<br>
