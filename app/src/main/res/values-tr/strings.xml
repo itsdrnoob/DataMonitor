@@ -9,4 +9,56 @@
     <string name="home_mobile_data_sent">%1$s
 \nGönderilen</string>
     <string name="notification_wifi_data_usage">Wi-Fi: %1$s</string>
+    <string name="home_wifi_data_sent">%1$s
+\nGönderilen</string>
+    <string name="home_wifi_data_received">%1$s
+\nAlınan</string>
+    <string name="label_current_data_warning_trigger_level_limit_set">Geçerli tetik seviyesi: %1$s%% (%2$s)</string>
+    <string name="label_mobile_data">Mobil veri</string>
+    <string name="label_wifi">Wi-Fi</string>
+    <string name="title_app_data_usage_type">Türü seç</string>
+    <string name="heading_data_reset">Sayacı sıfırla</string>
+    <string name="heading_data_limit">Veri sınırı</string>
+    <string name="title_add_data_plan">Veri planı ekle</string>
+    <string name="widget_setup_step_1">1. Ana ekranda boş bir alana dokunun ve basılı tutun.</string>
+    <string name="label_dev">Bitroid Inc. tarafından ❤ ile.</string>
+    <string name="monthly">Aylık</string>
+    <string name="app_label_uid">UID: %1$d</string>
+    <string name="label_today">Bugün</string>
+    <string name="action_cancel">İptal</string>
+    <string name="app_name_placeholder">Uygulama adı</string>
+    <string name="app_data_usage_placeholder">0 MB</string>
+    <string name="label_sent">gönderilen</string>
+    <string name="label_yesterday">Dün</string>
+    <string name="label_this_year">Bu yıl</string>
+    <string name="setup_image_footer">Widget\'lar ve/veya bildirimler kullanılan veri miktarına kolay erişim sağlar</string>
+    <string name="label_received">alınan</string>
+    <string name="action_open_app_settings">Uygulama ayarlarını aç</string>
+    <string name="label_this_month">Bu ay</string>
+    <string name="action_ok">Tamam</string>
+    <string name="title_app_data_usage_session">Oturum seç</string>
+    <string name="label_all_time">Tüm zamanlar</string>
+    <string name="action_update">Güncelle</string>
+    <string name="label_last_month">Geçen ay</string>
+    <string name="label_want_to_contribute">Veri Monitörü\'ne nasıl katkıda bulunabileceğinizi öğrenmek için buraya tıklayın.</string>
+    <string name="daily">Günlük</string>
+    <string name="data_type_gb">GB</string>
+    <string name="title_data_warning_trigger">Veri uyarısı tetikleme düzeyi</string>
+    <string name="title_data_usage">Veri kullanımı</string>
+    <string name="data_remaining_placeholder">0,00 GB kaldı</string>
+    <string name="label_loading_apps">Uygulamalar yükleniyor</string>
+    <string name="label_loading">Yükleniyor…</string>
+    <string name="label_app_data_usage_session_empty">Kullanılabilir veri yok</string>
+    <string name="data_type_mb">MB</string>
+    <string name="label_current_data_warning_trigger_level_limit_not_set">Geçerli tetik seviyesi: %1$s%%</string>
+    <string name="title_refresh_interval">Yenileme aralığını seç</string>
+    <string name="label_data_trigger_level">Verilerin %1$s% oranı kullanıldığında</string>
+    <string name="option_2_min">2 dakika</string>
+    <string name="option_5_min">5 dakika</string>
+    <string name="option_10_min">10 dakika</string>
+    <string name="option_15_min">15 dakika</string>
+    <string name="title_widget_setup">Widget\'ı ayarla</string>
+    <string name="app_label_package_name">Paket adı: %1$s</string>
+    <string name="option_1_min">1 dakika</string>
+    <string name="widget_setup_step_2">2. \"Widget\'lar \"a dokunun.</string>
 </resources>
