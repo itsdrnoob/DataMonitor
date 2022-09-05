@@ -1,0 +1,19 @@
+<p>Data Monitor is a user-friendly, free and open source app for you to manage your data usage. Data Monitor helps you to accurately measure your daily data traffic, and analyze the data in a way easy to understand.</p>
+
+<p><b>Features:</b></p><ul>
+<li>Track daily data usage</li>
+<li>App-wise data usage stats</li>
+<li>Stats for different time period (last month, this year, all time etc)</li>
+<li>Mobile data as well as Wifi usage stats</li>
+<li>Weekly data usage overview</li>
+<li>Data Monitor widget and notification</li>
+<li>Data usage alert</li>
+<li>Custom mobile data reset time</li>
+<li>Network diagnostics</li>
+<li>Live network speed monitor (Beta)</li>
+<li>App usage time</li>
+<li>No ads or In-app purchases</li>
+<li>Light-weight and Open Source</li>
+
+<p><b>Source:</b></p>
+<p><a href="https://github.com/itsdrnoob/DataMonitor">https://github.com/itsdrnoob/DataMonitor</a></p>
