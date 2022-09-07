@@ -1,0 +1,4 @@
+• Added Romanian Language
+• Added Data usage in notification title
+• Fixed system apps data usage stats not opening when app is opened from widget
+• Fixed minor UI flaws
