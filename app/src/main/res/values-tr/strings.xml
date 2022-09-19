@@ -252,4 +252,6 @@
     <string name="hudaifa_abdullah_summary">Arapça</string>
     <string name="dark_theme_summary">Koyu tema seçildi</string>
     <string name="holydemon_summary">Malayalamca</string>
+    <string name="body_app_data_warning_notification">%1$s veri kotasını kullandı</string>
+    <string name="label_reset_every_month">Her ayın %1$s%2$s</string>
 </resources>
