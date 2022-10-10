@@ -19,6 +19,10 @@
     <string name="btc_address" translatable="false">3MS2NP6ptS7XQytdn5yCAQgotVtXBQL1xw</string>
     <string name="upi_address" translatable="false"><![CDATA[upi://pay?pa=itsdrnoob@ybl&pn=itsdrnoob&tn=DataMonitor]]></string>
 
+    <string name="api_url" translatable="false">https://api.ipify.org</string>
+    <string name="download_test_url" translatable="false">http://speedtest.ftp.otenet.gr/files/test10Mb.db</string>
+    <string name="upload_test_url" translatable="false">https://www.azurespeed.com/Azure/UploadLargeFile/</string>
+
     <!-- Contributors -->
     <string name="github_itsdrnoob" translatable="false">https://www.github.com/itsdrnoob</string>
     <string name="github_ygorigor" translatable="false">https://www.github.com/ygorigor</string>

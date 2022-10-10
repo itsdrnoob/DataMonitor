@@ -207,9 +207,6 @@
     <string name="isp_region">地區</string>
     <string name="swipe_right_to_delete">向右劃動以刪除一個專案</string>
     <string name="refresh_list">重新整理列表</string>
-    <string name="api_url" translatable="false">https://api.ipify.org</string>
-    <string name="download_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/10M.iso</string>
-    <string name="upload_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/</string>
     <string name="no_network_connection">未檢測到網路連線！</string>
     <string name="connection_error">連線錯誤，請檢查你的網路。</string>
     <string name="app_label_screen_time">螢幕時間 : %1$s</string>

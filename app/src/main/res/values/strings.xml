@@ -209,9 +209,6 @@
     <string name="isp_region">Region</string>
     <string name="swipe_right_to_delete">Swipe right to delete an item</string>
     <string name="refresh_list">Refresh list</string>
-    <string name="api_url" translatable="false">https://api.ipify.org</string>
-    <string name="download_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/10M.iso</string>
-    <string name="upload_test_url" translatable="false">http://ipv4.ikoula.testdebit.info/</string>
     <string name="no_network_connection">No network connection detected!</string>
     <string name="connection_error">Could not connect.\nPlease ensure you are connected to the Internet.</string>
     <string name="app_label_screen_time">Screen time: %1$s</string>
