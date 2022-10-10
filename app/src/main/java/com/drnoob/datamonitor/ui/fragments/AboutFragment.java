@@ -146,14 +146,7 @@ public class AboutFragment extends Fragment {
     private void downloadUpdate() {
         String md5 = KeyUtils.get(getContext(), "MD5");
         Intent updateIntent = new Intent(Intent.ACTION_VIEW);
-        if (md5.equals(MD5_GITHUB)) {
-            // Github release
-            updateIntent.setData(Uri.parse(getString(R.string.github_release_latest)));
-        }
-        else {
-            // Play store release
-            updateIntent.setData(Uri.parse(getString(R.string.play_store)));
-        }
+        updateIntent.setData(Uri.parse(getString(R.string.f_droid)));
         startActivity(updateIntent);
     }
 

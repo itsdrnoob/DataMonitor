@@ -275,4 +275,6 @@
     <string name="liviogasp_summary">Italian</string>
     <string name="comradekingu_summary">Translation support</string>
     <string name="comradekingu" translatable="false">Allan Nordhøy</string>
+    <string name="f_droid_page">View app on F-Droid</string>
+    <string name="f_droid_page_summary">Check the app on the official F-Droid repo</string>
 </resources>
