@@ -10,8 +10,8 @@ android {
         applicationId "com.drnoob.datamonitor"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 7
-        versionName 'v2.0.0'
+        versionCode 8
+        versionName 'v2.1.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
