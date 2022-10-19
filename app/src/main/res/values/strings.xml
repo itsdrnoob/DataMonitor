@@ -274,4 +274,6 @@
     <string name="comradekingu" translatable="false">Allan Nordhøy</string>
     <string name="f_droid_page">View app on F-Droid</string>
     <string name="f_droid_page_summary">Check the app on the official F-Droid repo</string>
+    <string name="total_usage">Total usage: %1$s</string>
+    <string name="label_unknown">Unknown</string>
 </resources>
