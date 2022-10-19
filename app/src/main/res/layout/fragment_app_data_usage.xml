@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:layout_marginTop="@dimen/margin_medium"/>
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"/>
 
             <LinearLayout
                 android:id="@+id/nested_top_bar"
@@ -39,13 +40,15 @@
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/elevation_small"
                 android:gravity="center"
+                android:paddingBottom="@dimen/margin_mid_large"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/data_usage_session"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_mid_large"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
                     android:layout_weight="1"
                     android:background="@drawable/selectable_item_plain_background"
                     android:clickable="true"
@@ -63,7 +66,8 @@
                     android:id="@+id/data_usage_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_mid_large"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
                     android:layout_weight="1"
                     android:background="@drawable/selectable_item_plain_background"
                     android:clickable="true"

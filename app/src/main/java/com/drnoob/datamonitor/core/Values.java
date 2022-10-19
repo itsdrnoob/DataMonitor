@@ -52,6 +52,7 @@ public class Values {
     public static final String DATA_USAGE_TYPE = "data_usage_type";
     public static final int DATA_USAGE_SYSTEM = 0x005A;
     public static final int DATA_USAGE_USER = 0x0064;
+    public static final int DATA_USAGE_TODAY = 0x00D3;
 
     public static final String GENERAL_FRAGMENT_ID = "GENERAL_FRAGMENT_ID";
 

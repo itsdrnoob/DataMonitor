@@ -49,6 +49,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
@@ -113,6 +114,13 @@ public class SystemDataUsageFragment extends Fragment {
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
 
+        if (getActivity().getIntent() != null) {
+            Boolean fromHome = getActivity().getIntent().getBooleanExtra(DAILY_DATA_HOME_ACTION, false);
+            if (fromHome) {
+                mTopBar.setVisibility(View.GONE);
+                mAppsView.setPadding(0, 20, 0, 0);
+            }
+        }
 
         setSession(session);
         setType(type);

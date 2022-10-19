@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
@@ -64,10 +66,19 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
     private final List<AppDataUsageModel> mList;
     private final Context mContext;
     private Boolean animate;
+    private Boolean fromHome;
 
     public AppDataUsageAdapter(List<AppDataUsageModel> mList, Context mContext) {
         this.mList = mList;
         this.mContext = mContext;
+    }
+
+    public Boolean getFromHome() {
+        return fromHome;
+    }
+
+    public void setFromHome(Boolean fromHome) {
+        this.fromHome = fromHome;
     }
 
     @NonNull
@@ -119,6 +130,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_SYSTEM);
                     intent.putExtra(DATA_USAGE_SESSION, model.getSession());
                     intent.putExtra(DATA_USAGE_TYPE, model.getType());
+                    intent.putExtra(DAILY_DATA_HOME_ACTION, getFromHome());
                     mContext.startActivity(intent);
                 }
 //                else {

@@ -46,15 +46,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
-import com.drnoob.datamonitor.adapters.data.FragmentViewModel;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -75,7 +72,10 @@ import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
@@ -325,32 +325,27 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             }
         });
 
-        NavController controller = Navigation.findNavController(getActivity(), R.id.main_nav_host_fragment);
-        FragmentViewModel viewModel = new ViewModelProvider(getActivity()).get(FragmentViewModel.class);
-
         mMobileDataUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (controller != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
-                    bundle.putBoolean(DAILY_DATA_HOME_ACTION, true);
-                    viewModel.setCurrentType(TYPE_MOBILE_DATA);
-                    controller.navigate(R.id.bottom_menu_app_data_usage, bundle);
-                }
+                Intent intent = new Intent(mContext, ContainerActivity.class);
+                intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_TODAY);
+                intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
+                intent.putExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                intent.putExtra(DAILY_DATA_HOME_ACTION, true);
+                startActivity(intent);
             }
         });
 
         mWifiUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (controller != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(DATA_USAGE_TYPE, TYPE_WIFI);
-                    bundle.putBoolean(DAILY_DATA_HOME_ACTION, true);
-                    viewModel.setCurrentType(TYPE_WIFI);
-                    controller.navigate(R.id.bottom_menu_app_data_usage, bundle);
-                }
+                Intent intent = new Intent(mContext, ContainerActivity.class);
+                intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_TODAY);
+                intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
+                intent.putExtra(DATA_USAGE_TYPE, TYPE_WIFI);
+                intent.putExtra(DAILY_DATA_HOME_ACTION, true);
+                startActivity(intent);
             }
         });
 

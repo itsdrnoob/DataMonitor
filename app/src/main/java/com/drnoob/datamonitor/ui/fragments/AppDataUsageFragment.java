@@ -82,6 +82,7 @@ public class AppDataUsageFragment extends Fragment {
     public static LinearLayout mTopBar;
     private FragmentViewModel viewModel;
     private static TextView mTotalUsage;
+    private static boolean fromHome;
 
     public AppDataUsageFragment() {
 
@@ -110,7 +111,7 @@ public class AppDataUsageFragment extends Fragment {
         mDataRefresh = view.findViewById(R.id.refresh_data_usage);
         mSession = view.findViewById(R.id.data_usage_session);
         mType = view.findViewById(R.id.data_usage_type);
-        mTopBar = view.findViewById(R.id.top_bar);
+        mTopBar = view.findViewById(R.id.nested_top_bar);
         mEmptyList = view.findViewById(R.id.empty_list);
         mTotalUsage = view.findViewById(R.id.current_session_total);
 
@@ -118,13 +119,15 @@ public class AppDataUsageFragment extends Fragment {
 
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+        fromHome = getActivity().getIntent().getBooleanExtra(DAILY_DATA_HOME_ACTION, false);
 
-        if (getArguments() != null) {
-            boolean fromHome = getArguments().getBoolean(DAILY_DATA_HOME_ACTION, false);
+        if (getActivity().getIntent() != null) {
             if (fromHome) {
-                type = getArguments().getInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
                 setType(type);
                 refreshData();
+                mTopBar.setVisibility(View.GONE);
+                mAppsView.setPadding(0, 130, 0, 0);
             }
         }
 
@@ -344,31 +347,17 @@ public class AppDataUsageFragment extends Fragment {
 
         MainActivity.LoadData loadData = new MainActivity.LoadData(mContext, getSession(mContext),
                 getType(mContext));
-        loadData.execute();
+        if (!isDataLoading()) {
+            loadData.execute();
+        }
 
     }
 
     public static void onDataLoaded(Context context) {
         try {
-            int date = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_DATE, 1);
-            String totalUsage;
-            int type = getType(context);
-            if (type == TYPE_MOBILE_DATA) {
-                totalUsage = NetworkStatsHelper.formatData(
-                        NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(context), date)[0],
-                        NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(context), date)[1]
-                )[2];
-            }
-            else if (type == TYPE_WIFI) {
-                totalUsage = NetworkStatsHelper.formatData(
-                        NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession(context))[0],
-                        NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession(context))[1]
-                )[2];
-            }
-            else {
-                totalUsage = context.getString(R.string.label_unknown);
-            }
+            String totalUsage = getTotalDataUsage(context);
             mTotalUsage.setText(context.getString(R.string.total_usage, totalUsage));
+
         }
         catch (ParseException | RemoteException e) {
             e.printStackTrace();
@@ -376,6 +365,7 @@ public class AppDataUsageFragment extends Fragment {
         Log.d(TAG, "onDataLoaded: " + mSystemList.size() + " system");
         Log.d(TAG, "onDataLoaded: " + mList.size() + " user");
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setFromHome(fromHome);
         mAppsView.setAdapter(mAdapter);
         mAppsView.setLayoutManager(new LinearLayoutManager(mContext));
         mLoading.animate().alpha(0.0f);
@@ -388,6 +378,28 @@ public class AppDataUsageFragment extends Fragment {
             setSession(mList.get(0).getSession());
             setType(mList.get(0).getType());
         }
+    }
+
+    private static String getTotalDataUsage(Context context) throws ParseException, RemoteException {
+        int date = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_DATE, 1);
+        String totalUsage;
+        int type = getType(context);
+        if (type == TYPE_MOBILE_DATA) {
+            totalUsage = NetworkStatsHelper.formatData(
+                    NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(context), date)[0],
+                    NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(context), date)[1]
+            )[2];
+        }
+        else if (type == TYPE_WIFI) {
+            totalUsage = NetworkStatsHelper.formatData(
+                    NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession(context))[0],
+                    NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession(context))[1]
+            )[2];
+        }
+        else {
+            totalUsage = context.getString(R.string.label_unknown);
+        }
+        return totalUsage;
     }
 
     public static int getSession(Context context) {

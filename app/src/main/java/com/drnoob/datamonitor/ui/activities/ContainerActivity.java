@@ -30,6 +30,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
 import com.drnoob.datamonitor.ui.fragments.AboutFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
+import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
@@ -52,6 +53,7 @@ import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
@@ -140,6 +142,11 @@ public class ContainerActivity extends AppCompatActivity {
             case DATA_USAGE_SYSTEM:
                 fragment = new SystemDataUsageFragment();
                 title = getString(R.string.system_data_usage);
+                break;
+
+            case DATA_USAGE_TODAY:
+                fragment = new AppDataUsageFragment();
+                title = getString(R.string.heading_data_usage_today);
                 break;
         }
 
