@@ -14,5 +14,5 @@
 
     <item android:id="@+id/bottom_menu_network_diagnostics"
         android:title="@string/network_diagnostics"
-        android:icon="@drawable/ic_network_diagnostics"/>
+        android:icon="@drawable/ic_diagnostics"/>
 </menu>
