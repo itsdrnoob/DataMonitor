@@ -674,7 +674,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
         public void stopMonitor() {
             if (connectivityManager != null) {
-                connectivityManager.unregisterNetworkCallback(this);
+                try {
+                    connectivityManager.unregisterNetworkCallback(this);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
