@@ -19,6 +19,8 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -40,6 +42,8 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -51,6 +55,7 @@ import com.drnoob.datamonitor.core.base.DatePicker;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
@@ -82,6 +87,9 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
@@ -130,7 +138,7 @@ public class SetupFragment extends Fragment {
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowMobileData, mShowWifi,
-                mShowDataWarning, mNetworkSignalNotification;
+                mShowDataWarning, mNetworkSignalNotification, mAutoHideNetworkSpeed;
         private Snackbar snackbar;
 
         @Override
@@ -152,6 +160,7 @@ public class SetupFragment extends Fragment {
             mShowMobileData = (SwitchPreferenceCompat) findPreference("show_mobile_data_notification");
             mShowWifi = (SwitchPreferenceCompat) findPreference("show_wifi_notification");
             mShowDataWarning = (SwitchPreferenceCompat) findPreference("data_usage_alert");
+            mAutoHideNetworkSpeed = (SwitchPreferenceCompat) findPreference("auto_hide_network_speed");
 
 
             int widgetRefreshInterval = PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -586,6 +595,46 @@ public class SetupFragment extends Fragment {
                                 .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                         dismissOnClick(snackbar);
                         snackbar.show();
+                    }
+                    return false;
+                }
+            });
+
+            mAutoHideNetworkSpeed.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("auto_hide_network_speed", false);
+                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                    if (!isChecked) {
+                        boolean isNetworkSpeedEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("network_signal_notification", false);
+                        if (isNetworkSpeedEnabled) {
+                            Intent activityIntent = new Intent(Intent.ACTION_MAIN);
+                            activityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                            activityIntent.setComponent(new ComponentName(getContext().getPackageName(),
+                                    MainActivity.class.getName()));
+                            PendingIntent activityPendingIntent = PendingIntent.getActivity(
+                                    getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
+                                    NETWORK_SIGNAL_CHANNEL_ID);
+                            builder.setSmallIcon(R.drawable.ic_signal_kb_0);
+                            builder.setOngoing(true);
+                            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                            builder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
+                            builder.setStyle(new NotificationCompat.InboxStyle()
+                                    .addLine(getString(R.string.network_speed_download, "0 KB/s"))
+                                    .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
+                            builder.setShowWhen(false);
+                            builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                            builder.setContentIntent(activityPendingIntent);
+                            builder.setAutoCancel(false);
+                            builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
+                            managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                        }
+                    }
+                    else {
+                        managerCompat.cancel(NETWORK_SIGNAL_NOTIFICATION_ID);
                     }
                     return false;
                 }

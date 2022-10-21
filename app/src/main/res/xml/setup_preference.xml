@@ -84,6 +84,13 @@
                 app:iconSpaceReserved="false"
                 android:defaultValue="true"/>
 
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/auto_hide_live_network"
+                android:summary="@string/auto_hide_live_network_summary"
+                android:key="auto_hide_network_speed"
+                app:iconSpaceReserved="false"
+                android:defaultValue="false"/>
+
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory

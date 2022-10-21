@@ -276,4 +276,6 @@
     <string name="f_droid_page_summary">Check the app on the official F-Droid repo</string>
     <string name="total_usage">Total usage: %1$s</string>
     <string name="label_unknown">Unknown</string>
+    <string name="auto_hide_live_network">Auto hide network speed</string>
+    <string name="auto_hide_live_network_summary">Stop network speed notification when network is not connected</string>
 </resources>
