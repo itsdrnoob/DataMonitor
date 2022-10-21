@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <queries>
         <intent>
@@ -115,7 +116,6 @@
             android:exported="true"
             tools:ignore="Instantiatable">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.SCREEN_ON"/>
                 <action android:name="android.intent.action.SCREEN_OFF"/>
                 <action android:name="android.intent.action.USER_PRESENT"/>
@@ -124,7 +124,8 @@
 
         <service android:name=".utils.LiveNetworkMonitor"
             android:exported="true"
-            android:enabled="true" />
+            android:enabled="true">
+        </service>
 
         <activity
             android:name=".ui.activities.MainActivity"
@@ -134,6 +135,14 @@
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
         </activity>
+
+        <receiver android:name=".utils.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

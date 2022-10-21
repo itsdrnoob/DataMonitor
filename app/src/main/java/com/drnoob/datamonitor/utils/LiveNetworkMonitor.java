@@ -74,6 +74,10 @@ public class LiveNetworkMonitor extends Service {
         return null;
     }
 
+    public LiveNetworkMonitor() {
+        // Empty constructor
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -423,6 +427,10 @@ public class LiveNetworkMonitor extends Service {
     }
 
     public class LiveNetworkReceiver extends BroadcastReceiver {
+
+        public LiveNetworkReceiver() {
+            // Empty constructor
+        }
 
         @Override
         public void onReceive(Context context, Intent intent) {
