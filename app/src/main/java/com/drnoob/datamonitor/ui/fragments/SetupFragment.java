@@ -1295,6 +1295,15 @@ public class SetupFragment extends Fragment {
                         }
                     });
 
+                    slider.addOnChangeListener(new Slider.OnChangeListener() {
+                        @Override
+                        public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
+                            if (fromUser) {
+                                VibrationUtils.hapticMinor(getContext());
+                            }
+                        }
+                    });
+
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
