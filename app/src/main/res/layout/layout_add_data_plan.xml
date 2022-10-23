@@ -34,7 +34,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_mid_large"
+        android:layout_marginStart="@dimen/margin_mid_large"
         android:layout_marginTop="@dimen/margin_mid_large"
         android:text="@string/heading_data_reset"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
             android:layout_marginEnd="@dimen/margin_large"
             android:buttonTint="@color/primary"
             android:checked="true"
-            android:paddingLeft="@dimen/margin_large"
+            android:paddingStart="@dimen/margin_large"
             android:text="@string/daily" />
 
         <RadioButton
@@ -65,8 +65,18 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="@dimen/margin_large"
             android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
+            android:paddingStart="@dimen/margin_large"
             android:text="@string/monthly" />
+
+        <RadioButton
+            android:id="@+id/custom_reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:buttonTint="@color/primary"
+            android:paddingStart="@dimen/margin_large"
+            android:text="@string/custom"/>
 
     </RadioGroup>
 
@@ -74,7 +84,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_mid_large"
+        android:layout_marginStart="@dimen/margin_mid_large"
         android:layout_marginTop="@dimen/margin_large"
         android:text="@string/heading_data_limit"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,13 +147,74 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/custom_date_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingStart="@dimen/margin_mid_large"
+        android:paddingEnd="@dimen/margin_mid_large"
+        android:paddingBottom="@dimen/padding_medium"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layout_constraintTop_toBottomOf="@id/data_limit">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/heading_data_reset_custom_counter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/data_limit" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/custom_date_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:labelBehavior="withinBounds"
+            android:layout_marginTop="@dimen/margin_small"
+            android:valueFrom="1"
+            android:valueTo="30"
+            android:stepSize="1"
+            style="@style/Widget.App.Slider"
+            app:values="@array/initial_slider_values"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingEnd="@dimen/padding_medium"
+            android:layout_marginTop="@dimen/margin_small">
+
+            <TextView
+                android:id="@+id/custom_start_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_custom_start_date"
+                android:gravity="start"/>
+
+            <TextView
+                android:id="@+id/custom_end_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/label_custom_end_date"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <include
         android:id="@+id/footer"
         layout="@layout/bottom_sheet_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
-        app:layout_constraintTop_toBottomOf="@+id/data_limit" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_date_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

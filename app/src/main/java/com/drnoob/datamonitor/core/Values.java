@@ -34,6 +34,10 @@ public class Values {
     public static final String NETWORK_SIGNAL_CHANNEL_ID = "NetworkSignal.Notification";
     public static final String NETWORK_SIGNAL_CHANNEL_NAME = "Network Speed Monitor";
     public static final String NETWORK_SIGNAL_NOTIFICATION_GROUP = "Network Speed Monitor";
+    public static final int OTHER_NOTIFICATION_ID = 0x012C;
+    public static final String OTHER_NOTIFICATION_CHANNEL_ID = "Other.Notification";
+    public static final String OTHER_NOTIFICATION_CHANNEL_NAME = "Other";
+    public static final String DEFAULT_NOTIFICATION_GROUP = "Default";
 
 
     public static final int SESSION_TODAY = 0x000A;
@@ -43,6 +47,7 @@ public class Values {
     public static final int SESSION_THIS_YEAR = 0x0032;
     public static final int SESSION_ALL_TIME = 0x003C;
     public static final int SESSION_MONTHLY = 0x00A9;
+    public static final int SESSION_CUSTOM = 0x00AC;
 
     public static final int TYPE_MOBILE_DATA = 0x0046;
     public static final int TYPE_WIFI = 0x0050;
@@ -84,9 +89,13 @@ public class Values {
     public static final String DATA_RESET = "data_reset";
     public static final String DATA_RESET_DAILY = "daily";
     public static final String DATA_RESET_MONTHLY = "monthly";
+    public static final String DATA_RESET_CUSTOM = "custom";
     public static final String DATA_RESET_HOUR = "reset_hour";
     public static final String DATA_RESET_MIN = "reset_min";
     public static final String DATA_RESET_DATE = "reset_date";
+    public static final String DATA_RESET_CUSTOM_DATE_START = "custom_reset_date_start";
+    public static final String DATA_RESET_CUSTOM_DATE_END = "custom_reset_date_end";
+    public static final String DATA_RESET_CUSTOM_DATE_RESTART = "custom_reset_date_restart";
     public static final String DATA_WARNING_TRIGGER_LEVEL = "data_warning_trigger_level";
     public static final String DATA_USAGE_WARNING_SHOWN = "data_usage_warning_shown";
     public static final String DATA_USAGE_ALERT = "data_usage_alert";
@@ -128,5 +137,8 @@ public class Values {
 
     public static final String UPDATE_VERSION = "update_version";
     public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
+
+    public static final String INTENT_ACTION = "datamonitor.intent.action";
+    public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
 
 }

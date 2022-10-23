@@ -19,7 +19,6 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
@@ -28,6 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +37,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -60,9 +62,11 @@ import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
+import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.slider.LabelFormatter;
+import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -71,11 +75,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
@@ -646,15 +658,70 @@ public class SetupFragment extends Fragment {
                     BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                     View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_add_data_plan, null);
 
+                    LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
                     RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
                     TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                     TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
+                    RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
+                    TextView customStartDate = dialogView.findViewById(R.id.custom_start_date);
+                    TextView customEndDate = dialogView.findViewById(R.id.custom_end_date);
                     ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                     TextView cancel = footer.findViewById(R.id.cancel);
                     TextView ok = footer.findViewById(R.id.ok);
 
+                    Calendar calendar = Calendar.getInstance();
+                    int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                    customDateSlider.setValueTo((float) daysInMonth);
+
+                    int start = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
+                    int end = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getInt(DATA_RESET_CUSTOM_DATE_END, daysInMonth);
+
+                    List<Float> sliderValues = new ArrayList<>();
+                    sliderValues.add((float) start);
+                    sliderValues.add((float) end);
+                    customDateSlider.setValues(sliderValues);
+
+                    customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
+                    customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+
                     dataTypeSwitcher.selectTab(dataTypeSwitcher.getTabAt(PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getInt(DATA_TYPE, 0)));
+
+                    dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                        @Override
+                        public void onTabSelected(TabLayout.Tab tab) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
+
+                        @Override
+                        public void onTabUnselected(TabLayout.Tab tab) {
+
+                        }
+
+                        @Override
+                        public void onTabReselected(TabLayout.Tab tab) {
+
+                        }
+                    });
+
+                    customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+                        @Override
+                        public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
+                            if (fromUser) {
+                                VibrationUtils.hapticMinor(getContext());
+                            }
+                            int start = slider.getValues().get(0).intValue();
+                            int end = slider.getValues().get(1).intValue();
+
+                            customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
+                            customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+
+                        }
+                    });
+
                     Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getFloat(DATA_LIMIT, -1);
                     if (dataLimit > 0) {
@@ -667,12 +734,50 @@ public class SetupFragment extends Fragment {
                         }
 
                     }
-                    if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
-                        dataReset.check(R.id.monthly);
-                    } else {
-                        dataReset.check(R.id.daily);
+                    switch (PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getString(DATA_RESET, "")) {
+                        case DATA_RESET_MONTHLY:
+                            dataReset.check(R.id.monthly);
+                            customDateView.setVisibility(View.GONE);
+                            break;
+                        case DATA_RESET_DAILY:
+                            dataReset.check(R.id.daily);
+                            customDateView.setVisibility(View.GONE);
+                            break;
+                        case DATA_RESET_CUSTOM:
+                            dataReset.check(R.id.custom_reset);
+                            customDateView.setAlpha(1f);
+                            customDateView.setVisibility(View.VISIBLE);
+                            break;
                     }
+
+                    dataReset.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                            if (i == R.id.custom_reset) {
+                                customDateView.setAlpha(0f);
+                                customDateView.setVisibility(View.VISIBLE);
+                                customDateView.animate()
+                                        .alpha(1f)
+                                        .setDuration(350)
+                                        .start();
+                            }
+                            else {
+                                customDateView.animate()
+                                        .alpha(0f)
+                                        .setDuration(350)
+                                        .start();
+//                                customDateView.setVisibility(View.GONE);
+                                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        customDateView.setVisibility(View.GONE);
+                                    }
+                                }, 150);
+
+                            }
+                        }
+                    });
 
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -701,9 +806,23 @@ public class SetupFragment extends Fragment {
                                     dataType = dataTypeSwitcher.getSelectedTabPosition();
                                 }
                                 if (dataReset.getCheckedRadioButtonId() == R.id.daily) {
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(DATA_RESET, DATA_RESET_DAILY).apply();
-                                } else {
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
+                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                            .putString(DATA_RESET, DATA_RESET_DAILY).apply();
+                                }
+                                else if (dataReset.getCheckedRadioButtonId() == R.id.monthly) {
+                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                            .putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
+                                }
+                                else if (dataReset.getCheckedRadioButtonId() == R.id.custom_reset) {
+                                    calendar.set(Calendar.DAY_OF_MONTH, customDateSlider.getValues().get(1).intValue());
+                                    calendar.add(Calendar.DATE, 1);
+
+                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                            .putString(DATA_RESET, DATA_RESET_CUSTOM)
+                                            .putInt(DATA_RESET_CUSTOM_DATE_START, customDateSlider.getValues().get(0).intValue())
+                                            .putInt(DATA_RESET_CUSTOM_DATE_END, customDateSlider.getValues().get(1).intValue())
+                                            .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                                            .apply();
                                 }
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putFloat(DATA_LIMIT, dataLimit).apply();
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(LIMIT, dataLimitInput.getText().toString()).apply();
@@ -712,6 +831,7 @@ public class SetupFragment extends Fragment {
                                         getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 updateResetData();
+                                setDataPlanNotification(getContext());
                                 dialog.dismiss();
                                 dismissOnClick(snackbar);
                                 snackbar.show();
@@ -866,7 +986,8 @@ public class SetupFragment extends Fragment {
                         dialog.setContentView(dialogView);
                         dialog.show();
                     }
-                    else {
+                    else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                            .equals(DATA_RESET_DAILY)) {
                         BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_time_picker, null);
 
@@ -1058,6 +1179,13 @@ public class SetupFragment extends Fragment {
 
                         dialog.setContentView(dialogView);
                         dialog.show();
+                    }
+                    else {
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                getString(R.string.setup_usage_reset_date_custom_selected), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        dismissOnClick(snackbar);
+                        snackbar.show();
                     }
                     return false;
                 }
@@ -1254,7 +1382,8 @@ public class SetupFragment extends Fragment {
                 resetSummary = (getContext().getString(R.string.label_reset_every_month,
                         date, suffix));
             }
-            else {
+            else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_DAILY)) {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_time);
                 int hour, minute;
                 hour = PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -1303,6 +1432,10 @@ public class SetupFragment extends Fragment {
                         resetSummary = h + ":" + m + " am";
                     }
                 }
+            }
+            else {
+                resetTitle = getContext().getString(R.string.setup_usage_reset_date);
+                resetSummary = getContext().getString(R.string.setup_usage_reset_date_custom_selected);
             }
 
             mUsageResetTime.setTitle(resetTitle);

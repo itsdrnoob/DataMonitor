@@ -278,4 +278,11 @@
     <string name="label_unknown">Unknown</string>
     <string name="auto_hide_live_network">Auto hide network speed</string>
     <string name="auto_hide_live_network_summary">Stop network speed notification when network is not connected</string>
+    <string name="custom">Custom</string>
+    <string name="heading_data_reset_custom_counter">Reset date</string>
+    <string name="label_custom_start_date">Start date: %1$d</string>
+    <string name="label_custom_end_date">End date: %1$d</string>
+    <string name="setup_usage_reset_date_custom_selected">Custom data plan is active</string>
+    <string name="title_data_plan_expired">Data plan expired!</string>
+    <string name="summary_data_plan_expired">You might want to update your plan</string>
 </resources>
