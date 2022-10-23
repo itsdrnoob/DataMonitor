@@ -143,6 +143,16 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".utils.DataPlanRefreshReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
+        <receiver android:name=".utils.CrashReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
 
 </manifest>
