@@ -23,6 +23,10 @@
     <string name="download_test_url" translatable="false">http://speedtest.ftp.otenet.gr/files/test10Mb.db</string>
     <string name="upload_test_url" translatable="false">https://www.azurespeed.com/Azure/UploadLargeFile/</string>
 
+    <string name="email" translatable="false">bitroid.dev@gmail.com</string>
+
+    <string name="github_new_issue" translatable="false">"https://github.com/itsdrnoob/DataMonitor/issues/new?assignees=&amp;labels=&amp;template=bug_report.md&amp;title="</string>
+
     <!-- Contributors -->
     <string name="github_itsdrnoob" translatable="false">https://www.github.com/itsdrnoob</string>
     <string name="github_ygorigor" translatable="false">https://www.github.com/ygorigor</string>

@@ -20,6 +20,7 @@
     <dimen name="overview_max_height">350dp</dimen>
     <dimen name="text_extra_small">10sp</dimen>
     <dimen name="text_large">22sp</dimen>
+    <dimen name="text_extra_large">24sp</dimen>
     <dimen name="text_mid_large">16sp</dimen>
     <dimen name="text_small">12sp</dimen>
     <dimen name="ripple_stroke_width">2dp</dimen>

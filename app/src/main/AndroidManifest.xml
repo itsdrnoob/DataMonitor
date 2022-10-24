@@ -136,6 +136,14 @@
             tools:ignore="LockedOrientationActivity">
         </activity>
 
+        <activity
+            android:name=".ui.activities.CrashReportActivity"
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="LockedOrientationActivity">
+        </activity>
+
         <receiver android:name=".utils.BootReceiver"
             android:enabled="true"
             android:exported="true">
@@ -149,10 +157,15 @@
             android:exported="true">
         </receiver>
 
-        <receiver android:name=".utils.CrashReceiver"
-            android:enabled="true"
-            android:exported="true">
-        </receiver>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

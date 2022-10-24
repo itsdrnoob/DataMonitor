@@ -274,6 +274,16 @@
     <string name="comradekingu" translatable="false">Allan Nordhøy</string>
     <string name="f_droid_page">View app on F-Droid</string>
     <string name="f_droid_page_summary">Check the app on the official F-Droid repo</string>
+    <string name="label_crash_logs">Crash logs</string>
+    <string name="label_device_info">Device info</string>
+    <string name="crash_report_body">It seems like Data Monitor has crashed. You can send the crash report to the developer to help analyse the problem and solve it quicker. If no crash occurred, kindly ignore.</string>
+    <string name="crash_report_title">Crash Report</string>
+    <string name="device_info_content_label">See what\'s included in Device info</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="report_github_summary">Open a new issue on Github</string>
+    <string name="report_telegram_summary">Send the crash report in Telegram support chat</string>
+    <string name="report_mail_summary">Send the crash report in mail</string>
+    <string name="mail_uri">mailto:%1$s?&amp;subject=%2$s&amp;body=%3$s</string>
     <string name="total_usage">Total usage: %1$s</string>
     <string name="label_unknown">Unknown</string>
     <string name="auto_hide_live_network">Auto hide network speed</string>
@@ -285,4 +295,13 @@
     <string name="setup_usage_reset_date_custom_selected">Custom data plan is active</string>
     <string name="title_data_plan_expired">Data plan expired!</string>
     <string name="summary_data_plan_expired">You might want to update your plan</string>
+    <string name="error_unknown_telegram_client">Telegram not installed or unknown client present. Please try another method.</string>
+    <string name="crash_logs_extra_text">Data Monitor crash logs</string>
+    <string name="label_select_app">Select app</string>
+    <string name="label_crash_logs_share_chat">Share to chat: @datamonitor</string>
+    <string name="crash_logs_warning">Crash Logs; Do Not modify</string>
+    <string name="title_device_info_contents">Device info contents</string>
+    <string name="device_info_body">Device info includes: \nDevice Manufacturer\nDevice Brand\nDevice Model\nDevice Codename\nAndroid Version\nSOC Model</string>
+    <string name="label_crash_logs_copied">Crash logs copied to clipboard</string>
+    <string name="label_mail">Mail</string>
 </resources>

@@ -43,6 +43,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.databinding.ActivitySetupBinding;
+import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -69,6 +70,7 @@ public class SetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(SetupActivity.this));
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {

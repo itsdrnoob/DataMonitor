@@ -39,6 +39,7 @@ import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
 import com.drnoob.datamonitor.ui.fragments.OSSLicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
+import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
@@ -67,6 +68,7 @@ public class ContainerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MainActivity.setTheme(ContainerActivity.this);
+        Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(ContainerActivity.this));
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {

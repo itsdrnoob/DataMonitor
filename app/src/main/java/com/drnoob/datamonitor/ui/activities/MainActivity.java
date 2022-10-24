@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(MainActivity.this);
+        Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(MainActivity.this));
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isReadPhoneStateGranted(MainActivity.this)) {
                 startActivity(new Intent(this, SetupActivity.class)

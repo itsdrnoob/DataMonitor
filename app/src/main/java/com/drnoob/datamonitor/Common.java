@@ -31,9 +31,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
@@ -155,5 +158,17 @@ public class Common {
         else {
             Log.e(TAG, "setDataPlanNotification: something is wrong here " + wakeupMillis);
         }
+    }
+
+    public static void updateDialog(AlertDialog dialog, Context context) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(metrics);
+
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = (metrics.widthPixels * 85 / 100);
+        lp.y = 50;
+        dialog.getWindow().setAttributes(lp);
     }
 }

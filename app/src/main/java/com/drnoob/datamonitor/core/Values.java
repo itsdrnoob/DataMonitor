@@ -138,6 +138,8 @@ public class Values {
     public static final String UPDATE_VERSION = "update_version";
     public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
 
+    public static final String CRASH_REPORT_KEY = "datamonitor.crashReport";
+
     public static final String INTENT_ACTION = "datamonitor.intent.action";
     public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
 
