@@ -48,6 +48,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
@@ -87,8 +88,12 @@ public class DataUsageWidget extends AppWidgetProvider {
                     .equals(DATA_RESET_MONTHLY)) {
                 mobile = getDeviceMobileDataUsage(context, SESSION_MONTHLY, date);
             }
-            else {
+            else if (PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_DAILY)) {
                 mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
+            }
+            else {
+                mobile = getDeviceMobileDataUsage(context, SESSION_CUSTOM, -1);
             }
 
             mobileData = formatData(mobile[0], mobile[1])[2];
@@ -166,6 +171,23 @@ public class DataUsageWidget extends AppWidgetProvider {
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
+                }
+                else {
+                    Long total = (mobile[2]);
+                    Long limit = dataLimit.longValue() * 1048576;
+                    Long remaining;
+                    String remainingData;
+                    if (limit > total) {
+                        remaining= limit - total;
+                        remainingData = formatData(remaining / 2, remaining / 2)[2];
+                        views.setTextViewText(R.id.widget_data_usage_remaining, context.getString(R.string.label_data_remaining, remainingData));
+                    }
+                    else {
+                        remaining= total - limit;
+                        remainingData = formatData(remaining / 2, remaining / 2)[2];
+                        views.setTextViewText(R.id.widget_data_usage_remaining, context.getString(R.string.label_data_remaining_used_excess, remainingData));
+                    }
+                    Log.d(TAG, "updateAppWidget: " + remainingData);
                 }
                 views.setViewVisibility(R.id.widget_data_usage_remaining, View.VISIBLE);
 
