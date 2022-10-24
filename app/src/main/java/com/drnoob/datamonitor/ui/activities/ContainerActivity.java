@@ -55,6 +55,7 @@ import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
+import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
@@ -149,6 +150,11 @@ public class ContainerActivity extends AppCompatActivity {
             case DATA_USAGE_TODAY:
                 fragment = new AppDataUsageFragment();
                 title = getString(R.string.heading_data_usage_today);
+                break;
+
+            case DISABLE_BATTERY_OPTIMISATION_FRAGMENT:
+                fragment = new SetupActivity.DisableBatteryOptimisationFragment();
+                title = getString(R.string.label_battery_optimisation);
                 break;
         }
 

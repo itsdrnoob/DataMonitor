@@ -282,6 +282,13 @@ public class SetupActivity extends AppCompatActivity {
             TextView oemSkinWarning = view.findViewById(R.id.oem_skin_warning);
             TextView next = view.findViewById(R.id.next);
 
+            if (getActivity() instanceof SetupActivity) {
+                // Do nothing :)
+            }
+            else {
+                next.setVisibility(View.GONE);
+            }
+
             if (TextUtils.isEmpty(getSystemProperty("ro.miui.ui.version.code"))) {
                 oemSkinWarning.setVisibility(View.GONE);
             }

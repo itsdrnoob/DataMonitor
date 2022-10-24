@@ -70,6 +70,7 @@ public class Values {
     public static final int APP_DATA_LIMIT_FRAGMENT = 0x00AA;
     public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
+    public static final int DISABLE_BATTERY_OPTIMISATION_FRAGMENT = 0x00E6;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;

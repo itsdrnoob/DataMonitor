@@ -21,6 +21,33 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/battery_optimisation_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_mid_large"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/error_banner_background"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_baseline_report_24"
+        android:drawablePadding="@dimen/margin_mid_large"
+        android:drawableTint="@color/error"
+        android:elevation="@dimen/elevation_default"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/margin_mid_large"
+        android:paddingTop="@dimen/margin_mid_large"
+        android:paddingEnd="@dimen/margin_medium"
+        android:paddingBottom="@dimen/margin_mid_large"
+        android:text="@string/battery_optimisation_enabled_info"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/text_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        android:visibility="gone"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

@@ -31,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.text.Spannable;
 import android.util.Log;
@@ -43,6 +44,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -78,8 +81,6 @@ import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_THEME;
 import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
-import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
-import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_NAME;
@@ -87,9 +88,12 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_VALUE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
@@ -181,6 +185,14 @@ public class MainActivity extends AppCompatActivity {
 
                 NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
 
+                binding.batteryOptimisationError.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(MainActivity.this, ContainerActivity.class)
+                                .putExtra(GENERAL_FRAGMENT_ID, DISABLE_BATTERY_OPTIMISATION_FRAGMENT));
+                    }
+                });
+
 //        NavigationUI.setupActionBarWithNavController(this, controller, configuration);
 //        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
 
@@ -224,6 +236,23 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    private void checkBatteryOptimisationState() {
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
+                binding.mainNavHostFragment.getLayoutParams();
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        if (powerManager.isIgnoringBatteryOptimizations(getPackageName())) {
+            // Battery optimisation is disabled
+            params.topToBottom = R.id.main_toolbar;
+        }
+        else {
+            // Battery optimisation is enabled
+            params.topToBottom = R.id.battery_optimisation_error;
+        }
+
+        binding.mainNavHostFragment.setLayoutParams(params);
+        binding.mainNavHostFragment.requestLayout();
     }
 
     private void initializeBottomNavBar() {
@@ -305,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        checkBatteryOptimisationState();
 
         // Action bar title resets while changing theme in settings, setting current title
 //        NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
