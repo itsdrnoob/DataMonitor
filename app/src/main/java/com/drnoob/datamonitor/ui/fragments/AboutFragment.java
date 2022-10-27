@@ -55,6 +55,7 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 
 import static com.drnoob.datamonitor.core.Values.MD5_GITHUB;
+import static com.drnoob.datamonitor.core.Values.MD5_PLAY;
 import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 
 public class AboutFragment extends Fragment {
@@ -93,6 +94,15 @@ public class AboutFragment extends Fragment {
         if (newVersion > currentVersion) {
             isUpdateAvailable = true;
             mCheckForUpdate.setText(R.string.label_update_available);
+        }
+
+        String md5 = KeyUtils.get(getContext(), "MD5");
+        if (md5.equalsIgnoreCase(MD5_PLAY) || md5.equalsIgnoreCase(MD5_GITHUB)) {
+            // Do nothing :)
+        }
+        else {
+            // F-Droid build
+            mCheckForUpdate.setVisibility(View.GONE);
         }
 
         mCheckForUpdate.setOnClickListener(new View.OnClickListener() {

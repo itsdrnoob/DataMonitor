@@ -127,5 +127,6 @@ public class Values {
 
     public static final String UPDATE_VERSION = "update_version";
     public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
+    public static final String MD5_PLAY = "58CDB2B01A9E512D4FDC1A9926A29513";
 
 }
