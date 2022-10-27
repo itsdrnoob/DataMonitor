@@ -159,6 +159,13 @@ public class CrashReportActivity extends AppCompatActivity {
                     String logFile = "";
                     try {
                         logFile = extractLogsToFile(mErrorLogs, includeDeviceInfo, getContext());
+                        if (logFile == null) {
+                            Snackbar snackbar = Snackbar.make(getView(), getString(R.string.error_no_crash_logs),
+                                    Snackbar.LENGTH_LONG);
+                            dismissOnClick(snackbar);
+                            snackbar.show();
+                            return false;
+                        }
                         try {
                             List<Intent> telegramIntents = new ArrayList<Intent>();
                             Intent telegramIntent = new Intent(Intent.ACTION_SEND);
@@ -209,6 +216,13 @@ public class CrashReportActivity extends AppCompatActivity {
             github.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    if (mErrorLogs == null) {
+                        Snackbar snackbar = Snackbar.make(getView(), getString(R.string.error_no_crash_logs),
+                                Snackbar.LENGTH_LONG);
+                        dismissOnClick(snackbar);
+                        snackbar.show();
+                        return false;
+                    }
                     Intent githubIntent = new Intent(Intent.ACTION_VIEW);
                     githubIntent.setData(Uri.parse(getString(R.string.github_new_issue)));
                     startActivity(githubIntent);
@@ -220,6 +234,13 @@ public class CrashReportActivity extends AppCompatActivity {
             mail.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    if (mErrorLogs == null) {
+                        Snackbar snackbar = Snackbar.make(getView(), getString(R.string.error_no_crash_logs),
+                                Snackbar.LENGTH_LONG);
+                        dismissOnClick(snackbar);
+                        snackbar.show();
+                        return false;
+                    }
                     String logs = getString(R.string.crash_logs_warning) + "\n\n" +
                             getLogs(mErrorLogs, includeDeviceInfo, getContext());
                     Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
@@ -249,6 +270,9 @@ public class CrashReportActivity extends AppCompatActivity {
 
     private static String extractLogsToFile(String logs, boolean includeDeviceInfo, Context context)
             throws IOException {
+        if (logs == null) {
+            return null;
+        }
         String fileName;
         String filePath = context.getExternalFilesDir(null) + File.separator + "logs";
         File dir = new File(filePath);
@@ -297,6 +321,9 @@ public class CrashReportActivity extends AppCompatActivity {
     }
 
     private static String getLogs(String logs, boolean includeDeviceInfo, Context context) {
+        if (logs == null) {
+            return null;
+        }
         StringBuilder stringBuilder = new StringBuilder(logs);
         if (includeDeviceInfo) {
             stringBuilder.append("\n")

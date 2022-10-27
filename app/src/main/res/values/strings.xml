@@ -306,4 +306,5 @@
     <string name="label_mail">Mail</string>
     <string name="battery_optimisation_enabled_info">Battery optimisation is enabled. This will interfere with the working of Data Monitor. Click to disable.</string>
     <string name="label_battery_optimisation">Battery optimisation</string>
+    <string name="error_no_crash_logs">No crash logs found. Are you sure a crash occurred?</string>
 </resources>
