@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,9 +27,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -51,7 +54,8 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static com.drnoob.datamonitor.Common.updateDialog;
+import static com.drnoob.datamonitor.core.Values.MD5_GITHUB;
+import static com.drnoob.datamonitor.core.Values.MD5_PLAY;
 import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 
 public class AboutFragment extends Fragment {
@@ -90,6 +94,15 @@ public class AboutFragment extends Fragment {
         if (newVersion > currentVersion) {
             isUpdateAvailable = true;
             mCheckForUpdate.setText(R.string.label_update_available);
+        }
+
+        String md5 = KeyUtils.get(getContext(), "MD5");
+        if (md5.equalsIgnoreCase(MD5_PLAY) || md5.equalsIgnoreCase(MD5_GITHUB)) {
+            // Do nothing :)
+        }
+        else {
+            // F-Droid build
+            mCheckForUpdate.setVisibility(View.GONE);
         }
 
         mCheckForUpdate.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +158,18 @@ public class AboutFragment extends Fragment {
         Intent updateIntent = new Intent(Intent.ACTION_VIEW);
         updateIntent.setData(Uri.parse(getString(R.string.f_droid)));
         startActivity(updateIntent);
+    }
+
+    private void updateDialog(AlertDialog dialog, Context context) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(metrics);
+
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = (metrics.widthPixels * 85 / 100);
+        lp.y = 50;
+        dialog.getWindow().setAttributes(lp);
     }
 
     private class CheckForUpdate extends AsyncTask<Void, String, String> {
