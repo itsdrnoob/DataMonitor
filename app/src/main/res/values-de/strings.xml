@@ -247,4 +247,13 @@
     <string name="update_fetch_error">Konnte keine Updates abrufen</string>
     <string name="new_update_available">Eine neue Version ist verfügbar!</string>
     <string name="settings_app_theme">Theme</string>
+    <string name="system_theme_summary">Dem System-Design folgen</string>
+    <string name="hudaifa_abdullah_summary">Arabisch</string>
+    <string name="license_summary">App-Lizenzen anzeigen</string>
+    <string name="liviogasp_summary">Italienisch</string>
+    <string name="holydemon_summary">Malayalam</string>
+    <string name="f_droid_page">App auf F-Droid anzeigen</string>
+    <string name="network_diagnostics_info">Die Netzdiagnose kann etwa 20-30 MB Daten verbrauchen. Vergewissern Sie sich, dass dies in Ihrem Tarif verfügbar ist, da sonst Netzgebühren anfallen können.</string>
+    <string name="comradekingu_summary">Unterstützung bei der Übersetzung</string>
+    <string name="f_droid_page_summary">Die App im offiziellen F-Droid Repository ansehen</string>
 </resources>
