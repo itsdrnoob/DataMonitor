@@ -6,7 +6,7 @@
     <string name="github_contribute_translations" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/master/CONTRIBUTING.md#translations</string>
     <string name="github_issue" translatable="false">https://github.com/itsdrnoob/DataMonitor/issues/new/choose</string>
     <string name="xda_thread" translatable="false">https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/</string>
-    <string name="play_store" translatable="false">https://play.google.com/store/apps/details?id=com.drnoob.datamonitor</string>
+    <string name="f_droid" translatable="false">https://f-droid.org/packages/com.drnoob.datamonitor/</string>
     <string name="update_check" translatable="false">https://raw.githubusercontent.com/itsdrnoob/DataMonitor/HEAD/VERSION.md</string>
     <string name="changelog" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CHANGELOG.md</string>
 
@@ -18,6 +18,10 @@
     <string name="eth_address" translatable="false">0x820f316f75dacf5606b49bd33dfcf7e7142d59a5</string>
     <string name="btc_address" translatable="false">3MS2NP6ptS7XQytdn5yCAQgotVtXBQL1xw</string>
     <string name="upi_address" translatable="false"><![CDATA[upi://pay?pa=itsdrnoob@ybl&pn=itsdrnoob&tn=DataMonitor]]></string>
+
+    <string name="api_url" translatable="false">https://api.ipify.org</string>
+    <string name="download_test_url" translatable="false">http://speedtest.ftp.otenet.gr/files/test10Mb.db</string>
+    <string name="upload_test_url" translatable="false">https://www.azurespeed.com/Azure/UploadLargeFile/</string>
 
     <!-- Contributors -->
     <string name="github_itsdrnoob" translatable="false">https://www.github.com/itsdrnoob</string>

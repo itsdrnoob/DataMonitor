@@ -68,6 +68,7 @@ import fr.bmartel.speedtest.SpeedTestReport;
 import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
 import fr.bmartel.speedtest.model.SpeedTestError;
+import fr.bmartel.speedtest.utils.SpeedTestUtils;
 import io.ipinfo.api.IPinfo;
 import io.ipinfo.api.model.IPResponse;
 
@@ -280,7 +281,8 @@ public class NetworkDiagnosticsFragment extends Fragment {
                             });
 
                             uploadSpeedTestSocket = new SpeedTestSocket();
-                            uploadSpeedTestSocket.startFixedUpload(activity.getString(R.string.upload_test_url), 10000000, 10000);
+                            String fileName = SpeedTestUtils.generateFileName() + ".txt";
+                            uploadSpeedTestSocket.startFixedUpload(activity.getString(R.string.upload_test_url) + fileName, 10000000, 10000);
 
                             // add a listener to wait for speedtest completion and progress
                             uploadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
@@ -299,7 +301,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
                                     if (!isCancelled()) {
                                         try {
-                                            String host = "www.google.com";
+                                            String host = "1.1.1.1";
                                             int timeout = 10000;
                                             for (int i = 0; i < 20; i++) {
                                                 long beforeTime = System.currentTimeMillis();
@@ -315,9 +317,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             }
                                             mLatency = sum / mLatencies.size();
                                             onPostExecute("complete");
-                                        } catch (IOException e) {
+
+                                        }
+                                    catch (IOException e) {
                                             e.printStackTrace();
                                         }
+
                                     }
 
                                     onPostExecute("upload");
