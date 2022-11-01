@@ -254,4 +254,6 @@
     <string name="holydemon_summary">Malayalamca</string>
     <string name="body_app_data_warning_notification">%1$s veri kotasını kullandı</string>
     <string name="label_reset_every_month">Her ayın %1$s%2$s</string>
+    <string name="f_droid_page">Uygulamayı F-Droid\'de görüntüle</string>
+    <string name="f_droid_page_summary">Uygulamaya resmi F-Droid deposunda göz atın</string>
 </resources>
