@@ -51,6 +51,7 @@
         <activity android:name=".ui.activities.ContainerActivity"
             android:screenOrientation="portrait"
             android:exported="false"
+            android:fitsSystemWindows="true"
             tools:ignore="LockedOrientationActivity" />
 
         <receiver android:name=".Widget.DataUsageWidget"

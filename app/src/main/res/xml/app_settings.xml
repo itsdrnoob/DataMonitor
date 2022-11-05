@@ -26,6 +26,13 @@
             app:summary="@string/language_summary"
             android:widgetLayout="@layout/preference_right_arrow" />
 
+        <com.drnoob.datamonitor.core.base.Preference
+            android:icon="@drawable/ic_diagnostics"
+            android:key="network_diagnostics"
+            android:title="@string/settings_network_diagnostics"
+            app:summary="@string/network_diagnostics_summary"
+            android:widgetLayout="@layout/preference_right_arrow" />
+
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
     <com.drnoob.datamonitor.core.base.PreferenceCategory

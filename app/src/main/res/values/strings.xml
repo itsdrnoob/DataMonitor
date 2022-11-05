@@ -308,4 +308,21 @@
     <string name="label_battery_optimisation">Battery optimisation</string>
     <string name="error_no_crash_logs">No crash logs found. Are you sure a crash occurred?</string>
     <string name="label_copy_logs">Copy logs</string>
+    <string name="settings_network_diagnostics">Network diagnostics</string>
+    <string name="network_diagnostics_summary">Switch diagnostics server</string>
+    <string name="settings_diagnostics_server">Server</string>
+    <string name="settings_download_server">Download server</string>
+    <string name="settings_upload_server">Upload server</string>
+    <string name="download_url_1_summary" translatable="false">http://speedtest.ftp.otenet.gr</string>
+    <string name="download_url_2_summary" translatable="false">https://github.com</string>
+    <string name="download_url_3_summary" translatable="false">http://xcal1.vodafone.co.uk</string>
+    <string name="upload_url_1_summary" translatable="false">https://www.azurespeed.com</string>
+    <string name="upload_url_2_summary" translatable="false">https://v2.convertapi.com</string>
+    <string name="upload_url_3_summary" translatable="false">https://easyupload.io</string>
+    <string name="custom_upload_url_hint">Enter complete upload URL</string>
+    <string name="label_custom_server">Custom server</string>
+    <string name="custom_download_url_hint">Enter complete download URL</string>
+    <string name="label_custom_server_save_success">Server preference saved</string>
+    <string name="error_invaliid_url">Invalid download URL!</string>
+    <string name="error_url_verification_failed">Couldn\'t verify URL! Please try again or use a different one.</string>
 </resources>

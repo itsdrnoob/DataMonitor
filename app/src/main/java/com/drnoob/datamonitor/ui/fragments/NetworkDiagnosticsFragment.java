@@ -32,8 +32,12 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.TrafficStats;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -50,6 +54,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.drnoob.datamonitor.R;
@@ -65,6 +70,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -79,6 +86,8 @@ import io.ipinfo.api.model.IPResponse;
 import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
 import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.ISP;
 import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
@@ -234,6 +243,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
         long sentBefore;
         long sentAfter;
+        String downloadUrl, uploadUrl;
 
         public SpeedTest(Activity activity) {
             this.activity = activity;
@@ -283,8 +293,10 @@ public class NetworkDiagnosticsFragment extends Fragment {
                         }
                     });
 
+                    downloadUrl = PreferenceManager.getDefaultSharedPreferences(activity)
+                            .getString(DIAGNOSTICS_DOWNLOAD_URL, activity.getString(R.string.download_server_1_url));
                     downloadSpeedTestSocket = new SpeedTestSocket();
-                    downloadSpeedTestSocket.startFixedDownload(activity.getString(R.string.download_test_url), 15000, 1000);
+                    downloadSpeedTestSocket.startFixedDownload(downloadUrl, 15000, 1000);
 
                     // add a listener to wait for speedtest completion and progress
                     downloadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
@@ -302,11 +314,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                 }
                             });
 
+                            uploadUrl = PreferenceManager.getDefaultSharedPreferences(activity)
+                                    .getString(DIAGNOSTICS_UPLOAD_URL, activity.getString(R.string.upload_server_1_url));
                             uploadSpeedTestSocket = new SpeedTestSocket();
                             String fileName = SpeedTestUtils.generateFileName() + ".txt";
                             sentBefore = TrafficStats.getTotalTxBytes();
-                            Log.e(TAG, "onCompletion: upload start: " + sentBefore);
-                            uploadSpeedTestSocket.startFixedUpload(activity.getString(R.string.upload_test_url) + fileName, 10000000, 10000, 1000);
+                            uploadSpeedTestSocket.startFixedUpload(uploadUrl + fileName, 10000000, 10000, 1000);
 
                             // add a listener to wait for speedtest completion and progress
                             uploadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
@@ -771,7 +784,8 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                                                 @Override
                                                                 public void onAnimationStart(Animator animation) {
                                                                     super.onAnimationStart(animation);
-                                                                    runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
+                                                                    runDiagnostics.setBackground(activity.getResources()
+                                                                            .getDrawable(R.drawable.button_run_diagnostics_background, null));
                                                                     runDiagnostics.setText(R.string.run_diagnostics);
                                                                     setConnectionStatus();
                                                                     currentTest.setVisibility(View.GONE);

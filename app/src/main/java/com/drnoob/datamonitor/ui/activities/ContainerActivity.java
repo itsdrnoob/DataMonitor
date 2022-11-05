@@ -32,6 +32,7 @@ import com.drnoob.datamonitor.ui.fragments.AboutFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
+import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
@@ -55,6 +56,7 @@ import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
@@ -155,6 +157,11 @@ public class ContainerActivity extends AppCompatActivity {
             case DISABLE_BATTERY_OPTIMISATION_FRAGMENT:
                 fragment = new SetupActivity.DisableBatteryOptimisationFragment();
                 title = getString(R.string.label_battery_optimisation);
+                break;
+
+            case DIAGNOSTICS_SETTINGS_FRAGMENT:
+                fragment = new DiagnosticsSettingsFragment();
+                title = getString(R.string.settings_network_diagnostics);
                 break;
         }
 

@@ -71,6 +71,7 @@ public class Values {
     public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
     public static final int DISABLE_BATTERY_OPTIMISATION_FRAGMENT = 0x00E6;
+    public static final int DIAGNOSTICS_SETTINGS_FRAGMENT = 0x00F0;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -112,6 +113,12 @@ public class Values {
     public static final String DAILY_DATA_HOME_ACTION = "daily_data_home_action";
     public static final String APP_THEME = "app_theme";
     public static final String APP_THEME_SUMMARY = "app_theme_summary";
+    public static final String DIAGNOSTICS_DOWNLOAD_URL = "diagnostics_download_url";
+    public static final String DIAGNOSTICS_DOWNLOAD_URL_SUMMARY = "diagnostics_download_url_summary";
+    public static final String DIAGNOSTICS_DOWNLOAD_URL_INDEX = "diagnostics_download_url_index";
+    public static final String DIAGNOSTICS_UPLOAD_URL = "diagnostics_upload_url";
+    public static final String DIAGNOSTICS_UPLOAD_URL_SUMMARY = "diagnostics_upload_url_summary";
+    public static final String DIAGNOSTICS_UPLOAD_URL_INDEX = "diagnostics_upload_url_index";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

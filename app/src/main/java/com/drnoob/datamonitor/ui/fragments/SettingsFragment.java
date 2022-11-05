@@ -42,13 +42,15 @@ import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_THEME;
 import static com.drnoob.datamonitor.core.Values.APP_THEME_SUMMARY;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsFragment.class.getSimpleName();
-    private Preference mAppThemePicker, mLanguagePicker, mAbout, mLicense, mContributors, mDonate;
+    private Preference mAppThemePicker, mLanguagePicker, mDiagnosticsSettings,
+            mAbout, mLicense, mContributors, mDonate;
     private Snackbar snackbar;
 
     public SettingsFragment() {
@@ -66,6 +68,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         mAppThemePicker = (Preference) findPreference("app_theme");
         mLanguagePicker = (Preference) findPreference("language_picker");
+        mDiagnosticsSettings = (Preference) findPreference("network_diagnostics");
         mAbout = (Preference) findPreference("about");
         mLicense = (Preference) findPreference("license");
         mContributors = (Preference) findPreference("contributors");
@@ -181,6 +184,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(androidx.preference.Preference preference) {
                 startActivity(new Intent(getContext(), ContainerActivity.class)
                         .putExtra(GENERAL_FRAGMENT_ID, APP_LANGUAGE_FRAGMENT));
+                return false;
+            }
+        });
+
+        mDiagnosticsSettings.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                startActivity(new Intent(getContext(), ContainerActivity.class)
+                        .putExtra(GENERAL_FRAGMENT_ID, DIAGNOSTICS_SETTINGS_FRAGMENT));
                 return false;
             }
         });
