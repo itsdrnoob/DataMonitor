@@ -133,23 +133,29 @@ public class CrashReportActivity extends AppCompatActivity {
                             Snackbar.LENGTH_LONG);
                 }
                 else {
-                    StringBuilder stringBuilder = new StringBuilder(mErrorLogs);
-                    if (includeDeviceInfo) {
-                        stringBuilder.append("\n")
-                                .append("\n")
-                                .append("----------Device info----------" + "\n")
-                                .append("Device Manufacturer: " + Build.MANUFACTURER + "\n")
-                                .append("Device Brand: " + Build.BRAND + "\n")
-                                .append("Device Model: " + Build.MODEL + "\n")
-                                .append("Device Codename: " + Build.PRODUCT + "\n")
-                                .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n")
-                                .append("SOC Model: " + Build.SOC_MODEL);
+                    if (mErrorLogs != null) {
+                        StringBuilder stringBuilder = new StringBuilder(mErrorLogs);
+                        if (includeDeviceInfo) {
+                            stringBuilder.append("\n")
+                                    .append("\n")
+                                    .append("----------Device info----------" + "\n")
+                                    .append("Device Manufacturer: " + Build.MANUFACTURER + "\n")
+                                    .append("Device Brand: " + Build.BRAND + "\n")
+                                    .append("Device Model: " + Build.MODEL + "\n")
+                                    .append("Device Codename: " + Build.PRODUCT + "\n")
+                                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n")
+                                    .append("SOC Model: " + Build.SOC_MODEL);
+                        }
+                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clipData = ClipData.newPlainText("datamonitor-crash-logs", stringBuilder.toString());
+                        clipboardManager.setPrimaryClip(clipData);
+                        snackbar = Snackbar.make(binding.getRoot(), getString(R.string.label_crash_logs_copied),
+                                Snackbar.LENGTH_LONG);
                     }
-                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("datamonitor-crash-logs", stringBuilder.toString());
-                    clipboardManager.setPrimaryClip(clipData);
-                    snackbar = Snackbar.make(binding.getRoot(), getString(R.string.label_crash_logs_copied),
-                            Snackbar.LENGTH_LONG);
+                    else {
+                        snackbar = Snackbar.make(binding.getRoot(), getString(R.string.error_no_crash_logs),
+                                Snackbar.LENGTH_LONG);
+                    }
                 }
                 dismissOnClick(snackbar);
                 snackbar.show();
