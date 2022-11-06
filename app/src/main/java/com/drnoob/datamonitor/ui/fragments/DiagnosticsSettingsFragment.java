@@ -136,6 +136,11 @@ public class DiagnosticsSettingsFragment extends PreferenceFragmentCompat {
                                 summary = getString(R.string.download_url_3_summary);
                                 index = 2;
                             }
+                            else {
+                                url = getString(R.string.download_server_1_url);
+                                summary = getString(R.string.download_url_1_summary);
+                                index = 0;
+                            }
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
                                     .putString(Values.DIAGNOSTICS_DOWNLOAD_URL, url)
                                     .putString(DIAGNOSTICS_DOWNLOAD_URL_SUMMARY, summary)
@@ -247,8 +252,13 @@ public class DiagnosticsSettingsFragment extends PreferenceFragmentCompat {
                             }
                             else if (uploadServerGroup.getCheckedRadioButtonId() == R.id.server_3) {
                                 url = getString(R.string.upload_server_3_url);
-                                summary = getString(R.string.upload_url_2_summary);
+                                summary = getString(R.string.upload_url_3_summary);
                                 index = 2;
+                            }
+                            else {
+                                url = getString(R.string.upload_server_1_url);
+                                summary = getString(R.string.upload_url_1_summary);
+                                index = 0;
                             }
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
                                     .putString(Values.DIAGNOSTICS_UPLOAD_URL, url)
