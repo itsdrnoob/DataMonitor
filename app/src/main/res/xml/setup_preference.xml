@@ -50,6 +50,12 @@
                 android:key="remaining_data_info"
                 android:defaultValue="true"/>
 
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_show_wifi_usage"
+                app:iconSpaceReserved="false"
+                android:key="widget_show_wifi_usage"
+                android:defaultValue="true"/>
+
             <com.drnoob.datamonitor.core.base.Preference
                 android:title="@string/setup_refresh_widget"
                 android:summary="@string/refresh_widget_summary"

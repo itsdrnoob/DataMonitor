@@ -123,10 +123,19 @@ public class DataUsageWidget extends AppWidgetProvider {
 
         Boolean showRemaining = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("remaining_data_info", true);
+        Boolean showWifiUsage = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("widget_show_wifi_usage", true);
         Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
         if (dataLimit < 0) {
             views.setTextViewText(R.id.widget_data_usage_remaining, "");
             views.setViewVisibility(R.id.widget_data_usage_remaining, View.GONE);
+        }
+
+        if (!showWifiUsage) {
+            views.setViewVisibility(R.id.layout_wifi, View.GONE);
+        }
+        else {
+            views.setViewVisibility(R.id.layout_wifi, View.VISIBLE);
         }
 
         if (showRemaining) {
@@ -199,7 +208,6 @@ public class DataUsageWidget extends AppWidgetProvider {
             views.setViewVisibility(R.id.widget_data_usage_remaining, View.GONE);
         }
 //        views.setTextViewText(R.id.widget_wifi_usage_remaining, "");
-
 
         Intent intent = new Intent(context, DataUsageWidget.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);

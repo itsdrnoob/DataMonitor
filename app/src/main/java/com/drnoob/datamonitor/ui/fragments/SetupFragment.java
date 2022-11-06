@@ -149,8 +149,9 @@ public class SetupFragment extends Fragment {
         private static final String TAG = SetupPreference.class.getSimpleName();
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit;
-        private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowMobileData, mShowWifi,
-                mShowDataWarning, mNetworkSignalNotification, mAutoHideNetworkSpeed;
+        private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
+                mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
+                mAutoHideNetworkSpeed;
         private Snackbar snackbar;
 
         @Override
@@ -173,6 +174,7 @@ public class SetupFragment extends Fragment {
             mShowWifi = (SwitchPreferenceCompat) findPreference("show_wifi_notification");
             mShowDataWarning = (SwitchPreferenceCompat) findPreference("data_usage_alert");
             mAutoHideNetworkSpeed = (SwitchPreferenceCompat) findPreference("auto_hide_network_speed");
+            mShowWifiWidget = (SwitchPreferenceCompat) findPreference("widget_show_wifi_usage");
 
 
             int widgetRefreshInterval = PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -515,6 +517,19 @@ public class SetupFragment extends Fragment {
                     }
                     dismissOnClick(snackbar);
                     snackbar.show();
+                    return false;
+                }
+            });
+
+            mShowWifiWidget.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                    int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+                    Intent intent = new Intent(getContext(), DataUsageWidget.class);
+                    intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                    getContext().sendBroadcast(intent);
                     return false;
                 }
             });
