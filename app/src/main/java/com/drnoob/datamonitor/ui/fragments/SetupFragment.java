@@ -840,6 +840,13 @@ public class SetupFragment extends Fragment {
                                 Intent intent = new Intent(getContext(), DataUsageWidget.class);
                                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+
+                                boolean updateNotification = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
+                                if (updateNotification) {
+                                    Intent notificationIntent = new Intent(getContext(), NotificationUpdater.class);
+                                    getContext().sendBroadcast(notificationIntent);
+                                }
+
                                 getContext().sendBroadcast(intent);
                             }
                         }

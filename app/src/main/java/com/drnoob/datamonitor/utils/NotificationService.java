@@ -35,6 +35,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
@@ -42,6 +43,8 @@ import com.drnoob.datamonitor.ui.activities.MainActivity;
 
 import java.text.ParseException;
 
+import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP;
@@ -76,31 +79,37 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        mUpdaterIntent = new Intent(this, NotificationUpdater.class);
-        mUpdaterPendingIntent = PendingIntent.getBroadcast(this, 0, mUpdaterIntent,
-                PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
+        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setup_notification", false);
+        if (isChecked) {
+            mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            mUpdaterIntent = new Intent(this, NotificationUpdater.class);
+            mUpdaterPendingIntent = PendingIntent.getBroadcast(this, 0, mUpdaterIntent,
+                    PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
-                DATA_USAGE_NOTIFICATION_CHANNEL_ID);
-        builder.setSmallIcon(R.drawable.ic_mobile_data);
-        builder.setOngoing(true);
-        builder.setPriority(NotificationCompat.PRIORITY_LOW);
-        builder.setContentTitle(getString(R.string.title_data_usage_notification, getString(R.string.body_data_usage_notification_loading)));
-        builder.setContentText(getString(R.string.body_data_usage_notification_loading));
-        builder.setShowWhen(false);
-        builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
-        builder.setContentIntent(pendingIntent);
-        builder.setAutoCancel(false);
-        builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
+                    DATA_USAGE_NOTIFICATION_CHANNEL_ID);
+            builder.setSmallIcon(R.drawable.ic_mobile_data);
+            builder.setOngoing(true);
+            builder.setPriority(NotificationCompat.PRIORITY_LOW);
+            builder.setContentTitle(getString(R.string.title_data_usage_notification, getString(R.string.body_data_usage_notification_loading)));
+            builder.setContentText(getString(R.string.body_data_usage_notification_loading));
+            builder.setShowWhen(false);
+            builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+            builder.setContentIntent(pendingIntent);
+            builder.setAutoCancel(false);
+            builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
 
-        startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
-        startUpdater(getApplicationContext());
+            startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
+            startUpdater(getApplicationContext());
 
-        mAlarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis(), mUpdaterPendingIntent);
+            mAlarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis(), mUpdaterPendingIntent);
+        }
+        else {
+            onDestroy();
+        }
     }
 
     @Override
@@ -131,6 +140,7 @@ public class NotificationService extends Service {
         private static final String TAG = NotificationUpdater.class.getSimpleName();
         private String mobileDataUsage, wifiDataUsage,  totalDataUsage;
         private Long[] mobile, wifi;
+        private Boolean showPercent;
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -141,6 +151,10 @@ public class NotificationService extends Service {
 
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", true)) {
 
+                Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
+                showPercent = dataLimit > 0;
+                Float mobileMB;
+                int percent = 0;
                 try {
                     mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
                     String[] mobileData = formatData(mobile[0], mobile[1]);
@@ -157,6 +171,21 @@ public class NotificationService extends Service {
                             mobileData[2]);
                     wifiDataUsage = context.getResources().getString(R.string.notification_wifi_data_usage,
                             wifiData[2]);
+
+                    if (showPercent) {
+                        if (mobileData[2].split(" ")[1].equalsIgnoreCase("GB")) {
+                            mobileMB = Float.parseFloat(mobileData[2].split(" ")[0]) * 1024;
+                        }
+                        else {
+                            mobileMB = Float.parseFloat(mobileData[2].split(" ")[0]);
+                        }
+                        if (mobileMB > dataLimit) {
+                            percent = 100;
+                        }
+                        else {
+                            percent = (int) (mobileMB / dataLimit * 100);
+                        }
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 } catch (RemoteException e) {
@@ -173,13 +202,22 @@ public class NotificationService extends Service {
                 Boolean showWifi = PreferenceManager.getDefaultSharedPreferences(context)
                         .getBoolean(NOTIFICATION_WIFI, true);
 
-
                 Intent activityIntent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context,
                         DATA_USAGE_NOTIFICATION_CHANNEL_ID);
-                builder.setSmallIcon(R.drawable.ic_mobile_data);
+                if (showPercent) {
+                    String iconPrefix = "ic_data_usage_percent_";
+                    String iconSuffix = String.valueOf(percent);
+                    String iconName = iconPrefix + iconSuffix;
+                    int iconResID = context.getResources().getIdentifier(iconName , "drawable", context.getPackageName());
+                    IconCompat icon = IconCompat.createWithResource(context, iconResID);
+                    builder.setSmallIcon(icon);
+                }
+                else {
+                    builder.setSmallIcon(R.drawable.ic_mobile_data);
+                }
                 builder.setOngoing(true);
                 builder.setPriority(NotificationCompat.PRIORITY_LOW);
 //                builder.setContentTitle(context.getString(R.string.title_data_usage_notification));
