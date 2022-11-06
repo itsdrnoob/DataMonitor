@@ -1202,9 +1202,17 @@ public class SetupFragment extends Fragment {
                         dialog.setContentView(dialogView);
                         dialog.show();
                     }
-                    else {
+                    else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                            .equals(DATA_RESET_CUSTOM)) {
                         snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
                                 getString(R.string.setup_usage_reset_date_custom_selected), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        dismissOnClick(snackbar);
+                        snackbar.show();
+                    }
+                    else {
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                getString(R.string.label_add_data_plan_first), Snackbar.LENGTH_SHORT)
                                 .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                         dismissOnClick(snackbar);
                         snackbar.show();
@@ -1381,7 +1389,12 @@ public class SetupFragment extends Fragment {
         }
 
         public static void pauseMonitor() {
-            mContext.stopService(new Intent(mContext, DataUsageMonitor.class));
+            try {
+                mContext.stopService(new Intent(mContext, DataUsageMonitor.class));
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         public static void resumeMonitor() {
@@ -1414,7 +1427,11 @@ public class SetupFragment extends Fragment {
                         date, suffix));
             }
             else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
-                    .equals(DATA_RESET_DAILY)) {
+                    .equals(DATA_RESET_CUSTOM)) {
+                resetTitle = getContext().getString(R.string.setup_usage_reset_date);
+                resetSummary = getContext().getString(R.string.setup_usage_reset_date_custom_selected);
+            }
+            else {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_time);
                 int hour, minute;
                 hour = PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -1463,10 +1480,6 @@ public class SetupFragment extends Fragment {
                         resetSummary = h + ":" + m + " am";
                     }
                 }
-            }
-            else {
-                resetTitle = getContext().getString(R.string.setup_usage_reset_date);
-                resetSummary = getContext().getString(R.string.setup_usage_reset_date_custom_selected);
             }
 
             mUsageResetTime.setTitle(resetTitle);
