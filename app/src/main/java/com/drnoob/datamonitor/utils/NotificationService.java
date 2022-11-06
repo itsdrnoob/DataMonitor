@@ -44,7 +44,6 @@ import com.drnoob.datamonitor.ui.activities.MainActivity;
 import java.text.ParseException;
 
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
-import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP;

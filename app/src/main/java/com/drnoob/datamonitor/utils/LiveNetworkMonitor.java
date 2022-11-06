@@ -67,6 +67,7 @@ public class LiveNetworkMonitor extends Service {
     private boolean isTimerCancelled = true;
     private boolean isTaskPaused = false;
     private boolean isLiveNetworkReceiverRegistered = false;
+    private boolean isServiceRunning;
 
     @Nullable
     @Override
@@ -110,7 +111,11 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setAutoCancel(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
 
+        if (isServiceRunning) {
+            return;
+        }
         startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+        isServiceRunning = true;
 
         if (isTimerCancelled) {
             mTimer = new Timer();
@@ -134,6 +139,7 @@ public class LiveNetworkMonitor extends Service {
                     }
                     LiveNetworkMonitor.this.stopForeground(true);
                     LiveNetworkMonitor.this.stopSelf();
+                    stopService(new Intent(LiveNetworkMonitor.this, this.getClass()));
                 }
             }
         };
@@ -153,6 +159,7 @@ public class LiveNetworkMonitor extends Service {
             Log.d(TAG, "onDestroy: stopped");
             mNetworkChangeMonitor.stopMonitor();
             unregisterNetworkReceiver();
+            isServiceRunning = false;
         }
         super.onDestroy();
     }
@@ -436,7 +443,12 @@ public class LiveNetworkMonitor extends Service {
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 // Screen turned off. Cancel task
-                mTimerTask.cancel();
+                try {
+                    mTimerTask.cancel();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 restartService(context, true);

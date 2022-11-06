@@ -79,7 +79,8 @@ public class LanguageFragment extends Fragment {
         mContribute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.github_contribute_translations))));
+                startActivity(new Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse(getString(R.string.github_contribute_translations))));
             }
         });
     }

@@ -30,7 +30,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +46,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.databinding.ActivityCrashReportBinding;
-import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.snackbar.Snackbar;
 

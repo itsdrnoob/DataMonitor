@@ -17,7 +17,7 @@ Reçu"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"Niveau de déclenchement actuel : %1$s%%"</string>
     <string name="label_data_trigger_level">"Quand %1$s%% de données sont consommées"</string>
     <string name="app_label_package_name">"Nom du package : %1$s"</string>
-    <string name="app_label_uid">"Uid : %1$s"</string>
+    <string name="app_label_uid">"Uid : %1$d"</string>
     <string name="app_name_placeholder">"Nom de l'application"</string>
     <string name="app_data_usage_placeholder">"00 Mo"</string>
     <string name="label_sent">"Envoyé"</string>

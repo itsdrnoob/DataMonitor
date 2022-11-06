@@ -25,19 +25,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.TrafficStats;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -47,7 +42,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
@@ -70,8 +64,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -251,7 +243,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            Log.e(TAG, "onPreExecute: ");
+            Log.d(TAG, "onPreExecute: ");
             super.onPreExecute();
         }
 
@@ -329,7 +321,6 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     // Called when upload is finished
                                     Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
                                     mUploadSpeed = ((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8;
-                                    Log.e(TAG, "onCompletion: upload: " + mUploadSpeed );
                                     activity.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -480,7 +471,6 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                                 currentTest.setText(activity.getString(R.string.testing_download));
                                                 currentTest.setVisibility(View.VISIBLE);
                                                 currentTest.setAlpha(1f);
-                                                Log.e(TAG, "onAnimationEnd: " + currentTest.getVisibility() + "  " + currentTest.getAlpha() );
 //                                                currentTestAnim.setVisibility(View.VISIBLE);
 
 
@@ -822,7 +812,6 @@ public class NetworkDiagnosticsFragment extends Fragment {
     }
 
     private int getMeterDrawableId(float speed) {
-        Log.e(TAG, "getMeterDrawableId: " + speed );
         if (speed >= 0 && speed < 5) {
             return R.drawable.ic_meter_0;
         }
