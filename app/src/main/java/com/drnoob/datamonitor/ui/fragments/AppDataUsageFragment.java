@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -77,6 +78,7 @@ public class AppDataUsageFragment extends Fragment {
     public static List<AppDataUsageModel> mSystemList = new ArrayList<>();
     private static LinearLayout mLoading;
     private static Context mContext;
+    private static Activity mActivity;
     private static SwipeRefreshLayout mDataRefresh;
     private static TextView mSession, mType, mEmptyList;
     public static LinearLayout mTopBar;
@@ -97,6 +99,7 @@ public class AppDataUsageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
+        mActivity = getActivity();
     }
 
     @Nullable
@@ -116,6 +119,7 @@ public class AppDataUsageFragment extends Fragment {
         mTotalUsage = view.findViewById(R.id.current_session_total);
 
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(getActivity());
 
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
@@ -365,6 +369,7 @@ public class AppDataUsageFragment extends Fragment {
         Log.d(TAG, "onDataLoaded: " + mSystemList.size() + " system");
         Log.d(TAG, "onDataLoaded: " + mList.size() + " user");
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(mActivity);
         mAdapter.setFromHome(fromHome);
         mAppsView.setAdapter(mAdapter);
         mAppsView.setLayoutManager(new LinearLayoutManager(mContext));

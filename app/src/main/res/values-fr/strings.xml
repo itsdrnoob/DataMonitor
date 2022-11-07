@@ -147,7 +147,7 @@ Revenez voir plus tard"</string>
     <string name="day">"jour"</string>
     <string name="label_add_data_plan_first">"Veuillez ajouter un objectif de données en premier lieu"</string>
     <string name="title_data_warning_notification">"Avertissement de l'utilisation des données"</string>
-    <string name="body_data_warning_notification">"Vous avez utilisé %1$s%% de plus que votre limite de données"</string>
+    <string name="body_data_warning_notification">"Vous avez utilisé %1$d%% de plus que votre limite de données"</string>
     <string name="body_app_data_warning_notification">"%1$s a utilisé plus que son quota de données"</string>
     <string name="title_data_usage_notification">"Utilisation de données aujourd'hui"</string>
     <string name="body_data_usage_notification_loading">"Chargement..."</string>

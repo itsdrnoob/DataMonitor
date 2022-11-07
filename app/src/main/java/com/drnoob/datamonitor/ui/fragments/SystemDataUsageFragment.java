@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -71,6 +72,7 @@ public class SystemDataUsageFragment extends Fragment {
     public static RecyclerView mAppsView;
     private static LinearLayout mLoading;
     private static Context mContext;
+    private static Activity mActivity;
     private static SwipeRefreshLayout mDataRefresh;
     private static TextView mSession, mType, mEmptyList;
     public static LinearLayout mTopBar;
@@ -91,6 +93,7 @@ public class SystemDataUsageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
+        mActivity = getActivity();
     }
 
     @Override
@@ -108,6 +111,7 @@ public class SystemDataUsageFragment extends Fragment {
         mEmptyList = view.findViewById(R.id.empty_list);
         mList = AppDataUsageFragment.mSystemList;
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(getActivity());
         mAppsView = view.findViewById(R.id.app_data_usage_recycler);
 
 
@@ -287,6 +291,7 @@ public class SystemDataUsageFragment extends Fragment {
     private static void onDataLoaded() {
         Log.e(TAG, "onDataLoaded: " + mList.size() + " system");
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(mActivity);
         mAppsView.setAdapter(mAdapter);
         mAppsView.setLayoutManager(new LinearLayoutManager(mContext));
         mLoading.animate().alpha(0.0f);
