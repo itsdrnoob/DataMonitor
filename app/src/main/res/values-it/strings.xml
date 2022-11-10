@@ -206,4 +206,7 @@ Ricevuti"</string>
     <string name="current_language">"Lingua scelta"</string>
     <string name="available_languages">"Lingue disponibili"</string>
     <string name="label_reset_every_month">"%1$s%2$s di ogni mese"</string>
+    <string name="holydemon_summary">Malayalam</string>
+    <string name="liviogasp_summary">Italiano</string>
+    <string name="comradekingu_summary">Supporto alla traduzione</string>
 </resources>

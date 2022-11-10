@@ -211,7 +211,6 @@ Revenez voir plus tard"</string>
     <string name="system_data_usage">"Utilisation des données par le système"</string>
     <string name="cracky5322_summary">"Traducteur en chinois traditionnel"</string>
     <string name="louis_leblanc_summary">"Traducteur français"</string>
-    <string name="louis_leblanc"></string>
     <string name="network_speed_title">"Vitesse du réseau : %1$s"</string>
     <string name="network_speed_upload">"Upload : %1$s"</string>
     <string name="network_speed_download">"Téléchargement : %1$s"</string>
@@ -246,4 +245,12 @@ Revenez voir plus tard"</string>
     <string name="light_theme_summary">"Thème clair sélectionné"</string>
     <string name="dark_theme_summary">"Thème sombre sélectionné"</string>
     <string name="system_theme_summary">"Thème du système sélectionné"</string>
+    <string name="liviogasp_summary">Italien</string>
+    <string name="network_diagnostics_info">Les diagnostics réseau peuvent utiliser environ 20 à 30 Mo de données. Assurez-vous que cette quantité est disponible dans votre plan, sinon des frais de réseau peuvent s\'appliquer.</string>
+    <string name="comradekingu_summary">Aide à la traduction</string>
+    <string name="hudaifa_abdullah_summary">Arabe</string>
+    <string name="holydemon_summary">Malayalam</string>
+    <string name="license_summary">Afficher les licences d’application</string>
+    <string name="f_droid_page">Voir l\'application sur F-Droid</string>
+    <string name="f_droid_page_summary">Voir l\'application sur le dépôt officiel de F-Droid</string>
 </resources>
