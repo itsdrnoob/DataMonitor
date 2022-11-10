@@ -37,7 +37,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -644,8 +643,7 @@ public class SetupActivity extends AppCompatActivity {
             btnPrimary.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE},
-                            REQUEST_READ_PHONE_STATE);
+                    requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
                 }
             });
 
@@ -679,7 +677,21 @@ public class SetupActivity extends AppCompatActivity {
         @Override
         public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            onResume();
+            if (requestCode == REQUEST_READ_PHONE_STATE) {
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    onResume();
+                }
+                else {
+                    Snackbar snackbar = Snackbar.make(getView(), R.string.error_permission_denied, Snackbar.LENGTH_SHORT);
+                    FrameLayout footer = getView().findViewById(R.id.usage_permission_footer);
+                    if (footer.getVisibility() == View.VISIBLE) {
+                        snackbar.setAnchorView(R.id.usage_permission_footer);
+                    }
+                    snackbar.show();
+                }
+            }
         }
 
         @Override
@@ -694,14 +706,6 @@ public class SetupActivity extends AppCompatActivity {
                 btnPrimary.setTextColor(getResources().getColor(R.color.text_secondary, null));
                 startActivity(new Intent(getContext(), MainActivity.class));
                 getActivity().finish();
-            }
-            else {
-                Snackbar snackbar = Snackbar.make(getView(), R.string.error_permission_denied, Snackbar.LENGTH_SHORT);
-                FrameLayout footer = getView().findViewById(R.id.usage_permission_footer);
-                if (footer.getVisibility() == View.VISIBLE) {
-                    snackbar.setAnchorView(R.id.usage_permission_footer);
-                }
-                snackbar.show();
             }
         }
     }
