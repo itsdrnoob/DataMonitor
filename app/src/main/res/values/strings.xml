@@ -325,4 +325,31 @@
     <string name="label_custom_server_save_success">Server preference saved</string>
     <string name="error_invaliid_url">Invalid download URL!</string>
     <string name="error_url_verification_failed">Couldn\'t verify URL! Please try again or use a different one.</string>
+    <string name="comradekingu_translation_summary" translatable="false">Norwegian Bokmål</string>
+    <string name="metezd_summary" translatable="false">Turkish</string>
+    <string name="metezd" translatable="false">metezd</string>
+    <string name="eUgEntOptIc44" translatable="false">Jean-Luc Tibaux</string>
+    <string name="eUgEntOptIc44_summary" translatable="false">German</string>
+    <string name="ersen0" translatable="false">Oğuz Ersen</string>
+    <string name="ersen0_summary" translatable="false">Turkish</string>
+    <string name="AxusWizix" translatable="false">Axus Wizix</string>
+    <string name="AxusWizix_summary" translatable="false">Russian</string>
+    <string name="hectorgamer_summary" translatable="false">Portuguese</string>
+    <string name="hector_gamer" translatable="false">Hector Gamer</string>
+    <string name="BLENICeI_summary" translatable="false">Spanish</string>
+    <string name="BLENICeI" translatable="false">BLENICeI</string>
+    <string name="Igor_summary" translatable="false">Spanish</string>
+    <string name="Igor" translatable="false">Igor</string>
+    <string name="Denis_summary" translatable="false">Ukrainian</string>
+    <string name="Denis" translatable="false">Denis</string>
+    <string name="friedrich_summary" translatable="false">German</string>
+    <string name="friedrich" translatable="false">Friedrich</string>
+    <string name="helmut_summary" translatable="false">German</string>
+    <string name="helmut" translatable="false">Helmut</string>
+    <string name="kyoya_summary" translatable="false">Turkish</string>
+    <string name="kyoya" translatable="false">Kyoya</string>
+    <string name="paul_summary" translatable="false">German</string>
+    <string name="paul" translatable="false">Paul</string>
+    <string name="tobias_summary" translatable="false">German</string>
+    <string name="tobias" translatable="false">Tobias</string>
 </resources>

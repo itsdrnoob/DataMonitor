@@ -114,6 +114,13 @@ public class LanguageFragment extends Fragment {
             availableLanguages.add(new LanguageModel("Arabic", "ar", ""));
             availableLanguages.add(new LanguageModel("Malayalam", "ml", ""));
             availableLanguages.add(new LanguageModel("Italian", "it", ""));
+            availableLanguages.add(new LanguageModel("Russian", "ru", ""));
+            availableLanguages.add(new LanguageModel("Turkish", "tr", ""));
+            availableLanguages.add(new LanguageModel("German", "de", ""));
+            availableLanguages.add(new LanguageModel("Norwegian Bokmål", "nb", "rNO"));
+            availableLanguages.add(new LanguageModel("Portuguese", "pt", "rBR"));
+            availableLanguages.add(new LanguageModel("Spanish", "es", ""));
+            availableLanguages.add(new LanguageModel("Ukrainian", "uk", ""));
 
 
             Collections.sort(availableLanguages, new Comparator<LanguageModel>() {
