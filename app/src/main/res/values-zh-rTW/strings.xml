@@ -139,7 +139,6 @@
     <string name="notification_disabled">Data monitor 通知已關閉</string>
     <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新</string>
     <string name="label_notification_refresh_interval_change">通知將每 %1$s 更新</string>
-    <string name="label_data_usage_reset_interval_change">資料用量將每 %1$s %2$s 更新</string>
     <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
     <string name="remaining_data_info_disabled">剩餘流量資訊已禁用</string>
     <string name="label_monitoring_no_plan">新增一個流量使用計劃以繼續</string>
