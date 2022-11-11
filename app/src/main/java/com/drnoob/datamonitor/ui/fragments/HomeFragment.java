@@ -98,8 +98,10 @@ import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
 
 
 public class HomeFragment extends Fragment implements View.OnLongClickListener {
-
     private static final String TAG = HomeFragment.class.getSimpleName();
+    private static final int MODE_LOAD_OVERVIEW = 0;
+    private static final int MODE_REFRESH_OVERVIEW = 1;
+
     private RelativeLayout mSetupDataPlan;
     private TextView mMobileDataUsage,
             mMobileDataSent,
@@ -223,7 +225,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                         mRefreshOverview.setRotation(0);
                     }
                 });
-                refreshOverview();
+//                refreshOverview();
+                UpdateOverview updateOverview = new UpdateOverview(MODE_REFRESH_OVERVIEW);
+                updateOverview.execute();
             }
         });
 
@@ -521,6 +525,73 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         }
     }
 
+    private static void resetOverview() {
+        mOverviewLoading.setAlpha(0.0f);
+        mOverview.setAlpha(1.0f);
+
+        OverviewModel model = null;
+
+        for (int i = 0; i < mList.size(); i++) {
+            model = mList.get(i);
+            long mobileSent = (model.getTotalMobile() / 2l) * 1048576;
+            long mobileReceived = mobileSent;
+            long wifiSent = (model.getTotalWifi() / 2l) * 1048576;
+            long wifiReceived = wifiSent;
+            String data = formatData(mobileSent, mobileReceived)[2];
+            String wifi = formatData(wifiSent, wifiReceived)[2];
+            switch (i) {
+                case 0:
+                    mMobileMon.setProgress((model.getTotalMobile() / 25) + 2);  // 500 MB is 20 in the progressBar, so divided by 25. Added 2 to fix margin issue
+                    mWifiMon.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileMon.setLabelText(data);
+                    mWifiMon.setLabelText(wifi);
+                    break;
+
+                case 1:
+                    mMobileTue.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiTue.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileTue.setLabelText(data);
+                    mWifiTue.setLabelText(wifi);
+                    break;
+
+                case 2:
+                    mMobileWed.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiWed.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileWed.setLabelText(data);
+                    mWifiWed.setLabelText(wifi);
+                    break;
+
+                case 3:
+                    mMobileThurs.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiThurs.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileThurs.setLabelText(data);
+                    mWifiThurs.setLabelText(wifi);
+                    break;
+
+                case 4:
+                    mMobileFri.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiFri.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileFri.setLabelText(data);
+                    mWifiFri.setLabelText(wifi);
+                    break;
+
+                case 5:
+                    mMobileSat.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiSat.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileSat.setLabelText(data);
+                    mWifiSat.setLabelText(wifi);
+                    break;
+
+                case 6:
+                    mMobileSun.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiSun.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileSun.setLabelText(data);
+                    mWifiSun.setLabelText(wifi);
+                    break;
+            }
+        }
+    }
+
     private static void refreshOverview() {
         if (isOverviewAvailable()) {
             mOverviewLoading.setAlpha(0.0f);
@@ -589,7 +660,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             }
         }
         else {
-            UpdateOverview updateOverview = new UpdateOverview();
+            UpdateOverview updateOverview = new UpdateOverview(MODE_LOAD_OVERVIEW);
             updateOverview.execute();
         }
     }
@@ -756,13 +827,24 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     }
 
     private static class UpdateOverview extends AsyncTask<Object, Object, List<OverviewModel>> {
+        private int mode;
+
+        public UpdateOverview(int mode) {
+            this.mode = mode;
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.e(TAG, "onPreExecute: update overview");
-            mOverview.animate().alpha(0.0f);
-            mOverviewLoading.setAlpha(1.0f);
+            Log.d(TAG, "onPreExecute: update overview");
+            if (mode == MODE_LOAD_OVERVIEW) {
+                mOverview.animate().alpha(0.0f);
+                mOverviewLoading.setAlpha(1.0f);
+            }
+            else if (mode == MODE_REFRESH_OVERVIEW) {
+                mOverviewLoading.setAlpha(0.0f);
+                mOverview.setAlpha(1.0f);
+            }
         }
 
         @Override
@@ -829,7 +911,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             mOverview.animate().alpha(1.0f);
             mOverviewLoading.animate().alpha(0.0f);
             refreshOverview();
-
         }
     }
 }
