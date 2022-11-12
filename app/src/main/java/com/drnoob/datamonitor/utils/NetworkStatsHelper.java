@@ -44,8 +44,11 @@ import java.util.List;
 
 import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
 import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
 import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
@@ -101,6 +104,7 @@ public class NetworkStatsHelper {
 
         Long resetTimeMillis = getTimePeriod(context, session, startDate)[0];
         Long endTimeMillis = getTimePeriod(context, session, startDate)[1];
+
         Long sent = 0L,
                 received = 0L,
                 total = 0L;
@@ -585,6 +589,21 @@ public class NetworkStatsHelper {
                 }
                 break;
 
+            case SESSION_CUSTOM:
+                year = Integer.parseInt(yearFormat.format(date));
+                month = Integer.parseInt(monthFormat.format(date));
+                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_START, 1);
+                startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                resetDate = dateFormat.parse(startTime);
+                resetTimeMillis = resetDate.getTime();
+                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_END
+                        , calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                endTime = context.getResources().getString(R.string.reset_time, year, month, day, 23, 59);
+                endDate = dateFormat.parse(endTime);
+                endTimeMillis = endDate.getTime();
+
+                break;
+
         }
 
         if (resetTimeMillis > System.currentTimeMillis()) {
@@ -603,7 +622,8 @@ public class NetworkStatsHelper {
             endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
             endDate = dateFormat.parse(endTime);
             endTimeMillis = endDate.getTime();
-        } else {
+        }
+        else {
             if (session == SESSION_TODAY) {
                 year = Integer.parseInt(yearFormat.format(date));
                 month = Integer.parseInt(monthFormat.format(date));

@@ -97,7 +97,7 @@ public class AboutFragment extends Fragment {
         }
 
         String md5 = KeyUtils.get(getContext(), "MD5");
-        if (md5.equalsIgnoreCase(MD5_PLAY) || md5.equalsIgnoreCase(MD5_GITHUB)) {
+        if (md5.equalsIgnoreCase(MD5_GITHUB)) {
             // Do nothing :)
         }
         else {

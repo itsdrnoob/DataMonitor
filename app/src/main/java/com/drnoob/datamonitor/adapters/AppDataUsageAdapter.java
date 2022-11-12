@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -35,6 +36,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +54,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
@@ -64,10 +67,28 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
     private final List<AppDataUsageModel> mList;
     private final Context mContext;
     private Boolean animate;
+    private Boolean fromHome;
+    private Activity mActivity;
 
     public AppDataUsageAdapter(List<AppDataUsageModel> mList, Context mContext) {
         this.mList = mList;
         this.mContext = mContext;
+    }
+
+    public Activity getActivity() {
+        return mActivity;
+    }
+
+    public void setActivity(Activity mActivity) {
+        this.mActivity = mActivity;
+    }
+
+    public Boolean getFromHome() {
+        return fromHome;
+    }
+
+    public void setFromHome(Boolean fromHome) {
+        this.fromHome = fromHome;
     }
 
     @NonNull
@@ -119,6 +140,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_SYSTEM);
                     intent.putExtra(DATA_USAGE_SESSION, model.getSession());
                     intent.putExtra(DATA_USAGE_TYPE, model.getType());
+                    intent.putExtra(DAILY_DATA_HOME_ACTION, getFromHome());
                     mContext.startActivity(intent);
                 }
 //                else {
@@ -158,7 +180,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                                 mContext.getString(R.string.label_loading)));
                         appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
                                 mContext.getString(R.string.label_loading)));
-                        LoadScreenTime loadScreenTime = new LoadScreenTime(model, appScreenTime, appBackgroundTime);
+                        LoadScreenTime loadScreenTime = new LoadScreenTime(model, getActivity(), appScreenTime, appBackgroundTime);
                         loadScreenTime.execute();
                     }
                     else {
@@ -211,37 +233,55 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
 
     private class LoadScreenTime extends AsyncTask {
         private AppDataUsageModel model;
+        private Activity activity;
 
         TextView appScreenTime;
         TextView appBackgroundTime;
 
-        public LoadScreenTime(AppDataUsageModel model, TextView appScreenTime, TextView appBackgroundTime) {
+        public LoadScreenTime(AppDataUsageModel model, Activity activity, TextView appScreenTime, TextView appBackgroundTime) {
             this.model = model;
+            this.activity = activity;
             this.appScreenTime = appScreenTime;
             this.appBackgroundTime = appBackgroundTime;
         }
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            assert getActivity() != null;
             if (model.getPackageName() != mContext.getString(R.string.package_tethering)) {
                 int[] usageTime = getUsageTime(mContext, model.getPackageName(), model.getSession());
                 if (usageTime[1] == -1) {
 
                     // If value is -1, build version is below Q
-                    appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
-                            formatTime(usageTime[0] / 60f)));
-                    appBackgroundTime.setVisibility(View.GONE);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
+                                    formatTime(usageTime[0] / 60f)));
+                            appBackgroundTime.setVisibility(View.GONE);
+                        }
+                    });
                 }
                 else {
-                    appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
-                            formatTime(usageTime[0] / 60f)));
-                    appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
-                            formatTime(usageTime[1] / 60f)));
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
+                                    formatTime(usageTime[0] / 60f)));
+                            appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
+                                    formatTime(usageTime[1] / 60f)));
+                        }
+                    });
                 }
             }
             else {
-                appScreenTime.setVisibility(View.GONE);
-                appBackgroundTime.setVisibility(View.GONE);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        appScreenTime.setVisibility(View.GONE);
+                        appBackgroundTime.setVisibility(View.GONE);
+                    }
+                });
             }
             return null;
         }
@@ -296,6 +336,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
         UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         UsageEvents usageEvents = null;
         List<UsageStats> usageStats = null;
+        assert usageStatsManager != null;
         try {
             usageEvents = usageStatsManager.queryEvents(NetworkStatsHelper.getTimePeriod(context, session, 1)[0],
                     NetworkStatsHelper.getTimePeriod(context, session, 1)[1]);
@@ -303,52 +344,54 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
             usageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, NetworkStatsHelper.getTimePeriod(context, session, 1)[0],
                     NetworkStatsHelper.getTimePeriod(context, session, 1)[1]);
 
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (usageEvents.hasNextEvent()) {
-            while (usageEvents.hasNextEvent()) {
-                currentEvent = new UsageEvents.Event();
-                usageEvents.getNextEvent(currentEvent);
-                if(currentEvent.getPackageName().equals(packageName)) {
-                    if (currentEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED
-                            || currentEvent.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED
-                            || currentEvent.getEventType() == UsageEvents.Event.FOREGROUND_SERVICE_START
-                            || currentEvent.getEventType() == UsageEvents.Event.FOREGROUND_SERVICE_STOP) {
-                        allEvents.add(currentEvent);
-                        String key = currentEvent.getPackageName();
-                        if (appScreenTime.get(key) == null)
-                            appScreenTime.put(key, 0);
+        if (usageEvents != null) {
+            if (usageEvents.hasNextEvent()) {
+                while (usageEvents.hasNextEvent()) {
+                    currentEvent = new UsageEvents.Event();
+                    usageEvents.getNextEvent(currentEvent);
+                    if(currentEvent.getPackageName().equals(packageName)) {
+                        if (currentEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED
+                                || currentEvent.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED
+                                || currentEvent.getEventType() == UsageEvents.Event.FOREGROUND_SERVICE_START
+                                || currentEvent.getEventType() == UsageEvents.Event.FOREGROUND_SERVICE_STOP) {
+                            allEvents.add(currentEvent);
+                            String key = currentEvent.getPackageName();
+                            if (appScreenTime.get(key) == null)
+                                appScreenTime.put(key, 0);
+                        }
                     }
                 }
-            }
 
-            if (allEvents.size() > 0) {
-                for (int i = 0; i < allEvents.size() - 1; i++) {
-                    UsageEvents.Event E0 = allEvents.get(i);
-                    UsageEvents.Event E1 = allEvents.get(i + 1);
-                    if (E0.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED
-                            && E1.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED
-                            && E0.getClassName().equals(E1.getClassName())) {
-                        int diff = (int)(E1.getTimeStamp() - E0.getTimeStamp());
+                if (allEvents.size() > 0) {
+                    for (int i = 0; i < allEvents.size() - 1; i++) {
+                        UsageEvents.Event E0 = allEvents.get(i);
+                        UsageEvents.Event E1 = allEvents.get(i + 1);
+                        if (E0.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED
+                                && E1.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED
+                                && E0.getClassName().equals(E1.getClassName())) {
+                            int diff = (int)(E1.getTimeStamp() - E0.getTimeStamp());
+                            diff /= 1000;
+                            Integer prev = appScreenTime.get(E0.getPackageName());
+                            if(prev == null) prev = 0;
+                            appScreenTime.put(E0.getPackageName(), prev + diff);
+                        }
+                    }
+                    UsageEvents.Event lastEvent = allEvents.get(allEvents.size() - 1);
+                    if(lastEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED) {
+                        int diff = (int)System.currentTimeMillis() - (int)lastEvent.getTimeStamp();
                         diff /= 1000;
-                        Integer prev = appScreenTime.get(E0.getPackageName());
+                        Integer prev = appScreenTime.get(lastEvent.getPackageName());
                         if(prev == null) prev = 0;
-                        appScreenTime.put(E0.getPackageName(), prev + diff);
+                        appScreenTime.put(lastEvent.getPackageName(), prev + diff);
                     }
                 }
-                UsageEvents.Event lastEvent = allEvents.get(allEvents.size() - 1);
-                if(lastEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED) {
-                    int diff = (int)System.currentTimeMillis() - (int)lastEvent.getTimeStamp();
-                    diff /= 1000;
-                    Integer prev = appScreenTime.get(lastEvent.getPackageName());
-                    if(prev == null) prev = 0;
-                    appScreenTime.put(lastEvent.getPackageName(), prev + diff);
+                else {
+                    appScreenTime.put(packageName, 0);
                 }
-            }
-            else {
-                appScreenTime.put(packageName, 0);
             }
         }
 

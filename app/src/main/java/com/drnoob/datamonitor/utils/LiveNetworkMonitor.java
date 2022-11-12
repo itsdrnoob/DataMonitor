@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -54,20 +55,28 @@ import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
 public class LiveNetworkMonitor extends Service {
     private static final String TAG = LiveNetworkMonitor.class.getSimpleName();
 
-    private static Timer mTimer;
-    private static TimerTask mTimerTask;
-    public static Long previousTotalBytes, previousUpBytes, previousDownBytes;
-    private static Intent mActivityIntent;
-    private static PendingIntent mActivityPendingIntent;
-    private static NotificationCompat.Builder mBuilder;
+    private Timer mTimer;
+    private TimerTask mTimerTask;
+    public Long previousTotalBytes, previousUpBytes, previousDownBytes;
+    private Intent mActivityIntent;
+    private PendingIntent mActivityPendingIntent;
+    private NotificationCompat.Builder mBuilder;
     private LiveNetworkReceiver liveNetworkReceiver = new LiveNetworkReceiver();
-    private static boolean isNetworkConnected;
-    private static NetworkChangeMonitor mNetworkChangeMonitor;
+    private boolean isNetworkConnected;
+    private NetworkChangeMonitor mNetworkChangeMonitor;
+    private boolean isTimerCancelled = true;
+    private boolean isTaskPaused = false;
+    private boolean isLiveNetworkReceiverRegistered = false;
+    private boolean isServiceRunning;
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    public LiveNetworkMonitor() {
+        // Empty constructor
     }
 
     @Override
@@ -91,7 +100,7 @@ public class LiveNetworkMonitor extends Service {
 
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_LOW);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(getString(R.string.network_speed_download, "0 KB/s"))
@@ -102,9 +111,15 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setAutoCancel(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
 
+        if (isServiceRunning) {
+            return;
+        }
         startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+        isServiceRunning = true;
 
-        mTimer = new Timer();
+        if (isTimerCancelled) {
+            mTimer = new Timer();
+        }
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
@@ -117,25 +132,35 @@ public class LiveNetworkMonitor extends Service {
                     try {
                         mTimerTask.cancel();
                         mTimer.cancel();
+                        isTimerCancelled = true;
                     }
                     catch (Exception e) {
                         e.printStackTrace();
                     }
                     LiveNetworkMonitor.this.stopForeground(true);
                     LiveNetworkMonitor.this.stopSelf();
+                    stopService(new Intent(LiveNetworkMonitor.this, this.getClass()));
                 }
             }
         };
-        mTimer.scheduleAtFixedRate(mTimerTask, 0, 2000);
-        registerNetworkReceiver();
+        mTimer.scheduleAtFixedRate(mTimerTask, 0, 1000);
+        if (!isLiveNetworkReceiverRegistered && !isTaskPaused) {
+            registerNetworkReceiver();
+        }
 
     }
 
     @Override
     public void onDestroy() {
         // Service is stopped here
-        mNetworkChangeMonitor.stopMonitor();
-        unregisterNetworkReceiver();
+        boolean isEnabled = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
+                getBoolean("network_signal_notification", false);
+        if (!isEnabled) {
+            Log.d(TAG, "onDestroy: stopped");
+            mNetworkChangeMonitor.stopMonitor();
+            unregisterNetworkReceiver();
+            isServiceRunning = false;
+        }
         super.onDestroy();
     }
 
@@ -145,23 +170,33 @@ public class LiveNetworkMonitor extends Service {
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter.setPriority(100);
-        registerReceiver(liveNetworkReceiver, intentFilter);
-        Log.d(TAG, "registerNetworkReceiver: registered" );
+        if (!isLiveNetworkReceiverRegistered) {
+            registerReceiver(liveNetworkReceiver, intentFilter);
+            isLiveNetworkReceiverRegistered = true;
+            Log.d(TAG, "registerNetworkReceiver: registered" );
+        }
     }
 
     private void unregisterNetworkReceiver() {
         try {
             unregisterReceiver(liveNetworkReceiver);
+            isLiveNetworkReceiverRegistered = false;
             Log.d(TAG, "unregisterNetworkReceive: stopped" );
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void updateNotification(Context context) {
+    private void updateNotification(Context context) {
         // Update notification text here
         String[] speeds;
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
         if (isNetworkConnected) {
+            if (!isLiveNetworkReceiverRegistered) {
+                registerNetworkReceiver();
+            }
             Long currentUpBytes = TrafficStats.getTotalTxBytes();
             Long currentDownBytes = TrafficStats.getTotalRxBytes();
             Long currentTotalBytes = currentDownBytes + currentUpBytes;
@@ -177,7 +212,27 @@ public class LiveNetworkMonitor extends Service {
             previousTotalBytes = currentTotalBytes;
         }
         else  {
-            speeds = new String[]{"0 KB/s", "0 KB/s", "0 KB/s"};
+            boolean autoHide = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("auto_hide_network_speed", false);
+            if (autoHide) {
+                try {
+                    mTimerTask.cancel();
+                    mTimer.cancel();
+                    isTimerCancelled = true;
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                LiveNetworkMonitor.this.stopForeground(true);
+                if (isLiveNetworkReceiverRegistered) {
+                    unregisterNetworkReceiver();
+                }
+                isTaskPaused = true;
+                return;
+            }
+            else {
+                speeds = new String[]{"0 KB/s", "0 KB/s", "0 KB/s"};
+            }
         }
 
         String iconPrefix = "ic_signal_";
@@ -202,9 +257,13 @@ public class LiveNetworkMonitor extends Service {
         Log.d(TAG, "updateNotification: " + iconName );
         int iconResID = context.getResources().getIdentifier(iconName , "drawable", context.getPackageName());
         IconCompat icon = IconCompat.createWithResource(context, iconResID);
+        if (mBuilder == null) {
+            mBuilder = new NotificationCompat.Builder(this,
+                    NETWORK_SIGNAL_CHANNEL_ID);
+        }
         mBuilder.setSmallIcon(icon);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_LOW);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentTitle(context.getString(R.string.network_speed_title,  speeds[2]));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(context.getString(R.string.network_speed_download, speeds[1]))
@@ -214,8 +273,8 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setShowWhen(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
         mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
-        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+
     }
 
     private class NetworkChangeMonitor extends ConnectivityManager.NetworkCallback {
@@ -236,7 +295,12 @@ public class LiveNetworkMonitor extends Service {
 
         public void startMonitor() {
             if (connectivityManager != null) {
-                connectivityManager.registerNetworkCallback(networkRequest, this);
+                try {
+                    connectivityManager.registerNetworkCallback(networkRequest, this);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -246,7 +310,12 @@ public class LiveNetworkMonitor extends Service {
 
         public void stopMonitor() {
             if (connectivityManager != null) {
-                connectivityManager.unregisterNetworkCallback(this);
+                try {
+                    connectivityManager.unregisterNetworkCallback(this);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -258,6 +327,11 @@ public class LiveNetworkMonitor extends Service {
         public void onAvailable(@NonNull Network network) {
             super.onAvailable(network);
             isNetworkConnected = true;
+            if (isTaskPaused) {
+                LiveNetworkMonitor.this.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                restartService(context, false);
+                isTaskPaused = false;
+            }
         }
 
         @Override
@@ -266,6 +340,40 @@ public class LiveNetworkMonitor extends Service {
             isNetworkConnected = false;
         }
     }
+
+    public void restartService(Context context, boolean startReceiver) {
+        if (startReceiver && !isLiveNetworkReceiverRegistered) {
+            registerNetworkReceiver();
+        }
+        previousDownBytes = TrafficStats.getTotalRxBytes();
+        previousUpBytes = TrafficStats.getTotalTxBytes();
+        previousTotalBytes = previousDownBytes + previousUpBytes;
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (PreferenceManager.getDefaultSharedPreferences(context).
+                        getBoolean("network_signal_notification", false)) {
+                    updateNotification(context);
+                }
+                else {
+                    try {
+                        mTimerTask.cancel();
+                        mTimer.cancel();
+                        isTimerCancelled = true;
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    context.stopService(new Intent(context, LiveNetworkMonitor.class));
+                }
+            }
+        };
+        if (isTimerCancelled) {
+            mTimer = new Timer();
+        }
+        mTimer.scheduleAtFixedRate(mTimerTask, 0, 1000);
+    }
+
 
     private static String[] formatNetworkSpeed(Long upSpeed, Long downSpeed, Long totalSpeed) {
         String up, down, total;
@@ -325,38 +433,25 @@ public class LiveNetworkMonitor extends Service {
         return new String[]{upData, downData, totalData};
     }
 
-    public static class LiveNetworkReceiver extends BroadcastReceiver {
+    public class LiveNetworkReceiver extends BroadcastReceiver {
+
+        public LiveNetworkReceiver() {
+            // Empty constructor
+        }
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 // Screen turned off. Cancel task
-                mTimerTask.cancel();
+                try {
+                    mTimerTask.cancel();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
-                previousDownBytes = TrafficStats.getTotalRxBytes();
-                previousUpBytes = TrafficStats.getTotalTxBytes();
-                previousTotalBytes = previousDownBytes + previousUpBytes;
-                mTimerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (PreferenceManager.getDefaultSharedPreferences(context).
-                                getBoolean("network_signal_notification", false)) {
-                            updateNotification(context);
-                        }
-                        else {
-                            try {
-                                mTimerTask.cancel();
-                                mTimer.cancel();
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            context.stopService(new Intent(context, LiveNetworkMonitor.class));
-                        }
-                    }
-                };
-                mTimer.scheduleAtFixedRate(mTimerTask, 0, 2000);
+                restartService(context, true);
             }
         }
     }

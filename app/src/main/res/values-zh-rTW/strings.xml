@@ -1,9 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Data Monitor</string>
     <string name="appwidget_text">範例</string>
     <string name="add_widget">新增小工具</string>
-
-
     <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
     <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
     <string name="notification_mobile_data_usage">行動資料 : %1$s</string>
@@ -15,8 +14,6 @@
     <string name="label_current_data_warning_trigger_level_limit_set">目前觸發閾值 : %1$s%% (%2$s)</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">目前觸發閾值 : %1$s%%</string>
     <string name="label_data_trigger_level">目前使用 %1$s%% 流量</string>
-
-    <string name="hello_blank_fragment" translatable="false"></string>
     <string name="app_label_package_name">包名 : %1$s</string>
     <string name="app_label_uid">UID : %1$d</string>
     <string name="app_name_placeholder">軟體名稱</string>
@@ -142,7 +139,6 @@
     <string name="notification_disabled">Data monitor 通知已關閉</string>
     <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新</string>
     <string name="label_notification_refresh_interval_change">通知將每 %1$s 更新</string>
-    <string name="label_data_usage_reset_interval_change">資料用量將每 %1$s %2$s 更新</string>
     <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
     <string name="remaining_data_info_disabled">剩餘流量資訊已禁用</string>
     <string name="label_monitoring_no_plan">新增一個流量使用計劃以繼續</string>
@@ -219,5 +215,4 @@
     <string name="available_languages">可用語言</string>
     <string name="label_data_usage_reset_time_change">數據使用量將在 %2$s 每 %1$s 重置一次</string>
     <string name="label_data_usage_reset_date_change">數據使用量將在每月 %1$d%2$s 重置</string>
-
 </resources>

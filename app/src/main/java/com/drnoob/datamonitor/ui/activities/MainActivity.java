@@ -31,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.text.Spannable;
 import android.util.Log;
@@ -43,6 +44,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -55,6 +57,7 @@ import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.drnoob.datamonitor.databinding.ActivityMainBinding;
+import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
@@ -84,9 +87,12 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_VALUE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_NAME;
+import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
@@ -120,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(MainActivity.this);
-
+        Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(MainActivity.this));
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isReadPhoneStateGranted(MainActivity.this)) {
                 startActivity(new Intent(this, SetupActivity.class)
@@ -178,8 +184,13 @@ public class MainActivity extends AppCompatActivity {
 
                 NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
 
-
-
+                binding.batteryOptimisationError.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(MainActivity.this, ContainerActivity.class)
+                                .putExtra(GENERAL_FRAGMENT_ID, DISABLE_BATTERY_OPTIMISATION_FRAGMENT));
+                    }
+                });
 
 //        NavigationUI.setupActionBarWithNavController(this, controller, configuration);
 //        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
@@ -215,21 +226,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-//                binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//                    @Override
-//                    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-//                        if (item.getItemId() == binding.bottomNavigationView.getSelectedItemId()) {
-//                            return false;
-//                        }
-//                        if (item.getItemId() == R.id.bottom_menu_home) {
-//                            getSupportActionBar().setTitle(getString(R.string.app_name));
-//                        } else {
-//                            getSupportActionBar().setTitle(item.getTitle());
-//                        }
-//                        NavigationUI.onNavDestinationSelected(item, controller);
-//                        return true;
-//                    }
-//                });
 
             }
             else {
@@ -239,6 +235,23 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    private void checkBatteryOptimisationState() {
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
+                binding.mainNavHostFragment.getLayoutParams();
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        if (powerManager.isIgnoringBatteryOptimizations(getPackageName())) {
+            // Battery optimisation is disabled
+            params.topToBottom = R.id.main_toolbar;
+        }
+        else {
+            // Battery optimisation is enabled
+            params.topToBottom = R.id.battery_optimisation_error;
+        }
+
+        binding.mainNavHostFragment.setLayoutParams(params);
+        binding.mainNavHostFragment.requestLayout();
     }
 
     private void initializeBottomNavBar() {
@@ -320,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        checkBatteryOptimisationState();
 
         // Action bar title resets while changing theme in settings, setting current title
 //        NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
@@ -373,16 +387,26 @@ public class MainActivity extends AppCompatActivity {
         NotificationChannel appWarningChannel = new NotificationChannel(APP_DATA_USAGE_WARNING_CHANNEL_ID, APP_DATA_USAGE_WARNING_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
         NotificationChannel networkSignalChannel = new NotificationChannel(NETWORK_SIGNAL_CHANNEL_ID, NETWORK_SIGNAL_CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_LOW);
+                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel otherChannel = new NotificationChannel(OTHER_NOTIFICATION_CHANNEL_ID, OTHER_NOTIFICATION_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH);
         warningChannel.enableVibration(true);
         warningChannel.enableLights(true);
         appWarningChannel.enableVibration(true);
         appWarningChannel.enableLights(true);
+        networkSignalChannel.enableVibration(false);
+        networkSignalChannel.setSound(null, null);
+        networkSignalChannel.enableLights(false);
+        networkSignalChannel.setBypassDnd(true);
+        networkSignalChannel.setShowBadge(false);
+        otherChannel.enableVibration(true);
+        otherChannel.enableLights(true);
         List<NotificationChannel> channels = new ArrayList<>();
         channels.add(usageChannel);
         channels.add(warningChannel);
         channels.add(appWarningChannel);
         channels.add(networkSignalChannel);
+        channels.add(otherChannel);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannels(channels);
@@ -717,7 +741,6 @@ public class MainActivity extends AppCompatActivity {
                     mUserAppsList.add(model);
                 }
 
-
                 Collections.sort(mUserAppsList, new Comparator<AppDataUsageModel>() {
                     @Override
                     public int compare(AppDataUsageModel o1, AppDataUsageModel o2) {
@@ -755,7 +778,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(o);
             isDataLoading = false;
             if (getAppContext() != null) {
-                onDataLoaded();
+                onDataLoaded(getAppContext());
             } else {
 
             }

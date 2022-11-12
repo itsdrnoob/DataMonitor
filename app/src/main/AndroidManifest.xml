@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <queries>
         <intent>
@@ -50,6 +51,7 @@
         <activity android:name=".ui.activities.ContainerActivity"
             android:screenOrientation="portrait"
             android:exported="false"
+            android:fitsSystemWindows="true"
             tools:ignore="LockedOrientationActivity" />
 
         <receiver android:name=".Widget.DataUsageWidget"
@@ -112,9 +114,9 @@
         </receiver>
 
         <receiver android:name=".utils.LiveNetworkMonitor$LiveNetworkReceiver"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="Instantiatable">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.SCREEN_ON"/>
                 <action android:name="android.intent.action.SCREEN_OFF"/>
                 <action android:name="android.intent.action.USER_PRESENT"/>
@@ -123,7 +125,8 @@
 
         <service android:name=".utils.LiveNetworkMonitor"
             android:exported="true"
-            android:enabled="true" />
+            android:enabled="true">
+        </service>
 
         <activity
             android:name=".ui.activities.MainActivity"
@@ -133,6 +136,37 @@
             android:exported="false"
             tools:ignore="LockedOrientationActivity">
         </activity>
+
+        <activity
+            android:name=".ui.activities.CrashReportActivity"
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="LockedOrientationActivity">
+        </activity>
+
+        <receiver android:name=".utils.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".utils.DataPlanRefreshReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

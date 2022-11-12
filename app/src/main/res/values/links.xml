@@ -2,8 +2,8 @@
 <resources>
     <string name="github_source" translatable="false">https://github.com/itsdrnoob/DataMonitor</string>
     <string name="github_release_latest" translatable="false">https://github.com/itsdrnoob/DataMonitor/releases/latest</string>
-    <string name="github_contribute" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/master/CONTRIBUTING.md#contributing-to-data-monitor</string>
-    <string name="github_contribute_translations" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/master/CONTRIBUTING.md#translations</string>
+    <string name="github_contribute" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CONTRIBUTING.md#contributing-to-data-monitor</string>
+    <string name="github_contribute_translations" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CONTRIBUTING.md#translations</string>
     <string name="github_issue" translatable="false">https://github.com/itsdrnoob/DataMonitor/issues/new/choose</string>
     <string name="xda_thread" translatable="false">https://forum.xda-developers.com/t/app-v1-0-data-monitor-track-all-your-data-usage-at-one-place.4356129/</string>
     <string name="f_droid" translatable="false">https://f-droid.org/packages/com.drnoob.datamonitor/</string>
@@ -20,8 +20,18 @@
     <string name="upi_address" translatable="false"><![CDATA[upi://pay?pa=itsdrnoob@ybl&pn=itsdrnoob&tn=DataMonitor]]></string>
 
     <string name="api_url" translatable="false">https://api.ipify.org</string>
-    <string name="download_test_url" translatable="false">http://speedtest.ftp.otenet.gr/files/test10Mb.db</string>
-    <string name="upload_test_url" translatable="false">https://www.azurespeed.com/Azure/UploadLargeFile/</string>
+
+    <string name="download_server_1_url" translatable="false">http://speedtest.ftp.otenet.gr/files/test10Mb.db</string>
+    <string name="download_server_2_url" translatable="false">https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin</string>
+    <string name="download_server_3_url" translatable="false">http://212.183.159.230/10MB.zip</string>
+
+    <string name="upload_server_1_url" translatable="false">https://www.azurespeed.com/Azure/UploadLargeFile</string>
+    <string name="upload_server_2_url" translatable="false">https://v2.convertapi.com/upload</string>
+    <string name="upload_server_3_url" translatable="false">https://easyupload.io/</string>
+
+    <string name="email" translatable="false">bitroid.dev@gmail.com</string>
+
+    <string name="github_new_issue" translatable="false">"https://github.com/itsdrnoob/DataMonitor/issues/new?assignees=&amp;labels=&amp;template=bug_report.md&amp;title="</string>
 
     <!-- Contributors -->
     <string name="github_itsdrnoob" translatable="false">https://www.github.com/itsdrnoob</string>
@@ -29,4 +39,8 @@
     <string name="github_johnsonran" translatable="false">https://www.github.com/JohnsonRan</string>
     <string name="github_cracky5322" translatable="false">https://github.com/cracky5322</string>
     <string name="github_comradekingu" translatable="false">https://github.com/comradekingu</string>
+    <string name="github_metezd" translatable="false">https://github.com/metezd</string>
+    <string name="github_eUgEntOptIc44" translatable="false">https://github.com/eUgEntOptIc44</string>
+    <string name="github_ersen0" translatable="false">https://github.com/ersen0</string>
+    <string name="github_AxusWizix" translatable="false">https://github.com/AxusWizix</string>
 </resources>

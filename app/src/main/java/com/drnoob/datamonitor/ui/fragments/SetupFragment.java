@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -26,6 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,12 +37,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -51,13 +57,16 @@ import com.drnoob.datamonitor.core.base.DatePicker;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
+import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.slider.LabelFormatter;
+import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -66,11 +75,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
@@ -82,6 +99,9 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
 import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
@@ -129,8 +149,9 @@ public class SetupFragment extends Fragment {
         private static final String TAG = SetupPreference.class.getSimpleName();
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit;
-        private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowMobileData, mShowWifi,
-                mShowDataWarning, mNetworkSignalNotification;
+        private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
+                mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
+                mAutoHideNetworkSpeed;
         private Snackbar snackbar;
 
         @Override
@@ -152,6 +173,8 @@ public class SetupFragment extends Fragment {
             mShowMobileData = (SwitchPreferenceCompat) findPreference("show_mobile_data_notification");
             mShowWifi = (SwitchPreferenceCompat) findPreference("show_wifi_notification");
             mShowDataWarning = (SwitchPreferenceCompat) findPreference("data_usage_alert");
+            mAutoHideNetworkSpeed = (SwitchPreferenceCompat) findPreference("auto_hide_network_speed");
+            mShowWifiWidget = (SwitchPreferenceCompat) findPreference("widget_show_wifi_usage");
 
 
             int widgetRefreshInterval = PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -498,6 +521,19 @@ public class SetupFragment extends Fragment {
                 }
             });
 
+            mShowWifiWidget.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                    int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+                    Intent intent = new Intent(getContext(), DataUsageWidget.class);
+                    intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                    getContext().sendBroadcast(intent);
+                    return false;
+                }
+            });
+
             mWidgetRefresh.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
@@ -591,21 +627,116 @@ public class SetupFragment extends Fragment {
                 }
             });
 
+            mAutoHideNetworkSpeed.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("auto_hide_network_speed", false);
+                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                    if (!isChecked) {
+                        boolean isNetworkSpeedEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("network_signal_notification", false);
+                        if (isNetworkSpeedEnabled) {
+                            Intent activityIntent = new Intent(Intent.ACTION_MAIN);
+                            activityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                            activityIntent.setComponent(new ComponentName(getContext().getPackageName(),
+                                    MainActivity.class.getName()));
+                            PendingIntent activityPendingIntent = PendingIntent.getActivity(
+                                    getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
+                                    NETWORK_SIGNAL_CHANNEL_ID);
+                            builder.setSmallIcon(R.drawable.ic_signal_kb_0);
+                            builder.setOngoing(true);
+                            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                            builder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
+                            builder.setStyle(new NotificationCompat.InboxStyle()
+                                    .addLine(getString(R.string.network_speed_download, "0 KB/s"))
+                                    .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
+                            builder.setShowWhen(false);
+                            builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                            builder.setContentIntent(activityPendingIntent);
+                            builder.setAutoCancel(false);
+                            builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
+                            managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                        }
+                    }
+                    else {
+                        managerCompat.cancel(NETWORK_SIGNAL_NOTIFICATION_ID);
+                    }
+                    return false;
+                }
+            });
+
             mAddDataPlan.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
                     BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                     View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_add_data_plan, null);
 
+                    LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
                     RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
                     TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                     TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
+                    RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
+                    TextView customStartDate = dialogView.findViewById(R.id.custom_start_date);
+                    TextView customEndDate = dialogView.findViewById(R.id.custom_end_date);
                     ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                     TextView cancel = footer.findViewById(R.id.cancel);
                     TextView ok = footer.findViewById(R.id.ok);
 
+                    Calendar calendar = Calendar.getInstance();
+                    int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                    customDateSlider.setValueTo((float) daysInMonth);
+
+                    int start = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
+                    int end = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getInt(DATA_RESET_CUSTOM_DATE_END, daysInMonth);
+
+                    List<Float> sliderValues = new ArrayList<>();
+                    sliderValues.add((float) start);
+                    sliderValues.add((float) end);
+                    customDateSlider.setValues(sliderValues);
+
+                    customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
+                    customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+
                     dataTypeSwitcher.selectTab(dataTypeSwitcher.getTabAt(PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getInt(DATA_TYPE, 0)));
+
+                    dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                        @Override
+                        public void onTabSelected(TabLayout.Tab tab) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
+
+                        @Override
+                        public void onTabUnselected(TabLayout.Tab tab) {
+
+                        }
+
+                        @Override
+                        public void onTabReselected(TabLayout.Tab tab) {
+
+                        }
+                    });
+
+                    customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+                        @Override
+                        public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
+                            if (fromUser) {
+                                VibrationUtils.hapticMinor(getContext());
+                            }
+                            int start = slider.getValues().get(0).intValue();
+                            int end = slider.getValues().get(1).intValue();
+
+                            customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
+                            customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+
+                        }
+                    });
+
                     Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getFloat(DATA_LIMIT, -1);
                     if (dataLimit > 0) {
@@ -618,12 +749,50 @@ public class SetupFragment extends Fragment {
                         }
 
                     }
-                    if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
-                        dataReset.check(R.id.monthly);
-                    } else {
-                        dataReset.check(R.id.daily);
+                    switch (PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getString(DATA_RESET, "")) {
+                        case DATA_RESET_MONTHLY:
+                            dataReset.check(R.id.monthly);
+                            customDateView.setVisibility(View.GONE);
+                            break;
+                        case DATA_RESET_DAILY:
+                            dataReset.check(R.id.daily);
+                            customDateView.setVisibility(View.GONE);
+                            break;
+                        case DATA_RESET_CUSTOM:
+                            dataReset.check(R.id.custom_reset);
+                            customDateView.setAlpha(1f);
+                            customDateView.setVisibility(View.VISIBLE);
+                            break;
                     }
+
+                    dataReset.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                            if (i == R.id.custom_reset) {
+                                customDateView.setAlpha(0f);
+                                customDateView.setVisibility(View.VISIBLE);
+                                customDateView.animate()
+                                        .alpha(1f)
+                                        .setDuration(350)
+                                        .start();
+                            }
+                            else {
+                                customDateView.animate()
+                                        .alpha(0f)
+                                        .setDuration(350)
+                                        .start();
+//                                customDateView.setVisibility(View.GONE);
+                                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        customDateView.setVisibility(View.GONE);
+                                    }
+                                }, 150);
+
+                            }
+                        }
+                    });
 
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -652,9 +821,23 @@ public class SetupFragment extends Fragment {
                                     dataType = dataTypeSwitcher.getSelectedTabPosition();
                                 }
                                 if (dataReset.getCheckedRadioButtonId() == R.id.daily) {
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(DATA_RESET, DATA_RESET_DAILY).apply();
-                                } else {
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
+                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                            .putString(DATA_RESET, DATA_RESET_DAILY).apply();
+                                }
+                                else if (dataReset.getCheckedRadioButtonId() == R.id.monthly) {
+                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                            .putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
+                                }
+                                else if (dataReset.getCheckedRadioButtonId() == R.id.custom_reset) {
+                                    calendar.set(Calendar.DAY_OF_MONTH, customDateSlider.getValues().get(1).intValue());
+                                    calendar.add(Calendar.DATE, 1);
+
+                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                            .putString(DATA_RESET, DATA_RESET_CUSTOM)
+                                            .putInt(DATA_RESET_CUSTOM_DATE_START, customDateSlider.getValues().get(0).intValue())
+                                            .putInt(DATA_RESET_CUSTOM_DATE_END, customDateSlider.getValues().get(1).intValue())
+                                            .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                                            .apply();
                                 }
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putFloat(DATA_LIMIT, dataLimit).apply();
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(LIMIT, dataLimitInput.getText().toString()).apply();
@@ -663,6 +846,7 @@ public class SetupFragment extends Fragment {
                                         getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 updateResetData();
+                                setDataPlanNotification(getContext());
                                 dialog.dismiss();
                                 dismissOnClick(snackbar);
                                 snackbar.show();
@@ -671,6 +855,13 @@ public class SetupFragment extends Fragment {
                                 Intent intent = new Intent(getContext(), DataUsageWidget.class);
                                 intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
                                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+
+                                boolean updateNotification = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
+                                if (updateNotification) {
+                                    Intent notificationIntent = new Intent(getContext(), NotificationUpdater.class);
+                                    getContext().sendBroadcast(notificationIntent);
+                                }
+
                                 getContext().sendBroadcast(intent);
                             }
                         }
@@ -817,7 +1008,8 @@ public class SetupFragment extends Fragment {
                         dialog.setContentView(dialogView);
                         dialog.show();
                     }
-                    else {
+                    else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                            .equals(DATA_RESET_DAILY)) {
                         BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_time_picker, null);
 
@@ -1010,6 +1202,21 @@ public class SetupFragment extends Fragment {
                         dialog.setContentView(dialogView);
                         dialog.show();
                     }
+                    else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                            .equals(DATA_RESET_CUSTOM)) {
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                getString(R.string.setup_usage_reset_date_custom_selected), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        dismissOnClick(snackbar);
+                        snackbar.show();
+                    }
+                    else {
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                getString(R.string.label_add_data_plan_first), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        dismissOnClick(snackbar);
+                        snackbar.show();
+                    }
                     return false;
                 }
             });
@@ -1118,6 +1325,15 @@ public class SetupFragment extends Fragment {
                         }
                     });
 
+                    slider.addOnChangeListener(new Slider.OnChangeListener() {
+                        @Override
+                        public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
+                            if (fromUser) {
+                                VibrationUtils.hapticMinor(getContext());
+                            }
+                        }
+                    });
+
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1173,7 +1389,12 @@ public class SetupFragment extends Fragment {
         }
 
         public static void pauseMonitor() {
-            mContext.stopService(new Intent(mContext, DataUsageMonitor.class));
+            try {
+                mContext.stopService(new Intent(mContext, DataUsageMonitor.class));
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         public static void resumeMonitor() {
@@ -1204,6 +1425,11 @@ public class SetupFragment extends Fragment {
 
                 resetSummary = (getContext().getString(R.string.label_reset_every_month,
                         date, suffix));
+            }
+            else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_CUSTOM)) {
+                resetTitle = getContext().getString(R.string.setup_usage_reset_date);
+                resetSummary = getContext().getString(R.string.setup_usage_reset_date_custom_selected);
             }
             else {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_time);

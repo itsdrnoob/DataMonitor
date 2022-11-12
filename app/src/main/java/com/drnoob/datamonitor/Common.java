@@ -21,27 +21,42 @@ package com.drnoob.datamonitor;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AppOpsManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
 import java.util.Locale;
 
 import static android.content.Context.APP_OPS_SERVICE;
+import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
+import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 
 public class Common {
+    private static final String TAG = Common.class.getSimpleName();
+
     public static void dismissOnClick(Snackbar snackbar) {
         snackbar.getView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,5 +115,60 @@ public class Common {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
             context.startService(new Intent(context, NotificationService.class));
         }
+    }
+
+    public static void setRefreshAlarm(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        long wakeupMillis = 0l;
+        try {
+            wakeupMillis = getTimePeriod(context, SESSION_CUSTOM, -1)[1];
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Intent intent = new Intent(context, DataPlanRefreshReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1001,
+                intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        if (wakeupMillis > System.currentTimeMillis()) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+            Log.d(TAG, "setRefreshAlarm: set" );
+        }
+        else {
+            Log.e(TAG, "setRefreshAlarm: something is wrong here " + wakeupMillis);
+        }
+    }
+
+    public static void setDataPlanNotification(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        long wakeupMillis = 0l;
+        try {
+            wakeupMillis = getTimePeriod(context, SESSION_CUSTOM, -1)[1];
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Intent intent = new Intent(context, DataPlanRefreshReceiver.class)
+                .putExtra(INTENT_ACTION, ACTION_SHOW_DATA_PLAN_NOTIFICATION);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1001,
+                intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        if (wakeupMillis > System.currentTimeMillis()) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+            Log.d(TAG, "setDataPlanNotification: set" );
+        }
+        else {
+            Log.e(TAG, "setDataPlanNotification: something is wrong here " + wakeupMillis);
+        }
+    }
+
+    public static void updateDialog(AlertDialog dialog, Context context) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(metrics);
+
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = (metrics.widthPixels * 85 / 100);
+        lp.y = 50;
+        dialog.getWindow().setAttributes(lp);
     }
 }

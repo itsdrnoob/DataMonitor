@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.PreferenceCategory
+        android:title="@string/settings_diagnostics_server"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false">
+        <com.drnoob.datamonitor.core.base.Preference
+            android:icon="@drawable/ic_download_server"
+            android:key="download_server"
+            android:title="@string/settings_download_server"
+            app:summary="@string/download_url_1_summary"
+            android:widgetLayout="@layout/preference_right_arrow" />
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:icon="@drawable/ic_upload_server"
+            android:key="upload_server"
+            android:title="@string/settings_upload_server"
+            app:summary="@string/upload_url_1_summary"
+            android:widgetLayout="@layout/preference_right_arrow" />
+
+    </com.drnoob.datamonitor.core.base.PreferenceCategory>
+</PreferenceScreen>

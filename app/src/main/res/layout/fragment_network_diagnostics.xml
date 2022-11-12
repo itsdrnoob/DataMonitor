@@ -166,11 +166,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/current_connection"
+        android:layout_marginBottom="@dimen/margin_extra_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/test_view" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/current_test"
@@ -179,7 +179,7 @@
         android:text="@string/testing_download"
         android:textSize="@dimen/text_large"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/meter_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +190,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:lottie_rawRes="@raw/testing"
-        app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:layout_constraintDimensionRatio="2:1"
         android:scaleType="centerCrop"
@@ -200,5 +199,51 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_test" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/meter_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/meter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_meter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/needle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotation="270"
+            android:src="@drawable/ic_meter_needle"
+            app:layout_constraintBottom_toBottomOf="@+id/meter"
+            app:layout_constraintEnd_toEndOf="@+id/meter"
+            app:layout_constraintStart_toStartOf="@+id/meter"
+            app:layout_constraintTop_toTopOf="@+id/meter" />
+
+        <TextView
+            android:id="@+id/speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:text=""
+            android:textSize="@dimen/text_large"
+            app:layout_constraintBottom_toBottomOf="@+id/meter"
+            app:layout_constraintEnd_toEndOf="@+id/meter"
+            app:layout_constraintStart_toStartOf="@+id/meter" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

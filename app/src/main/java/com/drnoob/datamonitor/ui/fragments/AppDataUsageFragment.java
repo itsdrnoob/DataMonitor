@@ -19,8 +19,10 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -43,13 +46,16 @@ import com.drnoob.datamonitor.adapters.AppDataUsageAdapter;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.adapters.data.FragmentViewModel;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
+import com.drnoob.datamonitor.utils.NetworkStatsHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
@@ -60,6 +66,7 @@ import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
 import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.isDataLoading;
 import static com.drnoob.datamonitor.ui.activities.MainActivity.mSystemAppsList;
 import static com.drnoob.datamonitor.ui.activities.MainActivity.mUserAppsList;
 
@@ -71,10 +78,13 @@ public class AppDataUsageFragment extends Fragment {
     public static List<AppDataUsageModel> mSystemList = new ArrayList<>();
     private static LinearLayout mLoading;
     private static Context mContext;
+    private static Activity mActivity;
     private static SwipeRefreshLayout mDataRefresh;
     private static TextView mSession, mType, mEmptyList;
     public static LinearLayout mTopBar;
     private FragmentViewModel viewModel;
+    private static TextView mTotalUsage;
+    private static boolean fromHome;
 
     public AppDataUsageFragment() {
 
@@ -89,6 +99,7 @@ public class AppDataUsageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
+        mActivity = getActivity();
     }
 
     @Nullable
@@ -103,25 +114,30 @@ public class AppDataUsageFragment extends Fragment {
         mDataRefresh = view.findViewById(R.id.refresh_data_usage);
         mSession = view.findViewById(R.id.data_usage_session);
         mType = view.findViewById(R.id.data_usage_type);
-        mTopBar = view.findViewById(R.id.top_bar);
+        mTopBar = view.findViewById(R.id.nested_top_bar);
         mEmptyList = view.findViewById(R.id.empty_list);
+        mTotalUsage = view.findViewById(R.id.current_session_total);
 
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(getActivity());
 
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+        fromHome = getActivity().getIntent().getBooleanExtra(DAILY_DATA_HOME_ACTION, false);
 
-        if (getArguments() != null) {
-            boolean fromHome = getArguments().getBoolean(DAILY_DATA_HOME_ACTION, false);
+        if (getActivity().getIntent() != null) {
             if (fromHome) {
-                type = getArguments().getInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
                 setType(type);
                 refreshData();
+                mTopBar.setVisibility(View.GONE);
+                mAppsView.setPadding(0, 130, 0, 0);
             }
         }
 
         setSession(session);
         setType(type);
+        mTotalUsage.setText("...");
 
         mList = mUserAppsList;
         mSystemList = mSystemAppsList;
@@ -129,7 +145,7 @@ public class AppDataUsageFragment extends Fragment {
         if (!MainActivity.isDataLoading()) {
             mLoading.setAlpha(0.0f);
             mAppsView.setAlpha(1.0f);
-            onDataLoaded();
+            onDataLoaded(getContext());
         }
         else {
             mDataRefresh.setRefreshing(true);
@@ -145,6 +161,9 @@ public class AppDataUsageFragment extends Fragment {
         mSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isDataLoading()) {
+                    return;
+                }
                 BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                 View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_session, null);
 
@@ -232,6 +251,9 @@ public class AppDataUsageFragment extends Fragment {
         mType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isDataLoading()) {
+                    return;
+                }
                 BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                 View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_type, null);
 
@@ -324,17 +346,31 @@ public class AppDataUsageFragment extends Fragment {
         mAppsView.removeAllViews();
         mList.clear();
         mSystemList.clear();
+        mTotalUsage.setText("...");
+
 
         MainActivity.LoadData loadData = new MainActivity.LoadData(mContext, getSession(mContext),
                 getType(mContext));
-        loadData.execute();
+        if (!isDataLoading()) {
+            loadData.execute();
+        }
 
     }
 
-    public static void onDataLoaded() {
+    public static void onDataLoaded(Context context) {
+        try {
+            String totalUsage = getTotalDataUsage(context);
+            mTotalUsage.setText(context.getString(R.string.total_usage, totalUsage));
+
+        }
+        catch (ParseException | RemoteException e) {
+            e.printStackTrace();
+        }
         Log.d(TAG, "onDataLoaded: " + mSystemList.size() + " system");
         Log.d(TAG, "onDataLoaded: " + mList.size() + " user");
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(mActivity);
+        mAdapter.setFromHome(fromHome);
         mAppsView.setAdapter(mAdapter);
         mAppsView.setLayoutManager(new LinearLayoutManager(mContext));
         mLoading.animate().alpha(0.0f);
@@ -347,6 +383,28 @@ public class AppDataUsageFragment extends Fragment {
             setSession(mList.get(0).getSession());
             setType(mList.get(0).getType());
         }
+    }
+
+    private static String getTotalDataUsage(Context context) throws ParseException, RemoteException {
+        int date = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_DATE, 1);
+        String totalUsage;
+        int type = getType(context);
+        if (type == TYPE_MOBILE_DATA) {
+            totalUsage = NetworkStatsHelper.formatData(
+                    NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(context), date)[0],
+                    NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(context), date)[1]
+            )[2];
+        }
+        else if (type == TYPE_WIFI) {
+            totalUsage = NetworkStatsHelper.formatData(
+                    NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession(context))[0],
+                    NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession(context))[1]
+            )[2];
+        }
+        else {
+            totalUsage = context.getString(R.string.label_unknown);
+        }
+        return totalUsage;
     }
 
     public static int getSession(Context context) {

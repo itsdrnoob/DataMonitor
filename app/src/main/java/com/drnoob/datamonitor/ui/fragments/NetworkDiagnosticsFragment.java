@@ -30,6 +30,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -38,6 +39,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -46,6 +48,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.drnoob.datamonitor.R;
@@ -75,6 +78,8 @@ import io.ipinfo.api.model.IPResponse;
 import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
 import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
 import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.ISP;
 import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
@@ -110,6 +115,10 @@ public class NetworkDiagnosticsFragment extends Fragment {
     private Long mMinLatency = 0L;
     private Boolean isNetworkConnected;
     private NetworkChangeMonitor mNetworkChangeMonitor;
+    private ConstraintLayout mMeterView;
+    private ImageView mNeedle;
+    private ImageView mMeter;
+    private TextView mCurrentSpeed;
 
     public native String getApiKey();
 
@@ -147,6 +156,11 @@ public class NetworkDiagnosticsFragment extends Fragment {
         diagnosticsView = view.findViewById(R.id.test_view);
         diagnosticsRunning = view.findViewById(R.id.diagnostics_running);
         currentConnectionType = view.findViewById(R.id.current_connection);
+
+        mMeterView = view.findViewById(R.id.meter_view);
+        mNeedle = view.findViewById(R.id.needle);
+        mCurrentSpeed = view.findViewById(R.id.speed);
+        mMeter = view.findViewById(R.id.meter);
 
         mDownloadSpeeds = new ArrayList<>();
         mUploadSpeeds = new ArrayList<>();
@@ -198,13 +212,18 @@ public class NetworkDiagnosticsFragment extends Fragment {
     @Override
     public void onPause() {
         speedTest.cancel(true);
-        if (downloadSpeedTestSocket != null) {
-            downloadSpeedTestSocket.forceStopTask();
-            downloadSpeedTestSocket.closeSocket();
+        try {
+            if (downloadSpeedTestSocket != null) {
+                downloadSpeedTestSocket.forceStopTask();
+                downloadSpeedTestSocket.closeSocket();
+            }
+            if (uploadSpeedTestSocket != null) {
+                uploadSpeedTestSocket.forceStopTask();
+                uploadSpeedTestSocket.closeSocket();
+            }
         }
-        if (uploadSpeedTestSocket != null) {
-            uploadSpeedTestSocket.forceStopTask();
-            uploadSpeedTestSocket.closeSocket();
+        catch (Exception e) {
+            e.printStackTrace();
         }
         mNetworkChangeMonitor.stopMonitor();
         super.onPause();
@@ -214,19 +233,24 @@ public class NetworkDiagnosticsFragment extends Fragment {
     private class SpeedTest extends AsyncTask<Object, String, Object> {
         private Activity activity;
 
+        long sentBefore;
+        long sentAfter;
+        String downloadUrl, uploadUrl;
+
         public SpeedTest(Activity activity) {
             this.activity = activity;
         }
 
         @Override
         protected void onPreExecute() {
-            Log.e(TAG, "onPreExecute: ");
+            Log.d(TAG, "onPreExecute: ");
             super.onPreExecute();
         }
 
         @Override
         protected Object doInBackground(Object[] objects) {
             final IPResponse[] ipResponse = new IPResponse[1];
+
             if (!isCancelled()) {
                 try {
                     URL url = new URL(getString(R.string.api_url));
@@ -261,8 +285,10 @@ public class NetworkDiagnosticsFragment extends Fragment {
                         }
                     });
 
+                    downloadUrl = PreferenceManager.getDefaultSharedPreferences(activity)
+                            .getString(DIAGNOSTICS_DOWNLOAD_URL, activity.getString(R.string.download_server_1_url));
                     downloadSpeedTestSocket = new SpeedTestSocket();
-                    downloadSpeedTestSocket.startFixedDownload(activity.getString(R.string.download_test_url), 15000, 1000);
+                    downloadSpeedTestSocket.startFixedDownload(downloadUrl, 15000, 1000);
 
                     // add a listener to wait for speedtest completion and progress
                     downloadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
@@ -280,9 +306,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                 }
                             });
 
+                            uploadUrl = PreferenceManager.getDefaultSharedPreferences(activity)
+                                    .getString(DIAGNOSTICS_UPLOAD_URL, activity.getString(R.string.upload_server_1_url));
                             uploadSpeedTestSocket = new SpeedTestSocket();
                             String fileName = SpeedTestUtils.generateFileName() + ".txt";
-                            uploadSpeedTestSocket.startFixedUpload(activity.getString(R.string.upload_test_url) + fileName, 10000000, 10000);
+                            sentBefore = TrafficStats.getTotalTxBytes();
+                            uploadSpeedTestSocket.startFixedUpload(uploadUrl + fileName, 10000000, 10000, 1000);
 
                             // add a listener to wait for speedtest completion and progress
                             uploadSpeedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
@@ -341,6 +370,20 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
                                     Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
 //                                mUploadSpeeds.add(((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8);
+
+                                    sentAfter = TrafficStats.getTotalTxBytes();
+                                    Long progressBytes = sentAfter - sentBefore;
+                                    sentBefore = sentAfter;
+                                    Float currentSpeed = (progressBytes.floatValue() / (1024 * 1024)) * 8;
+
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            onProgressUpdate("upload_speed",
+                                                    getString(R.string.network_speed_mbps, String.format("%.2f", currentSpeed)),
+                                                    currentSpeed.toString());
+                                        }
+                                    });
                                 }
                             });
 
@@ -357,10 +400,20 @@ public class NetworkDiagnosticsFragment extends Fragment {
                         @Override
                         public void onProgress(float percent, SpeedTestReport report) {
                             // Called to notify download progress
-//                    onProgressUpdate(report);
                             Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
                             Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
 //                        mDownloadSpeeds.add(((report.getTransferRateOctet().floatValue() / 1024) / 1024) * 8);
+                            Float currentSpeed = ((report.getTransferRateOctet()
+                                    .floatValue() / 1024) / 1024) * 8;
+
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onProgressUpdate("download_speed",
+                                            activity.getString(R.string.network_speed_mbps, String.format("%.1f", currentSpeed)),
+                                            currentSpeed.toString());
+                                }
+                            });
                         }
                     });
 
@@ -380,6 +433,8 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
         @Override
         protected void onProgressUpdate(String... values) {
+            float speed, rotation;
+            int meterDrawable;
             if (getContext() != null) {
                 if (values != null) {
                     String state = values[0];
@@ -407,24 +462,89 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
                                 diagnosticsView.animate()
                                         .translationY(((getView().getPivotY()) - 300) * -1)
+                                        .alpha(0f)
                                         .setListener(new AnimatorListenerAdapter() {
                                             @Override
                                             public void onAnimationEnd(Animator animation) {
                                                 super.onAnimationEnd(animation);
                                                 runDiagnostics.setText(R.string.running_diagnostics);
-                                                currentTest.setText(getString(R.string.testing_download));
+                                                currentTest.setText(activity.getString(R.string.testing_download));
                                                 currentTest.setVisibility(View.VISIBLE);
-                                                currentTestAnim.setVisibility(View.VISIBLE);
+                                                currentTest.setAlpha(1f);
+//                                                currentTestAnim.setVisibility(View.VISIBLE);
+
+
+                                                diagnosticsView.setVisibility(View.GONE);
+                                                diagnosticsView.setAlpha(1f);
+                                            }
+
+                                            @Override
+                                            public void onAnimationStart(Animator animation) {
+                                                super.onAnimationStart(animation);
+                                                mMeterView.setAlpha(0f);
+                                                mMeterView.setVisibility(View.VISIBLE);
+                                                mMeterView.animate()
+                                                        .alpha(1f)
+                                                        .setListener(new AnimatorListenerAdapter() {
+                                                            @Override
+                                                            public void onAnimationEnd(Animator animation) {
+                                                                super.onAnimationEnd(animation);
+                                                            }
+                                                        })
+                                                        .start();
+                                                mNeedle.animate()
+                                                        .rotation(0f)
+                                                        .setDuration(1000)
+                                                        .start();
+                                                mCurrentSpeed.setText(activity.getString(R.string.network_speed_mbps, "0"));
                                             }
                                         })
                                         .start();
                             }
                             break;
                         case "upload":
+                            mMeter.setImageResource(R.drawable.ic_meter);
+                            mNeedle.animate()
+                                    .rotation(0f)
+                                    .setDuration(450)
+                                    .start();
                             currentTest.setText(activity.getString(R.string.testing_upload));
+                            mCurrentSpeed.setText(activity.getString(R.string.network_speed_mbps, "0"));
                             break;
 
                         case "latency":
+                            mMeterView.animate()
+                                    .scaleY(0.8f)
+                                    .scaleX(0.8f)
+                                    .alpha(0f)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            currentTestAnim.setVisibility(View.VISIBLE);
+                                            currentTestAnim.playAnimation();
+                                            currentTestAnim.animate()
+                                                    .scaleX(1)
+                                                    .scaleY(1)
+                                                    .alpha(1)
+                                                    .start();
+
+                                            mMeterView.setVisibility(View.GONE);
+                                            mMeterView.setAlpha(1);
+                                            mMeterView.setScaleX(1);
+                                            mMeterView.setScaleY(1);
+                                        }
+
+                                        @Override
+                                        public void onAnimationStart(Animator animation) {
+                                            super.onAnimationStart(animation);
+                                            currentTestAnim.setScaleX(0.8f);
+                                            currentTestAnim.setScaleY(0.8f);
+                                            currentTestAnim.setAlpha(0f);
+                                        }
+                                    })
+                                    .start();
+                            mCurrentSpeed.setText(activity.getString(R.string.network_speed_mbps, "0.00"));
                             currentTest.setText(activity.getString(R.string.testing_latency));
                             break;
 
@@ -433,14 +553,68 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     activity.getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
                                     .setAnchorView(activity.findViewById(R.id.bottomNavigationView))
                                     .show();
+
                             runDiagnostics.setClickable(true);
                             runDiagnostics.setEnabled(true);
-                            runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
-                            runDiagnostics.setText(R.string.run_diagnostics);
-                            setConnectionStatus();
-                            diagnosticsRunning.setVisibility(View.GONE);
-                            rippleView.playAnimation();
-                            rippleView.setVisibility(View.VISIBLE);
+                            diagnosticsInfo.setVisibility(View.VISIBLE);
+                            diagnosticsInfo.animate()
+                                    .translationY(0)
+                                    .start();
+
+                            diagnosticsView.setAlpha(0f);
+                            diagnosticsView.setVisibility(View.VISIBLE);
+
+                            diagnosticsView.animate()
+                                    .translationY(0)
+                                    .alpha(1f)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationStart(Animator animation) {
+                                            super.onAnimationStart(animation);
+                                            runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
+                                            runDiagnostics.setText(R.string.run_diagnostics);
+                                            setConnectionStatus();
+                                            currentTest.setVisibility(View.GONE);
+                                            currentTestAnim.setVisibility(View.GONE);
+                                            currentTestAnim.pauseAnimation();
+                                            diagnosticsRunning.setVisibility(View.GONE);
+                                            mMeterView.setVisibility(View.GONE);
+                                        }
+
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            rippleView.setVisibility(View.VISIBLE);
+                                            rippleView.playAnimation();
+//                                            currentConnectionType.setVisibility(View.VISIBLE);
+                                        }
+                                    })
+                                    .start();
+
+                            break;
+
+                        case "download_speed":
+                            speed = Float.valueOf(values[2]);
+                            mCurrentSpeed.setText(values[1]);
+                            rotation = getPositionByRate(speed);
+                            meterDrawable = getMeterDrawableId(speed);
+                            mMeter.setImageResource(meterDrawable);
+                            mNeedle.animate()
+                                    .rotation(rotation)
+                                    .setDuration(450)
+                                    .start();
+                            break;
+
+                        case "upload_speed":
+                            mCurrentSpeed.setText(values[1]);
+                            speed = Float.valueOf(values[2]);
+                            rotation = getPositionByRate(speed);
+                            meterDrawable = getMeterDrawableId(speed);
+                            mMeter.setImageResource(meterDrawable);
+                            mNeedle.animate()
+                                    .rotation(rotation)
+                                    .setDuration(450)
+                                    .start();
                             break;
 
                         default:
@@ -530,26 +704,42 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             .translationY(0)
                                             .start();
 
-                                    diagnosticsView.animate()
-                                            .translationY(0)
+                                    diagnosticsView.setAlpha(0f);
+                                    diagnosticsView.setVisibility(View.VISIBLE);
+
+                                    currentTestAnim.animate()
+                                            .alpha(0f)
                                             .setListener(new AnimatorListenerAdapter() {
                                                 @Override
                                                 public void onAnimationStart(Animator animation) {
                                                     super.onAnimationStart(animation);
-                                                    runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
-                                                    runDiagnostics.setText(R.string.run_diagnostics);
-                                                    setConnectionStatus();
-                                                    currentTest.setVisibility(View.GONE);
-                                                    currentTestAnim.setVisibility(View.GONE);
-                                                    diagnosticsRunning.setVisibility(View.GONE);
-                                                }
+                                                    diagnosticsView.animate()
+                                                            .translationY(0)
+                                                            .alpha(1f)
+                                                            .setListener(new AnimatorListenerAdapter() {
+                                                                @Override
+                                                                public void onAnimationStart(Animator animation) {
+                                                                    super.onAnimationStart(animation);
+                                                                    runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
+                                                                    runDiagnostics.setText(R.string.run_diagnostics);
+                                                                    setConnectionStatus();
+                                                                    currentTest.setVisibility(View.GONE);
+                                                                    currentTestAnim.setVisibility(View.GONE);
+                                                                    currentTestAnim.pauseAnimation();
+                                                                    diagnosticsRunning.setVisibility(View.GONE);
+                                                                }
 
-                                                @Override
-                                                public void onAnimationEnd(Animator animation) {
-                                                    super.onAnimationEnd(animation);
-                                                    rippleView.setVisibility(View.VISIBLE);
-                                                    rippleView.playAnimation();
+                                                                @Override
+                                                                public void onAnimationEnd(Animator animation) {
+                                                                    super.onAnimationEnd(animation);
+                                                                    rippleView.setVisibility(View.VISIBLE);
+                                                                    rippleView.playAnimation();
 //                                            currentConnectionType.setVisibility(View.VISIBLE);
+
+                                                                    mMeterView.setVisibility(View.GONE);
+                                                                }
+                                                            })
+                                                            .start();
                                                 }
                                             })
                                             .start();
@@ -569,26 +759,42 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             .translationY(0)
                                             .start();
 
-                                    diagnosticsView.animate()
-                                            .translationY(0)
+                                    currentTestAnim.animate()
+                                            .alpha(0f)
                                             .setListener(new AnimatorListenerAdapter() {
                                                 @Override
                                                 public void onAnimationStart(Animator animation) {
                                                     super.onAnimationStart(animation);
-                                                    runDiagnostics.setBackground(getResources().getDrawable(R.drawable.button_run_diagnostics_background, null));
-                                                    runDiagnostics.setText(R.string.run_diagnostics);
-                                                    currentConnectionType.setText(activity.getString(R.string.current_connection, mCurrentConnectionType));
-                                                    currentTest.setVisibility(View.GONE);
-                                                    currentTestAnim.setVisibility(View.GONE);
-                                                    diagnosticsRunning.setVisibility(View.GONE);
-                                                }
+                                                    diagnosticsView.setAlpha(0f);
+                                                    diagnosticsView.setVisibility(View.VISIBLE);
+                                                    diagnosticsView.animate()
+                                                            .translationY(0)
+                                                            .alpha(1f)
+                                                            .setListener(new AnimatorListenerAdapter() {
+                                                                @Override
+                                                                public void onAnimationStart(Animator animation) {
+                                                                    super.onAnimationStart(animation);
+                                                                    runDiagnostics.setBackground(activity.getResources()
+                                                                            .getDrawable(R.drawable.button_run_diagnostics_background, null));
+                                                                    runDiagnostics.setText(R.string.run_diagnostics);
+                                                                    setConnectionStatus();
+                                                                    currentTest.setVisibility(View.GONE);
+                                                                    currentTestAnim.setVisibility(View.GONE);
+                                                                    currentTestAnim.pauseAnimation();
+                                                                    diagnosticsRunning.setVisibility(View.GONE);
+                                                                }
 
-                                                @Override
-                                                public void onAnimationEnd(Animator animation) {
-                                                    super.onAnimationEnd(animation);
-                                                    rippleView.setVisibility(View.VISIBLE);
-                                                    rippleView.playAnimation();
+                                                                @Override
+                                                                public void onAnimationEnd(Animator animation) {
+                                                                    super.onAnimationEnd(animation);
+                                                                    rippleView.setVisibility(View.VISIBLE);
+                                                                    rippleView.playAnimation();
 //                                            currentConnectionType.setVisibility(View.VISIBLE);
+
+                                                                    mMeterView.setVisibility(View.GONE);
+                                                                }
+                                                            })
+                                                            .start();
                                                 }
                                             })
                                             .start();
@@ -603,6 +809,56 @@ public class NetworkDiagnosticsFragment extends Fragment {
                 }
             }
         }
+    }
+
+    private int getMeterDrawableId(float speed) {
+        if (speed >= 0 && speed < 5) {
+            return R.drawable.ic_meter_0;
+        }
+        else if (speed >= 5 && speed < 10) {
+            return R.drawable.ic_meter_5;
+        }
+        else if (speed >= 10 && speed < 15) {
+            return R.drawable.ic_meter_10;
+        }
+        else if (speed >= 15 && speed < 20) {
+            return R.drawable.ic_meter_15;
+        }
+        else if (speed >= 20 && speed < 25) {
+            return R.drawable.ic_meter_20;
+        }
+        else if (speed >= 25 && speed < 30) {
+            return R.drawable.ic_meter_25;
+        }
+        else if (speed >= 30 && speed < 50) {
+            return R.drawable.ic_meter_30;
+        }
+        else if (speed >= 50 && speed < 75) {
+            return R.drawable.ic_meter_50;
+        }
+        else if (speed >= 75 && speed < 100) {
+            return R.drawable.ic_meter_75;
+        }
+        else if (speed > 100) {
+            return R.drawable.ic_meter_100;
+        }
+        return R.drawable.ic_meter;
+    }
+
+    public float getPositionByRate(float rate) {
+        if (rate >= 0 && rate <= 30) {
+            return rate * 6;
+        }
+        else if (rate >= 30 && rate <= 50) {
+            return (float) ((rate - 30) * 1.5) + 180;
+        }
+        else if (rate > 50 && rate <= 100) {
+            return (float) ((rate - 50) * 1.2) + 210;
+        }
+        else if (rate > 100) {
+            return 270;
+        }
+        return 0;
     }
 
     private int getConnectivityStatus(Context context) {
@@ -642,7 +898,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                 mCurrentConnectionType = "Unknown";
                 break;
         }
-        currentConnectionType.setText(getString(R.string.current_connection, mCurrentConnectionType));
+        currentConnectionType.setText(getContext().getString(R.string.current_connection, mCurrentConnectionType));
     }
 
     private class NetworkChangeMonitor extends ConnectivityManager.NetworkCallback {
@@ -674,7 +930,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
         public void stopMonitor() {
             if (connectivityManager != null) {
-                connectivityManager.unregisterNetworkCallback(this);
+                try {
+                    connectivityManager.unregisterNetworkCallback(this);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);

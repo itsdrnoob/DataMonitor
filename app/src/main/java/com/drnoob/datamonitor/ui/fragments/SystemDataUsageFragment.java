@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
@@ -70,6 +72,7 @@ public class SystemDataUsageFragment extends Fragment {
     public static RecyclerView mAppsView;
     private static LinearLayout mLoading;
     private static Context mContext;
+    private static Activity mActivity;
     private static SwipeRefreshLayout mDataRefresh;
     private static TextView mSession, mType, mEmptyList;
     public static LinearLayout mTopBar;
@@ -90,6 +93,7 @@ public class SystemDataUsageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
+        mActivity = getActivity();
     }
 
     @Override
@@ -107,12 +111,20 @@ public class SystemDataUsageFragment extends Fragment {
         mEmptyList = view.findViewById(R.id.empty_list);
         mList = AppDataUsageFragment.mSystemList;
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(getActivity());
         mAppsView = view.findViewById(R.id.app_data_usage_recycler);
 
 
         int session = getActivity().getIntent().getIntExtra(DATA_USAGE_SESSION, SESSION_TODAY);
         int type = getActivity().getIntent().getIntExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
 
+        if (getActivity().getIntent() != null) {
+            Boolean fromHome = getActivity().getIntent().getBooleanExtra(DAILY_DATA_HOME_ACTION, false);
+            if (fromHome) {
+                mTopBar.setVisibility(View.GONE);
+                mAppsView.setPadding(0, 20, 0, 0);
+            }
+        }
 
         setSession(session);
         setType(type);
@@ -279,6 +291,7 @@ public class SystemDataUsageFragment extends Fragment {
     private static void onDataLoaded() {
         Log.e(TAG, "onDataLoaded: " + mList.size() + " system");
         mAdapter = new AppDataUsageAdapter(mList, mContext);
+        mAdapter.setActivity(mActivity);
         mAppsView.setAdapter(mAdapter);
         mAppsView.setLayoutManager(new LinearLayoutManager(mContext));
         mLoading.animate().alpha(0.0f);

@@ -118,7 +118,7 @@
     <string name="report">Report bugs</string>
     <string name="report_summary">Report bugs or request features</string>
     <string name="setup">Setup</string>
-    <string name="app_data_usage">App data usage</string>
+    <string name="app_data_usage">App usage</string>
     <string name="settings">Settings</string>
     <string name="btc_address_copied">Bitcoin wallet address copied to the clipboard</string>
     <string name="eth_address_copied">Ethereum wallet address copied to the clipboard</string>
@@ -184,7 +184,7 @@
     <string name="label_translators">Translators</string>
     <string name="setup_app_data_usage_alert">App data usage alert</string>
     <string name="title_app_data_limit">App data limit</string>
-    <string name="network_diagnostics">Network Diagnostics</string>
+    <string name="network_diagnostics">Diagnostics</string>
     <string name="run_diagnostics">Run Diagnostics</string>
     <string name="running_diagnostics">Running Diagnostics</string>
     <string name="connecting">Connecting</string>
@@ -274,4 +274,82 @@
     <string name="comradekingu" translatable="false">Allan Nordhøy</string>
     <string name="f_droid_page">View app on F-Droid</string>
     <string name="f_droid_page_summary">Check the app on the official F-Droid repo</string>
+    <string name="label_crash_logs">Crash logs</string>
+    <string name="label_device_info">Device info</string>
+    <string name="crash_report_body">It seems like Data Monitor has crashed. You can send the crash report to the developer to help analyse the problem and solve it quicker. If no crash occurred, kindly ignore.</string>
+    <string name="crash_report_title">Crash Report</string>
+    <string name="device_info_content_label">See what\'s included in Device info</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="report_github_summary">Open a new issue on Github</string>
+    <string name="report_telegram_summary">Send the crash report in Telegram support chat</string>
+    <string name="report_mail_summary">Send the crash report in mail</string>
+    <string name="mail_uri">mailto:%1$s?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="total_usage">Total usage: %1$s</string>
+    <string name="label_unknown">Unknown</string>
+    <string name="auto_hide_live_network">Auto hide network speed</string>
+    <string name="auto_hide_live_network_summary">Stop network speed notification when network is not connected</string>
+    <string name="custom">Custom</string>
+    <string name="heading_data_reset_custom_counter">Reset date</string>
+    <string name="label_custom_start_date">Start date: %1$d</string>
+    <string name="label_custom_end_date">End date: %1$d</string>
+    <string name="setup_usage_reset_date_custom_selected">Custom data plan is active</string>
+    <string name="title_data_plan_expired">Data plan expired!</string>
+    <string name="summary_data_plan_expired">You might want to update your plan</string>
+    <string name="error_unknown_telegram_client">Telegram not installed or unknown client present. Please try another method.</string>
+    <string name="crash_logs_extra_text">Data Monitor crash logs</string>
+    <string name="label_select_app">Select app</string>
+    <string name="label_crash_logs_share_chat">Share to chat: @datamonitor</string>
+    <string name="crash_logs_warning">Crash Logs; Do Not modify</string>
+    <string name="title_device_info_contents">Device info contents</string>
+    <string name="device_info_body">Device info includes: \nDevice Manufacturer\nDevice Brand\nDevice Model\nDevice Codename\nAndroid Version\nSOC Model</string>
+    <string name="label_crash_logs_copied">Crash logs copied to clipboard</string>
+    <string name="label_mail">Mail</string>
+    <string name="battery_optimisation_enabled_info">Battery optimisation is enabled. This will interfere with the working of Data Monitor. Click to disable.</string>
+    <string name="label_battery_optimisation">Battery optimisation</string>
+    <string name="error_no_crash_logs">No crash logs found. Are you sure a crash occurred?</string>
+    <string name="label_copy_logs">Copy logs</string>
+    <string name="settings_network_diagnostics">Network diagnostics</string>
+    <string name="network_diagnostics_summary">Switch diagnostics server</string>
+    <string name="settings_diagnostics_server">Server</string>
+    <string name="settings_download_server">Download server</string>
+    <string name="settings_upload_server">Upload server</string>
+    <string name="download_url_1_summary" translatable="false">http://speedtest.ftp.otenet.gr</string>
+    <string name="download_url_2_summary" translatable="false">https://github.com</string>
+    <string name="download_url_3_summary" translatable="false">http://xcal1.vodafone.co.uk</string>
+    <string name="upload_url_1_summary" translatable="false">https://www.azurespeed.com</string>
+    <string name="upload_url_2_summary" translatable="false">https://v2.convertapi.com</string>
+    <string name="upload_url_3_summary" translatable="false">https://easyupload.io</string>
+    <string name="custom_upload_url_hint">Enter complete upload URL</string>
+    <string name="label_custom_server">Custom server</string>
+    <string name="custom_download_url_hint">Enter complete download URL</string>
+    <string name="label_custom_server_save_success">Server preference saved</string>
+    <string name="error_invaliid_url">Invalid download URL!</string>
+    <string name="error_url_verification_failed">Couldn\'t verify URL! Please try again or use a different one.</string>
+    <string name="comradekingu_translation_summary" translatable="false">Norwegian Bokmål</string>
+    <string name="metezd_summary" translatable="false">Turkish</string>
+    <string name="metezd" translatable="false">metezd</string>
+    <string name="eUgEntOptIc44" translatable="false">Jean-Luc Tibaux</string>
+    <string name="eUgEntOptIc44_summary" translatable="false">German</string>
+    <string name="ersen0" translatable="false">Oğuz Ersen</string>
+    <string name="ersen0_summary" translatable="false">Turkish</string>
+    <string name="AxusWizix" translatable="false">Axus Wizix</string>
+    <string name="AxusWizix_summary" translatable="false">Russian</string>
+    <string name="hectorgamer_summary" translatable="false">Portuguese</string>
+    <string name="hector_gamer" translatable="false">Hector Gamer</string>
+    <string name="BLENICeI_summary" translatable="false">Spanish</string>
+    <string name="BLENICeI" translatable="false">BLENICeI</string>
+    <string name="Igor_summary" translatable="false">Spanish</string>
+    <string name="Igor" translatable="false">Igor</string>
+    <string name="Denis_summary" translatable="false">Ukrainian</string>
+    <string name="Denis" translatable="false">Denis</string>
+    <string name="friedrich_summary" translatable="false">German</string>
+    <string name="friedrich" translatable="false">Friedrich</string>
+    <string name="helmut_summary" translatable="false">German</string>
+    <string name="helmut" translatable="false">Helmut</string>
+    <string name="kyoya_summary" translatable="false">Turkish</string>
+    <string name="kyoya" translatable="false">Kyoya</string>
+    <string name="paul_summary" translatable="false">German</string>
+    <string name="paul" translatable="false">Paul</string>
+    <string name="tobias_summary" translatable="false">German</string>
+    <string name="tobias" translatable="false">Tobias</string>
 </resources>

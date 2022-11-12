@@ -17,53 +17,75 @@
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@color/top_bar_scrolling"
             android:elevation="@dimen/elevation_small"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/margin_mid_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/data_usage_session"
-                android:layout_width="0dp"
+                android:id="@+id/current_session_total"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_mid_large"
-                android:layout_weight="1"
-                android:background="@drawable/selectable_item_plain_background"
-                android:clickable="true"
-                android:drawableEnd="@drawable/ic_arrow_down_14"
-                android:drawablePadding="@dimen/margin_medium"
-                android:drawableTint="@color/text_primary"
-                android:elevation="@dimen/elevation_default"
-                android:gravity="center"
-                android:padding="@dimen/margin_small"
-                android:paddingEnd="@dimen/margin_large"
-                android:text="@string/label_today"
-                android:textSize="@dimen/text_mid_large" />
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"/>
 
-            <TextView
-                android:id="@+id/data_usage_type"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/nested_top_bar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_mid_large"
-                android:layout_weight="1"
-                android:background="@drawable/selectable_item_plain_background"
-                android:clickable="true"
-                android:drawableEnd="@drawable/ic_arrow_down_14"
-                android:drawablePadding="@dimen/margin_medium"
-                android:drawableTint="@color/text_primary"
-                android:elevation="@dimen/elevation_default"
+                android:elevation="@dimen/elevation_small"
                 android:gravity="center"
-                android:padding="@dimen/margin_small"
-                android:paddingEnd="@dimen/margin_mid_large"
-                android:text="@string/label_mobile_data"
-                android:textSize="@dimen/text_mid_large" />
+                android:paddingBottom="@dimen/margin_mid_large"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/data_usage_session"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item_plain_background"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_down_14"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:drawableTint="@color/text_primary"
+                    android:elevation="@dimen/elevation_default"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_small"
+                    android:paddingEnd="@dimen/margin_large"
+                    android:text="@string/label_today"
+                    android:textSize="@dimen/text_mid_large" />
+
+                <TextView
+                    android:id="@+id/data_usage_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
+                    android:layout_weight="1"
+                    android:background="@drawable/selectable_item_plain_background"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_down_14"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:drawableTint="@color/text_primary"
+                    android:elevation="@dimen/elevation_default"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_small"
+                    android:paddingEnd="@dimen/margin_mid_large"
+                    android:text="@string/label_mobile_data"
+                    android:textSize="@dimen/text_mid_large" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/apps_loading"
@@ -82,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingTop="@dimen/radius_large"
+            android:paddingTop="@dimen/padding_app_data_view"
             android:visibility="visible"
             android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"

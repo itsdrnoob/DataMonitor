@@ -34,6 +34,10 @@ public class Values {
     public static final String NETWORK_SIGNAL_CHANNEL_ID = "NetworkSignal.Notification";
     public static final String NETWORK_SIGNAL_CHANNEL_NAME = "Network Speed Monitor";
     public static final String NETWORK_SIGNAL_NOTIFICATION_GROUP = "Network Speed Monitor";
+    public static final int OTHER_NOTIFICATION_ID = 0x012C;
+    public static final String OTHER_NOTIFICATION_CHANNEL_ID = "Other.Notification";
+    public static final String OTHER_NOTIFICATION_CHANNEL_NAME = "Other";
+    public static final String DEFAULT_NOTIFICATION_GROUP = "Default";
 
 
     public static final int SESSION_TODAY = 0x000A;
@@ -43,6 +47,7 @@ public class Values {
     public static final int SESSION_THIS_YEAR = 0x0032;
     public static final int SESSION_ALL_TIME = 0x003C;
     public static final int SESSION_MONTHLY = 0x00A9;
+    public static final int SESSION_CUSTOM = 0x00AC;
 
     public static final int TYPE_MOBILE_DATA = 0x0046;
     public static final int TYPE_WIFI = 0x0050;
@@ -52,6 +57,7 @@ public class Values {
     public static final String DATA_USAGE_TYPE = "data_usage_type";
     public static final int DATA_USAGE_SYSTEM = 0x005A;
     public static final int DATA_USAGE_USER = 0x0064;
+    public static final int DATA_USAGE_TODAY = 0x00D3;
 
     public static final String GENERAL_FRAGMENT_ID = "GENERAL_FRAGMENT_ID";
 
@@ -64,6 +70,8 @@ public class Values {
     public static final int APP_DATA_LIMIT_FRAGMENT = 0x00AA;
     public static final int NETWORK_STATS_FRAGMENT = 0x00C8;
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
+    public static final int DISABLE_BATTERY_OPTIMISATION_FRAGMENT = 0x00E6;
+    public static final int DIAGNOSTICS_SETTINGS_FRAGMENT = 0x00F0;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -83,9 +91,13 @@ public class Values {
     public static final String DATA_RESET = "data_reset";
     public static final String DATA_RESET_DAILY = "daily";
     public static final String DATA_RESET_MONTHLY = "monthly";
+    public static final String DATA_RESET_CUSTOM = "custom";
     public static final String DATA_RESET_HOUR = "reset_hour";
     public static final String DATA_RESET_MIN = "reset_min";
     public static final String DATA_RESET_DATE = "reset_date";
+    public static final String DATA_RESET_CUSTOM_DATE_START = "custom_reset_date_start";
+    public static final String DATA_RESET_CUSTOM_DATE_END = "custom_reset_date_end";
+    public static final String DATA_RESET_CUSTOM_DATE_RESTART = "custom_reset_date_restart";
     public static final String DATA_WARNING_TRIGGER_LEVEL = "data_warning_trigger_level";
     public static final String DATA_USAGE_WARNING_SHOWN = "data_usage_warning_shown";
     public static final String DATA_USAGE_ALERT = "data_usage_alert";
@@ -101,6 +113,12 @@ public class Values {
     public static final String DAILY_DATA_HOME_ACTION = "daily_data_home_action";
     public static final String APP_THEME = "app_theme";
     public static final String APP_THEME_SUMMARY = "app_theme_summary";
+    public static final String DIAGNOSTICS_DOWNLOAD_URL = "diagnostics_download_url";
+    public static final String DIAGNOSTICS_DOWNLOAD_URL_SUMMARY = "diagnostics_download_url_summary";
+    public static final String DIAGNOSTICS_DOWNLOAD_URL_INDEX = "diagnostics_download_url_index";
+    public static final String DIAGNOSTICS_UPLOAD_URL = "diagnostics_upload_url";
+    public static final String DIAGNOSTICS_UPLOAD_URL_SUMMARY = "diagnostics_upload_url_summary";
+    public static final String DIAGNOSTICS_UPLOAD_URL_INDEX = "diagnostics_upload_url_index";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 
@@ -128,5 +146,10 @@ public class Values {
     public static final String UPDATE_VERSION = "update_version";
     public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
     public static final String MD5_PLAY = "58CDB2B01A9E512D4FDC1A9926A29513";
+
+    public static final String CRASH_REPORT_KEY = "datamonitor.crashReport";
+
+    public static final String INTENT_ACTION = "datamonitor.intent.action";
+    public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
 
 }

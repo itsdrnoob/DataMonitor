@@ -20,6 +20,7 @@
     <dimen name="overview_max_height">350dp</dimen>
     <dimen name="text_extra_small">10sp</dimen>
     <dimen name="text_large">22sp</dimen>
+    <dimen name="text_extra_large">24sp</dimen>
     <dimen name="text_mid_large">16sp</dimen>
     <dimen name="text_small">12sp</dimen>
     <dimen name="ripple_stroke_width">2dp</dimen>
@@ -31,4 +32,5 @@
     <dimen name="text_widget_title">18sp</dimen>
     <dimen name="company_logo_height">14dp</dimen>
     <dimen name="company_logo_width">63dp</dimen>
+    <dimen name="padding_app_data_view">120dp</dimen>
 </resources>

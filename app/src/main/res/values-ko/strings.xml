@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_current_data_warning_trigger_level_limit_set">현재 트리거 수준: %1$s%% (%2$s)</string>
+    <string name="app_name">데이터 모니터</string>
+    <string name="add_widget">위젯 추가하기</string>
+    <string name="notification_mobile_data_usage">모바일 데이터: %1$s</string>
+    <string name="home_wifi_data_sent">%1$s
+\n전송됨</string>
+    <string name="home_mobile_data_received">%1$s
+\n수신됨</string>
+    <string name="home_wifi_data_received">%1$s
+\n수신됨</string>
+</resources>

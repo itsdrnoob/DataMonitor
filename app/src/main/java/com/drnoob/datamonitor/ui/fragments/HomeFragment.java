@@ -28,6 +28,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,17 +48,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
-import com.drnoob.datamonitor.adapters.data.FragmentViewModel;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
@@ -69,13 +70,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
@@ -89,8 +98,10 @@ import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
 
 
 public class HomeFragment extends Fragment implements View.OnLongClickListener {
-
     private static final String TAG = HomeFragment.class.getSimpleName();
+    private static final int MODE_LOAD_OVERVIEW = 0;
+    private static final int MODE_REFRESH_OVERVIEW = 1;
+
     private RelativeLayout mSetupDataPlan;
     private TextView mMobileDataUsage,
             mMobileDataSent,
@@ -214,7 +225,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                         mRefreshOverview.setRotation(0);
                     }
                 });
-                refreshOverview();
+//                refreshOverview();
+                UpdateOverview updateOverview = new UpdateOverview(MODE_REFRESH_OVERVIEW);
+                updateOverview.execute();
             }
         });
 
@@ -224,27 +237,120 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                 View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_add_data_plan, null);
 
+                LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
                 RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
                 TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                 TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
+                RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
+                TextView customStartDate = dialogView.findViewById(R.id.custom_start_date);
+                TextView customEndDate = dialogView.findViewById(R.id.custom_end_date);
                 ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);
 
+                Calendar calendar = Calendar.getInstance();
+                int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                customDateSlider.setValueTo((float) daysInMonth);
+
+                int start = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
+                int end = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_CUSTOM_DATE_END, daysInMonth);
+
+                List<Float> sliderValues = new ArrayList<>();
+                sliderValues.add((float) start);
+                sliderValues.add((float) end);
+                customDateSlider.setValues(sliderValues);
+
+                customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
+                customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+
                 dataTypeSwitcher.selectTab(dataTypeSwitcher.getTabAt(PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getInt(DATA_TYPE, 0)));
+
+                dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        VibrationUtils.hapticMinor(getContext());
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
+
+                customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+                    @Override
+                    public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
+                        if (fromUser) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
+                        int start = slider.getValues().get(0).intValue();
+                        int end = slider.getValues().get(1).intValue();
+
+                        customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
+                        customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+
+                    }
+                });
+
                 Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getFloat(DATA_LIMIT, -1);
                 if (dataLimit > 0) {
                     dataLimitInput.setText(PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getString(LIMIT, null));
                 }
-                if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
-                    dataReset.check(R.id.monthly);
-                } else {
-                    dataReset.check(R.id.daily);
+                switch (PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getString(DATA_RESET, "")) {
+                    case DATA_RESET_MONTHLY:
+                        dataReset.check(R.id.monthly);
+                        customDateView.setVisibility(View.GONE);
+                        break;
+                    case DATA_RESET_DAILY:
+                        dataReset.check(R.id.daily);
+                        customDateView.setVisibility(View.GONE);
+                        break;
+                    case DATA_RESET_CUSTOM:
+                        dataReset.check(R.id.custom_reset);
+                        customDateView.setAlpha(1f);
+                        customDateView.setVisibility(View.VISIBLE);
+                        break;
                 }
+
+                dataReset.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                        if (i == R.id.custom_reset) {
+                            customDateView.setAlpha(0f);
+                            customDateView.setVisibility(View.VISIBLE);
+                            customDateView.animate()
+                                    .alpha(1f)
+                                    .setDuration(350)
+                                    .start();
+                        }
+                        else {
+                            customDateView.animate()
+                                    .alpha(0f)
+                                    .setDuration(350)
+                                    .start();
+//                                customDateView.setVisibility(View.GONE);
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    customDateView.setVisibility(View.GONE);
+                                }
+                            }, 150);
+
+                        }
+                    }
+                });
 
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -267,9 +373,23 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                             }
                             int dataType = dataTypeSwitcher.getSelectedTabPosition();
                             if (dataReset.getCheckedRadioButtonId() == R.id.daily) {
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(DATA_RESET, DATA_RESET_DAILY).apply();
-                            } else {
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putString(DATA_RESET, DATA_RESET_DAILY).apply();
+                            }
+                            else if (dataReset.getCheckedRadioButtonId() == R.id.monthly) {
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
+                            }
+                            else if (dataReset.getCheckedRadioButtonId() == R.id.custom_reset) {
+                                calendar.set(Calendar.DAY_OF_MONTH, customDateSlider.getValues().get(1).intValue());
+                                calendar.add(Calendar.DATE, 1);
+
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putString(DATA_RESET, DATA_RESET_CUSTOM)
+                                        .putInt(DATA_RESET_CUSTOM_DATE_START, customDateSlider.getValues().get(0).intValue())
+                                        .putInt(DATA_RESET_CUSTOM_DATE_END, customDateSlider.getValues().get(1).intValue())
+                                        .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                                        .apply();
                             }
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putFloat(DATA_LIMIT, dataLimit).apply();
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(LIMIT, dataLimitInput.getText().toString()).apply();
@@ -278,6 +398,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                                     getString(R.string.data_plan_saved), Snackbar.LENGTH_SHORT)
                                     .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                             mSetupDataPlan.setVisibility(View.GONE);
+                            setDataPlanNotification(getContext());
                             dialog.dismiss();
                             snackbar.show();
                             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
@@ -325,32 +446,27 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             }
         });
 
-        NavController controller = Navigation.findNavController(getActivity(), R.id.main_nav_host_fragment);
-        FragmentViewModel viewModel = new ViewModelProvider(getActivity()).get(FragmentViewModel.class);
-
         mMobileDataUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (controller != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
-                    bundle.putBoolean(DAILY_DATA_HOME_ACTION, true);
-                    viewModel.setCurrentType(TYPE_MOBILE_DATA);
-                    controller.navigate(R.id.bottom_menu_app_data_usage, bundle);
-                }
+                Intent intent = new Intent(mContext, ContainerActivity.class);
+                intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_TODAY);
+                intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
+                intent.putExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
+                intent.putExtra(DAILY_DATA_HOME_ACTION, true);
+                startActivity(intent);
             }
         });
 
         mWifiUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (controller != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(DATA_USAGE_TYPE, TYPE_WIFI);
-                    bundle.putBoolean(DAILY_DATA_HOME_ACTION, true);
-                    viewModel.setCurrentType(TYPE_WIFI);
-                    controller.navigate(R.id.bottom_menu_app_data_usage, bundle);
-                }
+                Intent intent = new Intent(mContext, ContainerActivity.class);
+                intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_TODAY);
+                intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
+                intent.putExtra(DATA_USAGE_TYPE, TYPE_WIFI);
+                intent.putExtra(DAILY_DATA_HOME_ACTION, true);
+                startActivity(intent);
             }
         });
 
@@ -406,6 +522,73 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             e.printStackTrace();
         } catch (RemoteException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void resetOverview() {
+        mOverviewLoading.setAlpha(0.0f);
+        mOverview.setAlpha(1.0f);
+
+        OverviewModel model = null;
+
+        for (int i = 0; i < mList.size(); i++) {
+            model = mList.get(i);
+            long mobileSent = (model.getTotalMobile() / 2l) * 1048576;
+            long mobileReceived = mobileSent;
+            long wifiSent = (model.getTotalWifi() / 2l) * 1048576;
+            long wifiReceived = wifiSent;
+            String data = formatData(mobileSent, mobileReceived)[2];
+            String wifi = formatData(wifiSent, wifiReceived)[2];
+            switch (i) {
+                case 0:
+                    mMobileMon.setProgress((model.getTotalMobile() / 25) + 2);  // 500 MB is 20 in the progressBar, so divided by 25. Added 2 to fix margin issue
+                    mWifiMon.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileMon.setLabelText(data);
+                    mWifiMon.setLabelText(wifi);
+                    break;
+
+                case 1:
+                    mMobileTue.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiTue.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileTue.setLabelText(data);
+                    mWifiTue.setLabelText(wifi);
+                    break;
+
+                case 2:
+                    mMobileWed.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiWed.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileWed.setLabelText(data);
+                    mWifiWed.setLabelText(wifi);
+                    break;
+
+                case 3:
+                    mMobileThurs.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiThurs.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileThurs.setLabelText(data);
+                    mWifiThurs.setLabelText(wifi);
+                    break;
+
+                case 4:
+                    mMobileFri.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiFri.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileFri.setLabelText(data);
+                    mWifiFri.setLabelText(wifi);
+                    break;
+
+                case 5:
+                    mMobileSat.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiSat.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileSat.setLabelText(data);
+                    mWifiSat.setLabelText(wifi);
+                    break;
+
+                case 6:
+                    mMobileSun.setProgress((model.getTotalMobile() / 25) + 2);
+                    mWifiSun.setProgress((model.getTotalWifi() / 25) + 2);
+                    mMobileSun.setLabelText(data);
+                    mWifiSun.setLabelText(wifi);
+                    break;
+            }
         }
     }
 
@@ -477,7 +660,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             }
         }
         else {
-            UpdateOverview updateOverview = new UpdateOverview();
+            UpdateOverview updateOverview = new UpdateOverview(MODE_LOAD_OVERVIEW);
             updateOverview.execute();
         }
     }
@@ -644,13 +827,24 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     }
 
     private static class UpdateOverview extends AsyncTask<Object, Object, List<OverviewModel>> {
+        private int mode;
+
+        public UpdateOverview(int mode) {
+            this.mode = mode;
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.e(TAG, "onPreExecute: update overview");
-            mOverview.animate().alpha(0.0f);
-            mOverviewLoading.setAlpha(1.0f);
+            Log.d(TAG, "onPreExecute: update overview");
+            if (mode == MODE_LOAD_OVERVIEW) {
+                mOverview.animate().alpha(0.0f);
+                mOverviewLoading.setAlpha(1.0f);
+            }
+            else if (mode == MODE_REFRESH_OVERVIEW) {
+                mOverviewLoading.setAlpha(0.0f);
+                mOverview.setAlpha(1.0f);
+            }
         }
 
         @Override
@@ -717,7 +911,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             mOverview.animate().alpha(1.0f);
             mOverviewLoading.animate().alpha(0.0f);
             refreshOverview();
-
         }
     }
 }

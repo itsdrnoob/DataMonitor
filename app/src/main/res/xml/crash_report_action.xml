@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.PreferenceCategory
+        android:title="Send report via"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:title="@string/label_telegram"
+            android:icon="@drawable/ic_telegram"
+            android:key="report_telegram"
+            app:summary="@string/report_telegram_summary"
+            app:widgetLayout="@layout/preference_right_arrow"/>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:title="@string/github"
+            android:icon="@drawable/ic_github"
+            android:key="report_github"
+            app:summary="@string/report_github_summary"
+            app:widgetLayout="@layout/preference_right_arrow"/>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:title="@string/label_mail"
+            android:icon="@drawable/ic_email"
+            android:key="report_mail"
+            app:summary="@string/report_mail_summary"
+            app:widgetLayout="@layout/preference_right_arrow"/>
+
+    </com.drnoob.datamonitor.core.base.PreferenceCategory>
+</PreferenceScreen>

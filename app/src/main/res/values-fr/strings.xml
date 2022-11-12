@@ -17,7 +17,7 @@ Reçu"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"Niveau de déclenchement actuel : %1$s%%"</string>
     <string name="label_data_trigger_level">"Quand %1$s%% de données sont consommées"</string>
     <string name="app_label_package_name">"Nom du package : %1$s"</string>
-    <string name="app_label_uid">"Uid : %1$s"</string>
+    <string name="app_label_uid">"Uid : %1$d"</string>
     <string name="app_name_placeholder">"Nom de l'application"</string>
     <string name="app_data_usage_placeholder">"00 Mo"</string>
     <string name="label_sent">"Envoyé"</string>
@@ -147,7 +147,7 @@ Revenez voir plus tard"</string>
     <string name="day">"jour"</string>
     <string name="label_add_data_plan_first">"Veuillez ajouter un objectif de données en premier lieu"</string>
     <string name="title_data_warning_notification">"Avertissement de l'utilisation des données"</string>
-    <string name="body_data_warning_notification">"Vous avez utilisé %1$s%% de plus que votre limite de données"</string>
+    <string name="body_data_warning_notification">"Vous avez utilisé %1$d%% de plus que votre limite de données"</string>
     <string name="body_app_data_warning_notification">"%1$s a utilisé plus que son quota de données"</string>
     <string name="title_data_usage_notification">"Utilisation de données aujourd'hui"</string>
     <string name="body_data_usage_notification_loading">"Chargement..."</string>
@@ -211,7 +211,6 @@ Revenez voir plus tard"</string>
     <string name="system_data_usage">"Utilisation des données par le système"</string>
     <string name="cracky5322_summary">"Traducteur en chinois traditionnel"</string>
     <string name="louis_leblanc_summary">"Traducteur français"</string>
-    <string name="louis_leblanc"></string>
     <string name="network_speed_title">"Vitesse du réseau : %1$s"</string>
     <string name="network_speed_upload">"Upload : %1$s"</string>
     <string name="network_speed_download">"Téléchargement : %1$s"</string>
@@ -246,4 +245,12 @@ Revenez voir plus tard"</string>
     <string name="light_theme_summary">"Thème clair sélectionné"</string>
     <string name="dark_theme_summary">"Thème sombre sélectionné"</string>
     <string name="system_theme_summary">"Thème du système sélectionné"</string>
+    <string name="liviogasp_summary">Italien</string>
+    <string name="network_diagnostics_info">Les diagnostics réseau peuvent utiliser environ 20 à 30 Mo de données. Assurez-vous que cette quantité est disponible dans votre plan, sinon des frais de réseau peuvent s\'appliquer.</string>
+    <string name="comradekingu_summary">Aide à la traduction</string>
+    <string name="hudaifa_abdullah_summary">Arabe</string>
+    <string name="holydemon_summary">Malayalam</string>
+    <string name="license_summary">Afficher les licences d’application</string>
+    <string name="f_droid_page">Voir l\'application sur F-Droid</string>
+    <string name="f_droid_page_summary">Voir l\'application sur le dépôt officiel de F-Droid</string>
 </resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"Monitor de datos"</string>
+    <string name="appwidget_text">"EJEMPLO"</string>
+    <string name="add_widget">"Agregar widget"</string>
+    <string name="notification_mobile_data_usage">"Datos móviles : %1$s"</string>
+    <string name="notification_wifi_data_usage">"Wifi : %1$s"</string>
+    <string name="home_mobile_data_sent">"%1$s Enviado"</string>
+    <string name="home_mobile_data_received">"%1$s Recibido"</string>
+    <string name="home_wifi_data_sent">"%1$s Enviado"</string>
+    <string name="home_wifi_data_received">"%1$s Recibido"</string>
+    <string name="label_current_data_warning_trigger_level_limit_set"/>
+    <string name="label_current_data_warning_trigger_level_limit_not_set"/>
+    <string name="label_data_trigger_level">"Cuando %1$s%% de datos es consumido"</string>
+    <string name="app_label_package_name">"Nombre del paquete : %1$s"</string>
+    <string name="app_name_placeholder">"Nombre de la app"</string>
+    <string name="app_data_usage_placeholder">"00 MB"</string>
+    <string name="label_sent">"enviado"</string>
+    <string name="label_received">"Recibido"</string>
+    <string name="action_open_app_settings">"Abrir las configuraciones"</string>
+    <string name="action_cancel">"Cancelar"</string>
+    <string name="action_ok">"Ok"</string>
+    <string name="title_app_data_usage_session">"Seleccionar sección"</string>
+    <string name="label_today">"Hoy"</string>
+    <string name="label_yesterday">"Ayer"</string>
+    <string name="label_this_month">"Este mes"</string>
+    <string name="label_last_month">"Mes pasado"</string>
+    <string name="label_this_year">"Año pasado"</string>
+    <string name="label_all_time">"Todo el tiempo"</string>
+    <string name="title_app_data_usage_type">"Seleccionar tipo"</string>
+    <string name="label_mobile_data">"Datos mobiles"</string>
+    <string name="label_wifi">"Wifi"</string>
+    <string name="title_data_usage">"Uso de datos"</string>
+    <string name="action_update">"Actualizar"</string>
+    <string name="data_remaining_placeholder">"0.00 GB restantes"</string>
+    <string name="label_dev">"Hecho con ❤ por Bitroid Inc."</string>
+    <string name="label_loading_apps">"Cargando aplicaciones"</string>
+    <string name="label_app_data_usage_session_empty">
+"No hay datos disponibles en la sección seleccionada"
+</string>
+    <string name="label_want_to_contribute">
+"Si quieres contribuir con Data Monitor haz click aquí para saber como."
+</string>
+    <string name="setup_image_footer">
+"Los widgets y las notificaciones pueden proveer un acceso rápido a la cantidad de datos que has utilizado"
+</string>
+    <string name="daily">"Diario"</string>
+    <string name="monthly">"Mensual"</string>
+    <string name="heading_data_limit">"Limites de datos"</string>
+    <string name="data_type_mb">"MB"</string>
+    <string name="data_type_gb">"GB"</string>
+    <string name="title_data_warning_trigger"/>
+    <string name="title_add_data_plan">"Agregar plan de datos"</string>
+    <string name="title_refresh_interval">"Seleccionar intervalo de actualizacion"</string>
+    <string name="option_1_min">"1 minuto"</string>
+    <string name="option_2_min">"2 minutos"</string>
+    <string name="option_5_min">"5 minutos"</string>
+    <string name="option_10_min">"10 minutos"</string>
+    <string name="option_15_min">"15 minutos"</string>
+    <string name="title_widget_setup">"Configurar widget"</string>
+    <string name="widget_setup_step_1">
+"1. En la pantalla principal toque y mantenga en un espacio vació."
+</string>
+    <string name="widget_setup_step_2">"Presione el widget"</string>
+    <string name="widget_setup_step_3">
+"3. Sostenga y suelte el widget de Data Monitor sobre su pantalla principal"
+</string>
+    <string name="heading_data_usage_today">"Total de datos utilizados hoy"</string>
+    <string name="action_add_data_plan_home">
+"Agregué su plan de datos para empezar a monitorizar"
+</string>
+    <string name="title_configure">"Configure"</string>
+    <string name="setup_widget_title">"Widget"</string>
+    <string name="setup_widget_refresh_interval">"Intervalo de actualización de widget"</string>
+    <string name="refresh_interval_placeholder">"1 minuto"</string>
+    <string name="setup_show_remaining_data">"Mostrar información de los datos restantes"</string>
+    <string name="setup_refresh_widget">"Actualizar widget"</string>
+    <string name="setup_notification_title">"Notificación"</string>
+    <string name="setup_notification_refresh_interval">"Intervalo de actualización de la notificacion"</string>
+    <string name="setup_show_mobile_usage">"Mostrar uso de datos mobiles"</string>
+    <string name="setup_show_wifi_usage">"Mostrar uso de Wifi"</string>
+    <string name="settings_general">"General"</string>
+    <string name="setup_add_data_plan">"Añadir plan de datos"</string>
+    <string name="add_data_plan_summary">"Añade o actualiza tu plan de datos"</string>
+    <string name="app_license_header">"Licendia"</string>
+    <string name="oss_licenses">"Licencias Opensource"</string>
+    <string name="itsdrnoob">"Dr.NooB"</string>
+    <string name="contributors">"Contribuidores"</string>
+    <string name="settings_appearance">"Apariencia"</string>
+    <string name="settings_dark_mode">"Modo oscuro"</string>
+    <string name="dark_mode_summary">"Activar tema oscuro"</string>
+    <string name="settings_language">"Idioma"</string>
+    <string name="language_summary">"Cambiar idioma de aplicación"</string>
+    <string name="about">"Acerca de"</string>
+    <string name="license">"Licencia"</string>
+    <string name="contributors_summary">"Aquellos que siempre están ahí"</string>
+    <string name="donate">"Donación"</string>
+    <string name="support_and_development">"Soporte y desarrollo"</string>
+    <string name="github_summary">"Ver código fuente"</string>
+    <string name="xda">"Foro Xda"</string>
+    <string name="settings">"Ajustes"</string>
+    <string name="telegram_summary">"Únete al grupo de soporte en telegram"</string>
+    <string name="no_update_available">"¡Estas usando al última versión!"</string>
+    <string name="label_update_available">"¡Actualización disponible!"</string>
+    <string name="label_download_update">"Descargar actualización"</string>
+    <string name="checking_for_update">"Comprobando actualizaciones"</string>
+    <string name="new_update_available">"¡Nueva actualización disponible!"</string>
+    <string name="settings_app_theme">"Tema de aplicación"</string>
+    <string name="app_theme_summary">"Selecciona tema de aplicación"</string>
+    <string name="theme_light">"Tema claro"</string>
+    <string name="theme_dark">"Tema oscuro"</string>
+</resources>

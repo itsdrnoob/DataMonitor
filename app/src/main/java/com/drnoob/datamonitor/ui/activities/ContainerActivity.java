@@ -30,7 +30,9 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
 import com.drnoob.datamonitor.ui.fragments.AboutFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
+import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
+import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
@@ -38,6 +40,7 @@ import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
 import com.drnoob.datamonitor.ui.fragments.OSSLicenseFragment;
 import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
+import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
@@ -52,6 +55,9 @@ import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
@@ -65,6 +71,7 @@ public class ContainerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MainActivity.setTheme(ContainerActivity.this);
+        Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(ContainerActivity.this));
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
@@ -140,6 +147,21 @@ public class ContainerActivity extends AppCompatActivity {
             case DATA_USAGE_SYSTEM:
                 fragment = new SystemDataUsageFragment();
                 title = getString(R.string.system_data_usage);
+                break;
+
+            case DATA_USAGE_TODAY:
+                fragment = new AppDataUsageFragment();
+                title = getString(R.string.heading_data_usage_today);
+                break;
+
+            case DISABLE_BATTERY_OPTIMISATION_FRAGMENT:
+                fragment = new SetupActivity.DisableBatteryOptimisationFragment();
+                title = getString(R.string.label_battery_optimisation);
+                break;
+
+            case DIAGNOSTICS_SETTINGS_FRAGMENT:
+                fragment = new DiagnosticsSettingsFragment();
+                title = getString(R.string.settings_network_diagnostics);
                 break;
         }
 

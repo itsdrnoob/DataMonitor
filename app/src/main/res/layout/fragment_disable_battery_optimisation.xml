@@ -44,10 +44,9 @@
                     android:layout_marginStart="@dimen/margin_small"
                     android:layout_marginTop="@dimen/margin_mid_large"
                     android:layout_marginEnd="@dimen/margin_small"
-                    android:background="@drawable/banner_background"
-                    android:backgroundTint="@color/error_banner_bg"
+                    android:background="@drawable/error_banner_background"
                     android:clickable="true"
-                    android:drawableStart="@drawable/ic_info"
+                    android:drawableStart="@drawable/ic_baseline_report_24"
                     android:drawablePadding="@dimen/margin_medium"
                     android:drawableTint="@color/error"
                     android:padding="@dimen/margin_medium"/>

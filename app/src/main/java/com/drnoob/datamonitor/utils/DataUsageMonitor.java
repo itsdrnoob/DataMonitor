@@ -66,12 +66,18 @@ public class DataUsageMonitor extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startForeground(0, null);
-        startMonitor(this);
-        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent intent = new Intent(this, DataMonitor.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
-        manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
+        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("data_usage_alert", false);
+        if (isChecked) {
+            startForeground(0, null);
+            startMonitor(this);
+            AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            Intent intent = new Intent(this, DataMonitor.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
+            manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
+        }
+        else {
+            onDestroy();
+        }
 
     }
 
@@ -108,44 +114,47 @@ public class DataUsageMonitor extends Service {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            int trigger = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
-            Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
+            boolean isWaningEnabled = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false);
+            if (isWaningEnabled) {
+                int trigger = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
+                Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
 
-            Double triggerLevel = 0d;
-            if (dataLimit > 0) {
-                triggerLevel = dataLimit.doubleValue() * trigger / 100;
-            }
-            try {
-                String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[0],
-                        getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[1])[2];
-                Double totalData = 0d;
-                if (totalRaw.contains(" MB")) {
-                    totalRaw = totalRaw.replace(" MB", "");
-                    totalData = Double.parseDouble(totalRaw);
-                } else {
-                    totalRaw = totalRaw.replace(" GB", "");
-                    totalData = Double.parseDouble(totalRaw) * 1024;
+                Double triggerLevel = 0d;
+                if (dataLimit > 0) {
+                    triggerLevel = dataLimit.doubleValue() * trigger / 100;
                 }
-
-                Log.d(TAG, "onReceive: " + totalData + " " + triggerLevel.intValue());
-                if (totalData.intValue() > triggerLevel.intValue() || totalData.intValue() == triggerLevel.intValue()) {
-                    Log.d(TAG, "onReceive: " + PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false));
-                    if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false)) {
-                        showNotification(context);
+                try {
+                    String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[0],
+                            getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[1])[2];
+                    Double totalData = 0d;
+                    if (totalRaw.contains(" MB")) {
+                        totalRaw = totalRaw.replace(" MB", "");
+                        totalData = Double.parseDouble(totalRaw);
                     } else {
-                        SetupFragment.SetupPreference.pauseMonitor();
-                        restartMonitor(context);
+                        totalRaw = totalRaw.replace(" GB", "");
+                        totalData = Double.parseDouble(totalRaw) * 1024;
                     }
-                }
-                if (totalData.intValue() >= dataLimit.intValue()) {
 
+                    Log.d(TAG, "onReceive: " + totalData + " " + triggerLevel.intValue());
+                    if (totalData.intValue() > triggerLevel.intValue() || totalData.intValue() == triggerLevel.intValue()) {
+                        Log.d(TAG, "onReceive: " + PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false));
+                        if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false)) {
+                            showNotification(context);
+                        } else {
+                            SetupFragment.SetupPreference.pauseMonitor();
+                            restartMonitor(context);
+                        }
+                    }
+                    if (totalData.intValue() >= dataLimit.intValue()) {
+
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (RemoteException e) {
-                e.printStackTrace();
+                setRepeating(context);
             }
-            setRepeating(context);
         }
 
         private void showNotification(Context context) throws ParseException {
