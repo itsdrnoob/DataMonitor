@@ -3,6 +3,34 @@
 All notable changes to Data Monitor will be documented in this file.
 
 
+## v2.1.0
+
+Data Monitor v2.1.0 release <br>
+This release includes many changes and improvements.
+
+- Added custom data plan
+- Added diagnostics server selection
+- Added crash reporter
+- Added speed meter to network diagnostics
+- Updated user interface
+- Added Material You themed app icon
+- Added option to auto hide network indicator
+- Data usage notifiaton now shows the percentage of data used as icon when a data plan is active
+- App data usage now shows the total data used for the selected time period
+- Added in-app battery optimisation checks
+- Added option to hide wifi usage in widget
+- Fixed crash due to NetworkCallback
+- Fixed issue with navigation when going to app data usage from home
+- Fixed duplicate list in app data usage
+- Fixed weekly overview data not updating on refresh
+- Fixed permission denied message before granting READ_PHONE_STATE permission
+- Fixed crash while updating screen time
+- Fixed monitor not starting on device boot
+- Improved live network speed accuracy
+- Updated app dependencies
+- Added Russian, Turkish, German, Norwegian Bokmål, Portuguese, Spanish and Ukrainian translations
+
+
 ## v2.0.0
 
 Data Monitor v2.0.0 release <br>
