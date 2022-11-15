@@ -14,24 +14,24 @@ body:
       options:
         - label: "I made sure that there are no similar feature requests - [open](https://github.com/itsdrnoob/DataMonitor/issues) or [closed](https://github.com/itsdrnoob/DataMonitor/issues?q=is%3Aissue+is%3Aclosed)."
           required: true
-        - label: "I have taken the time to fill in all the required details. I understand that the feature request will be dismissed otherwise."
+        - label: "I have taken the time to fill in all the required details in an appropriate descriptive way. I understand that the feature request will be dismissed otherwise."
           required: true
         - label: "This issue contains only one feature request."
           required: true
   - type: textarea
     id: feature-description
     attributes:
-      label: Is your feature request related to a problem? Please describe.
+      label: Describe the Feature you'd like
       description: |
-        A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+        A clear and concise description of the feature.
     validations:
       required: true
   - type: textarea
-    id: feature-problem-solution
+    id: feature-reason
     attributes:
-      label: Describe the solution you'd like
+      label: Why do you want this feature?
       description: |
-        A clear and concise description of what you want to happen.
+        A clear and concise description of why you want this feature.
     validations:
       required: true
   - type: textarea

@@ -16,7 +16,7 @@ body:
           required: true
         - label: "I made sure that there are no existing issues - [open](https://github.com/itsdrnoob/DataMonitor/issues) or [closed](https://github.com/itsdrnoob/DataMonitor/issues?q=is%3Aissue+is%3Aclosed)."
           required: true
-        - label: "I have taken the time to fill in all the required details. I understand that the bug report will be dismissed otherwise."
+        - label: "I have taken the time to fill in all the required details in an appropriate descriptive way. I understand that the bug report will be dismissed otherwise."
           required: true
         - label: "This issue contains only one bug."
           required: true
