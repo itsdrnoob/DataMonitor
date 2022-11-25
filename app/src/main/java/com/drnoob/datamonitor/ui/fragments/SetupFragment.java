@@ -71,6 +71,7 @@ import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -289,6 +290,14 @@ public class SetupFragment extends Fragment {
                     BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
                     View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_widget_setup, null);
                     dialog.setContentView(dialogView);
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialogInterface) {
+                            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    });
                     dialog.show();
                     return false;
                 }
@@ -388,6 +397,14 @@ public class SetupFragment extends Fragment {
                     });
 
                     dialog.setContentView(dialogView);
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialogInterface) {
+                            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    });
                     dialog.show();
                     return false;
                 }
@@ -482,6 +499,14 @@ public class SetupFragment extends Fragment {
                     });
 
                     dialog.setContentView(dialogView);
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialogInterface) {
+                            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    });
                     dialog.show();
                     return false;
                 }
@@ -675,6 +700,7 @@ public class SetupFragment extends Fragment {
 
                     LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
                     RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
+                    TextInputLayout dataLimitView = dialogView.findViewById(R.id.data_limit_view);
                     TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                     TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
                     RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
@@ -805,8 +831,10 @@ public class SetupFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             if (dataLimitInput.getText().toString().length() <= 0) {
-                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
-                            } else {
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
+                                dataLimitView.setError(getString(R.string.error_invalid_plan));
+                            }
+                            else {
                                 Float dataLimit = Float.parseFloat(dataLimitInput.getText().toString());
                                 int dataType;
                                 if (dataTypeSwitcher.getTabAt(0).isSelected()) {
@@ -876,9 +904,11 @@ public class SetupFragment extends Fragment {
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                             if (dataLimitInput.getText().toString().length() <= 0) {
-                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
+//                                dataLimitView.setError(getString(R.string.error_invalid_plan));
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
                             } else {
-                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
+                                dataLimitView.setError(null);
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
                             }
                         }
 
@@ -921,6 +951,9 @@ public class SetupFragment extends Fragment {
                         ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                         TextView cancel = footer.findViewById(R.id.cancel);
                         TextView ok = footer.findViewById(R.id.ok);
+
+                        (((LinearLayout) ((LinearLayout) datePicker.getChildAt(0)).getChildAt(0)).getChildAt(0)).setVerticalScrollBarEnabled(false);
+                        (((LinearLayout) ((LinearLayout) datePicker.getChildAt(0)).getChildAt(0)).getChildAt(2)).setVerticalScrollBarEnabled(false);
 
                         int resetDate = PreferenceManager.getDefaultSharedPreferences(getContext())
                                 .getInt(DATA_RESET_DATE, -1);
@@ -1006,6 +1039,14 @@ public class SetupFragment extends Fragment {
                         });
 
                         dialog.setContentView(dialogView);
+                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface dialogInterface) {
+                                BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                                FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                                BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                            }
+                        });
                         dialog.show();
                     }
                     else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
@@ -1017,6 +1058,9 @@ public class SetupFragment extends Fragment {
                         ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                         TextView cancel = footer.findViewById(R.id.cancel);
                         TextView ok = footer.findViewById(R.id.ok);
+
+                        (((LinearLayout) ((LinearLayout) timePicker.getChildAt(0)).getChildAt(0)).getChildAt(0)).setVerticalScrollBarEnabled(false);
+                        (((LinearLayout) ((LinearLayout) timePicker.getChildAt(0)).getChildAt(0)).getChildAt(2)).setVerticalScrollBarEnabled(false);
 
                         int resetHour = PreferenceManager.getDefaultSharedPreferences(getContext())
                                 .getInt(DATA_RESET_HOUR, -1);
@@ -1200,6 +1244,14 @@ public class SetupFragment extends Fragment {
 //                        timePickerDialog.show();
 
                         dialog.setContentView(dialogView);
+                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface dialogInterface) {
+                                BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                                FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                                BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                            }
+                        });
                         dialog.show();
                     }
                     else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
@@ -1372,6 +1424,14 @@ public class SetupFragment extends Fragment {
                     });
 
                     dialog.setContentView(dialogView);
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialogInterface) {
+                            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    });
                     dialog.show();
                     return false;
                 }

@@ -4,124 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background">
+    android:background="@android:color/transparent">
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="45dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/bottom_sheet_handle_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView6"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        android:gravity="center"
-        android:paddingStart="@dimen/margin_medium"
-        android:paddingEnd="@dimen/margin_medium"
-        android:text="@string/title_widget_setup"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view3" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_mid_large"
-            android:layout_weight="1"
-            android:layout_marginEnd="@dimen/margin_mid_large"
-            android:text="@string/widget_setup_step_1" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_marginEnd="@dimen/margin_mid_large"
-            android:minHeight="100dp"
-            android:minWidth="80dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setup_widget_1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_mid_large"
-            android:layout_weight="1"
-            android:layout_marginEnd="@dimen/margin_mid_large"
-            android:text="@string/widget_setup_step_2" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_marginEnd="@dimen/margin_mid_large"
-            android:minHeight="100dp"
-            android:minWidth="80dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setup_widget_2" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:background="@drawable/bottom_sheet_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="45dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/bottom_sheet_handle_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_mid_large"
-            android:layout_marginEnd="@dimen/margin_mid_large"
-            android:layout_weight="1"
-            android:text="@string/widget_setup_step_3" />
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="@string/title_widget_setup"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_marginEnd="@dimen/margin_mid_large"
-            android:minWidth="80dp"
-            android:minHeight="100dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setup_widget_3" />
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_mid_large"
+                android:layout_marginEnd="@dimen/margin_mid_large"
+                android:layout_weight="1"
+                android:text="@string/widget_setup_step_1" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="@dimen/margin_mid_large"
+                android:minWidth="80dp"
+                android:minHeight="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/setup_widget_1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_mid_large"
+                android:layout_marginEnd="@dimen/margin_mid_large"
+                android:layout_weight="1"
+                android:text="@string/widget_setup_step_2" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="@dimen/margin_mid_large"
+                android:minWidth="80dp"
+                android:minHeight="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/setup_widget_2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_mid_large"
+                android:layout_marginEnd="@dimen/margin_mid_large"
+                android:layout_weight="1"
+                android:text="@string/widget_setup_step_3" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="@dimen/margin_mid_large"
+                android:minWidth="80dp"
+                android:minHeight="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/setup_widget_3" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

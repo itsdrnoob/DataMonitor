@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,18 +43,24 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.KeyUtils;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static com.drnoob.datamonitor.Common.updateDialog;
+import static com.drnoob.datamonitor.core.Values.MD5_F_DROID;
 import static com.drnoob.datamonitor.core.Values.MD5_GITHUB;
 import static com.drnoob.datamonitor.core.Values.MD5_PLAY;
 import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
@@ -97,12 +104,12 @@ public class AboutFragment extends Fragment {
         }
 
         String md5 = KeyUtils.get(getContext(), "MD5");
-        if (md5.equalsIgnoreCase(MD5_GITHUB)) {
-            // Do nothing :)
-        }
-        else {
+        if (md5.equalsIgnoreCase(MD5_F_DROID)) {
             // F-Droid build
             mCheckForUpdate.setVisibility(View.GONE);
+        }
+        else {
+            mCheckForUpdate.setVisibility(View.VISIBLE);
         }
 
         mCheckForUpdate.setOnClickListener(new View.OnClickListener() {
@@ -113,20 +120,15 @@ public class AboutFragment extends Fragment {
                 }
                 else {
                     View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_update_check_dialog, null);
-
-                    ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                     LinearLayout updateAvailableView = dialogView.findViewById(R.id.view_update_available);
 
                     updateAvailableView.setVisibility(View.GONE);
-                    footer.setVisibility(View.GONE);
 
-                    updateCheckDialog = new AlertDialog.Builder(getContext())
+                    updateCheckDialog = new MaterialAlertDialogBuilder(getContext())
                             .setView(dialogView)
                             .create();
 
-                    updateCheckDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     updateCheckDialog.show();
-                    updateDialog(updateCheckDialog, getContext());
 
                     CheckForUpdate checkForUpdate = new CheckForUpdate();
                     checkForUpdate.execute();
@@ -156,7 +158,14 @@ public class AboutFragment extends Fragment {
     private void downloadUpdate() {
         String md5 = KeyUtils.get(getContext(), "MD5");
         Intent updateIntent = new Intent(Intent.ACTION_VIEW);
-        updateIntent.setData(Uri.parse(getString(R.string.f_droid)));
+        if (md5.equals(MD5_GITHUB)) {
+            // Github release
+            updateIntent.setData(Uri.parse(getString(R.string.github_release_latest)));
+        }
+        else {
+            // Play store release
+            updateIntent.setData(Uri.parse(getString(R.string.play_store)));
+        }
         startActivity(updateIntent);
     }
 
@@ -210,14 +219,14 @@ public class AboutFragment extends Fragment {
                     }
                     else {
                         updateCheckDialog.dismiss();
-                        Snackbar.make(Objects.requireNonNull(getView()), getString(R.string.no_update_available), Snackbar.LENGTH_SHORT)
+                        Snackbar.make(requireView(), getString(R.string.no_update_available), Snackbar.LENGTH_SHORT)
                                 .show();
                     }
                 }
             }
             else {
                 updateCheckDialog.dismiss();
-                Snackbar.make(Objects.requireNonNull(getView()), getString(R.string.update_fetch_error), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), getString(R.string.update_fetch_error), Snackbar.LENGTH_SHORT).show();
             }
         }
     }
@@ -228,29 +237,31 @@ public class AboutFragment extends Fragment {
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_update_check_dialog, null);
 
         TextView title = dialogView.findViewById(R.id.alert_dialog_title);
-        ConstraintLayout footer = dialogView.findViewById(R.id.footer);
         LinearProgressIndicator progressIndicator = dialogView.findViewById(R.id.checking_for_update_progress);
 
         TextView currentVersion = dialogView.findViewById(R.id.current_version);
         TextView newVersion = dialogView.findViewById(R.id.new_version);
         TextView changelogs = dialogView.findViewById(R.id.changelogs);
 
-        TextView downloadUpdate = footer.findViewById(R.id.ok);
-        TextView cancel = footer.findViewById(R.id.cancel);
-
         title.setText(getString(R.string.label_update_available));
-        downloadUpdate.setText(getString(R.string.label_download_update));
-
         currentVersion.setText(getString(R.string.current_version, current));
         newVersion.setText(getString(R.string.new_version, update));
 
         progressIndicator.setVisibility(View.GONE);
 
         if (updateCheckDialog == null) {
-            updateCheckDialog = new AlertDialog.Builder(Objects.requireNonNull(getContext()))
+            updateCheckDialog = new MaterialAlertDialogBuilder(requireContext())
+                    .setPositiveButton(R.string.label_download_update, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            downloadUpdate();
+                            updateCheckDialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton(R.string.action_cancel, null)
                     .create();
         }
-        updateCheckDialog.setContentView(dialogView);
+        updateCheckDialog.setView(dialogView);
 
         changelogs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,24 +274,7 @@ public class AboutFragment extends Fragment {
             }
         });
 
-        downloadUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                downloadUpdate();
-                updateCheckDialog.dismiss();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateCheckDialog.dismiss();
-            }
-        });
-
-        updateCheckDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         updateCheckDialog.show();
-        updateDialog(updateCheckDialog, Objects.requireNonNull(getContext()));
     }
 
     public static class SupportAndDevelopment extends PreferenceFragmentCompat {

@@ -4,109 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background">
+    android:background="@android:color/transparent">
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="45dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/bottom_sheet_handle_bg"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:background="@drawable/bottom_sheet_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:gravity="center"
-        android:paddingStart="@dimen/margin_medium"
-        android:paddingEnd="@dimen/margin_medium"
-        android:text="@string/title_app_data_usage_session"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view3" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="45dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/bottom_sheet_handle_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/session_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:paddingBottom="@dimen/margin_small"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="@string/title_app_data_usage_session"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
 
-        <RadioButton
-            android:id="@+id/session_today"
+        <RadioGroup
+            android:id="@+id/session_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:checked="true"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/label_today" />
+            android:layout_marginTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-        <RadioButton
-            android:id="@+id/session_yesterday"
+            <RadioButton
+                android:id="@+id/session_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:checked="true"
+                android:paddingLeft="@dimen/margin_large"
+                android:text="@string/label_today" />
+
+            <RadioButton
+                android:id="@+id/session_yesterday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:paddingLeft="@dimen/margin_large"
+                android:text="@string/label_yesterday" />
+
+            <RadioButton
+                android:id="@+id/session_this_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:paddingLeft="@dimen/margin_large"
+                android:text="@string/label_this_month" />
+
+            <RadioButton
+                android:id="@+id/session_last_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:paddingLeft="@dimen/margin_large"
+                android:text="@string/label_last_month" />
+
+            <RadioButton
+                android:id="@+id/session_this_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:paddingLeft="@dimen/margin_large"
+                android:text="@string/label_this_year" />
+
+            <RadioButton
+                android:id="@+id/session_all_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:paddingLeft="@dimen/margin_large"
+                android:text="@string/label_all_time" />
+
+        </RadioGroup>
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/bottom_sheet_footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/label_yesterday" />
+            app:layout_constraintTop_toBottomOf="@+id/session_group" />
 
-        <RadioButton
-            android:id="@+id/session_this_month"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/label_this_month" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <RadioButton
-            android:id="@+id/session_last_month"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/label_last_month" />
 
-        <RadioButton
-            android:id="@+id/session_this_year"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/label_this_year" />
-
-        <RadioButton
-            android:id="@+id/session_all_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:paddingLeft="@dimen/margin_large"
-            android:text="@string/label_all_time" />
-
-    </RadioGroup>
-
-    <include
-        android:id="@+id/footer"
-        layout="@layout/bottom_sheet_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/session_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

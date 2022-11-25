@@ -16,6 +16,7 @@
     <color name="primary">#006AE5</color>
     <color name="background">#000000</color>
     <color name="surface">#1B1E22</color>
+    <color name="status_bar">@color/surface</color>
     <color name="on_background">#E5F1FF</color>
     <color name="on_surface">#001733</color>
     <color name="text_primary">#E5F1FF</color>
@@ -47,4 +48,6 @@
     <color name="info_banner_bg">#003D25</color>
     <color name="error_banner_bg">#3D0000</color>
     <color name="warning_banner_bg">#4D4000</color>
+    <color name="bottom_nav_view_bg">@color/surface</color>
+    <color name="banner_tint">@color/info_banner_bg</color>
 </resources>

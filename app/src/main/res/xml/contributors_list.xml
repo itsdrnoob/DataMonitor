@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.drnoob.datamonitor.core.base.PreferenceCategory
         android:title="@string/support_and_development"
+        app:iconSpaceReserved="false"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false">
 
@@ -36,6 +37,7 @@
 
     <com.drnoob.datamonitor.core.base.PreferenceCategory
         android:title="@string/label_translators"
+        app:iconSpaceReserved="false"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false">
 

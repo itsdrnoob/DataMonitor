@@ -2,7 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.drnoob.datamonitor.core.base.PreferenceCategory
-        android:title="Send report via"
+        android:title="@string/label_send_report"
+        app:iconSpaceReserved="false"
         app:allowDividerBelow="false"
         app:allowDividerAbove="false">
 

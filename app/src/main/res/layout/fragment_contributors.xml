@@ -10,24 +10,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:id="@+id/contribute"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/label_want_to_contribute"
-            android:drawableStart="@drawable/ic_info"
-            android:drawablePadding="@dimen/margin_mid_large"
-            android:paddingStart="@dimen/margin_mid_large"
-            android:paddingEnd="@dimen/margin_medium"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_mid_large"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:elevation="@dimen/elevation_default"
-            android:clickable="true"
+            android:orientation="vertical"
+            android:backgroundTint="@color/banner_tint"
+            android:elevation="@dimen/elevation_small"
+            android:padding="@dimen/margin_mid_large"
             android:background="@drawable/banner_background"
-            android:paddingTop="@dimen/margin_mid_large"
-            android:paddingBottom="@dimen/margin_mid_large"/>
+            android:layout_marginStart="@dimen/margin_mid_large"
+            android:layout_marginEnd="@dimen/margin_mid_large"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_info"
+                android:tint="@color/text_secondary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/label_want_to_contribute"
+                android:layout_marginTop="@dimen/margin_medium"/>
+
+        </LinearLayout>
 
         <fragment
             android:id="@+id/contributors_list"

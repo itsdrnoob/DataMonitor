@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -56,18 +57,9 @@ public class Preference extends androidx.preference.Preference {
             TextView title = (TextView) holder.findViewById(android.R.id.title);
             LinearLayout rootLayout = (LinearLayout) title.getParent().getParent();
             TextView summary = (TextView) holder.findViewById(android.R.id.summary);
-            rootLayout.setBackgroundResource(R.drawable.selectable_item_plain_background);
-            summary.setTextColor(getContext().getResources().getColor(R.color.text_secondary, null));
-
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) rootLayout.getLayoutParams();
-            layoutParams.leftMargin = 25;
-            layoutParams.rightMargin = 25;
-            layoutParams.bottomMargin = 25;
-
-            rootLayout.setLayoutParams(layoutParams);
-
             rootLayout.setPadding(75, 10, 75, 10);
 
+            title.setSingleLine(false);
         }
     }
 

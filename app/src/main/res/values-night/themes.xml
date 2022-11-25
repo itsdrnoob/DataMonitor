@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.DataMonitor" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.DataMonitor" parent="Theme.Material3.DynamicColors.Dark">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_variant</item>
@@ -10,16 +10,17 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:statusBarColor">@color/status_bar</item>
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:textColor">@color/text_primary</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
         <item name="android:overScrollMode">never</item>
         <item name="snackbarStyle">@style/Theme.SnackBar</item>
         <item name="snackbarTextViewStyle">@style/Theme.SnackBar.Text</item>
+        <item name="materialButtonStyle">@style/Theme.DataMonitor.MaterialButton</item>
+        <item name="switchStyle">@style/Theme.DataMonitor.Switches</item>
     </style>
 
     <style name="ThemeOverlay.DataUsage.AppWidgetContainer" parent="">

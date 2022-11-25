@@ -44,6 +44,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,10 +58,13 @@ import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.skydoves.progressview.ProgressView;
 
 import org.jetbrains.annotations.NotNull;
@@ -87,6 +91,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SHOW_ADD_PLAN_BANNER;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
 import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
@@ -102,7 +107,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private static final int MODE_LOAD_OVERVIEW = 0;
     private static final int MODE_REFRESH_OVERVIEW = 1;
 
-    private RelativeLayout mSetupDataPlan;
+    private LinearLayout mSetupDataPlan;
+    private ConstraintLayout mGraphView;
+    private MaterialButton mDismissPlanBanner, mAddDataPlan;
     private TextView mMobileDataUsage,
             mMobileDataSent,
             mMobileDataReceived,
@@ -154,6 +161,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         mSetupDataPlan = view.findViewById(R.id.setup_data_plan);
+        mGraphView = view.findViewById(R.id.graph_view);
+        mDismissPlanBanner = view.findViewById(R.id.dismiss_add_plan_banner);
+        mAddDataPlan = view.findViewById(R.id.add_data_plan);
         mMobileDataUsage = view.findViewById(R.id.mobile_data_usage);
         mMobileDataSent = view.findViewById(R.id.mobile_data_sent);
         mMobileDataReceived = view.findViewById(R.id.mobile_data_received);
@@ -207,10 +217,17 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         updateData();
         refreshOverview();
 
+        mMobileDataUsage.setSelected(true);
+        mWifiDataUsage.setSelected(true);
+
+        boolean showPlanBanner = PreferenceManager.getDefaultSharedPreferences(getContext())
+                .getBoolean(SHOW_ADD_PLAN_BANNER, true);
+
         if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getFloat(DATA_LIMIT, -1) > 0) {
+                .getFloat(DATA_LIMIT, -1) > 0 || !showPlanBanner) {
             mSetupDataPlan.setVisibility(View.GONE);
-        } else {
+        }
+        else {
             mSetupDataPlan.setVisibility(View.VISIBLE);
         }
 
@@ -219,19 +236,19 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             public void onClick(View v) {
                 mRefreshOverview.animate().rotation(720).setDuration(1000)
                         .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        mRefreshOverview.setRotation(0);
-                    }
-                });
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                mRefreshOverview.setRotation(0);
+                            }
+                        });
 //                refreshOverview();
                 UpdateOverview updateOverview = new UpdateOverview(MODE_REFRESH_OVERVIEW);
                 updateOverview.execute();
             }
         });
 
-        mSetupDataPlan.setOnClickListener(new View.OnClickListener() {
+        mAddDataPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
@@ -239,6 +256,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
                 LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
                 RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
+                TextInputLayout dataLimitView = dialogView.findViewById(R.id.data_limit_view);
                 TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                 TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
                 RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
@@ -363,8 +381,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                     @Override
                     public void onClick(View v) {
                         if (dataLimitInput.getText().toString().length() <= 0) {
-                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
-                        } else {
+//                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
+                            dataLimitView.setError(getString(R.string.error_invalid_plan));
+                        }
+                        else {
                             Float dataLimit = Float.parseFloat(dataLimitInput.getText().toString());
                             if (dataTypeSwitcher.getTabAt(0).isSelected()) {
                                 dataLimit = dataLimit;
@@ -420,9 +440,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (dataLimitInput.getText().toString().length() <= 0) {
-                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
+//                                dataLimitView.setError(getString(R.string.error_invalid_plan));
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
                         } else {
-                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
+                            dataLimitView.setError(null);
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
                         }
                     }
 
@@ -443,6 +465,52 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                     }
                 });
                 dialog.show();
+            }
+        });
+
+        mDismissPlanBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSetupDataPlan.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .scaleY(0.8f)
+                    .scaleX(0.8f)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        float total = mSetupDataPlan.getHeight() + 28; // just to adjust a bit of distance issue
+                        mGraphView.animate()
+                            .translationY((total * -1))
+                            .setDuration(300)
+                            .setStartDelay(80)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+
+                                mGraphView.animate()
+                                    .translationY(0)
+                                    .setDuration(0)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationStart(Animator animation) {
+                                            super.onAnimationStart(animation);
+                                            mSetupDataPlan.setVisibility(View.GONE);
+                                        }
+                                    })
+                                    .start();
+                                }
+                            })
+                            .start();
+                        }
+                    })
+                    .start();
+
+                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                        .putBoolean(SHOW_ADD_PLAN_BANNER, false)
+                        .apply();
             }
         });
 

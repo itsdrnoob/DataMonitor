@@ -352,4 +352,8 @@
     <string name="paul" translatable="false">Paul</string>
     <string name="tobias_summary" translatable="false">German</string>
     <string name="tobias" translatable="false">Tobias</string>
+    <string name="error_invalid_plan">Invalid plan!</string>
+    <string name="label_send_report">Send report via</string>
+    <string name="label_permission_denied">Permission denied!</string>
+    <string name="notification_permission_denied_body">Features including Data monitor notification, Live network speed and Data usage alert won\'t work properly without notification permission. Please grant it manually.</string>
 </resources>

@@ -12,35 +12,36 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-
-    <uses-permission android:name="android.permission.VIBRATE" />
-<!--    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"-->
-<!--        tools:ignore="QueryAllPackagesPermission" />-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" -->
+    <!-- tools:ignore="QueryAllPackagesPermission" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.MAIN"/>
+            <action android:name="android.intent.action.MAIN" />
         </intent>
     </queries>
 
     <application
+        android:name=".core.base.DataMonitor"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.DataMonitor">
-        <activity android:name=".ui.activities.SetupActivity"
-            android:theme="@style/Theme.Splash"
-            android:screenOrientation="portrait"
+        android:theme="@style/Theme.DataMonitor"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.activities.SetupActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,13 +49,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.ContainerActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activities.ContainerActivity"
             android:exported="false"
             android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
-        <receiver android:name=".Widget.DataUsageWidget"
+        <receiver
+            android:name=".Widget.DataUsageWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -77,7 +80,9 @@
             android:name=".utils.DataUsageMonitor"
             android:enabled="true"
             android:exported="true" />
-        <receiver android:name=".utils.DataUsageMonitor$DataMonitor"
+
+        <receiver
+            android:name=".utils.DataUsageMonitor$DataMonitor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
@@ -89,21 +94,24 @@
             android:name=".utils.AppDataUsageMonitor"
             android:enabled="true"
             android:exported="true" />
-        <receiver android:name=".utils.AppDataUsageMonitor$AppDataMonitor"
+
+        <receiver
+            android:name=".utils.AppDataUsageMonitor$AppDataMonitor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".utils.NotificationService$NotificationRemover"
+        <receiver
+            android:name=".utils.NotificationService$NotificationRemover"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".utils.NotificationService$NotificationUpdater"
+        <receiver
+            android:name=".utils.NotificationService$NotificationUpdater"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_OFF" />
@@ -112,51 +120,48 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".utils.LiveNetworkMonitor$LiveNetworkReceiver"
+        <receiver
+            android:name=".utils.LiveNetworkMonitor$LiveNetworkReceiver"
             android:exported="true"
             tools:ignore="Instantiatable">
             <intent-filter>
-                <action android:name="android.intent.action.SCREEN_ON"/>
-                <action android:name="android.intent.action.SCREEN_OFF"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".utils.LiveNetworkMonitor"
-            android:exported="true"
-            android:enabled="true">
-        </service>
+        <service
+            android:name=".utils.LiveNetworkMonitor"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".ui.activities.MainActivity"
-            android:fitsSystemWindows="true"
-            android:theme="@style/Theme.Splash"
-            android:screenOrientation="portrait"
             android:exported="false"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
-
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.DataMonitor"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.activities.CrashReportActivity"
+            android:exported="true"
             android:fitsSystemWindows="true"
             android:screenOrientation="portrait"
-            android:exported="true"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity" />
 
-        <receiver android:name=".utils.BootReceiver"
+        <receiver
+            android:name=".utils.BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name=".utils.DataPlanRefreshReceiver"
+        <receiver
+            android:name=".utils.DataPlanRefreshReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -165,7 +170,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

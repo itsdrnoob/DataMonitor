@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ import com.drnoob.datamonitor.R;
 import org.jetbrains.annotations.NotNull;
 
 public class ContributorsFragment extends Fragment {
-    private TextView mContribute;
+    private LinearLayout mContribute;
 
     public ContributorsFragment() {
     }

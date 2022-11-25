@@ -30,6 +30,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,7 +62,7 @@ import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 public class LanguageFragment extends Fragment {
     private static final String TAG = LanguageFragment.class.getSimpleName();
 
-    private TextView mContribute;
+    private LinearLayout mContribute;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -102,7 +103,7 @@ public class LanguageFragment extends Fragment {
                     .getString(APP_LANGUAGE, "English");
             SpannableString spannableString = new SpannableString(currentLanguage);
             spannableString.setSpan(new ForegroundColorSpan(
-                    getContext().getResources().getColor(R.color.primary, null)), 0,
+                            getContext().getResources().getColor(R.color.primary, null)), 0,
                     spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             currentLanguagePref.setTitle(spannableString);
 

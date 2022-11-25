@@ -1,45 +1,9 @@
-/*
- * Copyright (C) 2021 Dr.NooB
- *
- * This file is a part of Data Monitor <https://github.com/itsdrnoob/DataMonitor>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 package com.drnoob.datamonitor.ui.activities;
 
-import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.RemoteException;
-import android.text.Spannable;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RemoteViews;
-
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +15,39 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.RemoteException;
+import android.text.Spannable;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.widget.RemoteViews;
+import android.widget.Toast;
+
 import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
@@ -59,6 +56,9 @@ import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.drnoob.datamonitor.databinding.ActivityMainBinding;
 import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.elevation.SurfaceColors;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -94,6 +94,7 @@ import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
+import static com.drnoob.datamonitor.core.Values.REQUEST_POST_NOTIFICATIONS;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
@@ -111,10 +112,8 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataU
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTetheringDataUsage;
 
 public class MainActivity extends AppCompatActivity {
-
-    ActivityMainBinding binding;
-
     private static final String TAG = MainActivity.class.getSimpleName();
+    ActivityMainBinding binding;
 
     public static List<AppDataUsageModel> mAppsList = new ArrayList<>();
     public static List<AppDataUsageModel> mUserAppsList = new ArrayList<>();
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(MainActivity.this);
+        MainActivity.setTheme(MainActivity.this);
         Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(MainActivity.this));
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (!isReadPhoneStateGranted(MainActivity.this)) {
@@ -146,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         refreshService(this);
-
         try {
             if (isUsageAccessGranted(MainActivity.this)) {
 
@@ -154,24 +152,17 @@ public class MainActivity extends AppCompatActivity {
                 setTheme(R.style.Theme_DataMonitor);
                 setContentView(binding.getRoot());
                 setSupportActionBar(binding.mainToolbar);
+                binding.mainToolbar.setBackgroundColor(SurfaceColors.SURFACE_2.getColor(this));
+                getWindow().setStatusBarColor(SurfaceColors.SURFACE_2.getColor(this));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                    getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
+                }
 
                 SharedPreferences.getUserPrefs(this).edit().putBoolean(SETUP_COMPLETED, true).apply();
 
                 if (binding.bottomNavigationView.getSelectedItemId() == R.id.bottom_menu_home) {
                     getSupportActionBar().setTitle(getString(R.string.app_name));
                 }
-
-//                AppBarConfiguration configuration = new AppBarConfiguration.Builder(R.id.bottom_menu_home,
-//                        R.id.bottom_menu_setup, R.id.bottom_menu_app_data_usage, R.id.bottom_menu_settings, R.id.system_data_usage).build();
-
-
-
-
-//                NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
-
-
-
-
 
                 NavHostFragment navHostFragment = (NavHostFragment)  getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
                 NavController controller = navHostFragment.getNavController();
@@ -192,14 +183,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-//        NavigationUI.setupActionBarWithNavController(this, controller, configuration);
-//        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
+                binding.closeBatteryBanner.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        binding.batteryOptimisationError.animate()
+                                .alpha(0)
+                                .translationY(-500)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        super.onAnimationEnd(animation);
+                                        binding.batteryOptimisationError.setVisibility(View.GONE);
+                                    }
+                                })
+                                .start();
+                    }
+                });
 
                 DatabaseHandler databaseHandler = new DatabaseHandler(MainActivity.this);
                 if (databaseHandler.getUsageList() != null && databaseHandler.getUsageList().size() > 0) {
 
                 } else {
-                    FetchApps fetchApps = new FetchApps(this);
+                    MainActivity.FetchApps fetchApps = new MainActivity.FetchApps(this);
                     fetchApps.execute();
 
                 }
@@ -221,12 +226,17 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (value != DATA_USAGE_SYSTEM) {
                     if (!isDataLoading()) {
-                        LoadData loadData = new LoadData(MainActivity.this, SESSION_TODAY, TYPE_MOBILE_DATA);
+                        MainActivity.LoadData loadData = new MainActivity.LoadData(MainActivity.this, SESSION_TODAY, TYPE_MOBILE_DATA);
                         loadData.execute();
                     }
                 }
 
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                    if (!notificationManager.areNotificationsEnabled()) {
+                        requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_POST_NOTIFICATIONS);
+                    }
+                }
             }
             else {
                 onResume();
@@ -234,7 +244,37 @@ public class MainActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_POST_NOTIFICATIONS) {
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                new MaterialAlertDialogBuilder(MainActivity.this)
+                        .setTitle(R.string.label_permission_denied)
+                        .setMessage(R.string.notification_permission_denied_body)
+                        .setPositiveButton(R.string.action_grant, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent();
+                                intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("app_package", getPackageName());
+                                intent.putExtra("app_uid", getApplicationInfo().uid);
+                                intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());
+
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(R.string.action_cancel, null)
+                        .show();
+            }
+        }
     }
 
     private void checkBatteryOptimisationState() {
@@ -254,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
         binding.mainNavHostFragment.requestLayout();
     }
 
-    private void initializeBottomNavBar() {
+    private void initializebottomNavigationViewBar() {
         NavHostFragment navHostFragment = (NavHostFragment)  getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
         NavController controller = navHostFragment.getNavController();
         controller.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -264,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });   // working
 
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);  // working
+//        NavigationUI.setupWithNavController(binding.bottomNavigationViewigationView, controller);  // working
     }
 
 
@@ -300,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         verifyAppVersion();
-//        initializeBottomNavBar();
+//        initializebottomNavigationViewBar();
     }
 
     @Override
@@ -333,7 +373,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        checkBatteryOptimisationState();
+        try {
+            checkBatteryOptimisationState();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Action bar title resets while changing theme in settings, setting current title
 //        NavController controller = Navigation.findNavController(this, R.id.main_nav_host_fragment);
@@ -372,6 +417,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.toolbar_settings:
                 startActivity(new Intent(MainActivity.this, ContainerActivity.class)
                         .putExtra(GENERAL_FRAGMENT_ID, BOTTOM_NAVBAR_ITEM_SETTINGS));
+//                startActivity(new Intent(MainActivity.this, MainActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -782,10 +828,19 @@ public class MainActivity extends AppCompatActivity {
             } else {
 
             }
-            FetchApps fetchApps = new FetchApps(mContext);
+            MainActivity.FetchApps fetchApps = new MainActivity.FetchApps(mContext);
             fetchApps.execute();
         }
 
+    }
+
+    private void verifyAppVersion() {
+        String updateVersion = SharedPreferences.getAppPrefs(MainActivity.this)
+                .getString(UPDATE_VERSION, BuildConfig.VERSION_NAME);
+        if (updateVersion.equalsIgnoreCase(BuildConfig.VERSION_NAME)) {
+            SharedPreferences.getAppPrefs(MainActivity.this)
+                    .edit().remove(UPDATE_VERSION).apply();
+        }
     }
 
     public static void setTheme(Activity activity) {
@@ -808,14 +863,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-    }
-
-    private void verifyAppVersion() {
-        String updateVersion = SharedPreferences.getAppPrefs(MainActivity.this)
-                .getString(UPDATE_VERSION, BuildConfig.VERSION_NAME);
-        if (updateVersion.equalsIgnoreCase(BuildConfig.VERSION_NAME)) {
-            SharedPreferences.getAppPrefs(MainActivity.this)
-                    .edit().remove(UPDATE_VERSION).apply();
-        }
     }
 }

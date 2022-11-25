@@ -22,6 +22,7 @@ package com.drnoob.datamonitor.core.base;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
@@ -50,8 +51,8 @@ public class PreferenceCategory extends androidx.preference.PreferenceCategory {
         super.onBindViewHolder(holder);
         if (holder != null) {
             TextView title = (TextView) holder.findViewById(android.R.id.title);
-            title.setTextColor(getContext().getResources().getColor(R.color.text_primary, null));
-            LinearLayout rootLayout = (LinearLayout) title.getParent();
+//            title.setTextColor(getContext().getResources().getColor(R.color.text_primary, null));
+            RelativeLayout rootLayout = (RelativeLayout) title.getParent();
             rootLayout.setPadding(30, 0, 0, 0);
 
         }

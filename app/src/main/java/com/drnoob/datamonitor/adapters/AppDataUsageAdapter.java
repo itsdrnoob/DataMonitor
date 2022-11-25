@@ -25,15 +25,23 @@ import android.app.usage.UsageEvents;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +53,9 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.NetworkStatsHelper;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.skydoves.progressview.ProgressView;
 
 import java.text.ParseException;
@@ -164,7 +174,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     TextView appUid = dialogView.findViewById(R.id.app_uid);
                     TextView appScreenTime = dialogView.findViewById(R.id.app_screen_time);
                     TextView appBackgroundTime = dialogView.findViewById(R.id.app_background_time);
-                    TextView appSettings = dialogView.findViewById(R.id.app_open_settings);
+                    MaterialButton appSettings = dialogView.findViewById(R.id.app_open_settings);
 
                     appName.setText(model.getAppName());
                     String packageName = mContext.getResources().getString(R.string.app_label_package_name,
@@ -172,13 +182,17 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     String uid = mContext.getResources().getString(R.string.app_label_uid,
                             model.getUid());
 
-                    appPackage.setText(packageName);
-                    appUid.setText(uid);
+                    appPackage.setText(setBoldSpan(packageName, model.getPackageName()));
+                    appUid.setText(setBoldSpan(uid, String.valueOf(model.getUid())));
 
                     if (model.getPackageName() != mContext.getString(R.string.package_tethering)) {
-                        appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
+                        String screenTime = mContext.getString(R.string.app_label_screen_time,
+                                mContext.getString(R.string.label_loading));
+                        String backgroundTime = mContext.getString(R.string.app_label_background_time,
+                                mContext.getString(R.string.label_loading));
+                        appScreenTime.setText(setBoldSpan(screenTime,
                                 mContext.getString(R.string.label_loading)));
-                        appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
+                        appBackgroundTime.setText(setBoldSpan(backgroundTime,
                                 mContext.getString(R.string.label_loading)));
                         LoadScreenTime loadScreenTime = new LoadScreenTime(model, getActivity(), appScreenTime, appBackgroundTime);
                         loadScreenTime.execute();
@@ -224,11 +238,28 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                         e.printStackTrace();
                     }
 
+                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialogInterface) {
+                            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+                            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    });
+
                     dialog.show();
                 }
             }
         });
 
+    }
+
+    private SpannableString setBoldSpan(String text, String spanText) {
+        SpannableString boldSpan = new SpannableString(text);
+        int start = text.indexOf(spanText);
+        int end = start + spanText.length();
+        boldSpan.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        return boldSpan;
     }
 
     private class LoadScreenTime extends AsyncTask {
@@ -251,13 +282,13 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
             if (model.getPackageName() != mContext.getString(R.string.package_tethering)) {
                 int[] usageTime = getUsageTime(mContext, model.getPackageName(), model.getSession());
                 if (usageTime[1] == -1) {
-
                     // If value is -1, build version is below Q
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
-                                    formatTime(usageTime[0] / 60f)));
+                            String screenTime = mContext.getString(R.string.app_label_screen_time,
+                                    formatTime(usageTime[0] / 60f));
+                            appScreenTime.setText(setBoldSpan(screenTime, formatTime(usageTime[0] / 60f)));
                             appBackgroundTime.setVisibility(View.GONE);
                         }
                     });
@@ -266,10 +297,12 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            appScreenTime.setText(mContext.getString(R.string.app_label_screen_time,
-                                    formatTime(usageTime[0] / 60f)));
-                            appBackgroundTime.setText(mContext.getString(R.string.app_label_background_time,
-                                    formatTime(usageTime[1] / 60f)));
+                            String screenTime = mContext.getString(R.string.app_label_screen_time,
+                                    formatTime(usageTime[0] / 60f));
+                            String backgroundTime = mContext.getString(R.string.app_label_background_time,
+                                    formatTime(usageTime[1] / 60f));
+                            appScreenTime.setText(setBoldSpan(screenTime, formatTime(usageTime[0] / 60f)));
+                            appBackgroundTime.setText(setBoldSpan(backgroundTime, formatTime(usageTime[1] / 60f)));
                         }
                     });
                 }

@@ -83,6 +83,7 @@ public class Values {
     public static final int USAGE_ACCESS_DISABLED = 0x00B4;
     public static final int READ_PHONE_STATE_DISABLED = 0x00B5;
     public static final int REQUEST_READ_PHONE_STATE = 2011;
+    public static final int REQUEST_POST_NOTIFICATIONS = 2111;
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";
@@ -119,6 +120,7 @@ public class Values {
     public static final String DIAGNOSTICS_UPLOAD_URL = "diagnostics_upload_url";
     public static final String DIAGNOSTICS_UPLOAD_URL_SUMMARY = "diagnostics_upload_url_summary";
     public static final String DIAGNOSTICS_UPLOAD_URL_INDEX = "diagnostics_upload_url_index";
+    public static final String SHOW_ADD_PLAN_BANNER = "show_add_plan_banner";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 
@@ -146,6 +148,7 @@ public class Values {
     public static final String UPDATE_VERSION = "update_version";
     public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
     public static final String MD5_PLAY = "58CDB2B01A9E512D4FDC1A9926A29513";
+    public static final String MD5_F_DROID = "4a509c658ae252568c7c196c0dba01ae";
 
     public static final String CRASH_REPORT_KEY = "datamonitor.crashReport";
 

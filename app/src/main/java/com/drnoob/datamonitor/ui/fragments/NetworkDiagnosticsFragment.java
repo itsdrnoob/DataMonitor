@@ -40,6 +40,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -93,8 +94,8 @@ public class NetworkDiagnosticsFragment extends Fragment {
     private static final String TAG = NetworkDiagnosticsFragment.class.getSimpleName();
 
     private TextView runDiagnostics,
-            diagnosticsInfo,
             currentTest;
+    private LinearLayout diagnosticsInfo;
     public static TextView currentConnectionType;
     private LottieAnimationView rippleView,
             currentTestAnim;
@@ -184,9 +185,9 @@ public class NetworkDiagnosticsFragment extends Fragment {
                     rippleView.setVisibility(View.INVISIBLE);
 //                currentConnectionType.setVisibility(View.GONE);
 
-                if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
-                    speedTest = new SpeedTest(getActivity());
-                }
+                    if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
+                        speedTest = new SpeedTest(getActivity());
+                    }
 //                new SpeedTest(requireActivity()).execute();
 //                speedTest = new SpeedTest(getActivity());
 //                    Log.e(TAG, "onClick: " + speedTest.getStatus() );
@@ -348,7 +349,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             onPostExecute("complete");
 
                                         }
-                                    catch (IOException e) {
+                                        catch (IOException e) {
                                             e.printStackTrace();
                                         }
 

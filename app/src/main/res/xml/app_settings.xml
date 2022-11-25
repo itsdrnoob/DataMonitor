@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.drnoob.datamonitor.core.base.PreferenceCategory
         android:title="@string/settings_appearance"
+        app:iconSpaceReserved="false"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false">
 
@@ -17,6 +18,7 @@
 
     <com.drnoob.datamonitor.core.base.PreferenceCategory
         android:title="@string/settings_preferences"
+        app:iconSpaceReserved="false"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false">
         <com.drnoob.datamonitor.core.base.Preference
@@ -37,6 +39,7 @@
 
     <com.drnoob.datamonitor.core.base.PreferenceCategory
         android:title="@string/settings_general"
+        app:iconSpaceReserved="false"
         app:allowDividerAbove="false"
         app:allowDividerBelow="false">
 
@@ -66,7 +69,6 @@
             app:icon="@drawable/ic_donate"
             android:key="donate"
             app:summary="@string/donate_summary"
-            android:fragment="com.drnoob.datamonitor.ui.fragments.SetupFragment"
             android:widgetLayout="@layout/preference_right_arrow" />
 
     </com.drnoob.datamonitor.core.base.PreferenceCategory>

@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.ui.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -42,6 +43,7 @@ import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
 import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.elevation.SurfaceColors;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -87,7 +89,25 @@ public class ContainerActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_arrow));
+//        getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_arrow));
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            binding.containerToolbar.setBackgroundColor(SurfaceColors.SURFACE_2.getColor(this));
+//        }
+//        else {
+//            binding.containerToolbar.setBackgroundColor(getResources().getColor(R.color.surface, null));
+//        }
+        binding.containerToolbar.setBackgroundColor(SurfaceColors.SURFACE_2.getColor(this));
+        getWindow().setStatusBarColor(SurfaceColors.SURFACE_2.getColor(this));
+
+        /*
+        In versions lower than O_MR1, windowLightNavigationBar cannot be applied, which results in the
+        navigation bar icons being a light color (white). This limits visibility in light theme.
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+//            getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.background, null));
+        }
 
         int fragmentId = getIntent().getIntExtra(GENERAL_FRAGMENT_ID, 0);
         Fragment fragment = null;

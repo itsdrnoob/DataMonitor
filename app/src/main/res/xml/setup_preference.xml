@@ -5,7 +5,8 @@
     <com.drnoob.datamonitor.core.base.PreferenceHeader
         android:title="@string/title_setup"
         app:allowDividerBelow="false"
-        app:allowDividerAbove="false">
+        app:allowDividerAbove="false"
+        app:iconSpaceReserved="false">
 
         <com.drnoob.datamonitor.core.base.Preference
             android:icon="@drawable/ic_widget"
@@ -27,9 +28,9 @@
     </com.drnoob.datamonitor.core.base.PreferenceHeader>
 
     <com.drnoob.datamonitor.core.base.PreferenceHeader
-        android:title="@string/title_configure"
         app:allowDividerAbove="false"
-        app:allowDividerBelow="false">
+        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false">
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
             android:title="@string/setup_widget_title"

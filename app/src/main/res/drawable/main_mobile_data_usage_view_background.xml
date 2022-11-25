@@ -4,7 +4,7 @@
     <item android:id="@+id/item_ripple">
         <shape android:shape="rectangle">
             <solid android:color="@color/mobile_data_usage_background_home"/>
-            <corners android:radius="30dp"/>
+            <corners android:radius="24dp"/>
             <stroke android:color="@color/data_usage_home_stroke"
                 android:width="2dp"/>
         </shape>
@@ -13,38 +13,38 @@
 </ripple>
 
 
-<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
-<!--    <item android:state_pressed="false">-->
-<!--        <shape android:shape="rectangle">-->
-<!--            <solid android:color="#FFD6D6"/>-->
-<!--            <corners android:radius="30dp"/>-->
-<!--            <stroke android:color="@color/white"-->
-<!--                android:width="2dp"/>-->
-<!--        </shape>-->
-<!--    </item>-->
-<!--    <item android:state_pressed="true">-->
-<!--        <ripple android:color="?android:colorControlHighlight">-->
-<!--            <item android:id="@+id/item_ripple">-->
-<!--                <shape android:shape="rectangle">-->
-<!--                    <solid android:color="#FFD6D6"/>-->
-<!--                    <corners android:radius="30dp"/>-->
-<!--                    <stroke android:color="@color/white"-->
-<!--                        android:width="2dp"/>-->
-<!--                </shape>-->
-<!--                <color android:color="#FFD6D6"/>-->
-<!--            </item>-->
-<!--        </ripple>-->
-<!--    </item>-->
+    <!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--    <item android:state_pressed="false">-->
+    <!--        <shape android:shape="rectangle">-->
+    <!--            <solid android:color="#FFD6D6"/>-->
+    <!--            <corners android:radius="30dp"/>-->
+    <!--            <stroke android:color="@color/white"-->
+    <!--                android:width="2dp"/>-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <!--    <item android:state_pressed="true">-->
+    <!--        <ripple android:color="?android:colorControlHighlight">-->
+    <!--            <item android:id="@+id/item_ripple">-->
+    <!--                <shape android:shape="rectangle">-->
+    <!--                    <solid android:color="#FFD6D6"/>-->
+    <!--                    <corners android:radius="30dp"/>-->
+    <!--                    <stroke android:color="@color/white"-->
+    <!--                        android:width="2dp"/>-->
+    <!--                </shape>-->
+    <!--                <color android:color="#FFD6D6"/>-->
+    <!--            </item>-->
+    <!--        </ripple>-->
+    <!--    </item>-->
 
 
-<!--</selector>-->
+    <!--</selector>-->
 
 
-<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--android:shape="rectangle">-->
-<!--<solid android:color="#FFD6D6"/>-->
-<!--<corners android:radius="30dp"/>-->
-<!--<stroke android:color="@color/white"-->
-<!--    android:width="2dp"/>-->
+    <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:shape="rectangle">-->
+    <!--<solid android:color="#FFD6D6"/>-->
+    <!--<corners android:radius="30dp"/>-->
+    <!--<stroke android:color="@color/white"-->
+    <!--    android:width="2dp"/>-->
 
-<!--</shape>-->
+    <!--</shape>-->

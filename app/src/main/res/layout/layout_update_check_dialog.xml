@@ -5,7 +5,7 @@
     android:id="@+id/alert_dialog_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/alert_dialog_background">
+    android:background="@android:color/transparent">
 
     <TextView
         android:id="@+id/alert_dialog_title"
@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        style="@style/TextAppearance.Material3.ActionBar.Title"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_large"
-        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_extra_large"
         app:trackThickness="10dp"
         android:indeterminate="true"
         android:layout_marginStart="@dimen/margin_medium"
@@ -45,13 +45,14 @@
         android:layout_marginStart="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_medium"
         android:paddingBottom="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alert_dialog_title">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_update_available"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:padding="@dimen/margin_extra_small"/>
 
         <TextView
@@ -59,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_extra_small"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:text="@string/current_version"/>
 
         <TextView
@@ -66,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_extra_small"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:text="@string/new_version"/>
 
         <TextView
@@ -73,20 +76,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_extra_small"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:text="@string/label_changelogs"
             android:textColor="@color/primary"/>
 
     </LinearLayout>
 
-    <include
-        android:id="@+id/footer"
-        layout="@layout/bottom_sheet_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <include-->
+<!--        android:id="@+id/footer"-->
+<!--        layout="@layout/bottom_sheet_footer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/margin_mid_large"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,6 +47,8 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.databinding.ActivityCrashReportBinding;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -88,10 +90,20 @@ public class CrashReportActivity extends AppCompatActivity {
         binding = ActivityCrashReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        binding.toolbar.setBackgroundColor(SurfaceColors.SURFACE_2.getColor(this));
+        getWindow().setStatusBarColor(SurfaceColors.SURFACE_2.getColor(this));
         getSupportActionBar().setTitle(R.string.crash_report_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_arrow));
+//        getSupportActionBar().setHomeAsUpIndicator(getDrawable(R.drawable.ic_arrow));
+
+        /*
+        In versions lower than O_MR1, windowLightNavigationBar cannot be applied, which results in the
+        navigation bar icons being a light color (white). This limits visibility in light theme.
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+//            getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.background, null));
+        }
 
         mErrorLogs = getIntent().getStringExtra(CRASH_REPORT_KEY);
         includeDeviceInfo = binding.deviceInfoLogs.isChecked();
@@ -99,21 +111,29 @@ public class CrashReportActivity extends AppCompatActivity {
         binding.deviceInfoLogsContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View dialogView = LayoutInflater.from(CrashReportActivity.this)
-                        .inflate(R.layout.layout_alert_dialog, null);
-                TextView title = dialogView.findViewById(R.id.dialog_title);
-                TextView body = dialogView.findViewById(R.id.dialog_body);
+//                View dialogView = LayoutInflater.from(CrashReportActivity.this)
+//                        .inflate(R.layout.layout_alert_dialog, null);
+//                TextView title = dialogView.findViewById(R.id.dialog_title);
+//                TextView body = dialogView.findViewById(R.id.dialog_body);
+//
+//                title.setText(R.string.title_device_info_contents);
+//                body.setText(R.string.device_info_body);
+//
+//                AlertDialog dialog = new AlertDialog.Builder(CrashReportActivity.this)
+//                        .setView(dialogView)
+//                        .create();
+//
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                dialog.show();
+//                updateDialog(dialog, CrashReportActivity.this);
 
-                title.setText(R.string.title_device_info_contents);
-                body.setText(R.string.device_info_body);
 
-                AlertDialog dialog = new AlertDialog.Builder(CrashReportActivity.this)
-                        .setView(dialogView)
-                        .create();
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-                updateDialog(dialog, CrashReportActivity.this);
+                new MaterialAlertDialogBuilder(CrashReportActivity.this)
+                        .setTitle(R.string.title_device_info_contents)
+                        .setMessage(R.string.device_info_body)
+                        .setPositiveButton(R.string.action_ok, null)
+                        .show();
             }
         });
 
