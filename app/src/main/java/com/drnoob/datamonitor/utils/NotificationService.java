@@ -42,6 +42,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
 import java.text.ParseException;
+import java.util.Arrays;
 
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
@@ -172,11 +173,17 @@ public class NotificationService extends Service {
                             wifiData[2]);
 
                     if (showPercent) {
-                        if (mobileData[2].split(" ")[1].equalsIgnoreCase("GB")) {
-                            mobileMB = Float.parseFloat(mobileData[2].split(" ")[0]) * 1024;
+                        Log.e(TAG, "onReceive: total: " + Arrays.toString(total) + " mobile: " +
+                                Arrays.toString(mobileData));
+                        String mobileDataTotal = mobileData[2];
+                        if (mobileDataTotal.contains(",")) {
+                            mobileDataTotal = mobileDataTotal.replace(",", ".");
+                        }
+                        if (mobileDataTotal.split(" ")[1].equalsIgnoreCase("GB")) {
+                            mobileMB = Float.parseFloat(mobileDataTotal.split(" ")[0]) * 1024;
                         }
                         else {
-                            mobileMB = Float.parseFloat(mobileData[2].split(" ")[0]);
+                            mobileMB = Float.parseFloat(mobileDataTotal.split(" ")[0]);
                         }
                         if (mobileMB > dataLimit) {
                             percent = 100;
@@ -185,9 +192,8 @@ public class NotificationService extends Service {
                             percent = (int) (mobileMB / dataLimit * 100);
                         }
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                } catch (RemoteException e) {
+                }
+                catch (Exception e) {
                     e.printStackTrace();
                 }
 

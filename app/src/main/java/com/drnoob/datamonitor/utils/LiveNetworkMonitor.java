@@ -34,6 +34,7 @@ import android.net.NetworkRequest;
 import android.net.TrafficStats;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,7 @@ import androidx.preference.PreferenceManager;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -248,15 +250,24 @@ public class LiveNetworkMonitor extends Service {
         if (iconSuffix.contains(".")) {
             iconSuffix = iconSuffix.replace(".", "_");
         }
+        if (iconSuffix.contains(",")) {
+            iconSuffix = iconSuffix.replace(",", "_");
+        }
         if (!iconSuffix.contains("_")) {
             if (networkType.equals("mb_") && Integer.parseInt(iconSuffix) > 200) {
                 iconSuffix = "200_plus";
             }
         }
         String iconName = iconPrefix + networkType + iconSuffix;
-        Log.d(TAG, "updateNotification: " + iconName );
-        int iconResID = context.getResources().getIdentifier(iconName , "drawable", context.getPackageName());
-        IconCompat icon = IconCompat.createWithResource(context, iconResID);
+        Log.d(TAG, "updateNotification: " + iconName + "  " + Arrays.toString(speeds));
+        IconCompat icon;
+        try {
+            int iconResID = context.getResources().getIdentifier(iconName , "drawable", context.getPackageName());
+            icon = IconCompat.createWithResource(context, iconResID);
+        }
+        catch (Exception e) {
+            icon = IconCompat.createWithResource(context, R.drawable.ic_signal_kb_0);
+        }
         if (mBuilder == null) {
             mBuilder = new NotificationCompat.Builder(this,
                     NETWORK_SIGNAL_CHANNEL_ID);
