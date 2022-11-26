@@ -35,22 +35,31 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.core.os.ConfigurationCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.adapters.data.LanguageModel;
+import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 import static android.content.Context.APP_OPS_SERVICE;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
 import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
+import static com.drnoob.datamonitor.core.Values.LANGUAGE_SYSTEM_DEFAULT;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 
@@ -90,6 +99,39 @@ public class Common {
     }
 
     public static void setLanguage(Activity activity, String languageCode, String countryCode) {
+        List<LanguageModel> availableLanguages =  refreshAvailableLanguages();
+
+        if (languageCode.equalsIgnoreCase(LANGUAGE_SYSTEM_DEFAULT)) {
+            // setting default system language if available
+            String systemLanguageCode = ConfigurationCompat.getLocales(Resources.getSystem()
+                    .getConfiguration()).get(0).getLanguage();
+            String systemCountryCode = "r" + ConfigurationCompat.getLocales(Resources.getSystem()
+                    .getConfiguration()).get(0).getCountry();
+
+            List<LanguageModel> availableSystemLanguages = new ArrayList<>();
+            for (LanguageModel languageModel : availableLanguages) {
+                if (languageModel.getLanguageCode().equalsIgnoreCase(systemLanguageCode)) {
+                    // Matching language code
+                    languageCode = systemLanguageCode;
+                    availableSystemLanguages.add(languageModel);
+                }
+            }
+            for (LanguageModel languageModel : availableSystemLanguages) {
+                if (languageModel.getCountryCode().equalsIgnoreCase(systemCountryCode)) {
+                    // System country code available
+                    countryCode = systemCountryCode;
+                    break;
+                }
+                else {
+                    // System country code not available
+                    countryCode = "";
+                }
+            }
+        }
+        if (languageCode.equalsIgnoreCase(LANGUAGE_SYSTEM_DEFAULT)) {
+            languageCode = "en";
+            countryCode = "";
+        }
         Resources res = activity.getResources();
         Configuration conf = res.getConfiguration();
         Locale locale;
@@ -106,6 +148,36 @@ public class Common {
         conf.setLayoutDirection(locale);
         res.updateConfiguration(conf, res.getDisplayMetrics());
 
+    }
+
+    public static List<LanguageModel> refreshAvailableLanguages() {
+        List<LanguageModel> list = new ArrayList<>();
+        list.add(new LanguageModel("Romanian", "ro", ""));
+        list.add(new LanguageModel("English", "en", ""));
+        list.add(new LanguageModel("Simplified Chinese", "zh", "rCN"));
+        list.add(new LanguageModel("Traditional Chinese", "zh", "rTW"));
+        list.add(new LanguageModel("French", "fr", ""));
+        list.add(new LanguageModel("Arabic", "ar", ""));
+        list.add(new LanguageModel("Malayalam", "ml", ""));
+        list.add(new LanguageModel("Italian", "it", ""));
+        list.add(new LanguageModel("Russian", "ru", ""));
+        list.add(new LanguageModel("Turkish", "tr", ""));
+        list.add(new LanguageModel("German", "de", ""));
+        list.add(new LanguageModel("Norwegian Bokmål", "nb", "rNO"));
+        list.add(new LanguageModel("Portuguese", "pt", "rBR"));
+        list.add(new LanguageModel("Spanish", "es", ""));
+        list.add(new LanguageModel("Ukrainian", "uk", ""));
+
+        Collections.sort(list, new Comparator<LanguageModel>() {
+            @Override
+            public int compare(LanguageModel languageModel, LanguageModel t1) {
+                return languageModel.getLanguage().compareTo(t1.getLanguage());
+            }
+        });
+
+        list.add(0, new LanguageModel("System Default", LANGUAGE_SYSTEM_DEFAULT, ""));
+
+        return list;
     }
 
     public static void refreshService(Context context) {

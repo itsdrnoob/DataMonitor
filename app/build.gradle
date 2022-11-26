@@ -12,6 +12,7 @@ android {
         targetSdkVersion 33
         versionCode 10
         versionName 'v2.2.0'
+        resConfigs "en", "ar", "de", "ef", "fr", "it", "ml", "nb-rNO", "pt-rBR", "ro", "ru", "tr", "uk", "zh-rCN", "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

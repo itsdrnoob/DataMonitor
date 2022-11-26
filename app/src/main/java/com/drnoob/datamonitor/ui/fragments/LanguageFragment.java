@@ -52,6 +52,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.drnoob.datamonitor.Common.refreshAvailableLanguages;
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE;
@@ -87,7 +88,7 @@ public class LanguageFragment extends Fragment {
     }
 
     public static class Language extends PreferenceFragmentCompat {
-        private List<LanguageModel> availableLanguages = new ArrayList<>();
+        private List<LanguageModel> availableLanguages = refreshAvailableLanguages();
         private String currentLanguage;
 
         @Override
@@ -107,30 +108,6 @@ public class LanguageFragment extends Fragment {
                     spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             currentLanguagePref.setTitle(spannableString);
 
-            availableLanguages.add(new LanguageModel("Romanian", "ro", ""));
-            availableLanguages.add(new LanguageModel("English", "en", ""));
-            availableLanguages.add(new LanguageModel("Simplified Chinese", "zh", "rCN"));
-            availableLanguages.add(new LanguageModel("Traditional Chinese", "zh", "rTW"));
-            availableLanguages.add(new LanguageModel("French", "fr", ""));
-            availableLanguages.add(new LanguageModel("Arabic", "ar", ""));
-            availableLanguages.add(new LanguageModel("Malayalam", "ml", ""));
-            availableLanguages.add(new LanguageModel("Italian", "it", ""));
-            availableLanguages.add(new LanguageModel("Russian", "ru", ""));
-            availableLanguages.add(new LanguageModel("Turkish", "tr", ""));
-            availableLanguages.add(new LanguageModel("German", "de", ""));
-            availableLanguages.add(new LanguageModel("Norwegian Bokmål", "nb", "rNO"));
-            availableLanguages.add(new LanguageModel("Portuguese", "pt", "rBR"));
-            availableLanguages.add(new LanguageModel("Spanish", "es", ""));
-            availableLanguages.add(new LanguageModel("Ukrainian", "uk", ""));
-
-
-            Collections.sort(availableLanguages, new Comparator<LanguageModel>() {
-                @Override
-                public int compare(LanguageModel languageModel, LanguageModel t1) {
-                    return languageModel.getLanguage().compareTo(t1.getLanguage());
-                }
-            });
-
             for (int i = 0; i < availableLanguages.size(); i++) {
                 String language = availableLanguages.get(i).getLanguage();
                 String languageCode = availableLanguages.get(i).getLanguageCode();
@@ -149,16 +126,6 @@ public class LanguageFragment extends Fragment {
                                     .putString(APP_LANGUAGE_CODE, languageCode)
                                     .putString(APP_COUNTRY_CODE, countryCode)
                                     .apply();
-//                        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags("ro");
-//                        AppCompatDelegate.setApplicationLocales(appLocale);
-
-
-//                        Locale locale = new Locale(languageCode);
-//                        Locale.setDefault(locale);
-//                        Resources resources = getActivity().getResources();
-//                        Configuration config = resources.getConfiguration();
-//                        config.setLocale(locale);
-//                        resources.updateConfiguration(config, resources.getDisplayMetrics());
 
                             setLanguage(getActivity(), languageCode, countryCode);
                             startActivity(new Intent(getActivity(), MainActivity.class)
