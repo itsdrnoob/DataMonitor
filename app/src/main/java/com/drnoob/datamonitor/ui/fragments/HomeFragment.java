@@ -83,6 +83,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
@@ -90,6 +91,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
+import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SHOW_ADD_PLAN_BANNER;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
@@ -130,6 +132,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private static Context mContext;
     private static List<OverviewModel> mList = new ArrayList<>();
     private boolean openQuickView = false;
+    private TextView mDataRemaining;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -172,6 +175,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         mWifiFataReceived = view.findViewById(R.id.wifi_data_received);
         mMobileDataUsageToday = view.findViewById(R.id.data_usage_mobile_today);
         mWifiUsageToday = view.findViewById(R.id.data_usage_wifi_today);
+        mDataRemaining = view.findViewById(R.id.home_data_remaining);
 
         mOverview = view.findViewById(R.id.overview);
         mOverviewLoading = view.findViewById(R.id.overview_loading);
@@ -247,6 +251,72 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 updateOverview.execute();
             }
         });
+
+        int date = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(DATA_RESET_DATE, 1);
+        Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1);
+        if (dataLimit > 0) {
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, null)
+                    .equals(DATA_RESET_DAILY)) {
+                Long total = (mobile[2]);
+                Long limit = dataLimit.longValue() * 1048576;
+                Long remaining;
+                String remainingData;
+                if (limit > total) {
+                    remaining= limit - total;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                }
+                else {
+                    remaining= total - limit;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                }
+
+            } else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, null)
+                    .equals(DATA_RESET_MONTHLY)) {
+                try {
+                    Long total = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date)[2];
+                    Long limit = dataLimit.longValue() * 1048576;
+                    Long remaining;
+                    String remainingData;
+                    if (limit > total) {
+                        remaining= limit - total;
+                        remainingData = formatData(remaining / 2, remaining / 2)[2];
+                        mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                    }
+                    else {
+                        remaining= total - limit;
+                        remainingData = formatData(remaining / 2, remaining / 2)[2];
+                        mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Long total = (mobile[2]);
+                Long limit = dataLimit.longValue() * 1048576;
+                Long remaining;
+                String remainingData;
+                if (limit > total) {
+                    remaining= limit - total;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                }
+                else {
+                    remaining= total - limit;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                }
+            }
+            mDataRemaining.setVisibility(View.VISIBLE);
+        }
+        else {
+            // No data plan is set. Hide mDataRemaining view.
+            mDataRemaining.setVisibility(View.GONE);
+        }
 
         mAddDataPlan.setOnClickListener(new View.OnClickListener() {
             @Override
