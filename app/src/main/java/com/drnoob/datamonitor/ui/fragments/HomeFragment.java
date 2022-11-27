@@ -360,7 +360,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
-                        VibrationUtils.hapticMinor(getContext());
+                        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("disable_haptics", false)) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
                     }
 
                     @Override
@@ -377,7 +380,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
                     @Override
                     public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
-                        if (fromUser) {
+                        if (fromUser && !PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("disable_haptics", false)) {
                             VibrationUtils.hapticMinor(getContext());
                         }
                         int start = slider.getValues().get(0).intValue();
@@ -812,7 +816,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         setOpenQuickView(true);
         float translation = getTranslation(view);
         float finalTranslation = translation;
-        hapticMajor(getContext());
+        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                .getBoolean("disable_haptics", false)) {
+            VibrationUtils.hapticMajor(getContext());
+        }
         if (isOverviewAvailable()) {
             try {
                 String[] dataUsage = getDataUsage(view);
@@ -830,7 +837,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 if (isOpenQuickView()) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                             motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                        hapticMinor(getContext());
+                        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("disable_haptics", false)) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
                         mQuickView.setVisibility(View.INVISIBLE);
                         setOpenQuickView(false);
                     }

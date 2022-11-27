@@ -20,16 +20,23 @@
 package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 
 import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.utils.VibrationUtils;
 
 public class SwitchPreferenceCompat extends androidx.preference.SwitchPreferenceCompat {
     private static final String TAG = SwitchPreferenceCompat.class.getSimpleName();
@@ -58,6 +65,17 @@ public class SwitchPreferenceCompat extends androidx.preference.SwitchPreference
             LinearLayout rootLayout = (LinearLayout) title.getParent().getParent();
             rootLayout.setPadding(75, 10, 75, 10);
             title.setSingleLine(false);
+
+            this.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull Preference preference) {
+                    if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("disable_haptics", false)) {
+                        VibrationUtils.hapticMinor(getContext());
+                    }
+                    return false;
+                }
+            });
         }
     }
 }

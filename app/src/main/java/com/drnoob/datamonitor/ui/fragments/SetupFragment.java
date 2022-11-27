@@ -734,7 +734,10 @@ public class SetupFragment extends Fragment {
                     dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
                         public void onTabSelected(TabLayout.Tab tab) {
-                            VibrationUtils.hapticMinor(getContext());
+                            if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getBoolean("disable_haptics", false)) {
+                                VibrationUtils.hapticMinor(getContext());
+                            }
                         }
 
                         @Override
@@ -751,7 +754,8 @@ public class SetupFragment extends Fragment {
                     customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
                         @Override
                         public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
-                            if (fromUser) {
+                            if (fromUser && !PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getBoolean("disable_haptics", false)) {
                                 VibrationUtils.hapticMinor(getContext());
                             }
                             int start = slider.getValues().get(0).intValue();
@@ -965,7 +969,10 @@ public class SetupFragment extends Fragment {
                         datePicker.setOnDateChangedListener(new android.widget.DatePicker.OnDateChangedListener() {
                             @Override
                             public void onDateChanged(android.widget.DatePicker datePicker, int i, int i1, int i2) {
-                                hapticMinor(getContext());
+                                if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                        .getBoolean("disable_haptics", false)) {
+                                    VibrationUtils.hapticMinor(getContext());
+                                }
                             }
                         });
 
@@ -1075,7 +1082,10 @@ public class SetupFragment extends Fragment {
                         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
                             @Override
                             public void onTimeChanged(TimePicker timePicker, int i, int i1) {
-                                hapticMinor(getContext());
+                                if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                        .getBoolean("disable_haptics", false)) {
+                                    VibrationUtils.hapticMinor(getContext());
+                                }
                             }
                         });
 
@@ -1380,7 +1390,8 @@ public class SetupFragment extends Fragment {
                     slider.addOnChangeListener(new Slider.OnChangeListener() {
                         @Override
                         public void onValueChange(@NonNull @NotNull Slider slider, float value, boolean fromUser) {
-                            if (fromUser) {
+                            if (fromUser && !PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getBoolean("disable_haptics", false)) {
                                 VibrationUtils.hapticMinor(getContext());
                             }
                         }

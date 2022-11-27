@@ -356,4 +356,8 @@
     <string name="label_send_report">Send report via</string>
     <string name="label_permission_denied">Permission denied!</string>
     <string name="notification_permission_denied_body">Features including Data monitor notification, Live network speed and Data usage alert won\'t work properly without notification permission. Please grant it manually.</string>
+    <string name="settings_disable_haptics">Disable haptics</string>
+    <string name="disable_haptics_summary">Disable haptic feedback across the app</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="action_add_data_plan_home_summary">No data plan found! Add a data plan to start tracking it.</string>
 </resources>

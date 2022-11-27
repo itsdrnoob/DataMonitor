@@ -35,6 +35,13 @@
             app:summary="@string/network_diagnostics_summary"
             android:widgetLayout="@layout/preference_right_arrow" />
 
+        <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+            android:icon="@drawable/ic_haptics"
+            android:key="disable_haptics"
+            android:title="@string/settings_disable_haptics"
+            app:summary="@string/disable_haptics_summary"
+            app:defaultValue="false"/>
+
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
     <com.drnoob.datamonitor.core.base.PreferenceCategory
