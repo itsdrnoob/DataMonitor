@@ -9,7 +9,6 @@
     <string name="home_mobile_data_received">"%1$s Recibido"</string>
     <string name="home_wifi_data_sent">"%1$s Enviado"</string>
     <string name="home_wifi_data_received">"%1$s Recibido"</string>
-    <string name="label_current_data_warning_trigger_level_limit_set"/>
     <string name="label_current_data_warning_trigger_level_limit_not_set"/>
     <string name="label_data_trigger_level">"Cuando %1$s%% de datos es consumido"</string>
     <string name="app_label_package_name">"Nombre del paquete : %1$s"</string>
@@ -49,7 +48,6 @@
     <string name="heading_data_limit">"Limites de datos"</string>
     <string name="data_type_mb">"MB"</string>
     <string name="data_type_gb">"GB"</string>
-    <string name="title_data_warning_trigger"/>
     <string name="title_add_data_plan">"Agregar plan de datos"</string>
     <string name="title_refresh_interval">"Seleccionar intervalo de actualizacion"</string>
     <string name="option_1_min">"1 minuto"</string>
