@@ -9,7 +9,6 @@
     <string name="home_mobile_data_received">"%1$s Recibido"</string>
     <string name="home_wifi_data_sent">"%1$s Enviado"</string>
     <string name="home_wifi_data_received">"%1$s Recibido"</string>
-    <string name="label_current_data_warning_trigger_level_limit_not_set"/>
     <string name="label_data_trigger_level">"Cuando %1$s%% de datos es consumido"</string>
     <string name="app_label_package_name">"Nombre del paquete : %1$s"</string>
     <string name="app_name_placeholder">"Nombre de la app"</string>
