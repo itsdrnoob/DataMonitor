@@ -19,6 +19,41 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.Common.UTCToLocal;
+import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.localToUTC;
+import static com.drnoob.datamonitor.Common.setBoldSpan;
+import static com.drnoob.datamonitor.Common.setDataPlanNotification;
+import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
+import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_ALERT;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
+import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.LIMIT;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
+import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
+import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
+import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL;
+import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL_SUMMARY;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
@@ -65,8 +100,12 @@ import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.slider.LabelFormatter;
-import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -76,42 +115,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
-
-import static com.drnoob.datamonitor.Common.dismissOnClick;
-import static com.drnoob.datamonitor.Common.setDataPlanNotification;
-import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
-import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_ALERT;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
-import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.core.Values.LIMIT;
-import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
-import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
-import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL_SUMMARY;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL;
-import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL_SUMMARY;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
-import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
+import java.util.Date;
 
 public class SetupFragment extends Fragment {
 
@@ -154,6 +160,7 @@ public class SetupFragment extends Fragment {
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
                 mAutoHideNetworkSpeed;
         private Snackbar snackbar;
+        private Long planStartDateMillis, planEndDateMillis;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -703,9 +710,10 @@ public class SetupFragment extends Fragment {
                     TextInputLayout dataLimitView = dialogView.findViewById(R.id.data_limit_view);
                     TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                     TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
-                    RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
-                    TextView customStartDate = dialogView.findViewById(R.id.custom_start_date);
-                    TextView customEndDate = dialogView.findViewById(R.id.custom_end_date);
+//                    RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
+                    TextView planStartDate = dialogView.findViewById(R.id.custom_start_date);
+                    TextView planEndDate = dialogView.findViewById(R.id.custom_end_date);
+//                    TextView planValidity = dialogView.findViewById(R.id.data_plan_validity);
                     ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                     TextView cancel = footer.findViewById(R.id.cancel);
                     TextView ok = footer.findViewById(R.id.ok);
@@ -713,20 +721,92 @@ public class SetupFragment extends Fragment {
                     Calendar calendar = Calendar.getInstance();
                     int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-                    customDateSlider.setValueTo((float) daysInMonth);
+                    planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
+                    planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getLong(DATA_RESET_CUSTOM_DATE_END, new Date().getTime());
 
-                    int start = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
-                    int end = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getInt(DATA_RESET_CUSTOM_DATE_END, daysInMonth);
 
-                    List<Float> sliderValues = new ArrayList<>();
-                    sliderValues.add((float) start);
-                    sliderValues.add((float) end);
-                    customDateSlider.setValues(sliderValues);
+                    String planStart = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
+                    String planEnd = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
+                    String startDateToday = getContext().getString(R.string.label_custom_start_date, planStart);
+                    String endDateToday = getContext().getString(R.string.label_custom_end_date, planEnd);
+                    planStartDate.setText(setBoldSpan(startDateToday, planStart));
+                    planEndDate.setText(setBoldSpan(endDateToday, planEnd));
 
-                    customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
-                    customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+                    planStartDate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            calendar.setTimeInMillis(new Date().getTime());
+                            calendar.add(Calendar.YEAR, -2);
+                            long startYear = calendar.getTimeInMillis();
+                            calendar.add(Calendar.YEAR, 2);
+                            long endYear = calendar.getTimeInMillis();
+
+                            CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder()
+                                    .setStart(startYear)
+                                    .setEnd(endYear)
+                                    .setValidator(DateValidatorPointBackward.now());
+
+                            MaterialDatePicker startDatePicker =
+                                    MaterialDatePicker.Builder.datePicker()
+                                            .setSelection(localToUTC(planStartDateMillis))
+                                            .setTitleText(getContext().getString(R.string.label_select_start_date))
+                                            .setCalendarConstraints(constraintsBuilder.build())
+                                            .build();
+
+                            startDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                                @Override
+                                public void onPositiveButtonClick(Object selection) {
+                                    planStartDateMillis = Long.parseLong(selection.toString());
+                                    Log.e(TAG, "onPositiveButtonClick: " + planStartDateMillis );
+                                    Log.e(TAG, "onPositiveButtonClick: " + UTCToLocal(planStartDateMillis));
+                                    planStartDateMillis = UTCToLocal(planStartDateMillis);
+                                    String date = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
+                                    String startDateString = getContext().getString(R.string.label_custom_start_date, date);
+                                    planStartDate.setText(setBoldSpan(startDateString, date));
+                                }
+                            });
+
+                            startDatePicker.show(getChildFragmentManager(), startDatePicker.toString());
+                        }
+                    });
+
+                    planEndDate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            calendar.setTimeInMillis(new Date().getTime());
+//                            calendar.add(Calendar.YEAR, -2);
+                            long startYear = calendar.getTimeInMillis();
+                            calendar.add(Calendar.YEAR, 2);
+                            long endYear = calendar.getTimeInMillis();
+
+                            CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder()
+                                    .setStart(startYear)
+                                    .setEnd(endYear)
+                                    .setValidator(DateValidatorPointForward.now());
+
+                            MaterialDatePicker endDatePicker =
+                                    MaterialDatePicker.Builder.datePicker()
+                                            .setSelection(localToUTC(planEndDateMillis))
+                                            .setTitleText(getContext().getString(R.string.label_plan_end_date))
+                                            .setCalendarConstraints(constraintsBuilder.build())
+                                            .build();
+
+                            endDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                                @Override
+                                public void onPositiveButtonClick(Object selection) {
+                                    planEndDateMillis = Long.parseLong(selection.toString());
+                                    planEndDateMillis = UTCToLocal(planEndDateMillis) + 86399999;   // 86,399,999 is added to change the time to 23:59:59
+                                    String date = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
+                                    String endDateString = getContext().getString(R.string.label_custom_end_date, date);
+                                    planEndDate.setText(setBoldSpan(endDateString, date));
+                                }
+                            });
+
+                            endDatePicker.show(getChildFragmentManager(), endDatePicker.toString());
+                        }
+                    });
 
                     dataTypeSwitcher.selectTab(dataTypeSwitcher.getTabAt(PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getInt(DATA_TYPE, 0)));
@@ -747,22 +827,6 @@ public class SetupFragment extends Fragment {
 
                         @Override
                         public void onTabReselected(TabLayout.Tab tab) {
-
-                        }
-                    });
-
-                    customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-                        @Override
-                        public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
-                            if (fromUser && !PreferenceManager.getDefaultSharedPreferences(getContext())
-                                    .getBoolean("disable_haptics", false)) {
-                                VibrationUtils.hapticMinor(getContext());
-                            }
-                            int start = slider.getValues().get(0).intValue();
-                            int end = slider.getValues().get(1).intValue();
-
-                            customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
-                            customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
 
                         }
                     });
@@ -861,16 +925,17 @@ public class SetupFragment extends Fragment {
                                             .putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
                                 }
                                 else if (dataReset.getCheckedRadioButtonId() == R.id.custom_reset) {
-                                    calendar.set(Calendar.DAY_OF_MONTH, customDateSlider.getValues().get(1).intValue());
+                                    calendar.setTimeInMillis(planEndDateMillis);
                                     calendar.add(Calendar.DATE, 1);
 
                                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
                                             .putString(DATA_RESET, DATA_RESET_CUSTOM)
-                                            .putInt(DATA_RESET_CUSTOM_DATE_START, customDateSlider.getValues().get(0).intValue())
-                                            .putInt(DATA_RESET_CUSTOM_DATE_END, customDateSlider.getValues().get(1).intValue())
-                                            .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                                            .putLong(DATA_RESET_CUSTOM_DATE_START, planStartDateMillis)
+                                            .putLong(DATA_RESET_CUSTOM_DATE_END, planEndDateMillis)
+                                            .putLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis())
                                             .apply();
                                 }
+
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putFloat(DATA_LIMIT, dataLimit).apply();
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(LIMIT, dataLimitInput.getText().toString()).apply();
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putInt(DATA_TYPE, dataType).apply();

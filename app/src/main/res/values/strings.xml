@@ -289,9 +289,9 @@
     <string name="auto_hide_live_network">Auto hide network speed</string>
     <string name="auto_hide_live_network_summary">Stop network speed notification when network is not connected</string>
     <string name="custom">Custom</string>
-    <string name="heading_data_reset_custom_counter">Reset date</string>
-    <string name="label_custom_start_date">Start date: %1$d</string>
-    <string name="label_custom_end_date">End date: %1$d</string>
+    <string name="heading_data_reset_custom_counter">Plan validity</string>
+    <string name="label_custom_start_date">Start date: %1$s</string>
+    <string name="label_custom_end_date">End date: %1$s</string>
     <string name="setup_usage_reset_date_custom_selected">Custom data plan is active</string>
     <string name="title_data_plan_expired">Data plan expired!</string>
     <string name="summary_data_plan_expired">You might want to update your plan</string>
@@ -360,4 +360,6 @@
     <string name="disable_haptics_summary">Disable haptic feedback across the app</string>
     <string name="action_dismiss">Dismiss</string>
     <string name="action_add_data_plan_home_summary">No data plan found! Add a data plan to start tracking it.</string>
+    <string name="label_select_start_date">Select start date</string>
+    <string name="label_plan_end_date">Select end date</string>
 </resources>
