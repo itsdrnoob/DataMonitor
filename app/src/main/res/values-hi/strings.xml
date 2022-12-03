@@ -201,7 +201,6 @@
     <string name="f_droid_page_summary">आधिकारिक एफ-ड्रॉयड रेपो पर ऐप देखें</string>
     <string name="label_crash_logs">दुर्घटना(क्रैश) लॉग</string>
     <string name="report_mail_summary">दुर्घटना रिपोर्ट मेल द्वारा भेजें</string>
-    <string name="mail_uri"></string>
     <string name="custom">कस्टम</string>
     <string name="label_custom_start_date">आरंभ तिथि: %1$d</string>
     <string name="label_custom_end_date">समाप्ति तिथि: %1$d</string>
