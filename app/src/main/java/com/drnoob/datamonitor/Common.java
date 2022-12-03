@@ -31,6 +31,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -50,11 +54,14 @@ import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import static android.content.Context.APP_OPS_SERVICE;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
@@ -242,5 +249,23 @@ public class Common {
         lp.width = (metrics.widthPixels * 85 / 100);
         lp.y = 50;
         dialog.getWindow().setAttributes(lp);
+    }
+
+    public static SpannableString setBoldSpan(String text, String spanText) {
+        SpannableString boldSpan = new SpannableString(text);
+        int start = text.indexOf(spanText);
+        int end = start + spanText.length();
+        boldSpan.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        return boldSpan;
+    }
+
+    public static Long UTCToLocal(Long UTCTime) {
+        int offset = TimeZone.getDefault().getOffset(new Date().getTime());
+        return UTCTime - (offset);
+    }
+
+    public static Long localToUTC(Long localTime) {
+        int offset = TimeZone.getDefault().getOffset(new Date().getTime());
+        return localTime + (offset);
     }
 }

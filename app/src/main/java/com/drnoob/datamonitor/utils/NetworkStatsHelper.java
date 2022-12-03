@@ -590,17 +590,19 @@ public class NetworkStatsHelper {
                 break;
 
             case SESSION_CUSTOM:
-                year = Integer.parseInt(yearFormat.format(date));
-                month = Integer.parseInt(monthFormat.format(date));
-                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_START, 1);
-                startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-                resetDate = dateFormat.parse(startTime);
-                resetTimeMillis = resetDate.getTime();
-                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_END
-                        , calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-                endTime = context.getResources().getString(R.string.reset_time, year, month, day, 23, 59);
-                endDate = dateFormat.parse(endTime);
-                endTimeMillis = endDate.getTime();
+//                year = Integer.parseInt(yearFormat.format(date));
+//                month = Integer.parseInt(monthFormat.format(date));
+//                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_START, 1);
+//                startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+//                resetDate = dateFormat.parse(startTime);
+                resetTimeMillis = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
+//                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_END
+//                        , calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+//                endTime = context.getResources().getString(R.string.reset_time, year, month, day, 23, 59);
+//                endDate = dateFormat.parse(endTime);
+                endTimeMillis = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getLong(DATA_RESET_CUSTOM_DATE_END, new Date().getTime());
 
                 break;
 

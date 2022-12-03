@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -13,6 +14,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
@@ -55,29 +57,30 @@ public class DataPlanRefreshReceiver extends BroadcastReceiver {
             Enables data plan to update on its own by calculating the validity of the currently set plan.
             Half-baked and not yet enabled.
              */
+            Log.d(TAG, "onReceive: updating data plan validity");
             Calendar calendar = Calendar.getInstance();
-
-            int start = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
-            int end = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getInt(DATA_RESET_CUSTOM_DATE_END, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-            calendar.set(Calendar.DAY_OF_MONTH, end);
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+            long start = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
+            long end = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_END, calendar.getTimeInMillis());
+            calendar.setTimeInMillis(end);
             calendar.add(Calendar.DATE, 1);
-            int restart = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH));
+            long restart = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis());
 
-            int validity = end - start;
-            calendar.set(Calendar.DAY_OF_MONTH, restart + validity);
+            long validity = end - start;    // i day => 86400000 millis
+            calendar.setTimeInMillis(restart + validity);
 
             PreferenceManager.getDefaultSharedPreferences(context).edit()
                     .putString(DATA_RESET, DATA_RESET_CUSTOM)
-                    .putInt(DATA_RESET_CUSTOM_DATE_START, restart)
-                    .putInt(DATA_RESET_CUSTOM_DATE_END, calendar.get(Calendar.DAY_OF_MONTH))
+                    .putLong(DATA_RESET_CUSTOM_DATE_START, restart)
+                    .putLong(DATA_RESET_CUSTOM_DATE_END, calendar.getTimeInMillis())
                     .apply();
 
             calendar.add(Calendar.DATE, 1);
             PreferenceManager.getDefaultSharedPreferences(context).edit()
-                    .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                    .putLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis())
                     .apply();
 
             setRefreshAlarm(context);

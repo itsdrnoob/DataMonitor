@@ -22,6 +22,7 @@ package com.drnoob.datamonitor.core.base;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -66,12 +67,14 @@ public class SwitchPreferenceCompat extends androidx.preference.SwitchPreference
             rootLayout.setPadding(75, 10, 75, 10);
             title.setSingleLine(false);
 
-            this.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            holder.itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public boolean onPreferenceClick(@NonNull Preference preference) {
-                    if (!PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getBoolean("disable_haptics", false)) {
-                        VibrationUtils.hapticMinor(getContext());
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("disable_haptics", false)) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
                     }
                     return false;
                 }

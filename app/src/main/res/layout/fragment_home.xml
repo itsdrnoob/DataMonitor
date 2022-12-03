@@ -291,7 +291,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="No data plan found! Add a data plan to start tracking it."
+                    android:text="@string/action_add_data_plan_home_summary"
                     android:layout_marginTop="@dimen/margin_small"/>
 
                 <LinearLayout
@@ -305,7 +305,7 @@
                         android:id="@+id/dismiss_add_plan_banner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dismiss"
+                        android:text="@string/action_dismiss"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_marginEnd="@dimen/margin_small"/>
 

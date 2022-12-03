@@ -205,41 +205,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/data_limit" />
 
-            <com.google.android.material.slider.RangeSlider
-                android:id="@+id/custom_date_slider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:labelBehavior="withinBounds"
-                android:layout_marginTop="@dimen/margin_small"
-                android:valueFrom="1"
-                android:valueTo="30"
-                android:stepSize="1"
-                style="@style/Widget.App.Slider"
-                app:values="@array/initial_slider_values"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/padding_medium"
-                android:paddingEnd="@dimen/padding_medium"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/margin_small">
 
                 <TextView
                     android:id="@+id/custom_start_date"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/label_custom_start_date"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:padding="@dimen/margin_small"
+                    android:clickable="true"
+                    android:background="?selectableItemBackground"
                     android:gravity="start"/>
 
                 <TextView
                     android:id="@+id/custom_end_date"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/label_custom_end_date"
-                    android:gravity="end"/>
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:padding="@dimen/margin_small"
+                    android:clickable="true"
+                    android:background="?selectableItemBackground"
+                    android:gravity="start"/>
 
             </LinearLayout>
 
@@ -250,7 +242,6 @@
             layout="@layout/bottom_sheet_footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/custom_date_view" />
 
