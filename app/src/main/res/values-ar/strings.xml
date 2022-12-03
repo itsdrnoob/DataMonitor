@@ -264,7 +264,7 @@
     <string name="auto_hide_live_network">إخفاء سرعة الشبكة تلقائيا</string>
     <string name="auto_hide_live_network_summary">أوقف إخطار سرعة الشبكة عندما لا تكون الشبكة متصلة</string>
     <string name="custom">مُخصّص</string>
-    <string name="label_custom_start_date">تاريخ البدء: %1$d</string>
+    <string name="label_custom_start_date">تاريخ البدء: %1$s</string>
     <string name="setup_usage_reset_date_custom_selected">خطة البيانات المخصصة نشطة</string>
     <string name="title_data_plan_expired">انتهت صلاحية خطة البيانات!</string>
     <string name="summary_data_plan_expired">قد ترغب في تحديث خطتك</string>
@@ -295,7 +295,7 @@
     <string name="action_dismiss">تجاهل</string>
     <string name="report_telegram_summary">إرسال تقرير الأعطال في دردشة دعم Telegram</string>
     <string name="crash_report_body">يبدو أن مراقب البيانات قد تحطم. يمكنك إرسال تقرير الأعطال إلى المطور للمساعدة في تحليل المشكلة وحلها بشكل أسرع. إذا لم يحدث أي عطل ، يرجى تجاهله.</string>
-    <string name="heading_data_reset_custom_counter">اعادة تعيين البيانات</string>
+    <string name="heading_data_reset_custom_counter">صلاحية الخطة</string>
     <string name="device_info_body">تتضمن معلومات الجهاز ما يلي:
 \nالشركة المصنعة للجهاز
 \nالعلامة التجارية للجهاز
@@ -303,7 +303,7 @@
 \nالاسم الرمزي للجهاز
 \nإصدار أندرويد
 \nنموذج SOC</string>
-    <string name="label_custom_end_date">تاريخ الانتهاء: %1$d</string>
+    <string name="label_custom_end_date">تاريخ الانتهاء: %1$s</string>
     <string name="error_unknown_telegram_client">Telegram غير مثبت أو عميل غير معروف موجود. يرجى تجربة طريقة أخرى.</string>
     <string name="label_crash_logs_copied">سجلات الأعطال التي تم نسخها إلى الحافظة</string>
     <string name="settings_network_diagnostics">تشخيصات الشبكة</string>
@@ -318,4 +318,6 @@
     <string name="comradekingu_summary">دعم الترجمة</string>
     <string name="f_droid_page">عرض التطبيق على F-Droid</string>
     <string name="f_droid_page_summary">تحقق من التطبيق على مستودع F-Droid الرسمي</string>
+    <string name="label_select_start_date">حدد تاريخ البدء</string>
+    <string name="label_plan_end_date">حدد تاريخ الانتهاء</string>
 </resources>
