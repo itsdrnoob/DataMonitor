@@ -202,13 +202,13 @@
     <string name="label_crash_logs">दुर्घटना(क्रैश) लॉग</string>
     <string name="report_mail_summary">दुर्घटना रिपोर्ट मेल द्वारा भेजें</string>
     <string name="custom">कस्टम</string>
-    <string name="label_custom_start_date">आरंभ तिथि: %1$d</string>
-    <string name="label_custom_end_date">समाप्ति तिथि: %1$d</string>
+    <string name="label_custom_start_date">आरंभ तिथि: %1$s</string>
+    <string name="label_custom_end_date">समाप्ति तिथि: %1$s</string>
     <string name="summary_data_plan_expired">आप अपनी योजना को अपडेट करना चाह सकते हैं</string>
     <string name="label_select_app">ऐप चुनें</string>
     <string name="label_crash_logs_share_chat">चैट पर साझा करें: @datamonitor</string>
     <string name="crash_logs_warning">क्रैश लॉग; संशोधित न करें</string>
-    <string name="heading_data_reset_custom_counter">नवीकरण तिथि</string>
+    <string name="heading_data_reset_custom_counter">प्लान वैधता</string>
     <string name="crash_logs_extra_text">डेटा मॉनिटर दुर्घटना(क्रैश) लॉग</string>
     <string name="setup_usage_reset_date_custom_selected">कस्टम डेटा प्लान सक्रिय है</string>
     <string name="title_device_info_contents">उपकरण की जानकारी</string>
@@ -314,4 +314,6 @@
     <string name="error_unknown_telegram_client">टेलीग्राम स्थापित नहीं है या अज्ञात क्लाइंट मौजूद है। कृपया किसी अन्य विधि का प्रयास करें.</string>
     <string name="dark_theme_summary">गहरी थीम चुनी गई</string>
     <string name="action_add_data_plan_home_summary">कोई डेटा योजना नहीं मिली! इसकी निगरानी करना शुरू करने के लिए एक डेटा योजना जोड़ें।</string>
+    <string name="label_select_start_date">प्रारंभ तिथि का चयन करें</string>
+    <string name="label_plan_end_date">समाप्ति तिथि चुनें</string>
 </resources>
