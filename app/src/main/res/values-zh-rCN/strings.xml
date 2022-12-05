@@ -1,9 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Data Monitor</string>
     <string name="appwidget_text">示例</string>
     <string name="add_widget">添加微件</string>
-
-
     <string name="notification_mobile_data_usage">移动数据 : %1$s</string>
     <string name="notification_wifi_data_usage">无线网络 : %1$s</string>
     <string name="home_mobile_data_sent">%1$s \n已发送</string>
@@ -13,7 +12,6 @@
     <string name="label_current_data_warning_trigger_level_limit_set">当前触发阈值 : %1$s%% (%2$s)</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">当前触发阈值 : %1$s%%</string>
     <string name="label_data_trigger_level">当已消耗 %1$s%% 流量</string>
-
     <string name="app_label_package_name">包名 : %1$s</string>
     <string name="app_label_uid">UID : %1$d</string>
     <string name="app_name_placeholder">软件名</string>
@@ -39,7 +37,7 @@
     <string name="label_dev">Bitroid Inc. ❤ 倾心制作</string>
     <string name="label_loading_apps">加载应用中</string>
     <string name="label_app_data_usage_session_empty">此时间段未使用流量</string>
-    <string name="label_want_to_contribute">想为这个软件做些什么吗？点击这里了解！</string>
+    <string name="label_want_to_contribute">想为这个软件做些什么吗？点击这里了解.</string>
     <string name="setup_image_footer">微件或通知可以让你轻松了解数据使用量</string>
     <string name="heading_data_reset">数据重置间隔</string>
     <string name="daily">每天</string>
@@ -56,13 +54,14 @@
     <string name="option_10_min">10 分钟</string>
     <string name="option_15_min">15 分钟</string>
     <string name="title_widget_setup">配置微件</string>
-    <string name="widget_setup_step_1">1. 在主屏幕上长按空白处</string>
-    <string name="widget_setup_step_2">2. 点击 微件</string>
-    <string name="widget_setup_step_3">3. 将 Data Monitor 提供的微件拖动到桌面上</string>
+    <string name="widget_setup_step_1">1. 在主屏幕上长按空白处.</string>
+    <string name="widget_setup_step_2">2. 点击 微件.</string>
+    <string name="widget_setup_step_3">3. 将 Data Monitor 提供的微件拖动到桌面上.</string>
     <string name="heading_data_usage_today">今日数据用量</string>
     <string name="action_add_data_plan_home">添加一个流量使用计划以继续</string>
     <string name="heading_week_overview">本周总览</string>
-    <string name="error_loading_overview">不好... 无法加载本周总览\n请稍后再试</string>
+    <string name="error_loading_overview">无法加载本周概览。
+\n稍后再试。</string>
     <string name="title_setup">配置 Data Monitor</string>
     <string name="setup_widget">配置微件</string>
     <string name="setup_notification">配置通知</string>
@@ -101,7 +100,7 @@
     <string name="license">许可</string>
     <string name="contributors_summary">那些陪伴着我的人</string>
     <string name="donate">捐赠</string>
-    <string name="donate_summary">给我买杯咖啡吧！</string>
+    <string name="donate_summary">给我们买杯咖啡好吗？</string>
     <string name="data_reset">数据重置</string>
     <string name="data_limit">数据限制</string>
     <string name="support_and_development">开发和支持</string>
@@ -120,16 +119,18 @@
     <string name="label_system_apps">系统应用</string>
     <string name="home">主页</string>
     <string name="usage_access_permission">使用情况访问权限</string>
-    <string name="usage_access_body">需要使用情况访问权限才能使用此软件。此权限将只用来收集数据用量，不会做其他用途</string>
+    <string name="usage_access_body">需要使用情况访问权限才能使用此软件。此权限将只用来收集数据用量.
+\n不会做其他用途.</string>
     <string name="action_grant">授予权限</string>
     <string name="label_tethering">手机热点</string>
     <string name="label_removed">已删除的应用</string>
     <string name="oem_skin_warning">%1$s 请查看额外的优化建议，以保证应用的正常运行。</string>
-    <string name="oem_skin_miui">检测到 MIUI！</string>
+    <string name="oem_skin_miui">检测到 MIUI.</string>
     <string name="battery_optimisation_disabled">电池优化已关闭</string>
     <string name="data_plan_saved">使用计划已保存</string>
     <string name="upi_app_not_found">未找到可以处理此请求的应用</string>
-    <string name="upi_unknown_error">发生了一个未知的错误。请再试一次或尝试其他方法。</string>
+    <string name="upi_unknown_error">未知错误。
+\n请重试或其他方法。</string>
     <string name="label_no_additional_lang">更多语言即将到来。想帮助我们？点击了解详情。</string>
     <string name="notification_disabled">Data monitor 通知已关闭</string>
     <string name="label_widget_refresh_interval_change">微件将每 %1$s 更新</string>
@@ -151,11 +152,12 @@
     <string name="body_data_warning_notification">您已超过 %1$d%% 数据限制</string>
     <string name="body_app_data_warning_notification">%1$s 已用完数据配额</string>
     <string name="title_data_usage_notification">今日数据用量 : %1$s</string>
-    <string name="body_data_usage_notification_loading">加载中...</string>
+    <string name="body_data_usage_notification_loading">加载中…</string>
     <string name="label_data_remaining">剩余 %1$s</string>
     <string name="label_data_remaining_used_excess">超出 %1$s</string>
     <string name="disable_battery_optimisation">关闭电池优化</string>
-    <string name="disable_battery_optimisation_body">禁用对 Data Monitor 的电池优化，以防止系统杀死后台服务。若启用将阻止应用程序的正常工作，并可能显示不正确的数值。</string>
+    <string name="disable_battery_optimisation_body">防止在后台运行时杀死 Data Monitor。
+\n否则值可能不正确。</string>
     <string name="extra_optimisation_tips">更多优化建议</string>
     <string name="oem_battery_settings">制造商电池设置</string>
     <string name="action_next">下一个</string>
@@ -170,7 +172,7 @@
     <string name="setup_app_data_usage_alert">数据用量警报</string>
     <string name="title_app_data_limit">数据用量限制</string>
     <string name="network_diagnostics">网速测试</string>
-    <string name="network_diagnostics_info">网速测试可能需要使用 20-30 Mb 数据。请确保您有足够的数据流量，否则可能会收取费用</string>
+    <string name="network_diagnostics_info">网速测试可能需要使用 20-30 Mb 数据。请确保您有足够的数据流量，否则可能会收取费用.</string>
     <string name="run_diagnostics">开始测试</string>
     <string name="running_diagnostics">测试中</string>
     <string name="connecting">连接中</string>
@@ -196,13 +198,14 @@
     <string name="swipe_right_to_delete">向右划动以删除一个项目</string>
     <string name="refresh_list">刷新列表</string>
     <string name="no_network_connection">未检测到网络连接！</string>
-    <string name="connection_error">连接错误，请检查你的网络。</string>
+    <string name="connection_error">连接错误.
+\n请检查你的网络。</string>
     <string name="app_label_screen_time">屏幕时间 : %1$s</string>
     <string name="app_label_background_time">后台时间 : %1$s</string>
     <string name="ygorigor_summary">罗马尼亚语 译者</string>
     <string name="johnsonran_summary">简体中文 译者</string>
     <string name="hudaifa_abdullah_summary">阿拉伯语 译者</string>
-    <string name="label_want_to_contribute_language">未找到您的语言？点此了解如何帮助我们！</string>
+    <string name="label_want_to_contribute_language">未找到您的语言？点此了解如何帮助我们.</string>
     <string name="current_language">当前语言</string>
     <string name="available_languages">可用语言</string>
     <string name="label_reset_every_month">每月 %1$s%2$s</string>
@@ -220,7 +223,7 @@
     <string name="read_phone_state_permission">读取手机状态权限</string>
     <string name="read_phone_state_body">使用 Android 9 及更低版本的设备需要手动授予 "读取手机状态" 权限。我们不会收集或储存任何个人数据。</string>
     <string name="action_permission_granted">权限已授予</string>
-    <string name="error_permission_denied">权限被拒，请手动授予该权限</string>
+    <string name="error_permission_denied">权限被拒. 请手动授予该权限.</string>
     <string name="telegram_support">Telegram 群组</string>
     <string name="telegram_summary">加入我们的 Telegram 群组</string>
     <string name="rate_app">为此应用评分</string>
@@ -229,10 +232,10 @@
     <string name="current_version">当前版本: %1$s</string>
     <string name="new_version">最新版本: %1$s</string>
     <string name="label_changelogs">看看更新了什么</string>
-    <string name="no_update_available">你已经在使用最新版本了！</string>
+    <string name="no_update_available">你已经在使用最新版本了.</string>
     <string name="label_update_available">有可用更新！</string>
     <string name="label_download_update">下载更新</string>
-    <string name="checking_for_update">检查更新中</string>
+    <string name="checking_for_update">检查更新中…</string>
     <string name="new_update_available">有新版本可用了！</string>
     <string name="update_fetch_error">无法获取更新信息</string>
     <string name="settings_app_theme">应用主题</string>
@@ -243,5 +246,71 @@
     <string name="light_theme_summary">已选择浅色主题</string>
     <string name="dark_theme_summary">已选择深色主题</string>
     <string name="system_theme_summary">已跟随系统</string>
-
+    <string name="custom">自定义</string>
+    <string name="title_device_info_contents">设备信息内容</string>
+    <string name="label_crash_logs_copied">崩溃日志复制到剪贴板</string>
+    <string name="label_mail">邮件</string>
+    <string name="label_battery_optimisation">电池优化</string>
+    <string name="error_no_crash_logs">未找到崩溃日志。你确定发生了崩溃？</string>
+    <string name="label_copy_logs">复制日志</string>
+    <string name="settings_network_diagnostics">网络诊断</string>
+    <string name="network_diagnostics_summary">交换机诊断服务器</string>
+    <string name="settings_diagnostics_server">服务器</string>
+    <string name="settings_download_server">下载服务器</string>
+    <string name="settings_upload_server">上传服务器</string>
+    <string name="custom_upload_url_hint">输入完整的上传网址</string>
+    <string name="error_invaliid_url">下载网址无效！</string>
+    <string name="error_url_verification_failed">无法验证URL!请再试一次或使用不同的网址。</string>
+    <string name="label_loading">加载中…</string>
+    <string name="liviogasp_summary">意大利菜</string>
+    <string name="comradekingu_summary">翻译支持</string>
+    <string name="label_device_info">设备信息</string>
+    <string name="label_select_app">选择应用</string>
+    <string name="label_crash_logs">崩溃日志</string>
+    <string name="crash_report_title">崩溃报告</string>
+    <string name="device_info_content_label">查看设备信息中包含的内容</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="report_github_summary">在 Github 上开启一个新 issue</string>
+    <string name="report_telegram_summary">在 Telegram 支持聊天中发送崩溃报告</string>
+    <string name="report_mail_summary">通过邮件发送崩溃报告</string>
+    <string name="label_unknown">未知的</string>
+    <string name="heading_data_reset_custom_counter">计划有效期</string>
+    <string name="label_custom_start_date">开始日期：%1$s</string>
+    <string name="label_custom_end_date">结束日期：%1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">自定义数据计划已激活</string>
+    <string name="summary_data_plan_expired">你可能要更新你的计划</string>
+    <string name="label_crash_logs_share_chat">分享到聊天：@datamonitor</string>
+    <string name="error_invalid_plan">无效计划！</string>
+    <string name="settings_disable_haptics">禁用触觉</string>
+    <string name="disable_haptics_summary">禁用整个应用程序的触觉反馈</string>
+    <string name="action_dismiss">取消</string>
+    <string name="action_add_data_plan_home_summary">没有找到数据计划！添加数据计划以开始跟踪它。</string>
+    <string name="auto_hide_live_network_summary">网络未连接时停止网速通知</string>
+    <string name="crash_logs_extra_text">数据监控器的崩溃日志</string>
+    <string name="crash_report_body">数据监视器似乎崩溃了。您可以将崩溃报告发送给开发人员，以帮助分析问题并更快地解决问题。如果没有发生崩溃，请忽略。</string>
+    <string name="total_usage">总使用量： %1$s</string>
+    <string name="auto_hide_live_network">自动隐藏网速</string>
+    <string name="label_select_start_date">选择开始日期</string>
+    <string name="label_plan_end_date">选择结束日期</string>
+    <string name="f_droid_page">在 F-Droid 上查看应用</string>
+    <string name="f_droid_page_summary">在官方 F-Droid 仓库上查看该应用程序</string>
+    <string name="holydemon_summary">马拉雅拉姆语</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="notification_permission_denied_body">包括数据监视器通知、实时网络速度和数据使用警报在内的功能在没有通知权限的情况下将无法正常工作。请手动授予。</string>
+    <string name="title_data_plan_expired">数据计划已过期！</string>
+    <string name="crash_logs_warning">崩溃日志；不要修改</string>
+    <string name="error_unknown_telegram_client">未安装电报或存在未知客户端。请尝试其他方法。</string>
+    <string name="battery_optimisation_enabled_info">已启用电池优化。这将干扰数据监视器的工作。单击以禁用。</string>
+    <string name="custom_download_url_hint">输入完整的下载网址</string>
+    <string name="label_permission_denied">权限被拒绝！</string>
+    <string name="device_info_body">设备信息包括：
+\n设备制造商
+\n设备品牌
+\n设备型号
+\n设备代号
+\n安卓版本
+\n芯片型号</string>
+    <string name="label_custom_server">自定义服务器</string>
+    <string name="label_send_report">通过以下方式发送报告</string>
+    <string name="label_custom_server_save_success">服务器首选项已保存</string>
 </resources>
