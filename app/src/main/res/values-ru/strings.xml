@@ -263,7 +263,7 @@
     <string name="label_battery_optimisation">Оптимизация батареи</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="report_github_summary">Создать новый вопрос на Github</string>
-    <string name="heading_data_reset_custom_counter">Сброс даты</string>
+    <string name="heading_data_reset_custom_counter">Срок действия плана</string>
     <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
     <string name="custom_upload_url_hint">Ввод полного URL-адреса загрузки</string>
     <string name="label_custom_server">Пользовательский сервер</string>
@@ -292,8 +292,8 @@
     <string name="auto_hide_live_network_summary">Скрывает в уведомлении состояние скорости сети, когда сеть не подключена</string>
     <string name="error_unknown_telegram_client">Telegram не установлен или присутствует неизвестный клиент. Пожалуйста, попробуйте другой метод.</string>
     <string name="error_no_crash_logs">Журналы сбоев не найдены. Вы уверены, что произошёл сбой\?</string>
-    <string name="label_custom_start_date">Начальная дата: %1$d</string>
-    <string name="label_custom_end_date">Конечная дата: %1$d</string>
+    <string name="label_custom_start_date">Начальная дата: %1$s</string>
+    <string name="label_custom_end_date">Конечная дата: %1$s</string>
     <string name="setup_usage_reset_date_custom_selected">Пользовательский тарифный план активен</string>
     <string name="summary_data_plan_expired">Возможно, вы захотите обновить свой план</string>
     <string name="crash_logs_extra_text">Журналы сбоев Монитора данных</string>
@@ -313,5 +313,8 @@
     <string name="error_invaliid_url">Неверный URL-адрес скачивания!</string>
     <string name="error_url_verification_failed">Не удалось проверить URL! Пожалуйста, попробуйте ещё раз или используйте другой.</string>
     <string name="custom_download_url_hint">Ввод полного URL-адреса скачивания</string>
-    <string name="title_app_data_limit">Лимит данных приложения</string>
+    <string name="title_app_data_limit">Ограничение данных приложения</string>
+    <string name="crash_logs_warning">Журналы сбоев; Не изменять</string>
+    <string name="label_select_start_date">Выберите дату начала</string>
+    <string name="label_plan_end_date">Выберите дату окончания</string>
 </resources>
