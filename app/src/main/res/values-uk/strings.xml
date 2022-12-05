@@ -5,10 +5,14 @@
     <string name="add_widget">"Додати пристосунок"</string>
     <string name="notification_mobile_data_usage">"Мобільні дані : %1$s"</string>
     <string name="notification_wifi_data_usage">"Wifi : %1$s"</string>
-    <string name="home_mobile_data_sent">"%1$s Надіслано"</string>
-    <string name="home_mobile_data_received">"%1$s Отримано"</string>
-    <string name="home_wifi_data_sent">"%1$s Надіслано"</string>
-    <string name="home_wifi_data_received">"%1$s Отримано"</string>
+    <string name="home_mobile_data_sent">%1$s
+\nНадіслано</string>
+    <string name="home_mobile_data_received">%1$s
+\nОтримано</string>
+    <string name="home_wifi_data_sent">%1$s
+\nНадіслано</string>
+    <string name="home_wifi_data_received">%1$s
+\nОтримано</string>
     <string name="app_label_package_name">"Назва Пакету : %1$s"</string>
     <string name="app_label_uid">"Uid : %1$d"</string>
     <string name="app_name_placeholder">Назва застосунку</string>
@@ -220,8 +224,8 @@
     <string name="label_unknown">Невідомо</string>
     <string name="auto_hide_live_network">Автоматично приховувати швидкість мережі</string>
     <string name="custom">Вручну</string>
-    <string name="label_custom_start_date">Початкова дата: %1$d</string>
-    <string name="label_custom_end_date">Кінцева дата: %1$d</string>
+    <string name="label_custom_start_date">Початкова дата: %1$s</string>
+    <string name="label_custom_end_date">Кінцева дата: %1$s</string>
     <string name="title_data_plan_expired">Термін дії тарифного плану закінчився!</string>
     <string name="summary_data_plan_expired">Можливо, ви захочете оновити свій план</string>
     <string name="crash_logs_extra_text">Журнали збоїв Монітора даних</string>
@@ -288,7 +292,7 @@
     <string name="network_diagnostics_info">Під час діагностики мережі може знадобитися близько 20-30 МБ даних. Переконайтеся, що на вашому тарифному плані достатня кількість трафіку та/або тариф дозволяє використовувати безлімітні дані, інакше за користування мережею може стягуватися додаткова плата.</string>
     <string name="crash_report_body">Схоже, що стався збій Монітора даних. Ви можете надіслати звіт про збій розробнику, щоб допомогти проаналізувати проблему і швидше її вирішити. Якщо збою не сталося, будь ласка, не звертайте уваги.</string>
     <string name="device_info_content_label">Дізнатися, що входить в інформацію про пристрій</string>
-    <string name="heading_data_reset_custom_counter">Скидання дати</string>
+    <string name="heading_data_reset_custom_counter">Термін дії плану</string>
     <string name="auto_hide_live_network_summary">Приховує в повідомленні стан швидкості мережі, коли мережа не під\'єднана</string>
     <string name="error_unknown_telegram_client">Telegram не встановлено або присутній невідомий клієнт. Будь ласка, спробуйте інший метод.</string>
     <string name="device_info_body">Інформація про пристрій містить у собі:
@@ -309,4 +313,8 @@
     <string name="widget_setup_step_3">3. Утримуванням перетягніть віджет Монітор даних на головний екран.</string>
     <string name="label_want_to_contribute">Натисніть тут, щоб дізнатися, як зробити свій внесок у додаток Монітор даних.</string>
     <string name="read_phone_state_body">Пристроям під управлінням Android версії 9 і нижче, цей дозвіл необхідно надати вручну. Жодні особисті дані збиратися не будуть.</string>
+    <string name="title_app_data_limit">Обмеження даних додатків</string>
+    <string name="crash_logs_warning">Журнали аварій; не змінювати</string>
+    <string name="label_select_start_date">Виберіть дату початку</string>
+    <string name="label_plan_end_date">Виберіть кінцеву дату</string>
 </resources>
