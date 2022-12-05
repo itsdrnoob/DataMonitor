@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"مراقب البيانات"</string>
-    <string name="appwidget_text">"مثال"</string>
-    <string name="add_widget">"إضافة تطبيق مصغر"</string>
+    <string name="app_name">رصد البيانات</string>
+    <string name="appwidget_text">مثل</string>
+    <string name="add_widget">إضافة القطعة</string>
     <string name="notification_mobile_data_usage">"بيانات الجوال: %1$s"</string>
-    <string name="notification_wifi_data_usage">"واي فاي : %1$s"</string>
+    <string name="notification_wifi_data_usage">واي فاي: %1$s</string>
     <string name="home_mobile_data_sent">%1$s 
 \nأرسلت</string>
-    <string name="home_mobile_data_received">%1$s
+    <string name="home_mobile_data_received">%1$s 
 \nتلقيت</string>
     <string name="home_wifi_data_sent">%1$s 
 \nأرسلت</string>
@@ -91,7 +91,7 @@
     <string name="oss_licenses">"تراخيص مفتوحة المصدر"</string>
     <string name="itsdrnoob">"دكتور نوب"</string>
     <string name="contributors">"المساهمون"</string>
-    <string name="itsdrnoob_summary">المطور والمصمم الرئيسي;</string>
+    <string name="itsdrnoob_summary">المطور الرئيسي والمصمم</string>
     <string name="settings_appearance">"المظهر"</string>
     <string name="settings_dark_mode">"الوضع الداكن"</string>
     <string name="dark_mode_summary">"قم بتمكين الوضع الداكن"</string>
@@ -127,11 +127,12 @@
     <string name="label_tethering">"نقطة وصول البيانات من الهاتف"</string>
     <string name="label_removed">"التطبيقات التي تمت إزالتها"</string>
     <string name="oem_skin_warning">%1$s يرجى التحقق من نصائح التحسين الإضافية للتأكد من أن التطبيق يعمل بشكل صحيح.</string>
-    <string name="oem_skin_miui">"تم الكشف عن Miui!"</string>
+    <string name="oem_skin_miui">تم الكشف عن MIUI.</string>
     <string name="battery_optimisation_disabled">"تم تعطيل تحسين البطارية"</string>
     <string name="data_plan_saved">"تم حفظ خطة البيانات"</string>
     <string name="upi_app_not_found">"لم يتم العثور على تطبيق للتعامل مع هذا الطلب"</string>
-    <string name="upi_unknown_error">"حدث خطأ غير معروف. يرجى المحاولة مرة أخرى أو محاولة طريقة أخرى."</string>
+    <string name="upi_unknown_error">خطأ غير معروف.
+\nيرجى المحاولة مرة أخرى أو طريقة أخرى.</string>
     <string name="label_no_additional_lang">"المزيد من اللغات قريبا .. تريد المساعدة؟ انقر لمعرفة كيف."</string>
     <string name="notification_disabled">"تم تعطيل إخطار مراقب البيانات"</string>
     <string name="label_widget_refresh_interval_change">"سيتم تحديث التطبيق المصغر كل %1$s"</string>
@@ -155,7 +156,8 @@
     <string name="label_data_remaining">"%1$s متبقية"</string>
     <string name="label_data_remaining_used_excess">"تم استخدام %1$s إضافيًا"</string>
     <string name="disable_battery_optimisation">"تعطيل تحسين البطارية"</string>
-    <string name="disable_battery_optimisation_body">"قم بتعطيل تحسين البطارية لمراقب البيانات لمنع النظام من اغلاق الخدمات الخلفية. سيؤدي عدم القيام بذلك إلى منع التطبيق من العمل بشكل صحيح وقد يُظهر قيمًا غير صحيحة."</string>
+    <string name="disable_battery_optimisation_body">يمنع قتل Data Monitor عند التشغيل في الخلفية.
+\nوإلا فقد تكون القيم غير صحيحة.</string>
     <string name="extra_optimisation_tips">"نصائح التحسين الإضافية"</string>
     <string name="oem_battery_settings">"إعدادات بطارية OEM"</string>
     <string name="action_next">"التالي"</string>
