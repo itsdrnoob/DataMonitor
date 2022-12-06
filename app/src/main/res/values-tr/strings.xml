@@ -104,7 +104,7 @@
     <string name="donate">Bağış</string>
     <string name="contributors">Katkıda Bulunanlar</string>
     <string name="dark_mode_summary">Koyu modu açma/kapatma</string>
-    <string name="language_summary">Uygulama dilini değiştirir</string>
+    <string name="language_summary">Uygulama dilini değiştir</string>
     <string name="about_summary">Kaynak, yardım ve daha fazlası</string>
     <string name="donate_summary">Bize bir kahve ısmarlar mısın\?</string>
     <string name="data_reset">Veri sıfırlama</string>
