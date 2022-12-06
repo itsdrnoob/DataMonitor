@@ -81,7 +81,7 @@
     <string name="label_translators">Oversettere</string>
     <string name="title_app_data_limit">Programdatagrense</string>
     <string name="setup_app_data_usage_alert">Varsel om programdatabruk</string>
-    <string name="connecting">Kobler til …</string>
+    <string name="connecting">Kobler til</string>
     <string name="min_download_speed">Min. nedlastingshastighet</string>
     <string name="avg_download_speed">Gjen. nedlastingshastighet</string>
     <string name="max_upload_speed">Maks. opplastingshastighet</string>
@@ -92,7 +92,7 @@
     <string name="network_stats">Nettverksstatistikk</string>
     <string name="isp_server">Tjener</string>
     <string name="swipe_right_to_delete">Dra til høyre for å slette et element</string>
-    <string name="no_network_connection">Fant ingen nettverkstilkobling.</string>
+    <string name="no_network_connection">Fant ingen nettverkstilkobling!</string>
     <string name="current_language">Nåværende</string>
     <string name="setup_usage_reset_date">Tilbakestillingsdato for databruk</string>
     <string name="system_data_usage">Systemdatabruk</string>
@@ -237,11 +237,11 @@
     <string name="network_speed_download">Nedlasting: %1$s</string>
     <string name="action_permission_granted">Tilgang innvilget</string>
     <string name="telegram_support">Telegram-støtte</string>
-    <string name="label_update_available">Ny versjon tilgjengelig.</string>
+    <string name="label_update_available">Ny versjon tilgjengelig!</string>
     <string name="network_signal_summary">Betafunksjon</string>
     <string name="telegram_summary">Ta del i brukerstøttegruppen</string>
     <string name="label_download_update">Last ned den nyeste versjonen</string>
-    <string name="new_update_available">En ny versjon er tilgjengelig.</string>
+    <string name="new_update_available">En ny versjon er tilgjengelig!</string>
     <string name="rate_app">Vurder programmet på Google Play</string>
     <string name="new_version">Ny versjon: %1$s</string>
     <string name="no_update_available">Du kjører den nyeste versjonen.</string>
@@ -254,4 +254,67 @@
     <string name="testing_latency">Testing av nettverksforsinkelse</string>
     <string name="current_connection">Nåværende tilkobling: %1$s</string>
     <string name="network_diagnostics_info">Nettverksdiagnostikk kan bruke rundt 20–30 MB data. Forsikre deg om at du har dette tilgjengelig, ellers kan det koste ekstra.</string>
+    <string name="crash_report_body">Det virker som Data Monitor har krasjet. Du kan sende krasjrapporten til utvikleren for å analysere problemet og løse det raskere. Hvis det ikke skjedde noen krasj, vennligst ignorer.</string>
+    <string name="crash_logs_warning">krasj logger; Ikke endre</string>
+    <string name="error_unknown_telegram_client">Telegram ikke installert eller ukjent klient til stede. Prøv en annen metode.</string>
+    <string name="label_select_app">Velg program</string>
+    <string name="label_crash_logs_share_chat">Del for å chatte: @datamonitor</string>
+    <string name="crash_logs_extra_text">Data Monitor krasjlogger</string>
+    <string name="error_no_crash_logs">Ingen krasjlogger funnet. Er du sikker på at det skjedde et krasj\?</string>
+    <string name="label_battery_optimisation">Batterioptimalisering</string>
+    <string name="label_copy_logs">Kopier logger</string>
+    <string name="settings_disable_haptics">Deaktiver haptikk</string>
+    <string name="action_add_data_plan_home_summary">Ingen dataplan funnet! Legg til en dataplan for å begynne å spore den.</string>
+    <string name="action_dismiss">Avvis</string>
+    <string name="notification_permission_denied_body">Funksjoner inkludert varsling om dataovervåking, live nettverkshastighet og varsel om databruk fungerer ikke som de skal uten varslingstillatelse. Vennligst gi det manuelt.</string>
+    <string name="f_droid_page">Vis app på F-Droid</string>
+    <string name="f_droid_page_summary">Sjekk appen på det offisielle F-Droid-repoet</string>
+    <string name="label_crash_logs">Krasj logger</string>
+    <string name="label_device_info">Enhetsinformasjon</string>
+    <string name="crash_report_title">Krasjrapport</string>
+    <string name="device_info_content_label">Se hva som er inkludert i enhetsinformasjonen</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="report_github_summary">Åpne en ny utgave på Github</string>
+    <string name="report_telegram_summary">Send krasjrapporten i Telegram support chat</string>
+    <string name="report_mail_summary">Sende krasjrapporten i e-post</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="total_usage">Total bruk: %1$s</string>
+    <string name="label_unknown">Ukjent</string>
+    <string name="auto_hide_live_network">Skjul automatisk nettverkshastighet</string>
+    <string name="auto_hide_live_network_summary">Stopp varsling om nettverkshastighet når nettverket ikke er tilkoblet</string>
+    <string name="custom">Egendefinert</string>
+    <string name="heading_data_reset_custom_counter">Planens gyldighet</string>
+    <string name="setup_usage_reset_date_custom_selected">Egendefinert dataplan er aktiv</string>
+    <string name="title_data_plan_expired">Dataplanen utløpt!</string>
+    <string name="summary_data_plan_expired">Det kan være lurt å oppdatere planen</string>
+    <string name="title_device_info_contents">Innhold i enhetsinformasjon</string>
+    <string name="device_info_body">Enhetsinformasjon inkluderer:
+\nProdusent av enheter
+\nEnhetens merkevare
+\nEnhetsmodell
+\nEnhetens kodenavn
+\nAndroid-versjon
+\nSOC-modell</string>
+    <string name="label_crash_logs_copied">Krasjlogger kopiert til utklippstavle</string>
+    <string name="label_mail">E-post</string>
+    <string name="battery_optimisation_enabled_info">Batterioptimalisering er aktivert. Dette vil forstyrre driften av Data Monitor. Klikk for å deaktivere.</string>
+    <string name="settings_network_diagnostics">Nettverksdiagnostikk</string>
+    <string name="network_diagnostics_summary">Server for svitsjdiagnostikk</string>
+    <string name="settings_diagnostics_server">Tjener</string>
+    <string name="settings_download_server">Last ned server</string>
+    <string name="settings_upload_server">Last opp server</string>
+    <string name="custom_upload_url_hint">Skriv inn fullstendig URL-adresse for opplasting</string>
+    <string name="label_custom_server">Egendefinert tjener</string>
+    <string name="custom_download_url_hint">Skriv inn fullstendig nettadresse for nedlasting</string>
+    <string name="label_custom_server_save_success">Serverinnstillinger lagret</string>
+    <string name="error_invaliid_url">Ugyldig nedlastingsadresse!</string>
+    <string name="error_url_verification_failed">Kunne ikke bekrefte URL! Prøv på nytt eller bruk en annen.</string>
+    <string name="error_invalid_plan">Ugyldig plan!</string>
+    <string name="label_send_report">Send rapport via</string>
+    <string name="label_permission_denied">Tillatelse nektet!</string>
+    <string name="disable_haptics_summary">Deaktiver haptisk tilbakemelding på tvers av appen</string>
+    <string name="label_custom_start_date">Startdato: %1$s</string>
+    <string name="label_custom_end_date">Sluttdato: %1$s</string>
+    <string name="label_select_start_date">Velg startdato</string>
+    <string name="label_plan_end_date">Velg sluttdato</string>
 </resources>
