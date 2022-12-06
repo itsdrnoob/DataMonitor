@@ -316,4 +316,5 @@
     <string name="action_add_data_plan_home_summary">कोई डेटा योजना नहीं मिली! इसकी निगरानी करना शुरू करने के लिए एक डेटा योजना जोड़ें।</string>
     <string name="label_select_start_date">प्रारंभ तिथि का चयन करें</string>
     <string name="label_plan_end_date">समाप्ति तिथि चुनें</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
 </resources>
