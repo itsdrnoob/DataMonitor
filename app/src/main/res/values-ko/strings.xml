@@ -152,4 +152,23 @@
     <string name="label_widget_refresh_interval_change">위젯은 %1$s마다 업데이트됩니다</string>
     <string name="label_monitoring_no_plan">데이터 요금제를 추가하여 모니터링 시작</string>
     <string name="label_data_usage_reset_time_change">%2$s에서 %1$s마다 데이터 사용량 재설정</string>
+    <string name="body_app_data_warning_notification">%1$s가 데이터 할당량을 모두 사용했습니다.</string>
+    <string name="title_data_usage_notification">오늘의 데이터 사용량: %1$s</string>
+    <string name="body_data_usage_notification_loading">로드 중…</string>
+    <string name="label_data_remaining">%1$s 남음</string>
+    <string name="label_data_remaining_used_excess">%1$s 추가 사용</string>
+    <string name="disable_battery_optimisation">배터리 최적화 끄기</string>
+    <string name="disable_battery_optimisation_body">백그라운드에서 실행할 때 데이터 모니터가 종료되는 것을 방지합니다.
+\n그렇지 않으면 값이 올바르지 않을 수 있습니다.</string>
+    <string name="extra_optimisation_tips">추가 최적화 팁</string>
+    <string name="oem_battery_settings">OEM 배터리 설정</string>
+    <string name="action_next">다음</string>
+    <string name="overview_monday">월</string>
+    <string name="overview_tuesday">화</string>
+    <string name="overview_wednesday">수</string>
+    <string name="overview_thursday">목</string>
+    <string name="overview_friday">금</string>
+    <string name="overview_saturday">토</string>
+    <string name="overview_sunday">일</string>
+    <string name="label_translators">번역가</string>
 </resources>
