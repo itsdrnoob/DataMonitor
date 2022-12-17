@@ -169,7 +169,7 @@ public class SetupFragment extends Fragment {
                 mCombinedNotificationIcon;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
-                mAutoHideNetworkSpeed, mCombineNotifications;
+                mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications;
         private Snackbar snackbar;
         private Long planStartDateMillis, planEndDateMillis;
         private Intent liveNetworkMonitorIntent;
@@ -197,6 +197,7 @@ public class SetupFragment extends Fragment {
             mAutoHideNetworkSpeed = (SwitchPreferenceCompat) findPreference("auto_hide_network_speed");
             mShowWifiWidget = (SwitchPreferenceCompat) findPreference("widget_show_wifi_usage");
             mCombineNotifications = (SwitchPreferenceCompat) findPreference("combine_notifications");
+            mLockscreenNotifications = (SwitchPreferenceCompat) findPreference("lockscreen_notification");
 
             liveNetworkMonitorIntent = new Intent(getContext(), LiveNetworkMonitor.class);
 

@@ -113,6 +113,12 @@
                 app:isPreferenceVisible="false"
                 app:widgetLayout="@layout/preference_right_arrow"/>
 
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/lockscreen_notification"
+                android:key="lockscreen_notification"
+                app:iconSpaceReserved="false"
+                android:defaultValue="false"/>
+
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory

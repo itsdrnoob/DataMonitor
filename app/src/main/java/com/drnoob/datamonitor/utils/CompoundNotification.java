@@ -140,13 +140,21 @@ public class CompoundNotification extends Service {
         bigContentView.setTextViewText(R.id.network_speed_download, getString(R.string.network_speed_download, "0 KB/s"));
 
 
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
+                .getBoolean("lockscreen_notification", false);
+
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0); // change this
         mBuilder.setContentTitle(getString(R.string.app_name));
         mBuilder.setOngoing(true);
         mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
         mBuilder.setShowWhen(false);
-        mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        if (showOnLockscreen) {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+        else {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        }
         mBuilder.setContentIntent(mActivityPendingIntent);
         mBuilder.setAutoCancel(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
@@ -407,6 +415,9 @@ public class CompoundNotification extends Service {
 //        contentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 //        bigContentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
+                .getBoolean("lockscreen_notification", false);
+
         if (notificationIcon.equals(ICON_DATA_USAGE)) {
             mBuilder.setSmallIcon(dataUsageIcon);
         }
@@ -421,7 +432,12 @@ public class CompoundNotification extends Service {
         mBuilder.setAutoCancel(false);
         mBuilder.setShowWhen(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-        mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        if (showOnLockscreen) {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+        else {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        }
         mBuilder.setCustomContentView(contentView);
         mBuilder.setCustomBigContentView(bigContentView);
         managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());

@@ -100,6 +100,9 @@ public class LiveNetworkMonitor extends Service {
         mNetworkChangeMonitor = new NetworkChangeMonitor(this);
         mNetworkChangeMonitor.startMonitor();
 
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
+                .getBoolean("lockscreen_notification", false);
+
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0);
         mBuilder.setOngoing(true);
         mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -108,7 +111,12 @@ public class LiveNetworkMonitor extends Service {
                 .addLine(getString(R.string.network_speed_download, "0 KB/s"))
                 .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
         mBuilder.setShowWhen(false);
-        mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        if (showOnLockscreen) {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+        else {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        }
         mBuilder.setContentIntent(mActivityPendingIntent);
         mBuilder.setAutoCancel(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
@@ -208,6 +216,9 @@ public class LiveNetworkMonitor extends Service {
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("lockscreen_notification", false);
+
         if (isNetworkConnected) {
             if (!isLiveNetworkReceiverRegistered) {
                 registerNetworkReceiver();
@@ -296,7 +307,12 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setAutoCancel(false);
         mBuilder.setShowWhen(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-        mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        if (showOnLockscreen) {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+        else {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        }
         managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
 
     }
