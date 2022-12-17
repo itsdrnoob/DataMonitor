@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/data_usage_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_tiny"
+        android:paddingBottom="@dimen/margin_tiny"
+        android:textAppearance="@style/TextAppearance.Compat.Notification.Title"/>
+
+    <TextView
+        android:id="@+id/network_speed_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_tiny"
+        android:paddingBottom="@dimen/margin_tiny"
+        android:layout_below="@id/data_usage_title"
+        android:textAppearance="@style/TextAppearance.Compat.Notification.Title"/>
+
+</RelativeLayout>

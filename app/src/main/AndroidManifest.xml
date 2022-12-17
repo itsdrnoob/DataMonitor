@@ -12,8 +12,9 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" -->
-    <!-- tools:ignore="QueryAllPackagesPermission" /> -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+<!--    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" -->
+<!--        tools:ignore="QueryAllPackagesPermission" /> -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -131,10 +132,26 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".utils.CompoundNotification$CompoundNotificationReceiver"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".utils.LiveNetworkMonitor"
             android:enabled="true"
             android:exported="true" />
+
+        <service
+            android:name=".utils.CompoundNotification"
+            android:enabled="true"
+            android:exported="false"/>
 
         <activity
             android:name=".ui.activities.MainActivity"

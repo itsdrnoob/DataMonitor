@@ -79,8 +79,11 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setup_notification", false);
-        if (isChecked) {
+        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("setup_notification", false);
+        boolean isCombined = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("combine_notifications", false);
+        if (isChecked && !isCombined) {
             mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             mUpdaterIntent = new Intent(this, NotificationUpdater.class);
             mUpdaterPendingIntent = PendingIntent.getBroadcast(this, 0, mUpdaterIntent,
@@ -149,8 +152,12 @@ public class NotificationService extends Service {
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             StatusBarNotification[] notification = manager.getActiveNotifications();
 
-            if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", true)) {
+            boolean isChecked = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("setup_notification", false);
+            boolean isCombined = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("combine_notifications", false);
 
+            if (isChecked && !isCombined) {
                 Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
                 showPercent = dataLimit > 0;
                 Float mobileMB;

@@ -125,8 +125,11 @@ public class LiveNetworkMonitor extends Service {
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                if (PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
-                        getBoolean("network_signal_notification", false)) {
+                boolean isEnabled = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
+                        getBoolean("network_signal_notification", false);
+                boolean isCombined = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
+                        .getBoolean("combine_notifications", false);
+                if (isEnabled && !isCombined) {
                     updateNotification(LiveNetworkMonitor.this);
                 }
                 else {
@@ -157,11 +160,21 @@ public class LiveNetworkMonitor extends Service {
         // Service is stopped here
         boolean isEnabled = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
                 getBoolean("network_signal_notification", false);
-        if (!isEnabled) {
+        boolean isCombined = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
+                .getBoolean("combine_notifications", false);
+        if (!isEnabled || isCombined) {
             Log.d(TAG, "onDestroy: stopped");
             mNetworkChangeMonitor.stopMonitor();
             unregisterNetworkReceiver();
             isServiceRunning = false;
+            try {
+                mTimerTask.cancel();
+                mTimer.cancel();
+                isTimerCancelled = true;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         super.onDestroy();
     }

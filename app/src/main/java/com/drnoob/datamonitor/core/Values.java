@@ -156,4 +156,7 @@ public class Values {
     public static final String INTENT_ACTION = "datamonitor.intent.action";
     public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
 
+    public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
+    public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";
+
 }
