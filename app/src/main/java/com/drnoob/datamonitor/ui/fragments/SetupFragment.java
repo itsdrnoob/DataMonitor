@@ -857,38 +857,42 @@ public class SetupFragment extends Fragment {
             mAutoHideNetworkSpeed.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getBoolean("auto_hide_network_speed", false);
-                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
-                    if (!isChecked) {
-                        boolean isNetworkSpeedEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
-                                .getBoolean("network_signal_notification", false);
-                        if (isNetworkSpeedEnabled) {
-                            Intent activityIntent = new Intent(Intent.ACTION_MAIN);
-                            activityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-                            activityIntent.setComponent(new ComponentName(getContext().getPackageName(),
-                                    MainActivity.class.getName()));
-                            PendingIntent activityPendingIntent = PendingIntent.getActivity(
-                                    getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
-                                    NETWORK_SIGNAL_CHANNEL_ID);
-                            builder.setSmallIcon(R.drawable.ic_signal_kb_0);
-                            builder.setOngoing(true);
-                            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            builder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
-                            builder.setStyle(new NotificationCompat.InboxStyle()
-                                    .addLine(getString(R.string.network_speed_download, "0 KB/s"))
-                                    .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
-                            builder.setShowWhen(false);
-                            builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
-                            builder.setContentIntent(activityPendingIntent);
-                            builder.setAutoCancel(false);
-                            builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-                            managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                    boolean isCombinedNotificationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("combine_notifications", false);
+                    if (!isCombinedNotificationEnabled) {
+                        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("auto_hide_network_speed", false);
+                        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                        if (!isChecked) {
+                            boolean isNetworkSpeedEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getBoolean("network_signal_notification", false);
+                            if (isNetworkSpeedEnabled) {
+                                Intent activityIntent = new Intent(Intent.ACTION_MAIN);
+                                activityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                activityIntent.setComponent(new ComponentName(getContext().getPackageName(),
+                                        MainActivity.class.getName()));
+                                PendingIntent activityPendingIntent = PendingIntent.getActivity(
+                                        getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
+                                        NETWORK_SIGNAL_CHANNEL_ID);
+                                builder.setSmallIcon(R.drawable.ic_signal_kb_0);
+                                builder.setOngoing(true);
+                                builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                builder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
+                                builder.setStyle(new NotificationCompat.InboxStyle()
+                                        .addLine(getString(R.string.network_speed_download, "0 KB/s"))
+                                        .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
+                                builder.setShowWhen(false);
+                                builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                                builder.setContentIntent(activityPendingIntent);
+                                builder.setAutoCancel(false);
+                                builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
+                                managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                            }
                         }
-                    }
-                    else {
-                        managerCompat.cancel(NETWORK_SIGNAL_NOTIFICATION_ID);
+                        else {
+                            managerCompat.cancel(NETWORK_SIGNAL_NOTIFICATION_ID);
+                        }
                     }
                     return false;
                 }

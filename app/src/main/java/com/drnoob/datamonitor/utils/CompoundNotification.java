@@ -329,27 +329,7 @@ public class CompoundNotification extends Service {
             previousTotalBytes = currentTotalBytes;
         }
         else  {
-            boolean autoHide = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getBoolean("auto_hide_network_speed", false);
-            if (autoHide) {
-                try {
-                    mTimerTask.cancel();
-                    mTimer.cancel();
-                    isTimerCancelled = true;
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                CompoundNotification.this.stopForeground(true);
-                if (isNotificationReceiverRegistered) {
-                    unregisterNetworkReceiver();
-                }
-                isTaskPaused = true;
-                return;
-            }
-            else {
-                speeds = new String[]{"0 KB/s", "0 KB/s", "0 KB/s"};
-            }
+            speeds = new String[]{"0 KB/s", "0 KB/s", "0 KB/s"};
         }
 
         String iconPrefix = "ic_signal_";
