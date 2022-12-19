@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:background="@drawable/bottom_sheet_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="45dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/bottom_sheet_handle_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="@string/title_refresh_interval"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
+
+<!--        <ImageView-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_info"-->
+<!--            app:tint="@color/text_primary"-->
+<!--            android:layout_marginEnd="@dimen/margin_mid_large"-->
+<!--            android:layout_marginTop="@dimen/margin_small"-->
+<!--            android:elevation="@dimen/elevation_small"-->
+<!--            app:layout_constraintTop_toTopOf="@id/refresh_interval_group"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/refresh_interval_group"/>-->
+
+        <RadioGroup
+            android:id="@+id/refresh_interval_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+            <RadioButton
+                android:id="@+id/interval_1_sec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_1_sec" />
+
+            <RadioButton
+                android:id="@+id/interval_15_sec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_15_sec" />
+
+            <RadioButton
+                android:id="@+id/interval_30_sec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_30_sec" />
+
+            <RadioButton
+                android:id="@+id/interval_1_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:checked="true"
+                android:text="@string/option_1_min" />
+
+            <RadioButton
+                android:id="@+id/interval_2_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_2_min" />
+
+            <RadioButton
+                android:id="@+id/interval_5_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_5_min" />
+
+            <RadioButton
+                android:id="@+id/interval_10_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_10_min" />
+
+            <RadioButton
+                android:id="@+id/interval_15_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:paddingLeft="30dp"
+                android:buttonTint="@color/primary"
+                android:text="@string/option_15_min" />
+
+        </RadioGroup>
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/bottom_sheet_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/refresh_interval_group" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

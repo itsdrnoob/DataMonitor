@@ -41,6 +41,8 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_ALERT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.ICON_DATA_USAGE;
+import static com.drnoob.datamonitor.core.Values.ICON_NETWORK_SPEED;
 import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
@@ -54,6 +56,8 @@ import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL_SUMMARY
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
@@ -69,15 +73,19 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -93,6 +101,7 @@ import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
+import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
@@ -105,6 +114,7 @@ import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
@@ -155,12 +165,14 @@ public class SetupFragment extends Fragment {
     public static class SetupPreference extends PreferenceFragmentCompat {
         private static final String TAG = SetupPreference.class.getSimpleName();
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
-                mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit;
+                mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit,
+                mCombinedNotificationIcon;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
-                mAutoHideNetworkSpeed;
+                mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications;
         private Snackbar snackbar;
         private Long planStartDateMillis, planEndDateMillis;
+        private Intent liveNetworkMonitorIntent;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -174,6 +186,7 @@ public class SetupFragment extends Fragment {
             mWidgetRefresh = (Preference) findPreference("refresh_widget");
             mDataWarningTrigger = (Preference) findPreference("data_warning_trigger_level");
             mAppDataLimit = (Preference) findPreference("app_data_limit");
+            mCombinedNotificationIcon = (Preference) findPreference("combined_notification_icon");
 
             mSetupNotification = (SwitchPreferenceCompat) findPreference("setup_notification");
             mNetworkSignalNotification = (SwitchPreferenceCompat) findPreference("network_signal_notification");
@@ -183,6 +196,10 @@ public class SetupFragment extends Fragment {
             mShowDataWarning = (SwitchPreferenceCompat) findPreference("data_usage_alert");
             mAutoHideNetworkSpeed = (SwitchPreferenceCompat) findPreference("auto_hide_network_speed");
             mShowWifiWidget = (SwitchPreferenceCompat) findPreference("widget_show_wifi_usage");
+            mCombineNotifications = (SwitchPreferenceCompat) findPreference("combine_notifications");
+            mLockscreenNotifications = (SwitchPreferenceCompat) findPreference("lockscreen_notification");
+
+            liveNetworkMonitorIntent = new Intent(getContext(), LiveNetworkMonitor.class);
 
 
             int widgetRefreshInterval = PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -245,22 +262,37 @@ public class SetupFragment extends Fragment {
 
             updateResetData();
 
+            mCombinedNotificationIcon.setVisible(PreferenceManager.getDefaultSharedPreferences(getContext())
+                    .getBoolean("combine_notifications", false));
+
             mSetupNotification.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
-                    if (isChecked) {
-                        getContext().startService(new Intent(getContext(), NotificationService.class));
-                        Log.d(TAG, "onPreferenceClick: Notification started");
+                    boolean isCombinedNotifiationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("combine_notifications", false);
+                    if (isCombinedNotifiationEnabled) {
                         snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                getString(R.string.label_notification_enabled), Snackbar.LENGTH_SHORT)
+                                        getString(R.string.error_combine_notifications_enabled),
+                                        Snackbar.LENGTH_SHORT)
                                 .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                    } else {
-                        getContext().stopService(new Intent(getContext(), NotificationService.class));
-                        Log.d(TAG, "onPreferenceClick: Notification stopped");
-                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                getString(R.string.notification_disabled), Snackbar.LENGTH_SHORT)
-                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        mSetupNotification.setChecked(true);
+                    }
+                    else {
+                        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
+                        if (isChecked) {
+                            getContext().startService(new Intent(getContext(), NotificationService.class));
+                            Log.d(TAG, "onPreferenceClick: Notification started");
+                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                            getString(R.string.label_notification_enabled), Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        }
+                        else {
+                            getContext().stopService(new Intent(getContext(), NotificationService.class));
+                            Log.d(TAG, "onPreferenceClick: Notification stopped");
+                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                            getString(R.string.notification_disabled), Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        }
                     }
                     dismissOnClick(snackbar);
                     snackbar.show();
@@ -271,19 +303,32 @@ public class SetupFragment extends Fragment {
             mNetworkSignalNotification.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("network_signal_notification", false);
-                    if (isChecked) {
-                        getContext().startService(new Intent(getContext(), LiveNetworkMonitor.class));
-                        Log.d(TAG, "onPreferenceClick: Notification started");
+                    boolean isCombinedNotifiationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("combine_notifications", false);
+                    if (isCombinedNotifiationEnabled) {
                         snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                getString(R.string.label_network_signal_notification_enabled), Snackbar.LENGTH_SHORT)
+                                        getString(R.string.error_combine_notifications_enabled),
+                                        Snackbar.LENGTH_SHORT)
                                 .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                    } else {
-                        getContext().stopService(new Intent(getContext(), LiveNetworkMonitor.class));
-                        Log.d(TAG, "onPreferenceClick: Notification stopped");
-                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                getString(R.string.label_network_signal_notification_disabled), Snackbar.LENGTH_SHORT)
-                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        mNetworkSignalNotification.setChecked(true);
+                    }
+                    else {
+                        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("network_signal_notification", false);
+                        if (isChecked) {
+                            getContext().startService(new Intent(getContext(), LiveNetworkMonitor.class));
+//                        getContext().startService(liveNetworkMonitorIntent);
+                            Log.d(TAG, "onPreferenceClick: Notification started");
+                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                            getString(R.string.label_network_signal_notification_enabled), Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        } else {
+                            getContext().stopService(new Intent(getContext(), LiveNetworkMonitor.class));
+//                        getContext().stopService(liveNetworkMonitorIntent);
+                            Log.d(TAG, "onPreferenceClick: Notification stopped");
+                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                            getString(R.string.label_network_signal_notification_disabled), Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        }
                     }
                     dismissOnClick(snackbar);
                     snackbar.show();
@@ -420,8 +465,115 @@ public class SetupFragment extends Fragment {
             mNotificationRefreshInterval.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    boolean isCombinedNotificationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("combine_notifications", false);
+//                    if (isCombinedNotificationEnabled) {
+//                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+//                                        getString(R.string.error_interval_combined_notifications_enabled), Snackbar.LENGTH_LONG)
+//                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+//                        dismissOnClick(snackbar);
+//                        snackbar.show();
+//                    }
+//                    else {
+//                        BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
+//                        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_refresh_interval, null);
+//                        RadioGroup intervalGroup = dialogView.findViewById(R.id.refresh_interval_group);
+//                        ConstraintLayout footer = dialogView.findViewById(R.id.footer);
+//                        TextView cancel = footer.findViewById(R.id.cancel);
+//                        TextView ok = footer.findViewById(R.id.ok);
+//
+//                        int elapsedTIme = PreferenceManager.getDefaultSharedPreferences(getContext())
+//                                .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
+//                        switch (elapsedTIme) {
+//                            case 60000:
+//                                intervalGroup.check(R.id.interval_1_min);
+//                                break;
+//
+//                            case 120000:
+//                                intervalGroup.check(R.id.interval_2_min);
+//                                break;
+//
+//                            case 300000:
+//                                intervalGroup.check(R.id.interval_5_min);
+//                                break;
+//
+//                            case 600000:
+//                                intervalGroup.check(R.id.interval_10_min);
+//                                break;
+//
+//                            case 900000:
+//                                intervalGroup.check(R.id.interval_15_min);
+//                                break;
+//                        }
+//
+//                        cancel.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//
+//                        ok.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                int elapsedTime = 60000;
+//                                String refreshGap = getString(R.string.option_1_min);
+//                                switch (intervalGroup.getCheckedRadioButtonId()) {
+//                                    case R.id.interval_1_min:
+//                                        elapsedTime = 60000;
+//                                        refreshGap = getString(R.string.option_1_min);
+//                                        break;
+//
+//                                    case R.id.interval_2_min:
+//                                        elapsedTime = 120000;
+//                                        refreshGap = getString(R.string.option_2_min);
+//                                        break;
+//
+//                                    case R.id.interval_5_min:
+//                                        elapsedTime = 300000;
+//                                        refreshGap = getString(R.string.option_5_min);
+//                                        break;
+//
+//                                    case R.id.interval_10_min:
+//                                        elapsedTime = 600000;
+//                                        refreshGap = getString(R.string.option_10_min);
+//                                        break;
+//
+//                                    case R.id.interval_15_min:
+//                                        elapsedTime = 900000;
+//                                        refreshGap = getString(R.string.option_15_min);
+//                                        break;
+//                                }
+//                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putInt(NOTIFICATION_REFRESH_INTERVAL,
+//                                        elapsedTime).apply();
+//                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY,
+//                                        refreshGap).apply();
+//                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+//                                                getString(R.string.label_notification_refresh_interval_change, refreshGap), Snackbar.LENGTH_SHORT)
+//                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+//                                dialog.dismiss();
+//                                mNotificationRefreshInterval.setSummary(refreshGap);
+//                                dismissOnClick(snackbar);
+//                                snackbar.show();
+//                                Intent i = new Intent(getContext(), NotificationUpdater.class);
+//                                getContext().sendBroadcast(i);
+//                            }
+//                        });
+//
+//                        dialog.setContentView(dialogView);
+//                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//                            @Override
+//                            public void onShow(DialogInterface dialogInterface) {
+//                                BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+//                                FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+//                                BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+//                            }
+//                        });
+//                        dialog.show();
+//                    }
+
                     BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
-                    View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_refresh_interval, null);
+                    View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_notification_refresh_interval, null);
                     RadioGroup intervalGroup = dialogView.findViewById(R.id.refresh_interval_group);
                     ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                     TextView cancel = footer.findViewById(R.id.cancel);
@@ -429,7 +581,29 @@ public class SetupFragment extends Fragment {
 
                     int elapsedTIme = PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
+
+                    if (!isCombinedNotificationEnabled) {
+                        intervalGroup.findViewById(R.id.interval_1_sec).setVisibility(View.GONE);
+                        intervalGroup.findViewById(R.id.interval_15_sec).setVisibility(View.GONE);
+                        intervalGroup.findViewById(R.id.interval_30_sec).setVisibility(View.GONE);
+                        if (elapsedTIme < 60000) {
+                            elapsedTIme = 60000;
+                        }
+                    }
+
                     switch (elapsedTIme) {
+                        case 1000:
+                            intervalGroup.check(R.id.interval_1_sec);
+                            break;
+
+                        case 15000:
+                            intervalGroup.check(R.id.interval_15_sec);
+                            break;
+
+                        case 30000:
+                            intervalGroup.check(R.id.interval_30_sec);
+                            break;
+
                         case 60000:
                             intervalGroup.check(R.id.interval_1_min);
                             break;
@@ -464,6 +638,21 @@ public class SetupFragment extends Fragment {
                             int elapsedTime = 60000;
                             String refreshGap = getString(R.string.option_1_min);
                             switch (intervalGroup.getCheckedRadioButtonId()) {
+                                case R.id.interval_1_sec:
+                                    elapsedTime = 1000;
+                                    refreshGap = getString(R.string.option_1_sec);
+                                    break;
+
+                                case R.id.interval_15_sec:
+                                    elapsedTime = 15000;
+                                    refreshGap = getString(R.string.option_15_sec);
+                                    break;
+
+                                case R.id.interval_30_sec:
+                                    elapsedTime = 30000;
+                                    refreshGap = getString(R.string.option_30_sec);
+                                    break;
+
                                 case R.id.interval_1_min:
                                     elapsedTime = 60000;
                                     refreshGap = getString(R.string.option_1_min);
@@ -494,14 +683,20 @@ public class SetupFragment extends Fragment {
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY,
                                     refreshGap).apply();
                             snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                    getString(R.string.label_notification_refresh_interval_change, refreshGap), Snackbar.LENGTH_SHORT)
+                                            getString(R.string.label_notification_refresh_interval_change, refreshGap), Snackbar.LENGTH_SHORT)
                                     .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                             dialog.dismiss();
                             mNotificationRefreshInterval.setSummary(refreshGap);
                             dismissOnClick(snackbar);
                             snackbar.show();
                             Intent i = new Intent(getContext(), NotificationUpdater.class);
-                            getContext().sendBroadcast(i);
+                            if (isCombinedNotificationEnabled) {
+//                                getContext().stopService(new Intent(getContext(), CompoundNotification.class));
+//                                getContext().startService(new Intent(getContext(), CompoundNotification.class));
+                            }
+                            else {
+                                getContext().sendBroadcast(i);
+                            }
                         }
                     });
 
@@ -662,39 +857,154 @@ public class SetupFragment extends Fragment {
             mAutoHideNetworkSpeed.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getBoolean("auto_hide_network_speed", false);
-                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
-                    if (!isChecked) {
-                        boolean isNetworkSpeedEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
-                                .getBoolean("network_signal_notification", false);
-                        if (isNetworkSpeedEnabled) {
-                            Intent activityIntent = new Intent(Intent.ACTION_MAIN);
-                            activityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-                            activityIntent.setComponent(new ComponentName(getContext().getPackageName(),
-                                    MainActivity.class.getName()));
-                            PendingIntent activityPendingIntent = PendingIntent.getActivity(
-                                    getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
-                                    NETWORK_SIGNAL_CHANNEL_ID);
-                            builder.setSmallIcon(R.drawable.ic_signal_kb_0);
-                            builder.setOngoing(true);
-                            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            builder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
-                            builder.setStyle(new NotificationCompat.InboxStyle()
-                                    .addLine(getString(R.string.network_speed_download, "0 KB/s"))
-                                    .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
-                            builder.setShowWhen(false);
-                            builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
-                            builder.setContentIntent(activityPendingIntent);
-                            builder.setAutoCancel(false);
-                            builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-                            managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                    boolean isCombinedNotificationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("combine_notifications", false);
+                    if (!isCombinedNotificationEnabled) {
+                        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("auto_hide_network_speed", false);
+                        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getContext());
+                        if (!isChecked) {
+                            boolean isNetworkSpeedEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getBoolean("network_signal_notification", false);
+                            if (isNetworkSpeedEnabled) {
+                                Intent activityIntent = new Intent(Intent.ACTION_MAIN);
+                                activityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                activityIntent.setComponent(new ComponentName(getContext().getPackageName(),
+                                        MainActivity.class.getName()));
+                                PendingIntent activityPendingIntent = PendingIntent.getActivity(
+                                        getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
+                                        NETWORK_SIGNAL_CHANNEL_ID);
+                                builder.setSmallIcon(R.drawable.ic_signal_kb_0);
+                                builder.setOngoing(true);
+                                builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                builder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
+                                builder.setStyle(new NotificationCompat.InboxStyle()
+                                        .addLine(getString(R.string.network_speed_download, "0 KB/s"))
+                                        .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
+                                builder.setShowWhen(false);
+                                builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                                builder.setContentIntent(activityPendingIntent);
+                                builder.setAutoCancel(false);
+                                builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
+                                managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                            }
+                        }
+                        else {
+                            managerCompat.cancel(NETWORK_SIGNAL_NOTIFICATION_ID);
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            mCombineNotifications.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    boolean isDataMonitorNotificationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("setup_notification", false);
+                    boolean isNetworkSpeedNotificationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("network_signal_notification", false);
+                    if (isDataMonitorNotificationEnabled && isNetworkSpeedNotificationEnabled) {
+                        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("combine_notifications", false);
+                        if (isChecked) {
+                            mCombinedNotificationIcon.setVisible(true);
+                            // Stop both services and start combined one
+                            getContext().stopService(new Intent(getContext(), LiveNetworkMonitor.class));
+                            getContext().stopService(new Intent(getContext(), NotificationService.class));
+
+                            getContext().startService(new Intent(getContext(), CompoundNotification.class));
+                        }
+                        else {
+                            mCombinedNotificationIcon.setVisible(false);
+                            // Stop compound service and start individual ones
+                            getContext().stopService(new Intent(getContext(), CompoundNotification.class));
+
+                            getContext().startService(new Intent(getContext(), LiveNetworkMonitor.class));
+                            getContext().startService(new Intent(getContext(), NotificationService.class));
+
+                            // Set notification refresh interval back to 1 min if changed
+                            int elapsedTime = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
+                            String refreshGap = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY, getContext().getString(R.string.option_1_min));
+                            if (elapsedTime < 60000) {
+                                // less than 1 min
+                                elapsedTime = 60000;
+                                refreshGap = getContext().getString(R.string.option_1_min);
+                            }
+                            mNotificationRefreshInterval.setSummary(refreshGap);
+                            PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putInt(NOTIFICATION_REFRESH_INTERVAL,
+                                    elapsedTime).apply();
+                            PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(NOTIFICATION_REFRESH_INTERVAL_SUMMARY,
+                                    refreshGap).apply();
+
                         }
                     }
                     else {
-                        managerCompat.cancel(NETWORK_SIGNAL_NOTIFICATION_ID);
+                        mCombineNotifications.setChecked(false);
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                        getString(R.string.label_setup_notification_first), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        dismissOnClick(snackbar);
+                        snackbar.show();
                     }
+                    return false;
+                }
+            });
+
+            mCombinedNotificationIcon.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
+                    View dialogView = LayoutInflater.from(getContext())
+                            .inflate(R.layout.layout_combined_notification_icon, null);
+                    RadioGroup iconGroup = dialogView.findViewById(R.id.combined_notification_icon_group);
+                    ConstraintLayout footer = dialogView.findViewById(R.id.footer);
+                    TextView cancel = footer.findViewById(R.id.cancel);
+                    TextView ok = footer.findViewById(R.id.ok);
+                    dialog.setContentView(dialogView);
+
+                    String checkIcon = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getString("combined_notification_icon", ICON_NETWORK_SPEED);
+                    if (checkIcon.equals(ICON_NETWORK_SPEED)) {
+                        iconGroup.check(R.id.icon_network_speed);
+                    }
+                    else {
+                        iconGroup.check(R.id.icon_data_usage_percent);
+                    }
+
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int selectedIcon = iconGroup.getCheckedRadioButtonId();
+                            String icon = "";
+                            switch (selectedIcon) {
+                                case R.id.icon_data_usage_percent:
+                                    icon = ICON_DATA_USAGE;
+                                    break;
+
+                                case R.id.icon_network_speed:
+                                    icon = ICON_NETWORK_SPEED;
+                                    break;
+                            }
+
+                            PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                    .putString("combined_notification_icon", icon)
+                                    .apply();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
                     return false;
                 }
             });

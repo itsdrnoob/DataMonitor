@@ -79,8 +79,11 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setup_notification", false);
-        if (isChecked) {
+        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("setup_notification", false);
+        boolean isCombined = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("combine_notifications", false);
+        if (isChecked && !isCombined) {
             mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             mUpdaterIntent = new Intent(this, NotificationUpdater.class);
             mUpdaterPendingIntent = PendingIntent.getBroadcast(this, 0, mUpdaterIntent,
@@ -89,6 +92,10 @@ public class NotificationService extends Service {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+            boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(NotificationService.this)
+                    .getBoolean("lockscreen_notification", false);
+
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
                     DATA_USAGE_NOTIFICATION_CHANNEL_ID);
             builder.setSmallIcon(R.drawable.ic_mobile_data);
@@ -97,7 +104,12 @@ public class NotificationService extends Service {
             builder.setContentTitle(getString(R.string.title_data_usage_notification, getString(R.string.body_data_usage_notification_loading)));
             builder.setContentText(getString(R.string.body_data_usage_notification_loading));
             builder.setShowWhen(false);
-            builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+            if (showOnLockscreen) {
+                builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+            }
+            else {
+                builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+            }
             builder.setContentIntent(pendingIntent);
             builder.setAutoCancel(false);
             builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
@@ -149,8 +161,12 @@ public class NotificationService extends Service {
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             StatusBarNotification[] notification = manager.getActiveNotifications();
 
-            if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", true)) {
+            boolean isChecked = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("setup_notification", false);
+            boolean isCombined = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean("combine_notifications", false);
 
+            if (isChecked && !isCombined) {
                 Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
                 showPercent = dataLimit > 0;
                 Float mobileMB;
@@ -210,6 +226,10 @@ public class NotificationService extends Service {
                 Intent activityIntent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
+
+                boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getBoolean("lockscreen_notification", false);
+
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context,
                         DATA_USAGE_NOTIFICATION_CHANNEL_ID);
                 if (showPercent) {
@@ -241,7 +261,12 @@ public class NotificationService extends Service {
                 builder.setContentIntent(pendingIntent);
                 builder.setAutoCancel(false);
                 builder.setShowWhen(false);
-                builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                if (showOnLockscreen) {
+                    builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+                }
+                else {
+                    builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+                }
                 builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
                 managerCompat.notify(DATA_USAGE_NOTIFICATION_ID, builder.build());

@@ -283,7 +283,7 @@
     <string name="report_github_summary">Open a new issue on Github</string>
     <string name="report_telegram_summary">Send the crash report in Telegram support chat</string>
     <string name="report_mail_summary">Send the crash report in mail</string>
-    <string name="mail_uri">mailto:%1$s?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="mail_uri" translatable="false">mailto:%1$s?&amp;subject=%2$s&amp;body=%3$s</string>
     <string name="total_usage">Total usage: %1$s</string>
     <string name="label_unknown">Unknown</string>
     <string name="auto_hide_live_network">Auto hide network speed</string>
@@ -362,4 +362,13 @@
     <string name="action_add_data_plan_home_summary">No data plan found! Add a data plan to start tracking it.</string>
     <string name="label_select_start_date">Select start date</string>
     <string name="label_plan_end_date">Select end date</string>
+    <string name="combine_notifications">Combine notifications</string>
+    <string name="combine_notifications_summary">Combine Data monitor and Network speed into one notification.</string>
+    <string name="combined_notification_icon">Combined notification icon</string>
+    <string name="combined_notification_icon_summary">Choose the icon to be displayed for the combined notification</string>
+    <string name="error_combine_notifications_enabled">Combined notification enabled. Cannot disable individual notification.</string>
+    <string name="option_1_sec">Every second</string>
+    <string name="option_15_sec">15 seconds</string>
+    <string name="option_30_sec">30 seconds</string>
+    <string name="lockscreen_notification">Enable notification on lock screen</string>
 </resources>

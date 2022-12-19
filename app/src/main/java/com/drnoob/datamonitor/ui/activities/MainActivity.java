@@ -1,73 +1,23 @@
+/*
+ * Copyright (C) 2021 Dr.NooB
+ *
+ * This file is a part of Data Monitor <https://github.com/itsdrnoob/DataMonitor>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.drnoob.datamonitor.ui.activities;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
-import androidx.preference.PreferenceManager;
-
-import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.RemoteException;
-import android.text.Spannable;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
-import android.widget.RemoteViews;
-import android.widget.Toast;
-
-import com.drnoob.datamonitor.BuildConfig;
-import com.drnoob.datamonitor.R;
-import com.drnoob.datamonitor.Widget.DataUsageWidget;
-import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
-import com.drnoob.datamonitor.core.task.DatabaseHandler;
-import com.drnoob.datamonitor.databinding.ActivityMainBinding;
-import com.drnoob.datamonitor.utils.CrashReporter;
-import com.drnoob.datamonitor.utils.SharedPreferences;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.elevation.SurfaceColors;
-import com.google.android.material.snackbar.Snackbar;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import static com.drnoob.datamonitor.Common.isAppInstalled;
 import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
@@ -111,6 +61,62 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDat
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTetheringDataUsage;
 
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.RemoteException;
+import android.text.Spannable;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RemoteViews;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
+
+import com.drnoob.datamonitor.BuildConfig;
+import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.Widget.DataUsageWidget;
+import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
+import com.drnoob.datamonitor.core.task.DatabaseHandler;
+import com.drnoob.datamonitor.databinding.ActivityMainBinding;
+import com.drnoob.datamonitor.utils.CrashReporter;
+import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.elevation.SurfaceColors;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     ActivityMainBinding binding;
@@ -144,7 +150,12 @@ public class MainActivity extends AppCompatActivity {
             setLanguage(this, languageCode, countryCode);
         }
 
-        refreshService(this);
+        try {
+            refreshService(this);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             if (isUsageAccessGranted(MainActivity.this)) {
 

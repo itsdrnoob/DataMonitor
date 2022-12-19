@@ -48,6 +48,7 @@ import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.adapters.data.LanguageModel;
 import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
+import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
@@ -188,12 +189,18 @@ public class Common {
     }
 
     public static void refreshService(Context context) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
-            context.startService(new Intent(context, LiveNetworkMonitor.class));
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("combine_notifications", false)) {
+            context.startService(new Intent(context, CompoundNotification.class));
         }
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
-            context.startService(new Intent(context, NotificationService.class));
+        else {
+            if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
+                context.startService(new Intent(context, LiveNetworkMonitor.class));
+            }
+            if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
+                context.startService(new Intent(context, NotificationService.class));
+            }
         }
+
     }
 
     public static void setRefreshAlarm(Context context) {

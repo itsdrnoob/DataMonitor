@@ -100,6 +100,9 @@ public class LiveNetworkMonitor extends Service {
         mNetworkChangeMonitor = new NetworkChangeMonitor(this);
         mNetworkChangeMonitor.startMonitor();
 
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
+                .getBoolean("lockscreen_notification", false);
+
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0);
         mBuilder.setOngoing(true);
         mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -108,7 +111,12 @@ public class LiveNetworkMonitor extends Service {
                 .addLine(getString(R.string.network_speed_download, "0 KB/s"))
                 .addLine(getString(R.string.network_speed_upload, "0 KB/s")));
         mBuilder.setShowWhen(false);
-        mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        if (showOnLockscreen) {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+        else {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        }
         mBuilder.setContentIntent(mActivityPendingIntent);
         mBuilder.setAutoCancel(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
@@ -125,8 +133,11 @@ public class LiveNetworkMonitor extends Service {
         mTimerTask = new TimerTask() {
             @Override
             public void run() {
-                if (PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
-                        getBoolean("network_signal_notification", false)) {
+                boolean isEnabled = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
+                        getBoolean("network_signal_notification", false);
+                boolean isCombined = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
+                        .getBoolean("combine_notifications", false);
+                if (isEnabled && !isCombined) {
                     updateNotification(LiveNetworkMonitor.this);
                 }
                 else {
@@ -157,11 +168,21 @@ public class LiveNetworkMonitor extends Service {
         // Service is stopped here
         boolean isEnabled = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this).
                 getBoolean("network_signal_notification", false);
-        if (!isEnabled) {
+        boolean isCombined = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
+                .getBoolean("combine_notifications", false);
+        if (!isEnabled || isCombined) {
             Log.d(TAG, "onDestroy: stopped");
             mNetworkChangeMonitor.stopMonitor();
             unregisterNetworkReceiver();
             isServiceRunning = false;
+            try {
+                mTimerTask.cancel();
+                mTimer.cancel();
+                isTimerCancelled = true;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         super.onDestroy();
     }
@@ -194,6 +215,9 @@ public class LiveNetworkMonitor extends Service {
         String[] speeds;
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("lockscreen_notification", false);
 
         if (isNetworkConnected) {
             if (!isLiveNetworkReceiverRegistered) {
@@ -283,7 +307,12 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setAutoCancel(false);
         mBuilder.setShowWhen(false);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-        mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        if (showOnLockscreen) {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        }
+        else {
+            mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
+        }
         managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
 
     }
