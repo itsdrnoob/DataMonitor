@@ -318,4 +318,13 @@
     <string name="label_select_start_date">Sélectionnez la date de début</string>
     <string name="label_plan_end_date">Sélectionnez la date de fin</string>
     <string name="label_custom_end_date">Date de fin : %1$s</string>
+    <string name="combine_notifications">Combiner les notifications</string>
+    <string name="combine_notifications_summary">Combinez le moniteur de données et la vitesse du réseau en une seule notification.</string>
+    <string name="combined_notification_icon">Icône de notification combinée</string>
+    <string name="combined_notification_icon_summary">Choisissez l’icône à afficher pour la notification combinée</string>
+    <string name="error_combine_notifications_enabled">Notification combinée activée. Impossible de désactiver la notification individuelle.</string>
+    <string name="option_30_sec">30 secondes</string>
+    <string name="lockscreen_notification">Activer la notification sur l’écran de verrouillage</string>
+    <string name="option_1_sec">Chaque seconde</string>
+    <string name="option_15_sec">15 secondes</string>
 </resources>
