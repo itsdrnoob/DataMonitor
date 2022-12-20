@@ -56,11 +56,12 @@
     <string name="title_widget_setup">Configurați widget-ul</string>
     <string name="widget_setup_step_1">1. Pe ecranul de pornire atingeți și mențineți un spațiu gol.</string>
     <string name="widget_setup_step_2">2. Atingeți Widget-uri.</string>
-    <string name="widget_setup_step_3">3. Trageți și plasați widget-ul de monitorizare a datelor pe ecranul de pornire</string>
+    <string name="widget_setup_step_3">3. Trageți și plasați widget-ul de monitorizare a datelor pe ecranul de pornire.</string>
     <string name="heading_data_usage_today">Utilizarea datelor astăzi</string>
     <string name="action_add_data_plan_home">Adăugați planul de date pentru a începe monitorizarea</string>
     <string name="heading_week_overview">Prezentare generală a acestei săptămâni</string>
-    <string name="error_loading_overview">Hopa... Nu s-a putut încărca prezentarea generală a săptămânii \nreveniți mai târziu și verificați</string>
+    <string name="error_loading_overview">Nu s-a putut încărca prezentarea generală a acestei săptămâni.
+\nÎncercați mai târziu.</string>
     <string name="title_setup">Configurare Monitorizare date</string>
     <string name="setup_widget">Configurare widget</string>
     <string name="setup_notification">Configurare notificare</string>
@@ -117,16 +118,18 @@
     <string name="label_system_apps">Aplicații de sistem</string>
     <string name="home">Acasă</string>
     <string name="usage_access_permission">Permisiune de acces de utilizare</string>
-    <string name="usage_access_body">Permisiunea de acces de utilizare este necesară pentru a rula aplicația. Acest lucru este necesar pentru colectarea statisticilor de utilizare a datelor. Nu vor fi colectate sau stocate date personale.</string>
+    <string name="usage_access_body">Necesar pentru a rula aplicația, deoarece colectează statistici de utilizare a aplicației.
+\nNu sunt colectate date cu caracter personal.</string>
     <string name="action_grant">Acordă permisiunea</string>
     <string name="label_tethering">Hotspot mobil</string>
     <string name="label_removed">Aplicații eliminate</string>
     <string name="oem_skin_warning">%1$s Verificați Sfaturi suplimentare de optimizare pentru a vă asigura că aplicația funcționează corect.</string>
-    <string name="oem_skin_miui">Miui detectat! </string>
+    <string name="oem_skin_miui">MIUI detectat.</string>
     <string name="battery_optimisation_disabled">Optimizare baterie dezactivată</string>
     <string name="data_plan_saved">Plan de date salvat</string>
     <string name="upi_app_not_found">Nicio aplicație găsită pentru a gestiona această solicitare</string>
-    <string name="upi_unknown_error">A apărut o eroare necunoscută. Încercați din nou sau încercați o altă metodă.</string>
+    <string name="upi_unknown_error">Eroare necunoscută.
+\nVă rugăm să încercați din nou sau o altă metodă.</string>
     <string name="label_no_additional_lang">Mai multe limbi în curând. Ajutați-ne. Faceți clic pentru a afla cum.</string>
     <string name="notification_disabled">Notificare monitorizare date dezactivată</string>
     <string name="label_widget_refresh_interval_change">Widget-ul va fi actualizat la fiecare %1$s</string>
@@ -147,11 +150,12 @@
     <string name="body_data_warning_notification">Ați folosit %1$d%% din limita de date</string>
     <string name="body_app_data_warning_notification">%1$s a epuizat cota de date</string>
     <string name="title_data_usage_notification">Utilizarea datelor astăzi : %1$s</string>
-    <string name="body_data_usage_notification_loading">Se încarcă...</string>
+    <string name="body_data_usage_notification_loading">Încărcare…</string>
     <string name="label_data_remaining">%1$s rămas</string>
     <string name="label_data_remaining_used_excess">%1$s extra folosit</string>
     <string name="disable_battery_optimisation">Dezactivați funcția de optimizare a bateriei</string>
-    <string name="disable_battery_optimisation_body">Dezactivați optimizarea bateriei pentru Monitorizare date pentru a preveni oprirea serviciului de fundal de către sistem. Dacă nu faceți acest lucru, aplicația nu va funcționa corect și poate afișa valori incorecte.</string>
+    <string name="disable_battery_optimisation_body">Previne uciderea Monitorului de date atunci când rulează în fundal.
+\nÎn caz contrar, valorile ar putea fi incorecte.</string>
     <string name="extra_optimisation_tips">Sfaturi de optimizare suplimentare</string>
     <string name="oem_battery_settings">Setări baterie OEM</string>
     <string name="action_next">Înainte</string>
@@ -191,10 +195,122 @@
     <string name="swipe_right_to_delete">Glisați la dreapta pentru a șterge un element</string>
     <string name="refresh_list">Reîmprospătare listă</string>
     <string name="no_network_connection">Nicio conexiune la rețea detectată!</string>
-    <string name="connection_error">Eroare de conexiune. Verificați conexiunea la internet</string>
+    <string name="connection_error">Nu s-a putut conecta.
+\nVă rugăm să vă asigurați că sunteți conectat la internet.</string>
     <string name="app_label_screen_time">Timp ecran: %1$s</string>
     <string name="app_label_background_time">Utilizare în fundal: %1$s</string>
     <string name="label_want_to_contribute_language">Nu puteți găsi limba dvs.? Ajutați-ne traducând conținutul în limba dvs. locală. Faceți clic pentru a ști cum.</string>
     <string name="current_language">Limba actuală</string>
     <string name="available_languages">Limbi disponibile</string>
+    <string name="louis_leblanc_summary">franceză</string>
+    <string name="johnsonran_summary">Chineză simplificată</string>
+    <string name="network_speed_title">Viteza rețelei: %1$s</string>
+    <string name="read_phone_state_body">Dispozitivele care rulează Android versiunea 9 și mai jos trebuie să acorde această permisiune manual. Nu vor fi colectate date cu caracter personal.</string>
+    <string name="heading_data_reset_custom_counter">Valabilitatea planului</string>
+    <string name="title_data_plan_expired">Planul de date a expirat!</string>
+    <string name="summary_data_plan_expired">S-ar putea să doriți să vă actualizați planul</string>
+    <string name="battery_optimisation_enabled_info">Optimizarea bateriei este activată. Acest lucru va interfera cu funcționarea Data Monitor. Faceți clic pentru a dezactiva.</string>
+    <string name="label_crash_logs_copied">Jurnalele de accident copiate în clipboard</string>
+    <string name="label_permission_denied">Permisiunea refuzată!</string>
+    <string name="notification_permission_denied_body">Caracteristicile, inclusiv notificarea monitorului de date, viteza live a rețelei și avertizarea de utilizare a datelor nu vor funcționa corect fără permisiunea de notificare. Vă rugăm să-l acordați manual.</string>
+    <string name="label_unknown">Necunoscut</string>
+    <string name="label_select_app">Selectați aplicația</string>
+    <string name="label_copy_logs">Copiere jurnale</string>
+    <string name="settings_upload_server">Încărcare server</string>
+    <string name="label_data_usage_reset_date_change">Utilizarea datelor va fi resetată pe %1$d%2$s din fiecare lună</string>
+    <string name="setup_usage_reset_date">Data de resetare a utilizării datelor</string>
+    <string name="label_network_signal_notification_disabled">Viteza rețelei live a fost dezactivată</string>
+    <string name="network_signal_summary">Caracteristică beta</string>
+    <string name="rate_app">Evaluați aplicația pe Google Play</string>
+    <string name="check_for_update">Verifică pentru actualizări</string>
+    <string name="no_update_available">Rulați cea mai recentă versiune.</string>
+    <string name="theme_system">Urmează tema sistemului</string>
+    <string name="light_theme_summary">Tema luminoasă selectată</string>
+    <string name="dark_theme_summary">Temă întunecată selectată</string>
+    <string name="holydemon_summary">Malaeziană</string>
+    <string name="label_loading">Încărcare…</string>
+    <string name="system_data_usage">Utilizarea datelor de sistem</string>
+    <string name="current_version">Versiunea curentă: %1$s</string>
+    <string name="system_theme_summary">Urmează tema sistemului</string>
+    <string name="crash_report_title">Rapoarte de eroare</string>
+    <string name="label_telegram">Telegramă</string>
+    <string name="auto_hide_live_network">Ascundere automată a vitezei rețelei</string>
+    <string name="auto_hide_live_network_summary">Se ascunde notificarea despre viteza rețelei atunci când rețeaua nu este conectată</string>
+    <string name="custom">Personalizată</string>
+    <string name="label_custom_end_date">Data încheierii: %1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">Planul de date personalizat este activ</string>
+    <string name="title_device_info_contents">Conținutul informațiilor despre dispozitiv</string>
+    <string name="label_mail">Poștă</string>
+    <string name="label_battery_optimisation">Optimizarea bateriei</string>
+    <string name="error_no_crash_logs">Nu s-au găsit jurnale de accident. Sunteți sigur că a avut loc un accident\?</string>
+    <string name="network_diagnostics_summary">Comutare server de diagnosticare</string>
+    <string name="settings_diagnostics_server">Serverul</string>
+    <string name="custom_download_url_hint">Introduceți adresa URL de descărcare completă</string>
+    <string name="error_invalid_plan">Plan nevalid!</string>
+    <string name="label_send_report">Trimiteți raportul prin</string>
+    <string name="settings_disable_haptics">Dezactivați hapticele</string>
+    <string name="disable_haptics_summary">Dezactivați feedback-ul haptic în întreaga aplicație</string>
+    <string name="action_dismiss">Respingeți</string>
+    <string name="action_add_data_plan_home_summary">Nu s-a găsit niciun plan de date! Adăugați un plan de date pentru a începe să îl urmăriți.</string>
+    <string name="new_version">Versiune nouă: %1$s</string>
+    <string name="rate_app_summary">Feedback-ul tău este apreciat</string>
+    <string name="label_crash_logs">Jurnale de accidente</string>
+    <string name="label_device_info">Informații despre dispozitiv</string>
+    <string name="report_mail_summary">Trimiteți raportul de accident prin poștă</string>
+    <string name="error_unknown_telegram_client">Telegram nu este instalat sau este prezent un client necunoscut. Vă rugăm să încercați o altă metodă.</string>
+    <string name="crash_logs_extra_text">Jurnalele de accident Data Monitor</string>
+    <string name="label_crash_logs_share_chat">Distribuie pe chat: @datamonitor</string>
+    <string name="label_custom_server">Server personalizat</string>
+    <string name="device_info_body">Informațiile despre dispozitiv includ:
+\nProducător de dispozitive
+\nMarca dispozitivului
+\nModelul dispozitivului
+\nNume de cod al dispozitivului
+\nVersiunea Android
+\nModel SOC</string>
+    <string name="settings_network_diagnostics">Diagnosticare rețea</string>
+    <string name="settings_download_server">Descărcați serverul</string>
+    <string name="custom_upload_url_hint">Introduceți adresa URL de încărcare completă</string>
+    <string name="label_custom_server_save_success">Preferința serverului salvată</string>
+    <string name="error_url_verification_failed">Nu a putut verifica URL-ul! Vă rugăm să încercați din nou sau să utilizați unul diferit.</string>
+    <string name="read_phone_state_permission">Permisiune de a citi starea telefonului</string>
+    <string name="device_info_content_label">Vedeți ce este inclus în Informații despre dispozitiv</string>
+    <string name="report_github_summary">Deschideți o nouă problemă pe Github</string>
+    <string name="report_telegram_summary">Trimiteți raportul de accident în chat-ul de asistență Telegram</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="total_usage">Utilizare totală: %1$s</string>
+    <string name="crash_logs_warning">Jurnale de accident; Nu modificați</string>
+    <string name="error_invaliid_url">Adresă URL de descărcare nevalidă!</string>
+    <string name="label_changelogs">Aflați ce este nou</string>
+    <string name="label_update_available">Este disponibilă o nouă versiune!</string>
+    <string name="label_download_update">Descărcați noua versiune</string>
+    <string name="checking_for_update">Verificare pentru actualizări…</string>
+    <string name="network_diagnostics_info">Diagnosticarea rețelei poate utiliza în jur de 20-30 MB de date. Asigurați-vă că aveți acest lucru disponibil în planul dvs., altfel se pot aplica taxe de rețea.</string>
+    <string name="error_permission_denied">Acces refuzat. Vă rugăm să o acordați manual.</string>
+    <string name="telegram_summary">Alăturați-vă grupului de asistență</string>
+    <string name="crash_report_body">Se pare ca Data Monitor sa prăbușit. Puteți trimite raportul de cădere dezvoltatorului pentru a vă ajuta să analizați problema și să o rezolvați mai rapid. Dacă nu a avut loc nici un accident, vă rugăm să ignorați.</string>
+    <string name="label_custom_start_date">Data începerii: %1$s</string>
+    <string name="label_select_start_date">Selectați data de început</string>
+    <string name="label_plan_end_date">Selectați data de sfârșit</string>
+    <string name="ygorigor_summary">Română</string>
+    <string name="label_reset_every_month">%1$s %2$s din fiecare lună</string>
+    <string name="cracky5322_summary">Chineză tradițională</string>
+    <string name="network_speed_upload">Încărcare: %1$s</string>
+    <string name="network_speed_download">Descărcați: %1$s</string>
+    <string name="network_signal_notification">Viteza rețelei live</string>
+    <string name="label_network_signal_notification_enabled">Viteza rețelei live este activată</string>
+    <string name="action_permission_granted">Permisiunea acordată</string>
+    <string name="telegram_support">Suport telegramă</string>
+    <string name="new_update_available">Este disponibilă o nouă versiune!</string>
+    <string name="update_fetch_error">Nu s-au putut prelua actualizările</string>
+    <string name="settings_app_theme">Temă</string>
+    <string name="app_theme_summary">Selectați tema aplicației</string>
+    <string name="theme_light">Luminoasă</string>
+    <string name="theme_dark">Întunecată</string>
+    <string name="hudaifa_abdullah_summary">Arabă</string>
+    <string name="license_summary">Vizualizarea licențelor pentru aplicații</string>
+    <string name="liviogasp_summary">italiană</string>
+    <string name="comradekingu_summary">Suport pentru traduceri</string>
+    <string name="f_droid_page">Vizualizați aplicația pe F-Droid</string>
+    <string name="f_droid_page_summary">Verificați aplicația în depozitul oficial F-Droid</string>
 </resources>

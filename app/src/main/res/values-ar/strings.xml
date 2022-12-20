@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"مراقب البيانات"</string>
-    <string name="appwidget_text">"مثال"</string>
-    <string name="add_widget">"إضافة تطبيق مصغر"</string>
+    <string name="app_name">رصد البيانات</string>
+    <string name="appwidget_text">مثل</string>
+    <string name="add_widget">إضافة القطعة</string>
     <string name="notification_mobile_data_usage">"بيانات الجوال: %1$s"</string>
-    <string name="notification_wifi_data_usage">"واي فاي : %1$s"</string>
-    <string name="home_mobile_data_sent">"%1$s
-أرسلت"</string>
-    <string name="home_mobile_data_received">"%1$s
-تلقيت"</string>
-    <string name="home_wifi_data_sent">"%1$s
-أرسلت"</string>
-    <string name="home_wifi_data_received">"%1$s
-تلقيت"</string>
+    <string name="notification_wifi_data_usage">واي فاي: %1$s</string>
+    <string name="home_mobile_data_sent">%1$s 
+\nأرسلت</string>
+    <string name="home_mobile_data_received">%1$s 
+\nتلقيت</string>
+    <string name="home_wifi_data_sent">%1$s 
+\nأرسلت</string>
+    <string name="home_wifi_data_received">%1$s 
+\nتلقيت</string>
     <string name="label_current_data_warning_trigger_level_limit_set">"مستوى التشغيل الحالي:%1$s%% (%2$s)"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"مستوى التشغيل الحالي:%1$s%%"</string>
     <string name="label_data_trigger_level">"عند استهلاك %1$s%% من البيانات"</string>
@@ -60,12 +60,12 @@
     <string name="title_widget_setup">"اعداد التطبيق المصغر"</string>
     <string name="widget_setup_step_1">"1. على إحدى الشاشات الرئيسية ، المس مع الاستمرار في مساحة فارغة."</string>
     <string name="widget_setup_step_2">"2. اضغط على التطبيقات المصغرة."</string>
-    <string name="widget_setup_step_3">"3. قم بسحب وإسقاط تطبيق Data Monitor المصغر على شاشتك الرئيسية"</string>
+    <string name="widget_setup_step_3">3. اسحب وأسقط أداة مراقبة البيانات على شاشتك الرئيسية.</string>
     <string name="heading_data_usage_today">"استخدام البيانات اليوم"</string>
     <string name="action_add_data_plan_home">"أضف خطة البيانات الخاصة بك لبدء المراقبة"</string>
     <string name="heading_week_overview">"نظرة عامة على الأسابيع"</string>
-    <string name="error_loading_overview">"عفوا ... لم اتمكن من تحميل النظرة عامة للأسابيع
-عد لاحقًا وتحقق"</string>
+    <string name="error_loading_overview">تعذر تحميل نظرة عامة لهذا الأسبوع.
+\nحاول مرة أخرى لاحقا.</string>
     <string name="title_setup">"إعداد مراقب البيانات"</string>
     <string name="setup_widget">"اعداد التطبيق المصغر"</string>
     <string name="setup_notification">"إعداد الإخطارات"</string>
@@ -91,7 +91,7 @@
     <string name="oss_licenses">"تراخيص مفتوحة المصدر"</string>
     <string name="itsdrnoob">"دكتور نوب"</string>
     <string name="contributors">"المساهمون"</string>
-    <string name="itsdrnoob_summary">"<![CDATA[ المطور والمصمم الرئيسي]]>;"</string>
+    <string name="itsdrnoob_summary">المطور الرئيسي والمصمم</string>
     <string name="settings_appearance">"المظهر"</string>
     <string name="settings_dark_mode">"الوضع الداكن"</string>
     <string name="dark_mode_summary">"قم بتمكين الوضع الداكن"</string>
@@ -99,27 +99,21 @@
     <string name="settings_language">"اللغة"</string>
     <string name="language_summary">"قم بتغيير لغة التطبيق"</string>
     <string name="about">"حول"</string>
-
-    <string name="about_summary">"<![CDATA[ المصدر ، تعليمات والمزيد]]>"</string>
+    <string name="about_summary">المصدر ، تعليمات والمزيد</string>
     <string name="license">"الرخصة"</string>
-
     <string name="contributors_summary">"أولئك الذين هم دائما هناك"</string>
     <string name="donate">"تبرع"</string>
-
     <string name="data_reset">"إعادة تعيين البيانات"</string>
     <string name="data_limit">"حد البيانات"</string>
     <string name="support_and_development">"الدعم والتطوير"</string>
-
     <string name="github">"جيت هب"</string>
     <string name="github_summary">"عرض برمجية المصدر"</string>
-
     <string name="xda">"ثريد XDA"</string>
-
-    <string name="xda_summary">"<![CDATA[ تاكيد الجودة ، المساعدة و استكشاف الأخطاء وإصلاحها]]>"</string>
+    <string name="xda_summary">الأسئلة المتداولة والمساعدة واستكشاف الأخطاء وإصلاحها</string>
     <string name="report">"التبليغ عن ثغرة"</string>
     <string name="report_summary">"الإبلاغ عن الأخطاء أو طلب ميزة جديدة"</string>
     <string name="setup">"إعداد"</string>
-    <string name="app_data_usage">"بيانات التطبيق المستخدمة"</string>
+    <string name="app_data_usage">استخدام التطبيق</string>
     <string name="settings">"الإعدادات"</string>
     <string name="btc_address_copied">"تم نسخ عنوان محفظة Bitcoin إلى الحافظة الخاصة بك"</string>
     <string name="eth_address_copied">"تم نسخ عنوان محفظة Ethereum إلى الحافظة الخاصة بك"</string>
@@ -127,17 +121,18 @@
     <string name="label_system_apps">"تطبيقات النظام"</string>
     <string name="home">"الشاشة الرئيسية"</string>
     <string name="usage_access_permission">"إذن وصول الاستخدام"</string>
-    <string name="usage_access_body">"مطلوب إذن بيانات الاستخدام لتشغيل التطبيق. هذا الاذن مطلوب لجمع إحصائيات استخدام البيانات. لن يتم جمع أو تخزين أي بيانات شخصية."</string>
+    <string name="usage_access_body">مطلوب لتشغيل التطبيق، لأنه يجمع إحصائيات استخدام التطبيق.
+\nلا يتم جمع أي بيانات شخصية.</string>
     <string name="action_grant">"اعطاء الأذن"</string>
     <string name="label_tethering">"نقطة وصول البيانات من الهاتف"</string>
     <string name="label_removed">"التطبيقات التي تمت إزالتها"</string>
-    <string name="oem_skin_warning">"%1$s  يرجى مراجعة نصائح التحسين الإضافية للتأكد من أن التطبيق يعمل بشكل صحيح."</string>
-
-    <string name="oem_skin_miui">"تم الكشف عن Miui!"</string>
+    <string name="oem_skin_warning">%1$s يرجى التحقق من نصائح التحسين الإضافية للتأكد من أن التطبيق يعمل بشكل صحيح.</string>
+    <string name="oem_skin_miui">تم الكشف عن MIUI.</string>
     <string name="battery_optimisation_disabled">"تم تعطيل تحسين البطارية"</string>
     <string name="data_plan_saved">"تم حفظ خطة البيانات"</string>
     <string name="upi_app_not_found">"لم يتم العثور على تطبيق للتعامل مع هذا الطلب"</string>
-    <string name="upi_unknown_error">"حدث خطأ غير معروف. يرجى المحاولة مرة أخرى أو محاولة طريقة أخرى."</string>
+    <string name="upi_unknown_error">خطأ غير معروف.
+\nيرجى المحاولة مرة أخرى أو طريقة أخرى.</string>
     <string name="label_no_additional_lang">"المزيد من اللغات قريبا .. تريد المساعدة؟ انقر لمعرفة كيف."</string>
     <string name="notification_disabled">"تم تعطيل إخطار مراقب البيانات"</string>
     <string name="label_widget_refresh_interval_change">"سيتم تحديث التطبيق المصغر كل %1$s"</string>
@@ -156,12 +151,13 @@
     <string name="title_data_warning_notification">"تحذير استخدام البيانات"</string>
     <string name="body_data_warning_notification">"لقد استخدمت ما يصل %1$d%% من حد البيانات الخاص بك"</string>
     <string name="body_app_data_warning_notification">"%1$s استنفد حصته من البيانات"</string>
-    <string name="title_data_usage_notification">"استخدام البيانات اليوم"</string>
-    <string name="body_data_usage_notification_loading">"جار التحميل..."</string>
+    <string name="title_data_usage_notification">استخدام البيانات اليوم: %1$s</string>
+    <string name="body_data_usage_notification_loading">جار التحميل…</string>
     <string name="label_data_remaining">"%1$s متبقية"</string>
     <string name="label_data_remaining_used_excess">"تم استخدام %1$s إضافيًا"</string>
     <string name="disable_battery_optimisation">"تعطيل تحسين البطارية"</string>
-    <string name="disable_battery_optimisation_body">"قم بتعطيل تحسين البطارية لمراقب البيانات لمنع النظام من اغلاق الخدمات الخلفية. سيؤدي عدم القيام بذلك إلى منع التطبيق من العمل بشكل صحيح وقد يُظهر قيمًا غير صحيحة."</string>
+    <string name="disable_battery_optimisation_body">يمنع قتل Data Monitor عند التشغيل في الخلفية.
+\nوإلا فقد تكون القيم غير صحيحة.</string>
     <string name="extra_optimisation_tips">"نصائح التحسين الإضافية"</string>
     <string name="oem_battery_settings">"إعدادات بطارية OEM"</string>
     <string name="action_next">"التالي"</string>
@@ -175,7 +171,7 @@
     <string name="label_translators">"المترجمين"</string>
     <string name="setup_app_data_usage_alert">"تنبيه استخدام بيانات التطبيق"</string>
     <string name="title_app_data_limit">"حد بيانات التطبيق"</string>
-    <string name="network_diagnostics">"تشخيصات الشبكة"</string>
+    <string name="network_diagnostics">التشخيص</string>
     <string name="run_diagnostics">"قم بتشغيل التشخيص"</string>
     <string name="running_diagnostics">"التشخيصات المفعلة"</string>
     <string name="connecting">"توصيل"</string>
@@ -184,7 +180,7 @@
     <string name="testing_latency">"اختبار وقت استجابة الشبكة"</string>
     <string name="current_connection">"الاتصال الحالي: %1$s"</string>
     <string name="network_stats">"احصائيات الشبكة"</string>
-    <string name="network_speed_mbps">"%1$s  ميغابت في الثانية"</string>
+    <string name="network_speed_mbps">%1$s ميغابت / ثانية</string>
     <string name="max_download_speed">"سرعة التنزيل القصوى"</string>
     <string name="min_download_speed">"سرعة التحميل الأدنى"</string>
     <string name="avg_download_speed">"متوسط سرعة التنزيل"</string>
@@ -201,10 +197,11 @@
     <string name="swipe_right_to_delete">"اسحب لليمين لحذف عنصر"</string>
     <string name="refresh_list">"تحديث القائمة"</string>
     <string name="no_network_connection">"لم يتم اكتشاف اتصال بالشبكة!"</string>
-    <string name="connection_error">"خطأ في الإتصال. يرجى التحقق من اتصالك بالإنترنت"</string>
+    <string name="connection_error">تعذر الاتصال.
+\nيرجى التأكد من اتصالك بالإنترنت.</string>
     <string name="app_label_screen_time">"وقت الشاشة: %1$s"</string>
     <string name="app_label_background_time">"استخدام الخلفية: %1$s"</string>
-    <string name="label_loading">"جار تحميل التطبيقات"</string>
+    <string name="label_loading">جار التحميل…</string>
     <string name="donate_summary">"شراء قهوة لنا ، ما رأيك؟"</string>
     <string name="label_data_usage_reset_time_change">"ستتم إعادة تعيين استخدام البيانات كل %1$s عند %2$s"</string>
     <string name="label_data_usage_reset_date_change">"ستتم إعادة تعيين استخدام البيانات في %1$d%2$s من كل شهر"</string>
@@ -238,13 +235,12 @@
     <string name="check_for_update">"التحقق من التحديثات"</string>
     <string name="current_version">"الإصدار الحالي : %1$s"</string>
     <string name="new_version">"الإصدار الجديد : %1$s"</string>
-
     <!-- Fuzzy -->
     <string name="label_changelogs">"البحث عن ما هو جديد"</string>
-    <string name="no_update_available">"أنت تقوم بتشغيل أحدث إصدار!"</string>
+    <string name="no_update_available">انت تقوم الان بتشغيل أحدث إصدار.</string>
     <string name="label_update_available">"تحديث متاح!"</string>
     <string name="label_download_update">"حمل التحديث"</string>
-    <string name="checking_for_update">"التحقق من وجود تحديث"</string>
+    <string name="checking_for_update">جاري التحقق من وجود تحديثات…</string>
     <string name="new_update_available">"تحديث جديد متاح!"</string>
     <string name="update_fetch_error">"تعذر جلب التحديثات"</string>
     <string name="settings_app_theme">"سمة التطبيق"</string>
@@ -255,4 +251,73 @@
     <string name="light_theme_summary">"تم تحديد المظهر الفاتح"</string>
     <string name="dark_theme_summary">"تم تحديد المظهر الداكن"</string>
     <string name="system_theme_summary">"متابعة سمة النظام"</string>
+    <string name="label_crash_logs">سجلات الأعطال</string>
+    <string name="label_device_info">معلومات الجهاز</string>
+    <string name="crash_report_title">تقارير الأعطال</string>
+    <string name="device_info_content_label">الاطلاع على ما يتم تضمينه في معلومات الجهاز</string>
+    <string name="label_telegram">تيليجرام</string>
+    <string name="report_github_summary">فتح خطأ جديد على Github</string>
+    <string name="report_mail_summary">إرسال تقرير الأعطال عبر البريد</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="total_usage">إجمالي الاستخدام: %1$s</string>
+    <string name="label_unknown">غير معروف</string>
+    <string name="auto_hide_live_network">إخفاء سرعة الشبكة تلقائيا</string>
+    <string name="auto_hide_live_network_summary">أوقف إخطار سرعة الشبكة عندما لا تكون الشبكة متصلة</string>
+    <string name="custom">مُخصّص</string>
+    <string name="label_custom_start_date">تاريخ البدء: %1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">خطة البيانات المخصصة نشطة</string>
+    <string name="title_data_plan_expired">انتهت صلاحية خطة البيانات!</string>
+    <string name="summary_data_plan_expired">قد ترغب في تحديث خطتك</string>
+    <string name="crash_logs_extra_text">سجلات تعطل مراقب البيانات</string>
+    <string name="label_select_app">اختر التطبيق</string>
+    <string name="label_crash_logs_share_chat">شارك للدردشة: @datamonitor</string>
+    <string name="crash_logs_warning">سجلات الأعطال; لا تقم بالتعديل</string>
+    <string name="title_device_info_contents">محتويات معلومات الجهاز</string>
+    <string name="label_mail">البريد</string>
+    <string name="battery_optimisation_enabled_info">تم تمكين تحسين البطارية. هذا سوف يتداخل مع عمل مراقب البيانات. انقر لتعطيل.</string>
+    <string name="label_battery_optimisation">تحسينات البطارية</string>
+    <string name="error_no_crash_logs">لم يتم العثور على سجلات الأعطال. هل أنت متأكد من حدوث مشكلة؟</string>
+    <string name="settings_diagnostics_server">الخادم</string>
+    <string name="settings_download_server">خادم التحميل</string>
+    <string name="settings_upload_server">خادم الرفع</string>
+    <string name="label_custom_server">خادم مخصص</string>
+    <string name="custom_download_url_hint">أدخل عنوان URL الكامل للتنزيل</string>
+    <string name="label_custom_server_save_success">تم حفظ تفضيلات الخادم</string>
+    <string name="error_invaliid_url">عنوان URL للتنزيل غير صالح!</string>
+    <string name="license_summary">عرض تراخيص التطبيق</string>
+    <string name="hudaifa_abdullah_summary">العربيّة</string>
+    <string name="network_diagnostics_info">قد تستخدم تشخيصات الشبكة حوالي 20-30 ميغا بايت من البيانات. تأكد من توفر هذا في خطتك ، وإلا فقد يتم تطبيق رسوم الشبكة.</string>
+    <string name="label_send_report">إرسال التقرير عبر</string>
+    <string name="label_permission_denied">تم رفض الإذن!</string>
+    <string name="notification_permission_denied_body">لن تعمل الميزات بما في ذلك إشعار مراقبة البيانات وسرعة الشبكة الحية وتنبيه استخدام البيانات بشكل صحيح دون إذن الإخطار. يرجى منحها يدويًا.</string>
+    <string name="settings_disable_haptics">تعطيل اللمس</string>
+    <string name="disable_haptics_summary">تعطيل ردود الفعل اللمسية عبر التطبيق</string>
+    <string name="action_dismiss">تجاهل</string>
+    <string name="report_telegram_summary">إرسال تقرير الأعطال في دردشة دعم Telegram</string>
+    <string name="crash_report_body">يبدو أن مراقب البيانات قد تحطم. يمكنك إرسال تقرير الأعطال إلى المطور للمساعدة في تحليل المشكلة وحلها بشكل أسرع. إذا لم يحدث أي عطل ، يرجى تجاهله.</string>
+    <string name="heading_data_reset_custom_counter">صلاحية الخطة</string>
+    <string name="device_info_body">تتضمن معلومات الجهاز ما يلي:
+\nالشركة المصنعة للجهاز
+\nالعلامة التجارية للجهاز
+\nطراز الجهاز
+\nالاسم الرمزي للجهاز
+\nإصدار أندرويد
+\nنموذج SOC</string>
+    <string name="label_custom_end_date">تاريخ الانتهاء: %1$s</string>
+    <string name="error_unknown_telegram_client">Telegram غير مثبت أو عميل غير معروف موجود. يرجى تجربة طريقة أخرى.</string>
+    <string name="label_crash_logs_copied">سجلات الأعطال التي تم نسخها إلى الحافظة</string>
+    <string name="settings_network_diagnostics">تشخيصات الشبكة</string>
+    <string name="error_invalid_plan">خطة غير صالحة!</string>
+    <string name="label_copy_logs">نسخ السجلات</string>
+    <string name="network_diagnostics_summary">خادم تبديل التشخيص</string>
+    <string name="custom_upload_url_hint">أدخل عنوان URL الكامل للرفع</string>
+    <string name="error_url_verification_failed">تعذر إثبات ملكية عنوان URL! يرجى المحاولة مرة أخرى أو استخدام واحدة مختلفة.</string>
+    <string name="action_add_data_plan_home_summary">لم يتم العثور على خطة بيانات! أضف خطة بيانات لبدء تعقبها.</string>
+    <string name="holydemon_summary">ماليالامية</string>
+    <string name="liviogasp_summary">الايطالية</string>
+    <string name="comradekingu_summary">دعم الترجمة</string>
+    <string name="f_droid_page">عرض التطبيق على F-Droid</string>
+    <string name="f_droid_page_summary">تحقق من التطبيق على مستودع F-Droid الرسمي</string>
+    <string name="label_select_start_date">حدد تاريخ البدء</string>
+    <string name="label_plan_end_date">حدد تاريخ الانتهاء</string>
 </resources>

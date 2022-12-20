@@ -26,7 +26,7 @@
     <string name="setup_notification_refresh_interval">Интервал обновления уведомлений</string>
     <string name="data_alert_summary">Уведомление о достижении лимита данных</string>
     <string name="setup_add_data_plan">Добавить тарифный план</string>
-    <string name="setup_usage_reset_time">Сброс времени использования данных</string>
+    <string name="setup_usage_reset_time">Время для сброса об использовании данных</string>
     <string name="itsdrnoob_summary">Ведущий разработчик и дизайнер</string>
     <string name="contributors">Участники проекта</string>
     <string name="license">Лицензия</string>
@@ -86,10 +86,10 @@
     <string name="isp_region">Регион</string>
     <string name="swipe_right_to_delete">Проведите пальцем вправо, чтобы удалить элемент</string>
     <string name="app_label_screen_time">Экранное время: %1$s</string>
-    <string name="johnsonran_summary">Китайский упрощенный</string>
+    <string name="johnsonran_summary">Китайский (упрощенный)</string>
     <string name="current_language">Текущий</string>
     <string name="setup_usage_reset_date">Дата сброса использования данных</string>
-    <string name="cracky5322_summary">Китайский традиционный</string>
+    <string name="cracky5322_summary">Китайский (традиционный)</string>
     <string name="louis_leblanc_summary">Французский</string>
     <string name="network_speed_title">Скорость сети: %1$s</string>
     <string name="network_speed_download">Скачивание: %1$s</string>
@@ -134,7 +134,7 @@
     <string name="label_this_month">Текущий месяц</string>
     <string name="title_data_usage">Использовано данных</string>
     <string name="label_app_data_usage_session_empty">Данные недоступны</string>
-    <string name="label_want_to_contribute">Нажмите здесь, чтобы узнать, как внести свой вклад в Data Monitor.</string>
+    <string name="label_want_to_contribute">Нажмите здесь, чтобы узнать, как внести свой вклад в приложение Монитор данных.</string>
     <string name="title_refresh_interval">Выбор интервала обновления</string>
     <string name="data_type_mb">МБ</string>
     <string name="action_open_app_settings">Открыть настройки приложения</string>
@@ -158,7 +158,7 @@
     <string name="option_15_min">15 минут</string>
     <string name="title_widget_setup">Настройка виджета</string>
     <string name="widget_setup_step_1">1. Нажмите и удерживайте пустое место на главном экране.</string>
-    <string name="widget_setup_step_3">3. Удерживанием перетащите виджет Data Monitor на главный экран.</string>
+    <string name="widget_setup_step_3">3. Удерживанием перетащите виджет Монитор данных на главный экран.</string>
     <string name="setup_notification">Настройка уведомлений</string>
     <string name="title_setup">Настройка мониторинга данных</string>
     <string name="setup_show_mobile_usage">Отобразить использование мобильных данных</string>
@@ -195,7 +195,7 @@
     <string name="label_data_plan_saved">Тарифный план сохранён</string>
     <string name="title_data_usage_notification">Использование данных за сегодня: %1$s</string>
     <string name="body_data_usage_notification_loading">Загрузка…</string>
-    <string name="disable_battery_optimisation_body">Предотвращает остановку Data Monitor при работе в фоновом режиме.
+    <string name="disable_battery_optimisation_body">Предотвращает остановку Монитор данных при работе в фоновом режиме.
 \nВ противном случае значения могут быть неверными.</string>
     <string name="label_translators">Переводчики</string>
     <string name="overview_tuesday">Вт</string>
@@ -222,7 +222,7 @@
     <string name="network_speed_upload">Загрузка: %1$s</string>
     <string name="label_network_signal_notification_disabled">Скорость сети в реальном времени отключена</string>
     <string name="network_diagnostics_info">При диагностике сети может потребоваться около 20-30 МБ данных. Убедитесь, что на вашем тарифном плане достаточное количество трафика и/или тариф позволяет использовать безлимитные данные, иначе за пользование сетью может взиматься дополнительная плата.</string>
-    <string name="read_phone_state_body">Устройства под управлением Android версии 9 и ниже должны предоставить это разрешение вручную. Никакие личные данные собираться не будут.</string>
+    <string name="read_phone_state_body">Устройствам под управлением Android версии 9 и ниже, данное разрешение необходимо предоставить вручную. Никакие личные данные собираться не будут.</string>
     <string name="rate_app">Оценить приложение в Google Play</string>
     <string name="check_for_update">Проверьте наличие обновлений</string>
     <string name="current_version">Текущая версия: %1$s</string>
@@ -247,4 +247,74 @@
     <string name="oem_skin_warning">%1$s Пожалуйста, проверьте дополнительные советы по оптимизации, чтобы приложение работало правильно.</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">Текущий уровень срабатывания: %1$s%%</string>
     <string name="label_current_data_warning_trigger_level_limit_set">Текущий уровень срабатывания: %1$s%% (%2$s)</string>
+    <string name="app_label_uid">UID: %1$d</string>
+    <string name="battery_optimisation_disabled">Оптимизация батареи отключена</string>
+    <string name="usage_access_permission">Использовать разрешение на доступ</string>
+    <string name="label_device_info">Информация об устройстве</string>
+    <string name="crash_report_title">Отчет об аварии</string>
+    <string name="device_info_content_label">Узнать, что входит в информацию об устройстве</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="label_unknown">Неизвестно</string>
+    <string name="custom">Вручную</string>
+    <string name="label_crash_logs">Журналы аварий</string>
+    <string name="label_crash_logs_copied">Журналы об аварий скопированы в буфер обмена</string>
+    <string name="label_mail">Электронная почта</string>
+    <string name="battery_optimisation_enabled_info">Включена оптимизация батареи. Это будет мешать работе Монитора данных. Нажмите, чтобы отключить.</string>
+    <string name="label_battery_optimisation">Оптимизация батареи</string>
+    <string name="itsdrnoob">Dr.NooB</string>
+    <string name="report_github_summary">Создать новый вопрос на Github</string>
+    <string name="heading_data_reset_custom_counter">Срок действия плана</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="custom_upload_url_hint">Ввод полного URL-адреса загрузки</string>
+    <string name="label_custom_server">Пользовательский сервер</string>
+    <string name="settings_disable_haptics">Отключить тактильные ощущения</string>
+    <string name="action_dismiss">Отклонить</string>
+    <string name="report_mail_summary">Отправить отчёт об аварии по почте</string>
+    <string name="disable_battery_optimisation">Отключить оптимизацию батареи</string>
+    <string name="oem_battery_settings">Настройки штатной батареи</string>
+    <string name="crash_report_body">Похоже, что произошёл сбой Монитора данных. Вы можете отправить отчёт о сбое разработчику, чтобы помочь проанализировать проблему и быстрее её решить. Если сбоя не произошло, пожалуйста, не обращайте внимания.</string>
+    <string name="report_telegram_summary">Отправить отчёт об аварии в чат поддержки через Telegram</string>
+    <string name="label_select_app">Выбрать приложение</string>
+    <string name="action_add_data_plan_home_summary">План передачи данных не найден! Добавьте тарифный план, чтобы начать его отслеживать.</string>
+    <string name="label_crash_logs_share_chat">Отправить в чат: @datamonitor</string>
+    <string name="error_invalid_plan">Недопустимый план!</string>
+    <string name="label_copy_logs">Скопировать журналы</string>
+    <string name="settings_network_diagnostics">Диагностика сети</string>
+    <string name="label_permission_denied">В разрешении отказано!</string>
+    <string name="notification_permission_denied_body">Такие функции, как уведомление о мониторинге данных, скорость сети в реальном времени и уведомление об использовании данных, не будут работать должным образом без разрешения на уведомление. Пожалуйста, разрешите его вручную.</string>
+    <string name="label_custom_server_save_success">Предпочтительный сервер сохранён</string>
+    <string name="usage_access_body">Требуется для запуска приложения, поскольку собирает статистику использования приложений.
+\nЛичные данные не собираются.</string>
+    <string name="disable_haptics_summary">Отключение тактильной обратной связи в приложении</string>
+    <string name="label_send_report">Отправить отчёт через</string>
+    <string name="auto_hide_live_network">Автоматически скрывать скорость сети</string>
+    <string name="total_usage">Всего использовано: %1$s</string>
+    <string name="auto_hide_live_network_summary">Скрывает в уведомлении состояние скорости сети, когда сеть не подключена</string>
+    <string name="error_unknown_telegram_client">Telegram не установлен или присутствует неизвестный клиент. Пожалуйста, попробуйте другой метод.</string>
+    <string name="error_no_crash_logs">Журналы сбоев не найдены. Вы уверены, что произошёл сбой\?</string>
+    <string name="label_custom_start_date">Начальная дата: %1$s</string>
+    <string name="label_custom_end_date">Конечная дата: %1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">Пользовательский тарифный план активен</string>
+    <string name="summary_data_plan_expired">Возможно, вы захотите обновить свой план</string>
+    <string name="crash_logs_extra_text">Журналы сбоев Монитора данных</string>
+    <string name="title_device_info_contents">Сведения об устройстве</string>
+    <string name="network_diagnostics_summary">Переключение сервера диагностики</string>
+    <string name="settings_diagnostics_server">Сервер</string>
+    <string name="settings_download_server">Сервер скачивания</string>
+    <string name="settings_upload_server">Сервер загрузки</string>
+    <string name="device_info_body">Информация об устройстве включает в себя:
+\nПроизводитель устройства
+\nМарка устройства
+\nМодель устройства
+\nКодовое имя устройства
+\nВерсия Android
+\nМодель SOC</string>
+    <string name="title_data_plan_expired">Срок действия тарифного плана истёк!</string>
+    <string name="error_invaliid_url">Неверный URL-адрес скачивания!</string>
+    <string name="error_url_verification_failed">Не удалось проверить URL! Пожалуйста, попробуйте ещё раз или используйте другой.</string>
+    <string name="custom_download_url_hint">Ввод полного URL-адреса скачивания</string>
+    <string name="title_app_data_limit">Ограничение данных приложения</string>
+    <string name="crash_logs_warning">Журналы сбоев; Не изменять</string>
+    <string name="label_select_start_date">Выберите дату начала</string>
+    <string name="label_plan_end_date">Выберите дату окончания</string>
 </resources>

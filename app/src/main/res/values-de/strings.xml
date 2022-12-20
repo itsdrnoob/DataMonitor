@@ -256,4 +256,65 @@
     <string name="network_diagnostics_info">Die Netzdiagnose kann etwa 20-30 MB Daten verbrauchen. Vergewissern Sie sich, dass dies in Ihrem Tarif verfügbar ist, da sonst Netzgebühren anfallen können.</string>
     <string name="comradekingu_summary">Unterstützung bei der Übersetzung</string>
     <string name="f_droid_page_summary">Die App im offiziellen F-Droid Repository ansehen</string>
+    <string name="report_github_summary">Öffnen Sie ein neues Problem auf Github</string>
+    <string name="report_telegram_summary">Den Absturzbericht in den Telegram-Support-Chat senden</string>
+    <string name="device_info_body">Zu den Geräteinformationen gehören:
+\nGerätehersteller
+\nGerätemarke
+\nGerätemodell
+\nCodename des Geräts
+\nAndroid-Version
+\nSOC-Modell</string>
+    <string name="label_battery_optimisation">Akku-Optimierung</string>
+    <string name="settings_download_server">Download-Server</string>
+    <string name="label_custom_server_save_success">Server-Einstellung gespeichert</string>
+    <string name="disable_haptics_summary">Haptisches Feedback in der App deaktivieren</string>
+    <string name="action_dismiss">Verwerfen</string>
+    <string name="total_usage">Gesamtnutzung: %1$s</string>
+    <string name="crash_report_title">Fehlerbericht</string>
+    <string name="custom_upload_url_hint">Vollständige Upload-URL eingeben</string>
+    <string name="label_custom_server">Benutzerdefinierter Server</string>
+    <string name="action_add_data_plan_home_summary">Kein Datentarif gefunden! Fügen Sie einen Datentarif hinzu, um mit der Nachverfolgung zu beginnen.</string>
+    <string name="label_crash_logs">Absturzprotokolle</string>
+    <string name="crash_report_body">Es scheint, als ob Data Monitor abgestürzt ist. Sie können den Absturzbericht an den Entwickler senden, um das Problem zu analysieren und schneller zu lösen. Wenn kein Absturz aufgetreten ist, ignorieren Sie es bitte.</string>
+    <string name="device_info_content_label">Sehen Sie, was in den Geräteinformationen enthalten ist</string>
+    <string name="label_telegram">Telegramm</string>
+    <string name="report_mail_summary">Den Absturzbericht per E-Mail versenden</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="label_unknown">Unbekannt</string>
+    <string name="auto_hide_live_network">Netzwerkgeschwindigkeit automatisch ausblenden</string>
+    <string name="auto_hide_live_network_summary">Die Benachrichtigung über die Netzwerkgeschwindigkeit verstecken, wenn das Netzwerk nicht verbunden ist</string>
+    <string name="custom">Benutzerdefiniert</string>
+    <string name="label_custom_start_date">Startdatum: %1$s</string>
+    <string name="label_custom_end_date">Enddatum: %1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">Benutzerdefinierter Datenplan ist aktiv</string>
+    <string name="title_data_plan_expired">Datentarif ist abgelaufen!</string>
+    <string name="summary_data_plan_expired">Vielleicht möchten Sie Ihren Plan aktualisieren</string>
+    <string name="crash_logs_extra_text">Data Monitor-Absturzprotokolle</string>
+    <string name="label_select_app">App auswählen</string>
+    <string name="label_crash_logs_share_chat">Zum Chat teilen: @datamonitor</string>
+    <string name="crash_logs_warning">Absturzprotokolle; Nicht ändern</string>
+    <string name="title_device_info_contents">Inhalt der Geräteinformationen</string>
+    <string name="label_crash_logs_copied">Absturzprotokolle in die Zwischenablage kopiert</string>
+    <string name="label_mail">E-Mail</string>
+    <string name="label_copy_logs">Protokolle kopieren</string>
+    <string name="settings_network_diagnostics">Netzwerk-Diagnose</string>
+    <string name="network_diagnostics_summary">Diagnostik-Server wechseln</string>
+    <string name="settings_diagnostics_server">Server</string>
+    <string name="settings_upload_server">Upload-Server</string>
+    <string name="custom_download_url_hint">Geben Sie die vollständige Download-URL ein</string>
+    <string name="error_url_verification_failed">URL konnte nicht überprüft werden! Bitte versuchen Sie es erneut oder verwenden Sie ein anderes.</string>
+    <string name="error_invalid_plan">Ungültiger Plan!</string>
+    <string name="error_invaliid_url">Ungültige Download-URL!</string>
+    <string name="label_send_report">Bericht senden via</string>
+    <string name="label_permission_denied">Zugriff verweigert!</string>
+    <string name="notification_permission_denied_body">Funktionen wie Datenmonitorbenachrichtigung, Live-Netzwerkgeschwindigkeit und Datennutzungswarnung funktionieren ohne Benachrichtigungsberechtigung nicht ordnungsgemäß. Bitte gewähren Sie es manuell.</string>
+    <string name="label_device_info">Geräteinformationen</string>
+    <string name="heading_data_reset_custom_counter">Gültigkeit des Plans</string>
+    <string name="battery_optimisation_enabled_info">Die Batterieoptimierung ist aktiviert. Dies beeinträchtigt die Arbeit von Data Monitor. Klicken Sie hier, um es zu deaktivieren.</string>
+    <string name="error_unknown_telegram_client">Telegramm nicht installiert oder unbekannter Client vorhanden. Bitte versuchen Sie es mit einer anderen Methode.</string>
+    <string name="error_no_crash_logs">Keine Absturzprotokolle gefunden. Sind Sie sicher, dass ein Absturz aufgetreten ist\?</string>
+    <string name="label_select_start_date">Startdatum auswählen</string>
+    <string name="label_plan_end_date">Enddatum auswählen</string>
+    <string name="settings_disable_haptics">Haptik deaktivieren</string>
 </resources>
