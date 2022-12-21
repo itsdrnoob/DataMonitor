@@ -129,7 +129,7 @@
     <string name="title_app_data_limit">ऐप डेटा सीमा</string>
     <string name="network_diagnostics">निदानिकी</string>
     <string name="run_diagnostics">निदानिकी चलिये</string>
-    <string name="connecting">जुड़ रहा है...</string>
+    <string name="connecting">कनेक्ट किया जा रहा है....</string>
     <string name="testing_upload">अपलोड गति का परीक्षण किया जा रहा है</string>
     <string name="current_connection">वर्तमान कनेक्शन: %1$s</string>
     <string name="network_stats">नेटवर्क आँकड़े</string>
@@ -317,4 +317,13 @@
     <string name="label_select_start_date">प्रारंभ तिथि का चयन करें</string>
     <string name="label_plan_end_date">समाप्ति तिथि चुनें</string>
     <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="combined_notification_icon_summary">मिश्रित नोटिफिकेशन का चिह्न चुने</string>
+    <string name="error_combine_notifications_enabled">मिश्रित नोटिफिकेशन सक्रिय हैं. केवल एक नोटिफिकेशन को हटाया नहीं जा सकता.</string>
+    <string name="combine_notifications">मिश्रित नोटिफिकेशन्स</string>
+    <string name="option_1_sec">प्रति सेकंड</string>
+    <string name="option_15_sec">15 सेकंड</string>
+    <string name="option_30_sec">30 सेकंड</string>
+    <string name="lockscreen_notification">लॉक स्क्रीन पर नोटिफिकेशन सक्रिय करें</string>
+    <string name="combined_notification_icon">मिश्रित नोटिफिकेशन चिन्ह</string>
+    <string name="combine_notifications_summary">डेटा मॉनिटर और नेटवर्क स्पीड को एक नोटिफिकेशन में मिलाएं।</string>
 </resources>

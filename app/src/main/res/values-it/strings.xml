@@ -209,4 +209,26 @@ Ricevuti"</string>
     <string name="holydemon_summary">Malayalam</string>
     <string name="liviogasp_summary">Italiano</string>
     <string name="comradekingu_summary">Supporto alla traduzione</string>
+    <string name="combined_notification_icon_summary">Scegliere l\'icona da visualizzare per la notifica combinata</string>
+    <string name="option_1_sec">Ogni secondo</string>
+    <string name="option_15_sec">Hai 12 secondi.</string>
+    <string name="combined_notification_icon">Icona di notifica combinata</string>
+    <string name="lockscreen_notification">Abilita notifica nella schermata di blocco</string>
+    <string name="combine_notifications">Combinare le notifiche</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="combine_notifications_summary">Combina il monitoraggio dei dati e la velocità di rete in un\'unica notifica.</string>
+    <string name="error_combine_notifications_enabled">Notifica combinata abilitata. Impossibile disabilitare la notifica individuale.</string>
+    <string name="option_30_sec">30 secondi</string>
+    <string name="label_custom_server">Server personalizzato</string>
+    <string name="total_usage">Utilizzo totale: %1$s</string>
+    <string name="error_invalid_plan">Piano non valido!</string>
+    <string name="label_permission_denied">Permesso negato!</string>
+    <string name="notification_permission_denied_body">Funzionalità come la notifica di monitoraggio dati, la velocità di rete in tempo reale e l\'avviso di utilizzo dei dati non funzioneranno correttamente senza l\'autorizzazione di notifica. Si prega di concederlo manualmente.</string>
+    <string name="settings_disable_haptics">Disabilita l\'aptica</string>
+    <string name="disable_haptics_summary">Disabilita il feedback tattile in tutta l\'app</string>
+    <string name="action_dismiss">Chiudi</string>
+    <string name="action_add_data_plan_home_summary">Nessun piano dati trovato! Aggiungi un piano dati per iniziare a monitorarlo.</string>
+    <string name="label_custom_start_date">Data di inizio: %1$d</string>
+    <string name="label_select_start_date">Seleziona la data di inizio</string>
+    <string name="label_plan_end_date">Seleziona la data di fine</string>
 </resources>

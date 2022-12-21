@@ -313,4 +313,13 @@
     <string name="comradekingu_summary">Suport pentru traduceri</string>
     <string name="f_droid_page">Vizualizați aplicația pe F-Droid</string>
     <string name="f_droid_page_summary">Verificați aplicația în depozitul oficial F-Droid</string>
+    <string name="combine_notifications">Combinare notificări</string>
+    <string name="combine_notifications_summary">Combinarea monitorizării datelor și a vitezei rețelei într-o singură notificare.</string>
+    <string name="combined_notification_icon">Pictogramă de notificare combinată</string>
+    <string name="combined_notification_icon_summary">Alegeți pictograma care va fi afișată pentru notificarea combinată</string>
+    <string name="error_combine_notifications_enabled">Notificarea combinată este activată. Nu se poate dezactiva notificarea individuală.</string>
+    <string name="option_1_sec">În fiecare secundă</string>
+    <string name="option_15_sec">15 secunde</string>
+    <string name="option_30_sec">30 de secunde</string>
+    <string name="lockscreen_notification">Activați notificarea pe ecranul de blocare</string>
 </resources>

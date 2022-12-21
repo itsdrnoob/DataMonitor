@@ -317,4 +317,13 @@
     <string name="label_select_start_date">Startdatum auswählen</string>
     <string name="label_plan_end_date">Enddatum auswählen</string>
     <string name="settings_disable_haptics">Haptik deaktivieren</string>
+    <string name="combine_notifications">Benachrichtigungen kombinieren</string>
+    <string name="combine_notifications_summary">Datenmonitor und Netzwerkgeschwindigkeit in einer Benachrichtigung kombinieren.</string>
+    <string name="combined_notification_icon">Kombiniertes Benachrichtigungs-Symbol</string>
+    <string name="combined_notification_icon_summary">Wählen Sie das Symbol, das für die kombinierte Benachrichtigung angezeigt wird</string>
+    <string name="option_15_sec">15 sekunden</string>
+    <string name="lockscreen_notification">Benachrichtigung auf Sperrbildschirm aktivieren</string>
+    <string name="error_combine_notifications_enabled">Kombinierte Benachrichtigung aktiviert. Individuelle Benachrichtigung kann nicht deaktiviert werden.</string>
+    <string name="option_1_sec">Jede Sekunde</string>
+    <string name="option_30_sec">30 Sekunden</string>
 </resources>
