@@ -327,4 +327,13 @@
     <string name="label_custom_end_date">Fecha de finalización: %1$s</string>
     <string name="label_select_start_date">Seleccione la fecha de inicio</string>
     <string name="label_plan_end_date">Seleccione la fecha de finalización</string>
+    <string name="combine_notifications">Combinar notificaciones</string>
+    <string name="combined_notification_icon">Icono de la notificación combinado</string>
+    <string name="combined_notification_icon_summary">Elija el icono que se mostrará para la notificación combinada</string>
+    <string name="option_1_sec">Cada segundo</string>
+    <string name="option_15_sec">15 segundos</string>
+    <string name="option_30_sec">30 segundos</string>
+    <string name="combine_notifications_summary">Combina el monitor de datos y la velocidad de la red en una sola notificación.</string>
+    <string name="error_combine_notifications_enabled">Notificación combinada activada. No se puede desactivar la notificación individual.</string>
+    <string name="lockscreen_notification">Activar la notificación en la pantalla de bloqueo</string>
 </resources>
