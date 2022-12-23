@@ -329,4 +329,16 @@
     <string name="combine_notifications_summary">اجمع بين مراقبة البيانات وسرعة الشبكة في إشعار واحد.</string>
     <string name="combined_notification_icon_summary">اختر الأيقونة التي سيتم عرضها للإخطار المدمج</string>
     <string name="combine_notifications">دمج الإشعارات</string>
+    <string name="exclude_apps">استبعاد التطبيقات</string>
+    <string name="exclude_apps_summary">استبعاد حركة مرور التطبيق من استخدام البيانات</string>
+    <string name="action_add_application">إضافة تطبيق</string>
+    <string name="label_no_apps_added">لم تتم إضافة أي تطبيقات. انقر فوق الزر أدناه لإضافة تطبيق.</string>
+    <string name="title_app_picker">حدد تطبيقا</string>
+    <string name="label_hide_system_apps">إخفاء تطبيقات النظام</string>
+    <string name="app_already_present">التطبيق المحدد يوجد في القائمة مسبقا.</string>
+    <string name="title_remove_apps">هل تريد إزالة التطبيقات المحددة؟</string>
+    <string name="action_delete">إزالة</string>
+    <string name="error_unknown">حدث خطأ غير معروف. يرجى المحاولة مرة أخرى.</string>
+    <string name="app_search_hint">ابحث عن تطبيق</string>
+    <string name="label_show_system_apps">إظهار تطبيقات النظام</string>
 </resources>
