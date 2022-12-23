@@ -171,6 +171,13 @@
                 app:widgetLayout="@layout/preference_right_arrow"
                 app:summary="@string/usage_reset_time_placeholder"/>
 
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/exclude_apps"
+                android:key="exclude_apps"
+                app:iconSpaceReserved="false"
+                app:widgetLayout="@layout/preference_right_arrow"
+                app:summary="@string/exclude_apps_summary"/>
+
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
     </com.drnoob.datamonitor.core.base.PreferenceHeader>

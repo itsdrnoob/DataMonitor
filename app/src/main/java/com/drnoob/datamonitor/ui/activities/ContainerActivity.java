@@ -19,34 +19,6 @@
 
 package com.drnoob.datamonitor.ui.activities;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import com.drnoob.datamonitor.R;
-import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
-import com.drnoob.datamonitor.ui.fragments.AboutFragment;
-import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
-import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
-import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
-import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
-import com.drnoob.datamonitor.ui.fragments.DonateFragment;
-import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
-import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
-import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
-import com.drnoob.datamonitor.ui.fragments.OSSLicenseFragment;
-import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
-import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
-import com.drnoob.datamonitor.utils.CrashReporter;
-import com.drnoob.datamonitor.utils.SharedPreferences;
-import com.google.android.material.elevation.SurfaceColors;
-
-import org.jetbrains.annotations.NotNull;
-
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
@@ -61,14 +33,59 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.OSS_LICENSE_FRAGMENT;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+
+import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.adapters.data.AppModel;
+import com.drnoob.datamonitor.adapters.data.LiveData;
+import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
+import com.drnoob.datamonitor.ui.fragments.AboutFragment;
+import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
+import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
+import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
+import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
+import com.drnoob.datamonitor.ui.fragments.DonateFragment;
+import com.drnoob.datamonitor.ui.fragments.ExcludeAppsFragment;
+import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
+import com.drnoob.datamonitor.ui.fragments.LicenseFragment;
+import com.drnoob.datamonitor.ui.fragments.NetworkStatsFragment;
+import com.drnoob.datamonitor.ui.fragments.OSSLicenseFragment;
+import com.drnoob.datamonitor.ui.fragments.SettingsFragment;
+import com.drnoob.datamonitor.ui.fragments.SystemDataUsageFragment;
+import com.drnoob.datamonitor.utils.CrashReporter;
+import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.google.android.material.elevation.SurfaceColors;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContainerActivity extends AppCompatActivity {
 
     ActivityContainerBinding binding;
+    private int fragmentID;
+    private LiveData mLiveData;
+    private boolean isAppSelectionView = false;
+    private boolean isListSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +100,7 @@ public class ContainerActivity extends AppCompatActivity {
             setLanguage(this, languageCode, countryCode);
         }
         super.onCreate(savedInstanceState);
+        fragmentID = getIntent().getIntExtra(GENERAL_FRAGMENT_ID, 0);
         binding = ActivityContainerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.containerToolbar);
@@ -109,10 +127,11 @@ public class ContainerActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.background, null));
         }
 
-        int fragmentId = getIntent().getIntExtra(GENERAL_FRAGMENT_ID, 0);
+        mLiveData = new ViewModelProvider(this).get(LiveData.class);
+
         Fragment fragment = null;
         String title = null;
-        switch (fragmentId) {
+        switch (fragmentID) {
             case ABOUT_FRAGMENT:
                 fragment = new AboutFragment();
                 title = getString(R.string.about);
@@ -183,10 +202,68 @@ public class ContainerActivity extends AppCompatActivity {
                 fragment = new DiagnosticsSettingsFragment();
                 title = getString(R.string.settings_network_diagnostics);
                 break;
+
+            case EXCLUDE_APPS_FRAGMENT:
+                fragment = new ExcludeAppsFragment();
+                title = getString(R.string.exclude_apps);
+                break;
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_host_fragment, fragment).commit();
         getSupportActionBar().setTitle(title);
+
+        mLiveData.getIsAppSelectionView().observe(this, new Observer<Boolean>() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                invalidateOptionsMenu();
+                if (aBoolean) {
+                    AnimatedVectorDrawableCompat arrowToCross = AnimatedVectorDrawableCompat
+                            .create(ContainerActivity.this, R.drawable.anim_back_arrow_to_cross);
+                    arrowToCross.setTint(getResources().getColor(R.color.text_primary, null));
+                    getSupportActionBar().setHomeAsUpIndicator(arrowToCross);
+                    arrowToCross.start();
+                }
+                else {
+                    AnimatedVectorDrawableCompat crossToArrow = AnimatedVectorDrawableCompat
+                            .create(ContainerActivity.this, R.drawable.anim_cross_to_back_arrow);
+                    crossToArrow.setTint(getResources().getColor(R.color.text_primary, null));
+                    getSupportActionBar().setHomeAsUpIndicator(crossToArrow);
+                    crossToArrow.start();
+                }
+                isAppSelectionView = aBoolean;
+
+                mLiveData.getSelectedAppsList().observe(ContainerActivity.this, new Observer<List<AppModel>>() {
+                    @Override
+                    public void onChanged(List<AppModel> appModels) {
+                        if (appModels != null) {
+                            if (appModels.isEmpty()) {
+                                getSupportActionBar().setTitle(getString(R.string.exclude_apps));
+                            }
+                            else {
+                                getSupportActionBar().setTitle(String.valueOf(appModels.size()));
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (fragmentID == EXCLUDE_APPS_FRAGMENT) {
+            getMenuInflater().inflate(R.menu.selection_options_menu, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (fragmentID == EXCLUDE_APPS_FRAGMENT) {
+            menu.findItem(R.id.menu_delete).setVisible(isAppSelectionView);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -197,5 +274,17 @@ public class ContainerActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isAppSelectionView) {
+            List<AppModel> appModelList = new ArrayList<>();
+            mLiveData.setIsAppSelectionView(false);
+            mLiveData.setSelectedAppsList(appModelList);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

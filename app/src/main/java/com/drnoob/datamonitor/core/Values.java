@@ -72,6 +72,8 @@ public class Values {
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
     public static final int DISABLE_BATTERY_OPTIMISATION_FRAGMENT = 0x00E6;
     public static final int DIAGNOSTICS_SETTINGS_FRAGMENT = 0x00F0;
+    public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
+//    public static final int APP_PICKER_FRAGMENT = 0x010E;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -155,8 +157,13 @@ public class Values {
 
     public static final String INTENT_ACTION = "datamonitor.intent.action";
     public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
+    public static final String EXTRA_APP_NAME = "datamonitor.intent.extra.appName";
+    public static final String EXTRA_APP_PACKAGE = "datamonitor.intent.extra.appPackageName";
 
     public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
     public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";
+
+    public static final String EXCLUDE_APPS_PREFERENCES = "com.drnoob.datamonitor_exclude_apps_preferences";
+    public static final String EXCLUDE_APPS_LIST = "excluded_apps_list";
 
 }
