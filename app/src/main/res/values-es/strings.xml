@@ -336,4 +336,16 @@
     <string name="combine_notifications_summary">Combina el monitor de datos y la velocidad de la red en una sola notificación.</string>
     <string name="error_combine_notifications_enabled">Notificación combinada activada. No se puede desactivar la notificación individual.</string>
     <string name="lockscreen_notification">Activar la notificación en la pantalla de bloqueo</string>
+    <string name="exclude_apps_summary">Excluir el tráfico de aplicaciones del uso de datos</string>
+    <string name="action_add_application">Añadir aplicación</string>
+    <string name="title_app_picker">Seleccione una aplicación</string>
+    <string name="app_search_hint">Buscar una aplicación</string>
+    <string name="label_show_system_apps">Mostrar las aplicaciones del sistema</string>
+    <string name="label_hide_system_apps">Ocultar las aplicaciones del sistema</string>
+    <string name="app_already_present">La aplicación ya está preestablecida en la lista.</string>
+    <string name="action_delete">Borrar</string>
+    <string name="error_unknown">Se ha producido un error desconocido. Por favor, inténtelo de nuevo.</string>
+    <string name="exclude_apps">Excluir aplicaciones</string>
+    <string name="label_no_apps_added">No hay aplicaciones añadidas. Haga clic en el botón de abajo para añadir una aplicación.</string>
+    <string name="title_remove_apps">¿Eliminar las aplicaciones seleccionadas\?</string>
 </resources>
