@@ -34,7 +34,7 @@ public class OSSLicense {
 
         libraries.add(new OSSLibrary("androidx.appcompat:appcompat", "The Android Open Source Project",
                 "The Support Library is a static library that you can add to your Android application in order to use APIs that are either not available for older platform versions or utility APIs that aren't a part of the framework APIs. Compatible on devices running API 14 or later.",
-                "1.4.2", "Apache License 2.0", R.string.apache_license_2));
+                "1.5.1", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("com.google.android.material:material", "The Android Open Source Project",
                 "Material Components for Android is a static library that you can add to your Android application in order to use APIs that provide implementations of the Material Design specification. Compatible on devices running API 14 or later.",
@@ -82,11 +82,11 @@ public class OSSLicense {
 
         libraries.add(new OSSLibrary("androidx.navigation:navigation-fragment", "The Android Open Source Project",
                 "Android Navigation-Fragment",
-                "2.5.2", "Apache License 2.0", R.string.apache_license_2));
+                "2.5.3", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("androidx.navigation:navigation-ui", "The Android Open Source Project",
                 "Android Navigation-UI",
-                "2.5.2", "Apache License 2.0", R.string.apache_license_2));
+                "2.5.3", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("androidx.lifecycle:lifecycle-extensions", "The Android Open Source Project",
                 "Android Lifecycle Extensions",
@@ -97,7 +97,7 @@ public class OSSLicense {
                 "2.8.8", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("androidx.preference:preference", "Google",
-                "", "1.0.0", "Apache License 2.0", R.string.apache_license_2));
+                "", "1.2.0", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("com.github.skydoves:progressview", "Skydoves",
                 "A polished and flexible ProgressView, fully customizable with animations.",
