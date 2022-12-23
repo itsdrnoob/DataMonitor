@@ -114,9 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:gravity="center"
             android:clickable="true"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:drawablePadding="@dimen/margin_mid_large"
             android:layout_marginEnd="@dimen/margin_large"
             android:layout_marginBottom="@dimen/margin_extra_large"
             android:text="@string/action_next"/>
