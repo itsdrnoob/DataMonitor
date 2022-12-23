@@ -371,4 +371,16 @@
     <string name="option_15_sec">15 seconds</string>
     <string name="option_30_sec">30 seconds</string>
     <string name="lockscreen_notification">Enable notification on lock screen</string>
+    <string name="exclude_apps">Exclude apps</string>
+    <string name="exclude_apps_summary">Exclude app traffic from data usage</string>
+    <string name="action_add_application">Add Application</string>
+    <string name="label_no_apps_added">No apps added. Click the below button to add an application.</string>
+    <string name="title_app_picker">Select an application</string>
+    <string name="app_search_hint">Find an app</string>
+    <string name="label_show_system_apps">Show System apps</string>
+    <string name="label_hide_system_apps">Hide System apps</string>
+    <string name="app_already_present">App is already preset in list.</string>
+    <string name="title_remove_apps">Remove selected apps?</string>
+    <string name="action_delete">Delete</string>
+    <string name="error_unknown">An unknown error occurred. Please try again.</string>
 </resources>

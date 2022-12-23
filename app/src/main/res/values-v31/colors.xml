@@ -7,13 +7,14 @@
     <color name="surface">@color/white</color>
     <color name="status_bar">@color/background</color>
     <color name="bottom_nav_view_bg">@color/material_dynamic_neutral99</color>
-    <color name="banner_tint">@color/material_dynamic_primary95</color>
+    <color name="banner_tint">@color/material_dynamic_secondary95</color>
     <color name="switch_off">#EBEBEB</color>
     <color name="switch_on_thumb">@color/material_dynamic_primary90</color>
     <color name="switch_off_thumb">@color/material_dynamic_neutral80</color>
     <color name="switch_off_thumb_stroke">@color/material_dynamic_neutral60</color>
     <color name="switch_on_track">@color/material_dynamic_primary40</color>
     <color name="switch_off_track">@color/material_on_primary_disabled</color>
+    <color name="search_bg">@color/material_dynamic_secondary90</color>
     <!--    <color name="on_background">@color/material_dynamic_primary40</color>-->
     <!--    <color name="on_surface">@color/material_dynamic_primary40</color>-->
     <!--    <color name="text_primary">@color/material_dynamic_primary40</color>-->

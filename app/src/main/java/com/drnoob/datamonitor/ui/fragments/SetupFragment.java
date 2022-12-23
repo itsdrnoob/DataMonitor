@@ -40,6 +40,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_ALERT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
+import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.ICON_DATA_USAGE;
 import static com.drnoob.datamonitor.core.Values.ICON_NETWORK_SPEED;
@@ -166,7 +167,7 @@ public class SetupFragment extends Fragment {
         private static final String TAG = SetupPreference.class.getSimpleName();
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit,
-                mCombinedNotificationIcon;
+                mCombinedNotificationIcon, mExcludeApps;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
                 mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications;
@@ -187,6 +188,7 @@ public class SetupFragment extends Fragment {
             mDataWarningTrigger = (Preference) findPreference("data_warning_trigger_level");
             mAppDataLimit = (Preference) findPreference("app_data_limit");
             mCombinedNotificationIcon = (Preference) findPreference("combined_notification_icon");
+            mExcludeApps = (Preference) findPreference("exclude_apps");
 
             mSetupNotification = (SwitchPreferenceCompat) findPreference("setup_notification");
             mNetworkSignalNotification = (SwitchPreferenceCompat) findPreference("network_signal_notification");
@@ -1828,6 +1830,15 @@ public class SetupFragment extends Fragment {
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
                     startActivity(new Intent(getContext(), ContainerActivity.class)
                             .putExtra(GENERAL_FRAGMENT_ID, APP_DATA_LIMIT_FRAGMENT));
+                    return false;
+                }
+            });
+
+            mExcludeApps.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    startActivity(new Intent(getActivity(), ContainerActivity.class)
+                            .putExtra(GENERAL_FRAGMENT_ID, EXCLUDE_APPS_FRAGMENT));
                     return false;
                 }
             });
