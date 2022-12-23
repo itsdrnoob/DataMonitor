@@ -326,4 +326,10 @@
     <string name="error_combine_notifications_enabled">Kombinierte Benachrichtigung aktiviert. Individuelle Benachrichtigung kann nicht deaktiviert werden.</string>
     <string name="option_1_sec">Jede Sekunde</string>
     <string name="option_30_sec">30 Sekunden</string>
+    <string name="label_hide_system_apps">System-Apps ausblenden</string>
+    <string name="label_show_system_apps">System-Apps anzeigen</string>
+    <string name="exclude_apps">Apps ausschließen</string>
+    <string name="action_add_application">Anwendung hinzufügen</string>
+    <string name="title_remove_apps">Ausgewählte Apps entfernen\?</string>
+    <string name="action_delete">Löschen</string>
 </resources>
