@@ -301,8 +301,7 @@
 \nالعلامة التجارية للجهاز
 \nطراز الجهاز
 \nالاسم الرمزي للجهاز
-\nإصدار أندرويد
-\nنموذج SOC</string>
+\nإصدار أندرويد</string>
     <string name="label_custom_end_date">تاريخ الانتهاء: %1$s</string>
     <string name="error_unknown_telegram_client">Telegram غير مثبت أو عميل غير معروف موجود. يرجى تجربة طريقة أخرى.</string>
     <string name="label_crash_logs_copied">سجلات الأعطال التي تم نسخها إلى الحافظة</string>

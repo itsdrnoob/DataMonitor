@@ -300,8 +300,7 @@
 \nMarca del dispositivo
 \nModelo de dispositivo
 \nNombre en clave del dispositivo
-\nVersión Android
-\nModelo SOC</string>
+\nVersión Android</string>
     <string name="label_crash_logs_copied">Registros de fallos copiados en el portapapeles</string>
     <string name="label_mail">Correo</string>
     <string name="label_battery_optimisation">Optimización de batería</string>

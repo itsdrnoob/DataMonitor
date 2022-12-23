@@ -301,7 +301,7 @@
     <string name="label_crash_logs_share_chat">Share to chat: @datamonitor</string>
     <string name="crash_logs_warning">Crash Logs; Do Not modify</string>
     <string name="title_device_info_contents">Device info contents</string>
-    <string name="device_info_body">Device info includes: \nDevice Manufacturer\nDevice Brand\nDevice Model\nDevice Codename\nAndroid Version\nSOC Model</string>
+    <string name="device_info_body">Device info includes: \nDevice Manufacturer\nDevice Brand\nDevice Model\nDevice Codename\nAndroid Version</string>
     <string name="label_crash_logs_copied">Crash logs copied to clipboard</string>
     <string name="label_mail">Mail</string>
     <string name="battery_optimisation_enabled_info">Battery optimisation is enabled. This will interfere with the working of Data Monitor. Click to disable.</string>

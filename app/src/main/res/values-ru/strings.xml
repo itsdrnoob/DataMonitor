@@ -307,8 +307,7 @@
 \nМарка устройства
 \nМодель устройства
 \nКодовое имя устройства
-\nВерсия Android
-\nМодель SOC</string>
+\nВерсия Android</string>
     <string name="title_data_plan_expired">Срок действия тарифного плана истёк!</string>
     <string name="error_invaliid_url">Неверный URL-адрес скачивания!</string>
     <string name="error_url_verification_failed">Не удалось проверить URL! Пожалуйста, попробуйте ещё раз или используйте другой.</string>

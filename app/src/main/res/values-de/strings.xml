@@ -263,8 +263,7 @@
 \nGerätemarke
 \nGerätemodell
 \nCodename des Geräts
-\nAndroid-Version
-\nSOC-Modell</string>
+\nAndroid-Version</string>
     <string name="label_battery_optimisation">Akku-Optimierung</string>
     <string name="settings_download_server">Download-Server</string>
     <string name="label_custom_server_save_success">Server-Einstellung gespeichert</string>
