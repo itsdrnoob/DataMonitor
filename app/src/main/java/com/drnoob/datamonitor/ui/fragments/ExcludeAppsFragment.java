@@ -90,16 +90,17 @@ public class ExcludeAppsFragment extends Fragment {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        try {
-                            assert result.getData() != null;
-                            String appName = result.getData().getStringExtra(EXTRA_APP_NAME);
-                            String appPackage = result.getData().getStringExtra(EXTRA_APP_PACKAGE);
+                        if (result.getData() != null) {
+                            try {
+                                String appName = result.getData().getStringExtra(EXTRA_APP_NAME);
+                                String appPackage = result.getData().getStringExtra(EXTRA_APP_PACKAGE);
 
-                            addApp(appName, appPackage);
+                                addApp(appName, appPackage);
 
-                        }
-                        catch (Exception e) {
-                            e.printStackTrace();
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 });
