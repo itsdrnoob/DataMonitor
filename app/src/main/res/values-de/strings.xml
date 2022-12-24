@@ -331,4 +331,7 @@
     <string name="action_add_application">Anwendung hinzufügen</string>
     <string name="title_remove_apps">Ausgewählte Apps entfernen\?</string>
     <string name="action_delete">Löschen</string>
+    <string name="exclude_apps_summary">App-Datenverkehr von der Datennutzung ausschließen</string>
+    <string name="label_no_apps_added">Keine Apps hinzugefügt. Klicken Sie auf die Schaltfläche unten, um eine Anwendung hinzuzufügen.</string>
+    <string name="title_app_picker">Wählen Sie eine Anwendung aus</string>
 </resources>
