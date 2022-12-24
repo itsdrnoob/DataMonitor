@@ -32,11 +32,11 @@
                 android:id="@+id/home_data_remaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_mid_large"
                 android:text="@string/data_remaining_placeholder"
                 app:layout_constraintBottom_toBottomOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                android:layout_marginEnd="@dimen/margin_mid_large"/>
+                app:layout_constraintTop_toTopOf="@+id/textView" />
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -88,17 +88,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_extra_small"
-                            android:gravity="center"
-                            android:text="@string/app_data_usage_placeholder"
-                            android:singleLine="true"
-                            android:maxLines="1"
                             android:ellipsize="marquee"
-                            android:marqueeRepeatLimit ="marquee_forever"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
+                            android:gravity="center"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:maxLines="1"
                             android:scrollHorizontally="true"
-                            android:textSize="@dimen/text_large"
-                            android:textColor="@color/text_primary" />
+                            android:singleLine="true"
+                            android:text="@string/app_data_usage_placeholder"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/text_large" />
 
                     </LinearLayout>
 
@@ -174,16 +174,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_extra_small"
-                            android:text="@string/app_data_usage_placeholder"
-                            android:singleLine="true"
-                            android:maxLines="1"
                             android:ellipsize="marquee"
-                            android:marqueeRepeatLimit ="marquee_forever"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:maxLines="1"
                             android:scrollHorizontally="true"
-                            android:textSize="@dimen/text_large"
-                            android:textColor="@color/text_primary" />
+                            android:singleLine="true"
+                            android:text="@string/app_data_usage_placeholder"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/text_large" />
 
                     </LinearLayout>
 
@@ -222,45 +222,6 @@
 
             </LinearLayout>
 
-            <!--            <RelativeLayout-->
-            <!--                android:id="@+id/setup_data_plan"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="@dimen/margin_small"-->
-            <!--                android:layout_marginTop="@dimen/margin_small"-->
-            <!--                android:layout_marginEnd="@dimen/margin_small"-->
-            <!--                android:background="@drawable/selectable_item_plain_background"-->
-            <!--                android:clickable="true"-->
-            <!--                android:elevation="@dimen/elevation_default"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0.5"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_centerVertical="true"-->
-            <!--                    android:layout_marginStart="@dimen/margin_large"-->
-            <!--                    android:padding="@dimen/margin_mid_large"-->
-            <!--                    android:text="@string/action_add_data_plan_home"-->
-            <!--                    android:layout_toStartOf="@+id/arrow_right"-->
-            <!--                    android:layout_alignParentStart="true"-->
-            <!--                    android:textColor="@color/text_primary" />-->
-
-            <!--                <ImageView-->
-            <!--                    android:id="@+id/arrow_right"-->
-            <!--                    android:layout_width="14dp"-->
-            <!--                    android:layout_height="14dp"-->
-            <!--                    android:layout_alignParentEnd="true"-->
-            <!--                    android:layout_centerVertical="true"-->
-            <!--                    android:layout_marginEnd="@dimen/margin_large"-->
-            <!--                    android:rotation="180"-->
-            <!--                    android:src="@drawable/ic_arrow"-->
-            <!--                    app:tint="@color/text_secondary" />-->
-
-            <!--            </RelativeLayout>-->
-
             <LinearLayout
                 android:id="@+id/setup_data_plan"
                 android:layout_width="match_parent"
@@ -271,8 +232,8 @@
                 android:background="@drawable/banner_background"
                 android:backgroundTint="@color/banner_tint"
                 android:clickable="true"
-                android:orientation="vertical"
                 android:elevation="@dimen/elevation_small"
+                android:orientation="vertical"
                 android:padding="@dimen/margin_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -285,36 +246,36 @@
                     android:clickable="true"
                     android:elevation="@dimen/elevation_default"
                     android:gravity="center_vertical"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                    android:text="@string/action_add_data_plan_home"/>
+                    android:text="@string/action_add_data_plan_home"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_add_data_plan_home_summary"
-                    android:layout_marginTop="@dimen/margin_small"/>
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/action_add_data_plan_home_summary" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/margin_small">
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/dismiss_add_plan_banner"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/action_dismiss"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_marginEnd="@dimen/margin_small"/>
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:text="@string/action_dismiss" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/add_data_plan"
+                        style="@style/Widget.Material3.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.Material3.Button"
-                        android:text="@string/title_add_data_plan"/>
+                        android:text="@string/title_add_data_plan" />
 
                 </LinearLayout>
 
@@ -339,7 +300,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/overview_refresh"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/overview_refresh"
@@ -428,39 +389,18 @@
                     app:layout_constraintStart_toStartOf="@+id/overview"
                     app:layout_constraintTop_toTopOf="@+id/overview" />
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--            <ImageView-->
+<!--                android:id="@+id/quick_view_overlay"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:elevation="10dp"-->
+<!--                android:layout_marginBottom="@dimen/margin_large"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/graph_view" />-->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/overview_quick_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="invisible"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/mobile_data_quick_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_mobile_overview"
-                android:text="110.65 GB"
-                android:gravity="center"
-                android:layout_margin="@dimen/margin_medium"
-                android:drawablePadding="@dimen/padding_medium"/>
-
-            <TextView
-                android:id="@+id/wifi_quick_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_wifi_overview"
-                android:text="110.65 GB"
-                android:gravity="center"
-                android:layout_margin="@dimen/margin_medium"
-                android:drawablePadding="@dimen/padding_medium"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

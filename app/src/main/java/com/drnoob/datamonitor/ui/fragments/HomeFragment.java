@@ -65,6 +65,7 @@ import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,6 +73,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -129,8 +131,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private static ProgressView mMobileMon, mMobileTue, mMobileWed, mMobileThurs, mMobileFri, mMobileSat, mMobileSun,
             mWifiMon, mWifiTue, mWifiWed, mWifiThurs, mWifiFri, mWifiSat, mWifiSun;
     private LinearLayout mMonView, mTueView, mWedView, mThursView, mFriView, mSatView, mSunView;
-    private LinearLayout mQuickView;
-    private TextView mQuickViewMobile, mQuickViewWifi;
     private static ConstraintLayout mOverview;
     private static ConstraintLayout mOverviewLoading;
     private static ImageView mRefreshOverview;
@@ -185,10 +185,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
         mOverview = view.findViewById(R.id.overview);
         mOverviewLoading = view.findViewById(R.id.overview_loading);
-
-        mQuickView = view.findViewById(R.id.overview_quick_view);
-        mQuickViewMobile = view.findViewById(R.id.mobile_data_quick_view);
-        mQuickViewWifi = view.findViewById(R.id.wifi_quick_view);
 
         mMobileMon = mOverview.findViewById(R.id.progress_mobile_mon);
         mMobileTue = mOverview.findViewById(R.id.progress_mobile_tue);
@@ -916,6 +912,16 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         setOpenQuickView(true);
         float translation = getTranslation(view);
         float finalTranslation = translation;
+
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.layout_overview_quick_view, null);
+        TextView overviewMobile = popupView.findViewById(R.id.overview_mobile_data);
+        TextView overviewWifi = popupView.findViewById(R.id.overview_wifi);
+
+        PopupWindow popupWindow = new PopupWindow(popupView,
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,
+                true);
+        popupWindow.setAnimationStyle(R.style.PopupAnimation);
+
         if (!PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getBoolean("disable_haptics", false)) {
             VibrationUtils.hapticMajor(getContext());
@@ -923,9 +929,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         if (isOverviewAvailable()) {
             try {
                 String[] dataUsage = getDataUsage(view);
-                mQuickViewMobile.setText(dataUsage[0]);
-                mQuickViewWifi.setText(dataUsage[1]);
-                mQuickView.setVisibility(View.VISIBLE);
+                overviewMobile.setText(dataUsage[0]);
+                overviewWifi.setText(dataUsage[1]);
+                popupWindow.setElevation(100);
+                view.setElevation(100);
+                popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
             }
             catch (NullPointerException e) {
                 e.printStackTrace();
@@ -941,7 +949,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                                 .getBoolean("disable_haptics", false)) {
                             VibrationUtils.hapticMinor(getContext());
                         }
-                        mQuickView.setVisibility(View.INVISIBLE);
+                        popupWindow.dismiss();
                         setOpenQuickView(false);
                     }
                 }
