@@ -171,6 +171,12 @@ public class NotificationService extends Service {
                 showPercent = dataLimit > 0;
                 Float mobileMB;
                 int percent = 0;
+
+                Boolean showMobileData = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getBoolean(NOTIFICATION_MOBILE_DATA, true);
+                Boolean showWifi = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getBoolean(NOTIFICATION_WIFI, true);
+
                 try {
                     mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
                     String[] mobileData = formatData(mobile[0], mobile[1]);
@@ -180,6 +186,15 @@ public class NotificationService extends Service {
 
                     long totalSent = mobile[0] + wifi[0];
                     long totalReceived = mobile[1] + wifi[1];
+
+                    if (!showMobileData) {
+                        totalSent = totalSent - mobile[0];
+                        totalReceived = totalReceived - mobile[1];
+                    }
+                    if (!showWifi) {
+                        totalSent = totalSent - wifi[0];
+                        totalReceived = totalReceived - wifi[1];
+                    }
 
                     String[] total = formatData(totalSent, totalReceived);
                     totalDataUsage = context.getResources().getString(R.string.title_data_usage_notification, total[2]);
@@ -217,11 +232,6 @@ public class NotificationService extends Service {
                 StringBuilder totalDataUsageText = new StringBuilder();
                 totalDataUsageText.append(mobileDataUsage + "\n")
                         .append(wifiDataUsage + "\n");
-
-                Boolean showMobileData = PreferenceManager.getDefaultSharedPreferences(context)
-                        .getBoolean(NOTIFICATION_MOBILE_DATA, true);
-                Boolean showWifi = PreferenceManager.getDefaultSharedPreferences(context)
-                        .getBoolean(NOTIFICATION_WIFI, true);
 
                 Intent activityIntent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

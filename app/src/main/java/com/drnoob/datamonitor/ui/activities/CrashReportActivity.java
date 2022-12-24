@@ -19,26 +19,28 @@
 
 package com.drnoob.datamonitor.ui.activities;
 
+import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
+import static com.drnoob.datamonitor.core.Values.CRASH_REPORT_KEY;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceFragmentCompat;
@@ -60,13 +62,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.drnoob.datamonitor.Common.dismissOnClick;
-import static com.drnoob.datamonitor.Common.setLanguage;
-import static com.drnoob.datamonitor.Common.updateDialog;
-import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
-import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
-import static com.drnoob.datamonitor.core.Values.CRASH_REPORT_KEY;
-
 public class CrashReportActivity extends AppCompatActivity {
     private static final String TAG = CrashReportActivity.class.getSimpleName();
 
@@ -82,8 +77,7 @@ public class CrashReportActivity extends AppCompatActivity {
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
             setLanguage(this, "en", countryCode);
-        }
-        else {
+        } else {
             setLanguage(this, languageCode, countryCode);
         }
         super.onCreate(savedInstanceState);
@@ -111,24 +105,6 @@ public class CrashReportActivity extends AppCompatActivity {
         binding.deviceInfoLogsContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                View dialogView = LayoutInflater.from(CrashReportActivity.this)
-//                        .inflate(R.layout.layout_alert_dialog, null);
-//                TextView title = dialogView.findViewById(R.id.dialog_title);
-//                TextView body = dialogView.findViewById(R.id.dialog_body);
-//
-//                title.setText(R.string.title_device_info_contents);
-//                body.setText(R.string.device_info_body);
-//
-//                AlertDialog dialog = new AlertDialog.Builder(CrashReportActivity.this)
-//                        .setView(dialogView)
-//                        .create();
-//
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                dialog.show();
-//                updateDialog(dialog, CrashReportActivity.this);
-
-
-
                 new MaterialAlertDialogBuilder(CrashReportActivity.this)
                         .setTitle(R.string.title_device_info_contents)
                         .setMessage(R.string.device_info_body)
@@ -151,8 +127,7 @@ public class CrashReportActivity extends AppCompatActivity {
                 if (mErrorLogs == null) {
                     snackbar = Snackbar.make(binding.getRoot(), getString(R.string.error_no_crash_logs),
                             Snackbar.LENGTH_LONG);
-                }
-                else {
+                } else {
                     if (mErrorLogs != null) {
                         StringBuilder stringBuilder = new StringBuilder(mErrorLogs);
                         if (includeDeviceInfo) {
@@ -163,16 +138,14 @@ public class CrashReportActivity extends AppCompatActivity {
                                     .append("Device Brand: " + Build.BRAND + "\n")
                                     .append("Device Model: " + Build.MODEL + "\n")
                                     .append("Device Codename: " + Build.PRODUCT + "\n")
-                                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n")
-                                    .append("SOC Model: " + Build.SOC_MODEL);
+                                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n");
                         }
                         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                         ClipData clipData = ClipData.newPlainText("datamonitor-crash-logs", stringBuilder.toString());
                         clipboardManager.setPrimaryClip(clipData);
                         snackbar = Snackbar.make(binding.getRoot(), getString(R.string.label_crash_logs_copied),
                                 Snackbar.LENGTH_LONG);
-                    }
-                    else {
+                    } else {
                         snackbar = Snackbar.make(binding.getRoot(), getString(R.string.error_no_crash_logs),
                                 Snackbar.LENGTH_LONG);
                     }
@@ -348,8 +321,7 @@ public class CrashReportActivity extends AppCompatActivity {
                     .append("Device Brand: " + Build.BRAND + "\n")
                     .append("Device Model: " + Build.MODEL + "\n")
                     .append("Device Codename: " + Build.PRODUCT + "\n")
-                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n")
-                    .append("SOC Model: " + Build.SOC_MODEL);
+                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n");
         }
         OutputStream os = new FileOutputStream(logFile);
         os.write(stringBuilder.toString().getBytes());
@@ -367,8 +339,7 @@ public class CrashReportActivity extends AppCompatActivity {
                     .append("Device Brand: " + Build.BRAND + "\n")
                     .append("Device Model: " + Build.MODEL + "\n")
                     .append("Device Codename: " + Build.PRODUCT + "\n")
-                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n")
-                    .append("SOC Model: " + Build.SOC_MODEL);
+                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n");
         }
         ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText("datamonitor-crash-logs", stringBuilder.toString());
@@ -389,8 +360,7 @@ public class CrashReportActivity extends AppCompatActivity {
                     .append("Device Brand: " + Build.BRAND + "\n")
                     .append("Device Model: " + Build.MODEL + "\n")
                     .append("Device Codename: " + Build.PRODUCT + "\n")
-                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n")
-                    .append("SOC Model: " + Build.SOC_MODEL);
+                    .append("Android version: " + Build.VERSION.RELEASE + ", " + Build.VERSION.SDK_INT + "\n");
         }
         return stringBuilder.toString();
     }

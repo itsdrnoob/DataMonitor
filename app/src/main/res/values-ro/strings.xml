@@ -266,8 +266,7 @@
 \nMarca dispozitivului
 \nModelul dispozitivului
 \nNume de cod al dispozitivului
-\nVersiunea Android
-\nModel SOC</string>
+\nVersiunea Android</string>
     <string name="settings_network_diagnostics">Diagnosticare rețea</string>
     <string name="settings_download_server">Descărcați serverul</string>
     <string name="custom_upload_url_hint">Introduceți adresa URL de încărcare completă</string>

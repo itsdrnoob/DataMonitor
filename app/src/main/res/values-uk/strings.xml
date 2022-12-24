@@ -300,8 +300,7 @@
 \nМарка пристрою
 \nМодель пристрою
 \nКодове ім\'я пристрою
-\nВерсія Android
-\nМодель SOC</string>
+\nВерсія Android</string>
     <string name="label_battery_optimisation">Оптимізація батареї</string>
     <string name="error_url_verification_failed">Не вдалося перевірити URL! Будь ласка, спробуйте ще раз або використовуйте інший.</string>
     <string name="error_invalid_plan">Неприпустимий план!</string>

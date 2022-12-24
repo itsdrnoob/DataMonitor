@@ -282,8 +282,7 @@
 \nMarque de l’appareil
 \nModèle d’appareil
 \nNom de code de l’appareil
-\nAndroid Version
-\nModèle SOC</string>
+\nAndroid Version</string>
     <string name="label_crash_logs_copied">Journaux de plantage copiés dans le Presse-papiers</string>
     <string name="title_data_plan_expired">Le plan de données a expiré !</string>
     <string name="label_battery_optimisation">Optimisation de la batterie</string>

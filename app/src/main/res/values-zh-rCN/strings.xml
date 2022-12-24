@@ -308,8 +308,7 @@
 \n设备品牌
 \n设备型号
 \n设备代号
-\n安卓版本
-\n芯片型号</string>
+\n安卓版本</string>
     <string name="label_custom_server">自定义服务器</string>
     <string name="label_send_report">通过以下方式发送报告</string>
     <string name="label_custom_server_save_success">服务器首选项已保存</string>

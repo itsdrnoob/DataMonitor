@@ -300,8 +300,7 @@ Perguntas e respostas, ajuda e solução de problemas
 \nMarca do dispositivo
 \nModelo do dispositivo
 \nCodinome do dispositivo
-\nVersão Android
-\nModelo SOC</string>
+\nVersão Android</string>
     <string name="label_custom_server">Servidor personalizado</string>
     <string name="error_url_verification_failed">Não foi possível verificar o URL! Tente novamente ou use um diferente.</string>
     <string name="hudaifa_abdullah_summary">Árabe</string>

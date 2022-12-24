@@ -296,8 +296,7 @@
 \nCihaz Markası
 \nCihaz Modeli
 \nCihaz Kod Adı
-\nAndroid Sürümü
-\nSOC Modeli</string>
+\nAndroid Sürümü</string>
     <string name="settings_network_diagnostics">Ağ teşhisi</string>
     <string name="label_custom_start_date">Başlangıç tarihi: %1$s</string>
     <string name="label_select_start_date">Başlangıç tarihini seçin</string>

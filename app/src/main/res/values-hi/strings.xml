@@ -217,8 +217,7 @@
 \nडिवाइस ब्रांड
 \nडिवाइस मॉडल
 \nडिवाइस कोडनेम
-\nAndroid संस्करण
-\nएसओसी मॉडल</string>
+\nAndroid संस्करण</string>
     <string name="label_crash_logs_copied">क्रैश लॉग क्लिपबोर्ड पर कॉपी किए गए</string>
     <string name="label_mail">मेल</string>
     <string name="battery_optimisation_enabled_info">बैटरी ऑप्टिमाइज़ेशन सक्षम किया गया है। यह डेटा मॉनिटर के काम में हस्तक्षेप करेगा। अक्षम करने के लिए स्पर्श करें.</string>

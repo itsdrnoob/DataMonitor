@@ -293,8 +293,7 @@
 \nEnhetens merkevare
 \nEnhetsmodell
 \nEnhetens kodenavn
-\nAndroid-versjon
-\nSOC-modell</string>
+\nAndroid-versjon</string>
     <string name="label_crash_logs_copied">Krasjlogger kopiert til utklippstavle</string>
     <string name="label_mail">E-post</string>
     <string name="battery_optimisation_enabled_info">Batterioptimalisering er aktivert. Dette vil forstyrre driften av Data Monitor. Klikk for å deaktivere.</string>
