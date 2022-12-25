@@ -73,7 +73,7 @@ public class Values {
     public static final int DISABLE_BATTERY_OPTIMISATION_FRAGMENT = 0x00E6;
     public static final int DIAGNOSTICS_SETTINGS_FRAGMENT = 0x00F0;
     public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
-//    public static final int APP_PICKER_FRAGMENT = 0x010E;
+    public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -164,6 +164,8 @@ public class Values {
     public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";
 
     public static final String EXCLUDE_APPS_PREFERENCES = "com.drnoob.datamonitor_exclude_apps_preferences";
+    public static final String DIAGNOSTICS_HISTORY_PREFERENCES = "com.drnoob.datamonitor_diagnostics_history_preferences";
     public static final String EXCLUDE_APPS_LIST = "excluded_apps_list";
+    public static final String DIAGNOSTICS_HISTORY_LIST = "diagnostics_history_list";
 
 }

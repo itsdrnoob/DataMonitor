@@ -36,6 +36,13 @@
             android:widgetLayout="@layout/preference_right_arrow" />
 
         <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+            android:icon="@drawable/ic_baseline_history_24"
+            android:key="save_results"
+            android:title="@string/settings_save_results"
+            app:summary="@string/save_results_summary"
+            app:defaultValue="true"/>
+
+        <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
             android:icon="@drawable/ic_haptics"
             android:key="disable_haptics"
             android:title="@string/settings_disable_haptics"

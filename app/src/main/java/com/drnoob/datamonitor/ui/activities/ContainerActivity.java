@@ -30,6 +30,7 @@ import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_HISTORY_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
@@ -45,6 +46,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,12 +57,14 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppModel;
+import com.drnoob.datamonitor.adapters.data.DiagnosticsHistoryModel;
 import com.drnoob.datamonitor.adapters.data.LiveData;
 import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
 import com.drnoob.datamonitor.ui.fragments.AboutFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
+import com.drnoob.datamonitor.ui.fragments.DiagnosticsHistoryFragment;
 import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
 import com.drnoob.datamonitor.ui.fragments.ExcludeAppsFragment;
@@ -85,6 +89,7 @@ public class ContainerActivity extends AppCompatActivity {
     private int fragmentID;
     private LiveData mLiveData;
     private boolean isAppSelectionView = false;
+    private boolean isResultsSelectionView = false;
     private boolean isListSelected = false;
 
     @Override
@@ -207,6 +212,11 @@ public class ContainerActivity extends AppCompatActivity {
                 fragment = new ExcludeAppsFragment();
                 title = getString(R.string.exclude_apps);
                 break;
+
+            case DIAGNOSTICS_HISTORY_FRAGMENT:
+                fragment = new DiagnosticsHistoryFragment();
+                title = getString(R.string.diagnostics_history);
+                break;
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_host_fragment, fragment).commit();
@@ -248,11 +258,47 @@ public class ContainerActivity extends AppCompatActivity {
                 });
             }
         });
+
+        mLiveData.getIsResultSelectionView().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                invalidateOptionsMenu();
+                if (aBoolean) {
+                    AnimatedVectorDrawableCompat arrowToCross = AnimatedVectorDrawableCompat
+                            .create(ContainerActivity.this, R.drawable.anim_back_arrow_to_cross);
+                    arrowToCross.setTint(getResources().getColor(R.color.text_primary, null));
+                    getSupportActionBar().setHomeAsUpIndicator(arrowToCross);
+                    arrowToCross.start();
+                }
+                else {
+                    AnimatedVectorDrawableCompat crossToArrow = AnimatedVectorDrawableCompat
+                            .create(ContainerActivity.this, R.drawable.anim_cross_to_back_arrow);
+                    crossToArrow.setTint(getResources().getColor(R.color.text_primary, null));
+                    getSupportActionBar().setHomeAsUpIndicator(crossToArrow);
+                    crossToArrow.start();
+                }
+                isResultsSelectionView = aBoolean;
+
+                mLiveData.getSelectedResults().observe(ContainerActivity.this, new Observer<List<DiagnosticsHistoryModel>>() {
+                    @Override
+                    public void onChanged(List<DiagnosticsHistoryModel> diagnosticsHistoryModels) {
+                        if (diagnosticsHistoryModels != null) {
+                            if (diagnosticsHistoryModels.isEmpty()) {
+                                getSupportActionBar().setTitle(getString(R.string.diagnostics_history));
+                            }
+                            else {
+                                getSupportActionBar().setTitle(String.valueOf(diagnosticsHistoryModels.size()));
+                            }
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (fragmentID == EXCLUDE_APPS_FRAGMENT) {
+        if (fragmentID == EXCLUDE_APPS_FRAGMENT || fragmentID == DIAGNOSTICS_HISTORY_FRAGMENT) {
             getMenuInflater().inflate(R.menu.selection_options_menu, menu);
         }
         return super.onCreateOptionsMenu(menu);
@@ -262,6 +308,11 @@ public class ContainerActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (fragmentID == EXCLUDE_APPS_FRAGMENT) {
             menu.findItem(R.id.menu_delete).setVisible(isAppSelectionView);
+            menu.findItem(R.id.menu_select_all).setVisible(false);
+        }
+        if (fragmentID == DIAGNOSTICS_HISTORY_FRAGMENT) {
+            menu.findItem(R.id.menu_delete).setVisible(isResultsSelectionView);
+            menu.findItem(R.id.menu_select_all).setVisible(isResultsSelectionView);
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -282,6 +333,11 @@ public class ContainerActivity extends AppCompatActivity {
             List<AppModel> appModelList = new ArrayList<>();
             mLiveData.setIsAppSelectionView(false);
             mLiveData.setSelectedAppsList(appModelList);
+        }
+        if (isResultsSelectionView) {
+            List<DiagnosticsHistoryModel> modelList = new ArrayList<>();
+            mLiveData.setIsResultSelectionView(false);
+            mLiveData.setSelectedResults(modelList);
         }
         else {
             super.onBackPressed();

@@ -28,6 +28,8 @@ public class LiveData extends ViewModel {
     private MutableLiveData<Boolean> isAppSelectionView = new MutableLiveData<>();
     private MutableLiveData<List<AppModel>> selectedAppsList = new MutableLiveData<>();
     private MutableLiveData<Integer> delete = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isResultSelectionView = new MutableLiveData<>();
+    private MutableLiveData<List<DiagnosticsHistoryModel>> selectedResults = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getIsAppSelectionView() {
         return isAppSelectionView;
@@ -43,5 +45,21 @@ public class LiveData extends ViewModel {
 
     public void setSelectedAppsList(List<AppModel> selectedAppsList) {
         this.selectedAppsList.setValue(selectedAppsList);
+    }
+
+    public MutableLiveData<Boolean> getIsResultSelectionView() {
+        return isResultSelectionView;
+    }
+
+    public void setIsResultSelectionView(Boolean isResultSelectionView) {
+        this.isResultSelectionView.setValue(isResultSelectionView);
+    }
+
+    public MutableLiveData<List<DiagnosticsHistoryModel>> getSelectedResults() {
+        return selectedResults;
+    }
+
+    public void setSelectedResults(List<DiagnosticsHistoryModel> selectedResults) {
+        this.selectedResults.setValue(selectedResults);
     }
 }

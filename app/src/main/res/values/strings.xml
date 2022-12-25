@@ -383,4 +383,9 @@
     <string name="title_remove_apps">Remove selected apps?</string>
     <string name="action_delete">Delete</string>
     <string name="error_unknown">An unknown error occurred. Please try again.</string>
+    <string name="diagnostics_history">Diagnostics History</string>
+    <string name="settings_save_results">Save results</string>
+    <string name="save_results_summary">Save Network diagnostics results</string>
+    <string name="title_delete_results">Delete selected results?</string>
+    <string name="action_select_all">Select all</string>
 </resources>

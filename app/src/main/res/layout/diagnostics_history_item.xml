@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_extra_small"
+    android:layout_marginBottom="@dimen/margin_extra_small"
+    android:layout_marginStart="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_small"
+    android:clickable="true"
+    android:background="@drawable/selectable_item_plain_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="@dimen/margin_medium"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/selection_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check_circle"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:tint="@color/text_primary" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/history_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sat 24 Dec 8:58 PM"
+            android:paddingTop="@dimen/margin_tiny"
+            android:paddingBottom="@dimen/margin_tiny"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_mid_large"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"/>
+
+        <TextView
+            android:id="@+id/history_up_down_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="12.5 Mbits/s | 2.54 Mbits/s"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_right"
+        app:tint="@color/text_primary" />
+
+</LinearLayout>
