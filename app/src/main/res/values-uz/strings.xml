@@ -1,0 +1,354 @@
+<resources>
+    <string name="app_name">Data Monitor</string>
+    <string name="appwidget_text">Namuna</string>
+    <string name="add_widget">Vidjet qo\'shish</string>
+
+
+    <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
+    <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
+    <string name="notification_mobile_data_usage"> Ishlatilgan trafik: %1$s</string>
+    <string name="notification_wifi_data_usage">Wi-Fi: %1$s</string>
+    <string name="home_mobile_data_sent">%1$s\nYuborildi</string>
+    <string name="home_mobile_data_received">%1$s\nOlindi</string>
+    <string name="home_wifi_data_sent">%1$s\nYuborildi</string>
+    <string name="home_wifi_data_received">%1$s\nOlindi</string>
+    <string name="label_current_data_warning_trigger_level_limit_set">Joriy tetiklish darajasi: %1$s%% (%2$s)</string>
+    <string name="label_current_data_warning_trigger_level_limit_not_set">Joriy tetiklik darajasi: %1$s%%</string>
+    <string name="label_data_trigger_level">Qachonki %1$s%% trafik ishlatilganda</string>
+    <string name="hello_blank_fragment" translatable="false"></string>
+    <string name="app_label_package_name">Paket nomi: %1$s</string>
+    <string name="app_label_uid">UID: %1$d</string>
+    <string name="app_name_placeholder">Ilova nomi</string>
+    <string name="app_data_usage_placeholder">0 MB</string>
+    <string name="label_sent">yuborildi</string>
+    <string name="label_received">olindi</string>
+    <string name="action_open_app_settings">Ilova sozlanmalarini ochish</string>
+    <string name="action_cancel">Bekor qilish</string>
+    <string name="action_ok">Yaxshi</string>
+    <string name="title_app_data_usage_session">Seansni tanlang</string>
+    <string name="label_today">Bugun</string>
+    <string name="label_yesterday">Kecha</string>
+    <string name="label_this_month">Bu oy</string>
+    <string name="label_last_month">O\'tgan oy</string>
+    <string name="label_this_year">Bu yil</string>
+    <string name="label_all_time">Barchasi</string>
+    <string name="title_app_data_usage_type">Turni tanlang</string>
+    <string name="label_mobile_data">Mobil trafik</string>
+    <string name="label_wifi">Wi-Fi</string>
+    <string name="title_data_usage">Foydalanilgan trafik</string>
+    <string name="action_update">Yangilash</string>
+    <string name="data_remaining_placeholder">0.00 GB qoldi</string>
+    <string name="app_version_placeholder" translatable="false">v1.0</string>
+    <string name="label_dev">❤ bilan Bitroid Inc.</string>
+    <string name="label_loading_apps">Ilovalar yuklanmoqda</string>
+    <string name="label_loading">Yuklanmoqda…</string>
+    <string name="label_app_data_usage_session_empty">Trafik mavjud emas</string>
+    <string name="label_want_to_contribute">Data Monitorga qanday hissa qo\'shishni bilish uchun shu yerni bosing.</string>
+    <string name="setup_image_footer">Vidjetlar va/yoki bildirishnomalar ishlatiladigan ma\'lumotlar miqdoriga oson kirish imkonini beradi</string>
+    <string name="heading_data_reset">Hisoblagichni qaytadan boshlash</string>
+    <string name="daily">Kunlik</string>
+    <string name="monthly">Oylik</string>
+    <string name="heading_data_limit">Trafik chegarasi</string>
+    <string name="data_limit_placeholder" translatable="false">0.00</string>
+    <string name="data_type_mb">MB</string>
+    <string name="data_type_gb">GB</string>
+    <string name="title_data_warning_trigger">Trafik haqida ogohlantirish darajasi</string>
+    <string name="title_add_data_plan">Trafik rejasini qo\'shish</string>
+    <string name="title_refresh_interval">Yangilanish oralig\'ini tanlash</string>
+    <string name="option_1_min">1 daqiqa</string>
+    <string name="option_2_min">2 daqiqa</string>
+    <string name="option_5_min">5 daqiqa</string>
+    <string name="option_10_min">10 daqiqa</string>
+    <string name="option_15_min">15 daqiqa</string>
+    <string name="title_widget_setup">Vidjetni sozlash</string>
+    <string name="widget_setup_step_1">1. Iovalar menyusida bosh joyga bosing va ushlab turing.</string>
+    <string name="widget_setup_step_2">2. \"Vidjetlar\"ga bosing.</string>
+    <string name="widget_setup_step_3">3. Trafik ko\'rsatkichini ilovalar menyusiga tortib tushiring.</string>
+    <string name="heading_data_usage_today">Bugungi ishlatilgan trafik</string>
+    <string name="action_add_data_plan_home">Nazorat qilish uchun trafik rejasini qo\'shing</string>
+    <string name="heading_week_overview">Bu hafta hisoboti</string>
+    <string name="error_loading_overview">Bu hafta hisobotini yuklab bo\'lmadi.\nKeyinroq qayta urinib ko\'ring.</string>
+    <string name="title_setup">Trafik hisoblagichini sozlash</string>
+    <string name="setup_widget">Vidjetni sozlash</string>
+    <string name="setup_notification">Bildirishnomalarni sozlash</string>
+    <string name="title_configure">Sozlash</string>
+    <string name="setup_widget_title">Vidjet</string>
+    <string name="setup_widget_refresh_interval">Vidjetnig yangilanish oralig\'i </string>
+    <string name="refresh_interval_placeholder">1 daqiqa</string>
+    <string name="setup_show_remaining_data">Qolgan trafik haqida ma\'lumotni ko\'rsatish</string>
+    <string name="setup_refresh_widget">Vidjetni yangilash</string>
+    <string name="refresh_widget_summary">Biror muommo tug\'ilsa vidjetni yangilang</string>
+    <string name="setup_notification_title">Bildirishnoma</string>
+    <string name="setup_notification_refresh_interval">Bildirishnomalar uchun yangilanish oralig\'i</string>
+    <string name="setup_show_mobile_usage">Ishlatilgan mobil ma\'lumotni ko\'rsatish</string>
+    <string name="setup_show_wifi_usage">Ishlatilgan Wi-Fi ni ko\'rsatish</string>
+    <string name="monitor_data">Trafikni nazorat qilish</string>
+    <string name="setup_data_alert">Ishlatilgan trafik haqida ogohlantirish</string>
+    <string name="data_alert_summary">Trafik chegarasiga yetganda xabardor qilish</string>
+    <string name="settings_general">Umumiy</string>
+    <string name="setup_add_data_plan">Tarfik rejasini qo\'shish</string>
+    <string name="add_data_plan_summary">Trafik rejasoni qo\'shish yoki yangilash</string>
+    <string name="setup_usage_reset_time">Trafik yangilanish payti</string>
+    <string name="usage_reset_time_placeholder" translatable="false">12:00 AM</string>
+    <string name="app_license_header">Ilova litsenziyasi</string>
+    <string name="oss_licenses">Ochiq manbali litsenziyalar</string>
+    <string name="itsdrnoob">Dr.NooB</string>
+    <string name="contributors">Xissa qo\'shuvchilar</string>
+    <string name="itsdrnoob_summary"><![CDATA[Bosh dasturchi va dizayner]]></string>
+    <string name="settings_appearance">Ko\'rinish</string>
+    <string name="settings_dark_mode">Tungi rejim</string>
+    <string name="dark_mode_summary">Tungi rejimni yoqish/o\'chirish</string>
+    <string name="settings_preferences">Sozlanmalar</string>
+    <string name="settings_language">Til</string>
+    <string name="language_summary">Ilova tilini o\'zgartirish</string>
+    <string name="about">Haqida</string>
+    <string name="about_summary"><![CDATA[Manba, Yordam va boshqalar]]></string>
+    <string name="license">Litsenziya</string>
+    <string name="contributors_summary">Doimo biz bilan bo\'lganlar insonlar</string>
+    <string name="donate">Xayriya qilish</string>
+    <string name="donate_summary">Balki, bizni qo\'llab quvvatlang</string>
+    <string name="data_reset">Trafikni qaytadan boshlash</string>
+    <string name="data_limit">Trafik chegarasi</string>
+    <string name="support_and_development">Qo\'llab quvvatlash va rivojlantirish</string>
+    <string name="github">GitHub</string>
+    <string name="github_summary">Manba kodini ko\'rish</string>
+    <string name="xda">XDA</string>
+    <string name="xda_summary"><![CDATA[Tez tez so\'raladigan savollar, yordam va muommolarni bartaraf etish]]></string>
+    <string name="report">Xatolik haqida xabar berish</string>
+    <string name="report_summary">Xatolik haqida xabar berish, yangi funksiyalar taklif qilish</string>
+    <string name="setup">Sozlash</string>
+    <string name="app_data_usage">Ilova trafigi</string>
+    <string name="settings">Sozlanmalar</string>
+    <string name="btc_address_copied">Bitcoin hamyon manzili buferga nusxalandi</string>
+    <string name="eth_address_copied">Ethereum hamyon manzili buferga nusxalandi</string>
+    <string name="ltc_address_copied">Litecoin hamyon manzili buferga nusxalandi</string>
+    <string name="label_system_apps">Tizim ilovalari</string>
+    <string name="package_system" translatable="false">com.android.systemui</string>
+    <string name="home">Bosh sahifa</string>
+    <string name="usage_access_permission">Ma\'lumotlardan foydalanish ruxsati</string>
+    <string name="usage_access_body">Ilova ishlashi uchun talab etiladi, ilova ma\'lumotlari statistikasini to\'playdi.\nShaxsiy ma\'lumotlar to\'planmaydi.</string>
+    <string name="action_grant">Ruxsat berish</string>
+    <string name="label_tethering">Mobil faol nuqta</string>
+    <string name="package_tethering" translatable="false">com.android.tethering</string>
+    <string name="label_removed">Olib tashlangan ilovalar</string>
+    <string name="package_removed" translatable="false">com.android.removed</string>
+    <string name="oem_skin_warning">%1$s Ilova to\'g\'ri ishlashi uchun, Iltimos qo\'shimcha optimizatsiya maslahatlarini tekshiring.</string>
+    <string name="oem_skin_miui">MIUI aniqlandi.</string>
+    <string name="battery_optimisation_disabled">Batareya optimizatsiyasi o\'chirildi</string>
+    <string name="data_plan_saved">Trafik rejasi saqlandi</string>
+    <string name="upi_app_not_found">Bu amalni bajarish uchun kerakli ilovani o\'rnating</string>
+    <string name="upi_unknown_error">Noma\'lum xatolik.\nIltimos boshqa usulni sinab ko\'ring yoki qaytadan urining.</string>
+    <string name="label_no_additional_lang">Ilovani tarjima qilishga yordam berish uchun buyerga bosing.</string>
+    <string name="notification_disabled">Trafik nazorati bildirishnomasi o\'chirildi</string>
+    <string name="label_widget_refresh_interval_change">Vidjet har %1$s da yangilanadi</string>
+    <string name="label_notification_refresh_interval_change">Bildirishnoma har %1$s da yangilanadi</string>
+    <string name="label_data_usage_reset_time_change">Trafikni har %1$s %2$s da yangilanadi</string>
+    <string name="label_data_usage_reset_date_change">Trafik har oyning %1$d %2$s sanasida yangilanadi</string>
+    <string name="remaining_data_info_enabled">Qolgan trafik ma\'lumoti yoqildi</string>
+    <string name="remaining_data_info_disabled">Qolgan trafik ma\'lumoti o\'chirildi</string>
+    <string name="label_monitoring_no_plan">Nazorat qilishni boshlash uchun trafik rejasini qo\'shing</string>
+    <string name="label_widget_refreshed">Vidjet yangilandi</string>
+    <string name="label_notification_enabled">Trafik nazorati bildirishnomasi yoqildi</string>
+    <string name="label_notification_cannot_disable_both">Ikala elementni bir vaqtda o\'chirib bo\'lmaydi</string>
+    <string name="label_setup_notification_first">Iltimos avval bildirishnomalarni sozlang</string>
+    <string name="label_data_plan_saved">Trafik rejasi saqlandi</string>
+    <string name="month">oy</string>
+    <string name="day">kun</string>
+    <string name="label_add_data_plan_first">Iltimos avval trafik rejasini qo\'shing</string>
+    <string name="title_data_warning_notification">Trafik ishlatilishi ogohlantirilishi</string>
+    <string name="body_data_warning_notification">Siz trafigingizni %1$d%%sidan foydalandingiz</string>
+    <string name="body_app_data_warning_notification">Trafikdan %1$s foydalanilgan</string>
+    <string name="title_data_usage_notification">Bugun ishlatilgan trafik: %1$s</string>
+    <string name="body_data_usage_notification_loading">Yuklanmoqda</string>
+    <string name="label_data_remaining">%1$s qoldi</string>
+    <string name="label_data_remaining_used_excess">Qo\'shimcha %1$s foydalanilgan</string>
+    <string name="disable_battery_optimisation">Batereya optimizatsiyasini o\'chiring</string>
+    <string name="disable_battery_optimisation_body">Prevents killing Data Monitor when running in the background.\nAks holda ko\'rsatkichlarda xatolik bo\'lishi mumkin.</string>
+    <string name="extra_optimisation_tips">Qo\'shimcha optimizatsiya maslahatlari</string>
+    <string name="oem_battery_settings">OEM batareya sozlanmalari</string>
+    <string name="action_next">Keyingi</string>
+    <string name="overview_monday">Du</string>
+    <string name="overview_tuesday">Se</string>
+    <string name="overview_wednesday">Chor</string>
+    <string name="overview_thursday">Pay</string>
+    <string name="overview_friday">Ju</string>
+    <string name="overview_saturday">Shan</string>
+    <string name="overview_sunday">Yak</string>
+    <string name="overview_2gb_plus" translatable="false">2 GB+</string>
+    <string name="overview_2gb" translatable="false">2 GB</string>
+    <string name="overview_1_5gb" translatable="false">1.5 GB</string>
+    <string name="overview_1gb" translatable="false">1 GB</string>
+    <string name="overview_0_5gb" translatable="false">0.5 GB</string>
+    <string name="overview_0gb" translatable="false">0 GB</string>
+    <string name="label_translators">Tarjima qilganlar</string>
+    <string name="setup_app_data_usage_alert">Ilova ma\'lumoti ogohlantirishi</string>
+    <string name="title_app_data_limit">Ilova ma\'lumoti chegarasi</string>
+    <string name="network_diagnostics">Diagnostika</string>
+    <string name="run_diagnostics">Diagnostikani boshlash</string>
+    <string name="running_diagnostics">Diagnostika ishlamoqda</string>
+    <string name="connecting">Ulanmoqda</string>
+    <string name="testing_download">Yuklab olish tezligi test qilinmoqda</string>
+    <string name="testing_upload">Yuklash tezligi test qilinmoqda</string>
+    <string name="testing_latency">Tarmoq kechikishi test qilinmoqda</string>
+    <string name="current_connection">Hozdgi aloqa: %1$s</string>
+    <string name="network_stats">Tarmoq statistikasi</string>
+    <string name="network_speed_mbps">%1$s Mbit/s</string>
+    <string name="max_download_speed">Maksimal yuklab olish tezligi</string>
+    <string name="min_download_speed">Minimal yuklab olish tezligi</string>
+    <string name="avg_download_speed">O\'rtacha yukab olish tezligi</string>
+    <string name="max_upload_speed">Maksimal yuklash tezligi</string>
+    <string name="avg_upload_speed">O\'ryacha yuklash tezligi</string>
+    <string name="min_latency">Minimal kechikish</string>
+    <string name="network_latency_ms">%1$s ms</string>
+    <string name="avg_latency">O\'rtacha kechikish</string>
+    <string name="network_ip">Tarmoq IPsi</string>
+    <string name="isp">Tarmoq taminlovchisi</string>
+    <string name="connected_server">Ulangan server: %1$s</string>
+    <string name="isp_server">Server</string>
+    <string name="isp_region">Mintaqa</string>
+    <string name="swipe_right_to_delete">Elementlarni o\'chirish uchun o\'nga suring</string>
+    <string name="refresh_list">Yangilanish ro\'yxati</string>
+    <string name="no_network_connection">Tarmoq aloqasi aniqlanmadi!</string>
+    <string name="connection_error">Ulanib bo\'lmadi.\nIltimos internetga ulanganingizga ishonch hosil qiling.</string>
+    <string name="app_label_screen_time">Ekran vaqti: %1$s</string>
+    <string name="app_label_background_time">Fon ma\'lumoti: %1$s</string>
+    <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
+    <string name="ygorigor_summary">Rumin</string>
+    <string name="ygorigor" translatable="false">Igor Sorocean</string>
+    <string name="johnsonran_summary">Soddalashtirilgan Xitoy</string>
+    <string name="johnsonran" translatable="false">JohnsonRan</string>
+    <string name="label_want_to_contribute_language">Ilovani o\'z tilingizga tarjima qilish uchun buyerga bosing.</string>
+    <string name="current_language">Hozrgi</string>
+    <string name="available_languages">Mavjud</string>
+    <string name="label_reset_every_month">Har oy %1$s%2$s</string>
+    <string name="setup_usage_reset_date">Trafik yangilanish sanasi</string>
+    <string name="system_data_usage">Tizim trafigi</string>
+    <string name="cracky5322_summary">Milliy xitoy</string>
+    <string name="cracky5322" translatable="false">Jia-Bin</string>
+    <string name="louis_leblanc_summary">Fransuz</string>
+    <string name="louis_leblanc" translatable="false">Louis Leblanc</string>
+    <string name="network_speed_title">Tqrmoq tezligi: %1$s</string>
+    <string name="network_speed_upload">Yuklash: %1$s</string>
+    <string name="network_speed_download">Yuklab olish: %1$s</string>
+    <string name="network_signal_notification">Jonli tarmoq tezligi</string>
+    <string name="label_network_signal_notification_enabled">Jonli tarmoq tezligi yoqildi</string>
+    <string name="label_network_signal_notification_disabled">Jonli tarmoq tezligi o\'chirildi</string>
+    <string name="network_signal_summary">Beta funksiya</string>
+    <string name="read_phone_state_permission">Smartphone holatini o\'qish</string>
+    <string name="read_phone_state_body">Android 9 yoki undam baland qurilmalar ruxsatni qo\'lda tasdiqlashi kerak bo\'ladi. Shaxsiy ma\'lumotlar to\'planmaydi.</string>
+    <string name="action_permission_granted">Ruxsat berildi</string>
+    <string name="error_permission_denied">Ruxsat rad etildi. Iltimos ruxsatni qo\'lda tasdiqlang.</string>
+    <string name="telegram_support">Telegramdagi qo\'llab quvvatlash guruhi</string>
+    <string name="telegram_summary">Qo\'llab quvvatlash guruhiga qo\'shiling</string>
+    <string name="telegram_chat" translatable="false">https://t.me/datamonitor</string>
+    <string name="rate_app">Ilovani Google Playda baholang</string>
+    <string name="rate_app_summary">Sizning fikr-mulohazangiz qadrlanadi</string>
+    <string name="check_for_update">Yangilanishlarni tekshirish</string>
+    <string name="current_version">Joriy versiya: %1$s</string>
+    <string name="new_version">Yangi versiya: %1$s</string>
+    <string name="label_changelogs">Nimalar yangi ekanligini tekshirish</string>
+    <string name="no_update_available">Siz so\'ngi versiyadan foydalanmoqdasiz.</string>
+    <string name="label_update_available">Yangi versiya mavjud!</string>
+    <string name="label_download_update">Yangi versiyani yuklab oling</string>
+    <string name="checking_for_update">Yangilanishlar tekshirilmoqda…</string>
+    <string name="new_update_available">Yangi versiya mavjud!</string>
+    <string name="update_fetch_error">Yangilanishlarni olib bo\'lmadi</string>
+    <string name="settings_app_theme">Mavzu</string>
+    <string name="app_theme_summary">Ilova mavzusini tanlash</string>
+    <string name="theme_light">Yorug\'</string>
+    <string name="theme_dark">Qorong\'i</string>
+    <string name="theme_system">Tizim mavzusi asosida</string>
+    <string name="light_theme_summary">Yorug\' mavzu tanlandi</string>
+    <string name="dark_theme_summary">Qorong\'i mavzu tanlandi</string>
+    <string name="system_theme_summary">Tizim mavzusi tanlandi</string>
+    <string name="hudaifa_abdullah_summary">Arab</string>
+    <string name="hudaifa_abdullah" translatable="false">Hudaifa Abdullah</string>
+    <string name="license_summary">Ilova litsenziyalarini ko\'rish</string>
+    <string name="network_diagnostics_info">Tarmoq diagnostikasi 20–30 MB trafik aarflashi mumkin. Tarif rejangizda shuncha trafik borligiga ishonch hosil qiling, aks holda qo\'shimcha trafik sarflanishi mumkin.</string>
+    <string name="holydemon" translatable="false">HolyDemon</string>
+    <string name="holydemon_summary">Malay</string>
+    <string name="liviogasp" translatable="false">Liviogasp</string>
+    <string name="liviogasp_summary">Italyan</string>
+    <string name="comradekingu_summary">Tarjima uchun yordam</string>
+    <string name="comradekingu" translatable="false">Allan Nordhøy</string>
+    <string name="f_droid_page">F-Droid da ko\'ring</string>
+    <string name="f_droid_page_summary">Rasmiy ilova hisobotini F-Droid datekshirng</string>
+    <string name="label_crash_logs">Xatolik jurnallari</string>
+    <string name="label_device_info">Qurilma ma\'lumoti</string>
+    <string name="crash_report_body">Trafik monitorr ishdan chiqqanga o\'xshaydi. Muammoni tahlil qilish va uni tezroq hal qilish uchun dasturchiga xato hisobotini yuborishingiz mumkin.  Hech qanday nosozlik bo\'lmasa, e\'tibor bermayman.</string>
+    <string name="crash_report_title">Ishdan chiqish hisoboti</string>
+    <string name="device_info_content_label">Qurilma ma\'lumotida nimalar borligini ko\'ring</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="report_github_summary">Yangi xatolikni Github da oching</string>
+    <string name="report_telegram_summary">Xatolik jurnalini telegram guruhda menga yuboring</string>
+    <string name="report_mail_summary">Xatolik jurnalini Mail orqali yuboring</string>
+    <string name="mail_uri">mailto:%1$s?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="total_usage">Jami trafik: %1$s</string>
+    <string name="label_unknown">Noma\'lum</string>
+    <string name="auto_hide_live_network">Avtomatik tarzda tarmoq tezligini yashirish</string>
+    <string name="auto_hide_live_network_summary">Tarmoq unlanmaganda tarmoq tezligi bildirishnomasini to\'xtatish</string>
+    <string name="custom">Odatiy</string>
+    <string name="heading_data_reset_custom_counter">Yangilanish sanasi</string>
+    <string name="label_custom_start_date">Boshlanish sanasi: %1$d</string>
+    <string name="label_custom_end_date">Tugash sanasi: %1$d</string>
+    <string name="setup_usage_reset_date_custom_selected">Odatiy trafik rejasi faol</string>
+    <string name="title_data_plan_expired">Trafik rejasi tugadi!</string>
+    <string name="summary_data_plan_expired">Siz trafik rejangizni yangilashni xohlashingiz mumkin</string>
+    <string name="error_unknown_telegram_client">Telegram o\'rnatilmadi yoki noma\'lum mijoz mavjud. Please try another method.</string>
+    <string name="crash_logs_extra_text">Trafik nazorati xatolik jurnallari </string>
+    <string name="label_select_app">Ilovani tanlang</string>
+    <string name="label_crash_logs_share_chat">Chat bilan ulashish: @datamonitor</string>
+    <string name="crash_logs_warning">Xatolik jurnallari; O\'zgartirmang</string>
+    <string name="title_device_info_contents">Qurilma ma\'lumoti mazmuni</string>
+    <string name="device_info_body">Qurilma ma\'lumoti: \nQurilma ishlab chiqaruvchisi\nQurilma Brendi\nQurilma Modeli\nQurilma kodli nomi\nAndroid versiyasi\nProtsessor Modeli ni o\'z ichiga oladi</string>
+    <string name="label_crash_logs_copied">Xatolik jurnallari buferga nusxalandi</string>
+    <string name="label_mail">Mail</string>
+    <string name="battery_optimisation_enabled_info">Batareya optimizatsiyasi yoqildi. Bu Trafik Nazorati bilan birga ko\'rinadi. O\'chirish uchun bosing.</string>
+    <string name="label_battery_optimisation">Batareya optimizatsiyasi</string>
+    <string name="error_no_crash_logs">Xatolik jurnallari topilmadi. Xatolik yuz berganiga ishonchingiz komilmi?</string>
+    <string name="label_copy_logs">Jurnallarni nusxalash</string>
+    <string name="settings_network_diagnostics">Tarmoq diagnostikasi</string>
+    <string name="network_diagnostics_summary">Diagnostika serverini o\'zgartirish</string>
+    <string name="settings_diagnostics_server">Server</string>
+    <string name="settings_download_server">Yuklab olish serveri</string>
+    <string name="settings_upload_server">Yuklash serveri</string>
+    <string name="download_url_1_summary" translatable="false">http://speedtest.ftp.otenet.gr</string>
+    <string name="download_url_2_summary" translatable="false">https://github.com</string>
+    <string name="download_url_3_summary" translatable="false">http://xcal1.vodafone.co.uk</string>
+    <string name="upload_url_1_summary" translatable="false">https://www.azurespeed.com</string>
+    <string name="upload_url_2_summary" translatable="false">https://v2.convertapi.com</string>
+    <string name="upload_url_3_summary" translatable="false">https://easyupload.io</string>
+    <string name="custom_upload_url_hint">To\'liq yuklash serveri URL sini kiriting</string>
+    <string name="label_custom_server">Odatiy server</string>
+    <string name="custom_download_url_hint">To\'liq yuklab olish serveri URL sini kiriting</string>
+    <string name="label_custom_server_save_success">Server sozlanmalari saqlandi</string>
+    <string name="error_invaliid_url">Yaroqsuz yuklab olish URL si!</string>
+    <string name="error_url_verification_failed">URL ni tasdiqlab bo\'lmadi! Iltimos qaytadan urining yoki boshqa usulni sinab ko\'ring.</string>
+    <string name="comradekingu_translation_summary" translatable="false">Norwegian Bokmål</string>
+    <string name="metezd_summary" translatable="false">Turkish</string>
+    <string name="metezd" translatable="false">metezd</string>
+    <string name="eUgEntOptIc44" translatable="false">Jean-Luc Tibaux</string>
+    <string name="eUgEntOptIc44_summary" translatable="false">German</string>
+    <string name="ersen0" translatable="false">Oğuz Ersen</string>
+    <string name="ersen0_summary" translatable="false">Turkish</string>
+    <string name="AxusWizix" translatable="false">Axus Wizix</string>
+    <string name="AxusWizix_summary" translatable="false">Russian</string>
+    <string name="hectorgamer_summary" translatable="false">Portuguese</string>
+    <string name="hector_gamer" translatable="false">Hector Gamer</string>
+    <string name="BLENICeI_summary" translatable="false">Spanish</string>
+    <string name="BLENICeI" translatable="false">BLENICeI</string>
+    <string name="Igor_summary" translatable="false">Spanish</string>
+    <string name="Igor" translatable="false">Igor</string>
+    <string name="Denis_summary" translatable="false">Ukrainian</string>
+    <string name="Denis" translatable="false">Denis</string>
+    <string name="friedrich_summary" translatable="false">German</string>
+    <string name="friedrich" translatable="false">Friedrich</string>
+    <string name="helmut_summary" translatable="false">German</string>
+    <string name="helmut" translatable="false">Helmut</string>
+    <string name="kyoya_summary" translatable="false">Turkish</string>
+    <string name="kyoya" translatable="false">Kyoya</string>
+    <string name="paul_summary" translatable="false">German</string>
+    <string name="paul" translatable="false">Paul</string>
+    <string name="tobias_summary" translatable="false">German</string>
+    <string name="tobias" translatable="false">Tobias</string>
+</resources>
