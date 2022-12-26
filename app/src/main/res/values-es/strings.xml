@@ -347,4 +347,9 @@
     <string name="exclude_apps">Excluir aplicaciones</string>
     <string name="label_no_apps_added">No hay aplicaciones añadidas. Haga clic en el botón de abajo para añadir una aplicación.</string>
     <string name="title_remove_apps">¿Eliminar las aplicaciones seleccionadas\?</string>
+    <string name="save_results_summary">Guardar los resultados del diagnóstico de red</string>
+    <string name="action_select_all">Seleccionar todo</string>
+    <string name="diagnostics_history">Historial del diagnóstico</string>
+    <string name="settings_save_results">Guardar los resultados</string>
+    <string name="title_delete_results">¿Borrar los resultados seleccionados\?</string>
 </resources>
