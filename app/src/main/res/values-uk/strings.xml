@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Монітор даних</string>
     <string name="appwidget_text">"ЗРАЗОК"</string>
-    <string name="add_widget">"Додати пристосунок"</string>
+    <string name="add_widget">Додати віджет</string>
     <string name="notification_mobile_data_usage">"Мобільні дані : %1$s"</string>
     <string name="notification_wifi_data_usage">"Wifi : %1$s"</string>
     <string name="home_mobile_data_sent">%1$s
@@ -45,15 +45,15 @@
     <string name="option_5_min">"5 хвилин"</string>
     <string name="option_10_min">"10 хвилин"</string>
     <string name="option_15_min">"15 хвилин"</string>
-    <string name="title_widget_setup">"Запустити Пристосунок"</string>
-    <string name="widget_setup_step_1">"1. На Домашньому екрані нажміть й потримайте на вільній частині"</string>
+    <string name="title_widget_setup">Налаштувати віджет</string>
+    <string name="widget_setup_step_1">1. На Домашньому екрані натисніть й потримайте на вільній частині</string>
     <string name="heading_data_usage_today">"Сьогоднішнє використання даних"</string>
     <string name="title_setup">Запустити Монітор даних</string>
-    <string name="setup_widget">"Запустити пристосунок"</string>
+    <string name="setup_widget">Налаштувати віджет</string>
     <string name="setup_notification">"Запустити сповіщення"</string>
-    <string name="setup_widget_title">"Пристосунок"</string>
+    <string name="setup_widget_title">Віджет</string>
     <string name="refresh_interval_placeholder">"1 хвилина"</string>
-    <string name="setup_refresh_widget">"Оновити пристосунок"</string>
+    <string name="setup_refresh_widget">Оновити віджет</string>
     <string name="setup_notification_title">"Сповіщення"</string>
     <string name="setup_notification_refresh_interval">"Період оновлення сповіщення"</string>
     <string name="setup_show_wifi_usage">"Показати використання Wifi"</string>
@@ -78,7 +78,7 @@
     <string name="action_grant">"Надати дозвіл"</string>
     <string name="label_tethering">"Мобільна Точка Доступу"</string>
     <string name="battery_optimisation_disabled">"Оптимізація використання аккумулятора вимкнено"</string>
-    <string name="label_widget_refreshed">"Пристосунок оновлено"</string>
+    <string name="label_widget_refreshed">Віджет оновлено</string>
     <string name="month">"місяць"</string>
     <string name="day">"день"</string>
     <string name="body_data_usage_notification_loading">Завантаження…</string>
@@ -147,7 +147,7 @@
     <string name="usage_access_permission">Використати дозвіл на доступ</string>
     <string name="oem_skin_miui">Виявлений MIUI.</string>
     <string name="data_plan_saved">Тарифний план збережений</string>
-    <string name="upi_app_not_found">Спочатку встановіть додаток, який може це зробити</string>
+    <string name="upi_app_not_found">Спочатку встановіть застосунок, який може це зробити</string>
     <string name="upi_unknown_error">Невідома помилка.
 \nБудь ласка, спробуйте ще раз або використовуйте інший спосіб.</string>
     <string name="label_widget_refresh_interval_change">Віджет буде оновлюватися кожні %1$s</string>
@@ -172,7 +172,7 @@
     <string name="oem_battery_settings">Налаштування штатної батареї</string>
     <string name="action_next">Далі</string>
     <string name="label_translators">Перекладачі</string>
-    <string name="setup_app_data_usage_alert">Повідомлення про використання даних програми</string>
+    <string name="setup_app_data_usage_alert">Повідомлення про використання даних застосунку</string>
     <string name="current_language">Поточний</string>
     <string name="available_languages">Доступне</string>
     <string name="label_reset_every_month">%1$s%2$s кожного місяця</string>
@@ -268,19 +268,19 @@
     <string name="about_summary">Джерела, допомога та багато іншого</string>
     <string name="eth_address_copied">Адресу гаманця Ethereum скопійовано в буфер обміну</string>
     <string name="btc_address_copied">Адресу біткойн-гаманця скопійовано в буфер обміну</string>
-    <string name="oem_skin_warning">%1$s Будь ласка, перевірте додаткові поради щодо оптимізації, щоб додаток працював правильно.</string>
+    <string name="oem_skin_warning">%1$s Будь ласка, перевірте додаткові поради щодо оптимізації, щоб застосунок працював правильно.</string>
     <string name="label_removed">Віддалені застосунки</string>
     <string name="label_no_additional_lang">Натисніть тут, щоб допомогти перекласти застосунок.</string>
     <string name="label_notification_refresh_interval_change">Повідомлення буде оновлюватися кожні %1$s</string>
     <string name="ygorigor_summary">Румунська</string>
     <string name="refresh_widget_summary">Оновіть віджет, у разі виникнення будь-якої проблеми</string>
-    <string name="usage_access_body">Потрібен для запуску програми, оскільки збирає статистику використання додатків.
+    <string name="usage_access_body">Потрібен для запуску застосунку, оскільки збирає статистику використання застосунків.
 \nОсобисті дані не збираються.</string>
     <string name="label_add_data_plan_first">Будь ласка, спершу додайте тарифний план</string>
     <string name="label_notification_enabled">Сповіщення про Монітор даних увімкнено</string>
     <string name="body_app_data_warning_notification">%1$s вичерпала свою квоту даних</string>
     <string name="johnsonran_summary">Китайська (спрощений)</string>
-    <string name="label_want_to_contribute_language">Натисніть тут, щоб допомогти перекласти додаток вашою мовою.</string>
+    <string name="label_want_to_contribute_language">Натисніть тут, щоб допомогти перекласти застосунок вашою мовою.</string>
     <string name="read_phone_state_permission">Дозвіл на читання стану телефону</string>
     <string name="no_update_available">Ви використовуєте останню версію.</string>
     <string name="setup_usage_reset_date_custom_selected">Користувацький тарифний план активний</string>
@@ -310,9 +310,9 @@
     <string name="disable_haptics_summary">Вимкнення тактильного зворотного зв\'язку в застосунку</string>
     <string name="action_add_data_plan_home_summary">План передачі даних не знайдено! Додайте тарифний план, щоб почати його відстежувати.</string>
     <string name="widget_setup_step_3">3. Утримуванням перетягніть віджет Монітор даних на головний екран.</string>
-    <string name="label_want_to_contribute">Натисніть тут, щоб дізнатися, як зробити свій внесок у додаток Монітор даних.</string>
+    <string name="label_want_to_contribute">Натисніть тут, щоб дізнатися, як зробити свій внесок у Монітор даних.</string>
     <string name="read_phone_state_body">Пристроям під управлінням Android версії 9 і нижче, цей дозвіл необхідно надати вручну. Жодні особисті дані збиратися не будуть.</string>
-    <string name="title_app_data_limit">Обмеження даних додатків</string>
+    <string name="title_app_data_limit">Обмеження даних застосунків</string>
     <string name="crash_logs_warning">Журнали аварій; не змінювати</string>
     <string name="label_select_start_date">Виберіть дату початку</string>
     <string name="label_plan_end_date">Виберіть кінцеву дату</string>
