@@ -329,11 +329,11 @@
     <string name="metezd_summary" translatable="false">Turkish</string>
     <string name="metezd" translatable="false">metezd</string>
     <string name="eUgEntOptIc44" translatable="false">Jean-Luc Tibaux</string>
-    <string name="eUgEntOptIc44_summary" translatable="false">German</string>
+    <string name="eUgEntOptIc44_summary" translatable="false">German, Italian, French</string>
     <string name="ersen0" translatable="false">Oğuz Ersen</string>
     <string name="ersen0_summary" translatable="false">Turkish</string>
     <string name="AxusWizix" translatable="false">Axus Wizix</string>
-    <string name="AxusWizix_summary" translatable="false">Russian</string>
+    <string name="AxusWizix_summary" translatable="false">Russian, Ukrainian, Russian</string>
     <string name="hectorgamer_summary" translatable="false">Portuguese</string>
     <string name="hector_gamer" translatable="false">Hector Gamer</string>
     <string name="BLENICeI_summary" translatable="false">Spanish</string>
@@ -388,4 +388,24 @@
     <string name="save_results_summary">Save Network diagnostics results</string>
     <string name="title_delete_results">Delete selected results?</string>
     <string name="action_select_all">Select all</string>
+    <string name="Atalanttore_summary">German</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato_summary">Spanish</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105_summary">Ukrainian</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07_summary">Arabic</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya_summary">Hindi, Bhojpuri</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp_summary">Indonesian</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050_summary">Traditional Chinese, Portuguese, French, Norwegian Bokmål, Spanish, German, Romanian, Korean, Turkish, Simplified Chinese, Ukrainian, Hindi, Russian, Arabic</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi_summary">Arabic</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy_summary">Korean</string>
+    <string name="MarongHappy">JungHee Lee</string>
+    <string name="U1M450W_summary">Uzbek</string>
+    <string name="U1M450W">U1M450W</string>
 </resources>

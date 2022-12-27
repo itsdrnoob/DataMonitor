@@ -249,6 +249,131 @@
 
         </com.drnoob.datamonitor.core.base.Preference>
 
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="MarongHappy"
+            android:summary="@string/MarongHappy_summary"
+            android:title="@string/MarongHappy"
+            app:icon="@drawable/maronghappy"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_MarongHappy" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="Atalanttore"
+            android:summary="@string/Atalanttore_summary"
+            android:title="@string/Atalanttore"
+            app:icon="@drawable/atalanttore"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_AxusWizix" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="gallegonovato"
+            android:summary="@string/gallegonovato_summary"
+            android:title="@string/gallegonovato"
+            app:icon="@drawable/ersen0"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_gallegonovato" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="Kefir2105"
+            android:summary="@string/Kefir2105_summary"
+            android:title="@string/Kefir2105"
+            app:icon="@drawable/kefir2105"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_Kefir2105" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="rex07"
+            android:summary="@string/rex07_summary"
+            android:title="@string/rex07"
+            app:icon="@drawable/rex07"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_rex07" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="shailendramaurya"
+            android:summary="@string/shailendramaurya_summary"
+            android:title="@string/shailendramaurya"
+            app:icon="@drawable/shailendramaurya"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_shailendramaurya" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="iqb4lsp"
+            android:summary="@string/iqb4lsp_summary"
+            android:title="@string/iqb4lsp"
+            app:icon="@drawable/ersen0"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_iqb4lsp" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="Master2050"
+            android:summary="@string/Master2050_summary"
+            android:title="@string/Master2050"
+            app:icon="@drawable/ersen0"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_Master2050" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="bonbonboi"
+            android:summary="@string/bonbonboi_summary"
+            android:title="@string/bonbonboi"
+            app:icon="@drawable/bonbonboi"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_bonbonboi" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:key="U1M450W"
+            android:summary="@string/U1M450W_summary"
+            android:title="@string/U1M450W"
+            app:icon="@drawable/ic_person">
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
 </PreferenceScreen>
