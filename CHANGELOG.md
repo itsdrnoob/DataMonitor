@@ -3,6 +3,31 @@
 All notable changes to Data Monitor will be documented in this file.
 
 
+## v2.2.0
+
+Data Monitor v2.2.0 release <br>
+This release includes many changes and improvements.
+
+- Introducing Material You! A closer experience to your device with a new & revamped User Interface.
+- Users can now add applications to the Excluded apps list, which will exclude their traffic from the data plan.
+- The home screen now shows the amount of data left in the data plan.
+- An all new custom data plan option. Now users can choose any start/end date.
+- Added system language detection.
+- Result of network diagnostics will now be saved to diagnostics history. Can be disabled from settings.
+- Added the option to disable haptic feedback.
+- Improved widget flexibility
+- Added the option to combine Data usage and Network speed notifications into a single one.
+- Added a toggle to enable or disable notifications on lockscreen.
+- Updated the crash reporter for better crash logs.
+- A new popup for weekly overview quick look.
+- Now Mobile data/Wifi usage will not be included in total data usage in the notification if disabled in Setup.
+- Added 3 additional options to notification refresh interval (1 sec, 15 sec, 30 sec) when combined notification is enabled.
+- Fixed the crash caused by "," as the decimal seperator.
+- Added support for Hindi, Bhojpuri, Korean, Indonesian and Uzbek languages.
+- Updated app and gradle dependencies.
+- Reduced the app download size.
+
+
 ## v2.1.0
 
 Data Monitor v2.1.0 release <br>
