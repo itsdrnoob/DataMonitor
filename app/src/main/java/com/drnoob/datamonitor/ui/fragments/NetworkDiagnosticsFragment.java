@@ -19,6 +19,21 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
+import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
+import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_HISTORY_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_HISTORY_LIST;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.ISP;
+import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
+import static com.drnoob.datamonitor.core.Values.NETWORK_IP;
+import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.REGION;
+import static com.drnoob.datamonitor.core.Values.SERVER;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
@@ -40,6 +55,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -52,17 +68,25 @@ import androidx.preference.PreferenceManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.adapters.data.DiagnosticsHistoryModel;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.InetAddress;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+import java.util.Locale;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -75,26 +99,13 @@ import fr.bmartel.speedtest.utils.SpeedTestUtils;
 import io.ipinfo.api.IPinfo;
 import io.ipinfo.api.model.IPResponse;
 
-import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
-import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
-import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.core.Values.ISP;
-import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
-import static com.drnoob.datamonitor.core.Values.NETWORK_IP;
-import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.REGION;
-import static com.drnoob.datamonitor.core.Values.SERVER;
-
 @Keep
 public class NetworkDiagnosticsFragment extends Fragment {
     private static final String TAG = NetworkDiagnosticsFragment.class.getSimpleName();
 
     private TextView runDiagnostics,
-            diagnosticsInfo,
             currentTest;
+    private LinearLayout diagnosticsInfo, history;
     public static TextView currentConnectionType;
     private LottieAnimationView rippleView,
             currentTestAnim;
@@ -156,6 +167,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
         diagnosticsView = view.findViewById(R.id.test_view);
         diagnosticsRunning = view.findViewById(R.id.diagnostics_running);
         currentConnectionType = view.findViewById(R.id.current_connection);
+        history = view.findViewById(R.id.history);
 
         mMeterView = view.findViewById(R.id.meter_view);
         mNeedle = view.findViewById(R.id.needle);
@@ -166,7 +178,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
         mUploadSpeeds = new ArrayList<>();
         mLatencies = new ArrayList<>();
 
-        mNetworkChangeMonitor = new NetworkChangeMonitor(Objects.requireNonNull(getActivity()));
+        mNetworkChangeMonitor = new NetworkChangeMonitor(requireActivity());
 
         mNetworkChangeMonitor.startMonitor();
         setConnectionStatus();
@@ -184,9 +196,9 @@ public class NetworkDiagnosticsFragment extends Fragment {
                     rippleView.setVisibility(View.INVISIBLE);
 //                currentConnectionType.setVisibility(View.GONE);
 
-                if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
-                    speedTest = new SpeedTest(getActivity());
-                }
+                    if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
+                        speedTest = new SpeedTest(getActivity());
+                    }
 //                new SpeedTest(requireActivity()).execute();
 //                speedTest = new SpeedTest(getActivity());
 //                    Log.e(TAG, "onClick: " + speedTest.getStatus() );
@@ -194,10 +206,18 @@ public class NetworkDiagnosticsFragment extends Fragment {
                 }
                 else {
                     Snackbar.make(view, getString(R.string.no_network_connection),
-                            Snackbar.LENGTH_SHORT).setAnchorView(Objects.requireNonNull(getActivity())
+                            Snackbar.LENGTH_SHORT).setAnchorView(requireActivity()
                             .findViewById(R.id.bottomNavigationView)).show();
                 }
 
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ContainerActivity.class)
+                        .putExtra(GENERAL_FRAGMENT_ID, DIAGNOSTICS_HISTORY_FRAGMENT));
             }
         });
 
@@ -348,7 +368,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             onPostExecute("complete");
 
                                         }
-                                    catch (IOException e) {
+                                        catch (IOException e) {
                                             e.printStackTrace();
                                         }
 
@@ -460,6 +480,20 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                         })
                                         .start();
 
+                                currentConnectionType.animate()
+                                        .alpha(0f)
+                                        .setListener(new AnimatorListenerAdapter() {
+                                            @Override
+                                            public void onAnimationEnd(Animator animation) {
+                                                history.setVisibility(View.GONE);
+                                                super.onAnimationEnd(animation);
+                                                currentConnectionType.animate()
+                                                        .alpha(1f)
+                                                        .start();
+                                            }
+                                        })
+                                        .start();
+
                                 diagnosticsView.animate()
                                         .translationY(((getView().getPivotY()) - 300) * -1)
                                         .alpha(0f)
@@ -521,12 +555,21 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                         @Override
                                         public void onAnimationEnd(Animator animation) {
                                             super.onAnimationEnd(animation);
-                                            currentTestAnim.setVisibility(View.VISIBLE);
                                             currentTestAnim.playAnimation();
                                             currentTestAnim.animate()
                                                     .scaleX(1)
                                                     .scaleY(1)
                                                     .alpha(1)
+                                                    .setListener(new AnimatorListenerAdapter() {
+                                                        @Override
+                                                        public void onAnimationStart(Animator animation) {
+                                                            super.onAnimationStart(animation);
+                                                            currentTestAnim.setAlpha(0f);
+                                                            currentTestAnim.setVisibility(View.VISIBLE);
+                                                            currentTestAnim.setScaleX(0.8f);
+                                                            currentTestAnim.setScaleY(0.8f);
+                                                        }
+                                                    })
                                                     .start();
 
                                             mMeterView.setVisibility(View.GONE);
@@ -538,18 +581,17 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                         @Override
                                         public void onAnimationStart(Animator animation) {
                                             super.onAnimationStart(animation);
-                                            currentTestAnim.setScaleX(0.8f);
-                                            currentTestAnim.setScaleY(0.8f);
-                                            currentTestAnim.setAlpha(0f);
+
                                         }
                                     })
                                     .start();
                             mCurrentSpeed.setText(activity.getString(R.string.network_speed_mbps, "0.00"));
                             currentTest.setText(activity.getString(R.string.testing_latency));
+
                             break;
 
                         case "connection_error":
-                            Snackbar.make(Objects.requireNonNull(getView()),
+                            Snackbar.make(requireView(),
                                     activity.getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
                                     .setAnchorView(activity.findViewById(R.id.bottomNavigationView))
                                     .show();
@@ -559,6 +601,20 @@ public class NetworkDiagnosticsFragment extends Fragment {
                             diagnosticsInfo.setVisibility(View.VISIBLE);
                             diagnosticsInfo.animate()
                                     .translationY(0)
+                                    .start();
+
+                            currentConnectionType.animate()
+                                    .alpha(0f)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            history.setVisibility(View.VISIBLE);
+                                            super.onAnimationEnd(animation);
+                                            currentConnectionType.animate()
+                                                    .alpha(1f)
+                                                    .start();
+                                        }
+                                    })
                                     .start();
 
                             diagnosticsView.setAlpha(0f);
@@ -694,6 +750,51 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                                 startActivity(intent);
                                             }
 
+                                            boolean saveResults = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                                    .getBoolean("save_results", true);
+                                            if (saveResults) {
+                                                Date date = new Date();
+                                                String day = new SimpleDateFormat("EE", Locale.getDefault()).format(date.getTime());
+                                                String dayOfMonth = new SimpleDateFormat("dd", Locale.getDefault()).format(date.getTime());
+                                                String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date.getTime());
+                                                String year = new SimpleDateFormat("yyyy", Locale.getDefault()).format(date.getTime());
+                                                String time = DateFormat.getTimeInstance(DateFormat.SHORT).format(date.getTime());
+                                                String isp = mIpResponse.getOrg().replace(mIpResponse.getOrg().split(" ")[0], "") == null ?
+                                                        requireContext().getString(R.string.label_unknown) :
+                                                        mIpResponse.getOrg().replace(mIpResponse.getOrg().split(" ")[0], "");
+                                                String resultDate = day + " " + dayOfMonth + " " + month + " " + year + " " + time;
+                                                DiagnosticsHistoryModel result = new DiagnosticsHistoryModel(
+                                                        System.currentTimeMillis(),
+                                                        resultDate,
+                                                        requireContext().getString(R.string.network_speed_mbps, String.format("%.2f", mDownloadSpeed))
+                                                                + "  |  " +
+                                                                requireContext().getString(R.string.network_speed_mbps, String.format("%.2f", mUploadSpeed)),
+                                                        String.format("%.2f", mDownloadSpeed),
+                                                        String.format("%.2f", mUploadSpeed),
+                                                        String.valueOf(mMinLatency),
+                                                        String.valueOf(mLatency),
+                                                        mIpResponse.getIp(),
+                                                        isp,
+                                                        mIpResponse.getCity(),
+                                                        mIpResponse.getRegion()
+                                                );
+
+                                                Gson gson = new Gson();
+                                                Type type = new TypeToken<List<DiagnosticsHistoryModel>>() {}.getType();
+                                                List<DiagnosticsHistoryModel> list = new ArrayList<>();
+                                                String jsonData = SharedPreferences.getDiagnosticsHistoryPrefs(requireContext())
+                                                                .getString(DIAGNOSTICS_HISTORY_LIST, null);
+                                                if (jsonData != null) {
+                                                    list.addAll(gson.fromJson(jsonData, type));
+                                                }
+                                                list.add(result);
+
+                                                jsonData = gson.toJson(list, type);
+                                                SharedPreferences.getDiagnosticsHistoryPrefs(requireContext()).edit()
+                                                        .putString(DIAGNOSTICS_HISTORY_LIST, jsonData)
+                                                        .apply();
+                                            }
+
                                         }
                                     }).start();
 
@@ -702,6 +803,20 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     diagnosticsInfo.setVisibility(View.VISIBLE);
                                     diagnosticsInfo.animate()
                                             .translationY(0)
+                                            .start();
+
+                                    currentConnectionType.animate()
+                                            .alpha(0f)
+                                            .setListener(new AnimatorListenerAdapter() {
+                                                @Override
+                                                public void onAnimationEnd(Animator animation) {
+                                                    history.setVisibility(View.VISIBLE);
+                                                    super.onAnimationEnd(animation);
+                                                    currentConnectionType.animate()
+                                                            .alpha(1f)
+                                                            .start();
+                                                }
+                                            })
                                             .start();
 
                                     diagnosticsView.setAlpha(0f);
@@ -759,6 +874,20 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                             .translationY(0)
                                             .start();
 
+                                    currentConnectionType.animate()
+                                            .alpha(0f)
+                                            .setListener(new AnimatorListenerAdapter() {
+                                                @Override
+                                                public void onAnimationEnd(Animator animation) {
+                                                    history.setVisibility(View.VISIBLE);
+                                                    super.onAnimationEnd(animation);
+                                                    currentConnectionType.animate()
+                                                            .alpha(1f)
+                                                            .start();
+                                                }
+                                            })
+                                            .start();
+
                                     currentTestAnim.animate()
                                             .alpha(0f)
                                             .setListener(new AnimatorListenerAdapter() {
@@ -798,7 +927,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                                 }
                                             })
                                             .start();
-                                    Snackbar.make(Objects.requireNonNull(getView()),
+                                    Snackbar.make(requireView(),
                                             activity.getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
                                             .setAnchorView(activity.findViewById(R.id.bottomNavigationView))
                                             .show();
@@ -847,7 +976,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
 
     public float getPositionByRate(float rate) {
         if (rate >= 0 && rate <= 30) {
-            return rate * 6;
+            return (float) (rate * 5.6);
         }
         else if (rate >= 30 && rate <= 50) {
             return (float) ((rate - 30) * 1.5) + 180;
@@ -873,7 +1002,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
     }
 
     private void setConnectionStatus() {
-        switch (getConnectivityStatus(Objects.requireNonNull(getContext()))) {
+        switch (getConnectivityStatus(requireContext())) {
             case ConnectivityManager.TYPE_MOBILE:
                 mCurrentConnectionType = "Mobile Data";
                 break;
@@ -965,7 +1094,12 @@ public class NetworkDiagnosticsFragment extends Fragment {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setConnectionStatus();
+                    try {
+                        setConnectionStatus();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }

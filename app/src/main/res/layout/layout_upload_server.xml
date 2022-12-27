@@ -4,114 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_background">
+    android:background="@android:color/transparent">
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="45dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/bottom_sheet_handle_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView7"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        android:gravity="center"
-        android:paddingStart="@dimen/margin_medium"
-        android:paddingEnd="@dimen/margin_medium"
-        android:text="@string/settings_upload_server"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view3" />
-
-    <RadioGroup
-        android:id="@+id/upload_server_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:background="@drawable/bottom_sheet_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/server_1"
+        <View
+            android:id="@+id/view3"
+            android:layout_width="45dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/bottom_sheet_handle_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="@string/settings_upload_server"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
+
+        <RadioGroup
+            android:id="@+id/upload_server_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+            <RadioButton
+                android:id="@+id/server_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:paddingLeft="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:checked="true"
+                android:text="@string/upload_url_1_summary" />
+
+            <RadioButton
+                android:id="@+id/server_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:paddingLeft="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:text="@string/upload_url_2_summary" />
+
+            <RadioButton
+                android:id="@+id/server_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:paddingLeft="@dimen/margin_large"
+                android:buttonTint="@color/primary"
+                android:text="@string/upload_url_3_summary" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_mid_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/label_custom_server"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upload_server_group" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/custom_server_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginEnd="@dimen/margin_large"
-            android:paddingLeft="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:checked="true"
-            android:text="@string/upload_url_1_summary" />
+            android:layout_marginTop="@dimen/margin_medium"
+            android:hint="@string/custom_upload_url_hint"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" >
 
-        <RadioButton
-            android:id="@+id/server_2"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/custom_server"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="text"
+                android:paddingStart="@dimen/padding_medium"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/bottom_sheet_footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:paddingLeft="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:text="@string/upload_url_2_summary" />
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@+id/custom_server_view" />
 
-        <RadioButton
-            android:id="@+id/server_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:paddingLeft="@dimen/margin_large"
-            android:buttonTint="@color/primary"
-            android:text="@string/upload_url_3_summary" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RadioGroup>
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_mid_large"
-        android:layout_marginTop="@dimen/margin_large"
-        android:text="@string/label_custom_server"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload_server_group" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/custom_server_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:hint="@string/custom_upload_url_hint"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/custom_server"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:inputType="text"
-            android:paddingStart="@dimen/padding_medium"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <include
-        android:id="@+id/footer"
-        layout="@layout/bottom_sheet_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
-        app:layout_constraintTop_toBottomOf="@+id/custom_server_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

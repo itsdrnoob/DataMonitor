@@ -10,147 +10,137 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/margin_mid_large">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_extra_small"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/network_ip_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/network_ip"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
             <TextView
                 android:id="@+id/network_ip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/network_ip_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin_extra_small"
                 android:textColor="@color/primary"
-                android:text="127.63.1.1"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/isp_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/isp"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
 
             <TextView
                 android:id="@+id/isp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/isp_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
                 android:textColor="@color/primary"
-                android:text="Reliance Jio"/>
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/isp_server_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/isp_server"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
 
             <TextView
                 android:id="@+id/isp_server"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/isp_server_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
-                android:textColor="@color/primary"
-                android:text="Cochin"/>
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/primary"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/isp_region_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/isp_region"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
 
             <TextView
                 android:id="@+id/isp_region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_toEndOf="@id/isp_region_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/primary"
-                android:text="Kerala"/>
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/primary"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
@@ -184,42 +174,40 @@
                 android:textColor="@color/primary"
                 android:text="@string/network_speed_mbps"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/avg_download_speed_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/avg_download_speed"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
 
             <TextView
                 android:id="@+id/avg_download_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/avg_download_speed_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/primary"
                 android:text="@string/network_speed_mbps"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -257,110 +245,104 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/avg_upload_speed_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/avg_upload_speed"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
 
             <TextView
                 android:id="@+id/avg_upload_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/avg_upload_speed_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/primary"
                 android:text="@string/network_speed_mbps"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/min_latency_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/min_latency"
-                android:textSize="@dimen/text_mid_large"/>
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
 
             <TextView
                 android:id="@+id/min_latency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/min_latency_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/primary"
                 android:text="@string/network_latency_ms"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginBottom="@dimen/margin_extra_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/selectable_item_plain_background"
-            android:padding="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_mid_large"
+            android:paddingEnd="@dimen/margin_mid_large"
             android:clickable="true"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/avg_latency_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:padding="@dimen/margin_medium"
                 android:text="@string/avg_latency"
-                android:textSize="@dimen/text_mid_large"/>
-
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
+§
             <TextView
                 android:id="@+id/avg_latency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/avg_latency_title"
-                android:gravity="end"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin_extra_small"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/primary"
                 android:text="@string/network_speed_mbps"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

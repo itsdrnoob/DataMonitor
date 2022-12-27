@@ -104,7 +104,7 @@
     <string name="donate">Bağış</string>
     <string name="contributors">Katkıda Bulunanlar</string>
     <string name="dark_mode_summary">Koyu modu açma/kapatma</string>
-    <string name="language_summary">Uygulama dilini değiştirir</string>
+    <string name="language_summary">Uygulama dilini değiştir</string>
     <string name="about_summary">Kaynak, yardım ve daha fazlası</string>
     <string name="donate_summary">Bize bir kahve ısmarlar mısın\?</string>
     <string name="data_reset">Veri sıfırlama</string>
@@ -256,4 +256,64 @@
     <string name="label_reset_every_month">Her ayın %1$s%2$s</string>
     <string name="f_droid_page">Uygulamayı F-Droid\'de görüntüle</string>
     <string name="f_droid_page_summary">Uygulamaya resmi F-Droid deposunda göz atın</string>
+    <string name="device_info_content_label">Cihaz bilgileri\'ne nelerin dahil olduğunu görme</string>
+    <string name="total_usage">Toplam kullanım: %1$s</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;konu=%2$s&amp;body=%3$s</string>
+    <string name="label_unknown">Bilinmiyor</string>
+    <string name="network_diagnostics_summary">Teşhis sunucusunu değiştir</string>
+    <string name="settings_diagnostics_server">Sunucu</string>
+    <string name="settings_download_server">İndirme sunucusu</string>
+    <string name="custom_upload_url_hint">Tam yükleme URL\'sini girin</string>
+    <string name="label_device_info">Cihaz bilgisi</string>
+    <string name="crash_report_title">Çökme Raporu</string>
+    <string name="report_github_summary">Github\'da yeni bir sayı açma</string>
+    <string name="heading_data_reset_custom_counter">Plan geçerliliği</string>
+    <string name="error_unknown_telegram_client">Telegram yüklü değil veya bilinmeyen istemci mevcut. Lütfen başka bir yöntem deneyin.</string>
+    <string name="label_select_app">Uygulama seç</string>
+    <string name="label_crash_logs">Çökme günlükleri</string>
+    <string name="crash_report_body">Data Monitor çökmüş gibi görünüyor. Sorunu analiz etmeye ve daha hızlı çözmeye yardımcı olması için kilitlenme raporunu geliştiriciye gönderebilirsiniz. Herhangi bir kaza meydana gelmediyse, lütfen görmezden gelin.</string>
+    <string name="label_telegram">Telegram</string>
+    <string name="report_telegram_summary">Kilitlenme raporunu Telegram destek sohbetinde gönderin</string>
+    <string name="auto_hide_live_network">Ağ hızını otomatik gizle</string>
+    <string name="custom">Özel biçim</string>
+    <string name="crash_logs_extra_text">Veri İzleyicisi kilitlenme günlükleri</string>
+    <string name="label_crash_logs_share_chat">Sohbet için paylaşın: @datamonitor</string>
+    <string name="label_mail">Posta</string>
+    <string name="settings_upload_server">Yükleme sunucusu</string>
+    <string name="error_invalid_plan">Geçersiz plan!</string>
+    <string name="label_send_report">Raporunuzu şu yolla gönderin</string>
+    <string name="label_permission_denied">İzin reddedildi!</string>
+    <string name="notification_permission_denied_body">Veri izleme bildirimi, Canlı ağ hızı ve Veri kullanım uyarısı gibi özellikler, bildirim izni olmadan düzgün çalışmayacaktır. Lütfen manuel olarak izin verin.</string>
+    <string name="settings_disable_haptics">Haptikleri devre dışı bırak</string>
+    <string name="action_dismiss">Yoksay</string>
+    <string name="action_add_data_plan_home_summary">Veri planı bulunamadı! İzlemeye başlamak için bir veri planı ekleyin.</string>
+    <string name="title_data_plan_expired">Veri planının süresi doldu!</string>
+    <string name="report_mail_summary">Kilitlenme raporunu postayla gönderin</string>
+    <string name="label_custom_end_date">Bitiş tarihi: %1$s</string>
+    <string name="summary_data_plan_expired">Planınızı güncellemek isteyebilirsiniz</string>
+    <string name="device_info_body">Cihaz bilgileri şunları içerir:
+\nCihaz Üreticisi
+\nCihaz Markası
+\nCihaz Modeli
+\nCihaz Kod Adı
+\nAndroid Sürümü</string>
+    <string name="settings_network_diagnostics">Ağ teşhisi</string>
+    <string name="label_custom_start_date">Başlangıç tarihi: %1$s</string>
+    <string name="label_select_start_date">Başlangıç tarihini seçin</string>
+    <string name="label_plan_end_date">Bitiş tarihini seçin</string>
+    <string name="crash_logs_warning">Kilitlenme Günlükleri; Değiştirme</string>
+    <string name="title_device_info_contents">Cihaz bilgisi içerikleri</string>
+    <string name="label_crash_logs_copied">Kilitlenme günlükleri panoya kopyalandı</string>
+    <string name="battery_optimisation_enabled_info">Pil optimizasyonu etkindir. Bu, Veri İzleyicisi\'nin çalışmasını engeller. Devre dışı bırakmak için tıklayın.</string>
+    <string name="error_no_crash_logs">Kilitlenme günlüğü bulunamadı. Bir çökme meydana geldiğinden emin misiniz\?</string>
+    <string name="label_custom_server">Özel sunucu</string>
+    <string name="custom_download_url_hint">İndirme URL\'sinin tamamını girin</string>
+    <string name="label_custom_server_save_success">Sunucu tercihi kaydedildi</string>
+    <string name="error_invaliid_url">Geçersiz indirme URL\'si!</string>
+    <string name="error_url_verification_failed">URL doğrulanamadı! Lütfen tekrar deneyin veya farklı bir tane kullanın.</string>
+    <string name="auto_hide_live_network_summary">Ağ bağlı değilken ağ hızı bildirimini durdur</string>
+    <string name="setup_usage_reset_date_custom_selected">Özel veri planı etkin</string>
+    <string name="label_battery_optimisation">Akü optimizasyonu</string>
+    <string name="disable_haptics_summary">Uygulama genelinde dokunsal geri bildirimi devre dışı bırakın</string>
+    <string name="label_copy_logs">Günlükleri kopyala</string>
 </resources>

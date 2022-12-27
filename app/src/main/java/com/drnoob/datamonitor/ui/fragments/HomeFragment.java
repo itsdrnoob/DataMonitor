@@ -19,6 +19,38 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.Common.UTCToLocal;
+import static com.drnoob.datamonitor.Common.localToUTC;
+import static com.drnoob.datamonitor.Common.setBoldSpan;
+import static com.drnoob.datamonitor.Common.setDataPlanNotification;
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
+import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
+import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.LIMIT;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SHOW_ADD_PLAN_BANNER;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.setRefreshAppDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.updateOverview;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.appwidget.AppWidgetManager;
@@ -34,6 +66,7 @@ import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,8 +74,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,47 +87,30 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.skydoves.progressview.ProgressView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
-import static com.drnoob.datamonitor.Common.setDataPlanNotification;
-import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
-import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
-import static com.drnoob.datamonitor.core.Values.DATA_TYPE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.core.Values.LIMIT;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
-import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.updateOverview;
-import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMajor;
-import static com.drnoob.datamonitor.utils.VibrationUtils.hapticMinor;
 
 
 public class HomeFragment extends Fragment implements View.OnLongClickListener {
@@ -102,7 +118,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private static final int MODE_LOAD_OVERVIEW = 0;
     private static final int MODE_REFRESH_OVERVIEW = 1;
 
-    private RelativeLayout mSetupDataPlan;
+    private LinearLayout mSetupDataPlan;
+    private ConstraintLayout mGraphView;
+    private MaterialButton mDismissPlanBanner, mAddDataPlan;
     private TextView mMobileDataUsage,
             mMobileDataSent,
             mMobileDataReceived,
@@ -115,14 +133,14 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private static ProgressView mMobileMon, mMobileTue, mMobileWed, mMobileThurs, mMobileFri, mMobileSat, mMobileSun,
             mWifiMon, mWifiTue, mWifiWed, mWifiThurs, mWifiFri, mWifiSat, mWifiSun;
     private LinearLayout mMonView, mTueView, mWedView, mThursView, mFriView, mSatView, mSunView;
-    private LinearLayout mQuickView;
-    private TextView mQuickViewMobile, mQuickViewWifi;
     private static ConstraintLayout mOverview;
     private static ConstraintLayout mOverviewLoading;
     private static ImageView mRefreshOverview;
     private static Context mContext;
     private static List<OverviewModel> mList = new ArrayList<>();
     private boolean openQuickView = false;
+    private TextView mDataRemaining;
+    private Long planStartDateMillis, planEndDateMillis;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -154,6 +172,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         mSetupDataPlan = view.findViewById(R.id.setup_data_plan);
+        mGraphView = view.findViewById(R.id.graph_view);
+        mDismissPlanBanner = view.findViewById(R.id.dismiss_add_plan_banner);
+        mAddDataPlan = view.findViewById(R.id.add_data_plan);
         mMobileDataUsage = view.findViewById(R.id.mobile_data_usage);
         mMobileDataSent = view.findViewById(R.id.mobile_data_sent);
         mMobileDataReceived = view.findViewById(R.id.mobile_data_received);
@@ -162,13 +183,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         mWifiFataReceived = view.findViewById(R.id.wifi_data_received);
         mMobileDataUsageToday = view.findViewById(R.id.data_usage_mobile_today);
         mWifiUsageToday = view.findViewById(R.id.data_usage_wifi_today);
+        mDataRemaining = view.findViewById(R.id.home_data_remaining);
 
         mOverview = view.findViewById(R.id.overview);
         mOverviewLoading = view.findViewById(R.id.overview_loading);
-
-        mQuickView = view.findViewById(R.id.overview_quick_view);
-        mQuickViewMobile = view.findViewById(R.id.mobile_data_quick_view);
-        mQuickViewWifi = view.findViewById(R.id.wifi_quick_view);
 
         mMobileMon = mOverview.findViewById(R.id.progress_mobile_mon);
         mMobileTue = mOverview.findViewById(R.id.progress_mobile_tue);
@@ -205,12 +223,20 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         mRefreshOverview = view.findViewById(R.id.overview_refresh);
 
         updateData();
+        updateDataBalance();
         refreshOverview();
 
+        mMobileDataUsage.setSelected(true);
+        mWifiDataUsage.setSelected(true);
+
+        boolean showPlanBanner = PreferenceManager.getDefaultSharedPreferences(getContext())
+                .getBoolean(SHOW_ADD_PLAN_BANNER, true);
+
         if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getFloat(DATA_LIMIT, -1) > 0) {
+                .getFloat(DATA_LIMIT, -1) > 0 || !showPlanBanner) {
             mSetupDataPlan.setVisibility(View.GONE);
-        } else {
+        }
+        else {
             mSetupDataPlan.setVisibility(View.VISIBLE);
         }
 
@@ -219,19 +245,31 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             public void onClick(View v) {
                 mRefreshOverview.animate().rotation(720).setDuration(1000)
                         .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        mRefreshOverview.setRotation(0);
-                    }
-                });
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                mRefreshOverview.setRotation(0);
+                            }
+                        });
 //                refreshOverview();
                 UpdateOverview updateOverview = new UpdateOverview(MODE_REFRESH_OVERVIEW);
                 updateOverview.execute();
             }
         });
 
-        mSetupDataPlan.setOnClickListener(new View.OnClickListener() {
+
+//        if (mobile != null && mobile.length > 0) {
+//
+//        }
+//        else {
+//            Log.d(TAG, "onCreateView: refreshing data");
+//            updateData();
+//        }
+
+
+
+
+        mAddDataPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
@@ -239,11 +277,12 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
                 LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
                 RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
+                TextInputLayout dataLimitView = dialogView.findViewById(R.id.data_limit_view);
                 TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
                 TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
-                RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
-                TextView customStartDate = dialogView.findViewById(R.id.custom_start_date);
-                TextView customEndDate = dialogView.findViewById(R.id.custom_end_date);
+//                RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
+                TextView planStartDate = dialogView.findViewById(R.id.custom_start_date);
+                TextView planEndDate = dialogView.findViewById(R.id.custom_end_date);
                 ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                 TextView cancel = footer.findViewById(R.id.cancel);
                 TextView ok = footer.findViewById(R.id.ok);
@@ -251,20 +290,92 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 Calendar calendar = Calendar.getInstance();
                 int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-                customDateSlider.setValueTo((float) daysInMonth);
+//                customDateSlider.setValueTo((float) daysInMonth);
 
-                int start = PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
-                int end = PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getInt(DATA_RESET_CUSTOM_DATE_END, daysInMonth);
+                planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getLong(DATA_RESET_CUSTOM_DATE_START, MaterialDatePicker.todayInUtcMilliseconds());
+                planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
 
-                List<Float> sliderValues = new ArrayList<>();
-                sliderValues.add((float) start);
-                sliderValues.add((float) end);
-                customDateSlider.setValues(sliderValues);
 
-                customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
-                customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
+                String planStart = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
+                String planEnd = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
+                String startDateToday = getContext().getString(R.string.label_custom_start_date, planStart);
+                String endDateToday = getContext().getString(R.string.label_custom_end_date, planEnd);
+                planStartDate.setText(setBoldSpan(startDateToday, planStart));
+                planEndDate.setText(setBoldSpan(endDateToday, planEnd));
+
+                planStartDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        calendar.setTimeInMillis(new Date().getTime());
+                        calendar.add(Calendar.YEAR, -2);
+                        long startYear = calendar.getTimeInMillis();
+                        calendar.add(Calendar.YEAR, 2);
+                        long endYear = calendar.getTimeInMillis();
+
+                        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder()
+                                .setStart(startYear)
+                                .setEnd(endYear)
+                                .setValidator(DateValidatorPointBackward.now());
+
+                        MaterialDatePicker startDatePicker =
+                                MaterialDatePicker.Builder.datePicker()
+                                        .setSelection(localToUTC(planStartDateMillis))
+                                        .setTitleText(getContext().getString(R.string.label_select_start_date))
+                                        .setCalendarConstraints(constraintsBuilder.build())
+                                        .build();
+
+                        startDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                            @Override
+                            public void onPositiveButtonClick(Object selection) {
+                                planStartDateMillis = Long.parseLong(selection.toString());
+                                planStartDateMillis = UTCToLocal(planStartDateMillis);
+                                String date = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
+                                String startDateString = getContext().getString(R.string.label_custom_start_date, date);
+                                planStartDate.setText(setBoldSpan(startDateString, date));
+                            }
+                        });
+
+                        startDatePicker.show(getChildFragmentManager(), startDatePicker.toString());
+                    }
+                });
+
+                planEndDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        calendar.setTimeInMillis(new Date().getTime());
+//                            calendar.add(Calendar.YEAR, -2);
+                        long startYear = calendar.getTimeInMillis();
+                        calendar.add(Calendar.YEAR, 2);
+                        long endYear = calendar.getTimeInMillis();
+
+                        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder()
+                                .setStart(startYear)
+                                .setEnd(endYear)
+                                .setValidator(DateValidatorPointForward.now());
+
+                        MaterialDatePicker endDatePicker =
+                                MaterialDatePicker.Builder.datePicker()
+                                        .setSelection(localToUTC(planEndDateMillis))
+                                        .setTitleText(getContext().getString(R.string.label_plan_end_date))
+                                        .setCalendarConstraints(constraintsBuilder.build())
+                                        .build();
+
+                        endDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                            @Override
+                            public void onPositiveButtonClick(Object selection) {
+                                planEndDateMillis = Long.parseLong(selection.toString());
+                                planEndDateMillis = UTCToLocal(planEndDateMillis) + 86399999;   // 86,399,999 is added to change the time to 23:59:59
+                                String date = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
+                                String endDateString = getContext().getString(R.string.label_custom_end_date, date);
+                                planEndDate.setText(setBoldSpan(endDateString, date));
+                            }
+                        });
+
+                        endDatePicker.show(getChildFragmentManager(), endDatePicker.toString());
+                    }
+                });
 
                 dataTypeSwitcher.selectTab(dataTypeSwitcher.getTabAt(PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getInt(DATA_TYPE, 0)));
@@ -272,7 +383,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
-                        VibrationUtils.hapticMinor(getContext());
+                        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("disable_haptics", false)) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
                     }
 
                     @Override
@@ -282,21 +396,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
                     @Override
                     public void onTabReselected(TabLayout.Tab tab) {
-
-                    }
-                });
-
-                customDateSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-                    @Override
-                    public void onValueChange(@NonNull @NotNull RangeSlider slider, float value, boolean fromUser) {
-                        if (fromUser) {
-                            VibrationUtils.hapticMinor(getContext());
-                        }
-                        int start = slider.getValues().get(0).intValue();
-                        int end = slider.getValues().get(1).intValue();
-
-                        customStartDate.setText(getContext().getString(R.string.label_custom_start_date, start));
-                        customEndDate.setText(getContext().getString(R.string.label_custom_end_date, end));
 
                     }
                 });
@@ -363,8 +462,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                     @Override
                     public void onClick(View v) {
                         if (dataLimitInput.getText().toString().length() <= 0) {
-                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
-                        } else {
+//                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
+                            dataLimitView.setError(getString(R.string.error_invalid_plan));
+                        }
+                        else {
                             Float dataLimit = Float.parseFloat(dataLimitInput.getText().toString());
                             if (dataTypeSwitcher.getTabAt(0).isSelected()) {
                                 dataLimit = dataLimit;
@@ -381,14 +482,14 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                                         .putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
                             }
                             else if (dataReset.getCheckedRadioButtonId() == R.id.custom_reset) {
-                                calendar.set(Calendar.DAY_OF_MONTH, customDateSlider.getValues().get(1).intValue());
+                                calendar.setTimeInMillis(planEndDateMillis);
                                 calendar.add(Calendar.DATE, 1);
 
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
                                         .putString(DATA_RESET, DATA_RESET_CUSTOM)
-                                        .putInt(DATA_RESET_CUSTOM_DATE_START, customDateSlider.getValues().get(0).intValue())
-                                        .putInt(DATA_RESET_CUSTOM_DATE_END, customDateSlider.getValues().get(1).intValue())
-                                        .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                                        .putLong(DATA_RESET_CUSTOM_DATE_START, planStartDateMillis)
+                                        .putLong(DATA_RESET_CUSTOM_DATE_END, planEndDateMillis)
+                                        .putLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis())
                                         .apply();
                             }
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putFloat(DATA_LIMIT, dataLimit).apply();
@@ -401,6 +502,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                             setDataPlanNotification(getContext());
                             dialog.dismiss();
                             snackbar.show();
+                            updateDataBalance();
                             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
                             int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
                             Intent intent = new Intent(getContext(), DataUsageWidget.class);
@@ -420,9 +522,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (dataLimitInput.getText().toString().length() <= 0) {
-                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
+//                                dataLimitView.setError(getString(R.string.error_invalid_plan));
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
                         } else {
-                            dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
+                            dataLimitView.setError(null);
+//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
                         }
                     }
 
@@ -446,6 +550,52 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             }
         });
 
+        mDismissPlanBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSetupDataPlan.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .scaleY(0.8f)
+                    .scaleX(0.8f)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        float total = mSetupDataPlan.getHeight() + 28; // just to adjust a bit of distance issue
+                        mGraphView.animate()
+                            .translationY((total * -1))
+                            .setDuration(300)
+                            .setStartDelay(80)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+
+                                mGraphView.animate()
+                                    .translationY(0)
+                                    .setDuration(0)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationStart(Animator animation) {
+                                            super.onAnimationStart(animation);
+                                            mSetupDataPlan.setVisibility(View.GONE);
+                                        }
+                                    })
+                                    .start();
+                                }
+                            })
+                            .start();
+                        }
+                    })
+                    .start();
+
+                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                        .putBoolean(SHOW_ADD_PLAN_BANNER, false)
+                        .apply();
+            }
+        });
+
         mMobileDataUsageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -454,6 +604,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
                 intent.putExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
                 intent.putExtra(DAILY_DATA_HOME_ACTION, true);
+                setRefreshAppDataUsage(true);
                 startActivity(intent);
             }
         });
@@ -466,12 +617,102 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
                 intent.putExtra(DATA_USAGE_TYPE, TYPE_WIFI);
                 intent.putExtra(DAILY_DATA_HOME_ACTION, true);
+                setRefreshAppDataUsage(true);
                 startActivity(intent);
             }
         });
 
 
         return view;
+    }
+
+    private void updateDataBalance() {
+        Long[] mobileData = null;
+        int date = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(DATA_RESET_DATE, 1);
+
+        try {
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_MONTHLY)) {
+                mobileData = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date);
+            }
+            else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_DAILY)) {
+                mobileData = getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1);
+            }
+            else {
+                mobileData = getDeviceMobileDataUsage(getContext(), SESSION_CUSTOM, -1);
+            }
+
+        }
+        catch (ParseException | RemoteException e) {
+            e.printStackTrace();
+        }
+
+        Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1);
+        if (dataLimit > 0) {
+            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, null)
+                    .equals(DATA_RESET_DAILY)) {
+                Long total = (mobileData[2]);
+                Long limit = dataLimit.longValue() * 1048576;
+                Long remaining;
+                String remainingData;
+                if (limit > total) {
+                    remaining= limit - total;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                }
+                else {
+                    remaining= total - limit;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                }
+
+            }
+            else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, null)
+                    .equals(DATA_RESET_MONTHLY)) {
+                try {
+                    Long total = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date)[2];
+                    Long limit = dataLimit.longValue() * 1048576;
+                    Long remaining;
+                    String remainingData;
+                    if (limit > total) {
+                        remaining= limit - total;
+                        remainingData = formatData(remaining / 2, remaining / 2)[2];
+                        mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                    }
+                    else {
+                        remaining= total - limit;
+                        remainingData = formatData(remaining / 2, remaining / 2)[2];
+                        mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Long total = (mobileData[2]);
+                Long limit = dataLimit.longValue() * 1048576;
+                Long remaining;
+                String remainingData;
+                if (limit > total) {
+                    remaining= limit - total;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                }
+                else {
+                    remaining= total - limit;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                }
+            }
+            mDataRemaining.setVisibility(View.VISIBLE);
+        }
+        else {
+            // No data plan is set. Hide mDataRemaining view.
+            mDataRemaining.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -483,6 +724,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     public void onResume() {
         super.onResume();
         updateData();
+        updateDataBalance();
     }
 
     @Override
@@ -674,13 +916,28 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         setOpenQuickView(true);
         float translation = getTranslation(view);
         float finalTranslation = translation;
-        hapticMajor(getContext());
+
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.layout_overview_quick_view, null);
+        TextView overviewMobile = popupView.findViewById(R.id.overview_mobile_data);
+        TextView overviewWifi = popupView.findViewById(R.id.overview_wifi);
+
+        PopupWindow popupWindow = new PopupWindow(popupView,
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,
+                true);
+        popupWindow.setAnimationStyle(R.style.PopupAnimation);
+
+        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                .getBoolean("disable_haptics", false)) {
+            VibrationUtils.hapticMajor(getContext());
+        }
         if (isOverviewAvailable()) {
             try {
                 String[] dataUsage = getDataUsage(view);
-                mQuickViewMobile.setText(dataUsage[0]);
-                mQuickViewWifi.setText(dataUsage[1]);
-                mQuickView.setVisibility(View.VISIBLE);
+                overviewMobile.setText(dataUsage[0]);
+                overviewWifi.setText(dataUsage[1]);
+                popupWindow.setElevation(100);
+                view.setElevation(100);
+                popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
             }
             catch (NullPointerException e) {
                 e.printStackTrace();
@@ -692,8 +949,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 if (isOpenQuickView()) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                             motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                        hapticMinor(getContext());
-                        mQuickView.setVisibility(View.INVISIBLE);
+                        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("disable_haptics", false)) {
+                            VibrationUtils.hapticMinor(getContext());
+                        }
+                        popupWindow.dismiss();
                         setOpenQuickView(false);
                     }
                 }

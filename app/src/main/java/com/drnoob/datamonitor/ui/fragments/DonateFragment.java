@@ -19,6 +19,8 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.Common.dismissOnClick;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
@@ -46,8 +48,6 @@ import com.drnoob.datamonitor.core.base.Preference;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
-
-import static com.drnoob.datamonitor.Common.dismissOnClick;
 
 public class DonateFragment extends Fragment {
     private static final String TAG = DonateFragment.class.getSimpleName();

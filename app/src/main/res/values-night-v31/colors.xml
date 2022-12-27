@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dynamic colors -->
+    <color name="primary">@color/material_dynamic_primary80</color>
+    <color name="primary_variant">@color/material_dynamic_primary80</color>
+    <color name="background">@color/material_dynamic_neutral0</color>
+    <color name="surface">#1B1E22</color>
+    <color name="status_bar">@color/background</color>
+    <color name="bottom_nav_view_bg">@color/material_dynamic_neutral99</color>
+    <color name="banner_tint">@color/material_dynamic_secondary20</color>
+    <color name="switch_off">#EBEBEB</color>
+    <color name="switch_on_thumb">@color/material_dynamic_primary90</color>
+    <color name="switch_off_thumb">@color/material_dynamic_neutral60</color>
+    <color name="switch_off_thumb_stroke">@color/material_dynamic_neutral30</color>
+    <color name="switch_on_track">@color/material_dynamic_secondary50</color>
+    <color name="switch_off_track">@color/material_on_primary_disabled</color>
+    <color name="search_bg">@color/material_dynamic_secondary30</color>
+</resources>

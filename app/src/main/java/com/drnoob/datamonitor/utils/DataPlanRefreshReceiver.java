@@ -1,18 +1,23 @@
+/*
+ * Copyright (C) 2021 Dr.NooB
+ *
+ * This file is a part of Data Monitor <https://github.com/itsdrnoob/DataMonitor>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.drnoob.datamonitor.utils;
-
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.preference.PreferenceManager;
-
-import com.drnoob.datamonitor.R;
-import com.drnoob.datamonitor.ui.activities.MainActivity;
-
-import java.util.Calendar;
 
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
@@ -25,6 +30,22 @@ import static com.drnoob.datamonitor.core.Values.DEFAULT_NOTIFICATION_GROUP;
 import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_ID;
+
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.preference.PreferenceManager;
+
+import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class DataPlanRefreshReceiver extends BroadcastReceiver {
     private static final String TAG = DataPlanRefreshReceiver.class.getSimpleName();
@@ -55,29 +76,30 @@ public class DataPlanRefreshReceiver extends BroadcastReceiver {
             Enables data plan to update on its own by calculating the validity of the currently set plan.
             Half-baked and not yet enabled.
              */
+            Log.d(TAG, "onReceive: updating data plan validity");
             Calendar calendar = Calendar.getInstance();
-
-            int start = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getInt(DATA_RESET_CUSTOM_DATE_START, 1);
-            int end = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getInt(DATA_RESET_CUSTOM_DATE_END, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-            calendar.set(Calendar.DAY_OF_MONTH, end);
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+            long start = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
+            long end = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_END, calendar.getTimeInMillis());
+            calendar.setTimeInMillis(end);
             calendar.add(Calendar.DATE, 1);
-            int restart = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH));
+            long restart = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis());
 
-            int validity = end - start;
-            calendar.set(Calendar.DAY_OF_MONTH, restart + validity);
+            long validity = end - start;    // i day => 86400000 millis
+            calendar.setTimeInMillis(restart + validity);
 
             PreferenceManager.getDefaultSharedPreferences(context).edit()
                     .putString(DATA_RESET, DATA_RESET_CUSTOM)
-                    .putInt(DATA_RESET_CUSTOM_DATE_START, restart)
-                    .putInt(DATA_RESET_CUSTOM_DATE_END, calendar.get(Calendar.DAY_OF_MONTH))
+                    .putLong(DATA_RESET_CUSTOM_DATE_START, restart)
+                    .putLong(DATA_RESET_CUSTOM_DATE_END, calendar.getTimeInMillis())
                     .apply();
 
             calendar.add(Calendar.DATE, 1);
             PreferenceManager.getDefaultSharedPreferences(context).edit()
-                    .putInt(DATA_RESET_CUSTOM_DATE_RESTART, calendar.get(Calendar.DAY_OF_MONTH))
+                    .putLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis())
                     .apply();
 
             setRefreshAlarm(context);

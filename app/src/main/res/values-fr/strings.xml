@@ -5,14 +5,14 @@
     <string name="add_widget">"Ajouter un widget"</string>
     <string name="notification_mobile_data_usage">"Données mobiles : %1$s"</string>
     <string name="notification_wifi_data_usage">"Wifi : %1$s"</string>
-    <string name="home_mobile_data_sent">"%1$s
-Envoyé"</string>
-    <string name="home_mobile_data_received">"%1$s
-Reçu"</string>
-    <string name="home_wifi_data_sent">"%1$s
-Envoyé"</string>
-    <string name="home_wifi_data_received">"%1$s
-Reçu"</string>
+    <string name="home_mobile_data_sent">%1$s
+\nEnvoyé</string>
+    <string name="home_mobile_data_received">%1$s
+\nReçu</string>
+    <string name="home_wifi_data_sent">%1$s
+\nEnvoyé</string>
+    <string name="home_wifi_data_received">%1$s
+\nReçu</string>
     <string name="label_current_data_warning_trigger_level_limit_set">"Niveau de déclenchement actuel : %1$s%% (%2$s)"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"Niveau de déclenchement actuel : %1$s%%"</string>
     <string name="label_data_trigger_level">"Quand %1$s%% de données sont consommées"</string>
@@ -31,7 +31,7 @@ Reçu"</string>
     <string name="label_this_month">"Ce mois"</string>
     <string name="label_last_month">"Le mois dernier"</string>
     <string name="label_this_year">"Cette année"</string>
-    <string name="label_all_time">"Tout le  temps"</string>
+    <string name="label_all_time">Tout le temps</string>
     <string name="title_app_data_usage_type">"Sélectionner le type"</string>
     <string name="label_mobile_data">"Données mobiles"</string>
     <string name="label_wifi">"Wifi"</string>
@@ -41,7 +41,7 @@ Reçu"</string>
     <string name="label_dev">"Fait avec ❤ par Bitroid Inc."</string>
     <string name="label_loading_apps">"Chargement des applications"</string>
     <string name="label_app_data_usage_session_empty">"Pas de données disponibles pour la session sélectionnée"</string>
-    <string name="label_want_to_contribute">"Vous voulez contribuer à Data Moniteur ? Cliquer ici pour savoir comment !"</string>
+    <string name="label_want_to_contribute">Cliquez ici pour savoir comment contribuer à Data Monitor.</string>
     <string name="setup_image_footer">"Les widgets et/ou les notifications peuvent fournir un accès facile à la quantité de données que vous utilisez"</string>
     <string name="heading_data_reset">"Remise à zéro des données"</string>
     <string name="daily">"Quotidiennement"</string>
@@ -58,14 +58,14 @@ Reçu"</string>
     <string name="option_10_min">"10 minutes"</string>
     <string name="option_15_min">"15 minutes"</string>
     <string name="title_widget_setup">"Réglages du widget"</string>
-    <string name="widget_setup_step_1">"1. Sur l'écran d'accueil, appuyez longtemps sur un espace vide"</string>
-    <string name="widget_setup_step_2">"2. Appuyez sur Widgets"</string>
-    <string name="widget_setup_step_3">"3. Glissez-déposez le widget de Data Monitor sur votre écran d'accueil"</string>
+    <string name="widget_setup_step_1">1. Sur l\'écran d\'accueil, appuyez longtemps sur un espace vide.</string>
+    <string name="widget_setup_step_2">2. Appuyez sur \"Widgets\".</string>
+    <string name="widget_setup_step_3">3. Glissez-déposez le widget de Data Monitor sur votre écran d\'accueil.</string>
     <string name="heading_data_usage_today">"Usage de données d'aujourd'hui"</string>
     <string name="action_add_data_plan_home">"Ajoutez votre limite de données pour démarrer le monitoring"</string>
     <string name="heading_week_overview">"Aperçu de cette semaine"</string>
-    <string name="error_loading_overview">"Oups... Impossible de charger l'aperçu de cette semaine
-Revenez voir plus tard"</string>
+    <string name="error_loading_overview">Impossible de charger l’aperçu de cette semaine.
+\nRéessayez plus tard.</string>
     <string name="title_setup">"Réglages de l'affichage"</string>
     <string name="setup_widget">"Réglages du widget"</string>
     <string name="setup_notification">"Réglages de la notification"</string>
@@ -113,7 +113,7 @@ Revenez voir plus tard"</string>
     <string name="report">"Soumettre un bug"</string>
     <string name="report_summary">"Soumettre un bug ou demander une nouvelle fonctionnalité"</string>
     <string name="setup">"Configuration"</string>
-    <string name="app_data_usage">"Usage de données des applications"</string>
+    <string name="app_data_usage">Utilisation de l\'application</string>
     <string name="settings">"Réglages"</string>
     <string name="btc_address_copied">"L'adresse du portefeuille Bitcoin a été copiée dans le presse-papier"</string>
     <string name="eth_address_copied">"L'adresse du portefeuille Ethereum a été copiée dans le presse-papier"</string>
@@ -121,16 +121,18 @@ Revenez voir plus tard"</string>
     <string name="label_system_apps">"Applications système"</string>
     <string name="home">"Accueil"</string>
     <string name="usage_access_permission">"Permission d'accès à l'usage du téléphone"</string>
-    <string name="usage_access_body">"La permission d'accès à l'usage du téléphone est nécessaire pour exécuter l'application. Ceci est requis pour collecter les statistiques d'utilisation des données. Aucune donnée personnelle ne sera collectée ou stockée"</string>
+    <string name="usage_access_body">Requis pour exécuter l’application, car elle collecte les statistiques d’utilisation de l’application.
+\nAucune donnée personnelle n’est collectée.</string>
     <string name="action_grant">"Accorder la permission"</string>
     <string name="label_tethering">"Point d'accès mobile"</string>
     <string name="label_removed">"Applications retirées"</string>
-    <string name="oem_skin_warning">"%1$s S'il vous plait, assurez-vous d'avoir effectué les petits réglages d'optimisation pour être sûr que l'application fonctionne correctement"</string>
-    <string name="oem_skin_miui">"Miui détecté !"</string>
+    <string name="oem_skin_warning">%1$s S\'il vous plait, assurez-vous d\'avoir effectué les petits réglages d\'optimisation pour être sûr que l\'application fonctionne correctement.</string>
+    <string name="oem_skin_miui">Miui détecté.</string>
     <string name="battery_optimisation_disabled">"Optimisation de la batterie désactivée"</string>
     <string name="data_plan_saved">"Objectif de données enregistré"</string>
     <string name="upi_app_not_found">"Aucune application trouvée pour procéder à cette requête"</string>
-    <string name="upi_unknown_error">"Une erreur inconnue a eu lieu. S'il vous plait, réessayez de même ou bien par une autre méthode."</string>
+    <string name="upi_unknown_error">Erreur inconnue.
+\nVeuillez réessayer ou une autre méthode.</string>
     <string name="label_no_additional_lang">"Plus de langues arrivent bientôt... Vous voulez nous aider ? Cliquez pour savoir comment."</string>
     <string name="notification_disabled">"Notification du moniteur de données désactivée"</string>
     <string name="label_widget_refresh_interval_change">"Le widget sera mis-à-jour tous les %1$s"</string>
@@ -149,12 +151,13 @@ Revenez voir plus tard"</string>
     <string name="title_data_warning_notification">"Avertissement de l'utilisation des données"</string>
     <string name="body_data_warning_notification">"Vous avez utilisé %1$d%% de plus que votre limite de données"</string>
     <string name="body_app_data_warning_notification">"%1$s a utilisé plus que son quota de données"</string>
-    <string name="title_data_usage_notification">"Utilisation de données aujourd'hui"</string>
-    <string name="body_data_usage_notification_loading">"Chargement..."</string>
+    <string name="title_data_usage_notification">Utilisation des données aujourd’hui : %1$s</string>
+    <string name="body_data_usage_notification_loading">Chargement…</string>
     <string name="label_data_remaining">"%1$s restant"</string>
     <string name="label_data_remaining_used_excess">"%1$s utilisé en plus"</string>
     <string name="disable_battery_optimisation">"Désactiver l'optimisation de la batterie"</string>
-    <string name="disable_battery_optimisation_body">"Désactivez l'optimisation de la batterie pour Data Monitor afin d'empêcher le système de tuer le service en arrière-plan. Ne pas le faire empêcherait l'application de fonctionner correctement et pourrait afficher des valeurs incorrectes."</string>
+    <string name="disable_battery_optimisation_body">Empêche de tuer Data Monitor lors de l’exécution en arrière-plan.
+\nSinon, les valeurs peuvent être incorrectes.</string>
     <string name="extra_optimisation_tips">"Points d'optimisation supplémentaires"</string>
     <string name="oem_battery_settings">"Réglages OEM de la batterie"</string>
     <string name="action_next">"Suivant"</string>
@@ -168,7 +171,7 @@ Revenez voir plus tard"</string>
     <string name="label_translators">"Traducteurs"</string>
     <string name="setup_app_data_usage_alert">"Avertissement d'usage de données d'application"</string>
     <string name="title_app_data_limit">"Limite d'usage de données de l'application"</string>
-    <string name="network_diagnostics">"Diagnostics réseau"</string>
+    <string name="network_diagnostics">Diagnostiques</string>
     <string name="run_diagnostics">"Lancer les diagnostics"</string>
     <string name="running_diagnostics">"Diagnostics lancés"</string>
     <string name="connecting">"Connection"</string>
@@ -194,10 +197,11 @@ Revenez voir plus tard"</string>
     <string name="swipe_right_to_delete">"Glissez sur la droite pour supprimer un élément"</string>
     <string name="refresh_list">"Rafraîchir la liste"</string>
     <string name="no_network_connection">"Aucune connexion réseau détectée !"</string>
-    <string name="connection_error">"Erreur de connexion. Veuillez vérifier votre connexion internet"</string>
+    <string name="connection_error">Erreur de connexion.
+\nVeuillez vérifier votre connexion internet.</string>
     <string name="app_label_screen_time">"Temps d'écran : %1$s"</string>
     <string name="app_label_background_time">"Utilisation d'arrière-plan : %1$s"</string>
-    <string name="label_loading">"Chargement des applications"</string>
+    <string name="label_loading">Chargement…</string>
     <string name="donate_summary">"Payez nous un café, peut-être ?"</string>
     <string name="label_data_usage_reset_time_change">"L'utilisation des données sera remise à zéro chaque %1$s à %2$s"</string>
     <string name="label_data_usage_reset_date_change">"L'utilisation des données sera remise à zéro le %1$d%2$s de chaque mois"</string>
@@ -231,10 +235,10 @@ Revenez voir plus tard"</string>
     <string name="current_version">"Version actuelle : %1$s"</string>
     <string name="new_version">"Nouvelle version : %1$s"</string>
     <string name="label_changelogs">"Regardez ce qui est nouveau"</string>
-    <string name="no_update_available">"Vous avez la dernière version !"</string>
+    <string name="no_update_available">Vous avez la dernière version.</string>
     <string name="label_update_available">"Mise-à-jour disponible !"</string>
     <string name="label_download_update">"Téléchargement de la mise-à-jour"</string>
-    <string name="checking_for_update">"Recherche d'une mise-à-jour"</string>
+    <string name="checking_for_update">Vérification des mises à jour…</string>
     <string name="new_update_available">"Une nouvelle mise-à-jour est disponible !"</string>
     <string name="update_fetch_error">"Impossible de vérifier les mises-à-jour"</string>
     <string name="settings_app_theme">"Thème de l'application"</string>
@@ -253,4 +257,73 @@ Revenez voir plus tard"</string>
     <string name="license_summary">Afficher les licences d’application</string>
     <string name="f_droid_page">Voir l\'application sur F-Droid</string>
     <string name="f_droid_page_summary">Voir l\'application sur le dépôt officiel de F-Droid</string>
+    <string name="crash_logs_extra_text">Journaux d’incident de Data Monitor</string>
+    <string name="label_custom_server">Serveur personnalisé</string>
+    <string name="error_url_verification_failed">Impossible de vérifier l\'URL ! Veuillez réessayer ou en utiliser un autre.</string>
+    <string name="label_crash_logs_share_chat">Partager pour chat : @datamonitor</string>
+    <string name="label_crash_logs">Journaux de plantage</string>
+    <string name="label_device_info">Info appareil</string>
+    <string name="crash_report_title">Rapport d\'incident</string>
+    <string name="device_info_content_label">Voir ce qui est inclus dans Informations sur l’appareil</string>
+    <string name="label_telegram">Télégramme</string>
+    <string name="report_github_summary">Ouvrir un nouveau numéro sur Github</string>
+    <string name="report_telegram_summary">Envoyer le rapport d’incident dans le chat d’assistance Telegram</string>
+    <string name="total_usage">Utilisation totale : %1$s</string>
+    <string name="label_unknown">Inconnu</string>
+    <string name="auto_hide_live_network">Masquer automatiquement la vitesse du réseau</string>
+    <string name="custom">Personnalisé</string>
+    <string name="heading_data_reset_custom_counter">Validité du plan</string>
+    <string name="setup_usage_reset_date_custom_selected">Le plan de données personnalisé est actif</string>
+    <string name="summary_data_plan_expired">Vous voudrez peut-être mettre à jour votre plan</string>
+    <string name="error_unknown_telegram_client">Telegram non installé ou client inconnu présent. Veuillez essayer une autre méthode.</string>
+    <string name="title_device_info_contents">Contenu des informations sur l’appareil</string>
+    <string name="device_info_body">Les informations sur l’appareil comprennent :
+\nFabricant de l’appareil
+\nMarque de l’appareil
+\nModèle d’appareil
+\nNom de code de l’appareil
+\nAndroid Version</string>
+    <string name="label_crash_logs_copied">Journaux de plantage copiés dans le Presse-papiers</string>
+    <string name="title_data_plan_expired">Le plan de données a expiré !</string>
+    <string name="label_battery_optimisation">Optimisation de la batterie</string>
+    <string name="network_diagnostics_summary">Serveur de diagnostic de commutation</string>
+    <string name="settings_diagnostics_server">Serveur</string>
+    <string name="settings_download_server">Serveur de téléchargement</string>
+    <string name="settings_upload_server">Télécharger le serveur</string>
+    <string name="label_custom_server_save_success">Préférences de serveur enregistrées</string>
+    <string name="disable_haptics_summary">Désactiver le retour haptique dans l’application</string>
+    <string name="crash_logs_warning">journaux d’incident ; Ne pas modifier</string>
+    <string name="error_invalid_plan">Plan invalide !</string>
+    <string name="label_send_report">Envoyer un rapport via</string>
+    <string name="label_permission_denied">Permission refusée !</string>
+    <string name="notification_permission_denied_body">Les fonctionnalités telles que la notification du moniteur de données, la vitesse du réseau en direct et l’alerte d’utilisation des données ne fonctionneront pas correctement sans autorisation de notification. Veuillez l’accorder manuellement.</string>
+    <string name="settings_disable_haptics">Désactiver l’haptique</string>
+    <string name="action_dismiss">Rejeter</string>
+    <string name="action_add_data_plan_home_summary">Aucun plan de données trouvé ! Ajoutez un plan de données pour commencer à le suivre.</string>
+    <string name="crash_report_body">Il semble que Data Monitor se soit écrasé. Vous pouvez envoyer le rapport d’incident au développeur pour l’aider à analyser le problème et à le résoudre plus rapidement. Si aucun crash ne s’est produit, veuillez l’ignorer.</string>
+    <string name="auto_hide_live_network_summary">Arrêter la notification de vitesse du réseau lorsque le réseau n’est pas connecté</string>
+    <string name="label_mail">Courrier</string>
+    <string name="battery_optimisation_enabled_info">L’optimisation de la batterie est activée. Cela interférera avec le fonctionnement de Data Monitor. Cliquez pour désactiver.</string>
+    <string name="error_no_crash_logs">Aucun journal de plantage trouvé. Êtes-vous sûr qu’un crash s’est produit \?</string>
+    <string name="label_copy_logs">Copier les journaux</string>
+    <string name="settings_network_diagnostics">Diagnostics réseau</string>
+    <string name="custom_upload_url_hint">Entrez l’URL de téléchargement complète</string>
+    <string name="custom_download_url_hint">Entrez l’URL de téléchargement complète</string>
+    <string name="error_invaliid_url">URL de téléchargement invalide !</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="report_mail_summary">Envoyer le rapport d’incident par courrier</string>
+    <string name="label_select_app">Sélectionnez une application</string>
+    <string name="label_custom_start_date">Date de début : %1$s</string>
+    <string name="label_select_start_date">Sélectionnez la date de début</string>
+    <string name="label_plan_end_date">Sélectionnez la date de fin</string>
+    <string name="label_custom_end_date">Date de fin : %1$s</string>
+    <string name="combine_notifications">Combiner les notifications</string>
+    <string name="combine_notifications_summary">Combinez le moniteur de données et la vitesse du réseau en une seule notification.</string>
+    <string name="combined_notification_icon">Icône de notification combinée</string>
+    <string name="combined_notification_icon_summary">Choisissez l’icône à afficher pour la notification combinée</string>
+    <string name="error_combine_notifications_enabled">Notification combinée activée. Impossible de désactiver la notification individuelle.</string>
+    <string name="option_30_sec">30 secondes</string>
+    <string name="lockscreen_notification">Activer la notification sur l’écran de verrouillage</string>
+    <string name="option_1_sec">Chaque seconde</string>
+    <string name="option_15_sec">15 secondes</string>
 </resources>

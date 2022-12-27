@@ -6,29 +6,55 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <TextView
+<!--    <TextView-->
+<!--        android:id="@+id/info"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/margin_small"-->
+<!--        android:layout_marginTop="@dimen/margin_mid_large"-->
+<!--        android:layout_marginEnd="@dimen/margin_small"-->
+<!--        android:background="@drawable/banner_background"-->
+<!--        android:clickable="true"-->
+<!--        android:drawableTop="@drawable/ic_info"-->
+<!--        android:drawablePadding="@dimen/margin_mid_large"-->
+<!--        android:elevation="@dimen/elevation_small"-->
+<!--        android:gravity="start"-->
+<!--        android:paddingStart="@dimen/margin_mid_large"-->
+<!--        android:paddingTop="@dimen/margin_mid_large"-->
+<!--        android:paddingEnd="@dimen/margin_medium"-->
+<!--        android:paddingBottom="@dimen/margin_mid_large"-->
+<!--        android:text="@string/network_diagnostics_info"-->
+<!--        android:textSize="@dimen/text_small"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <LinearLayout
         android:id="@+id/info"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:background="@drawable/banner_background"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_info"
-        android:drawablePadding="@dimen/margin_mid_large"
-        android:elevation="@dimen/elevation_default"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/margin_mid_large"
-        android:paddingTop="@dimen/margin_mid_large"
-        android:paddingEnd="@dimen/margin_medium"
-        android:paddingBottom="@dimen/margin_mid_large"
-        android:text="@string/network_diagnostics_info"
-        android:textSize="@dimen/text_small"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_mid_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_info"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/network_diagnostics_info"
+            android:layout_marginTop="@dimen/margin_medium"/>
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/test_view"
@@ -161,13 +187,58 @@
     <!--        android:orientation="vertical"-->
     <!--        app:layout_constraintGuide_percent="0.7" />-->
 
+
+    <LinearLayout
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:text="History"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                android:textSize="@dimen/text_mid_large" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:text="View diagnostics history"
+                android:textColor="@color/text_secondary" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="@color/text_primary" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/current_connection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/current_connection"
         android:layout_marginBottom="@dimen/margin_extra_large"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />

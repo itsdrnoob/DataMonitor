@@ -114,7 +114,7 @@
     <string name="report">回報問題</string>
     <string name="report_summary">反饋問題或請求新功能</string>
     <string name="setup">配置</string>
-    <string name="app_data_usage">應用資料用量</string>
+    <string name="app_data_usage">應用程序使用</string>
     <string name="settings">設定</string>
     <string name="btc_address_copied">Bitcoin 錢包地址已複製到剪貼簿</string>
     <string name="eth_address_copied">Ethereum 錢包地址已複製到剪貼簿</string>
@@ -215,4 +215,6 @@
     <string name="available_languages">可用語言</string>
     <string name="label_data_usage_reset_time_change">數據使用量將在 %2$s 每 %1$s 重置一次</string>
     <string name="label_data_usage_reset_date_change">數據使用量將在每月 %1$d%2$s 重置</string>
+    <string name="label_loading">載入中…</string>
+    <string name="label_plan_end_date">選擇結束日期</string>
 </resources>

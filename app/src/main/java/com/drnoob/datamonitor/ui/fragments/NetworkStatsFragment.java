@@ -19,6 +19,15 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
+import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
+import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
+import static com.drnoob.datamonitor.core.Values.ISP;
+import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
+import static com.drnoob.datamonitor.core.Values.NETWORK_IP;
+import static com.drnoob.datamonitor.core.Values.REGION;
+import static com.drnoob.datamonitor.core.Values.SERVER;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,15 +41,6 @@ import androidx.fragment.app.Fragment;
 import com.drnoob.datamonitor.R;
 
 import org.jetbrains.annotations.NotNull;
-
-import static com.drnoob.datamonitor.core.Values.AVG_DOWNLOAD_SPEED;
-import static com.drnoob.datamonitor.core.Values.AVG_LATENCY;
-import static com.drnoob.datamonitor.core.Values.AVG_UPLOAD_SPEED;
-import static com.drnoob.datamonitor.core.Values.ISP;
-import static com.drnoob.datamonitor.core.Values.MIN_LATENCY;
-import static com.drnoob.datamonitor.core.Values.NETWORK_IP;
-import static com.drnoob.datamonitor.core.Values.REGION;
-import static com.drnoob.datamonitor.core.Values.SERVER;
 
 public class NetworkStatsFragment extends Fragment {
     private static final String TAG = NetworkStatsFragment.class.getSimpleName();

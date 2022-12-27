@@ -29,10 +29,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_refresh"
-        android:tint="@color/text_primary"
         android:padding="@dimen/margin_extra_small"
         android:layout_alignTop="@id/textView4"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        app:tint="@color/text_primary" />
 
     <ProgressBar
         android:id="@+id/widget_update_progress"
@@ -57,16 +57,6 @@
         android:layout_marginTop="@dimen/margin_extra_small"
         android:paddingBottom="@dimen/margin_extra_small">
 
-        <ImageView
-            android:id="@+id/mobile_data_icon"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_widget_mobile_data_round"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"/>
-
         <TextView
             android:id="@+id/mobile_data_label"
             android:layout_width="0dp"
@@ -76,7 +66,7 @@
             android:textSize="@dimen/text_small"
             android:gravity="start|center_vertical"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/mobile_data_icon"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_extra_small"/>
 
@@ -86,7 +76,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_data_usage_placeholder"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:layout_alignParentEnd="true"
             android:paddingEnd="@dimen/margin_small"
             android:paddingTop="@dimen/margin_tiny"
@@ -119,16 +109,6 @@
         android:layout_marginTop="@dimen/margin_extra_small"
         android:paddingBottom="@dimen/margin_small">
 
-        <ImageView
-            android:id="@+id/wifi_icon"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_widget_wifi_round"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"/>
-
         <TextView
             android:id="@+id/wifi_label"
             android:layout_width="0dp"
@@ -138,7 +118,7 @@
             android:textSize="@dimen/text_small"
             android:layout_alignParentEnd="true"
             android:gravity="start|center_vertical"
-            android:layout_toEndOf="@id/wifi_icon"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="@dimen/margin_extra_small"
             android:layout_marginStart="@dimen/margin_medium"/>
 
@@ -148,7 +128,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_data_usage_placeholder"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:layout_alignParentEnd="true"
             android:paddingEnd="@dimen/margin_small"
             android:paddingTop="@dimen/margin_tiny"

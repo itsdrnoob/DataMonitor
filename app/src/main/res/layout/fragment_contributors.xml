@@ -1,41 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@android:color/transparent">
 
-        <TextView
-            android:id="@+id/contribute"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/label_want_to_contribute"
-            android:drawableStart="@drawable/ic_info"
-            android:drawablePadding="@dimen/margin_mid_large"
-            android:paddingStart="@dimen/margin_mid_large"
-            android:paddingEnd="@dimen/margin_medium"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_mid_large"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:elevation="@dimen/elevation_default"
-            android:clickable="true"
-            android:background="@drawable/banner_background"
-            android:paddingTop="@dimen/margin_mid_large"
-            android:paddingBottom="@dimen/margin_mid_large"/>
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <fragment
-            android:id="@+id/contributors_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_mid_large"
-            class="com.drnoob.datamonitor.ui.fragments.ContributorsFragment$Contributors"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/contribute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:backgroundTint="@color/banner_tint"
+                    android:elevation="@dimen/elevation_small"
+                    android:padding="@dimen/margin_mid_large"
+                    android:background="@drawable/banner_background"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
+                    android:layout_marginTop="@dimen/margin_mid_large"
+                    android:clickable="true">
 
-</androidx.core.widget.NestedScrollView>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_info"
+                        app:tint="@color/text_secondary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@string/label_want_to_contribute"
+                        android:layout_marginTop="@dimen/margin_medium"/>
+
+                </LinearLayout>
+
+                <fragment
+                    android:id="@+id/contributors_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_mid_large"
+                    class="com.drnoob.datamonitor.ui.fragments.ContributorsFragment$Contributors"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/translator_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/app_list_item"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

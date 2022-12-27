@@ -5,10 +5,14 @@
     <string name="add_widget">"Adicionar widget"</string>
     <string name="notification_mobile_data_usage">"Dados móveis: %1$s"</string>
     <string name="notification_wifi_data_usage">"Wifi: %1$s"</string>
-    <string name="home_mobile_data_sent">"%1$s Enviado"</string>
-    <string name="home_mobile_data_received">"%1$s Recebido"</string>
-    <string name="home_wifi_data_sent">"%1$s Enviado"</string>
-    <string name="home_wifi_data_received">"%1$s Recebido"</string>
+    <string name="home_mobile_data_sent">%1$s
+\nEnviado</string>
+    <string name="home_mobile_data_received">%1$s
+\nRecebido</string>
+    <string name="home_wifi_data_sent">%1$s
+\nEnviado</string>
+    <string name="home_wifi_data_received">%1$s
+\nRecebido</string>
     <string name="label_current_data_warning_trigger_level_limit_set">"Nível de acionamento atual: %1$s%% (%2$s)"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"Nível de acionamento atual: %1$s%%"</string>
     <string name="label_data_trigger_level">"Quando %1$s%% dos dados são consumidos"</string>
@@ -62,21 +66,18 @@
 "1. Na tela inicial, toque e segure em um espaço vazio."
 </string>
     <string name="widget_setup_step_2">"2. Toque em Widgets."</string>
-    <string name="widget_setup_step_3">
-"3. Arraste e solte o widget Data Monitor na sua tela inicial"
-</string>
+    <string name="widget_setup_step_3">3. Arraste e solte o widget Data Monitor na tela inicial.</string>
     <string name="heading_data_usage_today">"Uso de dados de hoje"</string>
     <string name="action_add_data_plan_home">
 "Adicione seu plano de dados para iniciar o monitoramento"
 </string>
     <string name="heading_week_overview">"Visão geral desta semana"</string>
-    <string name="error_loading_overview">
-"Opps... Não foi possível carregar a visão geral desta semana, volte mais tarde e veja"
-</string>
+    <string name="error_loading_overview">Não foi possível carregar a visão geral desta semana.
+\nTente novamente mais tarde.</string>
     <string name="title_setup">"Configure o Data monitor"</string>
     <string name="setup_widget">"Configure o widget"</string>
     <string name="setup_notification">"Configure a notificação"</string>
-    <string name="title_configure">"Configure"</string>
+    <string name="title_configure">Configurar</string>
     <string name="setup_widget_title">"Widget"</string>
     <string name="setup_widget_refresh_interval">"Intervalo de atualização do widget"</string>
     <string name="refresh_interval_placeholder">"1 minuto"</string>
@@ -146,24 +147,20 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="label_system_apps">"Apps do sistema"</string>
     <string name="home">"Casa"</string>
     <string name="usage_access_permission">"Permissão de acesso ao uso"</string>
-    <string name="usage_access_body">
-"A permissão de acesso ao uso é necessária para executar o aplicativo. Isso é necessário para coletar estatísticas de uso de dados. Nenhum dado pessoal será coletado ou armazenado."
-</string>
+    <string name="usage_access_body">Necessário para executar o aplicativo, uma vez que ele coleta estatísticas de uso do aplicativo.
+\nNenhum dado pessoal é coletado.</string>
     <string name="action_grant">"Conceder permissão"</string>
     <string name="label_tethering">"Hotspot móvel"</string>
     <string name="label_removed">"Apps removidos"</string>
-    <string name="oem_skin_warning">
-"%1$s Verifique as dicas extras de otimização para garantir que o aplicativo funcione corretamente."
-</string>
-    <string name="oem_skin_miui">"Miui detectado!"</string>
+    <string name="oem_skin_warning">%1$s Verifique as dicas extras de otimização para garantir que o aplicativo funcione corretamente.</string>
+    <string name="oem_skin_miui">MIUI detectado.</string>
     <string name="battery_optimisation_disabled">"Otimização da bateria desativada"</string>
     <string name="data_plan_saved">"Plano de dados salvo"</string>
     <string name="upi_app_not_found">
 "Nenhum aplicativo encontrado para lidar com esta solicitação"
 </string>
-    <string name="upi_unknown_error">
-"Ocorreu um erro desconhecido. Por favor, tente novamente ou tente outro método."
-</string>
+    <string name="upi_unknown_error">Erro desconhecido.
+\nTente novamente ou outro método.</string>
     <string name="label_no_additional_lang">
 "Mais idiomas em breve.. Ajude-nos? Clique para saber como."
 </string>
@@ -186,14 +183,13 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="title_data_warning_notification">"Aviso de uso de dados"</string>
     <string name="body_data_warning_notification">"Você usou %1$d%% do seu limite de dados"</string>
     <string name="body_app_data_warning_notification">"%1$s esgotou sua cota de dados"</string>
-    <string name="title_data_usage_notification">"Uso de dados hoje"</string>
-    <string name="body_data_usage_notification_loading">"Carregando..."</string>
+    <string name="title_data_usage_notification">Uso de dados hoje: %1$s</string>
+    <string name="body_data_usage_notification_loading">Carregando…</string>
     <string name="label_data_remaining">"%1$s restante"</string>
     <string name="label_data_remaining_used_excess">"%1$s extra usado"</string>
     <string name="disable_battery_optimisation">"Desativar otimização de bateria"</string>
-    <string name="disable_battery_optimisation_body">
-"Desative a otimização da bateria para o Data Monitor para evitar que o sistema elimine o serviço em segundo plano. Não fazer isso impedirá que o aplicativo funcione corretamente e poderá mostrar valores incorretos."
-</string>
+    <string name="disable_battery_optimisation_body">Evita matar o Data Monitor ao executar em segundo plano.
+\nCaso contrário, os valores podem estar incorretos.</string>
     <string name="extra_optimisation_tips">"Dicas extras de otimização"</string>
     <string name="oem_battery_settings">"Configurações OEM da bateria"</string>
     <string name="action_next">"Próximo"</string>
@@ -233,12 +229,11 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="swipe_right_to_delete">"Deslize para a direita para excluir um item"</string>
     <string name="refresh_list">"Atualizar lista"</string>
     <string name="no_network_connection">"Nenhuma conexão de rede detectada!"</string>
-    <string name="connection_error">
-"Erro de conexão. Por favor, verifique sua conexão com a internet"
-</string>
+    <string name="connection_error">Não foi possível conectar.
+\nCertifique-se de que está ligado à Internet.</string>
     <string name="app_label_screen_time">"Tempo de Tela: %1$s"</string>
     <string name="app_label_background_time">"Uso em segundo plano: %1$s"</string>
-    <string name="label_loading">"Carregando apps"</string>
+    <string name="label_loading">Carregando…</string>
     <string name="donate_summary">"Pague-nos um café, talvez?"</string>
     <string name="label_data_usage_reset_time_change">
 "O uso de dados será redefinido a cada %1$s em %2$s"
@@ -281,10 +276,10 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="current_version">"Versão atual: %1$s"</string>
     <string name="new_version">"Nova versão: %1$s"</string>
     <string name="label_changelogs">"Veja o que há de novo"</string>
-    <string name="no_update_available">"Você está utilizando a versão mais recente!"</string>
+    <string name="no_update_available">Você está utilizando a versão mais recente.</string>
     <string name="label_update_available">"Atualização disponível!"</string>
     <string name="label_download_update">"Baixar atualização"</string>
-    <string name="checking_for_update">"Verificando por atualizações"</string>
+    <string name="checking_for_update">Verificando por atualizações…</string>
     <string name="new_update_available">"Uma nova atualização está disponível!"</string>
     <string name="update_fetch_error">"Não foi possível buscar por atualizações"</string>
     <string name="settings_app_theme">"Tema do aplicativo"</string>
@@ -295,4 +290,72 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="light_theme_summary">"Tema claro selecionado"</string>
     <string name="dark_theme_summary">"Tema escuro selecionado"</string>
     <string name="system_theme_summary">"Seguindo o tema do sistema"</string>
+    <string name="network_diagnostics_info">O diagnóstico de rede pode usar cerca de 20 a 30 MB de dados. Certifique-se de ter isso disponível em seu plano, caso contrário, as taxas de rede podem ser aplicadas.</string>
+    <string name="crash_report_body">Parece que o Data Monitor travou. Você pode enviar o relatório de falhas para o desenvolvedor para ajudar a analisar o problema e resolvê-lo mais rapidamente. Se nenhuma falha ocorreu, gentilmente ignore.</string>
+    <string name="auto_hide_live_network_summary">Notificação de velocidade de interrupção da rede quando a rede não está conectada</string>
+    <string name="label_crash_logs_share_chat">Compartilhar no bate-papo: @datamonitor</string>
+    <string name="title_device_info_contents">Conteúdo das informações do dispositivo</string>
+    <string name="device_info_body">As informações do dispositivo incluem:
+\nFabricante do dispositivo
+\nMarca do dispositivo
+\nModelo do dispositivo
+\nCodinome do dispositivo
+\nVersão Android</string>
+    <string name="label_custom_server">Servidor personalizado</string>
+    <string name="error_url_verification_failed">Não foi possível verificar o URL! Tente novamente ou use um diferente.</string>
+    <string name="hudaifa_abdullah_summary">Árabe</string>
+    <string name="license_summary">Exibir licenças de aplicativos</string>
+    <string name="holydemon_summary">Malaiala</string>
+    <string name="liviogasp_summary">Italiano</string>
+    <string name="comradekingu_summary">Suporte à tradução</string>
+    <string name="f_droid_page">Ver aplicativo no F-Droid</string>
+    <string name="f_droid_page_summary">Verifique o aplicativo no repositório oficial do F-Droid</string>
+    <string name="label_crash_logs">Registros de falhas</string>
+    <string name="label_device_info">Informações do dispositivo</string>
+    <string name="crash_report_title">Relatório de falha</string>
+    <string name="device_info_content_label">Veja o que está incluído nas Informações do dispositivo</string>
+    <string name="label_telegram">Telegrama</string>
+    <string name="report_github_summary">Abrir uma nova edição no Github</string>
+    <string name="report_telegram_summary">Envie o relatório de falha no chat de suporte do Telegram</string>
+    <string name="report_mail_summary">Enviar o relatório de falhas por e-mail</string>
+    <string name="mail_uri">mailto:%1$s\?&amp;subject=%2$s&amp;body=%3$s</string>
+    <string name="total_usage">Uso total: %1$s</string>
+    <string name="label_unknown">Desconhecido</string>
+    <string name="auto_hide_live_network">Ocultar automaticamente a velocidade da rede</string>
+    <string name="custom">Personalizado</string>
+    <string name="heading_data_reset_custom_counter">Validade do plano</string>
+    <string name="label_custom_start_date">Data de início: %1$s</string>
+    <string name="label_custom_end_date">Data final: %1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">O plano de dados personalizado está ativo</string>
+    <string name="title_data_plan_expired">O plano de dados expirou!</string>
+    <string name="summary_data_plan_expired">Talvez você queira atualizar seu plano</string>
+    <string name="error_unknown_telegram_client">Telegram não instalado ou cliente desconhecido presente. Por favor, tente outro método.</string>
+    <string name="crash_logs_extra_text">Logs de falha do Monitor de Dados</string>
+    <string name="label_select_app">Selecionar aplicativo</string>
+    <string name="crash_logs_warning">Registros de Falhas; Não modificar</string>
+    <string name="label_crash_logs_copied">Registos de falhas copiados para a área de transferência</string>
+    <string name="label_mail">Correio</string>
+    <string name="battery_optimisation_enabled_info">A otimização da bateria está ativada. Isso interferirá no funcionamento do Monitor de Dados. Clique para desativar.</string>
+    <string name="label_battery_optimisation">Otimização da bateria</string>
+    <string name="error_no_crash_logs">Nenhum registro de falha encontrado. Tem certeza de que ocorreu uma falha\?</string>
+    <string name="label_copy_logs">Copiar logs</string>
+    <string name="settings_network_diagnostics">Diagnóstico de rede</string>
+    <string name="network_diagnostics_summary">Alternar servidor de diagnóstico</string>
+    <string name="settings_diagnostics_server">Servidor</string>
+    <string name="settings_download_server">Baixar servidor</string>
+    <string name="settings_upload_server">Servidor de upload</string>
+    <string name="custom_upload_url_hint">Insira o URL de upload completo</string>
+    <string name="custom_download_url_hint">Insira o URL completo do download</string>
+    <string name="label_custom_server_save_success">Preferência de servidor salva</string>
+    <string name="error_invaliid_url">URL de download inválido!</string>
+    <string name="error_invalid_plan">Plano inválido!</string>
+    <string name="label_send_report">Enviar relatório via</string>
+    <string name="label_permission_denied">Permissão negada!</string>
+    <string name="notification_permission_denied_body">Os recursos, incluindo notificação do monitor de dados, velocidade da rede ao vivo e alerta de uso de dados, não funcionarão corretamente sem permissão de notificação. Por favor, conceda-o manualmente.</string>
+    <string name="settings_disable_haptics">Desativar hápticos</string>
+    <string name="disable_haptics_summary">Desativar feedback háptico em todo o aplicativo</string>
+    <string name="action_dismiss">Dispensar</string>
+    <string name="action_add_data_plan_home_summary">Nenhum plano de dados encontrado! Adicione um plano de dados para começar a rastreá-lo.</string>
+    <string name="label_select_start_date">Selecione a data de início</string>
+    <string name="label_plan_end_date">Selecionar data de término</string>
 </resources>

@@ -5,6 +5,7 @@
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
             android:title="Donate in crypto"
+            app:iconSpaceReserved="false"
             app:allowDividerBelow="false"
             app:allowDividerAbove="false">
 
@@ -32,9 +33,23 @@
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
-            android:title="UPI"
+            android:title="Other"
+            app:iconSpaceReserved="false"
             app:allowDividerAbove="false"
             app:allowDividerBelow="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="PayPal"
+                app:summary="Donate via PayPal"
+                android:key="paypal"
+                android:icon="@drawable/ic_paypal"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://paypal.me/itsdrnoob"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
 
             <com.drnoob.datamonitor.core.base.Preference
                 android:title="BHIM-UPI"

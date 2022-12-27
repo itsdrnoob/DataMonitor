@@ -5,7 +5,8 @@
     <com.drnoob.datamonitor.core.base.PreferenceHeader
         android:title="@string/title_setup"
         app:allowDividerBelow="false"
-        app:allowDividerAbove="false">
+        app:allowDividerAbove="false"
+        app:iconSpaceReserved="false">
 
         <com.drnoob.datamonitor.core.base.Preference
             android:icon="@drawable/ic_widget"
@@ -27,9 +28,9 @@
     </com.drnoob.datamonitor.core.base.PreferenceHeader>
 
     <com.drnoob.datamonitor.core.base.PreferenceHeader
-        android:title="@string/title_configure"
         app:allowDividerAbove="false"
-        app:allowDividerBelow="false">
+        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false">
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
             android:title="@string/setup_widget_title"
@@ -97,6 +98,27 @@
                 app:iconSpaceReserved="false"
                 android:defaultValue="false"/>
 
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/combine_notifications"
+                android:summary="@string/combine_notifications_summary"
+                android:key="combine_notifications"
+                app:iconSpaceReserved="false"
+                android:defaultValue="false"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/combined_notification_icon"
+                app:iconSpaceReserved="false"
+                android:key="combined_notification_icon"
+                android:summary="@string/combined_notification_icon_summary"
+                app:isPreferenceVisible="false"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/lockscreen_notification"
+                android:key="lockscreen_notification"
+                app:iconSpaceReserved="false"
+                android:defaultValue="false"/>
+
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
@@ -148,6 +170,13 @@
                 app:iconSpaceReserved="false"
                 app:widgetLayout="@layout/preference_right_arrow"
                 app:summary="@string/usage_reset_time_placeholder"/>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/exclude_apps"
+                android:key="exclude_apps"
+                app:iconSpaceReserved="false"
+                app:widgetLayout="@layout/preference_right_arrow"
+                app:summary="@string/exclude_apps_summary"/>
 
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 

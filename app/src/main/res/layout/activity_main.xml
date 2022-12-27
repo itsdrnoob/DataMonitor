@@ -8,76 +8,130 @@
     android:background="@color/background"
     tools:context=".ui.activities.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
-        android:elevation="@dimen/elevation_default"
+        android:elevation="0.1dp"
+        style="@style/Widget.Material3.Toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/TextAppearance.Material3.ActionBar.Title">
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    <TextView
+<!--    <TextView-->
+<!--        android:id="@+id/battery_optimisation_error"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/margin_mid_large"-->
+<!--        android:layout_marginTop="@dimen/margin_mid_large"-->
+<!--        android:layout_marginEnd="@dimen/margin_mid_large"-->
+<!--        android:background="@drawable/error_banner_background"-->
+<!--        android:clickable="true"-->
+<!--        android:drawableStart="@drawable/ic_baseline_report_24"-->
+<!--        android:drawablePadding="@dimen/margin_mid_large"-->
+<!--        android:drawableTint="@color/error"-->
+<!--        android:elevation="@dimen/elevation_small"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:paddingStart="@dimen/margin_mid_large"-->
+<!--        android:paddingTop="@dimen/margin_mid_large"-->
+<!--        android:paddingEnd="@dimen/margin_medium"-->
+<!--        android:paddingBottom="@dimen/margin_mid_large"-->
+<!--        android:text="@string/battery_optimisation_enabled_info"-->
+<!--        android:textColor="@color/text_primary"-->
+<!--        android:textSize="@dimen/text_small"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/main_toolbar" />-->
+
+    <LinearLayout
         android:id="@+id/battery_optimisation_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_mid_large"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:background="@drawable/error_banner_background"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_baseline_report_24"
-        android:drawablePadding="@dimen/margin_mid_large"
-        android:drawableTint="@color/error"
-        android:elevation="@dimen/elevation_default"
-        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:elevation="@dimen/margin_small"
         android:paddingStart="@dimen/margin_mid_large"
-        android:paddingTop="@dimen/margin_mid_large"
-        android:paddingEnd="@dimen/margin_medium"
+        android:paddingEnd="@dimen/margin_mid_large"
         android:paddingBottom="@dimen/margin_mid_large"
-        android:text="@string/battery_optimisation_enabled_info"
-        android:textSize="@dimen/text_small"
-        android:textColor="@color/text_primary"
+        android:paddingTop="@dimen/margin_small"
+        android:background="@drawable/error_banner_background"
+        android:layout_marginStart="@dimen/margin_mid_large"
+        android:layout_marginEnd="@dimen/margin_mid_large"
+        android:layout_marginTop="@dimen/margin_mid_large"
+        android:clickable="true"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_report_24"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                app:tint="@color/error" />
+
+            <ImageView
+                android:id="@+id/close_battery_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_extra_small"
+                android:backgroundTint="@color/error_banner_bg"
+                android:background="@drawable/selectable_item_plain_background"
+                app:tint="@color/text_primary" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/battery_optimisation_enabled_info"/>
+
+    </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:navGraph="@navigation/nav_graph"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar" />
-
+        app:layout_constraintTop_toBottomOf="@+id/battery_optimisation_error"
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.Material3.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
-        app:elevation="@dimen/elevation_null"
-        app:itemPaddingTop="@dimen/margin_extra_small"
-        android:paddingTop="@dimen/margin_extra_small"
+        app:itemRippleColor="@null"
         app:labelVisibilityMode="labeled"
-        app:itemHorizontalTranslationEnabled="true"
-        app:itemIconTint="@color/bottom_navbar_icon_color_selector"
-        app:itemTextColor="@color/bottom_navbar_icon_color_selector"
+        app:itemTextAppearanceInactive="@style/TextAppearance.Material3.BodySmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

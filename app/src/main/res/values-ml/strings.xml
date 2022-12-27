@@ -5,14 +5,14 @@
     <string name="add_widget">"വിജറ്റ് ചേർക്കുക"</string>
     <string name="notification_mobile_data_usage">"മൊബൈൽ ഡാറ്റ : %1$s"</string>
     <string name="notification_wifi_data_usage">"വൈഫൈ : %1$s"</string>
-    <string name="home_mobile_data_sent">"%1$s
-അയച്ചു"</string>
-    <string name="home_mobile_data_received">"%1$s
-ലഭിച്ചു"</string>
-    <string name="home_wifi_data_sent">"%1$s
-അയച്ചു"</string>
-    <string name="home_wifi_data_received">"%1$s
-ലഭിച്ചു"</string>
+    <string name="home_mobile_data_sent">%1$s
+\nഅയച്ചു</string>
+    <string name="home_mobile_data_received">%1$s
+\nലഭിച്ചു</string>
+    <string name="home_wifi_data_sent">%1$s
+\nഅയച്ചു</string>
+    <string name="home_wifi_data_received">%1$s
+\nലഭിച്ചു</string>
     <string name="label_current_data_warning_trigger_level_limit_set">"നിലവിലെ ട്രിഗർ ലെവൽ : %1$s%% (%2$s)"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"നിലവിലെ ട്രിഗർ ലെവൽ : %1$s%%"</string>
     <string name="label_data_trigger_level">"%1$s%% ഡാറ്റ ഉപഭോഗം ചെയ്യുമ്പോൾ"</string>
@@ -41,7 +41,7 @@
     <string name="label_dev">"Bitroid Inc. സ്നേഹത്തോടെ നിർമ്മിച്ചത്"</string>
     <string name="label_loading_apps">"ആപ്പുകൾ ലോഡുചെയ്യുന്നു"</string>
     <string name="label_app_data_usage_session_empty">"തിരഞ്ഞെടുത്ത സെഷനായി ഡാറ്റയൊന്നും ലഭ്യമല്ല"</string>
-    <string name="label_want_to_contribute">"ഡാറ്റ മോണിറ്ററിലേക്ക് സംഭാവന ചെയ്യാൻ ആഗ്രഹിക്കുന്നത് എങ്ങനെയെന്നറിയാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക"</string>
+    <string name="label_want_to_contribute">ഡാറ്റ മോണിറ്ററിലേക്ക് സംഭാവന ചെയ്യാൻ ആഗ്രഹിക്കുന്നത് എങ്ങനെയെന്നറിയാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക.</string>
     <string name="setup_image_footer">"വിജറ്റുകൾക്കും കൂടാതെ/അല്ലെങ്കിൽ അറിയിപ്പിനും നിങ്ങൾ ഉപയോഗിച്ച ഡാറ്റയുടെ അളവിലേക്ക് എളുപ്പത്തിൽ ആക്സസ് നൽകാനാകും"</string>
     <string name="heading_data_reset">"ഡാറ്റ റീസെറ്റ്"</string>
     <string name="daily">"ദിവസേന"</string>
@@ -60,12 +60,12 @@
     <string name="title_widget_setup">"വിജറ്റ് സജ്ജീകരിക്കുക"</string>
     <string name="widget_setup_step_1">"1. ഹോം സ്ക്രീനിൽ, ഒരു ശൂന്യമായ ഇടം സ്പർശിച്ച് പിടിക്കുക."</string>
     <string name="widget_setup_step_2">"2. വിഡ്ജറ്റുകൾ ടാപ്പ് ചെയ്യുക."</string>
-    <string name="widget_setup_step_3">"3. നിങ്ങളുടെ ഹോം സ്ക്രീനിലേക്ക് ഡാറ്റ മോണിറ്റർ വിജറ്റ് വലിച്ചിടുക"</string>
+    <string name="widget_setup_step_3">3. നിങ്ങളുടെ ഹോം സ്ക്രീനിലേക്ക് ഡാറ്റ മോണിറ്റർ വിജറ്റ് വലിച്ചിടുക.</string>
     <string name="heading_data_usage_today">"ഇന്നത്തെ ഡാറ്റ ഉപയോഗം"</string>
     <string name="action_add_data_plan_home">"നിരീക്ഷണം ആരംഭിക്കാൻ നിങ്ങളുടെ ഡാറ്റ പ്ലാൻ ചേർക്കുക"</string>
     <string name="heading_week_overview">"ഈ ആഴ്ചത്തെ അവലോകനം"</string>
-    <string name="error_loading_overview">"ശ്ശോ... ഈ ആഴ്‌ചയുടെ അവലോകനം ലോഡുചെയ്യാൻ കഴിഞ്ഞില്ല,
-പിന്നീട് വന്ന് പരിശോധിക്കുക"</string>
+    <string name="error_loading_overview">ഈ ആഴ്‌ചയുടെ അവലോകനം ലോഡുചെയ്യാൻ കഴിഞ്ഞില്ല.
+\nപിന്നീട് പരിശോധിക്കുക.</string>
     <string name="title_setup">"ഡാറ്റ മോണിറ്റർ സജ്ജീകരിക്കുക"</string>
     <string name="setup_widget">"വിജറ്റ് സജ്ജീകരിക്കുക"</string>
     <string name="setup_notification">"അറിയിപ്പ് സജ്ജീകരിക്കുക"</string>
@@ -113,7 +113,7 @@
     <string name="report">"ബഗുകൾ റിപ്പോർട്ട് ചെയ്യുക"</string>
     <string name="report_summary">"ബഗുകൾ റിപ്പോർട്ട് ചെയ്യുക അല്ലെങ്കിൽ ഒരു പുതിയ ഫീച്ചർ അഭ്യർത്ഥിക്കുക"</string>
     <string name="setup">"സജ്ജമാക്കുക"</string>
-    <string name="app_data_usage">"ആപ്പ് ഡാറ്റ ഉപയോഗം"</string>
+    <string name="app_data_usage">ആപ്പ് ഉപയോഗം</string>
     <string name="settings">"ക്രമീകരണങ്ങൾ"</string>
     <string name="btc_address_copied">"ബിറ്റ്കോയിൻ വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്"</string>
     <string name="eth_address_copied">"എഥെറിയം വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്"</string>
@@ -121,16 +121,18 @@
     <string name="label_system_apps">"സിസ്റ്റം ആപ്പുകൾ"</string>
     <string name="home">"ഹോം"</string>
     <string name="usage_access_permission">"ഉപയോഗ പ്രവേശന അനുമതി"</string>
-    <string name="usage_access_body">"ആപ്പ് പ്രവർത്തിപ്പിക്കുന്നതിന് ഉപയോഗ വിലയിരുത്തൽ അനുമതി ആവശ്യമാണ്. ഡാറ്റ ഉപയോഗ സ്ഥിതിവിവരക്കണക്കുകൾ ശേഖരിക്കുന്നതിന് ഇത് ആവശ്യമാണ്. വ്യക്തിഗത വിവരങ്ങളൊന്നും ശേഖരിക്കുകയോ സൂക്ഷിക്കുകയോ ചെയ്യില്ല."</string>
+    <string name="usage_access_body">ആപ്ലിക്കേഷൻ ഉപയോഗ സ്ഥിതിവിവരക്കണക്കുകൾ ശേഖരിക്കുന്നതിനാൽ, ആപ്പ് പ്രവർത്തിപ്പിക്കേണ്ടതുണ്ട്.
+\nവ്യക്തിഗത വിവരങ്ങളൊന്നും ശേഖരിക്കപ്പെടുന്നില്ല.</string>
     <string name="action_grant">"അനുമതി നൽകുക"</string>
     <string name="label_tethering">"മൊബൈൽ ഹോട്ട്‌സ്‌പോട്ട്"</string>
     <string name="label_removed">"നീക്കം ചെയ്ത ആപ്പുകൾ"</string>
     <string name="oem_skin_warning">"%1$s ആപ്പ് ശരിയായി പ്രവർത്തിക്കുന്നുവെന്ന് ഉറപ്പാക്കാൻ അധിക ഒപ്റ്റിമൈസേഷൻ നുറുങ്ങുകൾ പരിശോധിക്കുക."</string>
-    <string name="oem_skin_miui">"MIUI കണ്ടെത്തി!"</string>
+    <string name="oem_skin_miui">MIUI കണ്ടെത്തി.</string>
     <string name="battery_optimisation_disabled">"ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="data_plan_saved">"ഡാറ്റ പ്ലാൻ സംരക്ഷിച്ചു"</string>
     <string name="upi_app_not_found">"ഈ അഭ്യർത്ഥന കൈകാര്യം ചെയ്യാൻ ഒരു ആപ്ലിക്കേഷനും കണ്ടെത്തിയില്ല"</string>
-    <string name="upi_unknown_error">"ഒരു അജ്ഞാത പിശക് സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ മറ്റൊരു രീതി പരീക്ഷിക്കുക."</string>
+    <string name="upi_unknown_error">ഒരു അജ്ഞാത പിശക് സംഭവിച്ചു.
+\nദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ മറ്റൊരു രീതി പരീക്ഷിക്കുക.</string>
     <string name="label_no_additional_lang">"കൂടുതൽ ഭാഷകൾ ഉടൻ വരുന്നു.. ഞങ്ങളെ സഹായിക്കണോ? എങ്ങനെയെന്നറിയാൻ ക്ലിക്ക് ചെയ്യുക."</string>
     <string name="notification_disabled">"ഡാറ്റ മോണിറ്റർ അറിയിപ്പ് പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="label_widget_refresh_interval_change">"ഓരോ %1$s കൂടുമ്പോഴും വിജറ്റ് അപ്‌ഡേറ്റ് ചെയ്യും"</string>
@@ -149,12 +151,13 @@
     <string name="title_data_warning_notification">"ഡാറ്റ ഉപയോഗ മുന്നറിയിപ്പ്"</string>
     <string name="body_data_warning_notification">"നിങ്ങളുടെ ഡാറ്റ പരിധിയുടെ %1$d%% നിങ്ങൾ ഉപയോഗിച്ചു"</string>
     <string name="body_app_data_warning_notification">"%1$s അതിന്റെ ഡാറ്റ ക്വാട്ട ഉപയോഗിച്ചു"</string>
-    <string name="title_data_usage_notification">"ഇന്നത്തെ ഡാറ്റ ഉപയോഗം"</string>
-    <string name="body_data_usage_notification_loading">"ലോഡിംഗ്..."</string>
+    <string name="title_data_usage_notification">ഇന്നത്തെ ഡാറ്റാ ഉപയോഗം: %1$s</string>
+    <string name="body_data_usage_notification_loading">ലോഡിംഗ്…</string>
     <string name="label_data_remaining">"%1$s ശേഷിക്കുന്നു"</string>
     <string name="label_data_remaining_used_excess">"%1$s അധികമായി ഉപയോഗിച്ചു"</string>
     <string name="disable_battery_optimisation">"ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ പ്രവർത്തനരഹിതമാക്കുക"</string>
-    <string name="disable_battery_optimisation_body">"പശ്ചാത്തല സേവനത്തെ നശിപ്പിക്കുന്നതിൽ നിന്ന് സിസ്റ്റം തടയാൻ ഡാറ്റ മോണിറ്ററിനായുള്ള ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ പ്രവർത്തനരഹിതമാക്കുക. അങ്ങനെ ചെയ്യാത്തത് ആപ്പ് ശരിയായി പ്രവർത്തിക്കുന്നതിൽ നിന്ന് തടയുകയും തെറ്റായ മൂല്യങ്ങൾ കാണിക്കുകയും ചെയ്യും."</string>
+    <string name="disable_battery_optimisation_body">ബാക്ക്ഗ്രൗണ്ടിൽ പ്രവർത്തിപ്പിക്കുമ്പോൾ ഡാറ്റാ മോണിറ്റർ കൊല്ലുന്നത് തടയുന്നു.
+\nഅല്ലാത്തപക്ഷം, മൂല്യങ്ങൾ തെറ്റായിരിക്കാം.</string>
     <string name="extra_optimisation_tips">"അധിക ഒപ്റ്റിമൈസേഷൻ നുറുങ്ങുകൾ"</string>
     <string name="oem_battery_settings">"ഓ ഇ എം ബാറ്ററി ക്രമീകരണങ്ങൾ"</string>
     <string name="action_next">"അടുത്തത്"</string>
@@ -168,7 +171,7 @@
     <string name="label_translators">"പരിഭാഷകർ"</string>
     <string name="setup_app_data_usage_alert">"ആപ്പ് ഡാറ്റ ഉപയോഗ മുന്നറിയിപ്പ്"</string>
     <string name="title_app_data_limit">"ആപ്പ് ഡാറ്റ പരിധി"</string>
-    <string name="network_diagnostics">"നെറ്റ്‌വർക്ക് ഡയഗ്നോസ്റ്റിക്സ്"</string>
+    <string name="network_diagnostics">ഡയഗ്നോസ്റ്റിക്സ്</string>
     <string name="run_diagnostics">"ഡയഗ്നോസ്റ്റിക്സ് പ്രവർത്തിപ്പിക്കുക"</string>
     <string name="running_diagnostics">"ഡയഗ്നോസ്റ്റിക്സ് പ്രവർത്തിപ്പിക്കുന്നു"</string>
     <string name="connecting">"കണക്റ്റുചെയ്യുന്നു"</string>
@@ -197,7 +200,7 @@
     <string name="connection_error">"കണക്ഷൻ തകരാറ്. നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക"</string>
     <string name="app_label_screen_time">"സ്ക്രീൻ സമയം : %1$s"</string>
     <string name="app_label_background_time">"പശ്ചാത്തല ഉപയോഗം : %1$s"</string>
-    <string name="label_loading">"ആപ്പുകൾ ലോഡുചെയ്യുന്നു"</string>
+    <string name="label_loading">ലോഡിംഗ്…</string>
     <string name="donate_summary">"ഞങ്ങൾക്ക് ഒരു കോഫി വാങ്ങിത്തരിക, ഒരുപക്ഷേ?"</string>
     <string name="label_data_usage_reset_time_change">"ഓരോ %1$s സമയത്തും %2$s-ന് ഡാറ്റ ഉപയോഗം പുനഃസജ്ജമാക്കും"</string>
     <string name="label_data_usage_reset_date_change">"എല്ലാ മാസവും %1$d%2$s-ന് ഡാറ്റ ഉപയോഗം റീസെറ്റ് ചെയ്യും"</string>
@@ -211,7 +214,6 @@
     <string name="system_data_usage">"സിസ്റ്റം ഡാറ്റ ഉപയോഗം"</string>
     <string name="cracky5322_summary">"പരമ്പരാഗത ചൈനീസ് വിവർത്തകൻ"</string>
     <string name="louis_leblanc_summary">"ഫ്രഞ്ച് വിവർത്തകൻ"</string>
-
     <!-- name? -->
     <string name="louis_leblanc">"ലൂയിസ് ലെബ്ലാങ്ക്"</string>
     <string name="network_speed_title">"നെറ്റ്‌വർക്ക് വേഗത: %1$s"</string>
@@ -228,7 +230,6 @@
     <string name="telegram_support">"
 ടെലഗ്രാം സപ്പോർട്ട്"</string>
     <string name="telegram_summary">"ടെലിഗ്രാം സപ്പോർട്ട് ഗ്രൂപ്പിൽ ചേരുക"</string>
-
     <!-- bruhhh. how can i ts the group invite link? -->
     <string name="telegram_chat">"https://t.me/datamonitor"</string>
     <string name="rate_app">"ഗൂഗിൾ പ്ലേ-യിൽ ആപ്പ് റേറ്റുചെയ്യുക"</string>
@@ -251,4 +252,97 @@
     <string name="light_theme_summary">"ലൈറ്റ് തീം തിരഞ്ഞെടുത്തു"</string>
     <string name="dark_theme_summary">"ഇരുണ്ട തീം തിരഞ്ഞെടുത്തു"</string>
     <string name="system_theme_summary">"സിസ്റ്റം തീം പിന്തുടരുന്നു"</string>
+    <string name="combine_notifications">നോട്ടിഫിക്കേഷന്‍ കൂട്ടിച്ചേര്‍ക്കുക</string>
+    <string name="combine_notifications_summary">ഡാറ്റാ മോണിറ്ററും നെറ്റ് വർക്ക് വേഗതയും ഒരു അറിയിപ്പിലേക്ക് കൂട്ടിച്ചേര്‍ക്കുക.</string>
+    <string name="combined_notification_icon">കൂട്ടിച്ചെർത്ത അറിയിപ്പ് ചിഹ്നം</string>
+    <string name="combined_notification_icon_summary">കൂട്ടിച്ചെർത്ത അറിയിപ്പിനായി പ്രദർശിപ്പിക്കേണ്ട ഐക്കൺ തിരഞ്ഞെടുക്കുക</string>
+    <string name="error_combine_notifications_enabled">കൂട്ടിച്ചെർത്ത അറിയിപ്പ് പ്രവർത്തനക്ഷമമാക്കി. വ്യക്തിഗത അറിയിപ്പ് പ്രവർത്തനരഹിതമാക്കാൻ കഴിയില്ല.</string>
+    <string name="option_1_sec">ഓരോ സെക്കന്റും</string>
+    <string name="option_15_sec">15 സെക്കൻഡ്</string>
+    <string name="option_30_sec">30 സെക്കൻഡ്</string>
+    <string name="label_crash_logs">ക്രാഷ് ലോഗുകൾ</string>
+    <string name="report_telegram_summary">ടെലിഗ്രാം സപ്പോർട്ട് ചാറ്റിൽ ക്രാഷ് റിപ്പോർട്ട് അയയ്ക്കുക</string>
+    <string name="label_unknown">അജ്ഞാതം</string>
+    <string name="custom">കസ്റ്റം</string>
+    <string name="crash_logs_extra_text">ഡാറ്റ മോണിറ്റർ ക്രാഷ് ലോഗുകൾ</string>
+    <string name="label_select_app">ആപ്പ് തിരഞ്ഞെടുക്കുക</string>
+    <string name="label_crash_logs_share_chat">ചാറ്റിലേക്ക് പങ്കിടുക: @datamonitor</string>
+    <string name="crash_logs_warning">ക്രാഷ് ലോഗുകൾ; പരിഷ്കരിക്കരുത്</string>
+    <string name="label_crash_logs_copied">ക്രാഷ് ലോഗുകൾ ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി</string>
+    <string name="label_mail">മെയിൽ</string>
+    <string name="label_battery_optimisation">ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ</string>
+    <string name="error_no_crash_logs">ക്രാഷ് ലോഗുകളൊന്നും കണ്ടെത്തിയില്ല. ക്രാഷ് സംഭവിച്ചുവെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ\?</string>
+    <string name="label_copy_logs">ലോഗുകൾ പകർത്തുക</string>
+    <string name="settings_network_diagnostics">നെറ്റ്‌വർക്ക് ഡയഗ്നോസ്റ്റിക്സ്</string>
+    <string name="network_diagnostics_summary">ഡയഗ്നോസ്റ്റിക്സ് സെർവർ മാറ്റുക</string>
+    <string name="settings_diagnostics_server">സെർവർ</string>
+    <string name="settings_download_server">ഡൗൺലോഡ് സെർവർ</string>
+    <string name="settings_upload_server">അപ് ലോഡ് സെർവർ</string>
+    <string name="custom_upload_url_hint">പൂർണ്ണമായ അപ് ലോഡ് യുആർഎൽ നൽകുക</string>
+    <string name="label_custom_server_save_success">സെർവർ മുൻഗണന സേവ് ചെയ്തു</string>
+    <string name="error_invaliid_url">അസാധുവായ ഡൗൺലോഡ് യു ആർ എൽ!</string>
+    <string name="error_invalid_plan">അസാധുവായ പ്ലാൻ!</string>
+    <string name="label_send_report">റിപ്പോർട്ട് അയയ്ക്കുക</string>
+    <string name="label_permission_denied">അനുമതി നിഷേധിച്ചു!</string>
+    <string name="settings_disable_haptics">ഹാപ്റ്റിക്സ് പ്രവർത്തനരഹിതമാക്കുക</string>
+    <string name="disable_haptics_summary">ആപ്പിലുടനീളം ഹാപ്‌റ്റിക് ഫീഡ്‌ബാക്ക് പ്രവർത്തനരഹിതമാക്കുക</string>
+    <string name="action_add_application">ആപ്പ് ചേർക്കുക</string>
+    <string name="title_app_picker">ഒരു ആപ്പ് തിരഞ്ഞെടുക്കുക</string>
+    <string name="app_search_hint">ഒരു ആപ്പ് കണ്ടെത്തുക</string>
+    <string name="label_show_system_apps">സിസ്റ്റം ആപ്പുകൾ കാണിക്കുക</string>
+    <string name="label_hide_system_apps">സിസ്റ്റം ആപ്പുകൾ മറയ്ക്കുക</string>
+    <string name="app_already_present">ആപ്പ് ഇതിനകം തന്നെ ലിസ്റ്റിൽ ഉണ്ട്.</string>
+    <string name="action_delete">നീക്കം ചെയ്യുക</string>
+    <string name="error_unknown">ഒരു അജ്ഞാത പിശക് സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക.</string>
+    <string name="settings_save_results">ഫലങ്ങൾ സെയിവ് ചെയുക</string>
+    <string name="title_delete_results">തെരഞ്ഞെടുത്ത ഫലങ്ങള് ഇല്ലാതാക്കണമോ\?</string>
+    <string name="action_select_all">എല്ലാം തിരഞ്ഞെടുക്കുക</string>
+    <string name="heading_data_reset_custom_counter">പ്ലാൻ വാലിഡിറ്റി</string>
+    <string name="label_custom_start_date">ആരംഭ തീയതി: %1$s</string>
+    <string name="label_select_start_date">ആരംഭ തീയതി തിരഞ്ഞെടുക്കുക</string>
+    <string name="label_plan_end_date">അവസാന തീയതി തിരഞ്ഞെടുക്കുക</string>
+    <string name="label_device_info">ഉപകരണ വിവരം</string>
+    <string name="device_info_content_label">ഉപകരണ വിവരത്തിൽ ഉൾപ്പെടുത്തിയിരിക്കുന്നത് കാണുക</string>
+    <string name="crash_report_title">ക്രാഷ് റിപ്പോർട്ട്</string>
+    <string name="label_telegram">ടെലഗ്രാം</string>
+    <string name="report_github_summary">ഗിറ്റ്ഹബ്ബിൽ ഒരു പുതിയ പ്രശ്നം തുറക്കുക</string>
+    <string name="crash_report_body">ഡാറ്റാ മോണിറ്റർ ക്രാഷ് ചെയ്തതായി തോന്നുന്നു. പ്രശ്നം വിശകലനം ചെയ്യാനും വേഗത്തിൽ പരിഹരിക്കാനും സഹായിക്കുന്നതിന് നിങ്ങൾക്ക് ക്രാഷ് റിപ്പോർട്ട് ഡെവലപ്പർക്ക് അയയ്ക്കാൻ കഴിയും. ക്രാഷ് സംഭവിച്ചില്ലെങ്കിൽ, ദയവായി അവഗണിക്കുക.</string>
+    <string name="report_mail_summary">ക്രാഷ് റിപ്പോർട്ട് മെയിലിൽ അയയ്ക്കുക</string>
+    <string name="auto_hide_live_network">നെറ്റ്‌വർക്ക് വേഗത സ്വയമേവ മറയ്‌ക്കുക</string>
+    <string name="auto_hide_live_network_summary">നെറ്റ്‌വർക്ക് കണക്റ്റ് ചെയ്യാത്തപ്പോൾ നെറ്റ്‌വർക്ക് വേഗത അറിയിപ്പ് നിർത്തുക</string>
+    <string name="total_usage">മൊത്തം ഉപയോഗം: %1$s</string>
+    <string name="label_custom_end_date">അവസാന തീയതി: %1$s</string>
+    <string name="setup_usage_reset_date_custom_selected">കസ്റ്റം ഡാറ്റ പ്ലാൻ സജീവമാണ്</string>
+    <string name="title_data_plan_expired">ഡാറ്റ പ്ലാൻ തീർന്നു!</string>
+    <string name="summary_data_plan_expired">നിങ്ങളുടെ പ്ലാൻ അപ് ഡേറ്റ് ചെയ്യാൻ സമയമായി</string>
+    <string name="error_unknown_telegram_client">ടെലിഗ്രാം ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല അല്ലെങ്കിൽ അജ്ഞാത ക്ലയന്റ് ഉണ്ട്. ദയവായി മറ്റൊരു രീതി പരീക്ഷിക്കുക.</string>
+    <string name="title_device_info_contents">ഉപകരണ വിവര ഉള്ളടക്കം</string>
+    <string name="device_info_body">ഉപകരണ വിവരങ്ങളിൽ ഉൾപ്പെടുന്നു:
+\nഉപകരണ നിർമ്മാതാവ്
+\nഉപകരണ ബ്രാൻഡ്
+\nഉപകരണ മോഡൽ
+\nഉപകരണത്തിന്റെ കോഡ്നാമം
+\nആൻഡ്രോയിഡ് പതിപ്പ്</string>
+    <string name="battery_optimisation_enabled_info">ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ പ്രവർത്തിക്കുന്നു. ഇത് ഡാറ്റ മോണിറ്ററിന്റെ പ്രവർത്തനത്തെ തടസ്സപ്പെടുത്തും. പ്രവർത്തനരഹിതമാക്കാൻ ക്ലിക്ക് ചെയ്യുക.</string>
+    <string name="label_custom_server">കസ്റ്റം സെർവർ</string>
+    <string name="custom_download_url_hint">പൂർണ്ണമായ ഡൌൺലോഡ് യുആർഎൽ നൽകുക</string>
+    <string name="error_url_verification_failed">യു ആർ എൽ സ്ഥിരീകരിക്കാൻ കഴിഞ്ഞില്ല! ദയവായി വീണ്ടും ശ്രമിക്കുക അല്ലെങ്കിൽ മറ്റൊന്ന് ഉപയോഗിക്കുക.</string>
+    <string name="notification_permission_denied_body">ഡാറ്റാ മോണിറ്റർ അറിയിപ്പ്, തത്സമയ നെറ്റ് വർക്ക് വേഗത, ഡാറ്റാ ഉപയോഗ അലേർട്ട് എന്നിവയുൾപ്പെടെയുള്ള സവിശേഷതകൾ അറിയിപ്പ് അനുമതിയില്ലാതെ ശരിയായി പ്രവർത്തിക്കില്ല. ദയവായി ഇത് മാനുവലായി അനുവദിക്കുക.</string>
+    <string name="action_dismiss">പിരിച്ചുവിടുക</string>
+    <string name="action_add_data_plan_home_summary">ഡാറ്റ പ്ലാനൊന്നും കണ്ടെത്തിയില്ല! അത് ട്രാക്ക് ചെയ്യാൻ തുടങ്ങാൻ ഒരു ഡാറ്റ പ്ലാൻ ചേർക്കുക.</string>
+    <string name="lockscreen_notification">ലോക്ക് സ്ക്രീനിൽ അറിയിപ്പ് കാണിക്കുക</string>
+    <string name="save_results_summary">നെറ്റ്‌വർക്ക് ഡയഗ്‌നോസ്റ്റിക്‌സ് ഫലങ്ങൾ സെയിവ് ചെയുക</string>
+    <string name="exclude_apps">ആപ്ലിക്കേഷനുകൾ ഒഴിവാക്കുക</string>
+    <string name="exclude_apps_summary">ഡാറ്റാ ഉപയോഗത്തിൽ നിന്ന് ആപ്ലിക്കേഷൻ ട്രാഫിക് ഒഴിവാക്കുക</string>
+    <string name="diagnostics_history">ഡയഗ്നോസ്റ്റിക്സ് ചരിത്രം</string>
+    <string name="label_no_apps_added">ആപ്പുകളൊന്നും ചേർത്തിട്ടില്ല. ഒരു ആപ്പ് ചേർക്കാൻ താഴെയുള്ള ബട്ടണിൽ ക്ലിക്ക് ചെയ്യുക.</string>
+    <string name="title_remove_apps">തിരഞ്ഞെടുത്ത ആപ്പുകൾ നീക്കം ചെയ്യണോ\?</string>
+    <string name="hudaifa_abdullah_summary">അറബി</string>
+    <string name="license_summary">ആപ്പ് ലൈസൻസുകൾ കാണുക</string>
+    <string name="network_diagnostics_info">നെറ്റ്‌വർക്ക് ഡയഗ്നോസ്റ്റിക്സിന് ഏകദേശം 20-30 എം.ബി ഡാറ്റ ഉപയോഗിച്ചേക്കാം. നിങ്ങളുടെ പ്ലാനിൽ ഇത് ലഭ്യമാണെന്ന് ഉറപ്പാക്കുക, അല്ലാത്തപക്ഷം നെറ്റ്‌വർക്ക് നിരക്കുകൾ ബാധകമായേക്കാം.</string>
+    <string name="holydemon_summary">മലയാളം</string>
+    <string name="liviogasp_summary">ഇറ്റാലിയൻ</string>
+    <string name="comradekingu_summary">വിവർത്തന പിന്തുണ</string>
+    <string name="f_droid_page">F-Droid-ൽ ആപ്പ് കാണുക</string>
+    <string name="f_droid_page_summary">ഔദ്യോഗിക F-Droid റിപ്പോയിൽ ആപ്പ് പരിശോധിക്കുക</string>
 </resources>

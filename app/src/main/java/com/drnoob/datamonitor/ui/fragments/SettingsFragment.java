@@ -19,24 +19,6 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-
-import com.drnoob.datamonitor.R;
-import com.drnoob.datamonitor.core.base.Preference;
-import com.drnoob.datamonitor.ui.activities.ContainerActivity;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.snackbar.Snackbar;
-
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_THEME;
@@ -47,10 +29,31 @@ import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
+import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.core.base.Preference;
+import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.snackbar.Snackbar;
+
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsFragment.class.getSimpleName();
     private Preference mAppThemePicker, mLanguagePicker, mDiagnosticsSettings,
             mAbout, mLicense, mContributors, mDonate;
+    private SwitchPreferenceCompat mDisableHaptics;
     private Snackbar snackbar;
 
     public SettingsFragment() {
@@ -69,6 +72,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mAppThemePicker = (Preference) findPreference("app_theme");
         mLanguagePicker = (Preference) findPreference("language_picker");
         mDiagnosticsSettings = (Preference) findPreference("network_diagnostics");
+        mDisableHaptics = (SwitchPreferenceCompat) findPreference("disable_haptics");
         mAbout = (Preference) findPreference("about");
         mLicense = (Preference) findPreference("license");
         mContributors = (Preference) findPreference("contributors");
@@ -193,6 +197,23 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(androidx.preference.Preference preference) {
                 startActivity(new Intent(getContext(), ContainerActivity.class)
                         .putExtra(GENERAL_FRAGMENT_ID, DIAGNOSTICS_SETTINGS_FRAGMENT));
+                return false;
+            }
+        });
+
+        mDisableHaptics.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("disable_haptics", false);
+                if (isChecked) {
+                    snackbar = Snackbar.make(getView(), "Haptic feedback disabled", Snackbar.LENGTH_SHORT);
+                }
+                else {
+                    snackbar = Snackbar.make(getView(), "Haptic feedback enabled", Snackbar.LENGTH_SHORT);
+                }
+                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                .putBoolean("disable_haptics", isChecked).apply();
+                snackbar.show();
                 return false;
             }
         });

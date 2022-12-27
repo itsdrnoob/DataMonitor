@@ -19,6 +19,12 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL_INDEX;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL_SUMMARY;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL_INDEX;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL_SUMMARY;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -50,12 +56,6 @@ import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
 import fr.bmartel.speedtest.model.SpeedTestError;
 import fr.bmartel.speedtest.utils.SpeedTestUtils;
-
-import static com.drnoob.datamonitor.Common.dismissOnClick;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL_INDEX;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_DOWNLOAD_URL_SUMMARY;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL_INDEX;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_UPLOAD_URL_SUMMARY;
 
 public class DiagnosticsSettingsFragment extends PreferenceFragmentCompat {
     public static final int TYPE_DOWNLOAD_URL = 1;

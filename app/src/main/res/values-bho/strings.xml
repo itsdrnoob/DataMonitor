@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">डाटा मॉनिटर</string>
+    <string name="appwidget_text">जइसन की</string>
+    <string name="notification_mobile_data_usage">मोबाइल डाटा : %1$s</string>
+    <string name="notification_wifi_data_usage">वाई-फाई: %1$s</string>
+    <string name="home_mobile_data_sent">%1$s
+\nभेजल गईल</string>
+    <string name="home_mobile_data_received">%1$s
+\nमिलल बा</string>
+    <string name="home_wifi_data_sent">%1$s
+\nभेजल गईल</string>
+    <string name="label_current_data_warning_trigger_level_limit_set">वर्तमान ट्रिगर स्तर: %1$s%% (%2$s) बा</string>
+    <string name="home_wifi_data_received">%1$s
+\nमिलल बा</string>
+    <string name="label_current_data_warning_trigger_level_limit_not_set">वर्तमान ट्रिगर स्तर: %1$s%% बा</string>
+    <string name="label_data_trigger_level">जब %1$s%% डेटा के इस्तेमाल हो जाय</string>
+    <string name="app_label_uid">यू आई डी: %1$d</string>
+    <string name="app_name_placeholder">ऍप क नाम</string>
+    <string name="label_sent">भेजल गईल</string>
+    <string name="label_received">मिलल बा</string>
+    <string name="action_open_app_settings">ऍप क सेटिंग खोला</string>
+    <string name="action_cancel">रहे द</string>
+    <string name="action_ok">ठीक बा</string>
+    <string name="label_today">आज</string>
+    <string name="label_yesterday">कलिहां</string>
+    <string name="label_all_time">आज तक क पूरा</string>
+    <string name="title_app_data_usage_type">प्रकार के चयन करीं</string>
+    <string name="app_label_package_name">पैकेज के नाम: %1$s बा</string>
+    <string name="app_data_usage_placeholder">0 MB</string>
+    <string name="title_app_data_usage_session">सत्र के चयन करीं</string>
+    <string name="label_this_month">इ महीना</string>
+    <string name="label_last_month">पिछला महीना</string>
+    <string name="label_this_year">एह साल</string>
+</resources>

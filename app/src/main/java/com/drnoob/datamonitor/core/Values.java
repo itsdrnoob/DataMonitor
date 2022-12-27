@@ -72,6 +72,8 @@ public class Values {
     public static final int APP_LANGUAGE_FRAGMENT = 0x00D2;
     public static final int DISABLE_BATTERY_OPTIMISATION_FRAGMENT = 0x00E6;
     public static final int DIAGNOSTICS_SETTINGS_FRAGMENT = 0x00F0;
+    public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
+    public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -83,6 +85,7 @@ public class Values {
     public static final int USAGE_ACCESS_DISABLED = 0x00B4;
     public static final int READ_PHONE_STATE_DISABLED = 0x00B5;
     public static final int REQUEST_READ_PHONE_STATE = 2011;
+    public static final int REQUEST_POST_NOTIFICATIONS = 2111;
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";
@@ -119,6 +122,8 @@ public class Values {
     public static final String DIAGNOSTICS_UPLOAD_URL = "diagnostics_upload_url";
     public static final String DIAGNOSTICS_UPLOAD_URL_SUMMARY = "diagnostics_upload_url_summary";
     public static final String DIAGNOSTICS_UPLOAD_URL_INDEX = "diagnostics_upload_url_index";
+    public static final String SHOW_ADD_PLAN_BANNER = "show_add_plan_banner";
+    public static final String LANGUAGE_SYSTEM_DEFAULT = "system";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 
@@ -146,10 +151,21 @@ public class Values {
     public static final String UPDATE_VERSION = "update_version";
     public static final String MD5_GITHUB = "39aa537128b70c2886cb771c33944a7d";
     public static final String MD5_PLAY = "58CDB2B01A9E512D4FDC1A9926A29513";
+    public static final String MD5_F_DROID = "4a509c658ae252568c7c196c0dba01ae";
 
     public static final String CRASH_REPORT_KEY = "datamonitor.crashReport";
 
     public static final String INTENT_ACTION = "datamonitor.intent.action";
     public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
+    public static final String EXTRA_APP_NAME = "datamonitor.intent.extra.appName";
+    public static final String EXTRA_APP_PACKAGE = "datamonitor.intent.extra.appPackageName";
+
+    public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
+    public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";
+
+    public static final String EXCLUDE_APPS_PREFERENCES = "com.drnoob.datamonitor_exclude_apps_preferences";
+    public static final String DIAGNOSTICS_HISTORY_PREFERENCES = "com.drnoob.datamonitor_diagnostics_history_preferences";
+    public static final String EXCLUDE_APPS_LIST = "excluded_apps_list";
+    public static final String DIAGNOSTICS_HISTORY_LIST = "diagnostics_history_list";
 
 }

@@ -19,6 +19,9 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_HISTORY_PREFERENCES;
+import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_PREFERENCES;
+
 import android.content.Context;
 
 public class SharedPreferences {
@@ -47,6 +50,26 @@ public class SharedPreferences {
         android.content.SharedPreferences preferences = null;
         if (context != null) {
             preferences = context.getSharedPreferences("app_data_limit_prefs",
+                    Context.MODE_PRIVATE);
+        }
+
+        return preferences;
+    }
+
+    public static android.content.SharedPreferences getExcludeAppsPrefs(Context context) {
+        android.content.SharedPreferences preferences = null;
+        if (context != null) {
+            preferences = context.getSharedPreferences(EXCLUDE_APPS_PREFERENCES,
+                    Context.MODE_PRIVATE);
+        }
+
+        return preferences;
+    }
+
+    public static android.content.SharedPreferences getDiagnosticsHistoryPrefs(Context context) {
+        android.content.SharedPreferences preferences = null;
+        if (context != null) {
+            preferences = context.getSharedPreferences(DIAGNOSTICS_HISTORY_PREFERENCES,
                     Context.MODE_PRIVATE);
         }
 

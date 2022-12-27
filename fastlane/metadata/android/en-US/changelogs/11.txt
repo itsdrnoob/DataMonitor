@@ -1,0 +1,5 @@
+• Introducing Material You! A closer experience to your device with a new & revamped User Interface.
+• Users can now add applications to the Excluded apps list, which will exclude their traffic from the data plan.
+• The home screen now shows the amount of data left in the data plan.
+• An all new custom data plan option. Now users can choose any start/end date.
+• For complete changelog visit https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CHANGELOG.md#v220
