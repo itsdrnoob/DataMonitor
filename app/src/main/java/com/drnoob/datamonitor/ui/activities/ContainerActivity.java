@@ -45,8 +45,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -334,7 +332,7 @@ public class ContainerActivity extends AppCompatActivity {
             mLiveData.setIsAppSelectionView(false);
             mLiveData.setSelectedAppsList(appModelList);
         }
-        if (isResultsSelectionView) {
+        else if (isResultsSelectionView) {
             List<DiagnosticsHistoryModel> modelList = new ArrayList<>();
             mLiveData.setIsResultSelectionView(false);
             mLiveData.setSelectedResults(modelList);

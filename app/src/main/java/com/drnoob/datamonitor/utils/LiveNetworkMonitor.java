@@ -19,6 +19,10 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
+import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -34,7 +38,6 @@ import android.net.NetworkRequest;
 import android.net.TrafficStats;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,10 +52,6 @@ import com.drnoob.datamonitor.ui.activities.MainActivity;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
-import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
-import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
 
 public class LiveNetworkMonitor extends Service {
     private static final String TAG = LiveNetworkMonitor.class.getSimpleName();

@@ -19,10 +19,20 @@
 
 package com.drnoob.datamonitor.ui.activities;
 
+import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
+import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
+import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
+import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
+import static com.drnoob.datamonitor.core.Values.REQUEST_READ_PHONE_STATE;
+import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
+import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
+import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,7 +43,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -49,25 +58,12 @@ import com.drnoob.datamonitor.databinding.ActivitySetupBinding;
 import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.color.DynamicColors;
-import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
-
-import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
-import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
-import static com.drnoob.datamonitor.Common.setLanguage;
-import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
-import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
-import static com.drnoob.datamonitor.core.Values.READ_PHONE_STATE_DISABLED;
-import static com.drnoob.datamonitor.core.Values.REQUEST_READ_PHONE_STATE;
-import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
-import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
-import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 
 public class SetupActivity extends AppCompatActivity {
     private static final String TAG = SetupActivity.class.getSimpleName();

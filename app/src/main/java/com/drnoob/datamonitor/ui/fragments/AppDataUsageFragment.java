@@ -19,6 +19,24 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
+import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.getRefreshAppDataUsage;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.isDataLoading;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.mSystemAppsList;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.mUserAppsList;
+import static com.drnoob.datamonitor.ui.activities.MainActivity.setRefreshAppDataUsage;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -55,23 +73,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
-import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
-import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
-import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
-import static com.drnoob.datamonitor.ui.activities.MainActivity.isDataLoading;
-import static com.drnoob.datamonitor.ui.activities.MainActivity.mSystemAppsList;
-import static com.drnoob.datamonitor.ui.activities.MainActivity.mUserAppsList;
 
 public class AppDataUsageFragment extends Fragment {
     private static final String TAG = AppDataUsageFragment.class.getSimpleName();
@@ -136,6 +137,10 @@ public class AppDataUsageFragment extends Fragment {
                 mTopBar.setVisibility(View.GONE);
                 mAppsView.setPadding(0, 130, 0, 0);
             }
+        }
+        Log.e(TAG, "onCreateView: " + getRefreshAppDataUsage() );
+        if (getRefreshAppDataUsage()) {
+            refreshData();
         }
 
         setSession(session);
@@ -348,7 +353,7 @@ public class AppDataUsageFragment extends Fragment {
 
     @Override
     public void onPause() {
-        viewModel.setCurrentSession(getSession(Objects.requireNonNull(getContext())));
+        viewModel.setCurrentSession(getSession(requireContext()));
         viewModel.setCurrentType(getType(getContext()));
         super.onPause();
     }
@@ -401,6 +406,9 @@ public class AppDataUsageFragment extends Fragment {
         else {
             setSession(mList.get(0).getSession());
             setType(mList.get(0).getType());
+        }
+        if (!fromHome) {
+            setRefreshAppDataUsage(false);
         }
     }
 

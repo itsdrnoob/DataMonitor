@@ -19,6 +19,10 @@
 
 package com.drnoob.datamonitor.adapters;
 
+import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
@@ -41,10 +45,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.util.List;
-
-import static com.drnoob.datamonitor.Common.isAppInstalled;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
 
 public class AppDataLimitAdapter extends RecyclerView.Adapter<AppDataLimitAdapter.AppDataLimitViewHolder> {
     private static final String TAG = AppDataLimitAdapter.class.getSimpleName();

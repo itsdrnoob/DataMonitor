@@ -19,6 +19,18 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP;
+import static com.drnoob.datamonitor.core.Values.NOTIFICATION_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
+import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
+
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,7 +40,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
@@ -41,20 +52,7 @@ import androidx.preference.PreferenceManager;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
-import java.text.ParseException;
 import java.util.Arrays;
-
-import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_MOBILE_DATA;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_REFRESH_INTERVAL;
-import static com.drnoob.datamonitor.core.Values.NOTIFICATION_WIFI;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 
 public class NotificationService extends Service {
 

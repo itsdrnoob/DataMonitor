@@ -19,6 +19,14 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.Common.refreshAvailableLanguages;
+import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -31,7 +39,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,18 +54,7 @@ import com.drnoob.datamonitor.utils.SharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import static com.drnoob.datamonitor.Common.refreshAvailableLanguages;
-import static com.drnoob.datamonitor.Common.setLanguage;
-import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
-import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE;
-import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
-import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 
 public class LanguageFragment extends Fragment {
     private static final String TAG = LanguageFragment.class.getSimpleName();

@@ -19,6 +19,13 @@
 
 package com.drnoob.datamonitor;
 
+import static android.content.Context.APP_OPS_SERVICE;
+import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
+import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
+import static com.drnoob.datamonitor.core.Values.LANGUAGE_SYSTEM_DEFAULT;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -26,7 +33,6 @@ import android.app.AppOpsManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -39,7 +45,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -47,7 +52,6 @@ import androidx.core.os.ConfigurationCompat;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.adapters.data.LanguageModel;
-import com.drnoob.datamonitor.ui.fragments.LanguageFragment;
 import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
@@ -55,7 +59,6 @@ import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,13 +66,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import static android.content.Context.APP_OPS_SERVICE;
-import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
-import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
-import static com.drnoob.datamonitor.core.Values.LANGUAGE_SYSTEM_DEFAULT;
-import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 
 public class Common {
     private static final String TAG = Common.class.getSimpleName();

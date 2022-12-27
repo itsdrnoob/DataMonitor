@@ -21,15 +21,12 @@ package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
-
-import com.drnoob.datamonitor.R;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -21,13 +21,10 @@ package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
-
-import com.drnoob.datamonitor.R;
 
 public class PreferenceCategory extends androidx.preference.PreferenceCategory {
     public PreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

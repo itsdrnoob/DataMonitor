@@ -20,15 +20,11 @@
 package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
-
-import com.drnoob.datamonitor.R;
 
 public class Preference extends androidx.preference.Preference {
 

@@ -19,6 +19,22 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
+import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
+import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
+import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppWifiDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -49,22 +65,6 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
-import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
-import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
-import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppWifiDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 
 public class SystemDataUsageFragment extends Fragment {
     private static final String TAG = SystemDataUsageFragment.class.getSimpleName();

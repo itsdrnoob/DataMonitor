@@ -19,16 +19,17 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.MD5_F_DROID;
+import static com.drnoob.datamonitor.core.Values.MD5_GITHUB;
+import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,13 +38,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
-import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.KeyUtils;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -52,18 +51,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import static com.drnoob.datamonitor.Common.updateDialog;
-import static com.drnoob.datamonitor.core.Values.MD5_F_DROID;
-import static com.drnoob.datamonitor.core.Values.MD5_GITHUB;
-import static com.drnoob.datamonitor.core.Values.MD5_PLAY;
-import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 
 public class AboutFragment extends Fragment {
     private static final String TAG = AboutFragment.class.getSimpleName();

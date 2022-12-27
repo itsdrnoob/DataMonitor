@@ -19,6 +19,16 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_THEME;
+import static com.drnoob.datamonitor.core.Values.APP_THEME_SUMMARY;
+import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,16 +48,6 @@ import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
-
-import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.APP_THEME;
-import static com.drnoob.datamonitor.core.Values.APP_THEME_SUMMARY;
-import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsFragment.class.getSimpleName();

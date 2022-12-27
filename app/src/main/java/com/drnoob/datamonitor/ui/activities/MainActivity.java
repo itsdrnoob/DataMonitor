@@ -127,6 +127,15 @@ public class MainActivity extends AppCompatActivity {
     public static int value;
     public static String themeSwitch;
     private static Boolean isDataLoading = false;
+    private static Boolean refreshAppDataUsage = false;
+
+    public static Boolean getRefreshAppDataUsage() {
+        return refreshAppDataUsage;
+    }
+
+    public static void setRefreshAppDataUsage(Boolean refreshAppDataUsage) {
+        MainActivity.refreshAppDataUsage = refreshAppDataUsage;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

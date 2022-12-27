@@ -242,6 +242,8 @@ public class CompoundNotification extends Service {
                 .getBoolean(NOTIFICATION_MOBILE_DATA, true);
         Boolean showWifi = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(NOTIFICATION_WIFI, true);
+        Boolean autoHide = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("auto_hide_network_speed", false);
 
         String notificationIcon = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
                 .getString("combined_notification_icon", ICON_NETWORK_SPEED);
@@ -266,6 +268,15 @@ public class CompoundNotification extends Service {
 
                 long totalSent = mobile[0] + wifi[0];
                 long totalReceived = mobile[1] + wifi[1];
+
+                if (!showMobileData) {
+                    totalSent = totalSent - mobile[0];
+                    totalReceived = totalReceived - mobile[1];
+                }
+                if (!showWifi) {
+                    totalSent = totalSent - wifi[0];
+                    totalReceived = totalReceived - wifi[1];
+                }
 
                 String[] total = formatData(totalSent, totalReceived);
                 totalDataUsage = context.getResources().getString(R.string.title_data_usage_notification, total[2]);
@@ -392,6 +403,15 @@ public class CompoundNotification extends Service {
             bigContentView.setViewVisibility(R.id.data_usage_wifi, View.GONE);
         }
 
+        if (!isNetworkConnected) {
+            if (autoHide) {
+                contentView.setViewVisibility(R.id.network_speed_title, View.GONE);
+                bigContentView.setViewVisibility(R.id.network_speed_title, View.GONE);
+                bigContentView.setViewVisibility(R.id.network_speed_upload, View.GONE);
+                bigContentView.setViewVisibility(R.id.network_speed_download, View.GONE);
+            }
+        }
+
 //        contentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 //        bigContentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 
@@ -402,7 +422,12 @@ public class CompoundNotification extends Service {
             mBuilder.setSmallIcon(dataUsageIcon);
         }
         else {
-            mBuilder.setSmallIcon(networkSpeedIcon);
+            if (!isNetworkConnected && autoHide) {
+                mBuilder.setSmallIcon(dataUsageIcon);
+            }
+            else {
+                mBuilder.setSmallIcon(networkSpeedIcon);
+            }
         }
         mBuilder.setOngoing(true);
         mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);

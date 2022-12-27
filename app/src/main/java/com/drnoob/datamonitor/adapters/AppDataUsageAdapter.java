@@ -19,6 +19,14 @@
 
 package com.drnoob.datamonitor.adapters;
 
+import static com.drnoob.datamonitor.Common.isAppInstalled;
+import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.usage.UsageEvents;
@@ -35,8 +43,6 @@ import android.os.Build;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +50,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,18 +63,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.skydoves.progressview.ProgressView;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.drnoob.datamonitor.Common.isAppInstalled;
-import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 
 public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapter.AppDataUsageViewHolder> {
 

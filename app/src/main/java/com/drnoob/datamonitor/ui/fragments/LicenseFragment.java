@@ -19,6 +19,11 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.OSS_LICENSE_FRAGMENT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -42,11 +47,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.OSS_LICENSE_FRAGMENT;
 
 public class LicenseFragment extends Fragment {
     private static final String TAG = LicenseFragment.class.getSimpleName();

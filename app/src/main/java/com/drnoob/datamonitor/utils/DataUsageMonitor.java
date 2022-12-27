@@ -19,6 +19,17 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_NOTIFICATION_ID;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
+import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
+import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
+import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -41,17 +52,6 @@ import com.drnoob.datamonitor.ui.fragments.SetupFragment;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_NOTIFICATION_ID;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
-import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
-import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
-import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 
 public class DataUsageMonitor extends Service {
     private static final String TAG = DataUsageMonitor.class.getSimpleName();
