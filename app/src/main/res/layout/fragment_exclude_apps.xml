@@ -32,34 +32,30 @@
 
     <LinearLayout
         android:id="@+id/empty_list_banner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:backgroundTint="@color/banner_tint"
-        android:elevation="@dimen/elevation_small"
         android:padding="@dimen/margin_mid_large"
         android:visibility="gone"
-        android:background="@drawable/banner_background"
-        android:layout_marginStart="@dimen/margin_mid_large"
-        android:layout_marginEnd="@dimen/margin_mid_large"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginBottom="@dimen/margin_mid_large"
-        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/add_app_fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_info"
-            app:tint="@color/text_secondary" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_info"
+                app:tint="@color/text_secondary" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/label_no_apps_added"
-            android:layout_marginTop="@dimen/margin_medium"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/label_no_apps_added"
+                android:layout_marginTop="@dimen/margin_medium"/>
 
     </LinearLayout>
 
