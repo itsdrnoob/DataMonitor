@@ -340,4 +340,9 @@
     <string name="error_unknown">حدث خطأ غير معروف. يرجى المحاولة مرة أخرى.</string>
     <string name="app_search_hint">ابحث عن تطبيق</string>
     <string name="label_show_system_apps">إظهار تطبيقات النظام</string>
+    <string name="diagnostics_history">سجل التشخيص</string>
+    <string name="settings_save_results">حفظ النتائج</string>
+    <string name="action_select_all">حدد الكل</string>
+    <string name="save_results_summary">حفظ نتائج تشخيص الشبكة</string>
+    <string name="title_delete_results">حذف النتائج المحددة؟</string>
 </resources>

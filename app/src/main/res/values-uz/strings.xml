@@ -1,9 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Data Monitor</string>
     <string name="appwidget_text">Namuna</string>
     <string name="add_widget">Vidjet qo\'shish</string>
-
-
     <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
     <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
     <string name="notification_mobile_data_usage"> Ishlatilgan trafik: %1$s</string>
@@ -15,7 +14,6 @@
     <string name="label_current_data_warning_trigger_level_limit_set">Joriy tetiklish darajasi: %1$s%% (%2$s)</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">Joriy tetiklik darajasi: %1$s%%</string>
     <string name="label_data_trigger_level">Qachonki %1$s%% trafik ishlatilganda</string>
-    <string name="hello_blank_fragment" translatable="false"></string>
     <string name="app_label_package_name">Paket nomi: %1$s</string>
     <string name="app_label_uid">UID: %1$d</string>
     <string name="app_name_placeholder">Ilova nomi</string>
