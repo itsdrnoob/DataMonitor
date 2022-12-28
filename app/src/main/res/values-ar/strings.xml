@@ -345,4 +345,24 @@
     <string name="action_select_all">حدد الكل</string>
     <string name="save_results_summary">حفظ نتائج تشخيص الشبكة</string>
     <string name="title_delete_results">حذف النتائج المحددة؟</string>
+    <string name="Atalanttore_summary">الألمانية</string>
+    <string name="bonbonboi_summary">العربيّة</string>
+    <string name="bonbonboi">بونبونبوي</string>
+    <string name="Master2050">المعلم 2050</string>
+    <string name="MarongHappy">جونغهي لي</string>
+    <string name="U1M450W_summary">الأوزبكية</string>
+    <string name="U1M450W">U1M450W</string>
+    <string name="gallegonovato">جاليجونوفاتو</string>
+    <string name="rex07">ريكس-سا</string>
+    <string name="shailendramaurya_summary">الهندية ، البوجبورية</string>
+    <string name="iqb4lsp_summary">الإندونيسية</string>
+    <string name="Atalanttore">إتوري أتالان</string>
+    <string name="Kefir2105">كفير2105</string>
+    <string name="gallegonovato_summary">الأسبانية</string>
+    <string name="rex07_summary">العربيّة</string>
+    <string name="Kefir2105_summary">الأوكرانية</string>
+    <string name="MarongHappy_summary">الكورية</string>
+    <string name="shailendramaurya">شايليندرا موريا</string>
+    <string name="iqb4lsp">IQB4LSP</string>
+    <string name="Master2050_summary">الصينية التقليدية والبرتغالية والفرنسية والنرويجية البوكمال والإسبانية والألمانية والرومانية والكورية والتركية والصينية المبسطة والأوكرانية والهندية والروسية والعربية</string>
 </resources>
