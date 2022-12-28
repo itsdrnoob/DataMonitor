@@ -35,7 +35,6 @@ Track all your data usage - at one place
 ## Download
 [<img alt="Get it on Google Play" height="85" src="./images/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.drnoob.datamonitor)<br><br>
 [<img alt="Get it on F-Droid" height="85" src="./images/f-droid-badge.png">](https://f-droid.org/packages/com.drnoob.datamonitor/)<br><br>
-[<img alt="Get it on AFH" height="50" src="https://www.androidfilehost.com/images/afh.png">](https://www.androidfilehost.com/?fid=14871746926876844877)<br><br>
 Or check <a href = "https://github.com/itsdrnoob/DataMonitor/releases/latest">releases</a>
 
 ## Changelog
