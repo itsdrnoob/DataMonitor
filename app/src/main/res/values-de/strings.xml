@@ -334,4 +334,15 @@
     <string name="exclude_apps_summary">App-Datenverkehr von der Datennutzung ausschließen</string>
     <string name="label_no_apps_added">Keine Apps hinzugefügt. Klicken Sie auf die Schaltfläche unten, um eine Anwendung hinzuzufügen.</string>
     <string name="title_app_picker">Wählen Sie eine Anwendung aus</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Kefir2105_summary">Ukrainisch</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya_summary">Hindi, Bhojpuri</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy">Jung-Hee Lee</string>
+    <string name="U1M450W_summary">Usbekisch</string>
+    <string name="U1M450W">U1M450W</string>
 </resources>
