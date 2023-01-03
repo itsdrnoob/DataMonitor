@@ -352,4 +352,24 @@
     <string name="diagnostics_history">Historial del diagnóstico</string>
     <string name="settings_save_results">Guardar los resultados</string>
     <string name="title_delete_results">¿Borrar los resultados seleccionados\?</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato_summary">Español</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105_summary">Ucraniano</string>
+    <string name="rex07_summary">Árabe</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya_summary">Hindi, Bhojpuri</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp_summary">Indonesio</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi_summary">Árabe</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy_summary">Coreano</string>
+    <string name="MarongHappy">JungHee Lee</string>
+    <string name="U1M450W_summary">Uzbeko</string>
+    <string name="U1M450W">U1M450W</string>
+    <string name="Atalanttore_summary">Alemán</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="Master2050_summary">Chino tradicional, portugués, francés, bokmål noruego, español, alemán, rumano, coreano, turco, chino simplificado, ucraniano, hindi, ruso y árabe</string>
 </resources>
