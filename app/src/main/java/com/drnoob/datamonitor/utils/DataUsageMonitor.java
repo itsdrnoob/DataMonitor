@@ -68,7 +68,7 @@ public class DataUsageMonitor extends Service {
         super.onCreate();
         boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("data_usage_alert", false);
         if (isChecked) {
-            startForeground(0, null);
+//            startForeground(0, null);
             startMonitor(this);
             AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
             Intent intent = new Intent(this, DataMonitor.class);
@@ -127,6 +127,9 @@ public class DataUsageMonitor extends Service {
                     String totalRaw = formatData(getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[0],
                             getDeviceMobileDataUsage(context, SESSION_TODAY, 1)[1])[2];
                     Double totalData = 0d;
+                    if (totalRaw.contains(",")) {
+                        totalRaw = totalRaw.replace(",", ".");
+                    }
                     if (totalRaw.contains(" MB")) {
                         totalRaw = totalRaw.replace(" MB", "");
                         totalData = Double.parseDouble(totalRaw);
