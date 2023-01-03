@@ -51,4 +51,5 @@
     <color name="bottom_nav_view_bg">@color/surface</color>
     <color name="banner_tint">@color/info_banner_bg</color>
     <color name="search_bg">#3A4757</color>
+    <color name="notification_summary_text">#c2c1cc</color>
 </resources>
