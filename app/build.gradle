@@ -10,8 +10,8 @@ android {
         applicationId "com.drnoob.datamonitor"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 13
-        versionName 'v2.2.0'
+        versionCode 14
+        versionName 'v2.3.0'
         resConfigs "en", "ar", "de", "es", "ef", "fr", "hi", "in", "it", "ko",
                 "ml", "nb-rNO", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "zh-rCN", "zh-rTW"
 
