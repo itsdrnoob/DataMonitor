@@ -68,7 +68,7 @@
     <string name="overview_friday">Пт</string>
     <string name="overview_saturday">Сб</string>
     <string name="overview_sunday">Вс</string>
-    <string name="network_diagnostics">Диагностика сети</string>
+    <string name="network_diagnostics">Диагностика</string>
     <string name="testing_upload">Проверка исходящей скорости</string>
     <string name="current_connection">Текущее соединение: %1$s</string>
     <string name="network_stats">Сетевая статистика</string>
@@ -92,7 +92,7 @@
     <string name="cracky5322_summary">Китайский (традиционный)</string>
     <string name="louis_leblanc_summary">Французский</string>
     <string name="network_speed_title">Скорость сети: %1$s</string>
-    <string name="network_speed_download">Скачивание: %1$s</string>
+    <string name="network_speed_download">Входящая: %1$s</string>
     <string name="network_signal_notification">Скорость сети в реальном времени</string>
     <string name="label_network_signal_notification_enabled">Скорость сети в реальном времени включена</string>
     <string name="network_signal_summary">Бета-версия</string>
@@ -152,7 +152,7 @@
     <string name="option_1_min">1 минута</string>
     <string name="option_2_min">2 минуты</string>
     <string name="widget_setup_step_2">2. Из контекстного меню выберите пункт \"Виджеты\".</string>
-    <string name="heading_data_usage_today">Использованные данные за сегодняшний день</string>
+    <string name="heading_data_usage_today">Использовано данных за сегодня</string>
     <string name="option_5_min">5 минут</string>
     <string name="option_10_min">20 минут</string>
     <string name="option_15_min">15 минут</string>
@@ -168,7 +168,7 @@
     <string name="setup_show_remaining_data">Отобразить информацию об оставшихся данных</string>
     <string name="setup_refresh_widget">Обновить виджет</string>
     <string name="refresh_widget_summary">Обновите виджет, при возникновении какой-либо проблемы</string>
-    <string name="setup_notification_title">Уведомление</string>
+    <string name="setup_notification_title">Уведомления</string>
     <string name="setup_show_wifi_usage">Отобразить использование Wi-Fi</string>
     <string name="setup_data_alert">Уведомление об использовании данных</string>
     <string name="settings_general">Общие</string>
@@ -193,7 +193,7 @@
     <string name="label_data_usage_reset_date_change">Использование данных будет обнуляться %1$d%2$s числа каждого месяца</string>
     <string name="remaining_data_info_enabled">Информация об остатке данных включена</string>
     <string name="label_data_plan_saved">Тарифный план сохранён</string>
-    <string name="title_data_usage_notification">Использование данных за сегодня: %1$s</string>
+    <string name="title_data_usage_notification">Использовано данных за сегодня: %1$s</string>
     <string name="body_data_usage_notification_loading">Загрузка…</string>
     <string name="disable_battery_optimisation_body">Предотвращает остановку Монитор данных при работе в фоновом режиме.
 \nВ противном случае значения могут быть неверными.</string>
@@ -219,7 +219,7 @@
     <string name="ygorigor_summary">Румынский</string>
     <string name="system_data_usage">Использование системных данных</string>
     <string name="label_want_to_contribute_language">Нажмите здесь, чтобы помочь перевести приложение на ваш язык.</string>
-    <string name="network_speed_upload">Загрузка: %1$s</string>
+    <string name="network_speed_upload">Исходящая: %1$s</string>
     <string name="label_network_signal_notification_disabled">Скорость сети в реальном времени отключена</string>
     <string name="network_diagnostics_info">При диагностике сети может потребоваться около 20-30 МБ данных. Убедитесь, что на вашем тарифном плане достаточное количество трафика и/или тариф позволяет использовать безлимитные данные, иначе за пользование сетью может взиматься дополнительная плата.</string>
     <string name="read_phone_state_body">Устройствам под управлением Android версии 9 и ниже, данное разрешение необходимо предоставить вручную. Никакие личные данные собираться не будут.</string>
@@ -251,13 +251,13 @@
     <string name="battery_optimisation_disabled">Оптимизация батареи отключена</string>
     <string name="usage_access_permission">Использовать разрешение на доступ</string>
     <string name="label_device_info">Информация об устройстве</string>
-    <string name="crash_report_title">Отчет об аварии</string>
+    <string name="crash_report_title">Отчет о сбое</string>
     <string name="device_info_content_label">Узнать, что входит в информацию об устройстве</string>
     <string name="label_telegram">Telegram</string>
     <string name="label_unknown">Неизвестно</string>
     <string name="custom">Вручную</string>
-    <string name="label_crash_logs">Журналы аварий</string>
-    <string name="label_crash_logs_copied">Журналы об аварий скопированы в буфер обмена</string>
+    <string name="label_crash_logs">Журналы сбоев</string>
+    <string name="label_crash_logs_copied">Журнал о сбоях скопирован в буфер обмена</string>
     <string name="label_mail">Электронная почта</string>
     <string name="battery_optimisation_enabled_info">Включена оптимизация батареи. Это будет мешать работе Монитора данных. Нажмите, чтобы отключить.</string>
     <string name="label_battery_optimisation">Оптимизация батареи</string>
@@ -316,7 +316,7 @@
     <string name="crash_logs_warning">Журналы сбоев; Не изменять</string>
     <string name="label_select_start_date">Выберите дату начала</string>
     <string name="label_plan_end_date">Выберите дату окончания</string>
-    <string name="combine_notifications">Объединить уведомления</string>
+    <string name="combine_notifications">Объединять уведомления</string>
     <string name="combine_notifications_summary">Объединение монитора данных и скорости сети в одном уведомлении.</string>
     <string name="combined_notification_icon">Значок объединённого уведомления</string>
     <string name="error_combine_notifications_enabled">Включено объединенное уведомление. Отключение уведомления по отдельности невозможно.</string>
