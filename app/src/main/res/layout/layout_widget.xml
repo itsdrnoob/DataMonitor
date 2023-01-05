@@ -31,8 +31,7 @@
         android:src="@drawable/ic_refresh"
         android:padding="@dimen/margin_extra_small"
         android:layout_alignTop="@id/textView4"
-        android:layout_alignParentEnd="true"
-        app:tint="@color/text_primary" />
+        android:layout_alignParentEnd="true" />
 
     <ProgressBar
         android:id="@+id/widget_update_progress"
