@@ -56,19 +56,20 @@ import java.util.TimerTask;
 public class LiveNetworkMonitor extends Service {
     private static final String TAG = LiveNetworkMonitor.class.getSimpleName();
 
-    private Timer mTimer;
-    private TimerTask mTimerTask;
-    public Long previousTotalBytes, previousUpBytes, previousDownBytes;
+    private static Timer mTimer;
+    private static TimerTask mTimerTask;
+    public static Long previousTotalBytes, previousUpBytes, previousDownBytes;
     private Intent mActivityIntent;
-    private PendingIntent mActivityPendingIntent;
-    private NotificationCompat.Builder mBuilder;
-    private LiveNetworkReceiver liveNetworkReceiver = new LiveNetworkReceiver();
-    private boolean isNetworkConnected;
+    private static PendingIntent mActivityPendingIntent;
+    private static NotificationCompat.Builder mBuilder;
+    private static LiveNetworkReceiver liveNetworkReceiver = new LiveNetworkReceiver();
+    private static boolean isNetworkConnected;
     private NetworkChangeMonitor mNetworkChangeMonitor;
-    private boolean isTimerCancelled = true;
-    private boolean isTaskPaused = false;
-    private boolean isLiveNetworkReceiverRegistered = false;
+    private static boolean isTimerCancelled = true;
+    private static boolean isTaskPaused = false;
+    private static boolean isLiveNetworkReceiverRegistered = false;
     private boolean isServiceRunning;
+    private static LiveNetworkMonitor mLiveNetworkMonitor;
 
     @Nullable
     @Override
@@ -84,6 +85,7 @@ public class LiveNetworkMonitor extends Service {
     public void onCreate() {
         super.onCreate();
         // Service is started here
+        mLiveNetworkMonitor = this;
 
         previousDownBytes = TrafficStats.getTotalRxBytes();
         previousUpBytes = TrafficStats.getTotalTxBytes();
@@ -157,8 +159,16 @@ public class LiveNetworkMonitor extends Service {
         };
         mTimer.scheduleAtFixedRate(mTimerTask, 0, 1000);
         if (!isLiveNetworkReceiverRegistered && !isTaskPaused) {
-            registerNetworkReceiver();
+            registerNetworkReceiver(this);
         }
+
+//        liveData.getIsScreenOn().observe(this, new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(Boolean aBoolean) {
+//                Log.e(TAG, "onChanged: " + aBoolean );
+//                restartService(LiveNetworkMonitor.this, true);
+//            }
+//        });
 
     }
 
@@ -186,22 +196,22 @@ public class LiveNetworkMonitor extends Service {
         super.onDestroy();
     }
 
-    private void registerNetworkReceiver() {
+    private static void registerNetworkReceiver(Context context) {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter.setPriority(100);
         if (!isLiveNetworkReceiverRegistered) {
-            registerReceiver(liveNetworkReceiver, intentFilter);
+            context.registerReceiver(liveNetworkReceiver, intentFilter);
             isLiveNetworkReceiverRegistered = true;
             Log.d(TAG, "registerNetworkReceiver: registered" );
         }
     }
 
-    private void unregisterNetworkReceiver() {
+    private static void unregisterNetworkReceiver() {
         try {
-            unregisterReceiver(liveNetworkReceiver);
+            mLiveNetworkMonitor.unregisterReceiver(liveNetworkReceiver);
             isLiveNetworkReceiverRegistered = false;
             Log.d(TAG, "unregisterNetworkReceive: stopped" );
         } catch (Exception e) {
@@ -209,7 +219,7 @@ public class LiveNetworkMonitor extends Service {
         }
     }
 
-    private void updateNotification(Context context) {
+    private static void updateNotification(Context context) {
         // Update notification text here
         String[] speeds;
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
@@ -220,7 +230,7 @@ public class LiveNetworkMonitor extends Service {
 
         if (isNetworkConnected) {
             if (!isLiveNetworkReceiverRegistered) {
-                registerNetworkReceiver();
+                registerNetworkReceiver(context);
             }
             Long currentUpBytes = TrafficStats.getTotalTxBytes();
             Long currentDownBytes = TrafficStats.getTotalRxBytes();
@@ -248,7 +258,7 @@ public class LiveNetworkMonitor extends Service {
                 catch (Exception e) {
                     e.printStackTrace();
                 }
-                LiveNetworkMonitor.this.stopForeground(true);
+                mLiveNetworkMonitor.stopForeground(true);
                 if (isLiveNetworkReceiverRegistered) {
                     unregisterNetworkReceiver();
                 }
@@ -292,7 +302,7 @@ public class LiveNetworkMonitor extends Service {
             icon = IconCompat.createWithResource(context, R.drawable.ic_signal_kb_0);
         }
         if (mBuilder == null) {
-            mBuilder = new NotificationCompat.Builder(this,
+            mBuilder = new NotificationCompat.Builder(context,
                     NETWORK_SIGNAL_CHANNEL_ID);
         }
         mBuilder.setSmallIcon(icon);
@@ -380,9 +390,9 @@ public class LiveNetworkMonitor extends Service {
         }
     }
 
-    public void restartService(Context context, boolean startReceiver) {
+    public static void restartService(Context context, boolean startReceiver) {
         if (startReceiver && !isLiveNetworkReceiverRegistered) {
-            registerNetworkReceiver();
+            registerNetworkReceiver(context);
         }
         previousDownBytes = TrafficStats.getTotalRxBytes();
         previousUpBytes = TrafficStats.getTotalTxBytes();
@@ -472,7 +482,7 @@ public class LiveNetworkMonitor extends Service {
         return new String[]{upData, downData, totalData};
     }
 
-    public class LiveNetworkReceiver extends BroadcastReceiver {
+    public static class LiveNetworkReceiver extends BroadcastReceiver {
 
         public LiveNetworkReceiver() {
             // Empty constructor
