@@ -364,8 +364,13 @@ public class SystemDataUsageFragment extends Fragment {
                                 Long deviceTotal = getDeviceMobileDataUsage(mContext, session, 1)[2];
 
                                 Double p = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 5;
-
-                                int progress = p.intValue();
+                                int progress;
+                                if (p != null) {
+                                    progress = p.intValue();
+                                }
+                                else {
+                                    progress = 0;
+                                }
 
                                 model.setProgress(progress);
 
@@ -396,8 +401,13 @@ public class SystemDataUsageFragment extends Fragment {
                                 Long deviceTotal = getDeviceWifiDataUsage(mContext, session)[2];
 
                                 Double p = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 5;
-
-                                int progress = p.intValue();
+                                int progress;
+                                if (p != null) {
+                                    progress = p.intValue();
+                                }
+                                else {
+                                    progress = 0;
+                                }
 
                                 model.setProgress(progress);
 
