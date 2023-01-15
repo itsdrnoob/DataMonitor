@@ -1208,7 +1208,11 @@ public class SetupFragment extends Fragment {
                                 dataLimitView.setError(getString(R.string.error_invalid_plan));
                             }
                             else {
-                                Float dataLimit = Float.parseFloat(dataLimitInput.getText().toString());
+                                String dataLimitText = dataLimitInput.getText().toString();
+                                if (dataLimitText.contains(",")) {
+                                    dataLimitText = dataLimitText.replace(",", ".");
+                                }
+                                Float dataLimit = Float.parseFloat(dataLimitText);
                                 int dataType;
                                 if (dataTypeSwitcher.getTabAt(0).isSelected()) {
                                     if (dataLimit >= 1024) {
@@ -1732,8 +1736,13 @@ public class SetupFragment extends Fragment {
                         public String getFormattedValue(float value) {
                             Float newValue = value + 50; // To ensure value is correct as slider slides
                             String rawValue = newValue.toString();
-                            String output = rawValue.replace(".0", "");
-
+                            String output;
+                            if (rawValue.contains(",")) {
+                                output = rawValue.replace(",0", "");
+                            }
+                            else {
+                                output = rawValue.replace(".0", "");
+                            }
                             int sliderValue = Integer.parseInt(output);
                             String triggerDataLevelValue = null;
                             Double triggerDataLevel = dataLimit.doubleValue() * sliderValue / 100;
@@ -1779,7 +1788,13 @@ public class SetupFragment extends Fragment {
                         public void onClick(View v) {
                             Float value = slider.getValue() + 50;
                             String rawValue = value.toString();
-                            String output = rawValue.replace(".0", "");
+                            String output;
+                            if (rawValue.contains(",")) {
+                                output = rawValue.replace(",0", "");
+                            }
+                            else {
+                                output = rawValue.replace(".0", "");
+                            }
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putInt(DATA_WARNING_TRIGGER_LEVEL,
                                     Integer.parseInt(output)).apply();
                             mDataWarningTrigger.setSummary(getContext().getString(R.string.label_data_trigger_level, output));

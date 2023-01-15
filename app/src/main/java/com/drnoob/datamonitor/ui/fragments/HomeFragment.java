@@ -476,7 +476,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                             dataLimitView.setError(getString(R.string.error_invalid_plan));
                         }
                         else {
-                            Float dataLimit = Float.parseFloat(dataLimitInput.getText().toString());
+                            String dataLimitText = dataLimitInput.getText().toString();
+                            if (dataLimitText.contains(",")) {
+                                dataLimitText = dataLimitText.replace(",", ".");
+                            }
+                            Float dataLimit = Float.parseFloat(dataLimitText);
                             if (dataTypeSwitcher.getTabAt(0).isSelected()) {
                                 dataLimit = dataLimit;
                             } else {
