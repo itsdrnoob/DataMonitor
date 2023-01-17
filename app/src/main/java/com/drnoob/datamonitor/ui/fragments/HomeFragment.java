@@ -292,10 +292,20 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
 //                customDateSlider.setValueTo((float) daysInMonth);
 
-                planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getLong(DATA_RESET_CUSTOM_DATE_START, MaterialDatePicker.todayInUtcMilliseconds());
-                planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
+                try {
+                    planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getLong(DATA_RESET_CUSTOM_DATE_START, MaterialDatePicker.todayInUtcMilliseconds());
+                    planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
+                }
+                catch (ClassCastException e) {
+                    int planStartIntValue = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getInt(DATA_RESET_CUSTOM_DATE_START, -1);
+                    int planEndIntValue = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getInt(DATA_RESET_CUSTOM_DATE_END, -1);
+                    planStartDateMillis = ((Number) planStartIntValue).longValue();
+                    planEndDateMillis = ((Number) planEndIntValue).longValue();
+                }
 
 
                 String planStart = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
@@ -466,7 +476,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                             dataLimitView.setError(getString(R.string.error_invalid_plan));
                         }
                         else {
-                            Float dataLimit = Float.parseFloat(dataLimitInput.getText().toString());
+                            String dataLimitText = dataLimitInput.getText().toString();
+                            if (dataLimitText.contains(",")) {
+                                dataLimitText = dataLimitText.replace(",", ".");
+                            }
+                            Float dataLimit = Float.parseFloat(dataLimitText);
                             if (dataTypeSwitcher.getTabAt(0).isSelected()) {
                                 dataLimit = dataLimit;
                             } else {

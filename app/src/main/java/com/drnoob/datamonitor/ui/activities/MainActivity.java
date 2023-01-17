@@ -615,7 +615,14 @@ public class MainActivity extends AppCompatActivity {
 
                                 // multiplied by 2 just to increase progress a bit.
                                 Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
-                                model.setProgress(progress.intValue());
+                                int progressInt;
+                                if (progress != null) {
+                                    progressInt = progress.intValue();
+                                }
+                                else {
+                                    progressInt = 0;
+                                }
+                                model.setProgress(progressInt);
 
                                 mSystemAppsList.add(model);
                             }
@@ -646,7 +653,14 @@ public class MainActivity extends AppCompatActivity {
                                 Long deviceTotal = getDeviceWifiDataUsage(mContext, session)[2];
 
                                 Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
-                                model.setProgress(progress.intValue());
+                                int progressInt;
+                                if (progress != null) {
+                                    progressInt = progress.intValue();
+                                }
+                                else {
+                                    progressInt = 0;
+                                }
+                                model.setProgress(progressInt);
 
                                 mSystemAppsList.add(model);
                             }
@@ -678,7 +692,14 @@ public class MainActivity extends AppCompatActivity {
                                     Long deviceTotal = getDeviceMobileDataUsage(mContext, session, date)[2];
 
                                     Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
-                                    model.setProgress(progress.intValue());
+                                    int progressInt;
+                                    if (progress != null) {
+                                        progressInt = progress.intValue();
+                                    }
+                                    else {
+                                        progressInt = 0;
+                                    }
+                                    model.setProgress(progressInt);
 
                                     mUserAppsList.add(model);
                                 }
@@ -708,7 +729,14 @@ public class MainActivity extends AppCompatActivity {
                                     Long deviceTotal = getDeviceWifiDataUsage(mContext, session)[2];
 
                                     Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
-                                    model.setProgress(progress.intValue());
+                                    int progressInt;
+                                    if (progress != null) {
+                                        progressInt = progress.intValue();
+                                    }
+                                    else {
+                                        progressInt = 0;
+                                    }
+                                    model.setProgress(progressInt);
 
                                     mUserAppsList.add(model);
                                 }
@@ -738,7 +766,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     deviceTotal = getDeviceMobileDataUsage(mContext, session, date)[2];
                     Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
-                    model.setProgress(progress.intValue());
+                    int progressInt;
+                    if (progress != null) {
+                        progressInt = progress.intValue();
+                    }
+                    else {
+                        progressInt = 0;
+                    }
+                    model.setProgress(progressInt);
 
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -749,7 +784,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     deviceTotal = getDeviceWifiDataUsage(mContext, session)[2];
                     Double progress = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
-                    model.setProgress(progress.intValue());
+                    int progressInt;
+                    if (progress != null) {
+                        progressInt = progress.intValue();
+                    }
+                    else {
+                        progressInt = 0;
+                    }
+                    model.setProgress(progressInt);
 
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -769,6 +811,13 @@ public class MainActivity extends AppCompatActivity {
                     tetheringTotal = totalTetheringSent + totalTetheringReceived;
 
                     Double tetheringProgress = ((tetheringTotal.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
+                    int tetheringProgressInt;
+                    if (tetheringProgress != null) {
+                        tetheringProgressInt = tetheringProgress.intValue();
+                    }
+                    else {
+                        tetheringProgressInt = 0;
+                    }
 
                     model = new AppDataUsageModel();
                     model.setAppName(mContext.getString(R.string.label_tethering));
@@ -777,7 +826,7 @@ public class MainActivity extends AppCompatActivity {
                     model.setReceivedMobile(totalTetheringReceived);
                     model.setSession(session);
                     model.setType(type);
-                    model.setProgress(tetheringProgress.intValue());
+                    model.setProgress(tetheringProgressInt);
 
                     if (tetheringTotal > 0) {
                         mUserAppsList.add(model);
@@ -793,6 +842,13 @@ public class MainActivity extends AppCompatActivity {
                 deletedAppsTotal = totalDeletedAppsSent + totalDeletedAppsReceived;
 
                 Double deletedProgress = ((deletedAppsTotal.doubleValue() / deviceTotal.doubleValue()) * 100) * 2;
+                int deletedProgressInt;
+                if (deletedProgress != null) {
+                    deletedProgressInt = deletedProgress.intValue();
+                }
+                else {
+                    deletedProgressInt = 0;
+                }
 
                 model = new AppDataUsageModel();
                 model.setAppName(mContext.getString(R.string.label_removed));
@@ -801,7 +857,7 @@ public class MainActivity extends AppCompatActivity {
                 model.setReceivedMobile(totalDeletedAppsReceived);
                 model.setSession(session);
                 model.setType(type);
-                model.setProgress(deletedProgress.intValue());
+                model.setProgress(deletedProgressInt);
 
                 if (deletedAppsTotal > 0) {
                     mUserAppsList.add(model);
