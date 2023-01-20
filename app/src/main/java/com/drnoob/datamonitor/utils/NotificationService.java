@@ -208,6 +208,9 @@ public class NotificationService extends Service {
                         if (mobileDataTotal.contains(",")) {
                             mobileDataTotal = mobileDataTotal.replace(",", ".");
                         }
+                        if (mobileDataTotal.contains("٫")) {
+                            mobileDataTotal = mobileDataTotal.replace("٫", ".");
+                        }
                         if (mobileDataTotal.split(" ")[1].equalsIgnoreCase("GB")) {
                             mobileMB = Float.parseFloat(mobileDataTotal.split(" ")[0]) * 1024;
                         }
