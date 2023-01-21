@@ -12,8 +12,8 @@ android {
         targetSdkVersion 33
         versionCode 14
         versionName 'v2.3.0'
-        resConfigs "en", "ar", "de", "es", "ef", "fr", "hi", "in", "it", "ko",
-                "ml", "nb-rNO", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "zh-rCN", "zh-rTW"
+        resConfigs "en", "ar", "de", "es", "fr", "hi", "in", "it", "ko",
+                "ml", "mr", "nb-rNO", "nl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "zh-rCN", "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

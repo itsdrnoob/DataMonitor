@@ -408,4 +408,11 @@
     <string name="MarongHappy">JungHee Lee</string>
     <string name="U1M450W_summary">Uzbek</string>
     <string name="U1M450W">U1M450W</string>
+    <string name="atharvshinde_summary">Developer</string>
+    <string name="atharvshinde">Atharv Shinde</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="graphixmedia_summary">Dutch</string>
+    <string name="hinamechan">HinameChan</string>
+    <string name="hinamechan_summary">Turkish</string>
+    <string name="atharvshinde_translation_summary">Marathi</string>
 </resources>
