@@ -228,6 +228,21 @@ public class ContributorsFragment extends Fragment {
                 getContext().getString(R.string.U1M450W_summary),
                 R.drawable.ic_person, false));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.atharvshinde),
+                getContext().getString(R.string.atharvshinde_translation_summary),
+                R.drawable.atharvshinde, true,
+                getContext().getString(R.string.github_atharvshinde)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.graphixmedia),
+                getContext().getString(R.string.graphixmedia_summary),
+                R.drawable.graphixmedia, true,
+                getContext().getString(R.string.github_graphixmedia)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.hinamechan),
+                getContext().getString(R.string.hinamechan_summary),
+                R.drawable.hinamechan, true,
+                getContext().getString(R.string.github_hinamechan)));
+
         return translators;
     }
 
