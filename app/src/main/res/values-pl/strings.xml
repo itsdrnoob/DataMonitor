@@ -1,2 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Data Monitor</string>
+    <string name="appwidget_text">Przykład</string>
+    <string name="home_wifi_data_sent">%1$s
+\nWysłano</string>
+    <string name="label_data_trigger_level">Gdy %1$s%% danych zostało użyte</string>
+    <string name="app_data_usage_placeholder">0 MB</string>
+    <string name="data_type_mb">MB</string>
+    <string name="add_widget">Dodaj widget</string>
+    <string name="app_label_package_name">Nazwa pakietu: %1$s</string>
+    <string name="notification_mobile_data_usage">Dane mobilne: %1$s</string>
+    <string name="notification_wifi_data_usage">Wi-Fi: %1$s</string>
+    <string name="home_mobile_data_sent">%1$s
+\nWysłano</string>
+    <string name="home_mobile_data_received">%1$s
+\nPobrano</string>
+    <string name="home_wifi_data_received">%1$s
+\nPobrano</string>
+    <string name="app_name_placeholder">Nazwa aplikacji</string>
+    <string name="label_today">Dzisiaj</string>
+    <string name="label_last_month">W poprzednim miesiącu</string>
+    <string name="app_label_uid">UID: %1$d</string>
+    <string name="label_received">pobrano</string>
+    <string name="label_sent">wysłano</string>
+    <string name="label_yesterday">Wczoraj</string>
+    <string name="action_open_app_settings">Otwórz ustawienia aplikacji</string>
+    <string name="action_cancel">Anuluj</string>
+    <string name="action_ok">OK</string>
+    <string name="label_this_month">W tym miesiącu</string>
+    <string name="title_app_data_usage_session">Wybierz sesję</string>
+    <string name="label_this_year">W tym roku</string>
+    <string name="label_all_time">Zawsze</string>
+    <string name="label_app_data_usage_session_empty">Brak dostępnych danych</string>
+    <string name="data_remaining_placeholder">pozostało 0.00 GB</string>
+    <string name="title_app_data_usage_type">Wybierz typ</string>
+    <string name="action_update">Aktualizuj</string>
+    <string name="label_loading_apps">Ładowanie aplikacji</string>
+    <string name="label_wifi">Wi-Fi</string>
+    <string name="title_data_usage">Użycie danych</string>
+    <string name="label_mobile_data">Dane mobilne</string>
+    <string name="label_dev">Stworzone przez Bitroid Inc.</string>
+    <string name="label_loading">Ładowanie…</string>
+    <string name="label_want_to_contribute">Kliknij, aby sprawdzić, jak możesz pomóc w tworzeniu Data Monitor.</string>
+    <string name="daily">Dziennie</string>
+    <string name="heading_data_limit">Limit danych</string>
+    <string name="data_type_gb">GB</string>
+    <string name="setup_image_footer">Widgety i/lub powiadomienia dają łatwy dostęp do ilości użytych danych</string>
+    <string name="heading_data_reset">Resetuj licznik</string>
+    <string name="title_add_data_plan">Dodaj plan danych</string>
+    <string name="option_10_min">10 minut</string>
+    <string name="title_refresh_interval">Wybierz interwał odświeżania</string>
+    <string name="option_15_min">15 minut</string>
+    <string name="widget_setup_step_3">3. Przeciągnij i upuść widget Data Monitor na ekran domowy.</string>
+    <string name="monthly">Miesięcznie</string>
+    <string name="option_2_min">2 minuty</string>
+    <string name="option_1_min">1 minuta</string>
+    <string name="widget_setup_step_2">2. Wybierz \"Widgety\".</string>
+    <string name="heading_data_usage_today">Użycie danych dzisiaj</string>
+    <string name="action_add_data_plan_home">Dodaj swój plan danych, aby zacząć go monitorować</string>
+    <string name="title_data_warning_trigger">Poziom ostrzeżenia o limicie danych</string>
+    <string name="option_5_min">5 minut</string>
+    <string name="title_widget_setup">Utwórz widget</string>
+    <string name="widget_setup_step_1">1. Dotknij i przytrzymaj wolną przestrzeń na ekranie domowym.</string>
+    <string name="heading_week_overview">Przegląd tygodnia</string>
+    <string name="error_loading_overview">Nie udało się załadować przeglądu tygodnia.
+\nSpróbuj ponownie później.</string>
+</resources>
