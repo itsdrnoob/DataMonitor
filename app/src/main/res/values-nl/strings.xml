@@ -201,7 +201,7 @@
     <string name="testing_latency">Netwerklatentie testen</string>
     <string name="current_connection">Huidige verbinding: %1$s</string>
     <string name="network_stats">Netwerk status</string>
-    <string name="network_speed_mbps">%1$s Mb/s</string>
+    <string name="network_speed_mbps">%1$s Mbit/s</string>
     <string name="max_download_speed">Max download snelheid</string>
     <string name="min_download_speed">Min download snelheid</string>
     <string name="avg_download_speed">Gem download snelheid</string>
