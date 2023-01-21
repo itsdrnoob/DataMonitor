@@ -109,67 +109,69 @@ public class AppDataUsageMonitor extends Service {
             Gson gson = new Gson();
             String s = SharedPreferences.getAppDataLimitPrefs(context).getString("monitor_apps_list", null);
             List<AppDataUsageModel> list = gson.fromJson(s, type);
-            if (list.size() < 1) {
-                stopMonitor(context);
-            }
-            else {
-                for (int i = 0; i < list.size(); i++) {
-                    String jsonText = SharedPreferences.getAppDataLimitPrefs(context).getString(list.get(i).getPackageName(), null);
-                    if (jsonText != null) {
-                        String[] data = gson.fromJson(jsonText, String[].class);
-                        model = list.get(i);
-                        model.setDataLimit(data[1]);
-                        model.setDataType(data[2]);
-                        model.setIsAppsList(false);
-                        String isNotificationShown;
-                        if (data.length > 3) {
-                            isNotificationShown = data[3];
-                        }
-                        else {
-                            isNotificationShown = "no";
-                        }
-
-                        try {
-                            String totalData = formatData(getAppMobileDataUsage(context, context.getPackageManager().getApplicationInfo(list.get(i).getPackageName(), 0).uid, SESSION_TODAY)[0],
-                                    getAppMobileDataUsage(context, context.getPackageManager().getApplicationInfo(list.get(i).getPackageName(), 0).uid, SESSION_TODAY)[1])[2];
-                            String totalDataType = totalData.split("\\s+")[1];
-                            Float totalDataUsed = Float.parseFloat(totalData.split("\\s+")[0]);
-                            int dataLimit = Integer.parseInt(model.getDataLimit());
-
-                            if (totalDataType.equals(context.getString(R.string.data_type_gb))) {
-                                totalDataUsed = totalDataUsed * 1024;
+            if (list != null) {
+                if (list.size() < 1) {
+                    stopMonitor(context);
+                }
+                else {
+                    for (int i = 0; i < list.size(); i++) {
+                        String jsonText = SharedPreferences.getAppDataLimitPrefs(context).getString(list.get(i).getPackageName(), null);
+                        if (jsonText != null) {
+                            String[] data = gson.fromJson(jsonText, String[].class);
+                            model = list.get(i);
+                            model.setDataLimit(data[1]);
+                            model.setDataType(data[2]);
+                            model.setIsAppsList(false);
+                            String isNotificationShown;
+                            if (data.length > 3) {
+                                isNotificationShown = data[3];
                             }
-                            if (model.getDataType().equals("1")) {
-                                dataLimit = dataLimit * 1024;
+                            else {
+                                isNotificationShown = "no";
                             }
 
-                            if (totalDataUsed.intValue() >= dataLimit || totalDataUsed.intValue() == dataLimit) {
-                                if (isNotificationShown.equals("no")) {
-                                    showNotification(context, model.getAppName());
-                                    data = new String[] {data[0], data[1], data[2], "yes"};
-                                    jsonText = gson.toJson(data, String[].class);
-                                    SharedPreferences.getAppDataLimitPrefs(context).edit().putString(model.getPackageName(), jsonText).apply();
+                            try {
+                                String totalData = formatData(getAppMobileDataUsage(context, context.getPackageManager().getApplicationInfo(list.get(i).getPackageName(), 0).uid, SESSION_TODAY)[0],
+                                        getAppMobileDataUsage(context, context.getPackageManager().getApplicationInfo(list.get(i).getPackageName(), 0).uid, SESSION_TODAY)[1])[2];
+                                String totalDataType = totalData.split("\\s+")[1];
+                                Float totalDataUsed = Float.parseFloat(totalData.split("\\s+")[0]);
+                                int dataLimit = Integer.parseInt(model.getDataLimit());
+
+                                if (totalDataType.equals(context.getString(R.string.data_type_gb))) {
+                                    totalDataUsed = totalDataUsed * 1024;
                                 }
-                                else {
-
+                                if (model.getDataType().equals("1")) {
+                                    dataLimit = dataLimit * 1024;
                                 }
 
+                                if (totalDataUsed.intValue() >= dataLimit || totalDataUsed.intValue() == dataLimit) {
+                                    if (isNotificationShown.equals("no")) {
+                                        showNotification(context, model.getAppName());
+                                        data = new String[] {data[0], data[1], data[2], "yes"};
+                                        jsonText = gson.toJson(data, String[].class);
+                                        SharedPreferences.getAppDataLimitPrefs(context).edit().putString(model.getPackageName(), jsonText).apply();
+                                    }
+                                    else {
+
+                                    }
+
+                                }
+
+
+
+                                Log.e(TAG, "onReceive: " + totalDataUsed + " " + model.getDataLimit() + "  " + model.getDataType() );
+
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            } catch (PackageManager.NameNotFoundException e) {
+                                e.printStackTrace();
                             }
-
-
-
-                            Log.e(TAG, "onReceive: " + totalDataUsed + " " + model.getDataLimit() + "  " + model.getDataType() );
-
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        } catch (PackageManager.NameNotFoundException e) {
-                            e.printStackTrace();
                         }
                     }
+                    setRepeating(context);
                 }
-                setRepeating(context);
             }
 
         }

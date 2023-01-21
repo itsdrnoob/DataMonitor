@@ -290,6 +290,9 @@ public class CompoundNotification extends Service {
                     if (mobileDataTotal.contains(",")) {
                         mobileDataTotal = mobileDataTotal.replace(",", ".");
                     }
+                    if (mobileDataTotal.contains("٫")) {
+                        mobileDataTotal = mobileDataTotal.replace("٫", ".");
+                    }
                     if (mobileDataTotal.split(" ")[1].equalsIgnoreCase("GB")) {
                         mobileMB = Float.parseFloat(mobileDataTotal.split(" ")[0]) * 1024;
                     }
@@ -358,6 +361,9 @@ public class CompoundNotification extends Service {
         }
         if (iconSuffix.contains(",")) {
             iconSuffix = iconSuffix.replace(",", "_");
+        }
+        if (iconSuffix.contains("٫")) {
+            iconSuffix = iconSuffix.replace("٫", "_");
         }
         if (!iconSuffix.contains("_")) {
             if (networkType.equals("mb_") && Integer.parseInt(iconSuffix) > 200) {

@@ -253,6 +253,9 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
     private SpannableString setBoldSpan(String text, String spanText) {
         SpannableString boldSpan = new SpannableString(text);
         int start = text.indexOf(spanText);
+        if (start < 0) {
+            start = 0;
+        }
         int end = start + spanText.length();
         boldSpan.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         return boldSpan;

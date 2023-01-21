@@ -1212,6 +1212,9 @@ public class SetupFragment extends Fragment {
                                 if (dataLimitText.contains(",")) {
                                     dataLimitText = dataLimitText.replace(",", ".");
                                 }
+                                if (dataLimitText.contains("٫")) {
+                                    dataLimitText = dataLimitText.replace("٫", ".");
+                                }
                                 Float dataLimit = Float.parseFloat(dataLimitText);
                                 int dataType;
                                 if (dataTypeSwitcher.getTabAt(0).isSelected()) {
@@ -1740,6 +1743,9 @@ public class SetupFragment extends Fragment {
                             if (rawValue.contains(",")) {
                                 output = rawValue.replace(",0", "");
                             }
+                            else if (rawValue.contains("٫")) {
+                                output = rawValue.replace("٫0", "");
+                            }
                             else {
                                 output = rawValue.replace(".0", "");
                             }
@@ -1791,6 +1797,9 @@ public class SetupFragment extends Fragment {
                             String output;
                             if (rawValue.contains(",")) {
                                 output = rawValue.replace(",0", "");
+                            }
+                            else if (rawValue.contains("٫")) {
+                                output = rawValue.replace("٫0", "");
                             }
                             else {
                                 output = rawValue.replace(".0", "");

@@ -286,6 +286,9 @@ public class LiveNetworkMonitor extends Service {
         if (iconSuffix.contains(",")) {
             iconSuffix = iconSuffix.replace(",", "_");
         }
+        if (iconSuffix.contains("٫")) {
+            iconSuffix = iconSuffix.replace("٫", "_");
+        }
         if (!iconSuffix.contains("_")) {
             if (networkType.equals("mb_") && Integer.parseInt(iconSuffix) > 200) {
                 iconSuffix = "200_plus";

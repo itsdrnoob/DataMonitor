@@ -130,6 +130,9 @@ public class DataUsageMonitor extends Service {
                     if (totalRaw.contains(",")) {
                         totalRaw = totalRaw.replace(",", ".");
                     }
+                    if (totalRaw.contains("٫")) {
+                        totalRaw = totalRaw.replace("٫", ".");
+                    }
                     if (totalRaw.contains(" MB")) {
                         totalRaw = totalRaw.replace(" MB", "");
                         totalData = Double.parseDouble(totalRaw);

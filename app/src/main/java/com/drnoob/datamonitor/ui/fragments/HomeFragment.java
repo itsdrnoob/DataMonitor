@@ -480,6 +480,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                             if (dataLimitText.contains(",")) {
                                 dataLimitText = dataLimitText.replace(",", ".");
                             }
+                            if (dataLimitText.contains("٫")) {
+                                dataLimitText = dataLimitText.replace("٫", ".");
+                            }
                             Float dataLimit = Float.parseFloat(dataLimitText);
                             if (dataTypeSwitcher.getTabAt(0).isSelected()) {
                                 dataLimit = dataLimit;
