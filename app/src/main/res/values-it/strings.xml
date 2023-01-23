@@ -5,14 +5,14 @@
     <string name="add_widget">"Aggiungi widget"</string>
     <string name="notification_mobile_data_usage">"Dati mobili : %1$s"</string>
     <string name="notification_wifi_data_usage">"Wifi : %1$s"</string>
-    <string name="home_mobile_data_sent">"%1$s
-Inviati"</string>
-    <string name="home_mobile_data_received">"%1$s
-Ricevuti"</string>
-    <string name="home_wifi_data_sent">"%1$s
-Inviati "</string>
-    <string name="home_wifi_data_received">"%1$s
-Ricevuti"</string>
+    <string name="home_mobile_data_sent">%1$s
+\nInviati</string>
+    <string name="home_mobile_data_received">%1$s
+\nRicevuti</string>
+    <string name="home_wifi_data_sent">%1$s
+\nInviati</string>
+    <string name="home_wifi_data_received">%1$s
+\nRicevuti</string>
     <string name="label_current_data_warning_trigger_level_limit_set">"Livello soglia : %1$s%% (%2$s)"</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">"Livello soglia : %1$s%%"</string>
     <string name="label_data_trigger_level">"Quando %1$s%% della limite dati raggiunta"</string>
@@ -41,7 +41,7 @@ Ricevuti"</string>
     <string name="label_dev">"Made with ❤ by Bitroid Inc."</string>
     <string name="label_loading_apps">"Caricamento app"</string>
     <string name="label_app_data_usage_session_empty">"Non ci sono dati disponibili per l'intervallo scelto"</string>
-    <string name="label_want_to_contribute">"Per sapere come contribuire all'app Data Monitor clicca qui"</string>
+    <string name="label_want_to_contribute">Per sapere come contribuire all\'app Data Monitor clicca qui.</string>
     <string name="setup_image_footer">"Widget e notifiche rendono aiutano a visualizzare quanti data hai usato"</string>
     <string name="heading_data_reset">"Reset dei dati"</string>
     <string name="daily">"Giornaliero"</string>
@@ -58,13 +58,14 @@ Ricevuti"</string>
     <string name="option_10_min">"10 minuti"</string>
     <string name="option_15_min">"15 minuti"</string>
     <string name="title_widget_setup">"Impostazioni del widget"</string>
-    <string name="widget_setup_step_1">"1. Nella Home tieni premuti su uno spazio vuoto"</string>
-    <string name="widget_setup_step_2">"2. clicca \"Widgets\""</string>
-    <string name="widget_setup_step_3">"3. Trascina il widget \"Data monitor\" sulla Home"</string>
+    <string name="widget_setup_step_1">1. Nella Home tieni premuto su uno spazio vuoto.</string>
+    <string name="widget_setup_step_2">2. Clicca \"Widgets\".</string>
+    <string name="widget_setup_step_3">3. Trascina e rilascia il widget \"Data monitor\" sulla Home.</string>
     <string name="heading_data_usage_today">"Uso dati di oggi"</string>
     <string name="action_add_data_plan_home">"Aggiungi il tuo piano dati per iniziare il monitoraggio dati"</string>
     <string name="heading_week_overview">"Riassunto di questa settimana"</string>
-    <string name="error_loading_overview">"Ops.. non è stato possibile caricare i dati di questa settimana, riprova più tardi"</string>
+    <string name="error_loading_overview">Non è stato possibile caricare i dati di questa settimana.
+\nRiprova più tardi.</string>
     <string name="title_setup">"Impostazioni di Data monitor"</string>
     <string name="setup_widget">"Impostazioni del widget"</string>
     <string name="setup_notification">"Impostazioni della notifica"</string>
@@ -85,7 +86,7 @@ Ricevuti"</string>
     <string name="settings_general">"Generale"</string>
     <string name="setup_add_data_plan">"Aggiungi il piano dati"</string>
     <string name="add_data_plan_summary">"Aggiungi o aggiorna il piano dati"</string>
-    <string name="setup_usage_reset_time">"quando resettare l'uso dei dati?"</string>
+    <string name="setup_usage_reset_time">Ripristina tempo uso dati</string>
     <string name="app_license_header">"Licenza dell'app"</string>
     <string name="oss_licenses">"Licenze Open Source"</string>
     <string name="itsdrnoob">"Dr.NooB"</string>
@@ -112,7 +113,7 @@ Ricevuti"</string>
     <string name="report">"Segnala bug"</string>
     <string name="report_summary">"Segnala bug o richiedi una nuova feature"</string>
     <string name="setup">"Setup"</string>
-    <string name="app_data_usage">"Uso dati delle app"</string>
+    <string name="app_data_usage">Uso delle app</string>
     <string name="settings">"Impostazioni"</string>
     <string name="btc_address_copied">"L'indirizzo del portafoglio Bitcoin è stato copiato"</string>
     <string name="eth_address_copied">"L'indirizzo del portafoglio Ethereum è stato copiato"</string>
@@ -120,16 +121,18 @@ Ricevuti"</string>
     <string name="label_system_apps">"App di sistema"</string>
     <string name="home">"Home"</string>
     <string name="usage_access_permission">"Permesso di accesso dell'uso"</string>
-    <string name="usage_access_body">"Il permesso di accesso dell'uso è necessario per usare l'app, Serve per raccogliere le statistiche di uso dei dati. Nessun dato personal viene raccolto nè memorizzato."</string>
+    <string name="usage_access_body">Necessario per eseguire l\'applicazione, dal momento che raccoglie statistiche di utilizzo app.
+\nNon vengono raccolti dati personali.</string>
     <string name="action_grant">"Dai il permesso"</string>
     <string name="label_tethering">"Hotspot mobile"</string>
     <string name="label_removed">"App rimosse"</string>
     <string name="oem_skin_warning">"%1$s Suggerumenti di ottimizzazione per assicuare il funzionamento corretto dell'app."</string>
-    <string name="oem_skin_miui">"Rilevata Miui!"</string>
+    <string name="oem_skin_miui">Rilevata Miui.</string>
     <string name="battery_optimisation_disabled">"Ottimizzazione batteria disabilitata"</string>
     <string name="data_plan_saved">"Piano dati salvato"</string>
     <string name="upi_app_not_found">"Nessuna app trovata per questa richiesta"</string>
-    <string name="upi_unknown_error">"Errore sconosciuto Riprova oppure prova un altro modo."</string>
+    <string name="upi_unknown_error">Errore sconosciuto.
+\nRiprova oppure prova un altro modo.</string>
     <string name="label_no_additional_lang">"Altre lingue saranno aggiunte presto. Vuoi contribuire? Clicca per sapere come."</string>
     <string name="notification_disabled">"Notifica di Data monitor disabilitata"</string>
     <string name="label_widget_refresh_interval_change">"Il widget sarà aggiornato ogni %1$s"</string>
@@ -140,20 +143,21 @@ Ricevuti"</string>
     <string name="label_widget_refreshed">"Il widget è stato aggiornato"</string>
     <string name="label_notification_enabled">"Notifica monitoraggio dati abilitata"</string>
     <string name="label_notification_cannot_disable_both">"Impossibile disabilitare entrambi gli elementi"</string>
-    <string name="label_setup_notification_first">"Prima impostare la notifica!"</string>
+    <string name="label_setup_notification_first">Prima impostare la notifica</string>
     <string name="label_data_plan_saved">"Piano dati salvato"</string>
     <string name="month">"mese"</string>
     <string name="day">"giorno"</string>
-    <string name="label_add_data_plan_first">"Prima impostare il piano dati!"</string>
+    <string name="label_add_data_plan_first">Prima impostare il piano dati</string>
     <string name="title_data_warning_notification">"Avviso uso dati"</string>
     <string name="body_data_warning_notification">"Hai usato %1$d%% del tuo limite dati"</string>
     <string name="body_app_data_warning_notification">"%1$s ha usato la sua quota di dati"</string>
-    <string name="title_data_usage_notification">"Uso dati di oggi"</string>
-    <string name="body_data_usage_notification_loading">"Caricamento..."</string>
+    <string name="title_data_usage_notification">Uso dati di oggi: %1$s</string>
+    <string name="body_data_usage_notification_loading">Caricamento…</string>
     <string name="label_data_remaining">"%1$s rimanenti"</string>
     <string name="label_data_remaining_used_excess">"%1$s extra usati"</string>
     <string name="disable_battery_optimisation">"Disabilita ottimizzazione della batteria"</string>
-    <string name="disable_battery_optimisation_body">"Disabilita l'ottimizzazione della batteria per Data monitor per evitare che Android fermi l'esecuzione del servizio in background. In caso contrario l'app non potrà funzionare correttamente e i dati visualizzati non saranno corretti."</string>
+    <string name="disable_battery_optimisation_body">Impedisce di fermare l\'esecuzione di Data Monitor quando viene eseguito in background.
+\nAltrimenti i valori potrebbero non essere corretti.</string>
     <string name="extra_optimisation_tips">"Suggerimenti di ottimizzazione extra"</string>
     <string name="oem_battery_settings">"Impostazioni della batteria OEM"</string>
     <string name="action_next">"Prossimo"</string>
@@ -193,13 +197,14 @@ Ricevuti"</string>
     <string name="swipe_right_to_delete">"Scorri in alto per cancellare un elemento"</string>
     <string name="refresh_list">"Aggiorna lista"</string>
     <string name="no_network_connection">"Nessuna connessione di rete rilevata!"</string>
-    <string name="connection_error">"Errore di connessione. Controlla la tua connessione ad internet"</string>
+    <string name="connection_error">Impossibile connettersi.
+\nAssicurati di essere connesso a Internet.</string>
     <string name="app_label_screen_time">"Tempo in primo piano: %1$s"</string>
     <string name="app_label_background_time">"Tempo in background: %1$s"</string>
-    <string name="label_loading">"Caricamento app in corso"</string>
+    <string name="label_loading">Caricamento…</string>
     <string name="donate_summary">"Vorresti offrirci un caffè?"</string>
     <string name="label_data_usage_reset_time_change">"L'uso dei dati sarà resettato ogni %1$s alle %2$s"</string>
-    <string name="label_data_usage_reset_date_change">"L'uso dei dati sarà resettato il %1d%2$s di ogni mese"</string>
+    <string name="label_data_usage_reset_date_change">L\'uso dei dati sarà resettato il %1$d%2$s di ogni mese</string>
     <string name="ygorigor_summary">"Traduttore del romeno"</string>
     <string name="johnsonran_summary">"Traduttore del cinese semplificato"</string>
     <string name="label_want_to_contribute_language">"Non trovi la tua lingua? Aiutaci traducendo i contenuti nella tua lingua. Clicca qui per sapere come."</string>
@@ -211,7 +216,7 @@ Ricevuti"</string>
     <string name="comradekingu_summary">Supporto alla traduzione</string>
     <string name="combined_notification_icon_summary">Scegliere l\'icona da visualizzare per la notifica combinata</string>
     <string name="option_1_sec">Ogni secondo</string>
-    <string name="option_15_sec">Hai 12 secondi.</string>
+    <string name="option_15_sec">15 secondi</string>
     <string name="combined_notification_icon">Icona di notifica combinata</string>
     <string name="lockscreen_notification">Abilita notifica nella schermata di blocco</string>
     <string name="combine_notifications">Combinare le notifiche</string>
@@ -228,7 +233,138 @@ Ricevuti"</string>
     <string name="disable_haptics_summary">Disabilita il feedback tattile in tutta l\'app</string>
     <string name="action_dismiss">Chiudi</string>
     <string name="action_add_data_plan_home_summary">Nessun piano dati trovato! Aggiungi un piano dati per iniziare a monitorarlo.</string>
-    <string name="label_custom_start_date">Data di inizio: %1$d</string>
+    <string name="label_custom_start_date">Data di inizio: %1$s</string>
     <string name="label_select_start_date">Seleziona la data di inizio</string>
     <string name="label_plan_end_date">Seleziona la data di fine</string>
+    <string name="label_unknown">Sconosciuto</string>
+    <string name="setup_usage_reset_date">Data di ripristino dell\'utilizzo dei dati</string>
+    <string name="system_data_usage">Utilizzo dei dati di sistema</string>
+    <string name="network_speed_title">Velocità di rete: %1$s</string>
+    <string name="error_permission_denied">Autorizzazione negata. Si prega di concederla manualmente.</string>
+    <string name="telegram_support">Supporto via Telegram</string>
+    <string name="telegram_summary">Unisciti al gruppo di supporto</string>
+    <string name="new_version">Nuova versione: %1$s</string>
+    <string name="app_theme_summary">Seleziona il tema dell\'app</string>
+    <string name="theme_light">Chiaro</string>
+    <string name="license_summary">Visualizza le licenze dell\'app</string>
+    <string name="atharvshinde_translation_summary">Marathi</string>
+    <string name="label_send_report">Invia report tramite</string>
+    <string name="exclude_apps">Escludi app</string>
+    <string name="exclude_apps_summary">Escludi traffico dati dell\'app dall\'utilizzo dati</string>
+    <string name="action_add_application">Aggiungi applicazione</string>
+    <string name="label_no_apps_added">Nessuna app aggiunta. Clicca il pulsante sotto per aggiungere un\'applicazione.</string>
+    <string name="title_app_picker">Seleziona un\'applicazione</string>
+    <string name="app_search_hint">Trova un\'app</string>
+    <string name="label_show_system_apps">Mostra app di sistema</string>
+    <string name="label_hide_system_apps">Nascondi app di sistema</string>
+    <string name="app_already_present">L\'app è già presente nella lista.</string>
+    <string name="title_remove_apps">Rimuovere le app selezionate\?</string>
+    <string name="action_delete">Elimina</string>
+    <string name="cracky5322_summary">Cinese tradizionale</string>
+    <string name="network_signal_notification">Velocità di rete in tempo reale</string>
+    <string name="network_speed_upload">Caricamento: %1$s</string>
+    <string name="label_network_signal_notification_disabled">Velocità di rete in tempo reale disattivata</string>
+    <string name="network_signal_summary">Funzionalità beta</string>
+    <string name="read_phone_state_permission">Autorizzazione a leggere lo stato del telefono</string>
+    <string name="read_phone_state_body">I dispositivi con Android versione 9 o inferiore devono concedere questa autorizzazione manualmente. Non verranno raccolti dati personali.</string>
+    <string name="network_speed_download">Scaricamento: %1$s</string>
+    <string name="system_theme_summary">Seguendo il tema del sistema</string>
+    <string name="label_network_signal_notification_enabled">Velocità di rete in tempo reale attivata</string>
+    <string name="action_permission_granted">Autorizzazione concessa</string>
+    <string name="no_update_available">La versione in uso è l\'ultima.</string>
+    <string name="current_version">Versione attuale: %1$s</string>
+    <string name="label_changelogs">Scopri le novità</string>
+    <string name="update_fetch_error">Impossibile recuperare gli aggiornamenti</string>
+    <string name="label_update_available">Una nuova versione è disponibile!</string>
+    <string name="label_download_update">Scarica la nuova versione</string>
+    <string name="checking_for_update">Controllo degli aggiornamenti…</string>
+    <string name="new_update_available">Una nuova versione è disponibile!</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="theme_system">Segui il tema del sistema</string>
+    <string name="settings_app_theme">Tema</string>
+    <string name="light_theme_summary">Tema chiaro selezionato</string>
+    <string name="hudaifa_abdullah_summary">Arabo</string>
+    <string name="dark_theme_summary">Tema scuro selezionato</string>
+    <string name="f_droid_page">Visualizza l\'applicazione su F-Droid</string>
+    <string name="f_droid_page_summary">Trova l\'app nel repository ufficiale di F-Droid</string>
+    <string name="report_github_summary">Apri una nuova Issue su Github</string>
+    <string name="crash_report_title">Rapporto incidenti</string>
+    <string name="error_no_crash_logs">Nessun registro degli arresti anomali trovato. Sei sicuro che si sia verificato un incidente\?</string>
+    <string name="network_diagnostics_info">La diagnostica di rete può utilizzare circa 20-30 MB di dati. Assicurati di averli a disposizione nel tuo piano, altrimenti potrebbero essere applicati costi di rete.</string>
+    <string name="label_crash_logs">Registro dei crash</string>
+    <string name="label_device_info">Info dispositivo</string>
+    <string name="crash_report_body">Sembra che Data Monitor si sia bloccato. È possibile inviare il rapporto di arresto anomalo allo sviluppatore per analizzare il problema e risolverlo più rapidamente. Se non si è verificato alcun arresto anomalo, ignorare gentilmente.</string>
+    <string name="device_info_content_label">Vedi cosa è incluso in Informazioni sul dispositivo</string>
+    <string name="label_select_app">Seleziona app</string>
+    <string name="report_mail_summary">Inviare il rapporto sull\'incidente per email</string>
+    <string name="custom">Personalizzato</string>
+    <string name="summary_data_plan_expired">Potresti voler aggiornare il tuo piano</string>
+    <string name="auto_hide_live_network">Nascondere automaticamente la velocità della rete</string>
+    <string name="auto_hide_live_network_summary">Interrompere la notifica della velocità di rete quando la rete non è connessa</string>
+    <string name="title_data_plan_expired">Piano dati scaduto!</string>
+    <string name="error_unknown_telegram_client">Telegram non è installato o è presente un client sconosciuto. Provare con un altro metodo.</string>
+    <string name="label_crash_logs_share_chat">Condividi in chat: @datamonitor</string>
+    <string name="crash_logs_warning">Registri degli arresti anomali; Non modificare</string>
+    <string name="title_device_info_contents">Contenuto delle informazioni sul dispositivo</string>
+    <string name="heading_data_reset_custom_counter">Validità del piano</string>
+    <string name="label_custom_end_date">Data di fine: %1$s</string>
+    <string name="crash_logs_extra_text">Registri degli arresti anomali di Data Monitor</string>
+    <string name="setup_usage_reset_date_custom_selected">Il piano dati personalizzato è attivo</string>
+    <string name="label_mail">Email</string>
+    <string name="label_battery_optimisation">Ottimizzazione batteria</string>
+    <string name="label_copy_logs">Copia i registri</string>
+    <string name="settings_network_diagnostics">Diagnostica di rete</string>
+    <string name="label_crash_logs_copied">Registri degli arresti anomali copiati negli appunti</string>
+    <string name="battery_optimisation_enabled_info">L\'ottimizzazione della batteria è attivata. Ciò interferisce con il funzionamento di Data Monitor. Fare clic per disattivarla.</string>
+    <string name="network_diagnostics_summary">Cambia server di diagnostica</string>
+    <string name="settings_download_server">Server scaricamento</string>
+    <string name="settings_diagnostics_server">Server</string>
+    <string name="custom_upload_url_hint">Inserisci l\'URL di caricamento completo</string>
+    <string name="custom_download_url_hint">Inserire l\'URL completo per il download</string>
+    <string name="settings_upload_server">Server caricamento</string>
+    <string name="label_custom_server_save_success">Preferenza del server salvata</string>
+    <string name="error_invaliid_url">URL di download non valido!</string>
+    <string name="error_url_verification_failed">Impossibile verificare l\'URL! Riprovare o utilizzarne uno diverso.</string>
+    <string name="settings_save_results">Salva risultati</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050">Master2050</string>
+    <string name="error_unknown">Si è verificato un errore sconosciuto. Riprova.</string>
+    <string name="diagnostics_history">Cronologia diagnostiche</string>
+    <string name="graphixmedia_summary">Olandese</string>
+    <string name="MarongHappy">JungHee Lee</string>
+    <string name="U1M450W_summary">Uzbeko</string>
+    <string name="atharvshinde">Atharv Shinde</string>
+    <string name="hinamechan_summary">Turco</string>
+    <string name="U1M450W">U1M450W</string>
+    <string name="atharvshinde_summary">Sviluppatore</string>
+    <string name="Master2050_summary">Cinese tradizionale, portoghese, francese, norvegese bokmål, spagnolo, tedesco, rumeno, coreano, turco, cinese semplificato, ucraino, hindi, russo, arabo</string>
+    <string name="bonbonboi_summary">Arabo</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy_summary">Coreano</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="hinamechan">HinameChan</string>
+    <string name="device_info_body">Le informazioni sul dispositivo includono:
+\nProduttore del dispositivo
+\nMarca del dispositivo
+\nModello del dispositivo
+\nNome in codice del dispositivo
+\nVersione Android</string>
+    <string name="save_results_summary">Salva i risultati delle diagnostiche di rete</string>
+    <string name="title_delete_results">Eliminare i risultati selezionati\?</string>
+    <string name="action_select_all">Seleziona tutti</string>
+    <string name="louis_leblanc_summary">Francese</string>
+    <string name="rate_app">Valuta l\'app su Google Play</string>
+    <string name="rate_app_summary">Il tuo feedback è apprezzato</string>
+    <string name="check_for_update">Controlla gli aggiornamenti</string>
+    <string name="Atalanttore_summary">Tedesco</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato_summary">Spagnolo</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105_summary">Ucraino</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07_summary">Arabo</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya_summary">Hindi, Bhojpuri</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp_summary">Indonesiano</string>
 </resources>
