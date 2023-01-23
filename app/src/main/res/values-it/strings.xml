@@ -367,4 +367,5 @@
     <string name="shailendramaurya_summary">Hindi, Bhojpuri</string>
     <string name="shailendramaurya">Shailendra Maurya</string>
     <string name="iqb4lsp_summary">Indonesiano</string>
+    <string name="report_telegram_summary">Inviate la segnalazione dell\'arresto anomalo nella chat di supporto di Telegram</string>
 </resources>
