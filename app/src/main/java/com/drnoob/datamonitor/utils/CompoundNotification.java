@@ -42,10 +42,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.net.TrafficStats;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +64,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -85,6 +88,8 @@ public class CompoundNotification extends Service {
             wifiDataUsage,
             totalDataUsage;
     private IconCompat dataUsageIcon, networkSpeedIcon;
+    private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
+    private boolean serviceRestart = true;
     
     @Nullable
     @Override
@@ -100,9 +105,27 @@ public class CompoundNotification extends Service {
     public void onCreate() {
         super.onCreate();
 
-        previousDownBytes = TrafficStats.getTotalRxBytes();
-        previousUpBytes = TrafficStats.getTotalTxBytes();
+//        previousDownBytes = TrafficStats.getTotalRxBytes();
+//        previousUpBytes = TrafficStats.getTotalTxBytes();
+
+        previousDownBytes = 0l;
+        previousUpBytes = 0l;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                final String iface = linkProperties.getInterfaceName();
+                if (iface == null) {
+                    continue;
+                }
+                previousUpBytes += TrafficStats.getTxBytes(iface);
+                previousDownBytes += TrafficStats.getRxBytes(iface);
+            }
+        }
+        else {
+            previousDownBytes = TrafficStats.getTotalRxBytes();
+            previousUpBytes = TrafficStats.getTotalTxBytes();
+        }
         previousTotalBytes = previousDownBytes + previousUpBytes;
+
         mActivityIntent = new Intent(Intent.ACTION_MAIN);
         mActivityIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         mActivityIntent.setComponent(new ComponentName(getPackageName(), MainActivity.class.getName()));
@@ -328,12 +351,44 @@ public class CompoundNotification extends Service {
             if (!isNotificationReceiverRegistered) {
                 registerNetworkReceiver();
             }
-            Long currentUpBytes = TrafficStats.getTotalTxBytes();
-            Long currentDownBytes = TrafficStats.getTotalRxBytes();
+            if (serviceRestart) {
+                updateInitialData();
+                serviceRestart = false;
+            }
+
+            Long currentUpBytes = 0l;
+            Long currentDownBytes = 0l;
+
+//            Long currentUpBytes = TrafficStats.getTotalTxBytes();
+//            Long currentDownBytes = TrafficStats.getTotalRxBytes();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    currentUpBytes += TrafficStats.getTxBytes(iface);
+                    currentDownBytes += TrafficStats.getRxBytes(iface);
+                }
+            }
+            else {
+                currentUpBytes = TrafficStats.getTotalTxBytes();
+                currentDownBytes = TrafficStats.getTotalRxBytes();
+            }
+
             Long currentTotalBytes = currentDownBytes + currentUpBytes;
 
             Long upSpeed = currentUpBytes - previousUpBytes;
             Long downSpeed = currentDownBytes - previousDownBytes;
+
+            if (upSpeed < 0) {
+                upSpeed = 0l;
+            }
+            if (downSpeed < 0) {
+                downSpeed = 0l;
+            }
+
             Long totalSpeed = upSpeed + downSpeed;
 
             speeds = formatNetworkSpeed(upSpeed, downSpeed, totalSpeed);
@@ -344,6 +399,7 @@ public class CompoundNotification extends Service {
         }
         else  {
             speeds = new String[]{"0 KB/s", "0 KB/s", "0 KB/s"};
+            serviceRestart = true;
         }
 
         String iconPrefix = "ic_signal_";
@@ -455,6 +511,25 @@ public class CompoundNotification extends Service {
 
     }
 
+    private void updateInitialData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                final String iface = linkProperties.getInterfaceName();
+                if (iface == null) {
+                    continue;
+                }
+                previousUpBytes += TrafficStats.getTxBytes(iface);
+                previousDownBytes += TrafficStats.getRxBytes(iface);
+            }
+        }
+        else {
+            previousDownBytes = TrafficStats.getTotalRxBytes();
+            previousUpBytes = TrafficStats.getTotalTxBytes();
+        }
+
+        previousTotalBytes = previousDownBytes + previousUpBytes;
+    }
+
     private void registerNetworkReceiver() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
@@ -496,18 +571,20 @@ public class CompoundNotification extends Service {
                 }
             }
             else {
-                restartService(context, true);
+                restartService(context, true, false);
             }
         }
     }
 
-    public void restartService(Context context, boolean startReceiver) {
+    public void restartService(Context context, boolean startReceiver, boolean restart) {
         if (startReceiver && !isNotificationReceiverRegistered) {
             registerNetworkReceiver();
         }
-        previousDownBytes = TrafficStats.getTotalRxBytes();
-        previousUpBytes = TrafficStats.getTotalTxBytes();
-        previousTotalBytes = previousDownBytes + previousUpBytes;
+//        previousDownBytes = TrafficStats.getTotalRxBytes();
+//        previousUpBytes = TrafficStats.getTotalTxBytes();
+//        previousTotalBytes = previousDownBytes + previousUpBytes;
+        serviceRestart = restart;
+
         mTimerTask = new TimerTask() {
             int interval = 0;
             @Override
@@ -516,6 +593,7 @@ public class CompoundNotification extends Service {
                         getBoolean("combine_notifications", false)) {
                     updateNotification(CompoundNotification.this, interval);
                     interval++;
+                    serviceRestart = false;
                     int elapsedTime = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
                             .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
                     elapsedTime /= 1000;
@@ -652,7 +730,7 @@ public class CompoundNotification extends Service {
             isNetworkConnected = true;
             if (isTaskPaused) {
                 CompoundNotification.this.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
-                restartService(context, false);
+                restartService(context, false, true);
                 isTaskPaused = false;
             }
         }
@@ -661,6 +739,13 @@ public class CompoundNotification extends Service {
         public void onLost(@NonNull Network network) {
             super.onLost(network);
             isNetworkConnected = false;
+            linkPropertiesHashMap.remove(network);
+        }
+
+        @Override
+        public void onLinkPropertiesChanged(@NonNull Network network, @NonNull LinkProperties linkProperties) {
+            super.onLinkPropertiesChanged(network, linkProperties);
+            linkPropertiesHashMap.put(network, linkProperties);
         }
     }
 }
