@@ -74,6 +74,7 @@ public class Values {
     public static final int DIAGNOSTICS_SETTINGS_FRAGMENT = 0x00F0;
     public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
     public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
+    public static final int DATA_PLAN_FRAGMENT = 0x0118;
 
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
@@ -97,6 +98,10 @@ public class Values {
     public static final String DATA_RESET_CUSTOM = "custom";
     public static final String DATA_RESET_HOUR = "reset_hour";
     public static final String DATA_RESET_MIN = "reset_min";
+    public static final String DATA_RESET_CUSTOM_DATE_START_HOUR = "custom_start_hour";
+    public static final String DATA_RESET_CUSTOM_DATE_START_MIN = "custom_start_min";
+    public static final String DATA_RESET_CUSTOM_DATE_END_HOUR = "custom_end_hour";
+    public static final String DATA_RESET_CUSTOM_DATE_END_MIN = "custom_end_min";
     public static final String DATA_RESET_DATE = "reset_date";
     public static final String DATA_RESET_CUSTOM_DATE_START = "custom_reset_date_start";
     public static final String DATA_RESET_CUSTOM_DATE_END = "custom_reset_date_end";

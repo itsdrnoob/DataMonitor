@@ -28,6 +28,7 @@ import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
 import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_HISTORY_FRAGMENT;
@@ -45,6 +46,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,6 +64,7 @@ import com.drnoob.datamonitor.ui.fragments.AboutFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
+import com.drnoob.datamonitor.ui.fragments.DataPlanFragment;
 import com.drnoob.datamonitor.ui.fragments.DiagnosticsHistoryFragment;
 import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
 import com.drnoob.datamonitor.ui.fragments.DonateFragment;
@@ -214,6 +217,13 @@ public class ContainerActivity extends AppCompatActivity {
             case DIAGNOSTICS_HISTORY_FRAGMENT:
                 fragment = new DiagnosticsHistoryFragment();
                 title = getString(R.string.diagnostics_history);
+                break;
+
+            case DATA_PLAN_FRAGMENT:
+                fragment = new DataPlanFragment();
+                title = getString(R.string.title_add_data_plan);
+//                binding.toolbarSave.setVisibility(View.VISIBLE);
+                getSupportActionBar().hide();
                 break;
         }
 

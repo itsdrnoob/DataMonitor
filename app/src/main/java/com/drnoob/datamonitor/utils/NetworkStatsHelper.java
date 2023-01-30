@@ -22,7 +22,11 @@ package com.drnoob.datamonitor.utils;
 import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
 import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_HOUR;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START_HOUR;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_LIST;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
@@ -34,6 +38,7 @@ import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
 
+import android.annotation.SuppressLint;
 import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
@@ -50,6 +55,7 @@ import androidx.preference.PreferenceManager;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppModel;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
@@ -479,15 +485,40 @@ public class NetworkStatsHelper {
         return data;
     }
 
+    @SuppressLint("SimpleDateFormat")
     public static Long[] getTimePeriod(Context context, int session, @Nullable int startDate) throws ParseException {
         int year, month, day;
         long resetTimeMillis = 0l,
                 endTimeMillis = 0l;
 
+        Long planStartDateMillis, planEndDateMillis;
+        try {
+            planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_START, MaterialDatePicker.todayInUtcMilliseconds());
+            planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
+        }
+        catch (ClassCastException e) {
+            int planStartIntValue = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getInt(DATA_RESET_CUSTOM_DATE_START, -1);
+            int planEndIntValue = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getInt(DATA_RESET_CUSTOM_DATE_END, -1);
+            planStartDateMillis = ((Number) planStartIntValue).longValue();
+            planEndDateMillis = ((Number) planEndIntValue).longValue();
+        }
+
         int resetHour = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt("reset_hour", 0);
         int resetMin = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt("reset_min", 0);
+        int customStartHour = PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(DATA_RESET_CUSTOM_DATE_START_HOUR,0);
+        int customStartMin = PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(DATA_RESET_CUSTOM_DATE_START_MIN,0);
+        int customEndHour = PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(DATA_RESET_CUSTOM_DATE_END_HOUR,11);
+        int customEndMin = PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(DATA_RESET_CUSTOM_DATE_END_MIN,59);
 
         Date date = new Date();
         SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
@@ -656,20 +687,21 @@ public class NetworkStatsHelper {
                 break;
 
             case SESSION_CUSTOM:
-//                year = Integer.parseInt(yearFormat.format(date));
-//                month = Integer.parseInt(monthFormat.format(date));
-//                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_START, 1);
-//                startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-//                resetDate = dateFormat.parse(startTime);
-                resetTimeMillis = PreferenceManager.getDefaultSharedPreferences(context)
-                        .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
-//                day = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_RESET_CUSTOM_DATE_END
-//                        , calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-//                endTime = context.getResources().getString(R.string.reset_time, year, month, day, 23, 59);
-//                endDate = dateFormat.parse(endTime);
-                endTimeMillis = PreferenceManager.getDefaultSharedPreferences(context)
-                        .getLong(DATA_RESET_CUSTOM_DATE_END, new Date().getTime());
+                year = Integer.parseInt(yearFormat.format(planStartDateMillis));;
+                month = Integer.parseInt(monthFormat.format(planStartDateMillis));
+                day = Integer.parseInt(dayFormat.format(planStartDateMillis));
+                startTime = context.getResources()
+                        .getString(R.string.reset_time, year, month, day, customStartHour, customStartMin);
+                resetDate = dateFormat.parse(startTime);
+                resetTimeMillis = resetDate.getTime();
 
+                year = Integer.parseInt(yearFormat.format(planEndDateMillis));
+                month = Integer.parseInt(monthFormat.format(planEndDateMillis));
+                day = Integer.parseInt(dayFormat.format(planEndDateMillis));
+                endTime = context.getResources()
+                        .getString(R.string.reset_time, year, month, day, customEndHour, customEndMin);
+                endDate = dateFormat.parse(endTime);
+                endTimeMillis = endDate.getTime();
                 break;
 
         }
