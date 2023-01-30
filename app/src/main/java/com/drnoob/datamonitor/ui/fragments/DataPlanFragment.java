@@ -127,10 +127,20 @@ public class DataPlanFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
-        planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getLong(DATA_RESET_CUSTOM_DATE_END, new Date().getTime());
+        try {
+            planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getLong(DATA_RESET_CUSTOM_DATE_START, MaterialDatePicker.todayInUtcMilliseconds());
+            planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
+        }
+        catch (ClassCastException e) {
+            int planStartIntValue = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getInt(DATA_RESET_CUSTOM_DATE_START, -1);
+            int planEndIntValue = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getInt(DATA_RESET_CUSTOM_DATE_END, -1);
+            planStartDateMillis = ((Number) planStartIntValue).longValue();
+            planEndDateMillis = ((Number) planEndIntValue).longValue();
+        }
 
         startHour = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getInt(DATA_RESET_CUSTOM_DATE_START_HOUR, -1);
