@@ -427,4 +427,6 @@
     <string name="label_buymeacoffee">Buy Me A Coffee</string>
     <string name="buymeacoffee_summary">Buy me a coffee :)</string>
     <string name="xmr_address_copied">Monero wallet address copied to clipboard</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="tadekdudek_summary">Polish</string>
 </resources>

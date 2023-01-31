@@ -243,6 +243,11 @@ public class ContributorsFragment extends Fragment {
                 R.drawable.hinamechan, true,
                 getContext().getString(R.string.github_hinamechan)));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.tadekdudek),
+                getContext().getString(R.string.tadekdudek_summary),
+                R.drawable.ersen0, true,
+                getContext().getString(R.string.github_tadekdudek)));
+
         return translators;
     }
 

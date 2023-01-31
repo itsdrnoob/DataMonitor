@@ -13,7 +13,7 @@ android {
         versionCode 14
         versionName 'v2.3.0'
         resConfigs "en", "ar", "de", "es", "fr", "hi", "in", "it", "ko",
-                "ml", "mr", "nb-rNO", "nl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "zh-rCN", "zh-rTW"
+                "ml", "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "zh-rCN", "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
