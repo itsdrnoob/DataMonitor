@@ -9,10 +9,10 @@
     </item>
 
     <item
-        android:height="@dimen/company_logo_height"
-        android:width="@dimen/company_logo_width"
+        android:height="80dp"
+        android:width="200dp"
         android:gravity="bottom|center_horizontal"
-        android:bottom="@dimen/margin_extra_large"
+        android:bottom="80dp"
         android:drawable="@drawable/ic_bitroid"/>
 
 </layer-list>

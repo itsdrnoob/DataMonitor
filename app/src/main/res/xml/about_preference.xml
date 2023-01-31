@@ -71,6 +71,19 @@
 
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
+            android:title="@string/license"
+            app:iconSpaceReserved="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/license"
+                app:icon="@drawable/ic_license"
+                android:key="license"
+                app:summary="@string/license_summary"
+                android:widgetLayout="@layout/preference_right_arrow" />
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
     </com.drnoob.datamonitor.core.base.PreferenceHeader>
 
 </PreferenceScreen>

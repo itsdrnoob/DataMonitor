@@ -51,7 +51,7 @@
             android:name=".ui.activities.SetupActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"
+            android:theme="@style/Theme.DataMonitor.Splash"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -186,6 +186,10 @@ public class OSSLicense {
                 "Android Support RecyclerView v7",
                 "1.1.0", "Apache License 2.0", R.string.apache_license_2));
 
+        libraries.add(new OSSLibrary("androidx.core:core-splashscreen", "The Android Open Source Project",
+                "Android core SplashScreen library",
+                "1.0.0", "Apache License 2.0", R.string.apache_license_2));
+
         Collections.sort(libraries, new Comparator<OSSLibrary>() {
             @Override
             public int compare(OSSLibrary ossLibrary, OSSLibrary t1) {

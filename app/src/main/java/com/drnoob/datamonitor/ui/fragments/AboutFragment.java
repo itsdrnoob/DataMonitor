@@ -19,6 +19,8 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.MD5_F_DROID;
 import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 
@@ -42,6 +44,8 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
+import com.drnoob.datamonitor.core.base.Preference;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.KeyUtils;
 import com.drnoob.datamonitor.utils.SharedPreferences;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -260,10 +264,22 @@ public class AboutFragment extends Fragment {
     }
 
     public static class SupportAndDevelopment extends PreferenceFragmentCompat {
+        Preference mLicense;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.about_preference, rootKey);
+
+            mLicense = (Preference) findPreference("license");
+
+            mLicense.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(androidx.preference.Preference preference) {
+                    startActivity(new Intent(getContext(), ContainerActivity.class)
+                            .putExtra(GENERAL_FRAGMENT_ID, LICENSE_FRAGMENT));
+                    return false;
+                }
+            });
         }
     }
 }

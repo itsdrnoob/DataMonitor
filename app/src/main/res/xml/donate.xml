@@ -4,6 +4,46 @@
     <com.drnoob.datamonitor.core.base.PreferenceHeader>
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
+            app:iconSpaceReserved="false"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false">
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/label_paypal"
+                app:summary="@string/paypal_summary"
+                android:key="paypal"
+                android:icon="@drawable/ic_paypal"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://paypal.me/itsdrnoob"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/label_buymeacoffee"
+                app:summary="@string/buymeacoffee_summary"
+                android:key="buymeacoffee"
+                android:icon="@drawable/ic_buymeacoffee"
+                app:widgetLayout="@layout/preference_right_arrow">
+
+                <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="@string/buymeacoffee_address"/>
+
+            </com.drnoob.datamonitor.core.base.Preference>
+
+            <com.drnoob.datamonitor.core.base.Preference
+                android:title="@string/label_upi"
+                app:summary="@string/upi_summary"
+                android:key="bhim"
+                android:icon="@drawable/ic_bhim"
+                app:widgetLayout="@layout/preference_right_arrow"/>
+
+        </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
+        <com.drnoob.datamonitor.core.base.PreferenceCategory
             android:title="Donate in crypto"
             app:iconSpaceReserved="false"
             app:allowDividerBelow="false"
@@ -30,32 +70,11 @@
                 app:summary="@string/ltc_address"
                 app:widgetLayout="@layout/preference_right_arrow"/>
 
-        </com.drnoob.datamonitor.core.base.PreferenceCategory>
-
-        <com.drnoob.datamonitor.core.base.PreferenceCategory
-            android:title="Other"
-            app:iconSpaceReserved="false"
-            app:allowDividerAbove="false"
-            app:allowDividerBelow="false">
-
             <com.drnoob.datamonitor.core.base.Preference
-                android:title="PayPal"
-                app:summary="Donate via PayPal"
-                android:key="paypal"
-                android:icon="@drawable/ic_paypal"
-                app:widgetLayout="@layout/preference_right_arrow">
-
-                <intent
-                    android:action="android.intent.action.VIEW"
-                    android:data="https://paypal.me/itsdrnoob"/>
-
-            </com.drnoob.datamonitor.core.base.Preference>
-
-            <com.drnoob.datamonitor.core.base.Preference
-                android:title="BHIM-UPI"
-                app:summary="Donate via UPI"
-                android:key="bhim"
-                android:icon="@drawable/ic_bhim"
+                android:title="Monero"
+                android:icon="@drawable/ic_monero"
+                android:key="monero"
+                app:summary="@string/xmr_address"
                 app:widgetLayout="@layout/preference_right_arrow"/>
 
         </com.drnoob.datamonitor.core.base.PreferenceCategory>
