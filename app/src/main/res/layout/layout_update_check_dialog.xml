@@ -5,6 +5,7 @@
     android:id="@+id/alert_dialog_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/margin_medium"
     android:background="@android:color/transparent">
 
     <TextView
@@ -12,9 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/checking_for_update"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginEnd="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -41,10 +41,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="@dimen/margin_extra_small"
         android:paddingTop="@dimen/margin_small"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginEnd="@dimen/margin_medium"
         android:paddingBottom="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alert_dialog_title">
 
@@ -52,32 +53,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_update_available"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            android:padding="@dimen/margin_extra_small"/>
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:padding="@dimen/margin_tiny"/>
 
         <TextView
             android:id="@+id/current_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_extra_small"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:padding="@dimen/margin_tiny"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:text="@string/current_version"/>
 
         <TextView
             android:id="@+id/new_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_extra_small"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:padding="@dimen/margin_tiny"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:text="@string/new_version"/>
 
         <TextView
             android:id="@+id/changelogs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_extra_small"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:padding="@dimen/margin_tiny"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:text="@string/label_changelogs"
+            android:clickable="true"
+            android:background="?selectableItemBackground"
             android:textColor="@color/primary"/>
 
     </LinearLayout>

@@ -30,7 +30,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +42,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
@@ -54,6 +59,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -84,11 +91,16 @@ public class AboutFragment extends Fragment {
         mCheckForUpdate = view.findViewById(R.id.check_for_update);
 
         mAppVersion.setText(BuildConfig.VERSION_NAME);
+        String currentVersionName = BuildConfig.VERSION_NAME;
 
-        int currentVersion = Integer.parseInt(BuildConfig.VERSION_NAME.split("v")[1]
+        if (currentVersionName.contains("-")) {
+            currentVersionName = currentVersionName.split("-")[0];
+        }
+
+        int currentVersion = Integer.parseInt(currentVersionName.split("v")[1]
                 .replace(".", ""));
         int newVersion = Integer.parseInt(SharedPreferences.getAppPrefs(getContext()).getString(UPDATE_VERSION,
-                BuildConfig.VERSION_NAME)
+                        currentVersionName)
                 .split("v")[1].replace(".", ""));
 
         if (newVersion > currentVersion) {
@@ -196,12 +208,16 @@ public class AboutFragment extends Fragment {
             super.onPostExecute(s);
             if (s != null) {
                 String currentVersion = BuildConfig.VERSION_NAME;
+                if (currentVersion.contains("-")) {
+                    currentVersion = currentVersion.split("-")[0];
+                }
                 String currentVersionNumber = currentVersion.split("v")[1].replace(".", "");
                 String newVersionNumber = s.split("v")[1].replace(".", "");
                 if (!isCancelled()) {
                     if (Float.parseFloat(newVersionNumber) > Float.parseFloat(currentVersionNumber)) {
                         isUpdateAvailable = true;
-                        updateAvailable(currentVersion, s);
+                        updateCheckDialog.dismiss();
+                        updateAvailable(BuildConfig.VERSION_NAME, s);
                     }
                     else {
                         updateCheckDialog.dismiss();
@@ -218,8 +234,9 @@ public class AboutFragment extends Fragment {
     }
 
     private void updateAvailable(String current, String update) {
-        SharedPreferences.getAppPrefs(getContext()).edit()
-                .putString(UPDATE_VERSION, update).apply();
+        SharedPreferences.getAppPrefs(requireContext()).edit()
+                .putString(UPDATE_VERSION, update)
+                .apply();
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_update_check_dialog, null);
 
         TextView title = dialogView.findViewById(R.id.alert_dialog_title);
@@ -229,25 +246,24 @@ public class AboutFragment extends Fragment {
         TextView newVersion = dialogView.findViewById(R.id.new_version);
         TextView changelogs = dialogView.findViewById(R.id.changelogs);
 
-        title.setText(getString(R.string.label_update_available));
+        title.setText(requireContext().getString(R.string.label_update_available));
         currentVersion.setText(getString(R.string.current_version, current));
         newVersion.setText(getString(R.string.new_version, update));
 
         progressIndicator.setVisibility(View.GONE);
 
-        if (updateCheckDialog == null) {
-            updateCheckDialog = new MaterialAlertDialogBuilder(requireContext())
-                    .setPositiveButton(R.string.label_download_update, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            downloadUpdate();
-                            updateCheckDialog.dismiss();
-                        }
-                    })
-                    .setNegativeButton(R.string.action_cancel, null)
-                    .create();
-        }
-        updateCheckDialog.setView(dialogView);
+        updateCheckDialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .setPositiveButton(requireContext().getString(R.string.label_download_update),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                downloadUpdate();
+                                updateCheckDialog.dismiss();
+                            }
+                        })
+                .setNegativeButton(requireContext().getString(R.string.action_cancel), null)
+                .create();
 
         changelogs.setOnClickListener(new View.OnClickListener() {
             @Override
