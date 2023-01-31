@@ -7,7 +7,9 @@
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
             android:title="@string/support_and_development"
-            app:iconSpaceReserved="false">
+            app:iconSpaceReserved="false"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false">
 
             <com.drnoob.datamonitor.core.base.Preference
                 android:title="@string/github"
@@ -73,7 +75,9 @@
 
         <com.drnoob.datamonitor.core.base.PreferenceCategory
             android:title="@string/license"
-            app:iconSpaceReserved="false">
+            app:iconSpaceReserved="false"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="false">
 
             <com.drnoob.datamonitor.core.base.Preference
                 android:title="@string/license"
