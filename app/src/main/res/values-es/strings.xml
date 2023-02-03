@@ -101,7 +101,7 @@
     <string name="telegram_summary">"Únete al grupo de soporte en telegram"</string>
     <string name="no_update_available">Está ejecutando la última versión.</string>
     <string name="label_update_available">"¡Actualización disponible!"</string>
-    <string name="label_download_update">"Descargar actualización"</string>
+    <string name="label_download_update">Descargar la actualización</string>
     <string name="checking_for_update">Buscando actualizaciones…</string>
     <string name="new_update_available">"¡Nueva actualización disponible!"</string>
     <string name="settings_app_theme">"Tema de aplicación"</string>
@@ -114,7 +114,7 @@
     <string name="setup_data_alert">Alerta de uso de datos</string>
     <string name="data_alert_summary">Notificar cuando se alcance el límite de datos</string>
     <string name="github">GitHub</string>
-    <string name="eth_address_copied">Dirección de la billetera Ethereum copiada al portapapeles</string>
+    <string name="eth_address_copied">Dirección de la billetera de Ethereum copiada al portapapeles</string>
     <string name="label_removed">Aplicaciones eliminadas</string>
     <string name="oem_skin_warning">%1$s Consulte los consejos de optimización adicionales para asegurarse de que la aplicación funciona correctamente.</string>
     <string name="usage_access_body">Necesario para ejecutar la aplicación, ya que recopila estadísticas de uso de la aplicación.
@@ -177,7 +177,7 @@
     <string name="report_summary">Informar errores o solicitar funciones</string>
     <string name="setup">Configuración</string>
     <string name="app_data_usage">Uso de la aplicación</string>
-    <string name="btc_address_copied">Dirección de billetera Bitcoin copiada en el portapapeles</string>
+    <string name="btc_address_copied">Dirección de la billetera de Bitcoin copiada al portapapeles</string>
     <string name="ltc_address_copied">Dirección de la billetera Litecoin copiada al portapapeles</string>
     <string name="label_system_apps">Aplicaciones del sistema</string>
     <string name="home">Hogar</string>
@@ -379,4 +379,20 @@
     <string name="hinamechan">HinameChan</string>
     <string name="hinamechan_summary">Turco</string>
     <string name="atharvshinde_translation_summary">Maratí</string>
+    <string name="donate_info">Data Monitor es una aplicación gratuita y de código abierto y siempre lo seguirá siendo :)
+\n
+\nSi desea apoyar el desarrollo de la aplicación, una donación sería muy apreciada.</string>
+    <string name="label_paypal">PayPal</string>
+    <string name="action_save">Guardar</string>
+    <string name="label_custom_end_time">Hora de fín: %1$s</string>
+    <string name="label_custom_start_time">Hora de inicio: %1$s</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="error_invalid_plan_duration">Duración inválida del plan</string>
+    <string name="paypal_summary">Donar mediante PayPal</string>
+    <string name="upi_summary">Donar a través de UPI</string>
+    <string name="buymeacoffee_summary">Invítame a un café :)</string>
+    <string name="label_buymeacoffee">Invítame a un café</string>
+    <string name="tadekdudek_summary">Polaco</string>
+    <string name="xmr_address_copied">Dirección de monedero copiada al portapapeles</string>
+    <string name="tadekdudek">tadekdudek</string>
 </resources>
