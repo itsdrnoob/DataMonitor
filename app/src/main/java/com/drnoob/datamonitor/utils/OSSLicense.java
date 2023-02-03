@@ -34,11 +34,11 @@ public class OSSLicense {
 
         libraries.add(new OSSLibrary("androidx.appcompat:appcompat", "The Android Open Source Project",
                 "The Support Library is a static library that you can add to your Android application in order to use APIs that are either not available for older platform versions or utility APIs that aren't a part of the framework APIs. Compatible on devices running API 14 or later.",
-                "1.5.1", "Apache License 2.0", R.string.apache_license_2));
+                "1.6.0", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("com.google.android.material:material", "The Android Open Source Project",
                 "Material Components for Android is a static library that you can add to your Android application in order to use APIs that provide implementations of the Material Design specification. Compatible on devices running API 14 or later.",
-                "1.6.1", "Apache License 2.0", R.string.apache_license_2));
+                "1.8.0", "Apache License 2.0", R.string.apache_license_2));
 
         libraries.add(new OSSLibrary("androidx.constraintlayout:constraintlayout", "The Android Open Source Project",
                 "ConstraintLayout for Android",
@@ -185,6 +185,10 @@ public class OSSLicense {
         libraries.add(new OSSLibrary("androidx.recyclerview:recyclerview", "The Android Open Source Project",
                 "Android Support RecyclerView v7",
                 "1.1.0", "Apache License 2.0", R.string.apache_license_2));
+
+        libraries.add(new OSSLibrary("androidx.core:core-splashscreen", "The Android Open Source Project",
+                "Android core SplashScreen library",
+                "1.0.0", "Apache License 2.0", R.string.apache_license_2));
 
         Collections.sort(libraries, new Comparator<OSSLibrary>() {
             @Override

@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.Widget;
 
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
@@ -92,8 +93,12 @@ public class DataUsageWidget extends AppWidgetProvider {
                     .equals(DATA_RESET_DAILY)) {
                 mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
             }
-            else {
+            else if (PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_CUSTOM)) {
                 mobile = getDeviceMobileDataUsage(context, SESSION_CUSTOM, -1);
+            }
+            else {
+                mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, -1);
             }
 
             mobileData = formatData(mobile[0], mobile[1])[2];

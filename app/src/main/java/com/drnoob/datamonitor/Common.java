@@ -178,6 +178,7 @@ public class Common {
         list.add(new LanguageModel("Uzbek", "uz", ""));
         list.add(new LanguageModel("Marathi", "mr", ""));
         list.add(new LanguageModel("Dutch", "nl", ""));
+        list.add(new LanguageModel("Polish", "pl", ""));
 
         Collections.sort(list, new Comparator<LanguageModel>() {
             @Override

@@ -17,7 +17,9 @@
     <string name="ltc_address" translatable="false">MQBVqLUpHLs2KUi8gTrhQkicpQVkohaccB</string>
     <string name="eth_address" translatable="false">0x820f316f75dacf5606b49bd33dfcf7e7142d59a5</string>
     <string name="btc_address" translatable="false">3MS2NP6ptS7XQytdn5yCAQgotVtXBQL1xw</string>
+    <string name="xmr_address" translatable="false">82xMyK4P174QrEkkAcpEcq4AsREGqYDgpUbdmFRpNQRjaPR3DNJGZcQCA3Vp2PFNJnUEHzWBRdPzLfKF827z2WyuCLoTGyo</string>
     <string name="upi_address" translatable="false"><![CDATA[upi://pay?pa=itsdrnoob@ybl&pn=itsdrnoob&tn=DataMonitor]]></string>
+    <string name="buymeacoffee_address" translatable="false">https://www.buymeacoffee.com/itsdrnoob</string>
 
     <string name="api_url" translatable="false">https://api.ipify.org</string>
 
@@ -31,7 +33,7 @@
 
     <string name="email" translatable="false">bitroid.dev@gmail.com</string>
 
-    <string name="github_new_issue" translatable="false">"https://github.com/itsdrnoob/DataMonitor/issues/new?assignees=&amp;labels=&amp;template=bug_report.md&amp;title="</string>
+    <string name="github_new_issue" translatable="false">https://github.com/itsdrnoob/DataMonitor/issues/new/choose</string>
 
     <!-- Contributors -->
     <string name="github_itsdrnoob" translatable="false">https://www.github.com/itsdrnoob</string>
@@ -55,4 +57,5 @@
     <string name="github_atharvshinde" translatable="false">https://github.com/AtharvShinde</string>
     <string name="github_graphixmedia" translatable="false">https://github.com/GraphixMedia</string>
     <string name="github_hinamechan" translatable="false">https://github.com/HinameChan</string>
+    <string name="github_tadekdudek" translatable="false">https://github.com/tadekdudek</string>
 </resources>

@@ -169,7 +169,7 @@ public class CompoundNotification extends Service {
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0); // change this
         mBuilder.setContentTitle(getString(R.string.app_name));
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
         mBuilder.setShowWhen(false);
         if (showOnLockscreen) {
@@ -492,7 +492,7 @@ public class CompoundNotification extends Service {
             }
         }
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentTitle(context.getString(R.string.app_name));
         mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
         mBuilder.setContentIntent(mActivityPendingIntent);

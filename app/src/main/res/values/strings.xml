@@ -120,9 +120,9 @@
     <string name="setup">Setup</string>
     <string name="app_data_usage">App usage</string>
     <string name="settings">Settings</string>
-    <string name="btc_address_copied">Bitcoin wallet address copied to the clipboard</string>
-    <string name="eth_address_copied">Ethereum wallet address copied to the clipboard</string>
-    <string name="ltc_address_copied">Litecoin wallet address copied to the clipboard</string>
+    <string name="btc_address_copied">Bitcoin wallet address copied to clipboard</string>
+    <string name="eth_address_copied">Ethereum wallet address copied to clipboard</string>
+    <string name="ltc_address_copied">Litecoin wallet address copied to clipboard</string>
     <string name="label_system_apps">System Apps</string>
     <string name="package_system" translatable="false">com.android.systemui</string>
     <string name="home">Home</string>
@@ -250,7 +250,7 @@
     <string name="label_changelogs">Find out what\'s new</string>
     <string name="no_update_available">You are running the latest version.</string>
     <string name="label_update_available">New version is available!</string>
-    <string name="label_download_update">Download the new version</string>
+    <string name="label_download_update">Download update</string>
     <string name="checking_for_update">Checking for updates…</string>
     <string name="new_update_available">A new version is available!</string>
     <string name="update_fetch_error">Couldn\'t fetch updates</string>
@@ -415,4 +415,18 @@
     <string name="hinamechan">HinameChan</string>
     <string name="hinamechan_summary">Turkish</string>
     <string name="atharvshinde_translation_summary">Marathi</string>
+    <string name="label_custom_start_time">Start Time: %1$s</string>
+    <string name="action_save">Save</string>
+    <string name="label_custom_end_time">End time: %1$s</string>
+    <string name="error_invalid_plan_duration">Invalid plan duration</string>
+    <string name="donate_info">Data Monitor is a Free and Open-Source application and will always remain that way :)\n\nIf you like to support the development of the app, a donation would be greatly appreciated.</string>
+    <string name="label_paypal">PayPal</string>
+    <string name="paypal_summary">Donate via PayPal</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="upi_summary">Donate via UPI</string>
+    <string name="label_buymeacoffee">Buy Me A Coffee</string>
+    <string name="buymeacoffee_summary">Buy me a coffee :)</string>
+    <string name="xmr_address_copied">Monero wallet address copied to clipboard</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="tadekdudek_summary">Polish</string>
 </resources>

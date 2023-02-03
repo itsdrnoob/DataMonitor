@@ -130,7 +130,7 @@ public class LiveNetworkMonitor extends Service {
 
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(getString(R.string.network_speed_download, "0 KB/s"))
@@ -360,7 +360,7 @@ public class LiveNetworkMonitor extends Service {
         }
         mBuilder.setSmallIcon(icon);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentTitle(context.getString(R.string.network_speed_title,  speeds[2]));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(context.getString(R.string.network_speed_download, speeds[1]))

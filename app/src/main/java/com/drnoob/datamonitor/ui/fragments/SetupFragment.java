@@ -26,6 +26,7 @@ import static com.drnoob.datamonitor.Common.setBoldSpan;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
@@ -57,6 +58,7 @@ import static com.drnoob.datamonitor.core.Values.WIDGET_REFRESH_INTERVAL_SUMMARY
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
@@ -80,7 +82,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -158,6 +166,7 @@ public class SetupFragment extends Fragment {
 
     public static class SetupPreference extends PreferenceFragmentCompat {
         private static final String TAG = SetupPreference.class.getSimpleName();
+
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit,
                 mCombinedNotificationIcon, mExcludeApps;
@@ -167,6 +176,41 @@ public class SetupFragment extends Fragment {
         private Snackbar snackbar;
         private Long planStartDateMillis, planEndDateMillis;
         private Intent liveNetworkMonitorIntent;
+        private ActivityResultLauncher<Intent> dataPlanLauncher;
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            dataPlanLauncher = registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                        @Override
+                        public void onActivityResult(ActivityResult result) {
+                            if (result.getResultCode() == Activity.RESULT_OK) {
+                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                                getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
+                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                                updateResetData();
+                                setDataPlanNotification(getContext());
+                                dismissOnClick(snackbar);
+                                snackbar.show();
+                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
+                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+
+                                boolean updateNotification = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
+                                if (updateNotification) {
+                                    Intent notificationIntent = new Intent(getContext(), NotificationUpdater.class);
+                                    getContext().sendBroadcast(notificationIntent);
+                                }
+
+                                getContext().sendBroadcast(intent);
+                            }
+                        }
+                    }
+            );
+        }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -1007,309 +1051,10 @@ public class SetupFragment extends Fragment {
             mAddDataPlan.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
-                    View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_add_data_plan, null);
+                    Intent intent = new Intent(getActivity(), ContainerActivity.class);
+                    intent.putExtra(GENERAL_FRAGMENT_ID, DATA_PLAN_FRAGMENT);
+                    dataPlanLauncher.launch(intent);
 
-                    LinearLayout customDateView = dialogView.findViewById(R.id.custom_date_view);
-                    RadioGroup dataReset = dialogView.findViewById(R.id.data_reset);
-                    TextInputLayout dataLimitView = dialogView.findViewById(R.id.data_limit_view);
-                    TextInputEditText dataLimitInput = dialogView.findViewById(R.id.data_limit);
-                    TabLayout dataTypeSwitcher = dialogView.findViewById(R.id.app_type_switcher);
-//                    RangeSlider customDateSlider = dialogView.findViewById(R.id.custom_date_slider);
-                    TextView planStartDate = dialogView.findViewById(R.id.custom_start_date);
-                    TextView planEndDate = dialogView.findViewById(R.id.custom_end_date);
-//                    TextView planValidity = dialogView.findViewById(R.id.data_plan_validity);
-                    ConstraintLayout footer = dialogView.findViewById(R.id.footer);
-                    TextView cancel = footer.findViewById(R.id.cancel);
-                    TextView ok = footer.findViewById(R.id.ok);
-
-                    Calendar calendar = Calendar.getInstance();
-                    int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-                    planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getLong(DATA_RESET_CUSTOM_DATE_START, new Date().getTime());
-                    planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getLong(DATA_RESET_CUSTOM_DATE_END, new Date().getTime());
-
-
-                    String planStart = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
-                    String planEnd = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
-                    String startDateToday = getContext().getString(R.string.label_custom_start_date, planStart);
-                    String endDateToday = getContext().getString(R.string.label_custom_end_date, planEnd);
-                    planStartDate.setText(setBoldSpan(startDateToday, planStart));
-                    planEndDate.setText(setBoldSpan(endDateToday, planEnd));
-
-                    planStartDate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            calendar.setTimeInMillis(new Date().getTime());
-                            calendar.add(Calendar.YEAR, -2);
-                            long startYear = calendar.getTimeInMillis();
-                            calendar.add(Calendar.YEAR, 2);
-                            long endYear = calendar.getTimeInMillis();
-
-                            CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder()
-                                    .setStart(startYear)
-                                    .setEnd(endYear)
-                                    .setValidator(DateValidatorPointBackward.now());
-
-                            MaterialDatePicker startDatePicker =
-                                    MaterialDatePicker.Builder.datePicker()
-                                            .setSelection(localToUTC(planStartDateMillis))
-                                            .setTitleText(getContext().getString(R.string.label_select_start_date))
-                                            .setCalendarConstraints(constraintsBuilder.build())
-                                            .build();
-
-                            startDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                                @Override
-                                public void onPositiveButtonClick(Object selection) {
-                                    planStartDateMillis = Long.parseLong(selection.toString());
-                                    Log.e(TAG, "onPositiveButtonClick: " + planStartDateMillis );
-                                    Log.e(TAG, "onPositiveButtonClick: " + UTCToLocal(planStartDateMillis));
-                                    planStartDateMillis = UTCToLocal(planStartDateMillis);
-                                    String date = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
-                                    String startDateString = getContext().getString(R.string.label_custom_start_date, date);
-                                    planStartDate.setText(setBoldSpan(startDateString, date));
-                                }
-                            });
-
-                            startDatePicker.show(getChildFragmentManager(), startDatePicker.toString());
-                        }
-                    });
-
-                    planEndDate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            calendar.setTimeInMillis(new Date().getTime());
-//                            calendar.add(Calendar.YEAR, -2);
-                            long startYear = calendar.getTimeInMillis();
-                            calendar.add(Calendar.YEAR, 2);
-                            long endYear = calendar.getTimeInMillis();
-
-                            CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder()
-                                    .setStart(startYear)
-                                    .setEnd(endYear)
-                                    .setValidator(DateValidatorPointForward.now());
-
-                            MaterialDatePicker endDatePicker =
-                                    MaterialDatePicker.Builder.datePicker()
-                                            .setSelection(localToUTC(planEndDateMillis))
-                                            .setTitleText(getContext().getString(R.string.label_plan_end_date))
-                                            .setCalendarConstraints(constraintsBuilder.build())
-                                            .build();
-
-                            endDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                                @Override
-                                public void onPositiveButtonClick(Object selection) {
-                                    planEndDateMillis = Long.parseLong(selection.toString());
-                                    planEndDateMillis = UTCToLocal(planEndDateMillis) + 86399999;   // 86,399,999 is added to change the time to 23:59:59
-                                    String date = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
-                                    String endDateString = getContext().getString(R.string.label_custom_end_date, date);
-                                    planEndDate.setText(setBoldSpan(endDateString, date));
-                                }
-                            });
-
-                            endDatePicker.show(getChildFragmentManager(), endDatePicker.toString());
-                        }
-                    });
-
-                    dataTypeSwitcher.selectTab(dataTypeSwitcher.getTabAt(PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getInt(DATA_TYPE, 0)));
-
-                    dataTypeSwitcher.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                        @Override
-                        public void onTabSelected(TabLayout.Tab tab) {
-                            if (!PreferenceManager.getDefaultSharedPreferences(getContext())
-                                    .getBoolean("disable_haptics", false)) {
-                                VibrationUtils.hapticMinor(getContext());
-                            }
-                        }
-
-                        @Override
-                        public void onTabUnselected(TabLayout.Tab tab) {
-
-                        }
-
-                        @Override
-                        public void onTabReselected(TabLayout.Tab tab) {
-
-                        }
-                    });
-
-                    Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getFloat(DATA_LIMIT, -1);
-                    if (dataLimit > 0) {
-                        if (dataLimit >= 1024) {
-                            String data = String.format("%.2f", dataLimit / 1024) + "";
-                            dataLimitInput.setText(data);
-                        } else {
-                            dataLimitInput.setText(PreferenceManager.getDefaultSharedPreferences(getContext())
-                                    .getString(LIMIT, null));
-                        }
-
-                    }
-                    switch (PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getString(DATA_RESET, "")) {
-                        case DATA_RESET_MONTHLY:
-                            dataReset.check(R.id.monthly);
-                            customDateView.setVisibility(View.GONE);
-                            break;
-                        case DATA_RESET_DAILY:
-                            dataReset.check(R.id.daily);
-                            customDateView.setVisibility(View.GONE);
-                            break;
-                        case DATA_RESET_CUSTOM:
-                            dataReset.check(R.id.custom_reset);
-                            customDateView.setAlpha(1f);
-                            customDateView.setVisibility(View.VISIBLE);
-                            break;
-                    }
-
-                    dataReset.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                            if (i == R.id.custom_reset) {
-                                customDateView.setAlpha(0f);
-                                customDateView.setVisibility(View.VISIBLE);
-                                customDateView.animate()
-                                        .alpha(1f)
-                                        .setDuration(350)
-                                        .start();
-                            }
-                            else {
-                                customDateView.animate()
-                                        .alpha(0f)
-                                        .setDuration(350)
-                                        .start();
-//                                customDateView.setVisibility(View.GONE);
-                                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        customDateView.setVisibility(View.GONE);
-                                    }
-                                }, 150);
-
-                            }
-                        }
-                    });
-
-                    cancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    ok.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (dataLimitInput.getText().toString().length() <= 0) {
-//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
-                                dataLimitView.setError(getString(R.string.error_invalid_plan));
-                            }
-                            else {
-                                String dataLimitText = dataLimitInput.getText().toString();
-                                if (dataLimitText.contains(",")) {
-                                    dataLimitText = dataLimitText.replace(",", ".");
-                                }
-                                if (dataLimitText.contains("٫")) {
-                                    dataLimitText = dataLimitText.replace("٫", ".");
-                                }
-                                Float dataLimit = Float.parseFloat(dataLimitText);
-                                int dataType;
-                                if (dataTypeSwitcher.getTabAt(0).isSelected()) {
-                                    if (dataLimit >= 1024) {
-                                        dataType = 1;
-                                    } else {
-                                        dataLimit = dataLimit;
-                                        dataType = dataTypeSwitcher.getSelectedTabPosition();
-                                    }
-                                } else {
-                                    dataLimit = dataLimit * 1024f;
-                                    dataType = dataTypeSwitcher.getSelectedTabPosition();
-                                }
-                                if (dataReset.getCheckedRadioButtonId() == R.id.daily) {
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                            .putString(DATA_RESET, DATA_RESET_DAILY).apply();
-                                }
-                                else if (dataReset.getCheckedRadioButtonId() == R.id.monthly) {
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                            .putString(DATA_RESET, DATA_RESET_MONTHLY).apply();
-                                }
-                                else if (dataReset.getCheckedRadioButtonId() == R.id.custom_reset) {
-                                    calendar.setTimeInMillis(planEndDateMillis);
-                                    calendar.add(Calendar.DATE, 1);
-
-                                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                            .putString(DATA_RESET, DATA_RESET_CUSTOM)
-                                            .putLong(DATA_RESET_CUSTOM_DATE_START, planStartDateMillis)
-                                            .putLong(DATA_RESET_CUSTOM_DATE_END, planEndDateMillis)
-                                            .putLong(DATA_RESET_CUSTOM_DATE_RESTART, calendar.getTimeInMillis())
-                                            .apply();
-                                }
-
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putFloat(DATA_LIMIT, dataLimit).apply();
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(LIMIT, dataLimitInput.getText().toString()).apply();
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putInt(DATA_TYPE, dataType).apply();
-                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                        getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
-                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                                updateResetData();
-                                setDataPlanNotification(getContext());
-                                dialog.dismiss();
-                                dismissOnClick(snackbar);
-                                snackbar.show();
-                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
-                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
-                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
-                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-
-                                boolean updateNotification = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
-                                if (updateNotification) {
-                                    Intent notificationIntent = new Intent(getContext(), NotificationUpdater.class);
-                                    getContext().sendBroadcast(notificationIntent);
-                                }
-
-                                getContext().sendBroadcast(intent);
-                            }
-                        }
-                    });
-
-                    dataLimitInput.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            if (dataLimitInput.getText().toString().length() <= 0) {
-//                                dataLimitView.setError(getString(R.string.error_invalid_plan));
-//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_error_background, null));
-                            } else {
-                                dataLimitView.setError(null);
-//                                dataLimitInput.setBackground(getResources().getDrawable(R.drawable.text_input_background, null));
-                            }
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-
-                        }
-                    });
-
-                    dialog.setContentView(dialogView);
-                    dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                        @Override
-                        public void onShow(DialogInterface dialog) {
-                            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialog;
-                            FrameLayout bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
-                            BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-                            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                        }
-                    });
-                    dialog.show();
                     return false;
                 }
             });
@@ -1554,80 +1299,80 @@ public class SetupFragment extends Fragment {
                         });
 
 
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                        .putInt(DATA_RESET_HOUR, hourOfDay).apply();
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-                                        .putInt(DATA_RESET_MIN, minute).apply();
-
-                                Intent i = new Intent(getContext(), NotificationUpdater.class);
-                                getContext().sendBroadcast(i);
-                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
-                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
-                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
-                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-                                getContext().sendBroadcast(intent);
-
-                                int h, m;
-                                m = minute;
-                                String time, interval;
-
-                                // Again :)
-
-                                if (hourOfDay >= 12) {
-                                    if (hourOfDay == 12) {
-                                        h = 12;
-                                    } else {
-                                        h = (hourOfDay - 12);
-                                    }
-                                    if (m < 10) {
-                                        time = h + ":0" + m + " pm";
-                                    } else {
-                                        time = h + ":" + m + " pm";
-                                    }
-                                } else {
-                                    if (hourOfDay == 0) {
-                                        h = 12;
-                                    } else if (hourOfDay < 10) {
-                                        h = hourOfDay;
-                                        if (m < 10) {
-                                            time = "0" + h + ":0" + m + " pm";
-                                        } else {
-                                            time = "0" + h + ":" + m + " pm";
-                                        }
-                                    } else {
-                                        h = hourOfDay;
-                                    }
-                                    if (h < 10) {
-                                        time = "0" + h + ":" + m + " am";
-                                    } else {
-                                        time = h + ":" + m + " am";
-                                    }
-                                    if (m < 10) {
-                                        time = h + ":0" + m + " am";
-                                    } else {
-                                        time = h + ":" + m + " am";
-                                    }
-                                }
-                                if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                                        .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
-                                    interval = getString(R.string.month);
-                                } else {
-                                    interval = getString(R.string.day);
-                                }
-
-                                mUsageResetTime.setSummary(time);
-
-                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                        getString(R.string.label_data_usage_reset_time_change, interval, time), Snackbar.LENGTH_SHORT)
-                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                                dismissOnClick(snackbar);
-                                snackbar.show();
-                            }
-                        }, hour, minute, false);
+//                        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+//                            @Override
+//                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+//                                        .putInt(DATA_RESET_HOUR, hourOfDay).apply();
+//                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+//                                        .putInt(DATA_RESET_MIN, minute).apply();
+//
+//                                Intent i = new Intent(getContext(), NotificationUpdater.class);
+//                                getContext().sendBroadcast(i);
+//                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+//                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
+//                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
+//                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+//                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+//                                getContext().sendBroadcast(intent);
+//
+//                                int h, m;
+//                                m = minute;
+//                                String time, interval;
+//
+//                                // Again :)
+//
+//                                if (hourOfDay >= 12) {
+//                                    if (hourOfDay == 12) {
+//                                        h = 12;
+//                                    } else {
+//                                        h = (hourOfDay - 12);
+//                                    }
+//                                    if (m < 10) {
+//                                        time = h + ":0" + m + " pm";
+//                                    } else {
+//                                        time = h + ":" + m + " pm";
+//                                    }
+//                                } else {
+//                                    if (hourOfDay == 0) {
+//                                        h = 12;
+//                                    } else if (hourOfDay < 10) {
+//                                        h = hourOfDay;
+//                                        if (m < 10) {
+//                                            time = "0" + h + ":0" + m + " pm";
+//                                        } else {
+//                                            time = "0" + h + ":" + m + " pm";
+//                                        }
+//                                    } else {
+//                                        h = hourOfDay;
+//                                    }
+//                                    if (h < 10) {
+//                                        time = "0" + h + ":" + m + " am";
+//                                    } else {
+//                                        time = h + ":" + m + " am";
+//                                    }
+//                                    if (m < 10) {
+//                                        time = h + ":0" + m + " am";
+//                                    } else {
+//                                        time = h + ":" + m + " am";
+//                                    }
+//                                }
+//                                if (PreferenceManager.getDefaultSharedPreferences(getContext())
+//                                        .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
+//                                    interval = getString(R.string.month);
+//                                } else {
+//                                    interval = getString(R.string.day);
+//                                }
+//
+//                                mUsageResetTime.setSummary(time);
+//
+//                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+//                                        getString(R.string.label_data_usage_reset_time_change, interval, time), Snackbar.LENGTH_SHORT)
+//                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+//                                dismissOnClick(snackbar);
+//                                snackbar.show();
+//                            }
+//                        }, hour, minute, false);
 //                        timePickerDialog.show();
 
                         dialog.setContentView(dialogView);

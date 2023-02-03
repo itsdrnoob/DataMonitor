@@ -287,8 +287,8 @@
     <string name="auto_hide_live_network_summary">Tarmoq unlanmaganda tarmoq tezligi bildirishnomasini to\'xtatish</string>
     <string name="custom">Odatiy</string>
     <string name="heading_data_reset_custom_counter">Yangilanish sanasi</string>
-    <string name="label_custom_start_date">Boshlanish sanasi: %1$d</string>
-    <string name="label_custom_end_date">Tugash sanasi: %1$d</string>
+    <string name="label_custom_start_date">Boshlanish sanasi: %1$s</string>
+    <string name="label_custom_end_date">Tugash sanasi: %1$s</string>
     <string name="setup_usage_reset_date_custom_selected">Odatiy trafik rejasi faol</string>
     <string name="title_data_plan_expired">Trafik rejasi tugadi!</string>
     <string name="summary_data_plan_expired">Siz trafik rejangizni yangilashni xohlashingiz mumkin</string>
