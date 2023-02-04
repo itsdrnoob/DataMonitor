@@ -115,9 +115,9 @@
     <string name="setup">"إعداد"</string>
     <string name="app_data_usage">استخدام التطبيق</string>
     <string name="settings">"الإعدادات"</string>
-    <string name="btc_address_copied">"تم نسخ عنوان محفظة Bitcoin إلى الحافظة الخاصة بك"</string>
-    <string name="eth_address_copied">"تم نسخ عنوان محفظة Ethereum إلى الحافظة الخاصة بك"</string>
-    <string name="ltc_address_copied">"تم نسخ عنوان محفظة Litecoin إلى الحافظة الخاصة بك"</string>
+    <string name="btc_address_copied">تم نسخ عنوان محفظة Bitcoin إلى الحافظة الخاصة بك</string>
+    <string name="eth_address_copied">تم نسخ عنوان محفظة Ethereum إلى الحافظة</string>
+    <string name="ltc_address_copied">تم نسخ عنوان محفظة Litecoin إلى الحافظة</string>
     <string name="label_system_apps">"تطبيقات النظام"</string>
     <string name="home">"الشاشة الرئيسية"</string>
     <string name="usage_access_permission">"إذن وصول الاستخدام"</string>
@@ -239,7 +239,7 @@
     <string name="label_changelogs">"البحث عن ما هو جديد"</string>
     <string name="no_update_available">انت تقوم الان بتشغيل أحدث إصدار.</string>
     <string name="label_update_available">"تحديث متاح!"</string>
-    <string name="label_download_update">"حمل التحديث"</string>
+    <string name="label_download_update">تنزيل التحديث</string>
     <string name="checking_for_update">جاري التحقق من وجود تحديثات…</string>
     <string name="new_update_available">"تحديث جديد متاح!"</string>
     <string name="update_fetch_error">"تعذر جلب التحديثات"</string>
@@ -372,4 +372,20 @@
     <string name="graphixmedia_summary">الهولنديّة</string>
     <string name="hinamechan">هينامتشان</string>
     <string name="atharvshinde_translation_summary">المراثية</string>
+    <string name="label_buymeacoffee">اشتري لي قهوة</string>
+    <string name="label_custom_start_time">وقت البدء: %1$s</string>
+    <string name="label_custom_end_time">وقت الانتهاء: %1$s</string>
+    <string name="label_paypal">بايبال</string>
+    <string name="buymeacoffee_summary">اشتر لي :) القهوة</string>
+    <string name="upi_summary">تبرع عبر UPI</string>
+    <string name="action_save">إحفظ</string>
+    <string name="error_invalid_plan_duration">مدة الخطة غير صالحة</string>
+    <string name="donate_info">مراقب البيانات هو تطبيق مجاني ومفتوح المصدر وسيظل دائما على هذا النحو :)
+\n
+\nإذا كنت ترغب في دعم تطوير التطبيق ، فسيكون التبرع موضع تقدير كبير.</string>
+    <string name="paypal_summary">تبرع عبر بايبال</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="xmr_address_copied">تم نسخ عنوان محفظة مونيرو إلى الحافظة</string>
+    <string name="tadekdudek">تاديكدوديك</string>
+    <string name="tadekdudek_summary">بولندي</string>
 </resources>
