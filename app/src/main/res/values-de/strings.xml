@@ -59,9 +59,9 @@
     <string name="setup">Einrichtung</string>
     <string name="app_data_usage">App-Datennutzung</string>
     <string name="settings">Einstellungen</string>
-    <string name="btc_address_copied">Bitcoin-Wallet-Adresse in die Zwischenablage kopiert</string>
-    <string name="eth_address_copied">Ethereum-Wallet-Adresse in die Zwischenablage kopiert</string>
-    <string name="ltc_address_copied">Litecoin-Wallet-Adresse in die Zwischenablage kopiert</string>
+    <string name="btc_address_copied">Bitcoin-Wallet-Adresse in Zwischenablage kopiert</string>
+    <string name="eth_address_copied">Ethereum-Wallet-Adresse in Zwischenablage kopiert</string>
+    <string name="ltc_address_copied">Litecoin-Wallet-Adresse in Zwischenablage kopiert</string>
     <string name="label_system_apps">System-Apps</string>
     <string name="home">Startseite</string>
     <string name="usage_access_permission">Zugriffs-Berechtigung für Nutzungsdaten</string>
@@ -242,7 +242,7 @@
     <string name="current_version">Aktuelle Version: %1$s</string>
     <string name="new_version">Neue Version: %1$s</string>
     <string name="label_update_available">Neue Version ist verfügbar!</string>
-    <string name="label_download_update">Download der neuen Version</string>
+    <string name="label_download_update">Aktualisierung herunterladen</string>
     <string name="checking_for_update">Nach Updates wird gesucht…</string>
     <string name="update_fetch_error">Konnte keine Updates abrufen</string>
     <string name="new_update_available">Eine neue Version ist verfügbar!</string>
@@ -365,4 +365,12 @@
     <string name="atharvshinde_summary">Entwickler</string>
     <string name="graphixmedia_summary">Niederländisch</string>
     <string name="hinamechan_summary">Türkisch</string>
+    <string name="label_paypal">PayPal</string>
+    <string name="upi_summary">Über UPI spenden</string>
+    <string name="label_custom_start_time">Startzeit: %1$s</string>
+    <string name="action_save">Speichern</string>
+    <string name="label_custom_end_time">Endzeit: %1$s</string>
+    <string name="paypal_summary">Über PayPal spenden</string>
+    <string name="xmr_address_copied">Monero-Wallet-Adresse in Zwischenablage kopiert</string>
+    <string name="tadekdudek_summary">Polnisch</string>
 </resources>
