@@ -81,6 +81,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -1557,15 +1558,22 @@ public class SetupFragment extends Fragment {
                                 try {
                                     int trigger = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
 
+                                    String totalUsage = formatData(getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1)[0],
+                                            getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1)[1])[2]
+                                            .replace(" MB", "").replace(" GB", "");
+                                    if (totalUsage.contains(",")) {
+                                        totalUsage = totalUsage.replace(",", ".");
+                                    }
+                                    else if (totalUsage.contains("٫")) {
+                                        totalUsage = totalUsage.replace("٫", ".");
+                                    }
+
                                     if (PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1) * trigger / 100 >
-                                            Double.parseDouble(formatData(getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1)[0],
-                                                    getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1)[1])[2]
-                                                    .replace(" MB", "").replace(" GB", ""))) {
+                                            Double.parseDouble(totalUsage)) {
                                         resumeMonitor();
                                     }
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                } catch (RemoteException e) {
+                                }
+                                catch (ParseException | RemoteException e) {
                                     e.printStackTrace();
                                 }
                             }
