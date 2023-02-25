@@ -429,4 +429,5 @@
     <string name="xmr_address_copied">Monero wallet address copied to clipboard</string>
     <string name="tadekdudek">tadekdudek</string>
     <string name="tadekdudek_summary">Polish</string>
+    <string name="error_network_monitor_start">Failed to start Network Monitor. Open the app to refresh.</string>
 </resources>

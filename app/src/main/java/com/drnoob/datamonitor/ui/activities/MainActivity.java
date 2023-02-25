@@ -69,11 +69,14 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioAttributes;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -91,6 +94,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -154,15 +158,13 @@ public class MainActivity extends AppCompatActivity {
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
             setLanguage(this, "en", countryCode);
-        }
-        else {
+        } else {
             setLanguage(this, languageCode, countryCode);
         }
 
         try {
             refreshService(this);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
@@ -184,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle(getString(R.string.app_name));
                 }
 
-                NavHostFragment navHostFragment = (NavHostFragment)  getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
+                NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
                 NavController controller = navHostFragment.getNavController();
                 controller.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
                     @Override
@@ -257,14 +259,12 @@ public class MainActivity extends AppCompatActivity {
                         requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_POST_NOTIFICATIONS);
                     }
                 }
-            }
-            else {
+            } else {
                 onResume();
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -304,8 +304,7 @@ public class MainActivity extends AppCompatActivity {
         if (powerManager.isIgnoringBatteryOptimizations(getPackageName())) {
             // Battery optimisation is disabled
             params.topToBottom = R.id.main_toolbar;
-        }
-        else {
+        } else {
             // Battery optimisation is enabled
             params.topToBottom = R.id.battery_optimisation_error;
         }
@@ -315,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializebottomNavigationViewBar() {
-        NavHostFragment navHostFragment = (NavHostFragment)  getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_nav_host_fragment);
         NavController controller = navHostFragment.getNavController();
         controller.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -335,25 +334,20 @@ public class MainActivity extends AppCompatActivity {
         if (destination.equalsIgnoreCase(getString(R.string.home))) {
             // Home Fragment
             getSupportActionBar().setTitle(getString(R.string.app_name));
-        }
-        else if (destination.equalsIgnoreCase(getString(R.string.setup))) {
+        } else if (destination.equalsIgnoreCase(getString(R.string.setup))) {
             // Setup Fragment
             getSupportActionBar().setTitle(getString(R.string.setup));
-        }
-        else if (destination.equalsIgnoreCase(getString(R.string.app_data_usage))) {
+        } else if (destination.equalsIgnoreCase(getString(R.string.app_data_usage))) {
             // App data usage Fragment
             getSupportActionBar().setTitle(getString(R.string.app_data_usage));
-        }
-        else if (destination.equalsIgnoreCase(getString(R.string.network_diagnostics))) {
+        } else if (destination.equalsIgnoreCase(getString(R.string.network_diagnostics))) {
             // Network diagnostics Fragment
             getSupportActionBar().setTitle(getString(R.string.network_diagnostics));
-        }
-        else {
+        } else {
             // Unknown Fragment
         }
 
     }
-
 
 
     @Override
@@ -395,8 +389,7 @@ public class MainActivity extends AppCompatActivity {
         }
         try {
             checkBatteryOptimisationState();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -453,26 +446,33 @@ public class MainActivity extends AppCompatActivity {
         NotificationChannel appWarningChannel = new NotificationChannel(APP_DATA_USAGE_WARNING_CHANNEL_ID, APP_DATA_USAGE_WARNING_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
         NotificationChannel networkSignalChannel = new NotificationChannel(NETWORK_SIGNAL_CHANNEL_ID, NETWORK_SIGNAL_CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT);
+                NotificationManager.IMPORTANCE_HIGH);
         NotificationChannel otherChannel = new NotificationChannel(OTHER_NOTIFICATION_CHANNEL_ID, OTHER_NOTIFICATION_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
         warningChannel.enableVibration(true);
         warningChannel.enableLights(true);
         appWarningChannel.enableVibration(true);
         appWarningChannel.enableLights(true);
+        Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.silent);
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build();
+        networkSignalChannel.setSound(sound, attributes);
+//        networkSignalChannel.setSound(null, null);
+        networkSignalChannel.setShowBadge(false);
         networkSignalChannel.enableVibration(false);
-        networkSignalChannel.setSound(null, null);
         networkSignalChannel.enableLights(false);
         networkSignalChannel.setBypassDnd(true);
-        networkSignalChannel.setShowBadge(false);
         otherChannel.enableVibration(true);
         otherChannel.enableLights(true);
+
         List<NotificationChannel> channels = new ArrayList<>();
         channels.add(usageChannel);
         channels.add(warningChannel);
         channels.add(appWarningChannel);
         channels.add(networkSignalChannel);
         channels.add(otherChannel);
+
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannels(channels);
@@ -559,7 +559,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -618,8 +617,7 @@ public class MainActivity extends AppCompatActivity {
                                 int progressInt;
                                 if (progress != null) {
                                     progressInt = progress.intValue();
-                                }
-                                else {
+                                } else {
                                     progressInt = 0;
                                 }
                                 model.setProgress(progressInt);
@@ -656,8 +654,7 @@ public class MainActivity extends AppCompatActivity {
                                 int progressInt;
                                 if (progress != null) {
                                     progressInt = progress.intValue();
-                                }
-                                else {
+                                } else {
                                     progressInt = 0;
                                 }
                                 model.setProgress(progressInt);
@@ -670,8 +667,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                }
-                else {
+                } else {
                     if (isAppInstalled(mContext, currentData.getPackageName())) {
                         if (type == TYPE_MOBILE_DATA) {
                             try {
@@ -695,8 +691,7 @@ public class MainActivity extends AppCompatActivity {
                                     int progressInt;
                                     if (progress != null) {
                                         progressInt = progress.intValue();
-                                    }
-                                    else {
+                                    } else {
                                         progressInt = 0;
                                     }
                                     model.setProgress(progressInt);
@@ -732,8 +727,7 @@ public class MainActivity extends AppCompatActivity {
                                     int progressInt;
                                     if (progress != null) {
                                         progressInt = progress.intValue();
-                                    }
-                                    else {
+                                    } else {
                                         progressInt = 0;
                                     }
                                     model.setProgress(progressInt);
@@ -769,8 +763,7 @@ public class MainActivity extends AppCompatActivity {
                     int progressInt;
                     if (progress != null) {
                         progressInt = progress.intValue();
-                    }
-                    else {
+                    } else {
                         progressInt = 0;
                     }
                     model.setProgress(progressInt);
@@ -787,8 +780,7 @@ public class MainActivity extends AppCompatActivity {
                     int progressInt;
                     if (progress != null) {
                         progressInt = progress.intValue();
-                    }
-                    else {
+                    } else {
                         progressInt = 0;
                     }
                     model.setProgress(progressInt);
@@ -814,8 +806,7 @@ public class MainActivity extends AppCompatActivity {
                     int tetheringProgressInt;
                     if (tetheringProgress != null) {
                         tetheringProgressInt = tetheringProgress.intValue();
-                    }
-                    else {
+                    } else {
                         tetheringProgressInt = 0;
                     }
 
@@ -845,8 +836,7 @@ public class MainActivity extends AppCompatActivity {
                 int deletedProgressInt;
                 if (deletedProgress != null) {
                     deletedProgressInt = deletedProgress.intValue();
-                }
-                else {
+                } else {
                     deletedProgressInt = 0;
                 }
 
