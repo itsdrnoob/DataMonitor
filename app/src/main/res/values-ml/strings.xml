@@ -115,9 +115,9 @@
     <string name="setup">"സജ്ജമാക്കുക"</string>
     <string name="app_data_usage">ആപ്പ് ഉപയോഗം</string>
     <string name="settings">"ക്രമീകരണങ്ങൾ"</string>
-    <string name="btc_address_copied">"ബിറ്റ്കോയിൻ വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്"</string>
-    <string name="eth_address_copied">"എഥെറിയം വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്"</string>
-    <string name="ltc_address_copied">"ലൈറ്റ്കോയിൻ വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്"</string>
+    <string name="btc_address_copied">ബിറ്റ്കോയിൻ വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്</string>
+    <string name="eth_address_copied">എഥെറിയം വാലറ്റ് വിലാസം നിങ്ങളുടെ ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്</string>
+    <string name="ltc_address_copied">ലൈറ്റ്കോയിൻ വാലറ്റ് വിലാസം ക്ലിപ്ബോർഡിലേക്ക് പകർത്തിയിട്ടുണ്ട്</string>
     <string name="label_system_apps">"സിസ്റ്റം ആപ്പുകൾ"</string>
     <string name="home">"ഹോം"</string>
     <string name="usage_access_permission">"ഉപയോഗ പ്രവേശന അനുമതി"</string>
@@ -167,7 +167,7 @@
     <string name="overview_thursday">"വ്യാഴം"</string>
     <string name="overview_friday">"വെള്ളി"</string>
     <string name="overview_saturday">"ശനി"</string>
-    <string name="overview_sunday">"ഞായര്‍ "</string>
+    <string name="overview_sunday">ഞായര്‍</string>
     <string name="label_translators">"പരിഭാഷകർ"</string>
     <string name="setup_app_data_usage_alert">"ആപ്പ് ഡാറ്റ ഉപയോഗ മുന്നറിയിപ്പ്"</string>
     <string name="title_app_data_limit">"ആപ്പ് ഡാറ്റ പരിധി"</string>
@@ -197,7 +197,8 @@
     <string name="swipe_right_to_delete">"ഒരു ഇനം ഇല്ലാതാക്കാൻ വലത്തേക്ക് സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="refresh_list">"ലിസ്റ്റ് പുതുക്കുക"</string>
     <string name="no_network_connection">"നെറ്റ്‌വർക്ക് കണക്ഷനൊന്നും കണ്ടെത്തിയില്ല!"</string>
-    <string name="connection_error">"കണക്ഷൻ തകരാറ്. നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക"</string>
+    <string name="connection_error">കണക്ഷൻ തകരാറ്.
+\nനിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക.</string>
     <string name="app_label_screen_time">"സ്ക്രീൻ സമയം : %1$s"</string>
     <string name="app_label_background_time">"പശ്ചാത്തല ഉപയോഗം : %1$s"</string>
     <string name="label_loading">ലോഡിംഗ്…</string>
@@ -227,8 +228,7 @@
     <string name="read_phone_state_body">"ആൻഡ്രോയിഡ് പതിപ്പ് 9-ഉം അതിൽ താഴെയും പ്രവർത്തിക്കുന്ന ഉപകരണങ്ങൾക്ക് സ്വമേധയാ 'റീഡ് ഫോൺ സ്റ്റേറ്റ്' അനുമതി നൽകേണ്ടതുണ്ട്. വ്യക്തിഗത വിവരങ്ങളൊന്നും ശേഖരിക്കുകയോ സൂക്ഷിക്കുകയോ ചെയ്യില്ല."</string>
     <string name="action_permission_granted">"അനുമതി നൽകി"</string>
     <string name="error_permission_denied">"അനുമതി നിഷേധിച്ചു. സ്വമേധയാ അനുമതി നൽകുക."</string>
-    <string name="telegram_support">"
-ടെലഗ്രാം സപ്പോർട്ട്"</string>
+    <string name="telegram_support">ടെലഗ്രാം സപ്പോർട്ട്</string>
     <string name="telegram_summary">"ടെലിഗ്രാം സപ്പോർട്ട് ഗ്രൂപ്പിൽ ചേരുക"</string>
     <!-- bruhhh. how can i ts the group invite link? -->
     <string name="telegram_chat">"https://t.me/datamonitor"</string>
@@ -238,10 +238,10 @@
     <string name="current_version">"നിലവിലെ പതിപ്പ്: %1$s"</string>
     <string name="new_version">"പുതിയ പതിപ്പ്: %1$s"</string>
     <string name="label_changelogs">"പുതിയതെന്താണെന്ന് കാണുക"</string>
-    <string name="no_update_available">"നിങ്ങൾ ഏറ്റവും പുതിയ പതിപ്പാണ് പ്രവർത്തിപ്പിക്കുന്നത്!"</string>
+    <string name="no_update_available">നിങ്ങൾ ഏറ്റവും പുതിയ പതിപ്പാണ് പ്രവർത്തിപ്പിക്കുന്നത്.</string>
     <string name="label_update_available">"അപ്ഡേറ്റ് ലഭ്യമാണ്!"</string>
-    <string name="label_download_update">"അപ്ഡേറ്റ് ഡൗൺലോഡ് ചെയ്യുക"</string>
-    <string name="checking_for_update">"അപ്ഡേറ്റിനായി പരിശോധിക്കുന്നു"</string>
+    <string name="label_download_update">അപ്ഡേറ്റ് ഡൗൺലോഡ് ചെയ്യുക</string>
+    <string name="checking_for_update">അപ്ഡേറ്റിനായി പരിശോധിക്കുന്നു…</string>
     <string name="new_update_available">"ഒരു പുതിയ അപ്ഡേറ്റ് ലഭ്യമാണ്!"</string>
     <string name="update_fetch_error">"അപ്ഡേറ്റുകൾ ലഭ്യമാക്കാനായില്ല"</string>
     <string name="settings_app_theme">"ആപ്പ് തീം"</string>
@@ -345,4 +345,47 @@
     <string name="comradekingu_summary">വിവർത്തന പിന്തുണ</string>
     <string name="f_droid_page">F-Droid-ൽ ആപ്പ് കാണുക</string>
     <string name="f_droid_page_summary">ഔദ്യോഗിക F-Droid റിപ്പോയിൽ ആപ്പ് പരിശോധിക്കുക</string>
+    <string name="atharvshinde">അഥർവ് ഷിൻഡെ</string>
+    <string name="atharvshinde_summary">ഡെവലപ്പർ</string>
+    <string name="graphixmedia">ഗ്രാഫിക്സ്</string>
+    <string name="graphixmedia_summary">ഡച്ച്</string>
+    <string name="hinamechan">ഹിനാമെചാൻ</string>
+    <string name="hinamechan_summary">ടര്‍ക്കിഷ്</string>
+    <string name="atharvshinde_translation_summary">മറാത്തി</string>
+    <string name="action_save">സേവ്</string>
+    <string name="label_custom_end_time">അവസാന സമയം: %1$s</string>
+    <string name="label_paypal">പേയ്പാൽ</string>
+    <string name="paypal_summary">പേയ്പാൽ വഴി സംഭാവന ചെയ്യുക</string>
+    <string name="label_upi">ഭിം-യുപിഐ</string>
+    <string name="upi_summary">യു പി ഐ വഴി സംഭാവന ചെയ്യുക</string>
+    <string name="label_buymeacoffee">എനിക്ക് ഒരു കോഫി വാങ്ങൂ</string>
+    <string name="buymeacoffee_summary">എനിക്കൊരു കോഫി വാങ്ങിത്തരൂ :)</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="tadekdudek_summary">പോളീഷ്</string>
+    <string name="xmr_address_copied">Monero വാലറ്റ് വിലാസം ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി</string>
+    <string name="label_custom_start_time">ആരംഭ സമയം: %1$s</string>
+    <string name="error_invalid_plan_duration">ഇൻവാലിഡ് പ്ലാൻ ഡ്യൂറേഷൻ</string>
+    <string name="donate_info">ഡാറ്റാ മോണിറ്റർ ഒരു സൗജന്യവും ഓപ്പൺ സോഴ്സ് ആപ്ലിക്കേഷനുമാണ്, ഇത് എല്ലായ്പ്പോഴും :)
+\n
+\nഅപ്ലിക്കേഷന്റെ വികസനത്തെ പിന്തുണയ്ക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, ഒരു സംഭാവന വളരെയധികം വിലമതിക്കപ്പെടും.</string>
+    <string name="Atalanttore_summary">ജർമ്മൻ</string>
+    <string name="Atalanttore">എറ്റോർ അറ്റലൻ</string>
+    <string name="gallegonovato_summary">സ്പാനിഷ്</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105_summary">യുക്രേനിയന്‍</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07_summary">അറബിക്</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya_summary">ഹിന്ദി, ഭോജ്പുരി</string>
+    <string name="shailendramaurya">ശൈലേന്ദ്ര മൗര്യ</string>
+    <string name="iqb4lsp_summary">ഇന്‍ഡൊനേഷ്യന്‍</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050_summary">പരമ്പരാഗത ചൈനീസ്, പോർച്ചുഗീസ്, ഫ്രഞ്ച്, നോർവീജിയൻ ബോക്മോൾ, സ്പാനിഷ്, ജർമ്മൻ, റൊമാനിയൻ, കൊറിയൻ, ടർക്കിഷ്, ലളിതമാക്കിയ ചൈനീസ്, ഉക്രേനിയൻ, ഹിന്ദി, റഷ്യൻ, അറബിക്</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi_summary">അറബിക്</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy_summary">കൊറിയന്‍</string>
+    <string name="U1M450W">U1M450W</string>
+    <string name="MarongHappy">ജംഗ്ഹീ ലീ</string>
+    <string name="U1M450W_summary">ഉസ്ബെക്</string>
 </resources>
