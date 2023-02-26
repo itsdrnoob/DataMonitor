@@ -40,6 +40,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -50,6 +51,7 @@ import android.widget.RemoteViews;
 
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -342,7 +344,18 @@ public class DataUsageWidget extends AppWidgetProvider {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context).getInt("widget_refresh_interval", 60000);
-        alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()) {
+                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pendingIntent);
+            }
+            else  {
+                Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                Common.postAlarmPermissionDeniedNotification(context);
+            }
+        }
+        else {
+            alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pendingIntent);
+        }
     }
 
     private void startReceiver(Context context) {

@@ -129,6 +129,7 @@ public class Values {
     public static final String DIAGNOSTICS_UPLOAD_URL_INDEX = "diagnostics_upload_url_index";
     public static final String SHOW_ADD_PLAN_BANNER = "show_add_plan_banner";
     public static final String LANGUAGE_SYSTEM_DEFAULT = "system";
+    public static final String ALARM_PERMISSION_DENIED = "alarm_permission_denied";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

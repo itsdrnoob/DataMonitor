@@ -24,6 +24,7 @@ import static com.drnoob.datamonitor.Common.dismissOnClick;
 import static com.drnoob.datamonitor.Common.localToUTC;
 import static com.drnoob.datamonitor.Common.setBoldSpan;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
+import static com.drnoob.datamonitor.Common.showAlarmPermissionDeniedDialog;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
@@ -59,6 +60,7 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
@@ -66,6 +68,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -289,34 +292,41 @@ public class SetupFragment extends Fragment {
             mSetupNotification.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    boolean isCombinedNotifiationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getBoolean("combine_notifications", false);
-                    if (isCombinedNotifiationEnabled) {
-                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                        getString(R.string.error_combine_notifications_enabled),
-                                        Snackbar.LENGTH_SHORT)
-                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                        mSetupNotification.setChecked(true);
+                    AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+                        showAlarmPermissionDeniedDialog(requireContext());
+                        mSetupNotification.setChecked(false);
                     }
                     else {
-                        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
-                        if (isChecked) {
-                            getContext().startService(new Intent(getContext(), NotificationService.class));
-                            Log.d(TAG, "onPreferenceClick: Notification started");
+                        boolean isCombinedNotifiationEnabled = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("combine_notifications", false);
+                        if (isCombinedNotifiationEnabled) {
                             snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                            getString(R.string.label_notification_enabled), Snackbar.LENGTH_SHORT)
+                                            getString(R.string.error_combine_notifications_enabled),
+                                            Snackbar.LENGTH_SHORT)
                                     .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                            mSetupNotification.setChecked(true);
                         }
                         else {
-                            getContext().stopService(new Intent(getContext(), NotificationService.class));
-                            Log.d(TAG, "onPreferenceClick: Notification stopped");
-                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                            getString(R.string.notification_disabled), Snackbar.LENGTH_SHORT)
-                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                            boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("setup_notification", false);
+                            if (isChecked) {
+                                getContext().startService(new Intent(getContext(), NotificationService.class));
+                                Log.d(TAG, "onPreferenceClick: Notification started");
+                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                                getString(R.string.label_notification_enabled), Snackbar.LENGTH_SHORT)
+                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                            }
+                            else {
+                                getContext().stopService(new Intent(getContext(), NotificationService.class));
+                                Log.d(TAG, "onPreferenceClick: Notification stopped");
+                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                                getString(R.string.notification_disabled), Snackbar.LENGTH_SHORT)
+                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                            }
                         }
+                        dismissOnClick(snackbar);
+                        snackbar.show();
                     }
-                    dismissOnClick(snackbar);
-                    snackbar.show();
                     return false;
                 }
             });
@@ -1400,22 +1410,29 @@ public class SetupFragment extends Fragment {
             mShowDataWarning.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                    Boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getBoolean("data_usage_alert", false);
-                    Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
-                            .getFloat(DATA_LIMIT, -1);
-                    if (dataLimit < 0) {
+                    AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+                        showAlarmPermissionDeniedDialog(requireContext());
                         mShowDataWarning.setChecked(false);
-                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                getString(R.string.label_add_data_plan_first), Snackbar.LENGTH_SHORT)
-                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                        snackbar.show();
                     }
                     else {
-                        if (isChecked) {
-                            getContext().startService(new Intent(getContext(), DataUsageMonitor.class));
-                        } else {
-                            getContext().stopService(new Intent(getContext(), DataUsageMonitor.class));
+                        Boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getBoolean("data_usage_alert", false);
+                        Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
+                                .getFloat(DATA_LIMIT, -1);
+                        if (dataLimit < 0) {
+                            mShowDataWarning.setChecked(false);
+                            snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                            getString(R.string.label_add_data_plan_first), Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                            snackbar.show();
+                        }
+                        else {
+                            if (isChecked) {
+                                getContext().startService(new Intent(getContext(), DataUsageMonitor.class));
+                            } else {
+                                getContext().stopService(new Intent(getContext(), DataUsageMonitor.class));
+                            }
                         }
                     }
                     return false;

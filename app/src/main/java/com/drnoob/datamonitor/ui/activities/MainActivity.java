@@ -24,6 +24,8 @@ import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
 import static com.drnoob.datamonitor.Common.refreshService;
 import static com.drnoob.datamonitor.Common.setLanguage;
+import static com.drnoob.datamonitor.Common.showAlarmPermissionDeniedDialog;
+import static com.drnoob.datamonitor.core.Values.ALARM_PERMISSION_DENIED;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_NAME;
@@ -65,6 +67,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.appwidget.AppWidgetManager;
@@ -82,6 +85,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.text.Spannable;
 import android.util.Log;
 import android.view.Menu;
@@ -355,6 +359,44 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         verifyAppVersion();
 //        initializebottomNavigationViewBar();
+
+        if (!PreferenceManager.getDefaultSharedPreferences(MainActivity.this)
+                .getBoolean(ALARM_PERMISSION_DENIED, false)) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (!alarmManager.canScheduleExactAlarms()) {
+                    new MaterialAlertDialogBuilder(this)
+                            .setTitle(getString(R.string.error_alarm_permission_denied))
+                            .setMessage(getString(R.string.error_alarm_permission_denied_dialog_summary))
+                            .setCancelable(false)
+                            .setPositiveButton(getString(R.string.action_grant), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent();
+                                    intent.setAction(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    dialog.dismiss();
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton(getString(R.string.action_cancel), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
+                                            .putBoolean(ALARM_PERMISSION_DENIED, true)
+                                            .apply();
+                                }
+                            })
+                            .show();
+                }
+            }
+        }
     }
 
     @Override

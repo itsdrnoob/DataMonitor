@@ -246,7 +246,9 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                         public void onShow(DialogInterface dialogInterface) {
                             BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
                             FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-                            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
+                            BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                            behavior.setSkipCollapsed(true);
                         }
                     });
 
