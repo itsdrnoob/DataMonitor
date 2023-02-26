@@ -31,7 +31,7 @@ public class Values {
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_ID = "AppDataUsage.Warning";
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_NAME = "App Data Usage Warning";
     public static final int NETWORK_SIGNAL_NOTIFICATION_ID = 0x010D;
-    public static final String NETWORK_SIGNAL_CHANNEL_ID = "NetworkSignal.Notification";
+    public static final String NETWORK_SIGNAL_CHANNEL_ID = "LiveNetwork.Notification";
     public static final String NETWORK_SIGNAL_CHANNEL_NAME = "Network Speed Monitor";
     public static final String NETWORK_SIGNAL_NOTIFICATION_GROUP = "Network Speed Monitor";
     public static final int OTHER_NOTIFICATION_ID = 0x012C;
@@ -130,6 +130,7 @@ public class Values {
     public static final String SHOW_ADD_PLAN_BANNER = "show_add_plan_banner";
     public static final String LANGUAGE_SYSTEM_DEFAULT = "system";
     public static final String ALARM_PERMISSION_DENIED = "alarm_permission_denied";
+    public static final String UPDATE_NOTIFICATION_CHANNEL = "update_notification_channel";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

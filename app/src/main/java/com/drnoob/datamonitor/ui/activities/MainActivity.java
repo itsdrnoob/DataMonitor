@@ -51,6 +51,7 @@ import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
+import static com.drnoob.datamonitor.core.Values.UPDATE_NOTIFICATION_CHANNEL;
 import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
 import static com.drnoob.datamonitor.core.Values.USAGE_ACCESS_DISABLED;
 import static com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment.getAppContext;
@@ -92,6 +93,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -517,6 +519,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (PreferenceManager.getDefaultSharedPreferences(MainActivity.this)
+                .getBoolean(UPDATE_NOTIFICATION_CHANNEL, true)) {
+            notificationManager.deleteNotificationChannel("NetworkSignal.Notification");
+            PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
+                    .putBoolean(UPDATE_NOTIFICATION_CHANNEL, false)
+                    .apply();
+        }
         notificationManager.createNotificationChannels(channels);
     }
 
