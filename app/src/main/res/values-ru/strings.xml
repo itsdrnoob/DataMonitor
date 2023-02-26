@@ -352,4 +352,20 @@
     <string name="combined_notification_icon_summary">Выбор значка, который будет отображаться для объединенного уведомления</string>
     <string name="app_already_present">Приложение уже добавлено в список.</string>
     <string name="Master2050_summary">Китайский (традиционный), Португальский, Французский, Норвежский букмол, Испанский, Немецкий, Румынский, Корейский, Турецкий, Китайский (упрощенный), Украинский, Хинди, Русский, Арабский</string>
+    <string name="action_save">Сохранить</string>
+    <string name="label_custom_end_time">Время окончания: %1$s</string>
+    <string name="error_invalid_plan_duration">Неверная длительность плана</string>
+    <string name="donate_info">Монитор данных является бесплатным приложением с открытым исходным кодом и всегда будет оставаться таковым :)
+\n
+\nЕсли вы решите поддержать развитие приложения, ваше пожертвование будет высоко оценено.</string>
+    <string name="hinamechan_summary">Турецкий</string>
+    <string name="graphixmedia_summary">Голландский</string>
+    <string name="atharvshinde_summary">Разработчик</string>
+    <string name="label_custom_start_time">Время начала: %1$s</string>
+    <string name="paypal_summary">Пожертвовать через PayPal</string>
+    <string name="upi_summary">Пожертвовать через UPI</string>
+    <string name="label_buymeacoffee">Угостите меня кофе</string>
+    <string name="buymeacoffee_summary">Угостите меня кофе :)</string>
+    <string name="xmr_address_copied">Адрес кошелька Monero скопирован в буфер обмена</string>
+    <string name="tadekdudek_summary">Польский</string>
 </resources>
