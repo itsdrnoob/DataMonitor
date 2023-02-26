@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/bottom_menu_setup"
-        android:name="com.drnoob.datamonitor.ui.fragments.SetupFragment"
-        android:label="@string/setup"
-        tools:layout="@layout/fragment_setup" >
+        android:name="com.drnoob.datamonitor.ui.fragments.SetupFragment$SetupPreference"
+        android:label="@string/setup" >
     </fragment>
     <fragment
         android:id="@+id/bottom_menu_home"

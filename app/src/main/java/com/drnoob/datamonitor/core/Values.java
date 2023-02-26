@@ -58,6 +58,7 @@ public class Values {
     public static final int DATA_USAGE_SYSTEM = 0x005A;
     public static final int DATA_USAGE_USER = 0x0064;
     public static final int DATA_USAGE_TODAY = 0x00D3;
+    public static final int DATA_USAGE_WEEKDAY = 0x00D4;
 
     public static final String GENERAL_FRAGMENT_ID = "GENERAL_FRAGMENT_ID";
 
@@ -75,7 +76,6 @@ public class Values {
     public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
     public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
     public static final int DATA_PLAN_FRAGMENT = 0x0118;
-
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
     public static final int BOTTOM_NAVBAR_ITEM_SETUP = 1;
@@ -164,6 +164,9 @@ public class Values {
     public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
     public static final String EXTRA_APP_NAME = "datamonitor.intent.extra.appName";
     public static final String EXTRA_APP_PACKAGE = "datamonitor.intent.extra.appPackageName";
+    public static final String EXTRA_ACTIVITY_TITLE = "datamonitor.intent.extra.activityTitle";
+    public static final String EXTRA_WEEK_DAY = "datamonitor.intent.extra.weekDay";
+    public static final String EXTRA_IS_WEEK_DAY_VIEW = "datamonitor.intent.extra.isWeekDayView";
 
     public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
     public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";

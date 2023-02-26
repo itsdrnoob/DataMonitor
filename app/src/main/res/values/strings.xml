@@ -430,4 +430,13 @@
     <string name="tadekdudek">tadekdudek</string>
     <string name="tadekdudek_summary">Polish</string>
     <string name="error_network_monitor_start">Failed to start Network Monitor. Open the app to refresh.</string>
+    <string name="label_filter_app_usage">Filter App Usage</string>
+    <string name="label_filter">Filter</string>
+    <string name="label_current_plan">Current Plan</string>
+    <string name="label_plan_details_title">%1$s plan active</string>
+    <string name="home_plan_usage_details">%1$s used | %2$s</string>
+    <string name="label_plan_validity">Valid till %1$s</string>
+    <string name="always_show_total">Always show total</string>
+    <string name="always_show_total_summary">Always show total data used in notification irrespective of selected options.</string>
+    <string name="app_label_combined_total">Total data usage: %1$s</string>
 </resources>

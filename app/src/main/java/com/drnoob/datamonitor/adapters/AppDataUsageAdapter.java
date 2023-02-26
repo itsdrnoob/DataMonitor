@@ -170,6 +170,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                     TextView appUid = dialogView.findViewById(R.id.app_uid);
                     TextView appScreenTime = dialogView.findViewById(R.id.app_screen_time);
                     TextView appBackgroundTime = dialogView.findViewById(R.id.app_background_time);
+                    TextView appCombinedTotal = dialogView.findViewById(R.id.app_combined_total);
                     MaterialButton appSettings = dialogView.findViewById(R.id.app_open_settings);
 
                     appName.setText(model.getAppName());
@@ -198,8 +199,13 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                         appBackgroundTime.setVisibility(View.GONE);
                     }
 
+                    long total = model.getSentMobile() + model.getReceivedMobile() + model.getSentWifi() + model.getReceivedWifi();
+                    String combinedTotal = formatData(0l, total)[2];
+
                     dataSent.setText(formatData(model.getSentMobile(), model.getReceivedMobile())[0]);
                     dataReceived.setText(formatData(model.getSentMobile(), model.getReceivedMobile())[1]);
+                    appCombinedTotal.setText(setBoldSpan(mContext.getString(R.string.app_label_combined_total, combinedTotal),
+                            combinedTotal));
 
                     appSettings.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -218,6 +224,7 @@ public class AppDataUsageAdapter extends RecyclerView.Adapter<AppDataUsageAdapte
                             appPackage.setVisibility(View.GONE);
                             appUid.setVisibility(View.GONE);
                             appSettings.setVisibility(View.GONE);
+                            appCombinedTotal.setVisibility(View.GONE);
                         } else if (model.getPackageName().equals(mContext.getString(R.string.package_removed))) {
                             appIcon.setImageResource(R.drawable.deleted_apps);
                             appPackage.setVisibility(View.GONE);

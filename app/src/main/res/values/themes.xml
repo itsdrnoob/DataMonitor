@@ -26,6 +26,7 @@
         <item name="switchStyle">@style/Theme.DataMonitor.Switches</item>
         <item name="android:splitMotionEvents">false</item>
         <item name="android:windowEnableSplitTouch">false</item>
+        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
     </style>
 
     <style name="Theme.DataMonitor.Switches" parent="Widget.AppCompat.CompoundButton.Switch">

@@ -133,36 +133,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SetupFragment extends Fragment {
-
-    private static final String TAG = SetupFragment.class.getSimpleName();
     private static Context mContext;
 
     public SetupFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onAttach(@NonNull @NotNull Context context) {
-        super.onAttach(context);
-        mContext = context;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_setup, container, false);
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     public static class SetupPreference extends PreferenceFragmentCompat {
@@ -173,11 +147,17 @@ public class SetupFragment extends Fragment {
                 mCombinedNotificationIcon, mExcludeApps;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
-                mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications;
+                mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications, mAlwaysShowTotal;
         private Snackbar snackbar;
         private Long planStartDateMillis, planEndDateMillis;
         private Intent liveNetworkMonitorIntent;
         private ActivityResultLauncher<Intent> dataPlanLauncher;
+
+        @Override
+        public void onAttach(@NonNull Context context) {
+            super.onAttach(context);
+            mContext = context;
+        }
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -238,6 +218,7 @@ public class SetupFragment extends Fragment {
             mShowWifiWidget = (SwitchPreferenceCompat) findPreference("widget_show_wifi_usage");
             mCombineNotifications = (SwitchPreferenceCompat) findPreference("combine_notifications");
             mLockscreenNotifications = (SwitchPreferenceCompat) findPreference("lockscreen_notification");
+            mAlwaysShowTotal = (SwitchPreferenceCompat) findPreference("always_show_total");
 
             liveNetworkMonitorIntent = new Intent(getContext(), LiveNetworkMonitor.class);
 
@@ -890,6 +871,15 @@ public class SetupFragment extends Fragment {
                         dismissOnClick(snackbar);
                         snackbar.show();
                     }
+                    return false;
+                }
+            });
+
+            mAlwaysShowTotal.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    Intent i = new Intent(getContext(), NotificationUpdater.class);
+                    getContext().sendBroadcast(i);
                     return false;
                 }
             });
