@@ -231,7 +231,7 @@ public class LiveNetworkMonitor extends Service {
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter.setPriority(100);
         if (!isLiveNetworkReceiverRegistered) {
-            context.registerReceiver(liveNetworkReceiver, intentFilter);
+            context.getApplicationContext().registerReceiver(liveNetworkReceiver, intentFilter);
             isLiveNetworkReceiverRegistered = true;
             Log.d(TAG, "registerNetworkReceiver: registered");
         }
