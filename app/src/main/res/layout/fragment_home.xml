@@ -222,66 +222,171 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/setup_data_plan"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/data_plan_banner_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_mid_large"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_mid_large"
-                android:background="@drawable/banner_background"
-                android:backgroundTint="@color/banner_tint"
-                android:clickable="true"
-                android:elevation="@dimen/elevation_small"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:elevation="@dimen/elevation_default"
-                    android:gravity="center_vertical"
-                    android:text="@string/action_add_data_plan_home"
-                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@string/action_add_data_plan_home_summary" />
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/setup_data_plan"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:orientation="horizontal">
+                    android:background="@drawable/banner_background"
+                    android:backgroundTint="@color/banner_tint"
+                    android:clickable="true"
+                    android:elevation="@dimen/elevation_small"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/dismiss_add_plan_banner"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:elevation="@dimen/elevation_default"
+                        android:gravity="center_vertical"
+                        android:text="@string/action_add_data_plan_home"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@string/action_add_data_plan_home_summary" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="@dimen/margin_small"
-                        android:text="@string/action_dismiss" />
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/add_data_plan"
-                        style="@style/Widget.Material3.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/title_add_data_plan" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/dismiss_add_plan_banner"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/margin_small"
+                            android:text="@string/action_dismiss" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/add_data_plan"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/title_add_data_plan" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/plan_details_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/margin_mid_large"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
+
+                    <TextView
+                        android:id="@+id/plan_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:text="@string/label_plan_details_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/plan_data_usage_view"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:layout_marginTop="@dimen/margin_medium"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/plan_details_title"-->
+<!--                        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="1.54 GB used"-->
+<!--                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="0.46 GB remaining"-->
+<!--                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>-->
+
+<!--                    </LinearLayout>-->
+
+                    <TextView
+                        android:id="@+id/plan_usage_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_plan_usage_details"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        app:layout_constraintTop_toBottomOf="@id/plan_details_title"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/plan_validity_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_plan_validity"
+                        android:layout_marginTop="@dimen/margin_small"
+                        app:layout_constraintTop_toBottomOf="@id/plan_usage_details"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="1.52 GB used  |  0.48 GB remaining"-->
+<!--                        android:layout_marginTop="@dimen/margin_tiny"-->
+<!--                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>-->
+
+<!--                    <com.skydoves.progressview.ProgressView-->
+<!--                        android:id="@+id/plan_progress"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="10dp"-->
+<!--                        app:progressView_animation="accelerateDecelerate"-->
+<!--                        app:progressView_autoAnimate="true"-->
+<!--                        app:progressView_colorBackground="@android:color/transparent"-->
+<!--                        app:progressView_colorGradientEnd="#0DC5FF"-->
+<!--                        app:progressView_colorGradientStart="#3E51FF"-->
+<!--                        app:progressView_orientation="horizontal"/>-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/graph_view"
@@ -289,7 +394,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/setup_data_plan">
+                app:layout_constraintTop_toBottomOf="@+id/data_plan_banner_view">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -394,13 +499,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/quick_view_overlay"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:elevation="10dp"-->
-<!--                android:layout_marginBottom="@dimen/margin_large"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/graph_view" />-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/quick_view_overlay"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:elevation="10dp"-->
+            <!--                android:layout_marginBottom="@dimen/margin_large"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/graph_view" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -37,6 +37,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -46,6 +47,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.fragments.SetupFragment;
 
@@ -73,7 +75,18 @@ public class DataUsageMonitor extends Service {
             AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
             Intent intent = new Intent(this, DataMonitor.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
-            manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (manager.canScheduleExactAlarms()) {
+                    manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    Common.postAlarmPermissionDeniedNotification(this);
+                }
+            }
+            else {
+                manager.setExact(AlarmManager.RTC, System.currentTimeMillis(), pendingIntent);
+            }
         }
         else {
             onDestroy();
@@ -185,7 +198,18 @@ public class DataUsageMonitor extends Service {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 //            int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
 //                    .getInt(NOTIFICATION_REFRESH_INTERVAL, 6000);
-            alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 60000, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 60000, pendingIntent);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    Common.postAlarmPermissionDeniedNotification(context);
+                }
+            }
+            else {
+                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 60000, pendingIntent);
+            }
         }
 
         private void restartMonitor(Context context) throws ParseException {
@@ -249,7 +273,18 @@ public class DataUsageMonitor extends Service {
 
             }
 
-            manager.setExact(AlarmManager.RTC, endTimeMillis, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (manager.canScheduleExactAlarms()) {
+                    manager.setExact(AlarmManager.RTC, endTimeMillis, pendingIntent);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    Common.postAlarmPermissionDeniedNotification(context);
+                }
+            }
+            else {
+                manager.setExact(AlarmManager.RTC, endTimeMillis, pendingIntent);
+            }
 
             Log.d(TAG, "onReceive: " + endTimeMillis);
         }

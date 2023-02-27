@@ -183,6 +183,10 @@ public class CompoundNotification extends Service {
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
         mBuilder.setCustomContentView(contentView);
         mBuilder.setCustomBigContentView(bigContentView);
+        mBuilder.setSortKey("0");
+        mBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
+        mBuilder.setOnlyAlertOnce(true);
+        mBuilder.setSound(null);
 
         if (isServiceRunning) {
             return;
@@ -498,7 +502,12 @@ public class CompoundNotification extends Service {
         mBuilder.setContentIntent(mActivityPendingIntent);
         mBuilder.setAutoCancel(false);
         mBuilder.setShowWhen(false);
+        mBuilder.setWhen(System.currentTimeMillis() + 1000);
         mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
+        mBuilder.setSortKey("0");
+        mBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
+        mBuilder.setOnlyAlertOnce(true);
+        mBuilder.setSound(null);
         if (showOnLockscreen) {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
         }

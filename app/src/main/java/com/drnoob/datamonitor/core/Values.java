@@ -31,7 +31,7 @@ public class Values {
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_ID = "AppDataUsage.Warning";
     public static final String APP_DATA_USAGE_WARNING_CHANNEL_NAME = "App Data Usage Warning";
     public static final int NETWORK_SIGNAL_NOTIFICATION_ID = 0x010D;
-    public static final String NETWORK_SIGNAL_CHANNEL_ID = "NetworkSignal.Notification";
+    public static final String NETWORK_SIGNAL_CHANNEL_ID = "LiveNetwork.Notification";
     public static final String NETWORK_SIGNAL_CHANNEL_NAME = "Network Speed Monitor";
     public static final String NETWORK_SIGNAL_NOTIFICATION_GROUP = "Network Speed Monitor";
     public static final int OTHER_NOTIFICATION_ID = 0x012C;
@@ -58,6 +58,7 @@ public class Values {
     public static final int DATA_USAGE_SYSTEM = 0x005A;
     public static final int DATA_USAGE_USER = 0x0064;
     public static final int DATA_USAGE_TODAY = 0x00D3;
+    public static final int DATA_USAGE_WEEKDAY = 0x00D4;
 
     public static final String GENERAL_FRAGMENT_ID = "GENERAL_FRAGMENT_ID";
 
@@ -75,7 +76,6 @@ public class Values {
     public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
     public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
     public static final int DATA_PLAN_FRAGMENT = 0x0118;
-
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
     public static final int BOTTOM_NAVBAR_ITEM_SETUP = 1;
@@ -129,6 +129,8 @@ public class Values {
     public static final String DIAGNOSTICS_UPLOAD_URL_INDEX = "diagnostics_upload_url_index";
     public static final String SHOW_ADD_PLAN_BANNER = "show_add_plan_banner";
     public static final String LANGUAGE_SYSTEM_DEFAULT = "system";
+    public static final String ALARM_PERMISSION_DENIED = "alarm_permission_denied";
+    public static final String UPDATE_NOTIFICATION_CHANNEL = "update_notification_channel";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 
@@ -164,6 +166,9 @@ public class Values {
     public static final String ACTION_SHOW_DATA_PLAN_NOTIFICATION = "datamonitor.intent.action.dataPlanNotification";
     public static final String EXTRA_APP_NAME = "datamonitor.intent.extra.appName";
     public static final String EXTRA_APP_PACKAGE = "datamonitor.intent.extra.appPackageName";
+    public static final String EXTRA_ACTIVITY_TITLE = "datamonitor.intent.extra.activityTitle";
+    public static final String EXTRA_WEEK_DAY = "datamonitor.intent.extra.weekDay";
+    public static final String EXTRA_IS_WEEK_DAY_VIEW = "datamonitor.intent.extra.isWeekDayView";
 
     public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
     public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";

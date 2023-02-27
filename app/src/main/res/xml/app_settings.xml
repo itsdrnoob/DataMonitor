@@ -58,10 +58,10 @@
         app:allowDividerBelow="false">
 
         <com.drnoob.datamonitor.core.base.Preference
-            android:title="@string/about"
-            app:icon="@drawable/ic_about"
-            android:key="about"
-            app:summary="@string/about_summary"
+            android:title="@string/donate"
+            app:icon="@drawable/ic_donate"
+            android:key="donate"
+            app:summary="@string/donate_summary"
             android:widgetLayout="@layout/preference_right_arrow" />
 
         <com.drnoob.datamonitor.core.base.Preference
@@ -72,10 +72,10 @@
             android:widgetLayout="@layout/preference_right_arrow" />
 
         <com.drnoob.datamonitor.core.base.Preference
-            android:title="@string/donate"
-            app:icon="@drawable/ic_donate"
-            android:key="donate"
-            app:summary="@string/donate_summary"
+            android:title="@string/about"
+            app:icon="@drawable/ic_about"
+            android:key="about"
+            app:summary="@string/about_summary"
             android:widgetLayout="@layout/preference_right_arrow" />
 
     </com.drnoob.datamonitor.core.base.PreferenceCategory>

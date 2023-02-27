@@ -15,4 +15,7 @@
     <color name="switch_on_track">@color/material_dynamic_primary40</color>
     <color name="switch_off_track">@color/material_on_primary_disabled</color>
     <color name="search_bg">@color/material_dynamic_secondary90</color>
+    <color name="chip_selected">@color/material_dynamic_primary80</color>
+    <color name="chip_unselected">@color/material_dynamic_secondary95</color>
+    <color name="arrow_back">@color/material_dynamic_primary10</color>
 </resources>

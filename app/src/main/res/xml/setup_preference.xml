@@ -2,6 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <Preference
+        android:layout="@layout/layout_setup_header"/>
+
     <com.drnoob.datamonitor.core.base.PreferenceHeader
         android:title="@string/title_setup"
         app:allowDividerBelow="false"
@@ -88,6 +91,13 @@
             <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
                 android:title="@string/setup_show_wifi_usage"
                 android:key="show_wifi_notification"
+                app:iconSpaceReserved="false"
+                android:defaultValue="true"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/always_show_total"
+                android:summary="@string/always_show_total_summary"
+                android:key="always_show_total"
                 app:iconSpaceReserved="false"
                 android:defaultValue="true"/>
 

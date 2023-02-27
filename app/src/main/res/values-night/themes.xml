@@ -21,6 +21,7 @@
         <item name="snackbarTextViewStyle">@style/Theme.SnackBar.Text</item>
         <item name="materialButtonStyle">@style/Theme.DataMonitor.MaterialButton</item>
         <item name="switchStyle">@style/Theme.DataMonitor.Switches</item>
+        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
     </style>
 
     <style name="ThemeOverlay.DataUsage.AppWidgetContainer" parent="">

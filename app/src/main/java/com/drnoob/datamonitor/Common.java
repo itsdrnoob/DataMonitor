@@ -21,8 +21,11 @@ package com.drnoob.datamonitor;
 
 import static android.content.Context.APP_OPS_SERVICE;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
+import static com.drnoob.datamonitor.core.Values.ALARM_PERMISSION_DENIED;
 import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
 import static com.drnoob.datamonitor.core.Values.LANGUAGE_SYSTEM_DEFAULT;
+import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 
@@ -32,12 +35,15 @@ import android.app.AlarmManager;
 import android.app.AppOpsManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -47,15 +53,19 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.adapters.data.LanguageModel;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
@@ -220,7 +230,18 @@ public class Common {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1001,
                 intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         if (wakeupMillis > System.currentTimeMillis()) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    postAlarmPermissionDeniedNotification(context);
+                }
+            }
+            else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+            }
             Log.d(TAG, "setRefreshAlarm: set" );
         }
         else {
@@ -242,7 +263,18 @@ public class Common {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1001,
                 intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         if (wakeupMillis > System.currentTimeMillis()) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    postAlarmPermissionDeniedNotification(context);
+                }
+            }
+            else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
+            }
             Log.d(TAG, "setDataPlanNotification: set" );
         }
         else {
@@ -281,5 +313,60 @@ public class Common {
     public static Long localToUTC(Long localTime) {
         int offset = TimeZone.getDefault().getOffset(new Date().getTime());
         return localTime + (offset);
+    }
+
+    public static void showAlarmPermissionDeniedDialog(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (!alarmManager.canScheduleExactAlarms()) {
+                new MaterialAlertDialogBuilder(context)
+                        .setTitle(context.getString(R.string.error_alarm_permission_denied))
+                        .setMessage(context.getString(R.string.error_alarm_permission_denied_feature_summary))
+                        .setCancelable(false)
+                        .setPositiveButton(context.getString(R.string.action_grant), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                dialog.dismiss();
+                                context.startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(context.getString(R.string.action_cancel), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                PreferenceManager.getDefaultSharedPreferences(context).edit()
+                                        .putBoolean(ALARM_PERMISSION_DENIED, true)
+                                        .apply();
+                            }
+                        })
+                        .show();
+            }
+        }
+    }
+
+    public static void postAlarmPermissionDeniedNotification(Context context) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, OTHER_NOTIFICATION_CHANNEL_ID);
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_IMMUTABLE);
+        builder.setContentTitle(context.getString(R.string.error_alarm_permission_denied))
+                .setContentText(context.getString(R.string.error_alarm_permission_denied_summary))
+                .setStyle(new NotificationCompat.BigTextStyle())
+                .setSmallIcon(R.drawable.ic_info)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .setPriority(NotificationCompat.PRIORITY_MAX);
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
+        managerCompat.notify(OTHER_NOTIFICATION_ID, builder.build());
     }
 }

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:background="@drawable/bottom_sheet_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="45dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bottom_sheet_handle_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="@string/label_filter_app_usage"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
+
+        <!--        <RadioGroup-->
+        <!--            android:id="@+id/themes_group"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:layout_marginTop="@dimen/margin_mid_large"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textView8">-->
+
+        <!--            <RadioButton-->
+        <!--                android:id="@+id/theme_light"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/margin_large"-->
+        <!--                android:layout_marginEnd="@dimen/margin_large"-->
+        <!--                android:buttonTint="@color/primary"-->
+        <!--                android:paddingLeft="@dimen/margin_large"-->
+        <!--                android:text="@string/theme_light" />-->
+
+        <!--            <RadioButton-->
+        <!--                android:id="@+id/theme_dark"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/margin_large"-->
+        <!--                android:layout_marginEnd="@dimen/margin_large"-->
+        <!--                android:buttonTint="@color/primary"-->
+        <!--                android:paddingLeft="@dimen/margin_large"-->
+        <!--                android:text="@string/theme_dark" />-->
+
+        <!--            <RadioButton-->
+        <!--                android:id="@+id/theme_system"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/margin_large"-->
+        <!--                android:layout_marginEnd="@dimen/margin_large"-->
+        <!--                android:buttonTint="@color/primary"-->
+        <!--                android:checked="true"-->
+        <!--                android:paddingLeft="@dimen/margin_large"-->
+        <!--                android:text="@string/theme_system" />-->
+
+        <!--        </RadioGroup>-->
+
+        <TextView
+            android:id="@+id/session_group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            android:layout_marginStart="@dimen/margin_mid_large"
+            android:layout_marginEnd="@dimen/margin_mid_large"
+            android:text="@string/title_app_data_usage_session"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView8" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/session_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_mid_large"
+            android:layout_marginEnd="@dimen/margin_mid_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/session_group_title"
+            app:singleSelection="true"
+            app:chipSpacingVertical="0dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_today"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_today"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_yesterday"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_yesterday"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_this_month"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_this_month"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_last_month"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_last_month"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_this_year"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_this_year"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_all_time"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_all_time"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/session_current_plan"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_current_plan"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/type_group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_mid_large"
+            android:layout_marginEnd="@dimen/margin_mid_large"
+            android:text="@string/title_app_data_usage_type"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/session_group" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/type_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_mid_large"
+            android:layout_marginEnd="@dimen/margin_mid_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type_group_title"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/type_mobile"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                android:text="@string/label_mobile_data"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/type_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_default"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:outlineProvider="bounds"
+                android:text="@string/label_wifi"
+                app:chipCornerRadius="@dimen/radius_large"
+                app:chipStrokeWidth="0dp"
+                app:chipBackgroundColor="@color/bottom_sheet_chip_selector"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <include
+            android:id="@+id/footer"
+            layout="@layout/bottom_sheet_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mid_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_group" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

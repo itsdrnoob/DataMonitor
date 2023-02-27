@@ -39,9 +39,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.IBinder;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -49,6 +51,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -115,7 +118,18 @@ public class NotificationService extends Service {
             startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
             startUpdater(getApplicationContext());
 
-            mAlarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis(), mUpdaterPendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (mAlarmManager.canScheduleExactAlarms()) {
+                    mAlarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis(), mUpdaterPendingIntent);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    Common.postAlarmPermissionDeniedNotification(this);
+                }
+            }
+            else {
+                mAlarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis(), mUpdaterPendingIntent);
+            }
         }
         else {
             onDestroy();
@@ -170,10 +184,12 @@ public class NotificationService extends Service {
                 Float mobileMB;
                 int percent = 0;
 
-                Boolean showMobileData = PreferenceManager.getDefaultSharedPreferences(context)
+                boolean showMobileData = PreferenceManager.getDefaultSharedPreferences(context)
                         .getBoolean(NOTIFICATION_MOBILE_DATA, true);
-                Boolean showWifi = PreferenceManager.getDefaultSharedPreferences(context)
+                boolean showWifi = PreferenceManager.getDefaultSharedPreferences(context)
                         .getBoolean(NOTIFICATION_WIFI, true);
+                boolean alwaysShowTotal = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getBoolean("always_show_total", false);
 
                 try {
                     mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
@@ -185,13 +201,15 @@ public class NotificationService extends Service {
                     long totalSent = mobile[0] + wifi[0];
                     long totalReceived = mobile[1] + wifi[1];
 
-                    if (!showMobileData) {
-                        totalSent = totalSent - mobile[0];
-                        totalReceived = totalReceived - mobile[1];
-                    }
-                    if (!showWifi) {
-                        totalSent = totalSent - wifi[0];
-                        totalReceived = totalReceived - wifi[1];
+                    if (!alwaysShowTotal) {
+                        if (!showMobileData) {
+                            totalSent = totalSent - mobile[0];
+                            totalReceived = totalReceived - mobile[1];
+                        }
+                        if (!showWifi) {
+                            totalSent = totalSent - wifi[0];
+                            totalReceived = totalReceived - wifi[1];
+                        }
                     }
 
                     String[] total = formatData(totalSent, totalReceived);
@@ -295,7 +313,18 @@ public class NotificationService extends Service {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
                     .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
-            alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pi);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pi);
+                }
+                else  {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                    Common.postAlarmPermissionDeniedNotification(context);
+                }
+            }
+            else {
+                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pi);
+            }
         }
     }
 

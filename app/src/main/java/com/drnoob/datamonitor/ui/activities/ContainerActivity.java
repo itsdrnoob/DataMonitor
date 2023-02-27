@@ -31,11 +31,13 @@ import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SYSTEM;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
+import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WEEKDAY;
 import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_HISTORY_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.EXTRA_ACTIVITY_TITLE;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
@@ -225,6 +227,12 @@ public class ContainerActivity extends AppCompatActivity {
 //                binding.toolbarSave.setVisibility(View.VISIBLE);
                 getSupportActionBar().hide();
                 break;
+
+            case DATA_USAGE_WEEKDAY:
+                fragment = new AppDataUsageFragment();
+                title = getString(R.string.app_data_usage);
+                break;
+
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_host_fragment, fragment).commit();
@@ -238,14 +246,14 @@ public class ContainerActivity extends AppCompatActivity {
                 if (aBoolean) {
                     AnimatedVectorDrawableCompat arrowToCross = AnimatedVectorDrawableCompat
                             .create(ContainerActivity.this, R.drawable.anim_back_arrow_to_cross);
-                    arrowToCross.setTint(getResources().getColor(R.color.text_primary, null));
+                    arrowToCross.setTint(getResources().getColor(R.color.arrow_back, null));
                     getSupportActionBar().setHomeAsUpIndicator(arrowToCross);
                     arrowToCross.start();
                 }
                 else {
                     AnimatedVectorDrawableCompat crossToArrow = AnimatedVectorDrawableCompat
                             .create(ContainerActivity.this, R.drawable.anim_cross_to_back_arrow);
-                    crossToArrow.setTint(getResources().getColor(R.color.text_primary, null));
+                    crossToArrow.setTint(getResources().getColor(R.color.arrow_back, null));
                     getSupportActionBar().setHomeAsUpIndicator(crossToArrow);
                     crossToArrow.start();
                 }
