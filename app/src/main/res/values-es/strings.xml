@@ -395,4 +395,18 @@
     <string name="tadekdudek_summary">Polaco</string>
     <string name="xmr_address_copied">Dirección de monedero copiada al portapapeles</string>
     <string name="tadekdudek">tadekdudek</string>
+    <string name="label_filter_app_usage">Filtrar el uso de la aplicación</string>
+    <string name="label_filter">Filtro</string>
+    <string name="label_plan_validity">Válido hasta el %1$s</string>
+    <string name="app_label_combined_total">Uso total de datos: %1$s</string>
+    <string name="error_alarm_permission_denied">¡Permiso de alarma denegado!</string>
+    <string name="label_plan_details_title">%1$s plan activo</string>
+    <string name="home_plan_usage_details">%1$s utilizado | %2$s</string>
+    <string name="always_show_total_summary">Mostrar siempre el total de datos utilizados en la notificación, independientemente de las opciones seleccionadas.</string>
+    <string name="label_current_plan">Plan actual</string>
+    <string name="error_network_monitor_start">No se ha podido iniciar Network Monitor. Abre la aplicación para actualizar.</string>
+    <string name="always_show_total">Mostrar siempre el total</string>
+    <string name="error_alarm_permission_denied_summary">Intentaste realizar una acción que requiere el permiso SCHEDULE_EXACT_ALARM, que no está concedido a la aplicación. Haz clic aquí para conceder el permiso.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Data Monitor requiere el permiso SCHEDULE_EXACT_ALARM para funcionar correctamente. Puedes seguir utilizando la aplicación, pero es posible que algunas funciones no funcionen correctamente.</string>
+    <string name="error_alarm_permission_denied_feature_summary">No puedes utilizar esta función sin conceder el permiso SCHEDULE_EXACT_ALARM.</string>
 </resources>
