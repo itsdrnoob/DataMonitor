@@ -388,4 +388,18 @@
     <string name="xmr_address_copied">تم نسخ عنوان محفظة مونيرو إلى الحافظة</string>
     <string name="tadekdudek">تاديكدوديك</string>
     <string name="tadekdudek_summary">بولندي</string>
+    <string name="error_alarm_permission_denied_summary">لقد حاولت تنفيذ إجراء يتطلب إذن SCHEDULE_EXACT_ALARM، والذي لم يتم منحه للتطبيق. انقر هنا لمنح الإذن.</string>
+    <string name="error_network_monitor_start">فشل بدء تشغيل \"مراقبة الشبكة\". افتح التطبيق للتحديث.</string>
+    <string name="label_filter_app_usage">تصفية استخدام التطبيق</string>
+    <string name="label_current_plan">الخطة الحالية</string>
+    <string name="label_plan_details_title">خطة %1$s نشطة</string>
+    <string name="label_filter">المرشحات</string>
+    <string name="home_plan_usage_details">%1$s مستخدمة | %2$s</string>
+    <string name="label_plan_validity">صالح حتى %1$s</string>
+    <string name="always_show_total">إظهار المجموع دائما</string>
+    <string name="app_label_combined_total">إجمالي استخدام البيانات: %1$s</string>
+    <string name="always_show_total_summary">اعرض دائما إجمالي البيانات المستخدمة في الإخطار بغض النظر عن الخيارات المحددة.</string>
+    <string name="error_alarm_permission_denied">تم رفض إذن التنبيه!</string>
+    <string name="error_alarm_permission_denied_feature_summary">لا يمكنك استخدام هذه الميزة دون منح إذن SCHEDULE_EXACT_ALARM.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">يتطلب مراقب البيانات إذنا SCHEDULE_EXACT_ALARM للعمل بشكل صحيح. لا يزال بإمكانك استخدام التطبيق، ولكن قد لا تعمل بعض الميزات بشكل صحيح.</string>
 </resources>
