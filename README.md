@@ -1,4 +1,4 @@
-[![Version](https://shields.io/badge/version-v2.2.0-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor)
+[![Version](https://shields.io/badge/version-v2.3.0-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor/tree/dev/2.3.0)
 [![Platform](https://shields.io/badge/platform-android-green.svg)](https://github.com/itsdrnoob/DataMonitor)
 [![License](https://img.shields.io/badge/license-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Release](https://shields.io/badge/release-v2.2.0-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
@@ -45,13 +45,22 @@ If you found the app useful, please consider starring and/or forking the repo. ð
 If you would like to support the development of the app, a donation would be greatly appreciated. ðŸ’µ<br>
 You can donate in the following ways:
 - [PayPal](https://paypal.me/itsdrnoob)
+- <a href="https://buymeacoffee.com/itsdrnoob">Buy Me A Coffee</a>
 - UPI: `itsdrnoob@ybl`
 - Bitcoin: `3MS2NP6ptS7XQytdn5yCAQgotVtXBQL1xw`
 - Etherium: `0x820f316f75dacf5606b49bd33dfcf7e7142d59a5`
 - Litecoin: `MQBVqLUpHLs2KUi8gTrhQkicpQVkohaccB`
+- Monero: `82xMyK4P174QrEkkAcpEcq4AsREGqYDgpUbdmFRpNQRjaPR3DNJGZcQCA3Vp2PFNJnUEHzWBRdPzLfKF827z2WyuCLoTGyo`
 
 ## Telegram support
 Cick <a href="https://t.me/datamonitor">here</a> to join the telegram support chat. If that didn't work try searching for <code>@datamonitor</code> in telegram instead.
+
+## Beta Builds
+Beta builds for Data Monitor will be available on Play Store and <a href="https://t.me/datamonitor">Telegram</a>.<br>
+Join the Beta program on:<br>
+<a href="https://play.google.com/store/apps/details?id=com.drnoob.datamonitor">Google Play</a><br>
+<a href="https://play.google.com/apps/testing/com.drnoob.datamonitor">Web</a><br>
+Latest Beta: <a href="https://github.com/itsdrnoob/DataMonitor/tree/dev/2.3.0">v2.3.0-Beta2</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>
