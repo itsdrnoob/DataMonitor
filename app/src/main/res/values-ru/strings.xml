@@ -372,8 +372,14 @@
     <string name="label_plan_details_title">План %1$s активен</string>
     <string name="home_plan_usage_details">%1$s использовано | %2$s</string>
     <string name="label_plan_validity">Действует до %1$s</string>
-    <string name="always_show_total">Всегда показывать общее значение</string>
+    <string name="always_show_total">Всегда показывать общее количество</string>
     <string name="label_current_plan">Текущий план</string>
     <string name="label_filter_app_usage">Фильтр использования приложений</string>
     <string name="label_filter">Фильтр</string>
+    <string name="error_alarm_permission_denied">Разрешение к уведомлениям отклонено!</string>
+    <string name="always_show_total_summary">Всегда показывать общее количество использованных данных в уведомлении независимо от выбранных опций.</string>
+    <string name="app_label_combined_total">Всего использовано данных: %1$s</string>
+    <string name="error_alarm_permission_denied_summary">Вы пытались выполнить действие, требующее разрешения SCHEDULE_EXACT_ALARM, которое не предоставлено приложению. Нажмите здесь, чтобы предоставить разрешение.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Для правильной работы Монитора данных требуется разрешение SCHEDULE_EXACT_ALARM. Вы можете продолжать пользоваться приложением, но некоторые функции могут работать некорректно.</string>
+    <string name="error_alarm_permission_denied_feature_summary">Вы не можете использовать эту функцию без предоставления разрешения SCHEDULE_EXACT_ALARM.</string>
 </resources>
