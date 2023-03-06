@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.UTCToLocal;
+import static com.drnoob.datamonitor.Common.cancelDataPlanNotification;
 import static com.drnoob.datamonitor.Common.dismissOnClick;
 import static com.drnoob.datamonitor.Common.localToUTC;
 import static com.drnoob.datamonitor.Common.setBoldSpan;
@@ -343,6 +344,8 @@ public class DataPlanFragment extends Fragment {
         binding.toolbarSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String previousPlanType = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        .getString(DATA_RESET, "null");
                 if (binding.dataLimit.getText().toString().length() <= 0) {
                     binding.dataLimitView.setError(getString(R.string.error_invalid_plan));
                 }
@@ -407,6 +410,11 @@ public class DataPlanFragment extends Fragment {
                                 .putInt(DATA_RESET_CUSTOM_DATE_END_HOUR, endHour)
                                 .putInt(DATA_RESET_CUSTOM_DATE_END_MIN, endMinute)
                                 .apply();
+
+                        if (previousPlanType.equals(DATA_RESET_CUSTOM)) {
+                            Log.d(TAG, "onClick: Previously set custom plan found, cancelling refresh alarm" );
+                            cancelDataPlanNotification(requireContext());
+                        }
 
                         Intent data = new Intent();
                         requireActivity().setResult(Activity.RESULT_OK, data);

@@ -25,6 +25,7 @@ import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
@@ -153,7 +154,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                             snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
                                             getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                     .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-                            setDataPlanNotification(getContext());
+                            if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                    .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
+                                setDataPlanNotification(getContext());
+                            }
                             mSetupDataPlan.setVisibility(View.GONE);
                             updateDataBalance();
                             dismissOnClick(snackbar);

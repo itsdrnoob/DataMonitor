@@ -286,6 +286,15 @@ public class Common {
         }
     }
 
+    public static void cancelDataPlanNotification(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, DataPlanRefreshReceiver.class)
+                .putExtra(INTENT_ACTION, ACTION_SHOW_DATA_PLAN_NOTIFICATION);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1001,
+                intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);
+    }
+
     public static void updateDialog(AlertDialog dialog, Context context) {
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         DisplayMetrics metrics = new DisplayMetrics();

@@ -174,7 +174,10 @@ public class SetupFragment extends Fragment {
                                                 getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 updateResetData();
-                                setDataPlanNotification(getContext());
+                                if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                        .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
+                                    setDataPlanNotification(getContext());
+                                }
                                 dismissOnClick(snackbar);
                                 snackbar.show();
                                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
