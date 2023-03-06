@@ -131,6 +131,7 @@ public class Values {
     public static final String LANGUAGE_SYSTEM_DEFAULT = "system";
     public static final String ALARM_PERMISSION_DENIED = "alarm_permission_denied";
     public static final String UPDATE_NOTIFICATION_CHANNEL = "update_notification_channel";
+    public static final String SHOULD_SHOW_BATTERY_OPTIMISATION_ERROR = "show_battery_optimisation_error";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 

@@ -304,7 +304,7 @@
     <string name="device_info_body">Device info includes: \nDevice Manufacturer\nDevice Brand\nDevice Model\nDevice Codename\nAndroid Version</string>
     <string name="label_crash_logs_copied">Crash logs copied to clipboard</string>
     <string name="label_mail">Mail</string>
-    <string name="battery_optimisation_enabled_info">Battery optimisation is enabled. This will interfere with the working of Data Monitor. Click to disable.</string>
+    <string name="battery_optimisation_enabled_info">Battery optimisation is enabled. This will interfere with the working of Data Monitor.</string>
     <string name="label_battery_optimisation">Battery optimisation</string>
     <string name="error_no_crash_logs">No crash logs found. Are you sure a crash occurred?</string>
     <string name="label_copy_logs">Copy logs</string>
@@ -443,4 +443,5 @@
     <string name="error_alarm_permission_denied_summary">You tried to perform an action that requires the SCHEDULE_EXACT_ALARM permission, which is not granted to the app. Click here to grant the permission.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor requires SCHEDULE_EXACT_ALARM permission to work properly. You can still use the app, but some features might not work properly.</string>
     <string name="error_alarm_permission_denied_feature_summary">You cannot use this feature without granting SCHEDULE_EXACT_ALARM permission.</string>
+    <string name="label_do_not_show_again">Do not show again</string>
 </resources>
