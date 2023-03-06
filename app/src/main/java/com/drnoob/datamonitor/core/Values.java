@@ -169,6 +169,7 @@ public class Values {
     public static final String EXTRA_ACTIVITY_TITLE = "datamonitor.intent.extra.activityTitle";
     public static final String EXTRA_WEEK_DAY = "datamonitor.intent.extra.weekDay";
     public static final String EXTRA_IS_WEEK_DAY_VIEW = "datamonitor.intent.extra.isWeekDayView";
+    public static final String EXTRA_DATA_ALARM_RESET = "datamonitor.intent.extra.dataAlarmReset";
 
     public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
     public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";

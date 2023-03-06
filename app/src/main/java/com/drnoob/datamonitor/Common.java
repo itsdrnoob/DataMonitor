@@ -63,6 +63,7 @@ import com.drnoob.datamonitor.adapters.data.LanguageModel;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
+import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -213,6 +214,9 @@ public class Common {
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
                 context.startService(new Intent(context, NotificationService.class));
             }
+        }
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false)) {
+            context.startService(new Intent(context, DataUsageMonitor.class));
         }
 
     }

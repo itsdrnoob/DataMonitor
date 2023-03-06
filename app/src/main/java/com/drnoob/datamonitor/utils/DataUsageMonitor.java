@@ -26,6 +26,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
 import static com.drnoob.datamonitor.core.Values.DATA_WARNING_TRIGGER_LEVEL;
+import static com.drnoob.datamonitor.core.Values.EXTRA_DATA_ALARM_RESET;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
@@ -37,9 +38,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -129,6 +133,13 @@ public class DataUsageMonitor extends Service {
         public void onReceive(Context context, Intent intent) {
             boolean isWaningEnabled = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false);
             if (isWaningEnabled) {
+                boolean isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
+                if (isRestart) {
+                    PreferenceManager.getDefaultSharedPreferences(context).edit()
+                            .putBoolean("data_usage_warning_shown", false)
+                            .apply();
+                }
+                Log.d(TAG, "onReceive: Alarm restart: " + isRestart);
                 int trigger = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
                 Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
 
@@ -167,9 +178,8 @@ public class DataUsageMonitor extends Service {
                     if (totalData.intValue() >= dataLimit.intValue()) {
 
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                } catch (RemoteException e) {
+                }
+                catch (ParseException | RemoteException e) {
                     e.printStackTrace();
                 }
                 setRepeating(context);
@@ -180,14 +190,21 @@ public class DataUsageMonitor extends Service {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context,
                     DATA_USAGE_WARNING_CHANNEL_ID);
             int triggerLevel = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
+            Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             builder.setContentTitle(context.getString(R.string.title_data_warning_notification))
                     .setContentText(context.getString(R.string.body_data_warning_notification, triggerLevel))
                     .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setSmallIcon(R.drawable.ic_info)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setShowWhen(true)
+                    .setAutoCancel(true)
+                    .setSound(uri)
                     .setVibrate(new long[]{0, 100, 1000, 300});
             NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
             managerCompat.notify(DATA_USAGE_WARNING_NOTIFICATION_ID, builder.build());
-            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(DATA_USAGE_WARNING_SHOWN, true).apply();
+            PreferenceManager.getDefaultSharedPreferences(context).edit()
+                    .putBoolean(DATA_USAGE_WARNING_SHOWN, true)
+                    .apply();
             SetupFragment.SetupPreference.pauseMonitor();
             restartMonitor(context);
         }
@@ -200,7 +217,7 @@ public class DataUsageMonitor extends Service {
 //                    .getInt(NOTIFICATION_REFRESH_INTERVAL, 6000);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (alarmManager.canScheduleExactAlarms()) {
-                    alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 60000, pendingIntent);
+                    alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 30000, pendingIntent);
                 }
                 else  {
                     Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
@@ -208,13 +225,14 @@ public class DataUsageMonitor extends Service {
                 }
             }
             else {
-                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 60000, pendingIntent);
+                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 30000, pendingIntent);
             }
         }
 
         private void restartMonitor(Context context) throws ParseException {
             AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             Intent restartIntent = new Intent(context, DataMonitor.class);
+            restartIntent.putExtra(EXTRA_DATA_ALARM_RESET, true);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, restartIntent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
             int year, month, day;
             String resetTime, endTime;
