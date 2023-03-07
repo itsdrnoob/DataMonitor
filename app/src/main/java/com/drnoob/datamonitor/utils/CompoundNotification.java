@@ -93,7 +93,8 @@ public class CompoundNotification extends Service {
     private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
     private static boolean serviceRestart = true;
     private static CompoundNotification mCompoundNotification;
-    
+    private static RemoteViews contentView, bigContentView;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -108,6 +109,8 @@ public class CompoundNotification extends Service {
     public void onCreate() {
         super.onCreate();
         mCompoundNotification = this;
+        contentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification);
+        bigContentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification_expanded);
 //        previousDownBytes = TrafficStats.getTotalRxBytes();
 //        previousUpBytes = TrafficStats.getTotalTxBytes();
 
@@ -145,9 +148,6 @@ public class CompoundNotification extends Service {
                 getString(R.string.body_data_usage_notification_loading));
         wifiDataUsage = getString(R.string.notification_wifi_data_usage,
                 getString(R.string.body_data_usage_notification_loading));
-
-        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification);
-        RemoteViews bigContentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification_expanded);
 
         // Set placeholder values to the views.
         contentView.setTextViewText(R.id.data_usage_title,
@@ -265,9 +265,6 @@ public class CompoundNotification extends Service {
         String[] speeds;
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        RemoteViews contentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification);
-        RemoteViews bigContentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification_expanded);
 
         Long[] mobile, wifi;
         Boolean showPercent;
@@ -502,19 +499,9 @@ public class CompoundNotification extends Service {
                 mBuilder.setSmallIcon(networkSpeedIcon);
             }
         }
-        mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentTitle(context.getString(R.string.app_name));
         mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
-        mBuilder.setContentIntent(mActivityPendingIntent);
-        mBuilder.setAutoCancel(false);
-        mBuilder.setShowWhen(false);
         mBuilder.setWhen(System.currentTimeMillis() + 1000);
-        mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-        mBuilder.setSortKey("0");
-        mBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
-        mBuilder.setOnlyAlertOnce(true);
-        mBuilder.setSound(null);
         if (showOnLockscreen) {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
         }
