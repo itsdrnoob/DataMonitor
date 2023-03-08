@@ -60,7 +60,7 @@ Beta builds for Data Monitor will be available on Play Store and <a href="https:
 Join the Beta program on:<br>
 <a href="https://play.google.com/store/apps/details?id=com.drnoob.datamonitor">Google Play</a><br>
 <a href="https://play.google.com/apps/testing/com.drnoob.datamonitor">Web</a><br>
-Latest Beta: <a href="https://github.com/itsdrnoob/DataMonitor/tree/dev/2.3.0">v2.3.0-Beta3</a>
+Latest Beta: <a href="https://github.com/itsdrnoob/DataMonitor/tree/dev/2.3.0">v2.3.0-Beta4</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>
