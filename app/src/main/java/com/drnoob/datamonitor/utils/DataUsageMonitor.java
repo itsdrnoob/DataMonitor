@@ -20,8 +20,14 @@
 package com.drnoob.datamonitor.utils;
 
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MIN;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_SHOWN;
@@ -43,7 +49,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -53,15 +58,17 @@ import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
-import com.drnoob.datamonitor.ui.fragments.SetupFragment;
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DataUsageMonitor extends Service {
     private static final String TAG = DataUsageMonitor.class.getSimpleName();
     private static final DataMonitor dataMonitor = new DataMonitor();
+    private static DataUsageMonitor mDataUsageMonitor;
 
     @Nullable
     @Override
@@ -72,6 +79,7 @@ public class DataUsageMonitor extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        mDataUsageMonitor = this;
         boolean isChecked = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("data_usage_alert", false);
         if (isChecked) {
 //            startForeground(0, null);
@@ -96,6 +104,18 @@ public class DataUsageMonitor extends Service {
             onDestroy();
         }
 
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        boolean isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
+        if (isRestart) {
+            Log.d(TAG, "onStartCommand: Restarting alarm");
+            PreferenceManager.getDefaultSharedPreferences(this).edit()
+                    .putBoolean("data_usage_warning_shown", false)
+                    .apply();
+        }
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -127,19 +147,18 @@ public class DataUsageMonitor extends Service {
         }
     }
 
+    public static void stopService(Context context) {
+        Log.d(TAG, "stopService: ");
+        mDataUsageMonitor.stopSelf();
+        context.stopService(new Intent(context, mDataUsageMonitor.getClass()));
+    }
+
     public static class DataMonitor extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             boolean isWaningEnabled = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false);
             if (isWaningEnabled) {
-                boolean isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
-                if (isRestart) {
-                    PreferenceManager.getDefaultSharedPreferences(context).edit()
-                            .putBoolean("data_usage_warning_shown", false)
-                            .apply();
-                }
-                Log.d(TAG, "onReceive: Alarm restart: " + isRestart);
                 int trigger = PreferenceManager.getDefaultSharedPreferences(context).getInt(DATA_WARNING_TRIGGER_LEVEL, 85);
                 Float dataLimit = PreferenceManager.getDefaultSharedPreferences(context).getFloat(DATA_LIMIT, -1);
 
@@ -167,12 +186,12 @@ public class DataUsageMonitor extends Service {
 
                     Log.d(TAG, "onReceive: " + totalData + " " + triggerLevel.intValue());
                     if (totalData.intValue() > triggerLevel.intValue() || totalData.intValue() == triggerLevel.intValue()) {
-                        Log.d(TAG, "onReceive: " + PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false));
+                        Log.d(TAG, "onReceive: Notification shown: " + PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false));
                         if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false)) {
                             showNotification(context);
-                        } else {
-                            SetupFragment.SetupPreference.pauseMonitor();
-                            restartMonitor(context);
+                        }
+                        else {
+                            stopService(context);
                         }
                     }
                     if (totalData.intValue() >= dataLimit.intValue()) {
@@ -205,39 +224,44 @@ public class DataUsageMonitor extends Service {
             PreferenceManager.getDefaultSharedPreferences(context).edit()
                     .putBoolean(DATA_USAGE_WARNING_SHOWN, true)
                     .apply();
-            SetupFragment.SetupPreference.pauseMonitor();
+            stopService(context);
             restartMonitor(context);
         }
 
         private static void setRepeating(Context context) {
-            Intent intent = new Intent(context, DataUsageMonitor.DataMonitor.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+            if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false)) {
+                Intent intent = new Intent(context, DataUsageMonitor.DataMonitor.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 //            int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
 //                    .getInt(NOTIFICATION_REFRESH_INTERVAL, 6000);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (alarmManager.canScheduleExactAlarms()) {
-                    alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 30000, pendingIntent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if (alarmManager.canScheduleExactAlarms()) {
+                        alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 30000, pendingIntent);
+                    }
+                    else  {
+                        Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                        Common.postAlarmPermissionDeniedNotification(context);
+                    }
                 }
-                else  {
-                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
-                    Common.postAlarmPermissionDeniedNotification(context);
+                else {
+                    alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 30000, pendingIntent);
                 }
             }
             else {
-                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + 30000, pendingIntent);
+                Log.d(TAG, "setRepeating: Stopping monitor");
+                stopMonitor(context);
             }
         }
 
-        private void restartMonitor(Context context) throws ParseException {
+        private static void restartMonitor(Context context) throws ParseException {
             AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-            Intent restartIntent = new Intent(context, DataMonitor.class);
-            restartIntent.putExtra(EXTRA_DATA_ALARM_RESET, true);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, restartIntent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
+
             int year, month, day;
             String resetTime, endTime;
             Date resetDate, endDate;
-            Long resetTimeMillis, endTimeMillis;
+            Long resetTimeMillis = 0L,
+                    endTimeMillis = 0L;
             SimpleDateFormat resetFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
             int resetHour = PreferenceManager.getDefaultSharedPreferences(context)
@@ -249,16 +273,54 @@ public class DataUsageMonitor extends Service {
             SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
             Date date = new Date();
 
-            year = Integer.parseInt(yearFormat.format(date));
-            month = Integer.parseInt(monthFormat.format(date));
-            day = Integer.parseInt(dayFormat.format(date));
-            resetTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-            resetDate = resetFormat.parse(resetTime);
-            resetTimeMillis = resetDate.getTime();
-            day = Integer.parseInt(dayFormat.format(date)) + 1;
-            endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-            endDate = resetFormat.parse(endTime);
-            endTimeMillis = endDate.getTime();
+            String planType = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getString(DATA_RESET, DATA_RESET_DAILY);
+
+            switch (planType) {
+                case DATA_RESET_DAILY:
+                    year = Integer.parseInt(yearFormat.format(date));
+                    month = Integer.parseInt(monthFormat.format(date));
+                    day = Integer.parseInt(dayFormat.format(date));
+                    resetTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    resetDate = resetFormat.parse(resetTime);
+                    resetTimeMillis = resetDate.getTime();
+                    day = Integer.parseInt(dayFormat.format(date)) + 1;
+                    endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    endDate = resetFormat.parse(endTime);
+                    endTimeMillis = endDate.getTime();
+                    break;
+
+                case DATA_RESET_MONTHLY:
+                    int planEnd = PreferenceManager.getDefaultSharedPreferences(context)
+                            .getInt(DATA_RESET_DATE, 1);
+                    Calendar calendar = Calendar.getInstance();
+                    int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                    int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
+                    if (planEnd > daysInMonth) {
+                        planEnd = daysInMonth;
+                    }
+                    calendar.set(Calendar.DAY_OF_MONTH, planEnd);
+                    if (today >= planEnd) {
+                        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+                    }
+                    calendar.set(Calendar.HOUR_OF_DAY, 0);
+                    calendar.set(Calendar.MINUTE, 0);
+                    calendar.set(Calendar.SECOND, 0);
+                    endTimeMillis = calendar.getTimeInMillis();
+                    break;
+
+                case DATA_RESET_CUSTOM:
+                    try {
+                        endTimeMillis = PreferenceManager.getDefaultSharedPreferences(context)
+                                .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
+                    }
+                    catch (ClassCastException e) {
+                        int planEndIntValue = PreferenceManager.getDefaultSharedPreferences(context)
+                                .getInt(DATA_RESET_CUSTOM_DATE_END, -1);
+                        endTimeMillis = ((Number) planEndIntValue).longValue();
+                    }
+                    break;
+            }
 
             if (resetTimeMillis > System.currentTimeMillis()) {
                 year = Integer.parseInt(yearFormat.format(date));
@@ -276,20 +338,28 @@ public class DataUsageMonitor extends Service {
                 endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                 endDate = resetFormat.parse(endTime);
                 endTimeMillis = endDate.getTime();
-            } else {
-                year = Integer.parseInt(yearFormat.format(date));
-                month = Integer.parseInt(monthFormat.format(date));
-                day = Integer.parseInt(dayFormat.format(date));
-                resetTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-                resetDate = resetFormat.parse(resetTime);
-                resetTimeMillis = resetDate.getTime();
+            }
+            else {
+                if (planType.equals(DATA_RESET_DAILY)) {
+                    year = Integer.parseInt(yearFormat.format(date));
+                    month = Integer.parseInt(monthFormat.format(date));
+                    day = Integer.parseInt(dayFormat.format(date));
+                    resetTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    resetDate = resetFormat.parse(resetTime);
+                    resetTimeMillis = resetDate.getTime();
 
-                day = Integer.parseInt(dayFormat.format(date)) + 1;
-                endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
-                endDate = resetFormat.parse(endTime);
-                endTimeMillis = endDate.getTime();
+                    day = Integer.parseInt(dayFormat.format(date)) + 1;
+                    endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
+                    endDate = resetFormat.parse(endTime);
+                    endTimeMillis = endDate.getTime();
+                }
 
             }
+
+            Intent restartIntent = new Intent(context, DataUsageMonitor.class);
+            restartIntent.putExtra(EXTRA_DATA_ALARM_RESET, true);
+            PendingIntent pendingIntent = PendingIntent.getService(context, 0,
+                    restartIntent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (manager.canScheduleExactAlarms()) {
@@ -303,8 +373,25 @@ public class DataUsageMonitor extends Service {
             else {
                 manager.setExact(AlarmManager.RTC, endTimeMillis, pendingIntent);
             }
+            Log.d(TAG, "restartMonitor: Restart at: " + endTimeMillis);
+        }
+    }
 
-            Log.d(TAG, "onReceive: " + endTimeMillis);
+    public static void updateServiceRestart(Context context) {
+        if (PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(DATA_USAGE_WARNING_SHOWN, false)) {
+            AlarmManager manager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+            Intent intent = new Intent(context, DataUsageMonitor.class);
+            PendingIntent pendingIntent = PendingIntent.getService(context, 0,
+                    intent, PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_IMMUTABLE);
+            manager.cancel(pendingIntent);
+            Log.d(TAG, "updateServiceRestart: Monitor cancelled, creating new one");
+            try {
+                DataMonitor.restartMonitor(context);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

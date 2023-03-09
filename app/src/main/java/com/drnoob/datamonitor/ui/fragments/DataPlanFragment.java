@@ -70,6 +70,7 @@ import androidx.preference.PreferenceManager;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.databinding.FragmentDataPlanBinding;
+import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -414,6 +415,10 @@ public class DataPlanFragment extends Fragment {
                         if (previousPlanType.equals(DATA_RESET_CUSTOM)) {
                             Log.d(TAG, "onClick: Previously set custom plan found, cancelling refresh alarm" );
                             cancelDataPlanNotification(requireContext());
+                        }
+                        if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                .getBoolean("data_usage_alert", false)) {
+                            DataUsageMonitor.updateServiceRestart(requireContext());
                         }
 
                         Intent data = new Intent();
