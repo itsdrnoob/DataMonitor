@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.UTCToLocal;
+import static com.drnoob.datamonitor.Common.cancelDataPlanNotification;
 import static com.drnoob.datamonitor.Common.dismissOnClick;
 import static com.drnoob.datamonitor.Common.localToUTC;
 import static com.drnoob.datamonitor.Common.setBoldSpan;
@@ -69,6 +70,7 @@ import androidx.preference.PreferenceManager;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.databinding.FragmentDataPlanBinding;
+import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -343,6 +345,8 @@ public class DataPlanFragment extends Fragment {
         binding.toolbarSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String previousPlanType = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        .getString(DATA_RESET, "null");
                 if (binding.dataLimit.getText().toString().length() <= 0) {
                     binding.dataLimitView.setError(getString(R.string.error_invalid_plan));
                 }
@@ -407,6 +411,15 @@ public class DataPlanFragment extends Fragment {
                                 .putInt(DATA_RESET_CUSTOM_DATE_END_HOUR, endHour)
                                 .putInt(DATA_RESET_CUSTOM_DATE_END_MIN, endMinute)
                                 .apply();
+
+                        if (previousPlanType.equals(DATA_RESET_CUSTOM)) {
+                            Log.d(TAG, "onClick: Previously set custom plan found, cancelling refresh alarm" );
+                            cancelDataPlanNotification(requireContext());
+                        }
+                        if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                .getBoolean("data_usage_alert", false)) {
+                            DataUsageMonitor.updateServiceRestart(requireContext());
+                        }
 
                         Intent data = new Intent();
                         requireActivity().setResult(Activity.RESULT_OK, data);

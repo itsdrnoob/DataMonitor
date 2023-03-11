@@ -50,6 +50,7 @@ import static com.drnoob.datamonitor.core.Values.REQUEST_POST_NOTIFICATIONS;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SETUP_COMPLETED;
 import static com.drnoob.datamonitor.core.Values.SETUP_VALUE;
+import static com.drnoob.datamonitor.core.Values.SHOULD_SHOW_BATTERY_OPTIMISATION_ERROR;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
 import static com.drnoob.datamonitor.core.Values.UPDATE_NOTIFICATION_CHANNEL;
 import static com.drnoob.datamonitor.core.Values.UPDATE_VERSION;
@@ -203,31 +204,6 @@ public class MainActivity extends AppCompatActivity {
 
                 NavigationUI.setupWithNavController(binding.bottomNavigationView, controller);
 
-                binding.batteryOptimisationError.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(MainActivity.this, ContainerActivity.class)
-                                .putExtra(GENERAL_FRAGMENT_ID, DISABLE_BATTERY_OPTIMISATION_FRAGMENT));
-                    }
-                });
-
-                binding.closeBatteryBanner.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        binding.batteryOptimisationError.animate()
-                                .alpha(0)
-                                .translationY(-500)
-                                .setListener(new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationEnd(Animator animation) {
-                                        super.onAnimationEnd(animation);
-                                        binding.batteryOptimisationError.setVisibility(View.GONE);
-                                    }
-                                })
-                                .start();
-                    }
-                });
-
                 DatabaseHandler databaseHandler = new DatabaseHandler(MainActivity.this);
                 if (databaseHandler.getUsageList() != null && databaseHandler.getUsageList().size() > 0) {
 
@@ -304,19 +280,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkBatteryOptimisationState() {
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
-                binding.mainNavHostFragment.getLayoutParams();
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         if (powerManager.isIgnoringBatteryOptimizations(getPackageName())) {
             // Battery optimisation is disabled
-            params.topToBottom = R.id.main_toolbar;
+            Log.d(TAG, "checkBatteryOptimisationState: Disabled");
         } else {
             // Battery optimisation is enabled
-            params.topToBottom = R.id.battery_optimisation_error;
+            Log.d(TAG, "checkBatteryOptimisationState: Enabled");
+            if (SharedPreferences.getUserPrefs(this).getBoolean(SHOULD_SHOW_BATTERY_OPTIMISATION_ERROR, true)) {
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle(getString(R.string.label_battery_optimisation))
+                        .setMessage(getString(R.string.battery_optimisation_enabled_info))
+                        .setPositiveButton(getString(R.string.disable_battery_optimisation), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                startActivity(new Intent(MainActivity.this, ContainerActivity.class)
+                                        .putExtra(GENERAL_FRAGMENT_ID, DISABLE_BATTERY_OPTIMISATION_FRAGMENT));
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.label_do_not_show_again), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences.getUserPrefs(MainActivity.this).edit()
+                                        .putBoolean(SHOULD_SHOW_BATTERY_OPTIMISATION_ERROR, false)
+                                        .apply();
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton(getString(R.string.action_cancel), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
         }
-
-        binding.mainNavHostFragment.setLayoutParams(params);
-        binding.mainNavHostFragment.requestLayout();
     }
 
     private void initializebottomNavigationViewBar() {

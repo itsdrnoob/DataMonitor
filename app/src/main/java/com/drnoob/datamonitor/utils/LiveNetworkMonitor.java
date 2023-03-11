@@ -359,21 +359,11 @@ public class LiveNetworkMonitor extends Service {
                     NETWORK_SIGNAL_CHANNEL_ID);
         }
         mBuilder.setSmallIcon(icon);
-        mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentTitle(context.getString(R.string.network_speed_title, speeds[2]));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(context.getString(R.string.network_speed_download, speeds[1]))
                 .addLine(context.getString(R.string.network_speed_upload, speeds[0])));
-        mBuilder.setContentIntent(mActivityPendingIntent);
-        mBuilder.setAutoCancel(false);
-        mBuilder.setShowWhen(false);
         mBuilder.setWhen(System.currentTimeMillis() + 1000);
-        mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-        mBuilder.setSortKey("0");
-        mBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
-        mBuilder.setOnlyAlertOnce(true);
-        mBuilder.setSound(null);
 
         if (showOnLockscreen) {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);

@@ -131,6 +131,7 @@ public class Values {
     public static final String LANGUAGE_SYSTEM_DEFAULT = "system";
     public static final String ALARM_PERMISSION_DENIED = "alarm_permission_denied";
     public static final String UPDATE_NOTIFICATION_CHANNEL = "update_notification_channel";
+    public static final String SHOULD_SHOW_BATTERY_OPTIMISATION_ERROR = "show_battery_optimisation_error";
 
     public static final String DARK_MODE_TOGGLE = "dark_mode_toggle";
 
@@ -169,6 +170,7 @@ public class Values {
     public static final String EXTRA_ACTIVITY_TITLE = "datamonitor.intent.extra.activityTitle";
     public static final String EXTRA_WEEK_DAY = "datamonitor.intent.extra.weekDay";
     public static final String EXTRA_IS_WEEK_DAY_VIEW = "datamonitor.intent.extra.isWeekDayView";
+    public static final String EXTRA_DATA_ALARM_RESET = "datamonitor.intent.extra.dataAlarmReset";
 
     public static final String ICON_DATA_USAGE = "combined_icon_data_usage";
     public static final String ICON_NETWORK_SPEED = "combined_icon_network_speed";

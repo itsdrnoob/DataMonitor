@@ -63,6 +63,7 @@ import com.drnoob.datamonitor.adapters.data.LanguageModel;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
+import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -214,6 +215,9 @@ public class Common {
                 context.startService(new Intent(context, NotificationService.class));
             }
         }
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false)) {
+            context.startService(new Intent(context, DataUsageMonitor.class));
+        }
 
     }
 
@@ -280,6 +284,15 @@ public class Common {
         else {
             Log.e(TAG, "setDataPlanNotification: something is wrong here " + wakeupMillis);
         }
+    }
+
+    public static void cancelDataPlanNotification(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, DataPlanRefreshReceiver.class)
+                .putExtra(INTENT_ACTION, ACTION_SHOW_DATA_PLAN_NOTIFICATION);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1001,
+                intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);
     }
 
     public static void updateDialog(AlertDialog dialog, Context context) {

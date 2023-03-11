@@ -33,6 +33,7 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 
+import android.app.ForegroundServiceStartNotAllowedException;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -52,6 +53,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,26 +73,28 @@ import java.util.TimerTask;
 public class CompoundNotification extends Service {
     private static final String TAG = CompoundNotification.class.getSimpleName();
 
-    private Timer mTimer;
-    private TimerTask mTimerTask;
-    public Long previousTotalBytes, previousUpBytes, previousDownBytes;
+    private static Timer mTimer;
+    private static TimerTask mTimerTask;
+    public static Long previousTotalBytes, previousUpBytes, previousDownBytes;
     private Intent mActivityIntent;
-    private PendingIntent mActivityPendingIntent;
-    private NotificationCompat.Builder mBuilder;
-    private CompoundNotificationReceiver compoundNotificationReceiver = new CompoundNotificationReceiver();
+    private static PendingIntent mActivityPendingIntent;
+    private static NotificationCompat.Builder mBuilder;
+    private static CompoundNotificationReceiver compoundNotificationReceiver = new CompoundNotificationReceiver();
     private NetworkChangeMonitor mNetworkChangeMonitor;
-    private boolean isNetworkConnected;
-    private boolean isTimerCancelled = true;
-    private boolean isTaskPaused = false;
-    private boolean isNotificationReceiverRegistered = false;
+    private static boolean isNetworkConnected;
+    private static boolean isTimerCancelled = true;
+    private static boolean isTaskPaused = false;
+    private static boolean isNotificationReceiverRegistered = false;
     private boolean isServiceRunning;
-    private String mobileDataUsage,
+    private static String mobileDataUsage,
             wifiDataUsage,
             totalDataUsage;
-    private IconCompat dataUsageIcon, networkSpeedIcon;
+    private static IconCompat dataUsageIcon, networkSpeedIcon;
     private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
-    private boolean serviceRestart = true;
-    
+    private static boolean serviceRestart = true;
+    private static CompoundNotification mCompoundNotification;
+    private static RemoteViews contentView, bigContentView;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -104,7 +108,9 @@ public class CompoundNotification extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        mCompoundNotification = this;
+        contentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification);
+        bigContentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification_expanded);
 //        previousDownBytes = TrafficStats.getTotalRxBytes();
 //        previousUpBytes = TrafficStats.getTotalTxBytes();
 
@@ -142,9 +148,6 @@ public class CompoundNotification extends Service {
                 getString(R.string.body_data_usage_notification_loading));
         wifiDataUsage = getString(R.string.notification_wifi_data_usage,
                 getString(R.string.body_data_usage_notification_loading));
-
-        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification);
-        RemoteViews bigContentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification_expanded);
 
         // Set placeholder values to the views.
         contentView.setTextViewText(R.id.data_usage_title,
@@ -222,15 +225,19 @@ public class CompoundNotification extends Service {
                     catch (Exception e) {
                         e.printStackTrace();
                     }
-                    CompoundNotification.this.stopForeground(true);
-                    CompoundNotification.this.stopSelf();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        mCompoundNotification.stopForeground(Service.STOP_FOREGROUND_REMOVE);
+                    } else {
+                        mCompoundNotification.stopForeground(true);
+                    }
+                    mCompoundNotification.stopSelf();
                     stopService(new Intent(CompoundNotification.this, this.getClass()));
                 }
             }
         };
         mTimer.scheduleAtFixedRate(mTimerTask, 0, 1000);
         if (!isNotificationReceiverRegistered && !isTaskPaused) {
-            registerNetworkReceiver();
+            registerNetworkReceiver(mCompoundNotification);
         }
     }
 
@@ -253,14 +260,11 @@ public class CompoundNotification extends Service {
         super.onDestroy();
     }
 
-    private void updateNotification(Context context, int interval) {
+    private static void updateNotification(Context context, int interval) {
         // Update notification text here
         String[] speeds;
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification);
-        RemoteViews bigContentView = new RemoteViews(getPackageName(), R.layout.layout_data_usage_notification_expanded);
 
         Long[] mobile, wifi;
         Boolean showPercent;
@@ -272,10 +276,10 @@ public class CompoundNotification extends Service {
         Boolean autoHide = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("auto_hide_network_speed", false);
 
-        String notificationIcon = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
+        String notificationIcon = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString("combined_notification_icon", ICON_NETWORK_SPEED);
 
-        int elapsedTime = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
+        int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
         elapsedTime /= 1000;
 
@@ -353,7 +357,7 @@ public class CompoundNotification extends Service {
 
         if (isNetworkConnected) {
             if (!isNotificationReceiverRegistered) {
-                registerNetworkReceiver();
+                registerNetworkReceiver(context);
             }
             if (serviceRestart) {
                 updateInitialData();
@@ -440,17 +444,17 @@ public class CompoundNotification extends Service {
             networkSpeedIcon = IconCompat.createWithResource(context, R.drawable.ic_signal_kb_0);
         }
         if (mBuilder == null) {
-            mBuilder = new NotificationCompat.Builder(this,
+            mBuilder = new NotificationCompat.Builder(context,
                     NETWORK_SIGNAL_CHANNEL_ID);
         }
 
-        contentView.setTextViewText(R.id.network_speed_title, getString(R.string.network_speed_title, speeds[2]));
+        contentView.setTextViewText(R.id.network_speed_title, context.getString(R.string.network_speed_title, speeds[2]));
         contentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 
         bigContentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
-        bigContentView.setTextViewText(R.id.network_speed_title, getString(R.string.network_speed_title, speeds[2]));
-        bigContentView.setTextViewText(R.id.network_speed_upload, getString(R.string.network_speed_upload, speeds[0]));
-        bigContentView.setTextViewText(R.id.network_speed_download, getString(R.string.network_speed_download, speeds[1]));
+        bigContentView.setTextViewText(R.id.network_speed_title, context.getString(R.string.network_speed_title, speeds[2]));
+        bigContentView.setTextViewText(R.id.network_speed_upload, context.getString(R.string.network_speed_upload, speeds[0]));
+        bigContentView.setTextViewText(R.id.network_speed_download, context.getString(R.string.network_speed_download, speeds[1]));
 
         if (showMobileData && showWifi) {
             bigContentView.setTextViewText(R.id.data_usage_mobile, mobileDataUsage);
@@ -481,7 +485,7 @@ public class CompoundNotification extends Service {
 //        contentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 //        bigContentView.setTextViewText(R.id.data_usage_title, totalDataUsage);
 
-        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
+        boolean showOnLockscreen = PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean("lockscreen_notification", false);
 
         if (notificationIcon.equals(ICON_DATA_USAGE)) {
@@ -495,19 +499,9 @@ public class CompoundNotification extends Service {
                 mBuilder.setSmallIcon(networkSpeedIcon);
             }
         }
-        mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentTitle(context.getString(R.string.app_name));
         mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
-        mBuilder.setContentIntent(mActivityPendingIntent);
-        mBuilder.setAutoCancel(false);
-        mBuilder.setShowWhen(false);
         mBuilder.setWhen(System.currentTimeMillis() + 1000);
-        mBuilder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-        mBuilder.setSortKey("0");
-        mBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
-        mBuilder.setOnlyAlertOnce(true);
-        mBuilder.setSound(null);
         if (showOnLockscreen) {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
         }
@@ -520,7 +514,7 @@ public class CompoundNotification extends Service {
 
     }
 
-    private void updateInitialData() {
+    private static void updateInitialData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
                 final String iface = linkProperties.getInterfaceName();
@@ -539,22 +533,22 @@ public class CompoundNotification extends Service {
         previousTotalBytes = previousDownBytes + previousUpBytes;
     }
 
-    private void registerNetworkReceiver() {
+    private static void registerNetworkReceiver(Context context) {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter.setPriority(100);
         if (!isNotificationReceiverRegistered) {
-            registerReceiver(compoundNotificationReceiver, intentFilter);
+            context.getApplicationContext().registerReceiver(compoundNotificationReceiver, intentFilter);
             isNotificationReceiverRegistered = true;
             Log.d(TAG, "registerNetworkReceiver: registered" );
         }
     }
 
-    private void unregisterNetworkReceiver() {
+    private static void unregisterNetworkReceiver() {
         try {
-            unregisterReceiver(compoundNotificationReceiver);
+            mCompoundNotification.unregisterReceiver(compoundNotificationReceiver);
             isNotificationReceiverRegistered = false;
             Log.d(TAG, "unregisterNetworkReceive: stopped" );
         } catch (Exception e) {
@@ -562,7 +556,7 @@ public class CompoundNotification extends Service {
         }
     }
 
-    public class CompoundNotificationReceiver extends BroadcastReceiver {
+    public static class CompoundNotificationReceiver extends BroadcastReceiver {
 
         public CompoundNotificationReceiver() {
             // Empty constructor
@@ -585,9 +579,9 @@ public class CompoundNotification extends Service {
         }
     }
 
-    public void restartService(Context context, boolean startReceiver, boolean restart) {
+    public static void restartService(Context context, boolean startReceiver, boolean restart) {
         if (startReceiver && !isNotificationReceiverRegistered) {
-            registerNetworkReceiver();
+            registerNetworkReceiver(context);
         }
 //        previousDownBytes = TrafficStats.getTotalRxBytes();
 //        previousUpBytes = TrafficStats.getTotalTxBytes();
@@ -598,12 +592,12 @@ public class CompoundNotification extends Service {
             int interval = 0;
             @Override
             public void run() {
-                if (PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this).
+                if (PreferenceManager.getDefaultSharedPreferences(context).
                         getBoolean("combine_notifications", false)) {
-                    updateNotification(CompoundNotification.this, interval);
+                    updateNotification(context, interval);
                     interval++;
                     serviceRestart = false;
-                    int elapsedTime = PreferenceManager.getDefaultSharedPreferences(CompoundNotification.this)
+                    int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context)
                             .getInt(NOTIFICATION_REFRESH_INTERVAL, 60000);
                     elapsedTime /= 1000;
                     if (interval > elapsedTime) {
@@ -738,7 +732,19 @@ public class CompoundNotification extends Service {
             super.onAvailable(network);
             isNetworkConnected = true;
             if (isTaskPaused) {
-                CompoundNotification.this.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    try {
+                        mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                    }
+                    catch (ForegroundServiceStartNotAllowedException e) {
+                        e.printStackTrace();
+                        Toast.makeText(context, context.getString(R.string.error_network_monitor_start),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                }
                 restartService(context, false, true);
                 isTaskPaused = false;
             }

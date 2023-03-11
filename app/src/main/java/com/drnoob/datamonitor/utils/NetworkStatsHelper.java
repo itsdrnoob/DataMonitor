@@ -123,13 +123,28 @@ public class NetworkStatsHelper {
 
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
         NetworkStats.Bucket bucket = new NetworkStats.Bucket();
-        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI,
+//        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI,
+//                getSubscriberId(context),
+//                resetTimeMillis,
+//                endTimeMillis);
+
+        NetworkStats networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_WIFI,
                 getSubscriberId(context),
                 resetTimeMillis,
                 endTimeMillis);
 
-        received = bucket.getRxBytes();
-        sent = bucket.getTxBytes();
+        received = 0l;
+        sent = 0l;
+
+        do {
+            networkStats.getNextBucket(bucket);
+            received += bucket.getRxBytes();
+            sent += bucket.getTxBytes();
+        }
+        while (networkStats.hasNextBucket());
+
+//        received = bucket.getRxBytes();
+//        sent = bucket.getTxBytes();
         total = sent + received;
 
         sent = sent - excludedSent;
@@ -142,7 +157,6 @@ public class NetworkStatsHelper {
 
     public static Long[] getDeviceMobileDataUsage(Context context, int session, @Nullable int startDate) throws ParseException, RemoteException {
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
-        NetworkStats networkStats = null;
         NetworkStats.Bucket bucket = new NetworkStats.Bucket();
 
         Long resetTimeMillis = getTimePeriod(context, session, startDate)[0];
@@ -175,14 +189,28 @@ public class NetworkStatsHelper {
             excludedTotal += mobile[2];
         }
 
-        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_MOBILE,
+//        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_MOBILE,
+//                getSubscriberId(context),
+//                resetTimeMillis,
+//                endTimeMillis);
+
+        NetworkStats networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_MOBILE,
                 getSubscriberId(context),
                 resetTimeMillis,
                 endTimeMillis);
 
+        Long rxBytes = 0L;
+        Long txBytes = 0L;
 
-        Long rxBytes = bucket.getRxBytes();
-        Long txBytes = bucket.getTxBytes();
+        do {
+            networkStats.getNextBucket(bucket);
+            rxBytes += bucket.getRxBytes();
+            txBytes += bucket.getTxBytes();
+        }
+        while (networkStats.hasNextBucket());
+
+//        Long rxBytes = bucket.getRxBytes();
+//        Long txBytes = bucket.getTxBytes();
 
         sent = txBytes;
         received = rxBytes;

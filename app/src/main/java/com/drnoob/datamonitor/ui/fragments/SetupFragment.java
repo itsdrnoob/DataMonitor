@@ -174,7 +174,10 @@ public class SetupFragment extends Fragment {
                                                 getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 updateResetData();
-                                setDataPlanNotification(getContext());
+                                if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                        .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
+                                    setDataPlanNotification(getContext());
+                                }
                                 dismissOnClick(snackbar);
                                 snackbar.show();
                                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
@@ -1157,6 +1160,10 @@ public class SetupFragment extends Fragment {
 
                                 dialog.dismiss();
 
+                                if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                        .getBoolean("data_usage_alert", false)) {
+                                    DataUsageMonitor.updateServiceRestart(requireContext());
+                                }
 
                                 snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
                                         getString(R.string.label_data_usage_reset_date_change, datePicker.getDayOfMonth(), suffix),
@@ -1290,6 +1297,11 @@ public class SetupFragment extends Fragment {
 
                                 dialog.dismiss();
 
+                                if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                        .getBoolean("data_usage_alert", false)) {
+                                    DataUsageMonitor.updateServiceRestart(requireContext());
+                                }
+
                                 snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
                                         getString(R.string.label_data_usage_reset_time_change, interval, time), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
@@ -1298,83 +1310,6 @@ public class SetupFragment extends Fragment {
 
                             }
                         });
-
-
-//                        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-//                            @Override
-//                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-//                                        .putInt(DATA_RESET_HOUR, hourOfDay).apply();
-//                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
-//                                        .putInt(DATA_RESET_MIN, minute).apply();
-//
-//                                Intent i = new Intent(getContext(), NotificationUpdater.class);
-//                                getContext().sendBroadcast(i);
-//                                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
-//                                int[] ids = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), DataUsageWidget.class));
-//                                Intent intent = new Intent(getContext(), DataUsageWidget.class);
-//                                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-//                                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-//                                getContext().sendBroadcast(intent);
-//
-//                                int h, m;
-//                                m = minute;
-//                                String time, interval;
-//
-//                                // Again :)
-//
-//                                if (hourOfDay >= 12) {
-//                                    if (hourOfDay == 12) {
-//                                        h = 12;
-//                                    } else {
-//                                        h = (hourOfDay - 12);
-//                                    }
-//                                    if (m < 10) {
-//                                        time = h + ":0" + m + " pm";
-//                                    } else {
-//                                        time = h + ":" + m + " pm";
-//                                    }
-//                                } else {
-//                                    if (hourOfDay == 0) {
-//                                        h = 12;
-//                                    } else if (hourOfDay < 10) {
-//                                        h = hourOfDay;
-//                                        if (m < 10) {
-//                                            time = "0" + h + ":0" + m + " pm";
-//                                        } else {
-//                                            time = "0" + h + ":" + m + " pm";
-//                                        }
-//                                    } else {
-//                                        h = hourOfDay;
-//                                    }
-//                                    if (h < 10) {
-//                                        time = "0" + h + ":" + m + " am";
-//                                    } else {
-//                                        time = h + ":" + m + " am";
-//                                    }
-//                                    if (m < 10) {
-//                                        time = h + ":0" + m + " am";
-//                                    } else {
-//                                        time = h + ":" + m + " am";
-//                                    }
-//                                }
-//                                if (PreferenceManager.getDefaultSharedPreferences(getContext())
-//                                        .getString(DATA_RESET, "").equals(DATA_RESET_MONTHLY)) {
-//                                    interval = getString(R.string.month);
-//                                } else {
-//                                    interval = getString(R.string.day);
-//                                }
-//
-//                                mUsageResetTime.setSummary(time);
-//
-//                                snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-//                                        getString(R.string.label_data_usage_reset_time_change, interval, time), Snackbar.LENGTH_SHORT)
-//                                        .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
-//                                dismissOnClick(snackbar);
-//                                snackbar.show();
-//                            }
-//                        }, hour, minute, false);
-//                        timePickerDialog.show();
 
                         dialog.setContentView(dialogView);
                         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
