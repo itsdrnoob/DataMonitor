@@ -178,7 +178,7 @@
     <string name="label_translators">譯者們</string>
     <string name="setup_app_data_usage_alert">資料用量警報</string>
     <string name="title_app_data_limit">資料用量限制</string>
-    <string name="network_diagnostics">網路診斷</string>
+    <string name="network_diagnostics">診斷</string>
     <string name="run_diagnostics">開始診斷</string>
     <string name="running_diagnostics">診斷中</string>
     <string name="connecting">連線中</string>
@@ -217,4 +217,26 @@
     <string name="label_data_usage_reset_date_change">數據使用量將在每月 %1$d%2$s 重置</string>
     <string name="label_loading">載入中…</string>
     <string name="label_plan_end_date">選擇結束日期</string>
+    <string name="label_reset_every_month">每月的 %1$s%2$s</string>
+    <string name="setup_usage_reset_date">數據用量週期重設日期</string>
+    <string name="louis_leblanc_summary">法文</string>
+    <string name="network_signal_summary">Beta 功能</string>
+    <string name="label_network_signal_notification_disabled">即時網路速度已關閉</string>
+    <string name="telegram_summary">加入支援群組</string>
+    <string name="action_permission_granted">授予權限</string>
+    <string name="telegram_support">Telegram 支援</string>
+    <string name="johnsonran_summary">簡體中文</string>
+    <string name="system_data_usage">系統數據使用</string>
+    <string name="cracky5322_summary">繁體中文</string>
+    <string name="network_speed_title">網路速度： %1$s</string>
+    <string name="network_speed_upload">上傳： %1$s</string>
+    <string name="network_speed_download">下載： %1$s</string>
+    <string name="network_signal_notification">即時網路速度</string>
+    <string name="label_network_signal_notification_enabled">即時網路速度已開啟</string>
+    <string name="read_phone_state_permission">存取手機狀態權限</string>
+    <string name="read_phone_state_body">使用 Android 9 及以下版本的設備必須手動授予此權限。 不會收集任何個人資料。</string>
+    <string name="error_permission_denied">權限遭拒。 請手動給予權限</string>
+    <string name="rate_app">在 Google Play 上為應用程式評分</string>
+    <string name="rate_app_summary">感謝您的回饋</string>
+    <string name="check_for_update">檢查更新</string>
 </resources>
