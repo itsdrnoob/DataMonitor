@@ -38,7 +38,7 @@
     <string name="xda">Тема на XDA</string>
     <string name="report_summary">Сообщение об ошибках или запрос функции</string>
     <string name="report">Сообщение об ошибках</string>
-    <string name="btc_address_copied">Адрес биткоин-кошелька скопирован в буфер обмена</string>
+    <string name="btc_address_copied">Адрес кошелька Bitcoin скопирован в буфер обмена</string>
     <string name="ltc_address_copied">Адрес кошелька Litecoin скопирован в буфер обмена</string>
     <string name="home">Главная</string>
     <string name="action_grant">Предоставить разрешение</string>
@@ -103,7 +103,7 @@
     <string name="telegram_summary">Вступайте в группу поддержки</string>
     <string name="rate_app_summary">Ваши отзывы для нас очень важны</string>
     <string name="no_update_available">Вы используете последнюю версию.</string>
-    <string name="label_download_update">Скачать новую версию</string>
+    <string name="label_download_update">Загрузить обновление</string>
     <string name="checking_for_update">Проверка обновлений…</string>
     <string name="update_fetch_error">Не удалось получить обновление</string>
     <string name="settings_app_theme">Тема</string>
@@ -259,7 +259,7 @@
     <string name="label_crash_logs">Журналы сбоев</string>
     <string name="label_crash_logs_copied">Журнал о сбоях скопирован в буфер обмена</string>
     <string name="label_mail">Электронная почта</string>
-    <string name="battery_optimisation_enabled_info">Включена оптимизация батареи. Это будет мешать работе Монитора данных. Нажмите, чтобы отключить.</string>
+    <string name="battery_optimisation_enabled_info">Включена оптимизация батареи. Это будет мешать работе приложения Монитор данных.</string>
     <string name="label_battery_optimisation">Оптимизация батареи</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="report_github_summary">Создать новый вопрос на Github</string>
@@ -382,4 +382,22 @@
     <string name="error_alarm_permission_denied_summary">Вы пытались выполнить действие, требующее разрешения SCHEDULE_EXACT_ALARM, которое не предоставлено приложению. Нажмите здесь, чтобы предоставить разрешение.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Для правильной работы Монитора данных требуется разрешение SCHEDULE_EXACT_ALARM. Вы можете продолжать пользоваться приложением, но некоторые функции могут работать некорректно.</string>
     <string name="error_alarm_permission_denied_feature_summary">Вы не можете использовать эту функцию без предоставления разрешения SCHEDULE_EXACT_ALARM.</string>
+    <string name="atharvshinde">Atharv Shinde</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="hinamechan">HinameChan</string>
+    <string name="atharvshinde_translation_summary">Marathi</string>
+    <string name="label_paypal">PayPal</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="label_do_not_show_again">Больше не показывать</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy">JungHee Lee</string>
+    <string name="U1M450W">U1M450W</string>
 </resources>
