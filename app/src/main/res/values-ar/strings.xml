@@ -274,7 +274,7 @@
     <string name="crash_logs_warning">سجلات الأعطال; لا تقم بالتعديل</string>
     <string name="title_device_info_contents">محتويات معلومات الجهاز</string>
     <string name="label_mail">البريد</string>
-    <string name="battery_optimisation_enabled_info">تم تمكين تحسين البطارية. هذا سوف يتداخل مع عمل مراقب البيانات. انقر لتعطيل.</string>
+    <string name="battery_optimisation_enabled_info">تم تمكين تحسين البطارية. سيتداخل هذا مع عمل مراقب البيانات.</string>
     <string name="label_battery_optimisation">تحسينات البطارية</string>
     <string name="error_no_crash_logs">لم يتم العثور على سجلات الأعطال. هل أنت متأكد من حدوث مشكلة؟</string>
     <string name="settings_diagnostics_server">الخادم</string>
@@ -402,4 +402,5 @@
     <string name="error_alarm_permission_denied">تم رفض إذن التنبيه!</string>
     <string name="error_alarm_permission_denied_feature_summary">لا يمكنك استخدام هذه الميزة دون منح إذن SCHEDULE_EXACT_ALARM.</string>
     <string name="error_alarm_permission_denied_dialog_summary">يتطلب مراقب البيانات إذنا SCHEDULE_EXACT_ALARM للعمل بشكل صحيح. لا يزال بإمكانك استخدام التطبيق، ولكن قد لا تعمل بعض الميزات بشكل صحيح.</string>
+    <string name="label_do_not_show_again">لا تظهر مرة أخرى</string>
 </resources>
