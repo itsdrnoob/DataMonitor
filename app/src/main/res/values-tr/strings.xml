@@ -2,7 +2,7 @@
 <resources>
     <string name="appwidget_text">Örnek</string>
     <string name="notification_mobile_data_usage">Mobil veri: %1$s</string>
-    <string name="app_name">Veri Monitörü</string>
+    <string name="app_name">Veri İzleyici</string>
     <string name="add_widget">Widget ekle</string>
     <string name="home_mobile_data_received">%1$s
 \nAlınan</string>
@@ -40,7 +40,7 @@
     <string name="label_all_time">Tüm zamanlar</string>
     <string name="action_update">Güncelle</string>
     <string name="label_last_month">Geçen ay</string>
-    <string name="label_want_to_contribute">Veri Monitörü\'ne nasıl katkıda bulunabileceğinizi öğrenmek için buraya tıklayın.</string>
+    <string name="label_want_to_contribute">Veri İzleyici’ye nasıl katkıda bulunabileceğinizi öğrenmek için buraya tıklayın.</string>
     <string name="daily">Günlük</string>
     <string name="data_type_gb">GB</string>
     <string name="title_data_warning_trigger">Veri uyarısı tetikleme düzeyi</string>
@@ -61,7 +61,7 @@
     <string name="app_label_package_name">Paket adı: %1$s</string>
     <string name="option_1_min">1 dakika</string>
     <string name="widget_setup_step_2">2. \"Widget\'lar \"a dokunun.</string>
-    <string name="widget_setup_step_3">3. Veri Monitörü widget\'ını ana ekrana sürükleyip bırakın.</string>
+    <string name="widget_setup_step_3">3. Veri İzleyici widget’ını ana ekrana sürükleyip bırakın.</string>
     <string name="app_license_header">Uygulama Lisansı</string>
     <string name="setup_widget_title">Widget</string>
     <string name="action_add_data_plan_home">İzlemeye başlamak için veri planınızı ekleyin</string>
@@ -73,7 +73,7 @@
     <string name="setup_show_mobile_usage">Mobil veri kullanımını göster</string>
     <string name="add_data_plan_summary">Veri planını ekleme veya güncelleme</string>
     <string name="heading_data_usage_today">Bugünlük veri kullanımı</string>
-    <string name="title_setup">Veri Monitörünü kur</string>
+    <string name="title_setup">Veri İzleyici’yi kur</string>
     <string name="refresh_interval_placeholder">1 dakika</string>
     <string name="setup_refresh_widget">Widget\'ı yenile</string>
     <string name="refresh_widget_summary">Herhangi bir sorunla karşılaşırsa widget\'ı yeniler</string>
@@ -116,7 +116,7 @@
     <string name="report_summary">Hata bildirme veya özellik talep etme</string>
     <string name="setup">Kurulum</string>
     <string name="label_system_apps">Sistem Uygulamaları</string>
-    <string name="usage_access_body">Uygulama kullanım istatistiklerini topladığı için uygulamayı çalıştırmak için gereklidir.
+    <string name="usage_access_body">Uygulamanın kullanım istatistiklerini topladığından dolayı uygulamanın çalışması için gereklidir.
 \nHiçbir kişisel veri toplanmaz.</string>
     <string name="settings">Ayarlar</string>
     <string name="app_data_usage">Uygulama veri kullanımı</string>
@@ -241,7 +241,7 @@
     <string name="network_signal_notification">Canlı ağ hızı</string>
     <string name="network_signal_summary">Beta özelliği</string>
     <string name="no_update_available">En son sürümü çalıştırıyorsunuz.</string>
-    <string name="label_download_update">Yeni sürümü indir</string>
+    <string name="label_download_update">Güncellemeyi indir</string>
     <string name="checking_for_update">Güncellemeler kontrol ediliyor…</string>
     <string name="update_fetch_error">Güncellemeler alınamadı</string>
     <string name="settings_app_theme">Tema</string>
@@ -304,7 +304,7 @@
     <string name="crash_logs_warning">Kilitlenme Günlükleri; Değiştirme</string>
     <string name="title_device_info_contents">Cihaz bilgisi içerikleri</string>
     <string name="label_crash_logs_copied">Kilitlenme günlükleri panoya kopyalandı</string>
-    <string name="battery_optimisation_enabled_info">Pil optimizasyonu etkindir. Bu, Veri İzleyicisi\'nin çalışmasını engeller. Devre dışı bırakmak için tıklayın.</string>
+    <string name="battery_optimisation_enabled_info">Pil optimizasyonu etkinleştirilmiş. Bu, Veri İzleyicisi’nin çalışmasını engeller.</string>
     <string name="error_no_crash_logs">Kilitlenme günlüğü bulunamadı. Bir çökme meydana geldiğinden emin misiniz\?</string>
     <string name="label_custom_server">Özel sunucu</string>
     <string name="custom_download_url_hint">İndirme URL\'sinin tamamını girin</string>
@@ -351,4 +351,53 @@
     <string name="label_hide_system_apps">Sistem uygulamalarını gizle</string>
     <string name="Master2050_summary">Geleneksel Çince, Portekizce, Fransızca, Norveççe Bokmål, İspanyolca, Almanca, Romence, Korece, Türkçe, Basitleştirilmiş Çince, Ukraynaca, Hintçe, Rusça, Arapça</string>
     <string name="bonbonboi_summary">Arapça</string>
+    <string name="label_filter_app_usage">Uygulama Kullanımını Filtrele</string>
+    <string name="error_network_monitor_start">Veri İzleyici başlatılamadı. Yenilemek için uygulamayı açın.</string>
+    <string name="label_filter">Filtrele</string>
+    <string name="label_current_plan">Mevcut Plan</string>
+    <string name="label_plan_details_title">%1$s planı etkin</string>
+    <string name="home_plan_usage_details">%1$s kullanıldı | %2$s</string>
+    <string name="label_plan_validity">%1$s tarihine kadar geçerli</string>
+    <string name="always_show_total">Her zaman toplamı göster</string>
+    <string name="always_show_total_summary">Yapılan tüm ayarları göz ardı edip toplam kullanılan veriyi bildirimde her zaman göster.</string>
+    <string name="app_label_combined_total">Toplam veri kullanımı: %1$s</string>
+    <string name="error_alarm_permission_denied">Alarm izni reddedildi!</string>
+    <string name="error_alarm_permission_denied_summary">Uygulamanın sahip olmadığı SCHEDULE_EXACT_ALARM iznini gerektiren bir işlemi gerçekleştirmeyi denediniz. İzin vermek için buraya tıklayın.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Veri İzleyici’nin düzgün çalışabilmesi için SCHEDULE_EXACT_ALARM izni gerekir. Uygulamayı kullanmaya devam edebilirsiniz ancak bazı özellikler düzgün çalışmayabilir.</string>
+    <string name="error_alarm_permission_denied_feature_summary">SCHEDULE_EXACT_ALARM izni verilmeden bu özellik kullanılamaz.</string>
+    <string name="graphixmedia_summary">Flemenkçe</string>
+    <string name="atharvshinde_summary">Geliştirici</string>
+    <string name="atharvshinde">Atharv Shinde</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="atharvshinde_translation_summary">Marathi</string>
+    <string name="label_custom_start_time">Başlangıç Zamanı: %1$s</string>
+    <string name="action_save">Kaydet</string>
+    <string name="label_custom_end_time">Bitiş Zamanı: %1$s</string>
+    <string name="label_paypal">PayPal</string>
+    <string name="paypal_summary">PayPal ile bağış yap</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="upi_summary">UPI aracılığıyla bağış yap</string>
+    <string name="label_buymeacoffee">Bana bir kahve ısmarla</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="tadekdudek_summary">Lehçe</string>
+    <string name="label_do_not_show_again">Tekrar gösterme</string>
+    <string name="diagnostics_history">Tanılama Geçmişi</string>
+    <string name="hinamechan">HinameChan</string>
+    <string name="donate_info">Veri İzleyici, Ücretsiz ve Açık Kaynaklı bir uygulamadır ve her zaman böyle kalacaktır :)
+\n
+\nUygulamanın gelişimini desteklemek isterseniz, bir bağış çok makbule geçer.</string>
+    <string name="hinamechan_summary">Türkçe</string>
+    <string name="error_invalid_plan_duration">Geçersiz plan süresi</string>
+    <string name="buymeacoffee_summary">Bana bir kahve ısmarla :)</string>
+    <string name="xmr_address_copied">Monero cüzdan adresi panoya kopyalandı</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy">JungHee Lee</string>
+    <string name="U1M450W">U1M450W</string>
 </resources>

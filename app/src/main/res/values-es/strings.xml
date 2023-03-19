@@ -139,7 +139,7 @@
     <string name="crash_report_body">Parece que Data Monitor se ha bloqueado. Puede enviar el informe de fallos al desarrollador para ayudar a analizar el problema y resolverlo más rápido. Si no se produjo ningún bloqueo, por favor ignórelo.</string>
     <string name="error_unknown_telegram_client">Telegram no instalado o cliente desconocido presente. Por favor, pruebe otro método.</string>
     <string name="notification_permission_denied_body">Las funciones que incluyen la notificación del monitor de datos, la velocidad de la red en vivo y la alerta de uso de datos no funcionarán correctamente sin el permiso de notificación. Por favor, concédalo manualmente.</string>
-    <string name="battery_optimisation_enabled_info">La optimización de la batería está habilitada. Esto interferirá con el funcionamiento de Data Monitor. Haga clic para deshabilitar.</string>
+    <string name="battery_optimisation_enabled_info">La optimización de la batería está activada. Esto interferirá con el funcionamiento de Data Monitor.</string>
     <string name="settings_upload_server">Subir servidor</string>
     <string name="label_custom_server_save_success">Preferencia de servidor guardada</string>
     <string name="disable_haptics_summary">Deshabilitar la retroalimentación háptica en toda la aplicación</string>
@@ -409,4 +409,5 @@
     <string name="error_alarm_permission_denied_summary">Intentaste realizar una acción que requiere el permiso SCHEDULE_EXACT_ALARM, que no está concedido a la aplicación. Haz clic aquí para conceder el permiso.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor requiere el permiso SCHEDULE_EXACT_ALARM para funcionar correctamente. Puedes seguir utilizando la aplicación, pero es posible que algunas funciones no funcionen correctamente.</string>
     <string name="error_alarm_permission_denied_feature_summary">No puedes utilizar esta función sin conceder el permiso SCHEDULE_EXACT_ALARM.</string>
+    <string name="label_do_not_show_again">No volver a mostrar</string>
 </resources>
