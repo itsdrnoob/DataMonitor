@@ -59,4 +59,8 @@
     <string name="github_graphixmedia" translatable="false">https://github.com/GraphixMedia</string>
     <string name="github_hinamechan" translatable="false">https://github.com/HinameChan</string>
     <string name="github_tadekdudek" translatable="false">https://github.com/tadekdudek</string>
+    <string name="github_fjuro" translatable="false">https://github.com/Fjuro</string>
+    <string name="github_croxz900" translatable="false">https://github.com/croxz900</string>
+    <string name="github_ngocanhtve" translatable="false">https://github.com/ngocanhtve</string>
+    <string name="github_bluehomewu" translatable="false">https://github.com/bluehomewu</string>
 </resources>

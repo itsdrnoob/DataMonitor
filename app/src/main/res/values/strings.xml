@@ -444,4 +444,12 @@
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor requires SCHEDULE_EXACT_ALARM permission to work properly. You can still use the app, but some features might not work properly.</string>
     <string name="error_alarm_permission_denied_feature_summary">You cannot use this feature without granting SCHEDULE_EXACT_ALARM permission.</string>
     <string name="label_do_not_show_again">Do not show again</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="fjuro_summary">Czech</string>
+    <string name="croxz900">Croxz</string>
+    <string name="croxz900_summary">Turkish</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="ngocanhtve_summary">Vietnamese</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="bluehomewu_summary">Traditional Chinese</string>
 </resources>

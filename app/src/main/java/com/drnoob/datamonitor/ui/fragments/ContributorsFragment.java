@@ -248,6 +248,26 @@ public class ContributorsFragment extends Fragment {
                 R.drawable.ersen0, true,
                 getContext().getString(R.string.github_tadekdudek)));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.fjuro),
+                getContext().getString(R.string.fjuro_summary),
+                R.drawable.fjuro, true,
+                getContext().getString(R.string.github_fjuro)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.croxz900),
+                getContext().getString(R.string.croxz900_summary),
+                R.drawable.croxz900, true,
+                getContext().getString(R.string.github_croxz900)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.ngocanhtve),
+                getContext().getString(R.string.ngocanhtve_summary),
+                R.drawable.ngocanhtve, true,
+                getContext().getString(R.string.github_ngocanhtve)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.bluehomewu),
+                getContext().getString(R.string.bluehomewu_summary),
+                R.drawable.bluehomewu, true,
+                getContext().getString(R.string.github_bluehomewu)));
+
         return translators;
     }
 
