@@ -20,7 +20,6 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
-import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
@@ -47,7 +46,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -56,7 +54,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -80,9 +77,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.skydoves.progressview.ProgressView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -158,14 +153,15 @@ public class AppDataUsageFragment extends Fragment {
                 String weekDay = getActivity().getIntent().getStringExtra(EXTRA_WEEK_DAY);
             }
         }
-        Log.e(TAG, "onCreateView: " + getRefreshAppDataUsage() );
-        if (getRefreshAppDataUsage()) {
-            refreshData();
-        }
 
         setSession(session);
         setType(type);
         mTotalUsage.setText("...");
+
+        Log.e(TAG, "onCreateView: " + getRefreshAppDataUsage() );
+        if (getRefreshAppDataUsage()) {
+            refreshData();
+        }
 
         mList = mUserAppsList;
         mSystemList = mSystemAppsList;
