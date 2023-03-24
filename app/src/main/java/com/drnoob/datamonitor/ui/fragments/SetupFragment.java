@@ -19,20 +19,16 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
-import static com.drnoob.datamonitor.Common.UTCToLocal;
+import static com.drnoob.datamonitor.Common.cancelDataPlanNotification;
 import static com.drnoob.datamonitor.Common.dismissOnClick;
-import static com.drnoob.datamonitor.Common.localToUTC;
-import static com.drnoob.datamonitor.Common.setBoldSpan;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
+import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.Common.showAlarmPermissionDeniedDialog;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_RESTART;
-import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR;
@@ -46,7 +42,6 @@ import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.ICON_DATA_USAGE;
 import static com.drnoob.datamonitor.core.Values.ICON_NETWORK_SPEED;
-import static com.drnoob.datamonitor.core.Values.LIMIT;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
@@ -62,7 +57,6 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDat
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -70,26 +64,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.RemoteException;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -116,24 +103,13 @@ import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointBackward;
-import com.google.android.material.datepicker.DateValidatorPointForward;
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class SetupFragment extends Fragment {
     private static Context mContext;
@@ -150,7 +126,8 @@ public class SetupFragment extends Fragment {
                 mCombinedNotificationIcon, mExcludeApps;
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
-                mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications, mAlwaysShowTotal;
+                mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications, mAlwaysShowTotal,
+                mAutoUpdateDataPlan;
         private Snackbar snackbar;
         private Long planStartDateMillis, planEndDateMillis;
         private Intent liveNetworkMonitorIntent;
@@ -165,6 +142,11 @@ public class SetupFragment extends Fragment {
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+        }
+
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
             dataPlanLauncher = registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                         @Override
@@ -174,9 +156,16 @@ public class SetupFragment extends Fragment {
                                                 getString(R.string.label_data_plan_saved), Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 updateResetData();
+                                refreshDataPlanSettingsVisibility();
                                 if (PreferenceManager.getDefaultSharedPreferences(requireContext())
                                         .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
-                                    setDataPlanNotification(getContext());
+                                    if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                            .getBoolean("auto_update_data_plan", false)) {
+                                        setRefreshAlarm(requireContext());
+                                    }
+                                    else {
+                                        setDataPlanNotification(requireContext());
+                                    }
                                 }
                                 dismissOnClick(snackbar);
                                 snackbar.show();
@@ -225,6 +214,7 @@ public class SetupFragment extends Fragment {
             mCombineNotifications = (SwitchPreferenceCompat) findPreference("combine_notifications");
             mLockscreenNotifications = (SwitchPreferenceCompat) findPreference("lockscreen_notification");
             mAlwaysShowTotal = (SwitchPreferenceCompat) findPreference("always_show_total");
+            mAutoUpdateDataPlan = (SwitchPreferenceCompat) findPreference("auto_update_data_plan");
 
             liveNetworkMonitorIntent = new Intent(getContext(), LiveNetworkMonitor.class);
 
@@ -286,8 +276,8 @@ public class SetupFragment extends Fragment {
                     String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext()).
                             getInt("data_warning_trigger_level", 85))));
 
-
             updateResetData();
+            refreshDataPlanSettingsVisibility();
 
             mCombinedNotificationIcon.setVisible(PreferenceManager.getDefaultSharedPreferences(getContext())
                     .getBoolean("combine_notifications", false));
@@ -893,6 +883,22 @@ public class SetupFragment extends Fragment {
                 public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
                     Intent i = new Intent(getContext(), NotificationUpdater.class);
                     getContext().sendBroadcast(i);
+                    return false;
+                }
+            });
+
+            mAutoUpdateDataPlan.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                            .getBoolean("auto_update_data_plan", false);
+                    cancelDataPlanNotification(requireContext());
+                    if (isChecked) {
+                        setRefreshAlarm(requireContext());
+                    }
+                    else {
+                        setDataPlanNotification(requireContext());
+                    }
                     return false;
                 }
             });
@@ -1555,6 +1561,27 @@ public class SetupFragment extends Fragment {
                 }
             });
 
+        }
+
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
+            if (dataPlanLauncher != null) {
+                dataPlanLauncher.unregister();
+                dataPlanLauncher = null;
+            }
+        }
+
+        private void refreshDataPlanSettingsVisibility() {
+            if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
+                mAutoUpdateDataPlan.setVisible(true);
+                mUsageResetTime.setVisible(false);
+            }
+            else {
+                mAutoUpdateDataPlan.setVisible(false);
+                mUsageResetTime.setVisible(true);
+            }
         }
 
         public static void pauseMonitor() {

@@ -181,6 +181,14 @@
                 app:widgetLayout="@layout/preference_right_arrow"
                 app:summary="@string/usage_reset_time_placeholder"/>
 
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_auto_update_data_plan"
+                android:key="auto_update_data_plan"
+                app:iconSpaceReserved="false"
+                app:summary="@string/auto_update_data_plan_summary"
+                android:defaultValue="false"
+                app:isPreferenceVisible="false"/>
+
             <com.drnoob.datamonitor.core.base.Preference
                 android:title="@string/exclude_apps"
                 android:key="exclude_apps"

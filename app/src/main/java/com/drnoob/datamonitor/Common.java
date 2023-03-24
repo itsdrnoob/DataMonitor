@@ -22,14 +22,18 @@ package com.drnoob.datamonitor;
 import static android.content.Context.APP_OPS_SERVICE;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
 import static com.drnoob.datamonitor.core.Values.ALARM_PERMISSION_DENIED;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.INTENT_ACTION;
 import static com.drnoob.datamonitor.core.Values.LANGUAGE_SYSTEM_DEFAULT;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_ID;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
@@ -52,6 +56,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -60,7 +65,6 @@ import androidx.core.os.ConfigurationCompat;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.adapters.data.LanguageModel;
-import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.CompoundNotification;
 import com.drnoob.datamonitor.utils.DataPlanRefreshReceiver;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
@@ -70,7 +74,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -228,7 +234,8 @@ public class Common {
         long wakeupMillis = 0l;
         try {
             wakeupMillis = getTimePeriod(context, SESSION_CUSTOM, -1)[1];
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -367,6 +374,7 @@ public class Common {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.S)
     public static void postAlarmPermissionDeniedNotification(Context context) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, OTHER_NOTIFICATION_CHANNEL_ID);
         Intent intent = new Intent();
@@ -383,5 +391,62 @@ public class Common {
                 .setPriority(NotificationCompat.PRIORITY_MAX);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         managerCompat.notify(OTHER_NOTIFICATION_ID, builder.build());
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getPlanValidity(int session, Context context) {
+        String validity;
+        Calendar calendar = Calendar.getInstance();
+        String month, endDate, suffix, end;
+        if (session == SESSION_MONTHLY) {
+            int planEnd = PreferenceManager.getDefaultSharedPreferences(context)
+                    .getInt(DATA_RESET_DATE, 1);
+            int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            if (planEnd > daysInMonth) {
+                planEnd = daysInMonth;
+            }
+            int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
+            if (today >= planEnd) {
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+            }
+            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
+            endDate = String.valueOf(planEnd);
+        }
+        else {
+            long planEndDateMillis;
+            try {
+                planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getLong(DATA_RESET_CUSTOM_DATE_END, -1);
+            }
+            catch (ClassCastException e) {
+                int planEndIntValue = PreferenceManager.getDefaultSharedPreferences(context)
+                        .getInt(DATA_RESET_CUSTOM_DATE_END, -1);
+                planEndDateMillis = ((Number) planEndIntValue).longValue();
+            }
+            calendar.setTimeInMillis(planEndDateMillis);
+            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
+            endDate = new SimpleDateFormat("d").format(calendar.getTime());
+        }
+        suffix = getDateSuffix(endDate);
+        end = endDate + suffix + " " + month;
+        validity = end;
+        return validity;
+    }
+
+    public static String getDateSuffix(String date) {
+        String suffix;
+        if (date.endsWith("1")) {
+            suffix = "st";
+        }
+        else if (date.endsWith("2")) {
+            suffix = "nd";
+        }
+        else if (date.endsWith("3")) {
+            suffix = "rd";
+        }
+        else {
+            suffix = "th";
+        }
+        return suffix;
     }
 }
