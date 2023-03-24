@@ -84,6 +84,7 @@ import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -99,6 +100,7 @@ public class DataPlanFragment extends Fragment {
 
     private Long planStartDateMillis, planEndDateMillis;
     private int startHour, startMinute, endHour, endMinute;
+    private long startMillis, endMillis; // Absolute start and end time in millis
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -167,6 +169,7 @@ public class DataPlanFragment extends Fragment {
         endTime = getContext().getString(R.string.label_custom_end_time, getTime(endHour, endMinute));
         String startDateToday = getContext().getString(R.string.label_custom_start_date, planStart);
         String endDateToday = getContext().getString(R.string.label_custom_end_date, planEnd);
+
 
         binding.customStartDate.setText(setBoldSpan(startDateToday, planStart));
         binding.customEndDate.setText(setBoldSpan(endDateToday, planEnd));
@@ -351,9 +354,25 @@ public class DataPlanFragment extends Fragment {
                     binding.dataLimitView.setError(getString(R.string.error_invalid_plan));
                 }
                 else {
+                    String startDate = new SimpleDateFormat("yyyy/MM/dd").format(planStartDateMillis);
+                    String endDate = new SimpleDateFormat("yyyy/MM/dd").format(planEndDateMillis);
+                    String start = startDate + " " + startHour + ":" + startMinute + ":00";
+                    String end = endDate + " " + endHour + ":" + endMinute + ":00";
+
+                    Date date;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    try {
+                        date = dateFormat.parse(start);
+                        startMillis = date.getTime();
+                        date = dateFormat.parse(end);
+                        endMillis = date.getTime();
+                    }
+                    catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
                     if (binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
-                            planStart.equals(planEnd) &&
-                            startHour > endHour) {
+                            startMillis > System.currentTimeMillis() || endMillis < System.currentTimeMillis()) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(),
                                 requireContext().getString(R.string.error_invalid_plan_duration),
                                 Snackbar.LENGTH_SHORT);
