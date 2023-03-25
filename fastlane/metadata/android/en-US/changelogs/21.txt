@@ -1,0 +1,7 @@
+• Added data plan auto-update.
+• Users can now change the time of their custom data plan.
+• Fixed multiple connection issues during Network diagnostics.
+• Fixed many crashes and stability issues.
+• Improved app responsiveness.
+• Added support for Czech, Dutch, Marathi and Vietnamese languages.
+For complete changelog, please check https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CHANGELOG.md#v230  

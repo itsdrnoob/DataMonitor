@@ -3,6 +3,46 @@
 All notable changes to Data Monitor will be documented in this file.
 
 
+## v2.3.0
+
+Data Monitor v2.3.0 release <br>
+This release includes many changes and improvements.
+
+### What's new?
+- Added data plan auto-update. When enabled, custom data plan will automatically update itself with a similar one.
+- Users can now change the time of their custom data plan.
+- Home screen summary, shows the currently active plan, it's validity and the amount of data used and remaining.
+- App details view now shows the total amount of data used by the app.
+- Added a new session "Current Plan" to App usage filter, which shows the data usage during the span of the currently set data plan.
+- Added a toggle to always show total data usage in notification irrespective of the slected options.
+- Added support for Czech, Dutch, Marathi and Vietnamese languages.
+
+### Fixes and Improvements
+- Fixed multiple connection issues and crashes during Network diagnostics.
+- Fixed issues with Data usage alert not working as intended.
+- Fixed the crash caused due to the denial of SCHEDULE_EXACT_ALARM permission.
+- Fixed ReceiverCallNotAllowedException while registering receiver.
+- Fixed visibility issues with update check dialog.
+- Fixed multiple instances of NumberFormatException caused due to decimal separator.
+- Fixed combined notification text visibility in dark mode.
+- Fixed widget refresh button tint in light mode.
+- Fixed RuntimeException caused by the unavailability of drawable resources in API 23.
+- Fixed error while instantiating LiveNetworkReceiver and CompoundNotificationReceiver.
+- Fixed the crash caused due to a null list reference upon device reboot.
+- Widget can now display mobile data usage without setting a data plan.
+- Fixed incorrectly shown data plan reset notfication.
+- Fixed an issue with app data usage where the previously selected data type was incorrectly shown after a refresh.
+- Fixed the constant recreation of notification view when using cobined notification.
+- Removed unused services.
+- Updated network speed notification to remain on top of the tray when possible, based on priority level.
+- Updated custom data plan validity check.
+- Updated UI and dynamic color-scheme.
+- Improved data usage calculation for better accuracy.
+- Improved app responsiveness.
+- Updated app dependencies.
+- Other minor improvements and bug fixes.
+
+
 ## v2.2.0
 
 Data Monitor v2.2.0 release <br>

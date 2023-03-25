@@ -21,7 +21,8 @@
     <string name="upi_address" translatable="false"><![CDATA[upi://pay?pa=itsdrnoob@ybl&pn=itsdrnoob&tn=DataMonitor]]></string>
     <string name="buymeacoffee_address" translatable="false">https://www.buymeacoffee.com/itsdrnoob</string>
 
-    <string name="api_url" translatable="false">https://api.ipify.org</string>
+    <string name="api_fetch_ip" translatable="false">https://datamonitorweb.vercel.app/fetchIP</string>
+    <string name="api_ip_lookup" translatable="false">https://datamonitorweb.vercel.app/ipLookup</string>
 
     <string name="download_server_1_url" translatable="false">http://speedtest.ftp.otenet.gr/files/test10Mb.db</string>
     <string name="download_server_2_url" translatable="false">https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin</string>
@@ -58,4 +59,8 @@
     <string name="github_graphixmedia" translatable="false">https://github.com/GraphixMedia</string>
     <string name="github_hinamechan" translatable="false">https://github.com/HinameChan</string>
     <string name="github_tadekdudek" translatable="false">https://github.com/tadekdudek</string>
+    <string name="github_fjuro" translatable="false">https://github.com/Fjuro</string>
+    <string name="github_croxz900" translatable="false">https://github.com/croxz900</string>
+    <string name="github_ngocanhtve" translatable="false">https://github.com/ngocanhtve</string>
+    <string name="github_bluehomewu" translatable="false">https://github.com/bluehomewu</string>
 </resources>

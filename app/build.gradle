@@ -10,10 +10,10 @@ android {
         applicationId "com.drnoob.datamonitor"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 19
-        versionName 'v2.3.0-Beta4'
-        resConfigs "en", "ar", "de", "es", "fr", "hi", "in", "it", "ko",
-                "ml", "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "zh-rCN", "zh-rTW"
+        versionCode 21
+        versionName 'v2.3.0'
+        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ko",
+                "ml", "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN", "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,7 +46,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -56,12 +56,13 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'com.android.volley:volley:1.2.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     /** */
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'androidx.preference:preference:1.2.0'
     implementation "com.github.skydoves:progressview:1.1.2"
     implementation 'com.airbnb.android:lottie:5.2.0'

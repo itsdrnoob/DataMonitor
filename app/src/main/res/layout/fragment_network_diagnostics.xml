@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-<!--    <TextView-->
-<!--        android:id="@+id/info"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="@dimen/margin_small"-->
-<!--        android:layout_marginTop="@dimen/margin_mid_large"-->
-<!--        android:layout_marginEnd="@dimen/margin_small"-->
-<!--        android:background="@drawable/banner_background"-->
-<!--        android:clickable="true"-->
-<!--        android:drawableTop="@drawable/ic_info"-->
-<!--        android:drawablePadding="@dimen/margin_mid_large"-->
-<!--        android:elevation="@dimen/elevation_small"-->
-<!--        android:gravity="start"-->
-<!--        android:paddingStart="@dimen/margin_mid_large"-->
-<!--        android:paddingTop="@dimen/margin_mid_large"-->
-<!--        android:paddingEnd="@dimen/margin_medium"-->
-<!--        android:paddingBottom="@dimen/margin_mid_large"-->
-<!--        android:text="@string/network_diagnostics_info"-->
-<!--        android:textSize="@dimen/text_small"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <LinearLayout
         android:id="@+id/info"
         android:layout_width="0dp"
@@ -135,58 +111,6 @@
             app:layout_constraintGuide_percent="0.7" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--    <com.airbnb.lottie.LottieAnimationView-->
-    <!--        android:id="@+id/ripple_view"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:scaleType="centerInside"-->
-    <!--        android:scaleX="1.5"-->
-    <!--        android:scaleY="1.5"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintDimensionRatio="1:1"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline3"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:lottie_autoPlay="true"-->
-    <!--        app:lottie_loop="true"-->
-    <!--        app:lottie_rawRes="@raw/button_ripple" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/run_diagnostics"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginRight="5dp"-->
-    <!--        android:layout_marginBottom="5dp"-->
-    <!--        android:background="@drawable/button_run_diagnostics_background"-->
-    <!--        android:clickable="true"-->
-    <!--        android:elevation="1dp"-->
-    <!--        android:gravity="center"-->
-    <!--        android:padding="@dimen/padding_medium"-->
-    <!--        android:text="@string/run_diagnostics"-->
-    <!--        android:textColor="@color/primary"-->
-    <!--        android:textSize="@dimen/text_run_diagnostics"-->
-    <!--        android:textStyle="bold"-->
-    <!--        android:visibility="visible"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/ripple_view"-->
-    <!--        app:layout_constraintEnd_toEndOf="@+id/ripple_view"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/ripple_view"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/ripple_view" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintGuide_percent="0.3" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintGuide_percent="0.7" />-->
-
 
     <LinearLayout
         android:id="@+id/history"

@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
+import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
@@ -96,6 +97,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements View.OnLongClickListener {
@@ -156,7 +158,13 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                                     .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                             if (PreferenceManager.getDefaultSharedPreferences(requireContext())
                                     .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
-                                setDataPlanNotification(getContext());
+                                if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                                        .getBoolean("auto_update_data_plan", false)) {
+                                    setRefreshAlarm(requireContext());
+                                }
+                                else {
+                                    setDataPlanNotification(requireContext());
+                                }
                             }
                             mSetupDataPlan.setVisibility(View.GONE);
                             updateDataBalance();
