@@ -49,10 +49,14 @@
     <color name="bottom_sheet_handle">#AFBAC9</color>
     <color name="ripple">@color/graph_divider_secondary</color>
     <color name="widget_background">#C8E5F1FF</color>  <!--96FFFFFF-->
-    <color name="info_banner_bg">#F0FFF9</color>
+    <color name="info_banner_bg">#E5F1FF</color>
     <color name="error_banner_bg">#FFE5E6</color>
     <color name="warning_banner_bg">#FFFBE5</color>
     <color name="bottom_nav_view_bg">@color/surface</color>
     <color name="banner_tint">@color/info_banner_bg</color>
     <color name="search_bg">#D6E9FF</color>
+    <color name="notification_summary_text">#4d4e57</color>
+    <color name="chip_selected">#99C8FF</color>
+    <color name="chip_unselected">#ECF2F9</color>
+    <color name="arrow_back">@color/text_primary</color>
 </resources>

@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.Widget;
 
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
@@ -39,6 +40,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,6 +51,7 @@ import android.widget.RemoteViews;
 
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -92,8 +95,12 @@ public class DataUsageWidget extends AppWidgetProvider {
                     .equals(DATA_RESET_DAILY)) {
                 mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, 1);
             }
-            else {
+            else if (PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, "null")
+                    .equals(DATA_RESET_CUSTOM)) {
                 mobile = getDeviceMobileDataUsage(context, SESSION_CUSTOM, -1);
+            }
+            else {
+                mobile = getDeviceMobileDataUsage(context, SESSION_TODAY, -1);
             }
 
             mobileData = formatData(mobile[0], mobile[1])[2];
@@ -337,7 +344,18 @@ public class DataUsageWidget extends AppWidgetProvider {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         int elapsedTime = PreferenceManager.getDefaultSharedPreferences(context).getInt("widget_refresh_interval", 60000);
-        alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()) {
+                alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pendingIntent);
+            }
+            else  {
+                Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                Common.postAlarmPermissionDeniedNotification(context);
+            }
+        }
+        else {
+            alarmManager.setExact(AlarmManager.RTC, System.currentTimeMillis() + elapsedTime, pendingIntent);
+        }
     }
 
     private void startReceiver(Context context) {

@@ -228,6 +228,46 @@ public class ContributorsFragment extends Fragment {
                 getContext().getString(R.string.U1M450W_summary),
                 R.drawable.ic_person, false));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.atharvshinde),
+                getContext().getString(R.string.atharvshinde_translation_summary),
+                R.drawable.atharvshinde, true,
+                getContext().getString(R.string.github_atharvshinde)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.graphixmedia),
+                getContext().getString(R.string.graphixmedia_summary),
+                R.drawable.graphixmedia, true,
+                getContext().getString(R.string.github_graphixmedia)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.hinamechan),
+                getContext().getString(R.string.hinamechan_summary),
+                R.drawable.hinamechan, true,
+                getContext().getString(R.string.github_hinamechan)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.tadekdudek),
+                getContext().getString(R.string.tadekdudek_summary),
+                R.drawable.ersen0, true,
+                getContext().getString(R.string.github_tadekdudek)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.fjuro),
+                getContext().getString(R.string.fjuro_summary),
+                R.drawable.fjuro, true,
+                getContext().getString(R.string.github_fjuro)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.croxz900),
+                getContext().getString(R.string.croxz900_summary),
+                R.drawable.croxz900, true,
+                getContext().getString(R.string.github_croxz900)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.ngocanhtve),
+                getContext().getString(R.string.ngocanhtve_summary),
+                R.drawable.ngocanhtve, true,
+                getContext().getString(R.string.github_ngocanhtve)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.bluehomewu),
+                getContext().getString(R.string.bluehomewu_summary),
+                R.drawable.bluehomewu, true,
+                getContext().getString(R.string.github_bluehomewu)));
+
         return translators;
     }
 

@@ -105,8 +105,8 @@ public class SystemDataUsageFragment extends Fragment {
         mAppsView = view.findViewById(R.id.app_data_usage_recycler);
         mLoading = view.findViewById(R.id.layout_list_loading);
         mDataRefresh = view.findViewById(R.id.refresh_data_usage);
-        mSession = view.findViewById(R.id.data_usage_session);
-        mType = view.findViewById(R.id.data_usage_type);
+//        mSession = view.findViewById(R.id.data_usage_session);
+//        mType = view.findViewById(R.id.data_usage_type);
         mTopBar = view.findViewById(R.id.top_bar);
         mEmptyList = view.findViewById(R.id.empty_list);
         mList = AppDataUsageFragment.mSystemList;
@@ -126,164 +126,164 @@ public class SystemDataUsageFragment extends Fragment {
             }
         }
 
-        setSession(session);
-        setType(type);
+//        setSession(session);
+//        setType(type);
 
 
         if (mList.size() > 0) {
             mLoading.setAlpha(0.0f);
             onDataLoaded();
         } else {
-            LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
+            LoadData loadData = new LoadData(mContext, session, type);
             loadData.execute();
         }
 
         mDataRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
+                LoadData loadData = new LoadData(mContext, session, type);
                 loadData.execute();
             }
         });
 
-        mSession.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
-                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_session, null);
-
-                RadioGroup sessions = dialogView.findViewById(R.id.session_group);
-                ConstraintLayout footer = dialogView.findViewById(R.id.footer);
-                TextView cancel = footer.findViewById(R.id.cancel);
-                TextView ok = footer.findViewById(R.id.ok);
-
-                switch (getSession(getContext())) {
-                    case SESSION_TODAY:
-                        sessions.check(R.id.session_today);
-                        break;
-
-                    case SESSION_YESTERDAY:
-                        sessions.check(R.id.session_yesterday);
-                        break;
-
-                    case SESSION_THIS_MONTH:
-                        sessions.check(R.id.session_this_month);
-                        break;
-
-                    case SESSION_LAST_MONTH:
-                        sessions.check(R.id.session_last_month);
-                        break;
-
-                    case SESSION_THIS_YEAR:
-                        sessions.check(R.id.session_this_year);
-                        break;
-
-                    case SESSION_ALL_TIME:
-                        sessions.check(R.id.session_all_time);
-                        break;
-
-                }
-
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String session = null;
-                        switch (sessions.getCheckedRadioButtonId()) {
-                            case R.id.session_today:
-                                session = getString(R.string.label_today);
-                                break;
-
-                            case R.id.session_yesterday:
-                                session = getString(R.string.label_yesterday);
-                                break;
-
-                            case R.id.session_this_month:
-                                session = getString(R.string.label_this_month);
-                                break;
-
-                            case R.id.session_last_month:
-                                session = getString(R.string.label_last_month);
-                                break;
-
-                            case R.id.session_this_year:
-                                session = getString(R.string.label_this_year);
-                                break;
-
-                            case R.id.session_all_time:
-                                session = getString(R.string.label_all_time);
-                                break;
-                        }
-                        mSession.setText(session);
-                        LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
-                        loadData.execute();
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.setContentView(dialogView);
-                dialog.show();
-            }
-        });
-
-        mType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
-                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_type, null);
-
-                RadioGroup types = dialogView.findViewById(R.id.type_group);
-                ConstraintLayout footer = dialogView.findViewById(R.id.footer);
-                TextView cancel = footer.findViewById(R.id.cancel);
-                TextView ok = footer.findViewById(R.id.ok);
-
-                switch (getType(getContext())) {
-                    case TYPE_MOBILE_DATA:
-                        types.check(R.id.type_mobile);
-                        break;
-
-                    case TYPE_WIFI:
-                        types.check(R.id.type_wifi);
-                        break;
-                }
-
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String type = null;
-                        switch (types.getCheckedRadioButtonId()) {
-                            case R.id.type_mobile:
-                                type = getString(R.string.label_mobile_data);
-                                break;
-
-                            case R.id.type_wifi:
-                                type = getString(R.string.label_wifi);
-                                break;
-                        }
-                        mType.setText(type);
-                        LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
-                        loadData.execute();
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.setContentView(dialogView);
-                dialog.show();
-            }
-        });
+//        mSession.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
+//                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_session, null);
+//
+//                RadioGroup sessions = dialogView.findViewById(R.id.session_group);
+//                ConstraintLayout footer = dialogView.findViewById(R.id.footer);
+//                TextView cancel = footer.findViewById(R.id.cancel);
+//                TextView ok = footer.findViewById(R.id.ok);
+//
+//                switch (getSession(getContext())) {
+//                    case SESSION_TODAY:
+//                        sessions.check(R.id.session_today);
+//                        break;
+//
+//                    case SESSION_YESTERDAY:
+//                        sessions.check(R.id.session_yesterday);
+//                        break;
+//
+//                    case SESSION_THIS_MONTH:
+//                        sessions.check(R.id.session_this_month);
+//                        break;
+//
+//                    case SESSION_LAST_MONTH:
+//                        sessions.check(R.id.session_last_month);
+//                        break;
+//
+//                    case SESSION_THIS_YEAR:
+//                        sessions.check(R.id.session_this_year);
+//                        break;
+//
+//                    case SESSION_ALL_TIME:
+//                        sessions.check(R.id.session_all_time);
+//                        break;
+//
+//                }
+//
+//                cancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                ok.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        String session = null;
+//                        switch (sessions.getCheckedRadioButtonId()) {
+//                            case R.id.session_today:
+//                                session = getString(R.string.label_today);
+//                                break;
+//
+//                            case R.id.session_yesterday:
+//                                session = getString(R.string.label_yesterday);
+//                                break;
+//
+//                            case R.id.session_this_month:
+//                                session = getString(R.string.label_this_month);
+//                                break;
+//
+//                            case R.id.session_last_month:
+//                                session = getString(R.string.label_last_month);
+//                                break;
+//
+//                            case R.id.session_this_year:
+//                                session = getString(R.string.label_this_year);
+//                                break;
+//
+//                            case R.id.session_all_time:
+//                                session = getString(R.string.label_all_time);
+//                                break;
+//                        }
+//                        mSession.setText(session);
+//                        LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
+//                        loadData.execute();
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                dialog.setContentView(dialogView);
+//                dialog.show();
+//            }
+//        });
+//
+//        mType.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
+//                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_type, null);
+//
+//                RadioGroup types = dialogView.findViewById(R.id.type_group);
+//                ConstraintLayout footer = dialogView.findViewById(R.id.footer);
+//                TextView cancel = footer.findViewById(R.id.cancel);
+//                TextView ok = footer.findViewById(R.id.ok);
+//
+//                switch (getType(getContext())) {
+//                    case TYPE_MOBILE_DATA:
+//                        types.check(R.id.type_mobile);
+//                        break;
+//
+//                    case TYPE_WIFI:
+//                        types.check(R.id.type_wifi);
+//                        break;
+//                }
+//
+//                cancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                ok.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        String type = null;
+//                        switch (types.getCheckedRadioButtonId()) {
+//                            case R.id.type_mobile:
+//                                type = getString(R.string.label_mobile_data);
+//                                break;
+//
+//                            case R.id.type_wifi:
+//                                type = getString(R.string.label_wifi);
+//                                break;
+//                        }
+//                        mType.setText(type);
+//                        LoadData loadData = new LoadData(mContext, getSession(mContext), getType(mContext));
+//                        loadData.execute();
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                dialog.setContentView(dialogView);
+//                dialog.show();
+//            }
+//        });
 
         return view;
     }
@@ -300,10 +300,10 @@ public class SystemDataUsageFragment extends Fragment {
         if (mList.size() <= 0) {
             mEmptyList.animate().alpha(1.0f);
         }
-        else {
-            setSession(mList.get(0).getSession());
-            setType(mList.get(0).getType());
-        }
+//        else {
+//            setSession(mList.get(0).getSession());
+//            setType(mList.get(0).getType());
+//        }
     }
 
     public static class LoadData extends AsyncTask {
@@ -364,8 +364,13 @@ public class SystemDataUsageFragment extends Fragment {
                                 Long deviceTotal = getDeviceMobileDataUsage(mContext, session, 1)[2];
 
                                 Double p = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 5;
-
-                                int progress = p.intValue();
+                                int progress;
+                                if (p != null) {
+                                    progress = p.intValue();
+                                }
+                                else {
+                                    progress = 0;
+                                }
 
                                 model.setProgress(progress);
 
@@ -396,8 +401,13 @@ public class SystemDataUsageFragment extends Fragment {
                                 Long deviceTotal = getDeviceWifiDataUsage(mContext, session)[2];
 
                                 Double p = ((total.doubleValue() / deviceTotal.doubleValue()) * 100) * 5;
-
-                                int progress = p.intValue();
+                                int progress;
+                                if (p != null) {
+                                    progress = p.intValue();
+                                }
+                                else {
+                                    progress = 0;
+                                }
 
                                 model.setProgress(progress);
 
@@ -433,96 +443,96 @@ public class SystemDataUsageFragment extends Fragment {
         }
     }
 
-    private int getSession(Context context) {
-        int session = 0;
-        String selectedSession = mSession.getText().toString();
-        String sessionToday = context.getString(R.string.label_today);
-        String sessionYesterday = context.getString(R.string.label_yesterday);
-        String sessionThisMonth = context.getString(R.string.label_this_month);
-        String sessionLastMonth = context.getString(R.string.label_last_month);
-        String sessionThisYear = context.getString(R.string.label_this_year);
-        String sessionAllTime = context.getString(R.string.label_all_time);
+//    private int getSession(Context context) {
+//        int session = 0;
+//        String selectedSession = mSession.getText().toString();
+//        String sessionToday = context.getString(R.string.label_today);
+//        String sessionYesterday = context.getString(R.string.label_yesterday);
+//        String sessionThisMonth = context.getString(R.string.label_this_month);
+//        String sessionLastMonth = context.getString(R.string.label_last_month);
+//        String sessionThisYear = context.getString(R.string.label_this_year);
+//        String sessionAllTime = context.getString(R.string.label_all_time);
+//
+//        if (selectedSession.equalsIgnoreCase(sessionToday)) {
+//            session = SESSION_TODAY;
+//        }
+//        else if (selectedSession.equalsIgnoreCase(sessionYesterday)) {
+//            session = SESSION_YESTERDAY;
+//        }
+//        else if (selectedSession.equalsIgnoreCase(sessionThisMonth)) {
+//            session = SESSION_THIS_MONTH;
+//        }
+//        else if (selectedSession.equalsIgnoreCase(sessionLastMonth)) {
+//            session = SESSION_LAST_MONTH;
+//        }
+//        else if (selectedSession.equalsIgnoreCase(sessionThisYear)) {
+//            session = SESSION_THIS_YEAR;
+//        }
+//        else if (selectedSession.equalsIgnoreCase(sessionAllTime)) {
+//            session = SESSION_ALL_TIME;
+//        }
+//        else {
+//            session = SESSION_TODAY;
+//        }
+//
+//        return session;
+//    }
+//
+//    private int getType(Context context) {
+//        int type = 0;
+//        String selectedType = mType.getText().toString();
+//        String mobileData = context.getString(R.string.label_mobile_data);
+//        String wifi = context.getString(R.string.label_wifi);
+//
+//        if (selectedType.equalsIgnoreCase(mobileData)) {
+//            type = TYPE_MOBILE_DATA;
+//        }
+//        else if (selectedType.equalsIgnoreCase(wifi)) {
+//            type = TYPE_WIFI;
+//        }
+//        else {
+//            type = TYPE_MOBILE_DATA;
+//        }
+//        return type;
+//    }
 
-        if (selectedSession.equalsIgnoreCase(sessionToday)) {
-            session = SESSION_TODAY;
-        }
-        else if (selectedSession.equalsIgnoreCase(sessionYesterday)) {
-            session = SESSION_YESTERDAY;
-        }
-        else if (selectedSession.equalsIgnoreCase(sessionThisMonth)) {
-            session = SESSION_THIS_MONTH;
-        }
-        else if (selectedSession.equalsIgnoreCase(sessionLastMonth)) {
-            session = SESSION_LAST_MONTH;
-        }
-        else if (selectedSession.equalsIgnoreCase(sessionThisYear)) {
-            session = SESSION_THIS_YEAR;
-        }
-        else if (selectedSession.equalsIgnoreCase(sessionAllTime)) {
-            session = SESSION_ALL_TIME;
-        }
-        else {
-            session = SESSION_TODAY;
-        }
+//    private static void setSession(int session) {
+//        switch (session) {
+//            case SESSION_TODAY:
+//                mSession.setText(mContext.getString(R.string.label_today));
+//                break;
+//
+//            case SESSION_YESTERDAY:
+//                mSession.setText(mContext.getString(R.string.label_yesterday));
+//                break;
+//
+//            case SESSION_THIS_MONTH:
+//                mSession.setText(mContext.getString(R.string.label_this_month));
+//                break;
+//
+//            case SESSION_LAST_MONTH:
+//                mSession.setText(mContext.getString(R.string.label_last_month));
+//                break;
+//            case SESSION_THIS_YEAR:
+//                mSession.setText(mContext.getString(R.string.label_this_year));
+//                break;
+//
+//            case SESSION_ALL_TIME:
+//                mSession.setText(mContext.getString(R.string.label_all_time));
+//                break;
+//
+//        }
+//    }
 
-        return session;
-    }
-
-    private int getType(Context context) {
-        int type = 0;
-        String selectedType = mType.getText().toString();
-        String mobileData = context.getString(R.string.label_mobile_data);
-        String wifi = context.getString(R.string.label_wifi);
-
-        if (selectedType.equalsIgnoreCase(mobileData)) {
-            type = TYPE_MOBILE_DATA;
-        }
-        else if (selectedType.equalsIgnoreCase(wifi)) {
-            type = TYPE_WIFI;
-        }
-        else {
-            type = TYPE_MOBILE_DATA;
-        }
-        return type;
-    }
-
-    private static void setSession(int session) {
-        switch (session) {
-            case SESSION_TODAY:
-                mSession.setText(mContext.getString(R.string.label_today));
-                break;
-
-            case SESSION_YESTERDAY:
-                mSession.setText(mContext.getString(R.string.label_yesterday));
-                break;
-
-            case SESSION_THIS_MONTH:
-                mSession.setText(mContext.getString(R.string.label_this_month));
-                break;
-
-            case SESSION_LAST_MONTH:
-                mSession.setText(mContext.getString(R.string.label_last_month));
-                break;
-            case SESSION_THIS_YEAR:
-                mSession.setText(mContext.getString(R.string.label_this_year));
-                break;
-
-            case SESSION_ALL_TIME:
-                mSession.setText(mContext.getString(R.string.label_all_time));
-                break;
-
-        }
-    }
-
-    private static void setType(int type) {
-        switch (type) {
-            case TYPE_MOBILE_DATA:
-                mType.setText(mContext.getString(R.string.label_mobile_data));
-                break;
-
-            case TYPE_WIFI:
-                mType.setText(mContext.getString(R.string.label_wifi));
-                break;
-        }
-    }
+//    private static void setType(int type) {
+//        switch (type) {
+//            case TYPE_MOBILE_DATA:
+//                mType.setText(mContext.getString(R.string.label_mobile_data));
+//                break;
+//
+//            case TYPE_WIFI:
+//                mType.setText(mContext.getString(R.string.label_wifi));
+//                break;
+//        }
+//    }
 }

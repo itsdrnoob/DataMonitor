@@ -3,7 +3,7 @@
     <!-- Dynamic colors -->
     <color name="primary">@color/material_dynamic_primary40</color>
     <color name="primary_variant">@color/material_dynamic_primary80</color>
-    <color name="background">@color/material_dynamic_tertiary99</color>
+    <color name="background">@color/material_dynamic_secondary99</color>
     <color name="surface">@color/white</color>
     <color name="status_bar">@color/background</color>
     <color name="bottom_nav_view_bg">@color/material_dynamic_neutral99</color>
@@ -15,35 +15,7 @@
     <color name="switch_on_track">@color/material_dynamic_primary40</color>
     <color name="switch_off_track">@color/material_on_primary_disabled</color>
     <color name="search_bg">@color/material_dynamic_secondary90</color>
-    <!--    <color name="on_background">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="on_surface">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="text_primary">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="text_secondary">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="error">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="error_95">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="on_error">@color/white</color>-->
-    <!--    <color name="warning">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="warning_95">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="on_warning">@color/white</color>-->
-    <!--    <color name="green">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="top_bar_scrolling">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="top_bar_still">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="graph_divider_primary">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="graph_divider_secondary">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="color_loading_background">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="mobile_data_usage_background_home">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="data_usage_home_stroke">@color/white</color>-->
-    <!--    <color name="wifi_usage_bg_home">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="usage_wifi_ripple">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="usage_mobile_ripple">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="bottom_sheet">@color/background</color>-->
-    <!--    <color name="switch_off">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="switch_on_thumb">@color/white</color>-->
-    <!--    <color name="switch_off_thumb">@color/white</color>-->
-    <!--    <color name="bottom_sheet_handle">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="ripple">@color/graph_divider_secondary</color>-->
-    <!--    <color name="widget_background">@color/material_dynamic_primary40</color>  &lt;!&ndash;96FFFFFF&ndash;&gt;-->
-    <!--    <color name="info_banner_bg">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="error_banner_bg">@color/material_dynamic_primary40</color>-->
-    <!--    <color name="warning_banner_bg">@color/material_dynamic_primary40</color>-->
+    <color name="chip_selected">@color/material_dynamic_primary80</color>
+    <color name="chip_unselected">@color/material_dynamic_secondary95</color>
+    <color name="arrow_back">@color/material_dynamic_primary10</color>
 </resources>

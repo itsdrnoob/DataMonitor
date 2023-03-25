@@ -52,7 +52,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsFragment.class.getSimpleName();
     private Preference mAppThemePicker, mLanguagePicker, mDiagnosticsSettings,
-            mAbout, mLicense, mContributors, mDonate;
+            mAbout, mContributors, mDonate;
     private SwitchPreferenceCompat mDisableHaptics;
     private Snackbar snackbar;
 
@@ -74,7 +74,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mDiagnosticsSettings = (Preference) findPreference("network_diagnostics");
         mDisableHaptics = (SwitchPreferenceCompat) findPreference("disable_haptics");
         mAbout = (Preference) findPreference("about");
-        mLicense = (Preference) findPreference("license");
         mContributors = (Preference) findPreference("contributors");
         mDonate = (Preference) findPreference("donate");
 
@@ -223,15 +222,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(androidx.preference.Preference preference) {
                 startActivity(new Intent(getContext(), ContainerActivity.class)
                         .putExtra(GENERAL_FRAGMENT_ID, ABOUT_FRAGMENT));
-                return false;
-            }
-        });
-
-        mLicense.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(androidx.preference.Preference preference) {
-                startActivity(new Intent(getContext(), ContainerActivity.class)
-                        .putExtra(GENERAL_FRAGMENT_ID, LICENSE_FRAGMENT));
                 return false;
             }
         });

@@ -71,10 +71,10 @@
     <string name="setup_notification">"إعداد الإخطارات"</string>
     <string name="title_configure">"تهيئة"</string>
     <string name="setup_widget_title">"تطبيق مصغر"</string>
-    <string name="setup_widget_refresh_interval">"الفاصل الزمني لتحديث التطبق المصغر"</string>
+    <string name="setup_widget_refresh_interval">الفاصل الزمني لتحديث التطبيق المصغر</string>
     <string name="refresh_interval_placeholder">"1 دقيقة"</string>
     <string name="setup_show_remaining_data">"إظهار معلومات البيانات المتبقية"</string>
-    <string name="setup_refresh_widget">"تحديث التبطيق المصغر"</string>
+    <string name="setup_refresh_widget">تحديث التطبيق المصغر</string>
     <string name="refresh_widget_summary">"قم بتحديث التطبيق المصغر إذا كانت تواجه مشكلة"</string>
     <string name="setup_notification_title">"إخطار"</string>
     <string name="setup_notification_refresh_interval">"الفاصل الزمني لتحديث الإخطار"</string>
@@ -115,9 +115,9 @@
     <string name="setup">"إعداد"</string>
     <string name="app_data_usage">استخدام التطبيق</string>
     <string name="settings">"الإعدادات"</string>
-    <string name="btc_address_copied">"تم نسخ عنوان محفظة Bitcoin إلى الحافظة الخاصة بك"</string>
-    <string name="eth_address_copied">"تم نسخ عنوان محفظة Ethereum إلى الحافظة الخاصة بك"</string>
-    <string name="ltc_address_copied">"تم نسخ عنوان محفظة Litecoin إلى الحافظة الخاصة بك"</string>
+    <string name="btc_address_copied">تم نسخ عنوان محفظة Bitcoin إلى الحافظة الخاصة بك</string>
+    <string name="eth_address_copied">تم نسخ عنوان محفظة Ethereum إلى الحافظة</string>
+    <string name="ltc_address_copied">تم نسخ عنوان محفظة Litecoin إلى الحافظة</string>
     <string name="label_system_apps">"تطبيقات النظام"</string>
     <string name="home">"الشاشة الرئيسية"</string>
     <string name="usage_access_permission">"إذن وصول الاستخدام"</string>
@@ -140,7 +140,7 @@
     <string name="remaining_data_info_enabled">"تم تمكين معلومات البيانات المتبقية"</string>
     <string name="remaining_data_info_disabled">"تم تعطيل معلومات البيانات المتبقية"</string>
     <string name="label_monitoring_no_plan">"أضف خطة بيانات لبدء المراقبة"</string>
-    <string name="label_widget_refreshed">"تم تحديث التطبق المصغر"</string>
+    <string name="label_widget_refreshed">تم تحديث التطبيق المصغر</string>
     <string name="label_notification_enabled">"تمكين إخطار مراقب البيانات"</string>
     <string name="label_notification_cannot_disable_both">"لا يمكن تعطيل كلا العنصرين"</string>
     <string name="label_setup_notification_first">"يرجى إعداد الإخطار أولا"</string>
@@ -239,7 +239,7 @@
     <string name="label_changelogs">"البحث عن ما هو جديد"</string>
     <string name="no_update_available">انت تقوم الان بتشغيل أحدث إصدار.</string>
     <string name="label_update_available">"تحديث متاح!"</string>
-    <string name="label_download_update">"حمل التحديث"</string>
+    <string name="label_download_update">تنزيل التحديث</string>
     <string name="checking_for_update">جاري التحقق من وجود تحديثات…</string>
     <string name="new_update_available">"تحديث جديد متاح!"</string>
     <string name="update_fetch_error">"تعذر جلب التحديثات"</string>
@@ -274,7 +274,7 @@
     <string name="crash_logs_warning">سجلات الأعطال; لا تقم بالتعديل</string>
     <string name="title_device_info_contents">محتويات معلومات الجهاز</string>
     <string name="label_mail">البريد</string>
-    <string name="battery_optimisation_enabled_info">تم تمكين تحسين البطارية. هذا سوف يتداخل مع عمل مراقب البيانات. انقر لتعطيل.</string>
+    <string name="battery_optimisation_enabled_info">تم تمكين تحسين البطارية. سيتداخل هذا مع عمل مراقب البيانات.</string>
     <string name="label_battery_optimisation">تحسينات البطارية</string>
     <string name="error_no_crash_logs">لم يتم العثور على سجلات الأعطال. هل أنت متأكد من حدوث مشكلة؟</string>
     <string name="settings_diagnostics_server">الخادم</string>
@@ -365,4 +365,42 @@
     <string name="shailendramaurya">شايليندرا موريا</string>
     <string name="iqb4lsp">IQB4LSP</string>
     <string name="Master2050_summary">الصينية التقليدية والبرتغالية والفرنسية والنرويجية البوكمال والإسبانية والألمانية والرومانية والكورية والتركية والصينية المبسطة والأوكرانية والهندية والروسية والعربية</string>
+    <string name="graphixmedia">جرافكسكس</string>
+    <string name="hinamechan_summary">التركيّة</string>
+    <string name="atharvshinde_summary">المطور</string>
+    <string name="atharvshinde">أثارف شيندي</string>
+    <string name="graphixmedia_summary">الهولنديّة</string>
+    <string name="hinamechan">هينامتشان</string>
+    <string name="atharvshinde_translation_summary">المراثية</string>
+    <string name="label_buymeacoffee">اشتري لي قهوة</string>
+    <string name="label_custom_start_time">وقت البدء: %1$s</string>
+    <string name="label_custom_end_time">وقت الانتهاء: %1$s</string>
+    <string name="label_paypal">بايبال</string>
+    <string name="buymeacoffee_summary">اشتر لي :) القهوة</string>
+    <string name="upi_summary">تبرع عبر UPI</string>
+    <string name="action_save">إحفظ</string>
+    <string name="error_invalid_plan_duration">مدة الخطة غير صالحة</string>
+    <string name="donate_info">مراقب البيانات هو تطبيق مجاني ومفتوح المصدر وسيظل دائما على هذا النحو :)
+\n
+\nإذا كنت ترغب في دعم تطوير التطبيق ، فسيكون التبرع موضع تقدير كبير.</string>
+    <string name="paypal_summary">تبرع عبر بايبال</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="xmr_address_copied">تم نسخ عنوان محفظة مونيرو إلى الحافظة</string>
+    <string name="tadekdudek">تاديكدوديك</string>
+    <string name="tadekdudek_summary">بولندي</string>
+    <string name="error_alarm_permission_denied_summary">لقد حاولت تنفيذ إجراء يتطلب إذن SCHEDULE_EXACT_ALARM، والذي لم يتم منحه للتطبيق. انقر هنا لمنح الإذن.</string>
+    <string name="error_network_monitor_start">فشل بدء تشغيل \"مراقبة الشبكة\". افتح التطبيق للتحديث.</string>
+    <string name="label_filter_app_usage">تصفية استخدام التطبيق</string>
+    <string name="label_current_plan">الخطة الحالية</string>
+    <string name="label_plan_details_title">خطة %1$s نشطة</string>
+    <string name="label_filter">المرشحات</string>
+    <string name="home_plan_usage_details">%1$s مستخدمة | %2$s</string>
+    <string name="label_plan_validity">صالح حتى %1$s</string>
+    <string name="always_show_total">إظهار المجموع دائما</string>
+    <string name="app_label_combined_total">إجمالي استخدام البيانات: %1$s</string>
+    <string name="always_show_total_summary">اعرض دائما إجمالي البيانات المستخدمة في الإخطار بغض النظر عن الخيارات المحددة.</string>
+    <string name="error_alarm_permission_denied">تم رفض إذن التنبيه!</string>
+    <string name="error_alarm_permission_denied_feature_summary">لا يمكنك استخدام هذه الميزة دون منح إذن SCHEDULE_EXACT_ALARM.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">يتطلب مراقب البيانات إذنا SCHEDULE_EXACT_ALARM للعمل بشكل صحيح. لا يزال بإمكانك استخدام التطبيق، ولكن قد لا تعمل بعض الميزات بشكل صحيح.</string>
+    <string name="label_do_not_show_again">لا تظهر مرة أخرى</string>
 </resources>

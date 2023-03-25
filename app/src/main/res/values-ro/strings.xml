@@ -321,4 +321,5 @@
     <string name="option_15_sec">15 secunde</string>
     <string name="option_30_sec">30 de secunde</string>
     <string name="lockscreen_notification">Activați notificarea pe ecranul de blocare</string>
+    <string name="exclude_apps">Excludere aplicații</string>
 </resources>

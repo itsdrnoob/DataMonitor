@@ -51,7 +51,7 @@
             android:name=".ui.activities.SetupActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"
+            android:theme="@style/Theme.DataMonitor.Splash"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -100,19 +100,19 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".utils.AppDataUsageMonitor"
-            android:enabled="true"
-            android:exported="true" />
+<!--        <service-->
+<!--            android:name=".utils.AppDataUsageMonitor"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true" />-->
 
-        <receiver
-            android:name=".utils.AppDataUsageMonitor$AppDataMonitor"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SCREEN_ON" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".utils.AppDataUsageMonitor$AppDataMonitor"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.SCREEN_ON" />-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
         <receiver
             android:name=".utils.NotificationService$NotificationRemover"
             android:exported="true">
@@ -132,8 +132,7 @@
         </receiver>
         <receiver
             android:name=".utils.LiveNetworkMonitor$LiveNetworkReceiver"
-            android:exported="true"
-            tools:ignore="Instantiatable">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.SCREEN_OFF" />
@@ -142,8 +141,7 @@
         </receiver>
         <receiver
             android:name=".utils.CompoundNotification$CompoundNotificationReceiver"
-            android:exported="true"
-            tools:ignore="Instantiatable">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.SCREEN_OFF" />

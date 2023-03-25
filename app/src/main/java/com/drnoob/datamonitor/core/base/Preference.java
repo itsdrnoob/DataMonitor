@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.core.base;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +54,8 @@ public class Preference extends androidx.preference.Preference {
             TextView title = (TextView) holder.findViewById(android.R.id.title);
             LinearLayout rootLayout = (LinearLayout) title.getParent().getParent();
             TextView summary = (TextView) holder.findViewById(android.R.id.summary);
+            summary.setMaxLines(2);
+            summary.setEllipsize(TextUtils.TruncateAt.END);
             rootLayout.setPadding(75, 10, 75, 10);
 
             title.setSingleLine(false);

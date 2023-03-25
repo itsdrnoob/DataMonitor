@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appwidget_text">Ví dụ</string>
+    <string name="app_name">Giám sát Dữ liệu</string>
+    <string name="add_widget">Thêm tiện ích</string>
+    <string name="notification_mobile_data_usage">Dữ liệu di động: %1$s</string>
+    <string name="notification_wifi_data_usage">Wi-Fi: %1$s</string>
+    <string name="home_mobile_data_sent">%1$s
+\nĐã gửi</string>
+    <string name="home_mobile_data_received">%1$s
+\nĐã nhận</string>
+    <string name="home_wifi_data_sent">%1$s
+\nĐã gửi</string>
+    <string name="home_wifi_data_received">%1$s
+\nĐã nhận</string>
+    <string name="label_current_data_warning_trigger_level_limit_set">Mức kích hoạt hiện tại: %1$s%% (%2$s)</string>
+    <string name="label_current_data_warning_trigger_level_limit_not_set">Mức kích hoạt hiện tại: %1$s%%</string>
+    <string name="label_data_trigger_level">Khi %1$s%% dữ liệu được sử dụng</string>
+    <string name="app_label_package_name">Tên gói: %1$s</string>
+    <string name="app_label_uid">UID: %1$d</string>
+    <string name="app_name_placeholder">Tên ứng dụng</string>
+    <string name="app_data_usage_placeholder">0 MB</string>
+    <string name="label_sent">đã gửi</string>
+    <string name="label_received">đã nhận</string>
+    <string name="action_open_app_settings">Mở cài đặt ứng dụng</string>
+    <string name="action_cancel">Hủy bỏ</string>
+    <string name="action_ok">OK</string>
+    <string name="title_app_data_usage_session">Chọn phiên</string>
+    <string name="label_today">Hôm nay</string>
+    <string name="label_yesterday">Hôm qua</string>
+    <string name="label_this_month">Tháng này</string>
+    <string name="label_last_month">Tháng trước</string>
+    <string name="label_this_year">Năm nay</string>
+    <string name="label_all_time">Mọi thời gian</string>
+    <string name="title_app_data_usage_type">Lựa chọn đối tượng</string>
+    <string name="label_mobile_data">Dữ liệu di động</string>
+    <string name="label_wifi">Wi-Fi</string>
+    <string name="title_data_usage">Sử dụng dữ liệu</string>
+    <string name="label_dev">Với ❤ của Bitroid Inc.</string>
+    <string name="action_update">Cập nhật</string>
+    <string name="data_remaining_placeholder">0.00 GB còn lại</string>
+    <string name="label_loading_apps">Đang tải ứng dụng</string>
+</resources>
