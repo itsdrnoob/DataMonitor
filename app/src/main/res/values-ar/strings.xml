@@ -71,10 +71,10 @@
     <string name="setup_notification">"إعداد الإخطارات"</string>
     <string name="title_configure">"تهيئة"</string>
     <string name="setup_widget_title">"تطبيق مصغر"</string>
-    <string name="setup_widget_refresh_interval">"الفاصل الزمني لتحديث التطبق المصغر"</string>
+    <string name="setup_widget_refresh_interval">الفاصل الزمني لتحديث التطبيق المصغر</string>
     <string name="refresh_interval_placeholder">"1 دقيقة"</string>
     <string name="setup_show_remaining_data">"إظهار معلومات البيانات المتبقية"</string>
-    <string name="setup_refresh_widget">"تحديث التبطيق المصغر"</string>
+    <string name="setup_refresh_widget">تحديث التطبيق المصغر</string>
     <string name="refresh_widget_summary">"قم بتحديث التطبيق المصغر إذا كانت تواجه مشكلة"</string>
     <string name="setup_notification_title">"إخطار"</string>
     <string name="setup_notification_refresh_interval">"الفاصل الزمني لتحديث الإخطار"</string>
@@ -140,7 +140,7 @@
     <string name="remaining_data_info_enabled">"تم تمكين معلومات البيانات المتبقية"</string>
     <string name="remaining_data_info_disabled">"تم تعطيل معلومات البيانات المتبقية"</string>
     <string name="label_monitoring_no_plan">"أضف خطة بيانات لبدء المراقبة"</string>
-    <string name="label_widget_refreshed">"تم تحديث التطبق المصغر"</string>
+    <string name="label_widget_refreshed">تم تحديث التطبيق المصغر</string>
     <string name="label_notification_enabled">"تمكين إخطار مراقب البيانات"</string>
     <string name="label_notification_cannot_disable_both">"لا يمكن تعطيل كلا العنصرين"</string>
     <string name="label_setup_notification_first">"يرجى إعداد الإخطار أولا"</string>
