@@ -626,14 +626,14 @@ public class AppDataUsageFragment extends Fragment {
         int type = getType();
         if (type == TYPE_MOBILE_DATA) {
             totalUsage = NetworkStatsHelper.formatData(
-                    NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(), date)[0],
-                    NetworkStatsHelper.getDeviceMobileDataUsage(context, getSession(), date)[1]
+                    NetworkStatsHelper.getTotalAppMobileDataUsage(context, getSession(), date)[0],
+                    NetworkStatsHelper.getTotalAppMobileDataUsage(context, getSession(), date)[1]
             )[2];
         }
         else if (type == TYPE_WIFI) {
             totalUsage = NetworkStatsHelper.formatData(
-                    NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession())[0],
-                    NetworkStatsHelper.getDeviceWifiDataUsage(context, getSession())[1]
+                    NetworkStatsHelper.getTotalAppWifiDataUsage(context, getSession())[0],
+                    NetworkStatsHelper.getTotalAppWifiDataUsage(context, getSession())[1]
             )[2];
         }
         else {
