@@ -188,12 +188,17 @@ public class DataUsageMonitor extends Service {
                     if (totalRaw.contains("٫")) {
                         totalRaw = totalRaw.replace("٫", ".");
                     }
-                    if (totalRaw.contains(" MB")) {
-                        totalRaw = totalRaw.replace(" MB", "");
-                        totalData = Double.parseDouble(totalRaw);
-                    } else {
-                        totalRaw = totalRaw.replace(" GB", "");
-                        totalData = Double.parseDouble(totalRaw) * 1024;
+                    try {
+                        if (totalRaw.contains(" MB")) {
+                            totalRaw = totalRaw.replace(" MB", "");
+                            totalData = Double.parseDouble(totalRaw);
+                        } else {
+                            totalRaw = totalRaw.replace(" GB", "");
+                            totalData = Double.parseDouble(totalRaw) * 1024;
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                     Log.d(TAG, "onReceive: " + totalData + " " + triggerLevel.intValue());
