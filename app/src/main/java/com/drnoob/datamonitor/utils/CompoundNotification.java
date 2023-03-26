@@ -237,8 +237,13 @@ public class CompoundNotification extends Service {
         if (!isNotificationReceiverRegistered && !isTaskPaused) {
             registerNetworkReceiver(mCompoundNotification);
         }
-        startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
-        isServiceRunning = true;
+        try {
+            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            isServiceRunning = true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -738,18 +743,13 @@ public class CompoundNotification extends Service {
             super.onAvailable(network);
             isNetworkConnected = true;
             if (isTaskPaused) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    try {
-                        mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
-                    }
-                    catch (ForegroundServiceStartNotAllowedException e) {
-                        e.printStackTrace();
-                        Toast.makeText(context, context.getString(R.string.error_network_monitor_start),
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-                else {
+                try {
                     mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, context.getString(R.string.error_network_monitor_start),
+                            Toast.LENGTH_LONG).show();
                 }
                 restartService(context, false, true);
                 isTaskPaused = false;

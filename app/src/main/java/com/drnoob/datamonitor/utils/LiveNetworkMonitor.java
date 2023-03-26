@@ -197,8 +197,13 @@ public class LiveNetworkMonitor extends Service {
             Log.d(TAG, "onCreate: registering LiveNetworkReceiver" );
             registerNetworkReceiver(mLiveNetworkMonitor);
         }
-        startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
-        isServiceRunning = true;
+        try {
+            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            isServiceRunning = true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
