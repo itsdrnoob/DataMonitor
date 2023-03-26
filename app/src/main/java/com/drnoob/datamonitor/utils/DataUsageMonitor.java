@@ -108,7 +108,13 @@ public class DataUsageMonitor extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        boolean isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
+        boolean isRestart;
+        if (intent != null) {
+            isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
+        }
+        else {
+            isRestart = false;
+        }
         if (isRestart) {
             Log.d(TAG, "onStartCommand: Restarting alarm");
             PreferenceManager.getDefaultSharedPreferences(this).edit()
@@ -149,8 +155,14 @@ public class DataUsageMonitor extends Service {
 
     public static void stopService(Context context) {
         Log.d(TAG, "stopService: ");
-        mDataUsageMonitor.stopSelf();
-        context.stopService(new Intent(context, mDataUsageMonitor.getClass()));
+        if (mDataUsageMonitor != null) {
+            mDataUsageMonitor.stopSelf();
+            context.stopService(new Intent(context, mDataUsageMonitor.getClass()));
+        }
+        else {
+            Log.d(TAG, "stopService: mDataUsageMonitor returned null. Attempting to stop");
+            context.stopService(new Intent(context, DataUsageMonitor.class));
+        }
     }
 
     public static class DataMonitor extends BroadcastReceiver {
@@ -198,7 +210,7 @@ public class DataUsageMonitor extends Service {
 
                     }
                 }
-                catch (ParseException | RemoteException e) {
+                catch (Exception e) {
                     e.printStackTrace();
                 }
                 setRepeating(context);
