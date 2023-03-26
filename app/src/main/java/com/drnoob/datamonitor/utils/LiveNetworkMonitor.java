@@ -137,7 +137,7 @@ public class LiveNetworkMonitor extends Service {
 
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(getString(R.string.network_speed_download, "0 KB/s"))
@@ -159,8 +159,6 @@ public class LiveNetworkMonitor extends Service {
         if (isServiceRunning) {
             return;
         }
-        startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
-        isServiceRunning = true;
 
         if (isTimerCancelled) {
             mTimer = new Timer();
@@ -199,6 +197,8 @@ public class LiveNetworkMonitor extends Service {
             Log.d(TAG, "onCreate: registering LiveNetworkReceiver" );
             registerNetworkReceiver(mLiveNetworkMonitor);
         }
+        startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+        isServiceRunning = true;
 
     }
 
@@ -210,19 +210,19 @@ public class LiveNetworkMonitor extends Service {
         boolean isCombined = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
                 .getBoolean("combine_notifications", false);
         if (!isEnabled || isCombined) {
-            Log.d(TAG, "onDestroy: stopped");
             mNetworkChangeMonitor.stopMonitor();
             unregisterNetworkReceiver();
-            stopForeground(true);
-            stopSelf();
-            isServiceRunning = false;
             try {
+                stopForeground(true);
+                stopSelf();
                 mTimerTask.cancel();
                 mTimer.cancel();
                 isTimerCancelled = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            isServiceRunning = false;
+            Log.d(TAG, "onDestroy: stopped");
         }
         super.onDestroy();
     }

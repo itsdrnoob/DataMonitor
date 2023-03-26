@@ -200,7 +200,12 @@ public class DataUsageMonitor extends Service {
                     if (totalData.intValue() > triggerLevel.intValue() || totalData.intValue() == triggerLevel.intValue()) {
                         Log.d(TAG, "onReceive: Notification shown: " + PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false));
                         if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false)) {
-                            showNotification(context);
+                            try {
+                                showNotification(context);
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         else {
                             stopService(context);
