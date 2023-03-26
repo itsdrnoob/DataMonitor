@@ -371,8 +371,10 @@ public class DataPlanFragment extends Fragment {
                         e.printStackTrace();
                     }
 
-                    if (binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
-                            startMillis > System.currentTimeMillis() || endMillis < System.currentTimeMillis()) {
+                    if ((binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
+                            startMillis > System.currentTimeMillis()) ||
+                            (binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
+                            endMillis < System.currentTimeMillis())) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(),
                                 requireContext().getString(R.string.error_invalid_plan_duration),
                                 Snackbar.LENGTH_SHORT);
