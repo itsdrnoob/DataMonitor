@@ -196,7 +196,8 @@ public class LiveNetworkMonitor extends Service {
         };
         mTimer.scheduleAtFixedRate(mTimerTask, 0, 1000);
         if (!isLiveNetworkReceiverRegistered && !isTaskPaused) {
-            registerNetworkReceiver(this);
+            Log.d(TAG, "onCreate: registering LiveNetworkReceiver" );
+            registerNetworkReceiver(mLiveNetworkMonitor);
         }
 
     }
@@ -212,6 +213,8 @@ public class LiveNetworkMonitor extends Service {
             Log.d(TAG, "onDestroy: stopped");
             mNetworkChangeMonitor.stopMonitor();
             unregisterNetworkReceiver();
+            stopForeground(true);
+            stopSelf();
             isServiceRunning = false;
             try {
                 mTimerTask.cancel();
@@ -239,7 +242,7 @@ public class LiveNetworkMonitor extends Service {
 
     private static void unregisterNetworkReceiver() {
         try {
-            mLiveNetworkMonitor.unregisterReceiver(liveNetworkReceiver);
+            mLiveNetworkMonitor.getApplicationContext().unregisterReceiver(liveNetworkReceiver);
             isLiveNetworkReceiverRegistered = false;
             Log.d(TAG, "unregisterNetworkReceive: stopped");
         } catch (Exception e) {
@@ -566,7 +569,8 @@ public class LiveNetworkMonitor extends Service {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else {
+            }
+            else {
                 restartService(context, true, false);
             }
         }
