@@ -32,6 +32,11 @@ public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive: Boot complete");
-        Common.refreshService(context);
+        try {
+            Common.refreshService(context);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,6 +3,19 @@
 All notable changes to Data Monitor will be documented in this file.
 
 
+## v2.3.1
+
+Data Monitor v2.3.1 release <br>
+This is a hotfix release with certain changes and bug fixes.
+
+- Fixed a crash caused by a NullPointerException while starting and stopping the DataMonitor service.
+- Fixed the invalid plan error when custom plan was not selected.
+- Fixed multiple issues with network speed notification.
+- Improved exception handling.
+- Fixed certain timezone issues when adding a data plan.
+- Other minor changes and improvements.
+
+
 ## v2.3.0
 
 Data Monitor v2.3.0 release <br>

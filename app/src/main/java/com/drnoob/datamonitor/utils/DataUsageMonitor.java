@@ -108,7 +108,13 @@ public class DataUsageMonitor extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        boolean isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
+        boolean isRestart;
+        if (intent != null) {
+            isRestart = intent.getBooleanExtra(EXTRA_DATA_ALARM_RESET, false);
+        }
+        else {
+            isRestart = false;
+        }
         if (isRestart) {
             Log.d(TAG, "onStartCommand: Restarting alarm");
             PreferenceManager.getDefaultSharedPreferences(this).edit()
@@ -149,8 +155,14 @@ public class DataUsageMonitor extends Service {
 
     public static void stopService(Context context) {
         Log.d(TAG, "stopService: ");
-        mDataUsageMonitor.stopSelf();
-        context.stopService(new Intent(context, mDataUsageMonitor.getClass()));
+        if (mDataUsageMonitor != null) {
+            mDataUsageMonitor.stopSelf();
+            context.stopService(new Intent(context, mDataUsageMonitor.getClass()));
+        }
+        else {
+            Log.d(TAG, "stopService: mDataUsageMonitor returned null. Attempting to stop");
+            context.stopService(new Intent(context, DataUsageMonitor.class));
+        }
     }
 
     public static class DataMonitor extends BroadcastReceiver {
@@ -176,19 +188,29 @@ public class DataUsageMonitor extends Service {
                     if (totalRaw.contains("٫")) {
                         totalRaw = totalRaw.replace("٫", ".");
                     }
-                    if (totalRaw.contains(" MB")) {
-                        totalRaw = totalRaw.replace(" MB", "");
-                        totalData = Double.parseDouble(totalRaw);
-                    } else {
-                        totalRaw = totalRaw.replace(" GB", "");
-                        totalData = Double.parseDouble(totalRaw) * 1024;
+                    try {
+                        if (totalRaw.contains(" MB")) {
+                            totalRaw = totalRaw.replace(" MB", "");
+                            totalData = Double.parseDouble(totalRaw);
+                        } else {
+                            totalRaw = totalRaw.replace(" GB", "");
+                            totalData = Double.parseDouble(totalRaw) * 1024;
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                     Log.d(TAG, "onReceive: " + totalData + " " + triggerLevel.intValue());
                     if (totalData.intValue() > triggerLevel.intValue() || totalData.intValue() == triggerLevel.intValue()) {
                         Log.d(TAG, "onReceive: Notification shown: " + PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false));
                         if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_warning_shown", false)) {
-                            showNotification(context);
+                            try {
+                                showNotification(context);
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         else {
                             stopService(context);
@@ -198,7 +220,7 @@ public class DataUsageMonitor extends Service {
 
                     }
                 }
-                catch (ParseException | RemoteException e) {
+                catch (Exception e) {
                     e.printStackTrace();
                 }
                 setRepeating(context);

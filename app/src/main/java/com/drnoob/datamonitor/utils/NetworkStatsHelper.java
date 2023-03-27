@@ -123,28 +123,14 @@ public class NetworkStatsHelper {
 
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
         NetworkStats.Bucket bucket = new NetworkStats.Bucket();
-//        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI,
-//                getSubscriberId(context),
-//                resetTimeMillis,
-//                endTimeMillis);
 
-        NetworkStats networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_WIFI,
+        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI,
                 getSubscriberId(context),
                 resetTimeMillis,
                 endTimeMillis);
 
-        received = 0l;
-        sent = 0l;
-
-        do {
-            networkStats.getNextBucket(bucket);
-            received += bucket.getRxBytes();
-            sent += bucket.getTxBytes();
-        }
-        while (networkStats.hasNextBucket());
-
-//        received = bucket.getRxBytes();
-//        sent = bucket.getTxBytes();
+        received = bucket.getRxBytes();
+        sent = bucket.getTxBytes();
         total = sent + received;
 
         sent = sent - excludedSent;
@@ -189,10 +175,132 @@ public class NetworkStatsHelper {
             excludedTotal += mobile[2];
         }
 
-//        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_MOBILE,
+        bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_MOBILE,
+                getSubscriberId(context),
+                resetTimeMillis,
+                endTimeMillis);
+
+//        NetworkStats networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_MOBILE,
 //                getSubscriberId(context),
 //                resetTimeMillis,
 //                endTimeMillis);
+
+//        Long rxBytes = 0L;
+//        Long txBytes = 0L;
+//
+//        do {
+//            networkStats.getNextBucket(bucket);
+//            rxBytes += bucket.getRxBytes();
+//            txBytes += bucket.getTxBytes();
+//        }
+//        while (networkStats.hasNextBucket());
+
+        Long rxBytes = bucket.getRxBytes();
+        Long txBytes = bucket.getTxBytes();
+
+        sent = txBytes;
+        received = rxBytes;
+        total = sent + received;
+
+        sent = sent - excludedSent;
+        received = received - excludedReceived;
+        total = total - excludedTotal;
+
+        Long[] data = new Long[]{sent, received, total};
+        return data;
+    }
+
+    public static Long[] getTotalAppWifiDataUsage(Context context, int session) throws ParseException, RemoteException {
+        Long[] data;
+        Long resetTimeMillis = getTimePeriod(context, session, 1)[0];
+        Long endTimeMillis = getTimePeriod(context, session, 1)[1];
+        Long sent, received, total;
+
+        Long excludedSent = 0L,
+                excludedReceived = 0L,
+                excludedTotal = 0L;
+
+        String jsonData = SharedPreferences.getExcludeAppsPrefs(context)
+                .getString(EXCLUDE_APPS_LIST, null);
+        List<AppModel> excludedAppsList = new ArrayList<>();
+        if (jsonData != null) {
+            excludedAppsList.addAll(gson.fromJson(jsonData, type));
+        }
+        for (AppModel app : excludedAppsList) {
+            int uid = 0;
+            try {
+                uid = context.getPackageManager().getApplicationInfo(app.getPackageName(), 0).uid;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            Long[] wifi = getAppWifiDataUsage(context, uid, session);
+
+            excludedSent += wifi[0];
+            excludedReceived += wifi[1];
+            excludedTotal += wifi[2];
+        }
+
+        NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
+        NetworkStats.Bucket bucket = new NetworkStats.Bucket();
+
+        NetworkStats networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_WIFI,
+                getSubscriberId(context),
+                resetTimeMillis,
+                endTimeMillis);
+
+        received = 0l;
+        sent = 0l;
+
+        do {
+            networkStats.getNextBucket(bucket);
+            received += bucket.getRxBytes();
+            sent += bucket.getTxBytes();
+        }
+        while (networkStats.hasNextBucket());
+
+        total = sent + received;
+
+        sent = sent - excludedSent;
+        received = received - excludedReceived;
+        total = total - excludedTotal;
+
+        data = new Long[]{sent, received, total};
+        return data;
+    }
+
+    public static Long[] getTotalAppMobileDataUsage(Context context, int session, @Nullable int startDate) throws ParseException, RemoteException {
+        NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getSystemService(Context.NETWORK_STATS_SERVICE);
+        NetworkStats.Bucket bucket = new NetworkStats.Bucket();
+
+        Long resetTimeMillis = getTimePeriod(context, session, startDate)[0];
+        Long endTimeMillis = getTimePeriod(context, session, startDate)[1];
+
+        Long sent = 0L,
+                received = 0L,
+                total = 0L;
+        Long excludedSent = 0L,
+                excludedReceived = 0L,
+                excludedTotal = 0L;
+
+        String jsonData = SharedPreferences.getExcludeAppsPrefs(context)
+                .getString(EXCLUDE_APPS_LIST, null);
+        List<AppModel> excludedAppsList = new ArrayList<>();
+        if (jsonData != null) {
+            excludedAppsList.addAll(gson.fromJson(jsonData, type));
+        }
+        for (AppModel app : excludedAppsList) {
+            int uid = 0;
+            try {
+                uid = context.getPackageManager().getApplicationInfo(app.getPackageName(), 0).uid;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            Long[] mobile = getAppMobileDataUsage(context, uid, session);
+
+            excludedSent += mobile[0];
+            excludedReceived += mobile[1];
+            excludedTotal += mobile[2];
+        }
 
         NetworkStats networkStats = networkStatsManager.querySummary(ConnectivityManager.TYPE_MOBILE,
                 getSubscriberId(context),
@@ -208,9 +316,6 @@ public class NetworkStatsHelper {
             txBytes += bucket.getTxBytes();
         }
         while (networkStats.hasNextBucket());
-
-//        Long rxBytes = bucket.getRxBytes();
-//        Long txBytes = bucket.getTxBytes();
 
         sent = txBytes;
         received = rxBytes;

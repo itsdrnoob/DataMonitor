@@ -137,7 +137,7 @@ public class LiveNetworkMonitor extends Service {
 
         mBuilder.setSmallIcon(R.drawable.ic_signal_kb_0);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         mBuilder.setContentTitle(getString(R.string.network_speed_title, "0 KB/s"));
         mBuilder.setStyle(new NotificationCompat.InboxStyle()
                 .addLine(getString(R.string.network_speed_download, "0 KB/s"))
@@ -159,8 +159,6 @@ public class LiveNetworkMonitor extends Service {
         if (isServiceRunning) {
             return;
         }
-        startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
-        isServiceRunning = true;
 
         if (isTimerCancelled) {
             mTimer = new Timer();
@@ -196,7 +194,15 @@ public class LiveNetworkMonitor extends Service {
         };
         mTimer.scheduleAtFixedRate(mTimerTask, 0, 1000);
         if (!isLiveNetworkReceiverRegistered && !isTaskPaused) {
-            registerNetworkReceiver(this);
+            Log.d(TAG, "onCreate: registering LiveNetworkReceiver" );
+            registerNetworkReceiver(mLiveNetworkMonitor);
+        }
+        try {
+            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            isServiceRunning = true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -209,17 +215,19 @@ public class LiveNetworkMonitor extends Service {
         boolean isCombined = PreferenceManager.getDefaultSharedPreferences(LiveNetworkMonitor.this)
                 .getBoolean("combine_notifications", false);
         if (!isEnabled || isCombined) {
-            Log.d(TAG, "onDestroy: stopped");
             mNetworkChangeMonitor.stopMonitor();
             unregisterNetworkReceiver();
-            isServiceRunning = false;
             try {
+                stopForeground(true);
+                stopSelf();
                 mTimerTask.cancel();
                 mTimer.cancel();
                 isTimerCancelled = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            isServiceRunning = false;
+            Log.d(TAG, "onDestroy: stopped");
         }
         super.onDestroy();
     }
@@ -239,7 +247,7 @@ public class LiveNetworkMonitor extends Service {
 
     private static void unregisterNetworkReceiver() {
         try {
-            mLiveNetworkMonitor.unregisterReceiver(liveNetworkReceiver);
+            mLiveNetworkMonitor.getApplicationContext().unregisterReceiver(liveNetworkReceiver);
             isLiveNetworkReceiverRegistered = false;
             Log.d(TAG, "unregisterNetworkReceive: stopped");
         } catch (Exception e) {
@@ -566,7 +574,8 @@ public class LiveNetworkMonitor extends Service {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else {
+            }
+            else {
                 restartService(context, true, false);
             }
         }

@@ -84,11 +84,14 @@ import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class DataPlanFragment extends Fragment {
     public static final String TAG = DataPlanFragment.class.getSimpleName();
@@ -101,6 +104,7 @@ public class DataPlanFragment extends Fragment {
     private Long planStartDateMillis, planEndDateMillis;
     private int startHour, startMinute, endHour, endMinute;
     private long startMillis, endMillis; // Absolute start and end time in millis
+    private boolean is12HourView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,11 +135,16 @@ public class DataPlanFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+        Date date = new Date();
+        String time = DateFormat.getTimeInstance(DateFormat.SHORT).format(date.getTime()).toLowerCase(Locale.ROOT);
+        is12HourView = time.contains("am") || time.contains("pm") ||
+                time.contains("a.m") || time.contains("p.m");
+
         try {
             planStartDateMillis = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                    .getLong(DATA_RESET_CUSTOM_DATE_START, MaterialDatePicker.todayInUtcMilliseconds());
+                    .getLong(DATA_RESET_CUSTOM_DATE_START, UTCToLocal(MaterialDatePicker.todayInUtcMilliseconds()));
             planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                    .getLong(DATA_RESET_CUSTOM_DATE_END, MaterialDatePicker.todayInUtcMilliseconds());
+                    .getLong(DATA_RESET_CUSTOM_DATE_END, UTCToLocal(MaterialDatePicker.todayInUtcMilliseconds()));
         }
         catch (ClassCastException e) {
             int planStartIntValue = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -165,16 +174,16 @@ public class DataPlanFragment extends Fragment {
         String planStart = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
         String planEnd = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
         String startTime, endTime;
-        startTime = getContext().getString(R.string.label_custom_start_time, getTime(startHour, startMinute));
-        endTime = getContext().getString(R.string.label_custom_end_time, getTime(endHour, endMinute));
+        startTime = getContext().getString(R.string.label_custom_start_time, getTime(startHour, startMinute, is12HourView));
+        endTime = getContext().getString(R.string.label_custom_end_time, getTime(endHour, endMinute, is12HourView));
         String startDateToday = getContext().getString(R.string.label_custom_start_date, planStart);
         String endDateToday = getContext().getString(R.string.label_custom_end_date, planEnd);
 
 
         binding.customStartDate.setText(setBoldSpan(startDateToday, planStart));
         binding.customEndDate.setText(setBoldSpan(endDateToday, planEnd));
-        binding.customStartTime.setText(setBoldSpan(startTime, getTime(startHour, startMinute)));
-        binding.customEndTime.setText(setBoldSpan(endTime, getTime(endHour, endMinute)));
+        binding.customStartTime.setText(setBoldSpan(startTime, getTime(startHour, startMinute, is12HourView)));
+        binding.customEndTime.setText(setBoldSpan(endTime, getTime(endHour, endMinute, is12HourView)));
 
         binding.customStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,10 +211,14 @@ public class DataPlanFragment extends Fragment {
                     @Override
                     public void onPositiveButtonClick(Object selection) {
                         planStartDateMillis = Long.parseLong(selection.toString());
-                        Log.d(TAG, "onPositiveButtonClick: " + planStartDateMillis );
-                        Log.d(TAG, "onPositiveButtonClick: " + UTCToLocal(planStartDateMillis));
+                        Log.d(TAG, "onPositiveButtonClick: UTC: " + planStartDateMillis );
+                        Log.d(TAG, "onPositiveButtonClick: Local: " + UTCToLocal(planStartDateMillis));
                         planStartDateMillis = UTCToLocal(planStartDateMillis);
-                        String date = new SimpleDateFormat("dd/MM/yyyy").format(planStartDateMillis);
+                        Log.d(TAG, "onPositiveButtonClick: UTC: " + localToUTC(planStartDateMillis));
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        dateFormat.setTimeZone(TimeZone.getDefault());
+                        String date = dateFormat.format(new Date(planStartDateMillis));
+
                         String startDateString = getContext().getString(R.string.label_custom_start_date, date);
                         binding.customStartDate.setText(setBoldSpan(startDateString, date));
                     }
@@ -240,7 +253,7 @@ public class DataPlanFragment extends Fragment {
                     @Override
                     public void onPositiveButtonClick(Object selection) {
                         planEndDateMillis = Long.parseLong(selection.toString());
-                        planEndDateMillis = UTCToLocal(planEndDateMillis) + 86399999;   // 86,399,999 is added to change the time to 23:59:59
+                        planEndDateMillis = UTCToLocal(planEndDateMillis);
                         String date = new SimpleDateFormat("dd/MM/yyyy").format(planEndDateMillis);
                         String endDateString = getContext().getString(R.string.label_custom_end_date, date);
                         binding.customEndDate.setText(setBoldSpan(endDateString, date));
@@ -371,8 +384,10 @@ public class DataPlanFragment extends Fragment {
                         e.printStackTrace();
                     }
 
-                    if (binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
-                            startMillis > System.currentTimeMillis() || endMillis < System.currentTimeMillis()) {
+                    if ((binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
+                            startMillis > System.currentTimeMillis()) ||
+                            (binding.dataReset.getCheckedRadioButtonId() == R.id.custom_reset &&
+                            endMillis < System.currentTimeMillis())) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(),
                                 requireContext().getString(R.string.error_invalid_plan_duration),
                                 Snackbar.LENGTH_SHORT);
@@ -483,6 +498,8 @@ public class DataPlanFragment extends Fragment {
         (((LinearLayout) ((LinearLayout) timePicker.getChildAt(0)).getChildAt(0)).getChildAt(0)).setVerticalScrollBarEnabled(false);
         (((LinearLayout) ((LinearLayout) timePicker.getChildAt(0)).getChildAt(0)).getChildAt(2)).setVerticalScrollBarEnabled(false);
 
+        timePicker.setIs24HourView(!is12HourView);
+
         if (type == TYPE_PLAN_START) {
             timePicker.setHour(startHour);
             timePicker.setMinute(startMinute);
@@ -523,7 +540,7 @@ public class DataPlanFragment extends Fragment {
 
                 String time, timeText;
 
-                time = getTime(timePicker.getHour(), timePicker.getMinute());
+                time = getTime(timePicker.getHour(), timePicker.getMinute(), is12HourView);
 
                 if (type == TYPE_PLAN_START) {
                     timeText = getContext().getString(R.string.label_custom_start_time, time);
@@ -556,52 +573,68 @@ public class DataPlanFragment extends Fragment {
         dialog.show();
     }
 
-    private String getTime(int hour, int minute) {
+    private String getTime(int hour, int minute, boolean is12HourView) {
         String time;
-
         int hourOfDay;
-
-        if (hour >= 12) {
-            if (hour == 12) {
-                hourOfDay = 12;
+        if (!is12HourView) {
+            String formattedHour, formattedMinute;
+            if (hour < 10) {
+                formattedHour = "0" + hour;
             }
             else {
-                hourOfDay = (hour - 12);
+                formattedHour = "" + hour;
             }
             if (minute < 10) {
-                time = hourOfDay + ":0" + minute + " pm";
+                formattedMinute = "0" + minute;
             }
             else {
-                time = hourOfDay + ":" + minute + " pm";
+                formattedMinute = "" + minute;
             }
+            time = formattedHour + ":" + formattedMinute;
         }
         else {
-            if (hour == 0) {
-                hourOfDay = 12;
-            }
-            else if (hour < 10) {
-                hourOfDay = hour;
-                if (minute < 10) {
-                    time = "0" + hourOfDay + ":0" + minute + " pm";
+            if (hour >= 12) {
+                if (hour == 12) {
+                    hourOfDay = 12;
                 }
                 else {
-                    time = "0" + hourOfDay + ":" + minute + " pm";
+                    hourOfDay = (hour - 12);
+                }
+                if (minute < 10) {
+                    time = hourOfDay + ":0" + minute + " pm";
+                }
+                else {
+                    time = hourOfDay + ":" + minute + " pm";
                 }
             }
             else {
-                hourOfDay = hour;
-            }
-            if (hourOfDay < 10) {
-                time = "0" + hourOfDay + ":" + minute + " am";
-            }
-            else {
-                time = hourOfDay + ":" + minute + " am";
-            }
-            if (minute < 10) {
-                time = hourOfDay + ":0" + minute + " am";
-            }
-            else {
-                time = hourOfDay + ":" + minute + " am";
+                if (hour == 0) {
+                    hourOfDay = 12;
+                }
+                else if (hour < 10) {
+                    hourOfDay = hour;
+                    if (minute < 10) {
+                        time = "0" + hourOfDay + ":0" + minute + " pm";
+                    }
+                    else {
+                        time = "0" + hourOfDay + ":" + minute + " pm";
+                    }
+                }
+                else {
+                    hourOfDay = hour;
+                }
+                if (hourOfDay < 10) {
+                    time = "0" + hourOfDay + ":" + minute + " am";
+                }
+                else {
+                    time = hourOfDay + ":" + minute + " am";
+                }
+                if (minute < 10) {
+                    time = hourOfDay + ":0" + minute + " am";
+                }
+                else {
+                    time = hourOfDay + ":" + minute + " am";
+                }
             }
         }
         return time;

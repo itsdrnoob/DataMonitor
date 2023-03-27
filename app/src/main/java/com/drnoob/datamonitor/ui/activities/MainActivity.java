@@ -501,8 +501,8 @@ public class MainActivity extends AppCompatActivity {
         AudioAttributes attributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                 .build();
-        networkSignalChannel.setSound(sound, attributes);
-//        networkSignalChannel.setSound(null, null);
+//        networkSignalChannel.setSound(sound, attributes);
+        networkSignalChannel.setSound(Uri.EMPTY, null);
         networkSignalChannel.setShowBadge(false);
         networkSignalChannel.enableVibration(false);
         networkSignalChannel.enableLights(false);
