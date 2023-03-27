@@ -403,4 +403,16 @@
     <string name="error_alarm_permission_denied_feature_summary">لا يمكنك استخدام هذه الميزة دون منح إذن SCHEDULE_EXACT_ALARM.</string>
     <string name="error_alarm_permission_denied_dialog_summary">يتطلب مراقب البيانات إذنا SCHEDULE_EXACT_ALARM للعمل بشكل صحيح. لا يزال بإمكانك استخدام التطبيق، ولكن قد لا تعمل بعض الميزات بشكل صحيح.</string>
     <string name="label_do_not_show_again">لا تظهر مرة أخرى</string>
+    <string name="fjuro">فجورو</string>
+    <string name="fjuro_summary">التشيكيّة</string>
+    <string name="auto_update_data_plan_summary">قم بتحديث خطة البيانات الخاصة بك تلقائيا بخطة مماثلة.</string>
+    <string name="bluehomewu_summary">الصينية التقليدية</string>
+    <string name="croxz900">كروكس</string>
+    <string name="croxz900_summary">التركيّة</string>
+    <string name="ngocanhtve">نجوكانتفي</string>
+    <string name="ngocanhtve_summary">الفيتنامية</string>
+    <string name="bluehomewu">إدواردوو</string>
+    <string name="data_plan_updated_summary">خطتك الجديدة صالحة حتى %1$s</string>
+    <string name="label_data_plan_updated">تم تحديث خطة البيانات!</string>
+    <string name="setup_auto_update_data_plan">التحديث التلقائي لخطة البيانات</string>
 </resources>
