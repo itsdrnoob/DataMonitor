@@ -373,4 +373,43 @@
     <string name="paypal_summary">Über PayPal spenden</string>
     <string name="xmr_address_copied">Monero-Wallet-Adresse in Zwischenablage kopiert</string>
     <string name="tadekdudek_summary">Polnisch</string>
+    <string name="error_network_monitor_start">Network Monitor konnte nicht gestartet werden. Öffnen Sie die App zur Aktualisierung.</string>
+    <string name="label_filter">Filtern</string>
+    <string name="label_plan_validity">Gültig bis %1$s</string>
+    <string name="always_show_total">Immer Gesamtbetrag anzeigen</string>
+    <string name="always_show_total_summary">Unabhängig von den gewählten Optionen wird in der Meldung immer die Gesamtzahl der verwendeten Daten angezeigt.</string>
+    <string name="app_label_combined_total">Gesamtdatenverbrauch: %1$s</string>
+    <string name="atharvshinde">Atharv Shinde</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="hinamechan">HinameChan</string>
+    <string name="atharvshinde_translation_summary">Marathi</string>
+    <string name="error_invalid_plan_duration">Ungültige Planlaufzeit</string>
+    <string name="label_buymeacoffee">Kauf mir einen Kaffee</string>
+    <string name="buymeacoffee_summary">Kauf mir einen Kaffee :)</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="fjuro_summary">Tschechisch</string>
+    <string name="croxz900">Croxz</string>
+    <string name="croxz900_summary">Türkisch</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="ngocanhtve_summary">Vietnamesich</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="bluehomewu_summary">Traditionelles Chinesisch</string>
+    <string name="label_data_plan_updated">Datenplan aktualisiert!</string>
+    <string name="data_plan_updated_summary">Ihr neuer Plan ist gültig bis %1$s</string>
+    <string name="setup_auto_update_data_plan">Datenplan automatisch aktualisieren</string>
+    <string name="auto_update_data_plan_summary">Aktualisieren Sie Ihren Datenplan automatisch mit einem ähnlichen Plan.</string>
+    <string name="donate_info">Data Monitor ist eine Freie und Open-Source Anwendung und wird dies auch immer bleiben :)
+\n
+\nWenn Sie die Entwicklung der Anwendung unterstützen möchten, wäre eine Spende sehr willkommen.</string>
+    <string name="label_filter_app_usage">Filtern der App-Nutzung</string>
+    <string name="label_current_plan">Aktueller Plan</string>
+    <string name="label_upi">BHIM-UPI</string>
+    <string name="home_plan_usage_details">%1$s verwendet | %2$s</string>
+    <string name="error_alarm_permission_denied_feature_summary">Sie können diese Funktion nur nutzen, wenn Sie das Recht SCHEDULE_EXACT_ALARM haben.</string>
+    <string name="label_plan_details_title">%1$s Plan aktiv</string>
+    <string name="error_alarm_permission_denied">Alarmerlaubnis verweigert!</string>
+    <string name="error_alarm_permission_denied_summary">Sie haben versucht, eine Aktion auszuführen, für die die Berechtigung SCHEDULE_EXACT_ALARM erforderlich ist, die der App nicht erteilt wurde. Klicken Sie hier, um die Berechtigung zu erteilen.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Data Monitor benötigt die Berechtigung SCHEDULE_EXACT_ALARM, um richtig zu funktionieren. Sie können die App trotzdem verwenden, aber einige Funktionen funktionieren möglicherweise nicht richtig.</string>
+    <string name="label_do_not_show_again">Nicht mehr zeigen</string>
 </resources>

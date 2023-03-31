@@ -410,4 +410,16 @@
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor requiere el permiso SCHEDULE_EXACT_ALARM para funcionar correctamente. Puedes seguir utilizando la aplicación, pero es posible que algunas funciones no funcionen correctamente.</string>
     <string name="error_alarm_permission_denied_feature_summary">No puedes utilizar esta función sin conceder el permiso SCHEDULE_EXACT_ALARM.</string>
     <string name="label_do_not_show_again">No volver a mostrar</string>
+    <string name="fjuro_summary">Checo</string>
+    <string name="bluehomewu_summary">Chino tradicional</string>
+    <string name="data_plan_updated_summary">Tú nuevo plan es válido hasta %1$s</string>
+    <string name="auto_update_data_plan_summary">Actualiza automáticamente tu plan de datos con uno similar.</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="label_data_plan_updated">¡Plan de datos actualizado!</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="croxz900">Croxz</string>
+    <string name="croxz900_summary">Turco</string>
+    <string name="ngocanhtve_summary">Vietnamita</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="setup_auto_update_data_plan">Actualización automática del plan de datos</string>
 </resources>
