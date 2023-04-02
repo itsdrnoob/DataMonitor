@@ -229,7 +229,7 @@
     <string name="testing_upload">Prueba de velocidades de carga</string>
     <string name="current_connection">Conexión actual: %1$s</string>
     <string name="network_stats">Estadísticas de red</string>
-    <string name="network_speed_mbps">%1$s Mbit/s</string>
+    <string name="network_speed_mbps">%1$s Mbps</string>
     <string name="max_download_speed">Velocidad máxima de descarga</string>
     <string name="avg_download_speed">Velocidad media de descarga</string>
     <string name="max_upload_speed">Velocidad máxima de carga</string>
