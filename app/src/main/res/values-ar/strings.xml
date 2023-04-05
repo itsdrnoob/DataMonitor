@@ -38,7 +38,7 @@
     <string name="title_data_usage">"استخدام البيانات"</string>
     <string name="action_update">"تحديث"</string>
     <string name="data_remaining_placeholder">"يتبقى 0.00 جيجا بايت"</string>
-    <string name="label_dev">"صنع بـ ❤ بواسطة Bitroid Inc."</string>
+    <string name="label_dev">"صنع بـ ❤ بواسطة Bitroid."</string>
     <string name="label_loading_apps">"جار تحميل التطبيقات"</string>
     <string name="label_app_data_usage_session_empty">"لا توجد بيانات متاحة للفترة المختارة"</string>
     <string name="label_want_to_contribute">"تريد المساهمة في مراقب البيانات انقر هنا لتعرف كيف."</string>

@@ -39,7 +39,7 @@
     <string name="label_wifi">Wi-Fi</string>
     <string name="title_data_usage">Użycie danych</string>
     <string name="label_mobile_data">Dane mobilne</string>
-    <string name="label_dev">Stworzone z ❤ przez Bitroid Inc.</string>
+    <string name="label_dev">Stworzone z ❤ przez Bitroid</string>
     <string name="label_loading">Ładowanie…</string>
     <string name="label_want_to_contribute">Kliknij, aby sprawdzić, jak możesz pomóc w tworzeniu Data Monitor.</string>
     <string name="daily">Dziennie</string>

@@ -40,7 +40,7 @@
     <string name="action_update">Update</string>
     <string name="data_remaining_placeholder">0.00 GB remaining</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">With ❤ by Bitroid Inc.</string>
+    <string name="label_dev">With ❤ by Bitroid</string>
     <string name="label_loading_apps">Loading apps</string>
     <string name="label_loading">Loading…</string>
     <string name="label_app_data_usage_session_empty">No data available</string>

@@ -36,7 +36,7 @@
     <string name="action_update">更新</string>
     <string name="data_remaining_placeholder">剩餘 0.00 GB</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">Bitroid Inc. ❤ 用心製作</string>
+    <string name="label_dev">Bitroid ❤ 用心製作</string>
     <string name="label_loading_apps">載入應用程式中</string>
     <string name="label_loading">載入中……</string>
     <string name="label_app_data_usage_session_empty">此時間段未使用流量</string>

@@ -115,8 +115,13 @@ public class NotificationService extends Service {
             builder.setAutoCancel(false);
             builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
 
-            startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
-            startUpdater(getApplicationContext());
+            try {
+                startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
+                startUpdater(getApplicationContext());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (mAlarmManager.canScheduleExactAlarms()) {

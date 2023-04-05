@@ -36,7 +36,7 @@
     <string name="action_update">Yangilash</string>
     <string name="data_remaining_placeholder">0.00 GB qoldi</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">❤ bilan Bitroid Inc.</string>
+    <string name="label_dev">❤ bilan Bitroid</string>
     <string name="label_loading_apps">Ilovalar yuklanmoqda</string>
     <string name="label_loading">Yuklanmoqda…</string>
     <string name="label_app_data_usage_session_empty">Trafik mavjud emas</string>

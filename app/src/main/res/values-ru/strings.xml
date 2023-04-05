@@ -12,7 +12,7 @@
     <string name="action_ok">ОК</string>
     <string name="label_all_time">Все время</string>
     <string name="label_this_year">Текущий год</string>
-    <string name="label_dev">С ❤ от Bitroid Inc.</string>
+    <string name="label_dev">С ❤ от Bitroid</string>
     <string name="label_loading_apps">Загрузка приложений</string>
     <string name="action_update">Обновить</string>
     <string name="heading_data_reset">Сброс счётчика</string>

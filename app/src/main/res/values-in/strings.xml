@@ -118,7 +118,7 @@
     <string name="title_data_usage">Penggunaan data</string>
     <string name="action_update">Perbaharui</string>
     <string name="data_remaining_placeholder">0.00 GB tersisa</string>
-    <string name="label_dev">Dengan ❤ oleh Bitroid Inc.</string>
+    <string name="label_dev">Dengan ❤ oleh Bitroid</string>
     <string name="daily">Harian</string>
     <string name="label_loading_apps">Memuat aplikasi</string>
     <string name="label_app_data_usage_session_empty">Tidak ada data yang tersedia</string>

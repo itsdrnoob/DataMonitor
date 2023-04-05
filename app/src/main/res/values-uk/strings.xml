@@ -35,7 +35,7 @@
     <string name="title_data_usage">"Використання даних"</string>
     <string name="action_update">"Оновити"</string>
     <string name="data_remaining_placeholder">"0.00 ГБ залишилося"</string>
-    <string name="label_dev">"Зроблено Паном Bitroid Inc. з ❤"</string>
+    <string name="label_dev">"Зроблено Паном Bitroid з ❤"</string>
     <string name="heading_data_limit">"Обмеження даних"</string>
     <string name="data_type_mb">"МБ"</string>
     <string name="data_type_gb">"ГБ"</string>
