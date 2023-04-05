@@ -170,9 +170,6 @@ public class NotificationService extends Service {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceive: NotificationUpdater");
 
-            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            StatusBarNotification[] notification = manager.getActiveNotifications();
-
             boolean isChecked = PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("setup_notification", false);
             boolean isCombined = PreferenceManager.getDefaultSharedPreferences(context)
