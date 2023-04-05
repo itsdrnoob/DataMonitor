@@ -506,6 +506,7 @@ public class CompoundNotification extends Service {
                 mBuilder.setSmallIcon(networkSpeedIcon);
             }
         }
+
         mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
         mBuilder.setWhen(System.currentTimeMillis() + 1000);
         if (showOnLockscreen) {
@@ -514,13 +515,16 @@ public class CompoundNotification extends Service {
         else {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
         }
-        mBuilder.setCustomContentView(contentView);
+        mBuilder.setContent(contentView);
         mBuilder.setCustomBigContentView(bigContentView);
+
         try {
             managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
         }
         catch (Exception e) {
             e.printStackTrace();
+            contentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification);
+            bigContentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification_expanded);
         }
 
     }
