@@ -400,4 +400,16 @@
     <string name="bonbonboi">bonbonboi</string>
     <string name="MarongHappy">JungHee Lee</string>
     <string name="U1M450W">U1M450W</string>
+    <string name="fjuro_summary">Чешский</string>
+    <string name="croxz900">Croxz</string>
+    <string name="ngocanhtve_summary">Вьетнамский</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="setup_auto_update_data_plan">Автоматическое обновление плана данных</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="bluehomewu_summary">Китайский (традиционный)</string>
+    <string name="data_plan_updated_summary">Ваш новый план действует до %1$s</string>
+    <string name="auto_update_data_plan_summary">Автоматическое обновление плана передачи данных на аналогичный.</string>
+    <string name="label_data_plan_updated">План данных обновлен!</string>
+    <string name="croxz900_summary">Турецкий</string>
 </resources>
