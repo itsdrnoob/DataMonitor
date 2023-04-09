@@ -229,8 +229,7 @@
     <string name="rate_app_summary">Twoja opinia jest ważna</string>
     <string name="new_version">Nowa wersja: %1$s</string>
     <string name="read_phone_state_permission">Uprawnienie do odczytu stanu telefonu</string>
-    <string name="read_phone_state_body">Urządzenia z Androidem 9 i starszym potrzebują ręcznego udzielenia tego uprawnienia.
-\nNie zbieramy żadnych danych osobowych.</string>
+    <string name="read_phone_state_body">Urządzenia z Androidem 9 i starszym potrzebują ręcznego udzielenia tego uprawnienia. Nie zbieramy żadnych danych osobowych.</string>
     <string name="telegram_support">Wsparcie przez Telegram</string>
     <string name="label_update_available">Nowa wersja jest dostępna!</string>
     <string name="label_download_update">Pobierz aktualizację</string>
