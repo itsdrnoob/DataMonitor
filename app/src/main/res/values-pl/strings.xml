@@ -229,8 +229,7 @@
     <string name="rate_app_summary">Twoja opinia jest ważna</string>
     <string name="new_version">Nowa wersja: %1$s</string>
     <string name="read_phone_state_permission">Uprawnienie do odczytu stanu telefonu</string>
-    <string name="read_phone_state_body">Urządzenia z Androidem 9 i starszym potrzebują ręcznego udzielenia tego uprawnienia.
-\nNie zbieramy żadnych danych osobowych.</string>
+    <string name="read_phone_state_body">Urządzenia z Androidem 9 i starszym potrzebują ręcznego udzielenia tego uprawnienia. Nie zbieramy żadnych danych osobowych.</string>
     <string name="telegram_support">Wsparcie przez Telegram</string>
     <string name="label_update_available">Nowa wersja jest dostępna!</string>
     <string name="label_download_update">Pobierz aktualizację</string>
@@ -318,4 +317,44 @@
     <string name="label_upi">BHIM-UPI</string>
     <string name="upi_summary">Wspomóż przez UPI</string>
     <string name="label_do_not_show_again">Nie pokazuj ponownie</string>
+    <string name="ngocanhtve_summary">Wietnamski</string>
+    <string name="donate_info">Data Monitor jest darmową aplikacją o otwartym kodzie źródłowym i nic tego nie zmieni :)
+\n
+\nJeśli chcesz wesprzeć rozwój aplikacji, darowizna byłaby bardzo mile widziana.</string>
+    <string name="app_label_combined_total">Całkowite użycie danych: %1$s</string>
+    <string name="croxz900_summary">Turecki</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="bluehomewu_summary">Tradycyjny chiński</string>
+    <string name="label_data_plan_updated">Plan danych został zaktualizowany!</string>
+    <string name="error_network_monitor_start">Nie udało się uruchomić monitor sieci. Otwórz aplikację, aby go odświeżyć.</string>
+    <string name="label_filter_app_usage">Filtruj użycie aplikacji</string>
+    <string name="always_show_total">Zawsze pokazuj całość</string>
+    <string name="label_plan_details_title">Plan %1$s jest aktywny</string>
+    <string name="home_plan_usage_details">Użyto %1$s | %2$s</string>
+    <string name="setup_app_data_usage_alert">Ostrzeżenie o użyciu aplikacji</string>
+    <string name="testing_download">Testowanie prędkości pobierania</string>
+    <string name="f_droid_page">Zobacz aplikację w F-Droidzie</string>
+    <string name="f_droid_page_summary">Sprawdź aplikację na oficjalnym repozytorium F-Droid</string>
+    <string name="auto_hide_live_network">Automatycznie ukrywaj prędkość sieci</string>
+    <string name="auto_hide_live_network_summary">Zatrzymaj powiadomienie o szybkości sieci, gdy sieć nie jest połączona</string>
+    <string name="title_data_plan_expired">Plan danych wygasł!</string>
+    <string name="title_device_info_contents">Zawartość informacji o urządzeniu</string>
+    <string name="settings_upload_server">Serwer wysyłania</string>
+    <string name="network_diagnostics_summary">Przełącz serwer diagnostyczny</string>
+    <string name="error_invaliid_url">Nieprawidłowy URL pobierania!</string>
+    <string name="combine_notifications_summary">Połącz monitor danych i szybkość sieci w jedno powiadomienie.</string>
+    <string name="save_results_summary">Zapisz wyniki diagnostyki sieci</string>
+    <string name="title_delete_results">Usunąć wybrane wyniki\?</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="iqb4lsp_summary">Indonezyjski</string>
+    <string name="graphixmedia_summary">Holenderski</string>
+    <string name="label_custom_start_time">Czas rozpoczęcia: %1$s</string>
+    <string name="label_custom_end_time">Czas zakończenia %1$s</string>
+    <string name="error_invalid_plan_duration">Nieprawidłowy czas trwania planu</string>
+    <string name="label_buymeacoffee">Kup mi kawę</string>
+    <string name="buymeacoffee_summary">Kup mi kawę :)</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="fjuro_summary">Czeski</string>
+    <string name="croxz900">Croxz</string>
 </resources>
