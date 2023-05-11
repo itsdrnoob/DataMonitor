@@ -100,9 +100,6 @@ public class LiveNetworkMonitor extends Service {
         // Service is started here
         mLiveNetworkMonitor = this;
 
-//        previousDownBytes = TrafficStats.getTotalRxBytes();
-//        previousUpBytes = TrafficStats.getTotalTxBytes();
-
         previousDownBytes = 0l;
         previousUpBytes = 0l;
 
@@ -157,7 +154,9 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setSound(null);
 
         if (isServiceRunning) {
-            return;
+            Log.d(TAG, "onCreate: Service in running state. Restarting.");
+            stopSelf();
+            startService(new Intent(this, LiveNetworkMonitor.class));
         }
 
         if (isTimerCancelled) {

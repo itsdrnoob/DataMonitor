@@ -35,6 +35,7 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
 import android.app.PendingIntent;
@@ -213,18 +214,26 @@ public class Common {
 
     public static void refreshService(Context context) {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("combine_notifications", false)) {
-            context.startService(new Intent(context, CompoundNotification.class));
+            if (!isCombinedNotificationServiceRunning(context)) {
+                context.startService(new Intent(context, CompoundNotification.class));
+            }
         }
         else {
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
-                context.startService(new Intent(context, LiveNetworkMonitor.class));
+                if (!isLiveNetworkServiceRunning(context)) {
+                    context.startService(new Intent(context, LiveNetworkMonitor.class));
+                }
             }
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
-                context.startService(new Intent(context, NotificationService.class));
+                if (!isNotificationServiceRunning(context)) {
+                    context.startService(new Intent(context, NotificationService.class));
+                }
             }
         }
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false)) {
-            context.startService(new Intent(context, DataUsageMonitor.class));
+            if (!isDataUsageAlertServiceRunning(context)) {
+                context.startService(new Intent(context, DataUsageMonitor.class));
+            }
         }
 
     }
@@ -448,5 +457,49 @@ public class Common {
             suffix = "th";
         }
         return suffix;
+    }
+
+    private static boolean isLiveNetworkServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (LiveNetworkMonitor.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isCombinedNotificationServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (CompoundNotification.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isNotificationServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (NotificationService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isDataUsageAlertServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (DataUsageMonitor.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
