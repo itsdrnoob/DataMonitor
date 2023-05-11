@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_wall_of_thanks"
+    android:fitsSystemWindows="true"
+    android:animateLayoutChanges="true"
+    tools:context=".ui.activities.WallOfThanksActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/padding_app_data_view"
+            android:paddingTop="@dimen/margin_small">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/learn_more"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:text="@string/label_learn_more"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/title"
+                app:layout_constraintTop_toTopOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_extra_large"
+                android:paddingStart="@dimen/margin_mid_large"
+                android:paddingEnd="@dimen/margin_mid_large"
+                android:text="@string/label_thank_you"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/learn_more"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:alpha="1"
+                android:paddingStart="@dimen/margin_mid_large"
+                android:paddingEnd="@dimen/margin_mid_large"
+                android:text="@string/wall_of_thanks_body"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/top_donors_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_top_donors"
+                android:textColor="@color/white"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintTop_toBottomOf="@id/sub_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/margin_mid_large"
+                android:layout_marginTop="@dimen/margin_mid_large"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/top_donors_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/top_donors_title"
+                tools:listitem="@layout/wall_of_thanks_featured_item_loading"
+                tools:itemCount="3"/>
+
+            <TextView
+                android:id="@+id/all_donors_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_all_donors"
+                android:textColor="@color/white"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintTop_toBottomOf="@id/top_donors_list"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/margin_mid_large"
+                android:layout_marginTop="@dimen/margin_mid_large"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/all_donors_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/all_donors_title"
+                tools:listitem="@layout/wall_of_thanks_item_loading"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/donate"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_default"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:text="@string/donate"
+        android:clickable="true"
+        app:backgroundTint="@color/white"
+        app:rippleColor="?android:colorControlHighlight"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:textColor="#3a7bd5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

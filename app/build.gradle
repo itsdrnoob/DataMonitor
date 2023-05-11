@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
 }
 
 android {
@@ -10,8 +11,8 @@ android {
         applicationId "com.drnoob.datamonitor"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 23
-        versionName 'v2.3.1'
+        versionCode 24
+        versionName 'v2.3.2'
         resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ko",
                 "ml", "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN", "zh-rTW"
 
@@ -57,6 +58,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.core:core-splashscreen:1.0.0'
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -70,4 +73,5 @@ dependencies {
     implementation 'fr.bmartel:jspeedtest:1.32.1'
     implementation 'io.ipinfo:ipinfo-api:2.1'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
 }

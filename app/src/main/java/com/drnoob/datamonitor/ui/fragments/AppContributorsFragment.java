@@ -43,13 +43,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContributorsFragment extends Fragment {
+public class AppContributorsFragment extends Fragment {
     private LinearLayout mContribute;
     private RecyclerView mTranslatorsView;
     private List<TranslatorModel> translators;
     private TranslatorAdapter mAdapter;
 
-    public ContributorsFragment() {
+    public AppContributorsFragment() {
     }
 
     @Override

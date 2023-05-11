@@ -118,4 +118,14 @@
         <item name="android:windowBackground">@drawable/ic_splash</item>
         <item name="android:statusBarColor">@color/background</item>
     </style>
+
+    <style name="Theme.DataMonitor.WallOfThanks" parent="Theme.DataMonitor">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+    
+    <style name="Theme.DataMonitor.RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

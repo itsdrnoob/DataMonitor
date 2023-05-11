@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_mid_large"
-                    class="com.drnoob.datamonitor.ui.fragments.ContributorsFragment$Contributors"/>
+                    class="com.drnoob.datamonitor.ui.fragments.AppContributorsFragment$Contributors"/>
 
             </LinearLayout>
 
