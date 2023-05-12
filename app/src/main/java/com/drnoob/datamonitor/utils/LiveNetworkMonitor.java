@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
@@ -56,6 +57,7 @@ import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -378,7 +380,7 @@ public class LiveNetworkMonitor extends Service {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
         }
 
-        managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+        postNotification(context, managerCompat, mBuilder, NETWORK_SIGNAL_NOTIFICATION_ID);
 
     }
 

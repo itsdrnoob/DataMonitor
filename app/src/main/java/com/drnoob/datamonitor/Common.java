@@ -56,9 +56,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -121,7 +123,7 @@ public class Common {
     }
 
     public static void setLanguage(Activity activity, String languageCode, String countryCode) {
-        List<LanguageModel> availableLanguages =  refreshAvailableLanguages();
+        List<LanguageModel> availableLanguages = refreshAvailableLanguages();
 
         if (languageCode.equalsIgnoreCase(LANGUAGE_SYSTEM_DEFAULT)) {
             // setting default system language if available
@@ -143,8 +145,7 @@ public class Common {
                     // System country code available
                     countryCode = systemCountryCode;
                     break;
-                }
-                else {
+                } else {
                     // System country code not available
                     countryCode = "";
                 }
@@ -159,11 +160,9 @@ public class Common {
         Locale locale;
         if (countryCode.equals("rTW")) {
             locale = Locale.TAIWAN;
-        }
-        else if (countryCode.equals("rCN")) {
+        } else if (countryCode.equals("rCN")) {
             locale = Locale.CHINESE;
-        }
-        else {
+        } else {
             locale = new Locale(languageCode, countryCode);
         }
         conf.locale = locale;
@@ -217,8 +216,7 @@ public class Common {
             if (!isCombinedNotificationServiceRunning(context)) {
                 context.startService(new Intent(context, CompoundNotification.class));
             }
-        }
-        else {
+        } else {
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
                 if (!isLiveNetworkServiceRunning(context)) {
                     context.startService(new Intent(context, LiveNetworkMonitor.class));
@@ -243,8 +241,7 @@ public class Common {
         long wakeupMillis = 0l;
         try {
             wakeupMillis = getTimePeriod(context, SESSION_CUSTOM, -1)[1];
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -255,18 +252,15 @@ public class Common {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (alarmManager.canScheduleExactAlarms()) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
-                }
-                else  {
-                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                } else {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted");
                     postAlarmPermissionDeniedNotification(context);
                 }
-            }
-            else {
+            } else {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
             }
-            Log.d(TAG, "setRefreshAlarm: set" );
-        }
-        else {
+            Log.d(TAG, "setRefreshAlarm: set");
+        } else {
             Log.e(TAG, "setRefreshAlarm: something is wrong here " + wakeupMillis);
         }
     }
@@ -288,18 +282,15 @@ public class Common {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (alarmManager.canScheduleExactAlarms()) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
-                }
-                else  {
-                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                } else {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted");
                     postAlarmPermissionDeniedNotification(context);
                 }
-            }
-            else {
+            } else {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
             }
-            Log.d(TAG, "setDataPlanNotification: set" );
-        }
-        else {
+            Log.d(TAG, "setDataPlanNotification: set");
+        } else {
             Log.e(TAG, "setDataPlanNotification: something is wrong here " + wakeupMillis);
         }
     }
@@ -399,7 +390,7 @@ public class Common {
                 .setOnlyAlertOnce(true)
                 .setPriority(NotificationCompat.PRIORITY_MAX);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-        managerCompat.notify(OTHER_NOTIFICATION_ID, builder.build());
+        postNotification(context, managerCompat, builder, OTHER_NOTIFICATION_ID);
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -501,5 +492,15 @@ public class Common {
             }
         }
         return false;
+    }
+
+    public static void postNotification(Context context, NotificationManagerCompat notificationManager,
+                                           NotificationCompat.Builder builder, int notificationId) {
+        if (notificationManager != null && builder != null) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                notificationManager.notify(notificationId, builder.build());
+            }
+        }
     }
 }
