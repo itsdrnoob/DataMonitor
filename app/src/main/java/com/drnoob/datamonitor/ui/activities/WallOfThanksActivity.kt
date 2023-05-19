@@ -346,38 +346,14 @@ class WallOfThanksActivity : AppCompatActivity() {
             .start()
     }
 
-    @SuppressLint("DiscouragedApi")
+    @SuppressLint("InternalInsetResource", "DiscouragedApi")
     private fun getNavBarHeight(): Int {
-        val result = 0
-        val hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey()
-        val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
-        if (!hasMenuKey && !hasBackKey) {
-            //The device has a navigation bar
-            val orientation: Int = resources.configuration.orientation
-            val resourceId: Int = if (isTablet()) {
-                resources.getIdentifier(
-                    if (orientation == Configuration.ORIENTATION_PORTRAIT) "navigation_bar_height" else "navigation_bar_height_landscape",
-                    "dimen",
-                    "android")
-            }
-            else {
-                resources.getIdentifier(
-                    if (orientation == Configuration.ORIENTATION_PORTRAIT) "navigation_bar_height" else "navigation_bar_width",
-                    "dimen",
-                    "android")
-            }
-            if (resourceId > 0) {
-                return resources.getDimensionPixelSize(resourceId)
-            }
+        var navigationBarHeight = 0
+        val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            navigationBarHeight = resources.getDimensionPixelSize(resourceId)
         }
-        return result
-    }
-
-
-    private fun isTablet(): Boolean {
-        return ((resources.configuration.screenLayout
-                and Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE)
+        return navigationBarHeight
     }
 
     private class UniformSpeedInterpolator : Interpolator {
