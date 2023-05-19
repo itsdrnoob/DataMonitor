@@ -85,6 +85,7 @@ public class LiveNetworkMonitor extends Service {
     private static LiveNetworkMonitor mLiveNetworkMonitor;
     private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
     private static boolean serviceRestart = true;
+    private static ConnectivityManager connectivityManager;
 
     @Nullable
     @Override
@@ -101,11 +102,16 @@ public class LiveNetworkMonitor extends Service {
         super.onCreate();
         // Service is started here
         mLiveNetworkMonitor = this;
+        connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 
         previousDownBytes = 0l;
         previousUpBytes = 0l;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || isVPNConnected(this)) {
+            previousUpBytes = TrafficStats.getTotalTxBytes();
+            previousDownBytes = TrafficStats.getTotalRxBytes();
+        }
+        else {
             for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
                 final String iface = linkProperties.getInterfaceName();
                 if (iface == null) {
@@ -114,9 +120,6 @@ public class LiveNetworkMonitor extends Service {
                 previousUpBytes += TrafficStats.getTxBytes(iface);
                 previousDownBytes += TrafficStats.getRxBytes(iface);
             }
-        } else {
-            previousDownBytes = TrafficStats.getTotalRxBytes();
-            previousUpBytes = TrafficStats.getTotalTxBytes();
         }
 
         previousTotalBytes = previousDownBytes + previousUpBytes;
@@ -156,9 +159,10 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setSound(null);
 
         if (isServiceRunning) {
-            Log.d(TAG, "onCreate: Service in running state. Restarting.");
-            stopSelf();
-            startService(new Intent(this, LiveNetworkMonitor.class));
+            Log.d(TAG, "onCreate: Service in running state.");
+            return;
+//            stopSelf();
+//            startService(new Intent(this, LiveNetworkMonitor.class));
         }
 
         if (isTimerCancelled) {
@@ -276,7 +280,11 @@ public class LiveNetworkMonitor extends Service {
             Long currentUpBytes = 0l;
             Long currentDownBytes = 0l;
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || isVPNConnected(context)) {
+                currentUpBytes = TrafficStats.getTotalTxBytes();
+                currentDownBytes = TrafficStats.getTotalRxBytes();
+            }
+            else {
                 for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
                     final String iface = linkProperties.getInterfaceName();
                     if (iface == null) {
@@ -285,9 +293,6 @@ public class LiveNetworkMonitor extends Service {
                     currentUpBytes += TrafficStats.getTxBytes(iface);
                     currentDownBytes += TrafficStats.getRxBytes(iface);
                 }
-            } else {
-                currentUpBytes = TrafficStats.getTotalTxBytes();
-                currentDownBytes = TrafficStats.getTotalRxBytes();
             }
 
             Long currentTotalBytes = currentDownBytes + currentUpBytes;
@@ -382,6 +387,16 @@ public class LiveNetworkMonitor extends Service {
 
         postNotification(context, managerCompat, mBuilder, NETWORK_SIGNAL_NOTIFICATION_ID);
 
+    }
+
+    private static boolean isVPNConnected(Context context) {
+        if (connectivityManager == null) {
+            connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+        }
+        NetworkCapabilities networkCapabilities = connectivityManager
+                .getNetworkCapabilities(connectivityManager.getActiveNetwork());
+        return networkCapabilities != null &&
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN);
     }
 
     private static void updateInitialData() {
