@@ -88,7 +88,7 @@ public class CompoundNotification extends Service {
     private static boolean isTimerCancelled = true;
     private static boolean isTaskPaused = false;
     private static boolean isNotificationReceiverRegistered = false;
-    private boolean isServiceRunning;
+    public static boolean isServiceRunning;
     private static String mobileDataUsage,
             wifiDataUsage,
             totalDataUsage;
@@ -585,13 +585,16 @@ public class CompoundNotification extends Service {
                 // Screen turned off. Cancel task
                 try {
                     mTimerTask.cancel();
+                    isServiceRunning = false;
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else {
-                restartService(context, true, false);
+                if (!isServiceRunning) {
+                    restartService(context, true, false);
+                }
             }
         }
     }

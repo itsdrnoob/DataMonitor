@@ -216,7 +216,8 @@ public class Common {
             if (!isCombinedNotificationServiceRunning(context)) {
                 context.startService(new Intent(context, CompoundNotification.class));
             }
-        } else {
+        }
+        else {
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
                 if (!isLiveNetworkServiceRunning(context)) {
                     context.startService(new Intent(context, LiveNetworkMonitor.class));
@@ -454,7 +455,8 @@ public class Common {
         // Check if the service is already running
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (LiveNetworkMonitor.class.getName().equals(service.service.getClassName())) {
+            if (LiveNetworkMonitor.class.getName().equals(service.service.getClassName()) ||
+                    LiveNetworkMonitor.isServiceRunning) {
                 return true;
             }
         }
@@ -465,7 +467,8 @@ public class Common {
         // Check if the service is already running
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (CompoundNotification.class.getName().equals(service.service.getClassName())) {
+            if (CompoundNotification.class.getName().equals(service.service.getClassName()) ||
+                    CompoundNotification.isServiceRunning) {
                 return true;
             }
         }

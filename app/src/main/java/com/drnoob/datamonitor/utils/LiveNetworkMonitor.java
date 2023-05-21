@@ -81,7 +81,7 @@ public class LiveNetworkMonitor extends Service {
     private static boolean isTimerCancelled = true;
     private static boolean isTaskPaused = false;
     private static boolean isLiveNetworkReceiverRegistered = false;
-    private boolean isServiceRunning;
+    public static boolean isServiceRunning;
     private static LiveNetworkMonitor mLiveNetworkMonitor;
     private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
     private static boolean serviceRestart = true;
@@ -587,12 +587,15 @@ public class LiveNetworkMonitor extends Service {
                 // Screen turned off. Cancel task
                 try {
                     mTimerTask.cancel();
+                    isServiceRunning = false;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else {
-                restartService(context, true, false);
+                if (!isServiceRunning) {
+                    restartService(context, true, false);
+                }
             }
         }
     }
