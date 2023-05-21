@@ -36,7 +36,7 @@
     <string name="label_mobile_data">Dữ liệu di động</string>
     <string name="label_wifi">Wi-Fi</string>
     <string name="title_data_usage">Sử dụng dữ liệu</string>
-    <string name="label_dev">Với ❤ của Bitroid Inc.</string>
+    <string name="label_dev">Với ❤ của Bitroid</string>
     <string name="action_update">Cập nhật</string>
     <string name="data_remaining_placeholder">0.00 GB còn lại</string>
     <string name="label_loading_apps">Đang tải ứng dụng</string>

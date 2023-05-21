@@ -21,7 +21,7 @@
     <string name="heading_data_limit">Veri sınırı</string>
     <string name="title_add_data_plan">Veri planı ekle</string>
     <string name="widget_setup_step_1">1. Ana ekranda boş bir alana dokunun ve basılı tutun.</string>
-    <string name="label_dev">Bitroid Inc. tarafından ❤ ile.</string>
+    <string name="label_dev">Bitroid tarafından ❤ ile.</string>
     <string name="monthly">Aylık</string>
     <string name="app_label_uid">UID: %1$d</string>
     <string name="label_today">Bugün</string>

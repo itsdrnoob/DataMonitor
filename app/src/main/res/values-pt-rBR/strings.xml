@@ -38,7 +38,7 @@
     <string name="title_data_usage">"Uso de dados"</string>
     <string name="action_update">"Atualizar"</string>
     <string name="data_remaining_placeholder">"0.00 GB restante"</string>
-    <string name="label_dev">"Feito com ❤ por Bitroid Inc."</string>
+    <string name="label_dev">"Feito com ❤ por Bitroid"</string>
     <string name="label_loading_apps">"Carregando apps"</string>
     <string name="label_app_data_usage_session_empty">"Nenhum dado disponível para a sessão selecionada"</string>
     <string name="label_want_to_contribute">

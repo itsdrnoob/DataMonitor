@@ -150,7 +150,7 @@
     <string name="label_mobile_data">Mobildata</string>
     <string name="label_wifi">Wi-Fi</string>
     <string name="title_data_usage">Databruk</string>
-    <string name="label_dev">Med ❤ av Bitroid Inc.</string>
+    <string name="label_dev">Med ❤ av Bitroid</string>
     <string name="data_remaining_placeholder">0,00 GB igjen</string>
     <string name="label_loading_apps">Innlasting av programmer</string>
     <string name="label_loading">Laster inn …</string>

@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.activities;
 
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.APP_CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
@@ -37,7 +38,6 @@ import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_FRAGMENT;
-import static com.drnoob.datamonitor.core.Values.EXTRA_ACTIVITY_TITLE;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.NETWORK_STATS_FRAGMENT;
@@ -48,7 +48,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,6 +62,7 @@ import com.drnoob.datamonitor.adapters.data.DiagnosticsHistoryModel;
 import com.drnoob.datamonitor.adapters.data.LiveData;
 import com.drnoob.datamonitor.databinding.ActivityContainerBinding;
 import com.drnoob.datamonitor.ui.fragments.AboutFragment;
+import com.drnoob.datamonitor.ui.fragments.AppContributorsFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
@@ -233,6 +233,10 @@ public class ContainerActivity extends AppCompatActivity {
                 title = getString(R.string.app_data_usage);
                 break;
 
+            case APP_CONTRIBUTORS_FRAGMENT:
+                fragment = new AppContributorsFragment();
+                title = getString(R.string.app_contributors);
+                break;
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container_host_fragment, fragment).commit();

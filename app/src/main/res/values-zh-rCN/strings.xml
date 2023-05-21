@@ -34,7 +34,7 @@
     <string name="title_data_usage">流量已使用</string>
     <string name="action_update">更新</string>
     <string name="data_remaining_placeholder">剩余 0.00 GB</string>
-    <string name="label_dev">Bitroid Inc. ❤ 倾心制作</string>
+    <string name="label_dev">Bitroid ❤ 倾心制作</string>
     <string name="label_loading_apps">加载应用中</string>
     <string name="label_app_data_usage_session_empty">此时间段未使用流量</string>
     <string name="label_want_to_contribute">想为这个软件做些什么吗？点击这里了解.</string>

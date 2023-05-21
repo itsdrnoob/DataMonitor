@@ -3,7 +3,6 @@
     <string name="app_name">Data Monitor</string>
     <string name="appwidget_text">範例</string>
     <string name="add_widget">新增小工具</string>
-    <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d：%5$d：00</string>
     <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
     <string name="notification_mobile_data_usage">行動資料 ：%1$s</string>
     <string name="notification_wifi_data_usage">WiFi ：%1$s</string>
@@ -37,7 +36,7 @@
     <string name="action_update">更新</string>
     <string name="data_remaining_placeholder">剩餘 0.00 GB</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">Bitroid Inc. ❤ 用心製作</string>
+    <string name="label_dev">Bitroid ❤ 用心製作</string>
     <string name="label_loading_apps">載入應用程式中</string>
     <string name="label_loading">載入中……</string>
     <string name="label_app_data_usage_session_empty">此時間段未使用流量</string>

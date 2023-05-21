@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.drnoob.datamonitor.core.base.Preference
+        android:icon="@drawable/ic_contributors"
+        android:key="app_contributors"
+        android:title="@string/app_contributors"
+        app:summary="@string/app_contributors_summary"
+        android:widgetLayout="@layout/preference_right_arrow" />
+
+    <com.drnoob.datamonitor.core.base.Preference
+        android:icon="@drawable/ic_wall_of_thanks"
+        android:key="wall_of_thanks"
+        android:title="@string/wall_of_thanks"
+        app:summary="@string/wall_of_thanks_summary"
+        android:widgetLayout="@layout/preference_right_arrow" />
+</PreferenceScreen>

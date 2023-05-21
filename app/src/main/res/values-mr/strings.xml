@@ -312,7 +312,7 @@
     <string name="title_app_data_usage_type">प्रकार निवडा</string>
     <string name="data_remaining_placeholder">0.00 GB शिल्लक</string>
     <string name="label_loading_apps">अॅप्स लोड करत आहे</string>
-    <string name="label_dev">Bitroid Inc द्वारे ❤ सह.</string>
+    <string name="label_dev">Bitroid द्वारे ❤ सह.</string>
     <string name="setup_refresh_widget">विजेट रिफ्रेश करा</string>
     <string name="label_app_data_usage_session_empty">माहिती उपलब्ध नाही</string>
     <string name="heading_data_reset">काउंटर रीसेट करा</string>

@@ -76,6 +76,7 @@ public class Values {
     public static final int EXCLUDE_APPS_FRAGMENT = 0x0104;
     public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
     public static final int DATA_PLAN_FRAGMENT = 0x0118;
+    public static final int APP_CONTRIBUTORS_FRAGMENT = 0x0122;
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
     public static final int BOTTOM_NAVBAR_ITEM_SETUP = 1;
@@ -179,5 +180,9 @@ public class Values {
     public static final String DIAGNOSTICS_HISTORY_PREFERENCES = "com.drnoob.datamonitor_diagnostics_history_preferences";
     public static final String EXCLUDE_APPS_LIST = "excluded_apps_list";
     public static final String DIAGNOSTICS_HISTORY_LIST = "diagnostics_history_list";
+
+    public static final String WALL_OF_THANKS_LAST_UPDATE = "wall_of_thanks_last_update";
+    public static final String WALL_OF_THANKS_FEATURED_DONORS = "wall_of_thanks_featured_donors";
+    public static final String WALL_OF_THANKS_ALL_DONORS = "wall_of_thanks_all_donors";
 
 }

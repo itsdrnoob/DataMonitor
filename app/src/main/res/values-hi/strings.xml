@@ -253,7 +253,7 @@
     <string name="label_last_month">पिछले महीने</string>
     <string name="label_mobile_data">मोबाइल डेटा</string>
     <string name="data_remaining_placeholder">0.00 जी.बी. शेष</string>
-    <string name="label_dev">❤ के साथ Bitroid Inc द्वारा संचालित।</string>
+    <string name="label_dev">❤ के साथ Bitroid द्वारा संचालित।</string>
     <string name="action_update">अद्यतन(अपडेट)</string>
     <string name="widget_setup_step_1">1. अपनी होम स्क्रीन पर खाली जगह को स्पर्श करके रखें।</string>
     <string name="widget_setup_step_2">2. \"विजेट\" पर स्पर्श करें।</string>

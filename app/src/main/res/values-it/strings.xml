@@ -38,7 +38,7 @@
     <string name="title_data_usage">"Uso dati"</string>
     <string name="action_update">"Aggiorna"</string>
     <string name="data_remaining_placeholder">"0.00 GB rimanenti"</string>
-    <string name="label_dev">"Made with ❤ by Bitroid Inc."</string>
+    <string name="label_dev">"Made with ❤ by Bitroid"</string>
     <string name="label_loading_apps">"Caricamento app"</string>
     <string name="label_app_data_usage_session_empty">"Non ci sono dati disponibili per l'intervallo scelto"</string>
     <string name="label_want_to_contribute">Per sapere come contribuire all\'app Data Monitor clicca qui.</string>

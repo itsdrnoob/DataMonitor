@@ -3,7 +3,6 @@
     <string name="app_name">Data Monitor</string>
     <string name="appwidget_text">Namuna</string>
     <string name="add_widget">Vidjet qo\'shish</string>
-    <string name="reset_time" translatable="false">%1$d/%2$d/%3$d %4$d:%5$d:00</string>
     <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
     <string name="notification_mobile_data_usage"> Ishlatilgan trafik: %1$s</string>
     <string name="notification_wifi_data_usage">Wi-Fi: %1$s</string>
@@ -37,7 +36,7 @@
     <string name="action_update">Yangilash</string>
     <string name="data_remaining_placeholder">0.00 GB qoldi</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
-    <string name="label_dev">❤ bilan Bitroid Inc.</string>
+    <string name="label_dev">❤ bilan Bitroid</string>
     <string name="label_loading_apps">Ilovalar yuklanmoqda</string>
     <string name="label_loading">Yuklanmoqda…</string>
     <string name="label_app_data_usage_session_empty">Trafik mavjud emas</string>

@@ -35,7 +35,7 @@
     <string name="title_data_usage">Data gebruik</string>
     <string name="action_update">bijwerken</string>
     <string name="data_remaining_placeholder">0.00 GB over</string>
-    <string name="label_dev">Met ❤ door Bitroid Inc.</string>
+    <string name="label_dev">Met ❤ door Bitroid</string>
     <string name="label_loading_apps">Apps laden</string>
     <string name="label_loading">Laden…</string>
     <string name="label_want_to_contribute">Klik hier voor meer informatie over hoe u kunt bijdragen aan Data Monitor.</string>

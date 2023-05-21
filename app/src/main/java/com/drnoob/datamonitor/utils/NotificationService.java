@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
@@ -115,8 +116,13 @@ public class NotificationService extends Service {
             builder.setAutoCancel(false);
             builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
 
-            startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
-            startUpdater(getApplicationContext());
+            try {
+                startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
+                startUpdater(getApplicationContext());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (mAlarmManager.canScheduleExactAlarms()) {
@@ -169,9 +175,6 @@ public class NotificationService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceive: NotificationUpdater");
-
-            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            StatusBarNotification[] notification = manager.getActiveNotifications();
 
             boolean isChecked = PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean("setup_notification", false);
@@ -298,7 +301,7 @@ public class NotificationService extends Service {
                 }
                 builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-                managerCompat.notify(DATA_USAGE_NOTIFICATION_ID, builder.build());
+                postNotification(context, managerCompat, builder, DATA_USAGE_NOTIFICATION_ID);
 
                 setRepeating(context);
             } else {

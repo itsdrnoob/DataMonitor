@@ -35,6 +35,7 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTimePeriod;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
 import android.app.PendingIntent;
@@ -55,9 +56,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -120,7 +123,7 @@ public class Common {
     }
 
     public static void setLanguage(Activity activity, String languageCode, String countryCode) {
-        List<LanguageModel> availableLanguages =  refreshAvailableLanguages();
+        List<LanguageModel> availableLanguages = refreshAvailableLanguages();
 
         if (languageCode.equalsIgnoreCase(LANGUAGE_SYSTEM_DEFAULT)) {
             // setting default system language if available
@@ -142,8 +145,7 @@ public class Common {
                     // System country code available
                     countryCode = systemCountryCode;
                     break;
-                }
-                else {
+                } else {
                     // System country code not available
                     countryCode = "";
                 }
@@ -158,11 +160,9 @@ public class Common {
         Locale locale;
         if (countryCode.equals("rTW")) {
             locale = Locale.TAIWAN;
-        }
-        else if (countryCode.equals("rCN")) {
+        } else if (countryCode.equals("rCN")) {
             locale = Locale.CHINESE;
-        }
-        else {
+        } else {
             locale = new Locale(languageCode, countryCode);
         }
         conf.locale = locale;
@@ -198,6 +198,7 @@ public class Common {
         list.add(new LanguageModel("Polish", "pl", ""));
         list.add(new LanguageModel("Czech", "cs", ""));
         list.add(new LanguageModel("Vietnamese", "vi", ""));
+        list.add(new LanguageModel("Japanese", "ja", ""));
 
         Collections.sort(list, new Comparator<LanguageModel>() {
             @Override
@@ -213,18 +214,26 @@ public class Common {
 
     public static void refreshService(Context context) {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("combine_notifications", false)) {
-            context.startService(new Intent(context, CompoundNotification.class));
+            if (!isCombinedNotificationServiceRunning(context)) {
+                context.startService(new Intent(context, CompoundNotification.class));
+            }
         }
         else {
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("network_signal_notification", false)) {
-                context.startService(new Intent(context, LiveNetworkMonitor.class));
+                if (!isLiveNetworkServiceRunning(context)) {
+                    context.startService(new Intent(context, LiveNetworkMonitor.class));
+                }
             }
             if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("setup_notification", false)) {
-                context.startService(new Intent(context, NotificationService.class));
+                if (!isNotificationServiceRunning(context)) {
+                    context.startService(new Intent(context, NotificationService.class));
+                }
             }
         }
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("data_usage_alert", false)) {
-            context.startService(new Intent(context, DataUsageMonitor.class));
+            if (!isDataUsageAlertServiceRunning(context)) {
+                context.startService(new Intent(context, DataUsageMonitor.class));
+            }
         }
 
     }
@@ -234,8 +243,7 @@ public class Common {
         long wakeupMillis = 0l;
         try {
             wakeupMillis = getTimePeriod(context, SESSION_CUSTOM, -1)[1];
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -246,18 +254,15 @@ public class Common {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (alarmManager.canScheduleExactAlarms()) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
-                }
-                else  {
-                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                } else {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted");
                     postAlarmPermissionDeniedNotification(context);
                 }
-            }
-            else {
+            } else {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
             }
-            Log.d(TAG, "setRefreshAlarm: set" );
-        }
-        else {
+            Log.d(TAG, "setRefreshAlarm: set");
+        } else {
             Log.e(TAG, "setRefreshAlarm: something is wrong here " + wakeupMillis);
         }
     }
@@ -279,18 +284,15 @@ public class Common {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (alarmManager.canScheduleExactAlarms()) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
-                }
-                else  {
-                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted" );
+                } else {
+                    Log.e(TAG, "setRefreshAlarm: permission SCHEDULE_EXACT_ALARM not granted");
                     postAlarmPermissionDeniedNotification(context);
                 }
-            }
-            else {
+            } else {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeupMillis, pendingIntent);
             }
-            Log.d(TAG, "setDataPlanNotification: set" );
-        }
-        else {
+            Log.d(TAG, "setDataPlanNotification: set");
+        } else {
             Log.e(TAG, "setDataPlanNotification: something is wrong here " + wakeupMillis);
         }
     }
@@ -390,7 +392,7 @@ public class Common {
                 .setOnlyAlertOnce(true)
                 .setPriority(NotificationCompat.PRIORITY_MAX);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-        managerCompat.notify(OTHER_NOTIFICATION_ID, builder.build());
+        postNotification(context, managerCompat, builder, OTHER_NOTIFICATION_ID);
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -448,5 +450,61 @@ public class Common {
             suffix = "th";
         }
         return suffix;
+    }
+
+    private static boolean isLiveNetworkServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (LiveNetworkMonitor.class.getName().equals(service.service.getClassName()) ||
+                    LiveNetworkMonitor.isServiceRunning) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isCombinedNotificationServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (CompoundNotification.class.getName().equals(service.service.getClassName()) ||
+                    CompoundNotification.isServiceRunning) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isNotificationServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (NotificationService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isDataUsageAlertServiceRunning(Context context) {
+        // Check if the service is already running
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (DataUsageMonitor.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void postNotification(Context context, NotificationManagerCompat notificationManager,
+                                           NotificationCompat.Builder builder, int notificationId) {
+        if (notificationManager != null && builder != null) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                notificationManager.notify(notificationId, builder.build());
+            }
+        }
     }
 }

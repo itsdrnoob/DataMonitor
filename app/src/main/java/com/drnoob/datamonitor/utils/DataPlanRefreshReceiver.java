@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.utils;
 
 import static com.drnoob.datamonitor.Common.getPlanValidity;
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.ACTION_SHOW_DATA_PLAN_NOTIFICATION;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
@@ -48,6 +49,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -77,7 +79,7 @@ public class DataPlanRefreshReceiver extends BroadcastReceiver {
                     .setGroup(DEFAULT_NOTIFICATION_GROUP)
                     .setContentIntent(pendingIntent);
             NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-            managerCompat.notify(OTHER_NOTIFICATION_ID, builder.build());
+            postNotification(context, managerCompat, builder, OTHER_NOTIFICATION_ID);
         }
         else {
             try {
@@ -145,6 +147,6 @@ public class DataPlanRefreshReceiver extends BroadcastReceiver {
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentIntent(pendingIntent);
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-        managerCompat.notify(OTHER_NOTIFICATION_ID, builder.build());
+        postNotification(context, managerCompat, builder, OTHER_NOTIFICATION_ID);
     }
 }

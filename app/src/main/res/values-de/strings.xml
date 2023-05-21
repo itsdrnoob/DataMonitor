@@ -142,7 +142,7 @@
     <string name="option_2_min">2 Minuten</string>
     <string name="label_current_data_warning_trigger_level_limit_set">Aktueller Triggerpegel: %1$s%% (%2$s)</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">Aktueller Triggerpegel: %1$s%%</string>
-    <string name="label_dev">Mit ❤ von Bitroid Inc.</string>
+    <string name="label_dev">Mit ❤ von Bitroid</string>
     <string name="label_loading_apps">Apps laden</string>
     <string name="label_loading">Laden…</string>
     <string name="title_data_usage">Datennutzung</string>

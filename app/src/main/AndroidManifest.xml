@@ -65,6 +65,12 @@
             android:fitsSystemWindows="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.activities.WallOfThanksActivity"
+            android:exported="false"
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
 
         <receiver
             android:name=".Widget.DataUsageWidget"
@@ -99,20 +105,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-<!--        <service-->
-<!--            android:name=".utils.AppDataUsageMonitor"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true" />-->
-
-<!--        <receiver-->
-<!--            android:name=".utils.AppDataUsageMonitor$AppDataMonitor"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.SCREEN_ON" />-->
-<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
         <receiver
             android:name=".utils.NotificationService$NotificationRemover"
             android:exported="true">
