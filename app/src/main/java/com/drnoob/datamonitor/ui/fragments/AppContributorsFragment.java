@@ -268,6 +268,21 @@ public class AppContributorsFragment extends Fragment {
                 R.drawable.bluehomewu, true,
                 getContext().getString(R.string.github_bluehomewu)));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.rezaalmanda),
+                getContext().getString(R.string.rezaalmanda_summary),
+                R.drawable.rezaalmanda, true,
+                getContext().getString(R.string.github_rezaalmanda)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.gnu_ewm),
+                getContext().getString(R.string.gnu_ewm_summary),
+                R.drawable.ersen0, true,
+                getContext().getString(R.string.github_gnu_ewm)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.rintan),
+                getContext().getString(R.string.rintan_summary),
+                R.drawable.rintan, true,
+                getContext().getString(R.string.github_rintan)));
+
         return translators;
     }
 

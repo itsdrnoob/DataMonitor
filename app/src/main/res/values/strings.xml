@@ -466,4 +466,17 @@
     <string name="error_data_fetch_failed">Failed to fetch data</string>
     <string name="wall_of_thanks_summary">A place to show our appreciation to the supporters of the app.</string>
     <string name="app_contributors_summary">A list of contributors who support the development of the app.</string>
+    <string name="setup_smart_data_allocation">Smart Data Allocation</string>
+    <string name="smart_data_allocation_summary">Smartly allocate your data using daily quotas and data rollovers.</string>
+    <string name="setup_daily_quota_alert">Daily quota alert</string>
+    <string name="daily_quota_alert_summary">Get an alert when your daily quota is exhausted.</string>
+    <string name="daily_quota_alert_title">Daily data quota reached!</string>
+    <string name="daily_quota_alert_body">You\'ve exhausted your daily data quota.</string>
+    <string name="label_daily_quota">Daily quota: %1$s</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="rezaalmanda_summary">Indonesian</string>
+    <string name="gnu_ewm_summary">Polish</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="rintan_summary">Japanese</string>
 </resources>
