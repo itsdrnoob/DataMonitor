@@ -13,7 +13,7 @@ android {
         targetSdkVersion 33
         versionCode 24
         versionName 'v2.3.2'
-        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ko",
+        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ja", "ko",
                 "ml", "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN", "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
