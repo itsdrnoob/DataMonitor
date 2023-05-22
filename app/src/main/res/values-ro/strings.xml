@@ -209,7 +209,7 @@
     <string name="heading_data_reset_custom_counter">Valabilitatea planului</string>
     <string name="title_data_plan_expired">Planul de date a expirat!</string>
     <string name="summary_data_plan_expired">S-ar putea să doriți să vă actualizați planul</string>
-    <string name="battery_optimisation_enabled_info">Optimizarea bateriei este activată. Acest lucru va interfera cu funcționarea Data Monitor. Faceți clic pentru a dezactiva.</string>
+    <string name="battery_optimisation_enabled_info">Optimizarea bateriei este activată. Acest lucru va interfera cu funcționarea Data Monitor.</string>
     <string name="label_crash_logs_copied">Jurnalele de accident copiate în clipboard</string>
     <string name="label_permission_denied">Permisiunea refuzată!</string>
     <string name="notification_permission_denied_body">Caracteristicile, inclusiv notificarea monitorului de date, viteza live a rețelei și avertizarea de utilizare a datelor nu vor funcționa corect fără permisiunea de notificare. Vă rugăm să-l acordați manual.</string>
@@ -282,7 +282,7 @@
     <string name="error_invaliid_url">Adresă URL de descărcare nevalidă!</string>
     <string name="label_changelogs">Aflați ce este nou</string>
     <string name="label_update_available">Este disponibilă o nouă versiune!</string>
-    <string name="label_download_update">Descărcați noua versiune</string>
+    <string name="label_download_update">Descarcă actualizarea</string>
     <string name="checking_for_update">Verificare pentru actualizări…</string>
     <string name="network_diagnostics_info">Diagnosticarea rețelei poate utiliza în jur de 20-30 MB de date. Asigurați-vă că aveți acest lucru disponibil în planul dvs., altfel se pot aplica taxe de rețea.</string>
     <string name="error_permission_denied">Acces refuzat. Vă rugăm să o acordați manual.</string>
@@ -322,4 +322,9 @@
     <string name="option_30_sec">30 de secunde</string>
     <string name="lockscreen_notification">Activați notificarea pe ecranul de blocare</string>
     <string name="exclude_apps">Excludere aplicații</string>
+    <string name="action_add_application">Adăugare aplicație</string>
+    <string name="label_no_apps_added">Nu sunt adăugate aplicații. Fă clic pe butonul de mai jos pentru a adăuga o aplicație.</string>
+    <string name="exclude_apps_summary">Aplicații excluse din traficul de utilizare a datelor</string>
+    <string name="title_app_picker">Selectează o aplicație</string>
+    <string name="app_search_hint">Caută o aplicație</string>
 </resources>
