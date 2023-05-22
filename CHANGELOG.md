@@ -3,6 +3,23 @@
 All notable changes to Data Monitor will be documented in this file.
 
 
+## v2.3.2
+
+Data Monitor v2.3.2 release <br>
+This release includes certain changes and improvements.
+
+### What's new?
+- Introducing Wall of Thanks, a dedicated space to acknowledge and express gratitude to our amazing supporters.
+- Updated translations and added support for Japanese language.
+
+### Fixes and Improvements
+- Fixed the crash caused when app language was set to Traditional Chinese.
+- Improved exception handling.
+- Fixed the issue causing notifications to stop updating after a while.
+- Fixed Live network speed count on some VPN connections.
+- Resolved duplication of Live network speed notification.
+
+
 ## v2.3.1
 
 Data Monitor v2.3.1 release <br>

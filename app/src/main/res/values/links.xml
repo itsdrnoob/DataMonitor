@@ -9,10 +9,13 @@
     <string name="f_droid" translatable="false">https://f-droid.org/packages/com.drnoob.datamonitor/</string>
     <string name="update_check" translatable="false">https://raw.githubusercontent.com/itsdrnoob/DataMonitor/HEAD/VERSION.md</string>
     <string name="changelog" translatable="false">https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CHANGELOG.md</string>
+    <string name="wall_of_thanks_api" translatable="false">https://datamonitorweb.vercel.app/wallOfThanks/</string>
+    <string name="wall_of_thanks_about" translatable="false">https://datamonitorweb.vercel.app/wallOfThanks/about</string>
 
     <string name="apache_license_2" translatable="false">http://www.apache.org/licenses/LICENSE-2.0.txt</string>
     <string name="jspeedtest_license" translatable="false">https://github.com/bertrandmartel/speed-test-lib/blob/master/LICENSE.md</string>
     <string name="protobuf_license" translatable="false">https://github.com/protocolbuffers/protobuf/blob/main/LICENSE</string>
+    <string name="glide_license" translatable="false">https://github.com/bumptech/glide/blob/master/LICENSE</string>
 
     <string name="ltc_address" translatable="false">MQBVqLUpHLs2KUi8gTrhQkicpQVkohaccB</string>
     <string name="eth_address" translatable="false">0x820f316f75dacf5606b49bd33dfcf7e7142d59a5</string>
@@ -63,4 +66,7 @@
     <string name="github_croxz900" translatable="false">https://github.com/croxz900</string>
     <string name="github_ngocanhtve" translatable="false">https://github.com/ngocanhtve</string>
     <string name="github_bluehomewu" translatable="false">https://github.com/bluehomewu</string>
+    <string name="github_rezaalmanda" translatable="false">https://github.com/rezaalmanda</string>
+    <string name="github_gnu_ewm" translatable="false">https://github.com/gnu-ewm</string>
+    <string name="github_rintan" translatable="false">https://github.com/Rintan</string>
 </resources>

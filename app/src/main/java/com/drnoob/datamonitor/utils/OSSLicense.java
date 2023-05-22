@@ -194,6 +194,10 @@ public class OSSLicense {
                 "Volley",
                 "1.2.1", "Apache License 2.0", R.string.apache_license_2));
 
+        libraries.add(new OSSLibrary("Glide", "Bumptech",
+                "Glide is a fast and efficient open source media management and image loading framework for Android.",
+                "1.2.1", "BSD, part MIT and Apache 2.0.", R.string.glide_license));
+
         Collections.sort(libraries, new Comparator<OSSLibrary>() {
             @Override
             public int compare(OSSLibrary ossLibrary, OSSLibrary t1) {

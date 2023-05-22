@@ -456,4 +456,27 @@
     <string name="data_plan_updated_summary">Your new plan is valid till %1$s</string>
     <string name="setup_auto_update_data_plan">Auto-update data plan</string>
     <string name="auto_update_data_plan_summary">Automatically update your data plan with a similar one.</string>
+    <string name="wall_of_thanks">Wall of Thanks</string>
+    <string name="app_contributors">App Contributors</string>
+    <string name="label_thank_you">Thank You</string>
+    <string name="label_learn_more">Learn more</string>
+    <string name="wall_of_thanks_body">Data Monitor has come a long way since its inception, and we couldn\'t have done it without the support of our generous donors.</string>
+    <string name="label_top_donors">Top Donors</string>
+    <string name="label_all_donors">All Donors</string>
+    <string name="error_data_fetch_failed">Failed to fetch data</string>
+    <string name="wall_of_thanks_summary">A place to show our appreciation to the supporters of the app.</string>
+    <string name="app_contributors_summary">A list of contributors who support the development of the app.</string>
+    <string name="setup_smart_data_allocation">Smart Data Allocation</string>
+    <string name="smart_data_allocation_summary">Smartly allocate your data using daily quotas and data rollovers.</string>
+    <string name="setup_daily_quota_alert">Daily quota alert</string>
+    <string name="daily_quota_alert_summary">Get an alert when your daily quota is exhausted.</string>
+    <string name="daily_quota_alert_title">Daily data quota reached!</string>
+    <string name="daily_quota_alert_body">You\'ve exhausted your daily data quota.</string>
+    <string name="label_daily_quota">Daily quota: %1$s</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="rezaalmanda_summary">Indonesian</string>
+    <string name="gnu_ewm_summary">Polish</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="rintan_summary">Japanese</string>
 </resources>

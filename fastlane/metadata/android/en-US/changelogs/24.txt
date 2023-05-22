@@ -1,0 +1,5 @@
+• Introducing Wall of Thanks, a dedicated space to acknowledge and express gratitude to our amazing supporters.
+• Fixed the crash caused when app language was set to Traditional Chinese.
+• Fixed the issue causing notifications to stop updating after a while.
+• Resolved duplication of Live network speed notification.
+Checkout full changelog here: https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CHANGELOG.md#v232

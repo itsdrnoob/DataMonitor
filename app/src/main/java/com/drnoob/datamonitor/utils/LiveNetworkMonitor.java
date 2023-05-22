@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GROUP;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
@@ -56,6 +57,7 @@ import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -79,10 +81,11 @@ public class LiveNetworkMonitor extends Service {
     private static boolean isTimerCancelled = true;
     private static boolean isTaskPaused = false;
     private static boolean isLiveNetworkReceiverRegistered = false;
-    private boolean isServiceRunning;
+    public static boolean isServiceRunning;
     private static LiveNetworkMonitor mLiveNetworkMonitor;
     private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
     private static boolean serviceRestart = true;
+    private static ConnectivityManager connectivityManager;
 
     @Nullable
     @Override
@@ -99,14 +102,16 @@ public class LiveNetworkMonitor extends Service {
         super.onCreate();
         // Service is started here
         mLiveNetworkMonitor = this;
-
-//        previousDownBytes = TrafficStats.getTotalRxBytes();
-//        previousUpBytes = TrafficStats.getTotalTxBytes();
+        connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 
         previousDownBytes = 0l;
         previousUpBytes = 0l;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || isVPNConnected(this)) {
+            previousUpBytes = TrafficStats.getTotalTxBytes();
+            previousDownBytes = TrafficStats.getTotalRxBytes();
+        }
+        else {
             for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
                 final String iface = linkProperties.getInterfaceName();
                 if (iface == null) {
@@ -115,9 +120,6 @@ public class LiveNetworkMonitor extends Service {
                 previousUpBytes += TrafficStats.getTxBytes(iface);
                 previousDownBytes += TrafficStats.getRxBytes(iface);
             }
-        } else {
-            previousDownBytes = TrafficStats.getTotalRxBytes();
-            previousUpBytes = TrafficStats.getTotalTxBytes();
         }
 
         previousTotalBytes = previousDownBytes + previousUpBytes;
@@ -157,7 +159,10 @@ public class LiveNetworkMonitor extends Service {
         mBuilder.setSound(null);
 
         if (isServiceRunning) {
+            Log.d(TAG, "onCreate: Service in running state.");
             return;
+//            stopSelf();
+//            startService(new Intent(this, LiveNetworkMonitor.class));
         }
 
         if (isTimerCancelled) {
@@ -275,7 +280,11 @@ public class LiveNetworkMonitor extends Service {
             Long currentUpBytes = 0l;
             Long currentDownBytes = 0l;
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S || isVPNConnected(context)) {
+                currentUpBytes = TrafficStats.getTotalTxBytes();
+                currentDownBytes = TrafficStats.getTotalRxBytes();
+            }
+            else {
                 for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
                     final String iface = linkProperties.getInterfaceName();
                     if (iface == null) {
@@ -284,9 +293,6 @@ public class LiveNetworkMonitor extends Service {
                     currentUpBytes += TrafficStats.getTxBytes(iface);
                     currentDownBytes += TrafficStats.getRxBytes(iface);
                 }
-            } else {
-                currentUpBytes = TrafficStats.getTotalTxBytes();
-                currentDownBytes = TrafficStats.getTotalRxBytes();
             }
 
             Long currentTotalBytes = currentDownBytes + currentUpBytes;
@@ -379,8 +385,18 @@ public class LiveNetworkMonitor extends Service {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
         }
 
-        managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+        postNotification(context, managerCompat, mBuilder, NETWORK_SIGNAL_NOTIFICATION_ID);
 
+    }
+
+    private static boolean isVPNConnected(Context context) {
+        if (connectivityManager == null) {
+            connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+        }
+        NetworkCapabilities networkCapabilities = connectivityManager
+                .getNetworkCapabilities(connectivityManager.getActiveNetwork());
+        return networkCapabilities != null &&
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN);
     }
 
     private static void updateInitialData() {
@@ -571,12 +587,15 @@ public class LiveNetworkMonitor extends Service {
                 // Screen turned off. Cancel task
                 try {
                     mTimerTask.cancel();
+                    isServiceRunning = false;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else {
-                restartService(context, true, false);
+                if (!isServiceRunning) {
+                    restartService(context, true, false);
+                }
             }
         }
     }

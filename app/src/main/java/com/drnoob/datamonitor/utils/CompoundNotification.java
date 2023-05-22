@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.ICON_DATA_USAGE;
 import static com.drnoob.datamonitor.core.Values.ICON_NETWORK_SPEED;
@@ -63,6 +64,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -86,7 +88,7 @@ public class CompoundNotification extends Service {
     private static boolean isTimerCancelled = true;
     private static boolean isTaskPaused = false;
     private static boolean isNotificationReceiverRegistered = false;
-    private boolean isServiceRunning;
+    public static boolean isServiceRunning;
     private static String mobileDataUsage,
             wifiDataUsage,
             totalDataUsage;
@@ -519,7 +521,7 @@ public class CompoundNotification extends Service {
         mBuilder.setCustomBigContentView(bigContentView);
 
         try {
-            managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            postNotification(context, managerCompat, mBuilder, NETWORK_SIGNAL_NOTIFICATION_ID);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -583,13 +585,16 @@ public class CompoundNotification extends Service {
                 // Screen turned off. Cancel task
                 try {
                     mTimerTask.cancel();
+                    isServiceRunning = false;
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             else {
-                restartService(context, true, false);
+                if (!isServiceRunning) {
+                    restartService(context, true, false);
+                }
             }
         }
     }

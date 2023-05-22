@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_ID;
@@ -300,7 +301,7 @@ public class NotificationService extends Service {
                 }
                 builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-                managerCompat.notify(DATA_USAGE_NOTIFICATION_ID, builder.build());
+                postNotification(context, managerCompat, builder, DATA_USAGE_NOTIFICATION_ID);
 
                 setRepeating(context);
             } else {

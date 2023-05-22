@@ -19,6 +19,7 @@
 
 package com.drnoob.datamonitor.utils;
 
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
@@ -242,7 +243,7 @@ public class DataUsageMonitor extends Service {
                     .setSound(uri)
                     .setVibrate(new long[]{0, 100, 1000, 300});
             NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
-            managerCompat.notify(DATA_USAGE_WARNING_NOTIFICATION_ID, builder.build());
+            postNotification(context, managerCompat, builder, DATA_USAGE_WARNING_NOTIFICATION_ID);
             PreferenceManager.getDefaultSharedPreferences(context).edit()
                     .putBoolean(DATA_USAGE_WARNING_SHOWN, true)
                     .apply();
