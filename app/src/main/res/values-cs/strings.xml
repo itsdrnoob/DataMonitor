@@ -411,4 +411,27 @@
     <string name="auto_update_data_plan_summary">Automaticky aktualizovat váš datový tarif na podobný.</string>
     <string name="setup_auto_update_data_plan">Automaticky aktualizovat datový plán</string>
     <string name="label_do_not_show_again">Nezobrazovat znovu</string>
+    <string name="wall_of_thanks">Zeď díků</string>
+    <string name="app_contributors">Přispěvatelé aplikace</string>
+    <string name="label_thank_you">Děkujeme</string>
+    <string name="label_learn_more">Zjistit více</string>
+    <string name="wall_of_thanks_summary">Místo, kde můžeme vyjádřit uznání podporovatelům aplikace.</string>
+    <string name="app_contributors_summary">Seznam přispěvatelů, kteří podporují vývoj aplikace.</string>
+    <string name="wall_of_thanks_body">Od svého vzniku urazil Data Monitor dlouhou cestu a bez podpory našich štědrých dárců bychom to nedokázali.</string>
+    <string name="label_top_donors">Největší dárci</string>
+    <string name="label_all_donors">Všichni dárci</string>
+    <string name="error_data_fetch_failed">Nepodařilo se načíst data</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="rezaalmanda_summary">Indonéština</string>
+    <string name="gnu_ewm_summary">Polština</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="rintan_summary">Japonština</string>
+    <string name="daily_quota_alert_title">Denní datová kvóta vyčerpána!</string>
+    <string name="daily_quota_alert_body">Vyčerpali jste denní kvótu dat.</string>
+    <string name="smart_data_allocation_summary">Chytře rozdělovat data pomocí denních kvót a převádění dat.</string>
+    <string name="setup_smart_data_allocation">Chytré přidělování dat</string>
+    <string name="setup_daily_quota_alert">Upozornění na denní kvótu</string>
+    <string name="label_daily_quota">Denní kvóta: %1$s</string>
+    <string name="daily_quota_alert_summary">Získat upozornění po vyčerpání denní kvóty.</string>
 </resources>
