@@ -412,4 +412,27 @@
     <string name="bonbonboi">bonbonboi</string>
     <string name="MarongHappy">JungHee Lee</string>
     <string name="U1M450W">U1M450W</string>
+    <string name="wall_of_thanks_body">З моменту заснування Data Monitor пройшов довгий шлях, і ми не змогли б цього зробити без підтримки наших щедрих донатерів.</string>
+    <string name="wall_of_thanks_summary">Місце, де ми можемо висловити нашу вдячність тим, хто підтримує застосунок.</string>
+    <string name="setup_smart_data_allocation">Розумний розподіл даних</string>
+    <string name="daily_quota_alert_title">Добовий ліміт даних досягнуто!</string>
+    <string name="smart_data_allocation_summary">Розумно розподіляйте дані, використовуючи щоденні ліміти та перенесення даних.</string>
+    <string name="setup_daily_quota_alert">Щоденне сповіщення про ліміт</string>
+    <string name="label_daily_quota">Денний ліміт: %1$s</string>
+    <string name="rezaalmanda">Реза</string>
+    <string name="rezaalmanda_summary">Індонезійська</string>
+    <string name="gnu_ewm_summary">Польська</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="rintan_summary">Японська</string>
+    <string name="wall_of_thanks">Стіна подяки</string>
+    <string name="label_thank_you">Дякую</string>
+    <string name="app_contributors">Учасники застосунку</string>
+    <string name="label_learn_more">Дізнайтеся більше</string>
+    <string name="label_top_donors">Топ донатерів</string>
+    <string name="label_all_donors">Всі донатери</string>
+    <string name="error_data_fetch_failed">Не вдалося отримати дані</string>
+    <string name="app_contributors_summary">Список дописувачів, які підтримують розробку застосунку.</string>
+    <string name="daily_quota_alert_summary">Отримувати сповіщення, коли ваша денний ліміт буде вичерпано.</string>
+    <string name="daily_quota_alert_body">Ви вичерпали свій денний ліміт даних.</string>
 </resources>
