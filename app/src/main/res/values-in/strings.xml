@@ -142,4 +142,7 @@
     <string name="label_data_usage_reset_date_change">Penggunaan data akan diatur ulang di %1$d%2$s setiap bulannya</string>
     <string name="remaining_data_info_enabled">Info data yang tersisa diaktifkan</string>
     <string name="label_no_additional_lang">Klik di sini untuk membantu menerjemahkan aplikasi.</string>
+    <string name="remaining_data_info_disabled">Info data yang tersisa dinonaktifkan</string>
+    <string name="label_monitoring_no_plan">Tambahkan paket data untuk memulai pemantauan</string>
+    <string name="label_widget_refreshed">Widget disegarkan</string>
 </resources>
