@@ -412,4 +412,27 @@
     <string name="auto_update_data_plan_summary">Автоматическое обновление плана передачи данных на аналогичный.</string>
     <string name="label_data_plan_updated">План данных обновлен!</string>
     <string name="croxz900_summary">Турецкий</string>
+    <string name="wall_of_thanks">Стена благодарностей</string>
+    <string name="label_thank_you">Спасибо</string>
+    <string name="label_learn_more">Узнать больше</string>
+    <string name="wall_of_thanks_body">Монитор данных прошел долгий путь с момента своего создания, и мы не смогли бы этого сделать без поддержки наших щедрых доноров.</string>
+    <string name="app_contributors_summary">Список участников, которые поддерживают развитие приложения.</string>
+    <string name="daily_quota_alert_body">Вы исчерпали свою суточную норму данных.</string>
+    <string name="app_contributors">Участники приложения</string>
+    <string name="label_top_donors">Лучшие спонсоры</string>
+    <string name="label_all_donors">Все спонсоры</string>
+    <string name="error_data_fetch_failed">Не удалось получить данные</string>
+    <string name="wall_of_thanks_summary">Место для выражения нашей признательности сторонникам приложения.</string>
+    <string name="setup_smart_data_allocation">Умное распределение данных</string>
+    <string name="smart_data_allocation_summary">Разумное распределение данных с помощью ежедневных квот и переноса данных.</string>
+    <string name="setup_daily_quota_alert">Ежедневное оповещение о квоте</string>
+    <string name="daily_quota_alert_summary">Получать оповещение, когда ваша дневная норма исчерпана.</string>
+    <string name="daily_quota_alert_title">Суточная квота данных достигнута!</string>
+    <string name="label_daily_quota">Суточная квота: %1$s</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="rezaalmanda_summary">Индонезийский</string>
+    <string name="gnu_ewm_summary">Польский</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan_summary">Японский</string>
+    <string name="rintan">Rintan</string>
 </resources>
