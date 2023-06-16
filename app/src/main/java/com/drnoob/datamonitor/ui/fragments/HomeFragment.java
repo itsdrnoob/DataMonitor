@@ -52,6 +52,7 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.updateOverview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -501,10 +502,12 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
         String month, endDate, suffix, end;
+        int daysRemaining;
         if (session == SESSION_MONTHLY) {
             int planEnd = PreferenceManager.getDefaultSharedPreferences(getContext())
                     .getInt(DATA_RESET_DATE, 1);
@@ -515,6 +518,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
             if (today >= planEnd) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+                daysRemaining = daysInMonth - today + planEnd;
+            } else {
+                daysRemaining = planEnd - today;
             }
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
             endDate = String.valueOf(planEnd);
@@ -533,10 +539,13 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             calendar.setTimeInMillis(planEndDateMillis);
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
             endDate = new SimpleDateFormat("d").format(calendar.getTime());
+            long currentTimeMillis = System.currentTimeMillis();
+            long remainingMillis = planEndDateMillis - currentTimeMillis;
+            daysRemaining = (int) (remainingMillis / (24 * 60 * 60 * 1000.0));
         }
         suffix = getDateSuffix(endDate);
         end = endDate + suffix + " " + month;
-        validity = requireContext().getString(R.string.label_plan_validity, end);
+        validity = requireContext().getString(R.string.label_plan_validity, end, Integer.toString(daysRemaining));
         return validity;
     }
 
