@@ -371,7 +371,7 @@
     <string name="error_network_monitor_start">Не удалось запустить Network Monitor. Откройте приложение для обновления.</string>
     <string name="label_plan_details_title">План %1$s активен</string>
     <string name="home_plan_usage_details">%1$s использовано | %2$s</string>
-    <string name="label_plan_validity">Действует до %1$s</string>
+    <string name="label_plan_validity">Действует до %1$sb | %2$s</string>
     <string name="always_show_total">Всегда показывать общее количество</string>
     <string name="label_current_plan">Текущий план</string>
     <string name="label_filter_app_usage">Фильтр использования приложений</string>

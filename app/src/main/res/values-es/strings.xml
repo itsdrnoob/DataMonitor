@@ -397,7 +397,7 @@
     <string name="tadekdudek">tadekdudek</string>
     <string name="label_filter_app_usage">Filtrar el uso de la aplicación</string>
     <string name="label_filter">Filtro</string>
-    <string name="label_plan_validity">Válido hasta el %1$s</string>
+    <string name="label_plan_validity">Válido hasta el %1$s | %2$s</string>
     <string name="app_label_combined_total">Uso total de datos: %1$s</string>
     <string name="error_alarm_permission_denied">¡Permiso de alarma denegado!</string>
     <string name="label_plan_details_title">%1$s plan activo</string>

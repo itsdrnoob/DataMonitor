@@ -88,6 +88,7 @@
     <string name="body_app_data_warning_notification">%1$s hat sein Datenkontingent ausgeschöpft</string>
     <string name="label_data_remaining">%1$s verbleibend</string>
     <string name="label_data_remaining_used_excess">%1$s zusätzlich verwendet</string>
+    <string name="label_days_remaining">%1$s Tag(e) verbleibend</string>
     <string name="overview_tuesday">Di</string>
     <string name="running_diagnostics">Ausführen der Diagnose</string>
     <string name="connecting">Verbinden</string>
@@ -375,7 +376,7 @@
     <string name="tadekdudek_summary">Polnisch</string>
     <string name="error_network_monitor_start">Network Monitor konnte nicht gestartet werden. Öffnen Sie die App zur Aktualisierung.</string>
     <string name="label_filter">Filtern</string>
-    <string name="label_plan_validity">Gültig bis %1$s | %2$s Tag(e) verbleibend</string>
+    <string name="label_plan_validity">Gültig bis %1$s | %2$s</string>
     <string name="always_show_total">Immer Gesamtbetrag anzeigen</string>
     <string name="always_show_total_summary">Unabhängig von den gewählten Optionen wird in der Meldung immer die Gesamtzahl der verwendeten Daten angezeigt.</string>
     <string name="app_label_combined_total">Gesamtdatenverbrauch: %1$s</string>

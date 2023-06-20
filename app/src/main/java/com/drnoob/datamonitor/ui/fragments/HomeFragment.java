@@ -502,7 +502,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         }
     }
 
-    @SuppressLint("StringFormatMatches")
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
@@ -516,7 +515,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 planEnd = daysInMonth;
             }
             int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
-            if (today >= planEnd) {
+            if (today >= planEnd) { // shouldn't this just be `>`?
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
                 daysRemaining = daysInMonth - today + planEnd;
             } else {
@@ -545,7 +544,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         }
         suffix = getDateSuffix(endDate);
         end = endDate + suffix + " " + month;
-        validity = requireContext().getString(R.string.label_plan_validity, end, Integer.toString(daysRemaining));
+        String remaining = requireContext().getString(R.string.label_days_remaining, Integer.toString(daysRemaining));
+        validity = requireContext().getString(R.string.label_plan_validity, end, remaining);
         return validity;
     }
 
