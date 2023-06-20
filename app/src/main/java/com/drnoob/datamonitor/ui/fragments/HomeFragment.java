@@ -52,7 +52,6 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.updateOverview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
