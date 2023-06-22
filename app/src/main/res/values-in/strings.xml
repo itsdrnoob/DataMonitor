@@ -145,4 +145,18 @@
     <string name="remaining_data_info_disabled">Info data yang tersisa dinonaktifkan</string>
     <string name="label_monitoring_no_plan">Tambahkan paket data untuk memulai pemantauan</string>
     <string name="label_widget_refreshed">Widget disegarkan</string>
+    <string name="label_notification_enabled">Pemberitahuan monitor data diaktifkan</string>
+    <string name="label_notification_cannot_disable_both">Tidak dapat mematikan kedua elemen</string>
+    <string name="label_setup_notification_first">Harap atur notifikasi terlebih dahulu</string>
+    <string name="day">hari</string>
+    <string name="title_data_warning_notification">Peringatan penggunaan data</string>
+    <string name="body_data_warning_notification">Anda telah menggunakan %1$d%% dari batas data Anda</string>
+    <string name="body_app_data_warning_notification">%1$s telah menghabiskan kuota datanya</string>
+    <string name="title_data_usage_notification">Penggunaan data hari ini: %1$s</string>
+    <string name="label_add_data_plan_first">Harap tambahkan paket data terlebih dahulu</string>
+    <string name="label_data_plan_saved">Paket data disimpan</string>
+    <string name="month">bulan</string>
+    <string name="body_data_usage_notification_loading">Memuat…</string>
+    <string name="label_data_remaining">%1$s tersisa</string>
+    <string name="label_data_remaining_used_excess">%1$s ekstra digunakan</string>
 </resources>
