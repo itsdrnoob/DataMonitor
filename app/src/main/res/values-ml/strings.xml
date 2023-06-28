@@ -388,4 +388,12 @@
     <string name="U1M450W">U1M450W</string>
     <string name="MarongHappy">ജംഗ്ഹീ ലീ</string>
     <string name="U1M450W_summary">ഉസ്ബെക്</string>
+    <string name="error_network_monitor_start">നെറ്റ്‌വർക്ക് മോണിറ്റർ ആരംഭിക്കുന്നതിൽ പരാജയപ്പെട്ടു. പുതുക്കാൻ ആപ്പ് തുറക്കുക.</string>
+    <string name="label_filter">ഫിൽറ്റർ</string>
+    <string name="label_filter_app_usage">ആപ്പ് ഉപയോഗം ഫിൽറ്റർ ചെയ്യുക</string>
+    <string name="label_current_plan">നിലവിലെ പ്ലാൻ</string>
+    <string name="label_plan_details_title">%1$s പ്ലാൻ സജീവമാണ്</string>
+    <string name="home_plan_usage_details">%1$s ഉപയോഗിച്ചു | %2$s</string>
+    <string name="label_plan_validity">%1$s വരെ സാധുതയുണ്ട്</string>
+    <string name="always_show_total">എല്ലായ്‌പ്പോഴും ആകെ കാണിക്കുക</string>
 </resources>
