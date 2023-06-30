@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="appwidget_text">Ví dụ</string>
-    <string name="app_name">GIám sát Dữ liệu</string>
+    <string name="app_name">Giám sát Dữ liệu</string>
     <string name="add_widget">Thêm tiện ích</string>
     <string name="notification_mobile_data_usage">Dữ liệu di động: %1$s</string>
     <string name="notification_wifi_data_usage">Wi-Fi: %1$s</string>
