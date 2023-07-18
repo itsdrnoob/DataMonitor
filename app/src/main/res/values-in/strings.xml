@@ -159,4 +159,31 @@
     <string name="body_data_usage_notification_loading">Memuat…</string>
     <string name="label_data_remaining">%1$s tersisa</string>
     <string name="label_data_remaining_used_excess">%1$s ekstra digunakan</string>
+    <string name="disable_battery_optimisation">Matikan pengoptimalan baterai</string>
+    <string name="disable_battery_optimisation_body">Mencegah mematikan Monitor Data saat berjalan di latar belakang.
+\nJika tidak, nilainya mungkin salah.</string>
+    <string name="extra_optimisation_tips">Tips pengoptimalan ekstra</string>
+    <string name="oem_battery_settings">Pengaturan baterai OEM</string>
+    <string name="action_next">Berikutnya</string>
+    <string name="overview_monday">Sen</string>
+    <string name="overview_tuesday">Sel</string>
+    <string name="overview_wednesday">Rab</string>
+    <string name="overview_thursday">Kam</string>
+    <string name="overview_friday">Jum</string>
+    <string name="overview_saturday">Sab</string>
+    <string name="overview_sunday">Min</string>
+    <string name="label_translators">Penerjemah</string>
+    <string name="setup_app_data_usage_alert">Peringatan penggunaan data aplikasi</string>
+    <string name="title_app_data_limit">Batas data aplikasi</string>
+    <string name="network_diagnostics">Diagnostik</string>
+    <string name="run_diagnostics">Jalankan Diagnostik</string>
+    <string name="running_diagnostics">Menjalankan Diagnostik</string>
+    <string name="connecting">Menghubungkan</string>
+    <string name="testing_download">Menguji kecepatan unduh</string>
+    <string name="testing_upload">Menguji kecepatan unggah</string>
+    <string name="testing_latency">Menguji latensi jaringan</string>
+    <string name="current_connection">Koneksi saat ini: %1$s</string>
+    <string name="network_stats">Statistik jaringan</string>
+    <string name="network_speed_mbps">%1$s Mbit/dtk</string>
+    <string name="max_download_speed">Kecepatan unduh maksimum</string>
 </resources>
