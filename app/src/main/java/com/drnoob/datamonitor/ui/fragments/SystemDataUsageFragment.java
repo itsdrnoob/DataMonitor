@@ -22,14 +22,8 @@ package com.drnoob.datamonitor.ui.fragments;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
-import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
-import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
 import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
-import static com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
-import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getAppWifiDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
@@ -45,12 +39,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -58,10 +53,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.AppDataUsageAdapter;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
+import com.drnoob.datamonitor.adapters.data.DataUsageViewModel;
+import com.drnoob.datamonitor.adapters.data.DataUsageViewModelFactory;
 import com.drnoob.datamonitor.core.task.DatabaseHandler;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.drnoob.datamonitor.utils.helpers.UsageDataHelperImpl;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -76,7 +74,7 @@ public class SystemDataUsageFragment extends Fragment {
     private static SwipeRefreshLayout mDataRefresh;
     private static TextView mSession, mType, mEmptyList;
     public static LinearLayout mTopBar;
-    private static List<AppDataUsageModel> mList;
+    private static List<AppDataUsageModel> mList = new ArrayList<>();
     private static AppDataUsageAdapter mAdapter;
 
     public SystemDataUsageFragment() {
@@ -99,8 +97,12 @@ public class SystemDataUsageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_system_data_usage, container, false);
+        return inflater.inflate(R.layout.fragment_system_data_usage, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         mAppsView = view.findViewById(R.id.app_data_usage_recycler);
         mLoading = view.findViewById(R.id.layout_list_loading);
@@ -109,7 +111,6 @@ public class SystemDataUsageFragment extends Fragment {
 //        mType = view.findViewById(R.id.data_usage_type);
         mTopBar = view.findViewById(R.id.top_bar);
         mEmptyList = view.findViewById(R.id.empty_list);
-        mList = AppDataUsageFragment.mSystemList;
         mAdapter = new AppDataUsageAdapter(mList, mContext);
         mAdapter.setActivity(getActivity());
         mAppsView = view.findViewById(R.id.app_data_usage_recycler);
@@ -125,12 +126,7 @@ public class SystemDataUsageFragment extends Fragment {
                 mAppsView.setPadding(0, 20, 0, 0);
             }
         }
-
-//        setSession(session);
-//        setType(type);
-
-
-        if (mList.size() > 0) {
+        if (mList != null && mList.size() > 0) {
             mLoading.setAlpha(0.0f);
             onDataLoaded();
         } else {
@@ -145,8 +141,6 @@ public class SystemDataUsageFragment extends Fragment {
                 loadData.execute();
             }
         });
-
-        return view;
     }
 
     private static void onDataLoaded() {
@@ -234,7 +228,6 @@ public class SystemDataUsageFragment extends Fragment {
                                 }
 
                                 model.setProgress(progress);
-
                                 mList.add(model);
                             }
 

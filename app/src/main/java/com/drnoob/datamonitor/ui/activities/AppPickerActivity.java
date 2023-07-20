@@ -50,6 +50,7 @@ import com.drnoob.datamonitor.core.task.DatabaseHandler;
 import com.drnoob.datamonitor.databinding.ActivityAppPickerBinding;
 import com.drnoob.datamonitor.utils.CrashReporter;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.drnoob.datamonitor.utils.helpers.ThemeHelperKt;
 import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class AppPickerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.setTheme(AppPickerActivity.this);
+        ThemeHelperKt.setTheme(AppPickerActivity.this);
         Thread.setDefaultUncaughtExceptionHandler(new CrashReporter(AppPickerActivity.this));
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
