@@ -44,7 +44,6 @@ import static com.drnoob.datamonitor.core.Values.SESSION_TODAY;
 import static com.drnoob.datamonitor.core.Values.SHOW_ADD_PLAN_BANNER;
 import static com.drnoob.datamonitor.core.Values.TYPE_MOBILE_DATA;
 import static com.drnoob.datamonitor.core.Values.TYPE_WIFI;
-import static com.drnoob.datamonitor.ui.activities.MainActivity.setRefreshAppDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
@@ -84,6 +83,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.button.MaterialButton;
@@ -362,7 +362,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
                 intent.putExtra(DATA_USAGE_TYPE, TYPE_MOBILE_DATA);
                 intent.putExtra(DAILY_DATA_HOME_ACTION, true);
-                setRefreshAppDataUsage(true);
+                MainActivity.Companion.setRefreshAppDataUsage(true);
                 startActivity(intent);
             }
         });
@@ -375,7 +375,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 intent.putExtra(DATA_USAGE_SESSION, SESSION_TODAY);
                 intent.putExtra(DATA_USAGE_TYPE, TYPE_WIFI);
                 intent.putExtra(DAILY_DATA_HOME_ACTION, true);
-                setRefreshAppDataUsage(true);
+                MainActivity.Companion.setRefreshAppDataUsage(true);
                 startActivity(intent);
             }
         });
