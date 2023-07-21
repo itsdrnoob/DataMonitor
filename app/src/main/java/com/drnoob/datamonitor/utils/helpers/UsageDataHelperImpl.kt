@@ -19,41 +19,36 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
 
     override suspend fun fetchApps() = withContext(Dispatchers.IO) {
         val packageManager = context.packageManager
-        val allApps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
-        val modelList: MutableList<AppDataUsageModel> = ArrayList()
-        var model: AppDataUsageModel?
+        val allApps =
+            packageManager.getInstalledApplications(PackageManager.GET_META_DATA).removeDuplicates()
+
         val databaseHandler = DatabaseHandler(context)
+        if (allApps.size == databaseHandler.usageListSize) return@withContext
+
         for (applicationInfo in allApps) {
-            if (applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 1) {
-                // System app
-                modelList.add(
-                    AppDataUsageModel(
-                        packageManager.getApplicationLabel(applicationInfo).toString(),
-                        applicationInfo.packageName,
-                        applicationInfo.uid,
-                        true
-                    )
+            val model = if (applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 1) {
+                AppDataUsageModel(
+                    packageManager.getApplicationLabel(applicationInfo).toString(),
+                    applicationInfo.packageName,
+                    applicationInfo.uid,
+                    true
                 )
             } else {
                 // User app
-                modelList.add(
-                    AppDataUsageModel(
-                        packageManager.getApplicationLabel(applicationInfo).toString(),
-                        applicationInfo.packageName,
-                        applicationInfo.uid,
-                        false
-                    )
+                AppDataUsageModel(
+                    packageManager.getApplicationLabel(applicationInfo).toString(),
+                    applicationInfo.packageName,
+                    applicationInfo.uid,
+                    false
                 )
             }
-        }
-        for (i in modelList.indices) {
-            model = AppDataUsageModel().apply {
-                this.appName = modelList[i].appName
-                this.packageName = modelList[i].packageName
-                this.uid = modelList[i].uid
-                this.setIsSystemApp(modelList[i].isSystemApp)
-            }
-            databaseHandler.addData(model)
+            databaseHandler.addData(
+                AppDataUsageModel().apply {
+                    this.appName = model.appName
+                    this.packageName = model.packageName
+                    this.uid = model.uid
+                    this.setIsSystemApp(model.isSystemApp)
+                })
         }
     }
 
@@ -66,6 +61,9 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
         var totalSystemReceived = 0L
         val date = PreferenceManager.getDefaultSharedPreferences(context)
             .getInt(Values.DATA_RESET_DATE, 1)
+
+        fetchApps()
+
         val handler = DatabaseHandler(context)
         val list = handler.usageList
 
@@ -150,7 +148,6 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
             totalSystemReceived
         )
     }
-
 
     override suspend fun loadSystemAppsData(
         session: Int,
@@ -361,5 +358,21 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
         dataList.reverse()
 
         return dataList
+    }
+
+    /**
+     * Removes the [ApplicationInfo] objects from list which have duplicate [ApplicationInfo.uid]
+     * */
+    private fun MutableList<ApplicationInfo>.removeDuplicates(): List<ApplicationInfo> {
+        val uniqueUid = HashSet<Int>()
+        val iterator = this.iterator()
+
+        while (iterator.hasNext()) {
+            val appInfo = iterator.next()
+            if (!uniqueUid.add(appInfo.uid)) {
+                iterator.remove()
+            }
+        }
+        return this
     }
 }

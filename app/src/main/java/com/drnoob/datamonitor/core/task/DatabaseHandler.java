@@ -76,7 +76,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         finally {
             database.close();
         }
-
     }
 
     public List<AppDataUsageModel> getUsageList() {
@@ -155,4 +154,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return mList;
     }
+
+    /**
+    * Returns total number of apps fetched and saved in database.
+     * Update the database if total number of apps in database is different from total number of apps currently installed in device.
+    * */
+    public int getUsageListSize() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int count = 0;
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("SELECT COUNT(*) FROM app_data_usage", null);
+            if (cursor.moveToFirst()) {
+                count = cursor.getInt(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return count;
+    }
+
 }
