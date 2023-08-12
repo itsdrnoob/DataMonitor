@@ -422,4 +422,27 @@
     <string name="ngocanhtve_summary">Vietnamita</string>
     <string name="bluehomewu">EdwardWu</string>
     <string name="setup_auto_update_data_plan">Actualización automática del plan de datos</string>
+    <string name="label_thank_you">Gracias</string>
+    <string name="label_top_donors">Principales donantes</string>
+    <string name="label_all_donors">Todos los donantes</string>
+    <string name="error_data_fetch_failed">No se han podido recuperar los datos</string>
+    <string name="app_contributors_summary">Lista de colaboradores que apoyan el desarrollo de la aplicación.</string>
+    <string name="setup_smart_data_allocation">Asignación inteligente de los datos</string>
+    <string name="smart_data_allocation_summary">Asigna tus datos de forma inteligente mediante cuotas diarias y prórrogas de datos.</string>
+    <string name="setup_daily_quota_alert">Alerta de la cuota diaria</string>
+    <string name="daily_quota_alert_summary">Recibe una alerta cuando se agote tu cuota diaria.</string>
+    <string name="daily_quota_alert_body">Has agotado tu cuota diaria de datos.</string>
+    <string name="label_daily_quota">Cuota diaria: %1$s</string>
+    <string name="rezaalmanda_summary">Indonesia</string>
+    <string name="gnu_ewm_summary">Polaco</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="rintan_summary">Japonés</string>
+    <string name="wall_of_thanks_body">Data Monitor ha recorrido un largo camino desde su creación, y no podríamos haberlo hecho sin el apoyo de nuestros generosos donantes.</string>
+    <string name="wall_of_thanks_summary">Un lugar para mostrar nuestro agradecimiento a quienes apoyan la aplicación.</string>
+    <string name="app_contributors">Colaboradores de la aplicación</string>
+    <string name="label_learn_more">Más información</string>
+    <string name="wall_of_thanks">Muro de los agradecimientos</string>
+    <string name="daily_quota_alert_title">¡Cuota diaria de datos alcanzada!</string>
+    <string name="rezaalmanda">Reza</string>
 </resources>

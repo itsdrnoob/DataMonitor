@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Монітор даних</string>
+    <string name="app_name">Data Monitor</string>
     <string name="appwidget_text">"ЗРАЗОК"</string>
     <string name="add_widget">Додати віджет</string>
     <string name="notification_mobile_data_usage">"Мобільні дані : %1$s"</string>
@@ -46,9 +46,9 @@
     <string name="option_10_min">"10 хвилин"</string>
     <string name="option_15_min">"15 хвилин"</string>
     <string name="title_widget_setup">Налаштувати віджет</string>
-    <string name="widget_setup_step_1">1. На Домашньому екрані натисніть й потримайте на вільній частині</string>
+    <string name="widget_setup_step_1">1. На Головному екрані торкніться й потримайте на вільній частині</string>
     <string name="heading_data_usage_today">"Сьогоднішнє використання даних"</string>
-    <string name="title_setup">Запустити Монітор даних</string>
+    <string name="title_setup">Запустити Data monitor</string>
     <string name="setup_widget">Налаштувати віджет</string>
     <string name="setup_notification">"Запустити сповіщення"</string>
     <string name="setup_widget_title">Віджет</string>
@@ -65,7 +65,7 @@
     <string name="settings_dark_mode">"Темний режим"</string>
     <string name="settings_preferences">"Налаштування"</string>
     <string name="settings_language">"Мова"</string>
-    <string name="about">"Про"</string>
+    <string name="about">Про застосунок</string>
     <string name="license">"Ліцензія"</string>
     <string name="donate">"Внесок"</string>
     <string name="github">"Github"</string>
@@ -249,7 +249,7 @@
     <string name="label_permission_denied">У дозволі відмовлено!</string>
     <string name="settings_disable_haptics">Вимкнути тактильні відчуття</string>
     <string name="action_dismiss">Відхилити</string>
-    <string name="widget_setup_step_2">2 З контекстного меню виберіть пункт \"Віджети\".</string>
+    <string name="widget_setup_step_2">2. Торкніться \"Віджети\".</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">Поточний рівень спрацьовування: %1$s%%</string>
     <string name="label_app_data_usage_session_empty">Дані недоступні</string>
     <string name="setup_image_footer">Віджети та/або повідомлення забезпечують легкий доступ до обсягу використовуваних даних</string>
@@ -309,8 +309,8 @@
     <string name="notification_permission_denied_body">Такі функції, як повідомлення про моніторинг даних, швидкість мережі в реальному часі та повідомлення про використання даних, не працюватимуть належним чином без дозволу на повідомлення. Будь ласка, дозвольте його вручну.</string>
     <string name="disable_haptics_summary">Вимкнення тактильного зворотного зв\'язку в застосунку</string>
     <string name="action_add_data_plan_home_summary">План передачі даних не знайдено! Додайте тарифний план, щоб почати його відстежувати.</string>
-    <string name="widget_setup_step_3">3. Утримуванням перетягніть віджет Монітор даних на головний екран.</string>
-    <string name="label_want_to_contribute">Натисніть тут, щоб дізнатися, як зробити свій внесок у Монітор даних.</string>
+    <string name="widget_setup_step_3">3. Утримуванням перетягніть віджет Data Monitor на головний екран.</string>
+    <string name="label_want_to_contribute">Натисніть тут, щоб дізнатися, як зробити свій внесок у Data Monitor.</string>
     <string name="read_phone_state_body">Пристроям під управлінням Android версії 9 і нижче, цей дозвіл необхідно надати вручну. Жодні особисті дані збиратися не будуть.</string>
     <string name="title_app_data_limit">Обмеження даних застосунків</string>
     <string name="crash_logs_warning">Журнали аварій; не змінювати</string>
@@ -412,4 +412,27 @@
     <string name="bonbonboi">bonbonboi</string>
     <string name="MarongHappy">JungHee Lee</string>
     <string name="U1M450W">U1M450W</string>
+    <string name="wall_of_thanks_body">З моменту заснування Data Monitor пройшов довгий шлях, і ми не змогли б цього зробити без підтримки наших щедрих донатерів.</string>
+    <string name="wall_of_thanks_summary">Місце, де ми можемо висловити нашу вдячність тим, хто підтримує застосунок.</string>
+    <string name="setup_smart_data_allocation">Розумний розподіл даних</string>
+    <string name="daily_quota_alert_title">Добовий ліміт даних досягнуто!</string>
+    <string name="smart_data_allocation_summary">Розумно розподіляйте дані, використовуючи щоденні ліміти та перенесення даних.</string>
+    <string name="setup_daily_quota_alert">Щоденне сповіщення про ліміт</string>
+    <string name="label_daily_quota">Денний ліміт: %1$s</string>
+    <string name="rezaalmanda">Реза</string>
+    <string name="rezaalmanda_summary">Індонезійська</string>
+    <string name="gnu_ewm_summary">Польська</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="rintan_summary">Японська</string>
+    <string name="wall_of_thanks">Стіна подяки</string>
+    <string name="label_thank_you">Дякую</string>
+    <string name="app_contributors">Учасники застосунку</string>
+    <string name="label_learn_more">Дізнайтеся більше</string>
+    <string name="label_top_donors">Топ донатерів</string>
+    <string name="label_all_donors">Всі донатери</string>
+    <string name="error_data_fetch_failed">Не вдалося отримати дані</string>
+    <string name="app_contributors_summary">Список дописувачів, які підтримують розробку застосунку.</string>
+    <string name="daily_quota_alert_summary">Отримувати сповіщення, коли ваша денний ліміт буде вичерпано.</string>
+    <string name="daily_quota_alert_body">Ви вичерпали свій денний ліміт даних.</string>
 </resources>

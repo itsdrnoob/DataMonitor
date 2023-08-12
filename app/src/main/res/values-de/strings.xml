@@ -413,4 +413,22 @@
     <string name="error_alarm_permission_denied_summary">Sie haben versucht, eine Aktion auszuführen, für die die Berechtigung SCHEDULE_EXACT_ALARM erforderlich ist, die der App nicht erteilt wurde. Klicken Sie hier, um die Berechtigung zu erteilen.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor benötigt die Berechtigung SCHEDULE_EXACT_ALARM, um richtig zu funktionieren. Sie können die App trotzdem verwenden, aber einige Funktionen funktionieren möglicherweise nicht richtig.</string>
     <string name="label_do_not_show_again">Nicht mehr zeigen</string>
+    <string name="wall_of_thanks">Dankeswand</string>
+    <string name="app_contributors">App-Mitwirkende</string>
+    <string name="label_thank_you">Danke schön</string>
+    <string name="label_learn_more">Mehr erfahren</string>
+    <string name="label_top_donors">Größte Spender</string>
+    <string name="label_all_donors">Alle Spender</string>
+    <string name="setup_daily_quota_alert">Täglicher Kontingentalarm</string>
+    <string name="wall_of_thanks_body">Data Monitor hat seit seiner Gründung einen langen Weg zurückgelegt, und ohne die Unterstützung unserer großzügigen Spender hätten wir das nicht geschafft.</string>
+    <string name="wall_of_thanks_summary">Ein Ort, um den Unterstützern der App unsere Wertschätzung zu zeigen.</string>
+    <string name="app_contributors_summary">Eine Liste der Mitwirkenden, die die Entwicklung der App unterstützen.</string>
+    <string name="setup_smart_data_allocation">Intelligente Datenzuordnung</string>
+    <string name="daily_quota_alert_summary">Erhalten Sie einen Alarm, wenn Ihr tägliches Kontingent erschöpft ist.</string>
+    <string name="daily_quota_alert_title">Tägliches Datenkontingent erreicht!</string>
+    <string name="rintan_summary">Japanisch</string>
+    <string name="daily_quota_alert_body">Sie haben Ihr tägliches Datenkontingent ausgeschöpft.</string>
+    <string name="rezaalmanda_summary">Indonesisch</string>
+    <string name="label_daily_quota">Tägliches Kontingent: %1$s</string>
+    <string name="gnu_ewm_summary">Polnisch</string>
 </resources>
