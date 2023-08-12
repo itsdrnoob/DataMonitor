@@ -163,6 +163,7 @@
     <string name="body_data_usage_notification_loading">Loading…</string>
     <string name="label_data_remaining">%1$s remaining</string>
     <string name="label_data_remaining_used_excess">%1$s extra used</string>
+    <string name="label_days_remaining">%1$s day(s) remaining</string>
     <string name="disable_battery_optimisation">Turn off battery optimisation</string>
     <string name="disable_battery_optimisation_body">Prevents killing Data Monitor when running in the background.\nOtherwise values might be incorrect.</string>
     <string name="extra_optimisation_tips">Extra optimisation tips</string>
@@ -435,7 +436,7 @@
     <string name="label_current_plan">Current Plan</string>
     <string name="label_plan_details_title">%1$s plan active</string>
     <string name="home_plan_usage_details">%1$s used | %2$s</string>
-    <string name="label_plan_validity">Valid till %1$s</string>
+    <string name="label_plan_validity">Valid till %1$s | %2$s</string>
     <string name="always_show_total">Always show total</string>
     <string name="always_show_total_summary">Always show total data used in notification irrespective of selected options.</string>
     <string name="app_label_combined_total">Total data usage: %1$s</string>

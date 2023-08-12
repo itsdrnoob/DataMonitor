@@ -505,6 +505,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         String validity;
         Calendar calendar = Calendar.getInstance();
         String month, endDate, suffix, end;
+        int daysRemaining;
         if (session == SESSION_MONTHLY) {
             int planEnd = PreferenceManager.getDefaultSharedPreferences(getContext())
                     .getInt(DATA_RESET_DATE, 1);
@@ -513,8 +514,11 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 planEnd = daysInMonth;
             }
             int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
-            if (today >= planEnd) {
+            if (today >= planEnd) { // shouldn't this just be `>`?
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+                daysRemaining = daysInMonth - today + planEnd;
+            } else {
+                daysRemaining = planEnd - today;
             }
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
             endDate = String.valueOf(planEnd);
@@ -533,10 +537,14 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             calendar.setTimeInMillis(planEndDateMillis);
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
             endDate = new SimpleDateFormat("d").format(calendar.getTime());
+            long currentTimeMillis = System.currentTimeMillis();
+            long remainingMillis = planEndDateMillis - currentTimeMillis;
+            daysRemaining = (int) (remainingMillis / (24 * 60 * 60 * 1000.0));
         }
         suffix = getDateSuffix(endDate);
         end = endDate + suffix + " " + month;
-        validity = requireContext().getString(R.string.label_plan_validity, end);
+        String remaining = requireContext().getString(R.string.label_days_remaining, Integer.toString(daysRemaining));
+        validity = requireContext().getString(R.string.label_plan_validity, end, remaining);
         return validity;
     }
 

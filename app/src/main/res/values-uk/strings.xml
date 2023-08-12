@@ -368,7 +368,7 @@
     <string name="error_alarm_permission_denied_summary">Ви спробували виконати дію, яка вимагає дозволу SCHEDULE_EXACT_ALARM, який не надано застосунку. Натисніть тут, щоб надати дозвіл.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Для належної роботи Data Monitor потрібен дозвіл SCHEDULE_EXACT_ALARM. Ви все ще можете використовувати застосунок, але деякі функції можуть не працювати належним чином.</string>
     <string name="home_plan_usage_details">%1$s використано | %2$s</string>
-    <string name="label_plan_validity">Дійсний до %1$s</string>
+    <string name="label_plan_validity">Дійсний до %1$s | %2$s</string>
     <string name="always_show_total">Завжди показувати загальну кількість</string>
     <string name="always_show_total_summary">Завжди показуйте загальну кількість даних, використаних у сповіщенні, незалежно від обраних опцій.</string>
     <string name="atharvshinde_summary">Розробник</string>

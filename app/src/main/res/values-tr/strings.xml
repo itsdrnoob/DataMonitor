@@ -357,7 +357,7 @@
     <string name="label_current_plan">Mevcut Plan</string>
     <string name="label_plan_details_title">%1$s planı etkin</string>
     <string name="home_plan_usage_details">%1$s kullanıldı | %2$s</string>
-    <string name="label_plan_validity">%1$s tarihine kadar geçerli</string>
+    <string name="label_plan_validity">%1$s tarihine kadar geçerli | %2$s</string>
     <string name="always_show_total">Her zaman toplamı göster</string>
     <string name="always_show_total_summary">Yapılan tüm ayarları göz ardı edip toplam kullanılan veriyi bildirimde her zaman göster.</string>
     <string name="app_label_combined_total">Toplam veri kullanımı: %1$s</string>
