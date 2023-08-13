@@ -52,7 +52,7 @@
     <string name="setup_auto_update_data_plan">Tự động cập nhật gói dữ liệu</string>
     <string name="auto_update_data_plan_summary">Tự động cập nhật gói dữ liệu của bạn với một gói tương tự.</string>
     <string name="fjuro">Fjuro</string>
-    <string name="label_plan_validity">Hiệu lực đến: %1$s</string>
+    <string name="label_plan_validity">Hiệu lực đến: %1$s | %2$s</string>
     <string name="label_thank_you">Cảm ơn</string>
     <string name="wall_of_thanks_body">Giám sát Dữ liệu đã trải qua một chặng đường dài kể từ khi thành lập và chúng tôi không thể làm được điều đó nếu không có sự hỗ trợ của các nhà tài trợ hào phóng.</string>
     <string name="hinamechan">HinameChan</string>
@@ -434,4 +434,5 @@
     <string name="github">GitHub</string>
     <string name="github_summary">Xem mã nguồn</string>
     <string name="xda">Chủ đề XDA</string>
+    <string name="label_days_remaining">%1$s ngày còn lại</string>
 </resources>
