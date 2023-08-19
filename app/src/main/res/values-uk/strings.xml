@@ -63,7 +63,7 @@
     <string name="contributors">Учасники проєкту</string>
     <string name="settings_appearance">"Вигляд"</string>
     <string name="settings_dark_mode">"Темний режим"</string>
-    <string name="settings_preferences">"Налаштування"</string>
+    <string name="settings_preferences">Параметри</string>
     <string name="settings_language">"Мова"</string>
     <string name="about">Про застосунок</string>
     <string name="license">"Ліцензія"</string>
@@ -435,4 +435,5 @@
     <string name="app_contributors_summary">Список дописувачів, які підтримують розробку застосунку.</string>
     <string name="daily_quota_alert_summary">Отримувати сповіщення, коли ваша денний ліміт буде вичерпано.</string>
     <string name="daily_quota_alert_body">Ви вичерпали свій денний ліміт даних.</string>
+    <string name="label_days_remaining">%1$s день(дні), що залишилися</string>
 </resources>

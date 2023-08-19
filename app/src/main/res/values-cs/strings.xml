@@ -434,4 +434,5 @@
     <string name="setup_daily_quota_alert">Upozornění na denní kvótu</string>
     <string name="label_daily_quota">Denní kvóta: %1$s</string>
     <string name="daily_quota_alert_summary">Získat upozornění po vyčerpání denní kvóty.</string>
+    <string name="label_days_remaining">Zbývá %1$s dní</string>
 </resources>

@@ -395,7 +395,7 @@
     <string name="label_plan_details_title">خطة %1$s نشطة</string>
     <string name="label_filter">المرشحات</string>
     <string name="home_plan_usage_details">%1$s مستخدمة | %2$s</string>
-    <string name="label_plan_validity">صالح حتى %1$s</string>
+    <string name="label_plan_validity">صالح حتى %1$s|%2$s</string>
     <string name="always_show_total">إظهار المجموع دائما</string>
     <string name="app_label_combined_total">إجمالي استخدام البيانات: %1$s</string>
     <string name="always_show_total_summary">اعرض دائما إجمالي البيانات المستخدمة في الإخطار بغض النظر عن الخيارات المحددة.</string>
@@ -438,4 +438,5 @@
     <string name="gnu_ewm_summary">البولندية</string>
     <string name="gnu_ewm">إريك ميشالاك</string>
     <string name="rintan_summary">اليابانية</string>
+    <string name="label_days_remaining">%1$s يوم/ايام متبقية</string>
 </resources>

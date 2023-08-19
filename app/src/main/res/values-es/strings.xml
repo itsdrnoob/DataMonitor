@@ -445,4 +445,5 @@
     <string name="wall_of_thanks">Muro de los agradecimientos</string>
     <string name="daily_quota_alert_title">¡Cuota diaria de datos alcanzada!</string>
     <string name="rezaalmanda">Reza</string>
+    <string name="label_days_remaining">%1$s día(s) restante(s)</string>
 </resources>
