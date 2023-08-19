@@ -21,12 +21,14 @@ package com.drnoob.datamonitor.utils;
 
 import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
 import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START_MIN;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_LIST;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
@@ -644,6 +646,13 @@ public class NetworkStatsHelper {
                 .getInt("reset_hour", 0);
         int resetMin = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt("reset_min", 0);
+
+        if (!PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, "null")
+                .equals(DATA_RESET_DAILY)) {
+            resetHour = 0;
+            resetMin = 0;
+        }
+
         int customStartHour = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(DATA_RESET_CUSTOM_DATE_START_HOUR,0);
         int customStartMin = PreferenceManager.getDefaultSharedPreferences(context)
@@ -725,7 +734,7 @@ public class NetworkStatsHelper {
 //                endTimeMillis = endDate.getTime();
 
 
-                /**
+                /*
                  * When data reset date is ahead of today's date, reducing 1 from the current month will
                  * only give the month when the current plan started.
                  * So to get the last month's period, 2 has to be subtracted to get the starting month
