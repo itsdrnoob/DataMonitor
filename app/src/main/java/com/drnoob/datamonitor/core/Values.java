@@ -91,6 +91,7 @@ public class Values {
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";
+    public static final String DATA_QUOTA = "data_quota";
     public static final String DATA_TYPE = "data_type";
     public static final String LIMIT = "limit";
     public static final String DATA_RESET = "data_reset";
@@ -109,6 +110,7 @@ public class Values {
     public static final String DATA_RESET_CUSTOM_DATE_RESTART = "custom_reset_date_restart";
     public static final String DATA_WARNING_TRIGGER_LEVEL = "data_warning_trigger_level";
     public static final String DATA_USAGE_WARNING_SHOWN = "data_usage_warning_shown";
+    public static final String DATA_QUOTA_WARNING_SHOWN = "data_quota_warning_shown";
     public static final String DATA_USAGE_ALERT = "data_usage_alert";
     public static final String WIDGET_REFRESH_INTERVAL_SUMMARY = "widget_refresh_interval_summary";
     public static final String WIDGET_REFRESH_INTERVAL = "widget_refresh_interval";
