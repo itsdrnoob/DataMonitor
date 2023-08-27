@@ -22,16 +22,25 @@ package com.drnoob.datamonitor.utils
 import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceManager
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.drnoob.datamonitor.core.Values
 import com.drnoob.datamonitor.core.Values.DATA_QUOTA
+import com.drnoob.datamonitor.core.Values.DATA_QUOTA_PERFORMED_RESET
 import com.drnoob.datamonitor.core.Values.DATA_RESET
 import com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY
 import com.drnoob.datamonitor.core.Values.SESSION_YESTERDAY
 import kotlin.math.round
 
-class DataRolloverHelper(context: Context, workerParams: WorkerParameters)
-    : Worker(context, workerParams) {
+/**
+ * Worker class to calculate and update data quota everyday.
+ */
+class DataRolloverHelper(context: Context, workerParams: WorkerParameters) :
+    Worker(context, workerParams) {
     companion object {
         private val TAG = DataRolloverHelper::class.simpleName
     }
@@ -56,23 +65,34 @@ class DataRolloverHelper(context: Context, workerParams: WorkerParameters)
         if (dailyQuota > 0) {
             when (planType) {
                 DATA_RESET_DAILY -> {
-                    val dataUsage = round((NetworkStatsHelper.getDeviceMobileDataUsage(applicationContext,
-                        SESSION_YESTERDAY, -1)[2] / 1024f / 1024f) * 100) / 100 // rounds the usage value to 2 decimals
+                    val dataUsage = round(
+                        (NetworkStatsHelper.getDeviceMobileDataUsage(
+                            applicationContext,
+                            SESSION_YESTERDAY, -1
+                        )[2] / 1024f / 1024f) * 100
+                    ) / 100 // rounds the usage value to 2 decimals
                     if (dailyQuota > dataUsage) {
                         val remainingData = dailyQuota - dataUsage
                         val newDataQuota = dailyQuota + remainingData
-                        Log.d(TAG, "doWork: used: $dataUsage, remaining: $remainingData, new: $newDataQuota")
+                        Log.d(
+                            TAG,
+                            "doWork: used: $dataUsage, remaining: $remainingData, new: $newDataQuota"
+                        )
                         preference.edit().putFloat(DATA_QUOTA, newDataQuota).apply()
                     }
                 }
+
                 else -> {
-                    val dataUsage = round((NetworkStatsHelper.getDeviceMobileDataUsage(applicationContext,
-                        SESSION_YESTERDAY, -1)[2] / 1024f / 1024f) * 100) / 100 // rounds the usage value to 2 decimals
+                    val dataUsage = round(
+                        (NetworkStatsHelper.getDeviceMobileDataUsage(
+                            applicationContext,
+                            SESSION_YESTERDAY, -1
+                        )[2] / 1024f / 1024f) * 100
+                    ) / 100 // rounds the usage value to 2 decimals
                     var newDataQuota = if (dailyQuota > dataUsage) {
                         val remainingData = dailyQuota - dataUsage
                         dailyQuota + remainingData
-                    }
-                    else {
+                    } else {
                         val excessUsage = dataUsage - dailyQuota
                         dailyQuota - excessUsage
                     }
@@ -84,7 +104,6 @@ class DataRolloverHelper(context: Context, workerParams: WorkerParameters)
                     preference.edit().putFloat(DATA_QUOTA, newDataQuota).apply()
                 }
             }
-
 
 
 //            val dataUsage = round((NetworkStatsHelper.getDeviceMobileDataUsage(applicationContext,
@@ -99,12 +118,46 @@ class DataRolloverHelper(context: Context, workerParams: WorkerParameters)
 //            }
 //            Log.d(TAG, "doWork: usage: $dataUsage, new quota: $newDataQuota")
 //            preference.edit().putFloat(DATA_QUOTA, newDataQuota).apply()
-        }
-        else {
+        } else {
             return Result.failure()
         }
 
         Log.d(TAG, "Updated data quota.")
         return Result.success()
+    }
+
+    /**
+     * Worker class that resets the data quota once the current data plan iss over.
+     */
+    class QuotaRefreshHelper(context: Context, workerParams: WorkerParameters) :
+        Worker(context, workerParams) {
+        override fun doWork(): Result {
+            Log.d(TAG, "doWork: Resetting data quota")
+
+            val preference = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+
+            if (preference.getBoolean("smart_data_allocation", false)) {
+                val workManager = WorkManager.getInstance(applicationContext)
+
+                workManager.cancelUniqueWork("smart_data_allocation")
+                workManager.cancelUniqueWork("data_rollover")
+                workManager.cancelUniqueWork("quota_reset")
+
+                val smartDataAllocationWorkRequest = OneTimeWorkRequest
+                    .Builder(SmartDataAllocationService::class.java)
+                    .build()
+
+                workManager.enqueueUniqueWork(
+                    "smart_data_allocation",
+                    ExistingWorkPolicy.KEEP,
+                    smartDataAllocationWorkRequest
+                )
+
+                preference.edit().putLong(DATA_QUOTA_PERFORMED_RESET, System.currentTimeMillis()).apply()
+
+                return Result.success()
+            }
+            return Result.failure()
+        }
     }
 }

@@ -1584,6 +1584,7 @@ public class SetupFragment extends Fragment {
                             .getBoolean("smart_data_allocation", false);
                     Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
                             .getFloat(DATA_LIMIT, -1);
+                    WorkManager workManager = WorkManager.getInstance(requireContext());
                     if (dataLimit < 0) {
                         mSmartDataAllocation.setChecked(false);
                         snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
@@ -1597,16 +1598,16 @@ public class SetupFragment extends Fragment {
                                     .Builder(SmartDataAllocationService.class)
                                     .build();
 
-                            WorkManager.getInstance(getContext())
-                                    .enqueueUniqueWork(
-                                            "smart_data_allocation",
-                                            ExistingWorkPolicy.KEEP,
-                                            smartDataAllocationWorkRequest
-                                    );
+                            workManager.enqueueUniqueWork(
+                                    "smart_data_allocation",
+                                    ExistingWorkPolicy.KEEP,
+                                    smartDataAllocationWorkRequest
+                            );
                         }
                         else {
-                            WorkManager.getInstance(getContext()).cancelUniqueWork("smart_data_allocation");
-                            WorkManager.getInstance(getContext()).cancelUniqueWork("data_rollover");
+                            workManager.cancelUniqueWork("smart_data_allocation");
+                            workManager.cancelUniqueWork("data_rollover");
+                            workManager.cancelUniqueWork("quota_reset");
                             mDailyQuotaAlert.setChecked(false);
 
                         }
@@ -1790,18 +1791,18 @@ public class SetupFragment extends Fragment {
 
         private void updateDailyQuota() {
             if (mSmartDataAllocation.isChecked()) {
-                WorkManager.getInstance(getContext()).cancelUniqueWork("smart_data_allocation");
-                WorkManager.getInstance(getContext()).cancelUniqueWork("data_rollover");
+                WorkManager workManager = WorkManager.getInstance(requireContext());
+                workManager.cancelUniqueWork("smart_data_allocation");
+                workManager.cancelUniqueWork("data_rollover");
                 OneTimeWorkRequest smartDataAllocationWorkRequest = new OneTimeWorkRequest
                         .Builder(SmartDataAllocationService.class)
                         .build();
 
-                WorkManager.getInstance(getContext())
-                        .enqueueUniqueWork(
-                                "smart_data_allocation",
-                                ExistingWorkPolicy.KEEP,
-                                smartDataAllocationWorkRequest
-                        );
+                workManager.enqueueUniqueWork(
+                        "smart_data_allocation",
+                        ExistingWorkPolicy.KEEP,
+                        smartDataAllocationWorkRequest
+                );
             }
         }
     }

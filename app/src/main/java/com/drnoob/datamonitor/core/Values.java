@@ -187,4 +187,8 @@ public class Values {
     public static final String WALL_OF_THANKS_FEATURED_DONORS = "wall_of_thanks_featured_donors";
     public static final String WALL_OF_THANKS_ALL_DONORS = "wall_of_thanks_all_donors";
 
+
+    public static final String DATA_QUOTA_SCHEDULED_RESET = "quota_scheduled_reset";
+    public static final String DATA_QUOTA_PERFORMED_RESET = "quota_performed_reset";
+
 }
