@@ -118,6 +118,7 @@ import com.google.android.material.snackbar.Snackbar;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Calendar;
 
 public class SetupFragment extends Fragment {
     private static final String TAG = SetupFragment.class.getSimpleName();
@@ -129,6 +130,7 @@ public class SetupFragment extends Fragment {
 
     public static class SetupPreference extends PreferenceFragmentCompat {
         private static final String TAG = SetupPreference.class.getSimpleName();
+        private final int CALENDAR_YEAR = 2000;
 
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit,
@@ -1099,6 +1101,8 @@ public class SetupFragment extends Fragment {
                         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_date_picker, null);
 
                         DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.reset_date_picker);
+                        Calendar calendar = Calendar.getInstance();
+                        datePicker.init(CALENDAR_YEAR, 0, 1, null);
                         ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                         TextView cancel = footer.findViewById(R.id.cancel);
                         TextView ok = footer.findViewById(R.id.ok);
@@ -1120,6 +1124,7 @@ public class SetupFragment extends Fragment {
                                         .getBoolean("disable_haptics", false)) {
                                     VibrationUtils.hapticMinor(getContext());
                                 }
+                                datePicker.updateDate(CALENDAR_YEAR, 0, datePicker.getDayOfMonth());
                             }
                         });
 
