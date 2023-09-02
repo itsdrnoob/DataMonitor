@@ -218,6 +218,9 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
      */
     private fun getResetTimeDelay(): Long? {
         val planType = preferences.getString(DATA_RESET, "null")
+        if (planType == DATA_RESET_DAILY) {
+            return 0
+        }
         val startDate = preferences.getInt(DATA_RESET_DATE, -1)
         val session = when (planType) {
             DATA_RESET_MONTHLY -> {
