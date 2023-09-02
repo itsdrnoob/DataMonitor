@@ -115,6 +115,7 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
                     dataRemaining = dataLimit - dataUsage
                     dailyQuota = dataRemaining / daysRemaining
                     dailyQuota = round(dailyQuota * 100) / 100
+                    dailyQuota = max(dailyQuota, 0f)
 
                     preferences.edit().putFloat(DATA_QUOTA, dailyQuota).apply()
                 }
@@ -129,7 +130,8 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
                         SESSION_CUSTOM, -1)[2] / 1024f / 1024f) * 100) / 100
                     val planEndDateMillis: Long = try {
                         preferences.getLong(DATA_RESET_CUSTOM_DATE_END, -1)
-                    } catch (e: ClassCastException) {
+                    }
+                    catch (e: ClassCastException) {
                         val planEndIntValue = preferences.getInt(DATA_RESET_CUSTOM_DATE_END, -1)
                         (planEndIntValue as Number).toLong()
                     }
@@ -140,10 +142,7 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
                     dataRemaining = dataLimit - dataUsage
                     dailyQuota = dataRemaining / daysRemaining.toFloat()
                     dailyQuota = round(dailyQuota * 100) / 100
-
-                    Log.e(TAG, "doWork: $daysRemaining, $dataRemaining" )
-
-                    Log.d(TAG, "doWork: quota: $dailyQuota")
+                    dailyQuota = max(dailyQuota, 0f)
 
                     preferences.edit().putFloat(DATA_QUOTA, dailyQuota).apply()
                 }

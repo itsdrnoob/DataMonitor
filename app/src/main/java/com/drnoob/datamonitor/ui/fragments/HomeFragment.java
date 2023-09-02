@@ -31,6 +31,8 @@ import static com.drnoob.datamonitor.core.Values.DATA_QUOTA_SCHEDULED_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_HOUR;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
@@ -550,7 +552,14 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         }
     }
 
-    @SuppressLint("StringFormatMatches")
+    /**
+     * Calculates the plan validity for Monthly/Custom data plans.
+     *
+     * @param session The plan session. One of SESSION_MONTHLY or SESSION_CUSTOM.
+     *
+     * @return Plan reset date and the number of days remaining as a formatted string.
+     */
+    @SuppressLint({"StringFormatMatches", "SimpleDateFormat"})
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
@@ -572,6 +581,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             endDate = String.valueOf(planReset);
         }
         else {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+
             long planEndDateMillis;
             try {
                 planEndDateMillis = preferences.getLong(DATA_RESET_CUSTOM_DATE_END, -1);
@@ -580,12 +593,22 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 int planEndIntValue = preferences.getInt(DATA_RESET_CUSTOM_DATE_END, -1);
                 planEndDateMillis = ((Number) planEndIntValue).longValue();
             }
+
+            int planEndHour = preferences.getInt(DATA_RESET_CUSTOM_DATE_END_HOUR, 0);
+            int planEndMin = preferences.getInt(DATA_RESET_CUSTOM_DATE_END_MIN, 0);
+
             calendar.setTimeInMillis(planEndDateMillis);
+            calendar.set(Calendar.HOUR, planEndHour);
+            calendar.set(Calendar.MINUTE, planEndMin);
+
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
             endDate = new SimpleDateFormat("d").format(calendar.getTime());
+
             long currentTimeMillis = System.currentTimeMillis();
-            long remainingMillis = planEndDateMillis - currentTimeMillis;
-            daysRemaining = (int) (remainingMillis / (24 * 60 * 60 * 1000.0));
+            long endTimeMillis = calendar.getTimeInMillis();
+
+            long remainingMillis = endTimeMillis - currentTimeMillis;
+            daysRemaining = (int) Math.round((remainingMillis / (24 * 60 * 60 * 1000.0)));
         }
         suffix = getDateSuffix(endDate);
         end = endDate + suffix + " " + month;
