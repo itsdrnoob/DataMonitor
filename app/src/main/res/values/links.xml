@@ -69,4 +69,7 @@
     <string name="github_rezaalmanda" translatable="false">https://github.com/rezaalmanda</string>
     <string name="github_gnu_ewm" translatable="false">https://github.com/gnu-ewm</string>
     <string name="github_rintan" translatable="false">https://github.com/Rintan</string>
+    <string name="github_timtcg" translatable="false">https://github.com/TimTCG</string>
+    <string name="github_ecogaming" translatable="false">https://github.com/Eco-Gaming</string>
+    <string name="github_zahiruddinRushdi" translatable="false">https://github.com/zahiruddinRushdi</string>
 </resources>

@@ -283,6 +283,36 @@ public class AppContributorsFragment extends Fragment {
                 R.drawable.rintan, true,
                 getContext().getString(R.string.github_rintan)));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.dan),
+                getContext().getString(R.string.dan_summary),
+                R.drawable.ic_person, false));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.jean_mareilles),
+                getContext().getString(R.string.jean_mareilles_summary),
+                R.drawable.ic_person, false));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.timtcg),
+                getContext().getString(R.string.timtcg_summary),
+                R.drawable.timtcg, true,
+                getContext().getString(R.string.github_timtcg)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.zahiruddinrushdi),
+                getContext().getString(R.string.zahiruddinrushdi_summary),
+                R.drawable.zahiruddinrushdi, true,
+                getContext().getString(R.string.github_zahiruddinRushdi)));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.detrimental_god),
+                getContext().getString(R.string.detrimental_god_summary),
+                R.drawable.ic_person, false));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.chin_housin),
+                getContext().getString(R.string.chin_housin_summary),
+                R.drawable.ic_person, false));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.jonnysemon),
+                getContext().getString(R.string.jonnysemon_summary),
+                R.drawable.ic_person, false));
+
         return translators;
     }
 

@@ -480,4 +480,20 @@
     <string name="gnu_ewm">Eryk Michalak</string>
     <string name="rintan">Rintan</string>
     <string name="rintan_summary">Japanese</string>
+    <string name="dan">Dan</string>
+    <string name="dan_summary">Ukrainian</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jonnysemon_summary">Arabic</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="timtcg_summary">Vietnamese</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="chin_housin_summary">Simplified Chinese</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="detrimental_god_summary">Malayalam</string>
+    <string name="ecogaming">Eco-Gaming</string>
+    <string name="ecogaming_summary">Developer</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">Malay</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="jean_mareilles_summary">French</string>
 </resources>
