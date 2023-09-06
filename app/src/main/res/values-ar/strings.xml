@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">رصد البيانات</string>
-    <string name="appwidget_text">مثل</string>
+    <string name="appwidget_text">مثال</string>
     <string name="add_widget">إضافة أداة</string>
     <string name="notification_mobile_data_usage">"بيانات الجوال: %1$s"</string>
     <string name="notification_wifi_data_usage">واي فاي: %1$s</string>
