@@ -236,8 +236,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_mid_large"
-                    android:layout_marginEnd="@dimen/margin_mid_large"
                     android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_mid_large"
                     android:background="@drawable/banner_background"
                     android:backgroundTint="@color/banner_tint"
                     android:clickable="true"
@@ -298,9 +298,9 @@
                     android:id="@+id/plan_details_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginStart="@dimen/margin_mid_large"
                     android:layout_marginEnd="@dimen/margin_mid_large"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -315,74 +315,37 @@
                         android:layout_marginTop="@dimen/margin_large"
                         android:text="@string/label_plan_details_title"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/plan_data_usage_view"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:layout_marginTop="@dimen/margin_medium"-->
-<!--                        app:layout_constraintTop_toBottomOf="@id/plan_details_title"-->
-<!--                        app:layout_constraintStart_toStartOf="parent">-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_weight="1"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="1.54 GB used"-->
-<!--                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_weight="1"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="0.46 GB remaining"-->
-<!--                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>-->
-
-<!--                    </LinearLayout>-->
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/plan_usage_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_plan_usage_details"
                         android:layout_marginTop="@dimen/margin_medium"
+                        android:text="@string/home_plan_usage_details"
                         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                        app:layout_constraintTop_toBottomOf="@id/plan_details_title"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_details_title" />
+
+                    <TextView
+                        android:id="@+id/daily_quota"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@string/label_daily_quota"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_usage_details" />
 
                     <TextView
                         android:id="@+id/plan_validity_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/label_plan_validity"
                         android:layout_marginTop="@dimen/margin_small"
-                        app:layout_constraintTop_toBottomOf="@id/plan_usage_details"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="1.52 GB used  |  0.48 GB remaining"-->
-<!--                        android:layout_marginTop="@dimen/margin_tiny"-->
-<!--                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>-->
-
-<!--                    <com.skydoves.progressview.ProgressView-->
-<!--                        android:id="@+id/plan_progress"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="10dp"-->
-<!--                        app:progressView_animation="accelerateDecelerate"-->
-<!--                        app:progressView_autoAnimate="true"-->
-<!--                        app:progressView_colorBackground="@android:color/transparent"-->
-<!--                        app:progressView_colorGradientEnd="#0DC5FF"-->
-<!--                        app:progressView_colorGradientStart="#3E51FF"-->
-<!--                        app:progressView_orientation="horizontal"/>-->
+                        android:text="@string/label_plan_validity"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/daily_quota" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -499,19 +462,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/quick_view_overlay"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:elevation="10dp"-->
-            <!--                android:layout_marginBottom="@dimen/margin_large"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@id/graph_view" />-->
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
-
-
 
 </androidx.core.widget.NestedScrollView>

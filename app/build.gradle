@@ -13,8 +13,9 @@ android {
         targetSdkVersion 33
         versionCode 25
         versionName 'v2.4.0-Beta1'
-        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ko",
-                "ml", "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN", "zh-rTW"
+        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ja", "ko", "ml", "ms",
+                "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN",
+                "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

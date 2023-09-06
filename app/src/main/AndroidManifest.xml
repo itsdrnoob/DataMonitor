@@ -177,6 +177,12 @@
             android:enabled="true"
             android:exported="true" />
 
+        <receiver android:name=".utils.DailyQuotaAlertReceiver"
+            android:exported="true"/>
+
+        <receiver android:name=".utils.DailyQuotaAlertReceiver$ResetDataQuotaAlert"
+            android:exported="true"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

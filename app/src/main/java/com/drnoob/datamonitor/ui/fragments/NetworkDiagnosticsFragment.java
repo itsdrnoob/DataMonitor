@@ -224,7 +224,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                     rippleView.setVisibility(View.INVISIBLE);
 //                currentConnectionType.setVisibility(View.GONE);
 
-                    String ipLookupUrl = context.getString(R.string.api_ip_lookup);
+                    String ipLookupUrl = requireContext().getString(R.string.api_ip_lookup);
                     Volley.newRequestQueue(requireContext()).add(
                             new StringRequest(
                                     Request.Method.GET,
@@ -271,7 +271,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            String errorMessage = context.getString(R.string.error_unknown);
+                                            String errorMessage = requireContext().getString(R.string.error_unknown);
                                             try {
                                                 errorMessage = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                                                 runDiagnostics.setClickable(true);
