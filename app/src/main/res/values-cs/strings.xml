@@ -435,4 +435,20 @@
     <string name="label_daily_quota">Denní kvóta: %1$s</string>
     <string name="daily_quota_alert_summary">Získat upozornění po vyčerpání denní kvóty.</string>
     <string name="label_days_remaining">Zbývá %1$s dní</string>
+    <string name="ecogaming">Eco-Gaming</string>
+    <string name="dan_summary">Ukrajinština</string>
+    <string name="detrimental_god_summary">Malajálamština</string>
+    <string name="jonnysemon_summary">Arabština</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="ecogaming_summary">Vývojář</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">Malajština</string>
+    <string name="chin_housin_summary">Zjednodušená čínština</string>
+    <string name="timtcg_summary">Vietnamština</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jean_mareilles_summary">Francouzština</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="dan">Dan</string>
 </resources>
