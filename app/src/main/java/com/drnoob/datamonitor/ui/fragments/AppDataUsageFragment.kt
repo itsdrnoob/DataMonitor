@@ -250,8 +250,9 @@ class AppDataUsageFragment : Fragment() {
         } catch (e: RemoteException) {
             e.printStackTrace()
         }
+        binding.filterAppUsage.visibility = View.VISIBLE
         binding.refreshDataUsage.isRefreshing = false
-        binding.layoutListLoading.root.animate().alpha(0.0f)
+        binding.layoutListLoading.root.visibility = View.GONE
         binding.appDataUsageRecycler.animate().alpha(1.0f)
         if (userAppsList.isEmpty()) {
             binding.layoutListLoading.root.animate().alpha(0.0F)
@@ -263,7 +264,8 @@ class AppDataUsageFragment : Fragment() {
     }
 
     private fun refreshData() {
-        binding.layoutListLoading.root.animate().alpha(1.0f)
+        binding.filterAppUsage.visibility = View.GONE
+        binding.layoutListLoading.root.visibility = View.VISIBLE
         binding.appDataUsageRecycler.animate().alpha(0.0f)
         binding.emptyList.animate().alpha(0.0f)
         binding.refreshDataUsage.isRefreshing = true

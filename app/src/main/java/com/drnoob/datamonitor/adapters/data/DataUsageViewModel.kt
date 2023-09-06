@@ -23,10 +23,12 @@ class DataUsageViewModel(private val usageDataHelper: UsageDataHelper) : ViewMod
     }
 
     fun loadUserAppsData(session: Int, type: Int) = viewModelScope.launch {
+        usageDataHelper.fetchApps()
         _userAppsList.postValue(usageDataHelper.loadUserAppsData(session, type))
     }
 
     fun loadSystemAppsData(session: Int, type: Int) = viewModelScope.launch {
+        usageDataHelper.fetchApps()
         _systemAppsList.postValue(usageDataHelper.loadSystemAppsData(session, type))
     }
 

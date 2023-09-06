@@ -23,8 +23,9 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
         val modelList: MutableList<AppDataUsageModel> = ArrayList()
         var model: AppDataUsageModel?
         val databaseHandler = DatabaseHandler(context)
+        if (allApps.size == databaseHandler.usageList.size) return@withContext
         for (applicationInfo in allApps) {
-            if (applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 1) {
+            if ((applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM) == 1) {
                 // System app
                 modelList.add(
                     AppDataUsageModel(
@@ -69,20 +70,19 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
         val handler = DatabaseHandler(context)
         val list = handler.usageList
 
-        for (currentData in list) {
+        for (currentApp in list) {
             if (!Common.isAppInstalled(
                     context,
-                    currentData.packageName
-                ) || currentData.isSystemApp
+                    currentApp.packageName
+                )
             ) continue
-
             val model: AppDataUsageModel?
             val (sent, received) = when (type) {
                 Values.TYPE_MOBILE_DATA -> {
                     try {
                         val mobileDataUsage = NetworkStatsHelper.getAppMobileDataUsage(
                             context,
-                            currentData.uid,
+                            currentApp.uid,
                             session
                         )
                         mobileDataUsage[0] to mobileDataUsage[1]
@@ -94,12 +94,11 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
                         continue
                     }
                 }
-
                 else -> {
                     try {
                         val wifiDataUsage = NetworkStatsHelper.getAppWifiDataUsage(
                             context,
-                            currentData.uid,
+                            currentApp.uid,
                             session
                         )
                         wifiDataUsage[0] to wifiDataUsage[1]
@@ -114,11 +113,16 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
             }
 
             if (sent <= 0 && received <= 0) continue
+            if (currentApp.isSystemApp) {
+                totalSystemSent += sent
+                totalSystemReceived += received
+                continue
+            }
 
             model = AppDataUsageModel().apply {
-                appName = currentData.appName
-                packageName = currentData.packageName
-                uid = currentData.uid
+                appName = currentApp.appName
+                packageName = currentApp.packageName
+                uid = currentApp.uid
                 sentMobile = sent
                 receivedMobile = received
                 this.session = session
@@ -136,9 +140,6 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
                 }
 
                 progress = ((total.toDouble() / deviceTotal.toDouble()) * 100 * 2).toInt()
-
-                totalSystemSent += sent
-                totalSystemReceived += received
             }
             dataList.add(model)
         }
@@ -164,14 +165,15 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
         val handler = DatabaseHandler(context)
         val list = handler.usageList
 
-        for (currentData in list) {
+        for (currentApp in list) {
+            if (!currentApp.isSystemApp) continue
             val model: AppDataUsageModel?
             val (sent, received) = when (type) {
                 Values.TYPE_MOBILE_DATA -> {
                     try {
                         val mobileDataUsage = NetworkStatsHelper.getAppMobileDataUsage(
                             context,
-                            currentData.uid,
+                            currentApp.uid,
                             session
                         )
                         mobileDataUsage[0] to mobileDataUsage[1]
@@ -188,7 +190,7 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
                     try {
                         val wifiDataUsage = NetworkStatsHelper.getAppWifiDataUsage(
                             context,
-                            currentData.uid,
+                            currentApp.uid,
                             session
                         )
                         wifiDataUsage[0] to wifiDataUsage[1]
@@ -205,9 +207,9 @@ class UsageDataHelperImpl(val context: Context) : UsageDataHelper {
             if (sent <= 0 && received <= 0) continue
 
             model = AppDataUsageModel().apply {
-                appName = currentData.appName
-                packageName = currentData.packageName
-                uid = currentData.uid
+                appName = currentApp.appName
+                packageName = currentApp.packageName
+                uid = currentApp.uid
                 sentMobile = sent
                 receivedMobile = received
                 this.session = session

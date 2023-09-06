@@ -27,6 +27,7 @@ class UsageDataAdapter(private val context: Context) :
             newItem: AppDataUsageModel
         ): Boolean {
             return oldItem.packageName == newItem.packageName
+                    && oldItem.totalDataUsage == newItem.totalDataUsage
         }
 
         override fun areContentsTheSame(
@@ -34,6 +35,7 @@ class UsageDataAdapter(private val context: Context) :
             newItem: AppDataUsageModel
         ): Boolean {
             return oldItem.totalDataUsage == newItem.totalDataUsage
+                    && oldItem.session == newItem.session
         }
     }
 
