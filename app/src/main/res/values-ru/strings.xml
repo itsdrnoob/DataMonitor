@@ -435,4 +435,13 @@
     <string name="gnu_ewm">Eryk Michalak</string>
     <string name="rintan_summary">Японский</string>
     <string name="rintan">Rintan</string>
+    <string name="dan_summary">Украинский</string>
+    <string name="detrimental_god_summary">Малаялам</string>
+    <string name="jonnysemon_summary">Арабский</string>
+    <string name="ecogaming_summary">Разработчик</string>
+    <string name="zahiruddinrushdi_summary">Малайский</string>
+    <string name="chin_housin_summary">Китайский (упрощенный)</string>
+    <string name="timtcg_summary">Вьетнамский</string>
+    <string name="label_days_remaining">осталось %1$s дней</string>
+    <string name="jean_mareilles_summary">Французский</string>
 </resources>
