@@ -436,4 +436,20 @@
     <string name="daily_quota_alert_summary">Отримувати сповіщення, коли ваша денний ліміт буде вичерпано.</string>
     <string name="daily_quota_alert_body">Ви вичерпали свій денний ліміт даних.</string>
     <string name="label_days_remaining">%1$s день(дні), що залишилися</string>
+    <string name="ecogaming">Eco-Gaming</string>
+    <string name="dan_summary">Українська</string>
+    <string name="detrimental_god_summary">Малаялам</string>
+    <string name="jonnysemon_summary">Арабська</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="ecogaming_summary">Розробник</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">Малайська</string>
+    <string name="chin_housin_summary">Китайська (спрощена)</string>
+    <string name="timtcg_summary">В\'єтнамська</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jean_mareilles_summary">Французька</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="dan">Dan</string>
 </resources>
