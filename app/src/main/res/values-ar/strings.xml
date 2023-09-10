@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">رصد البيانات</string>
-    <string name="appwidget_text">مثل</string>
+    <string name="appwidget_text">مثال</string>
     <string name="add_widget">إضافة أداة</string>
     <string name="notification_mobile_data_usage">"بيانات الجوال: %1$s"</string>
     <string name="notification_wifi_data_usage">واي فاي: %1$s</string>
@@ -439,4 +439,20 @@
     <string name="gnu_ewm">إريك ميشالاك</string>
     <string name="rintan_summary">اليابانية</string>
     <string name="label_days_remaining">%1$s يوم/ايام متبقية</string>
+    <string name="ecogaming">Eco-Gaming</string>
+    <string name="dan_summary">الأوكرانيّة</string>
+    <string name="detrimental_god_summary">المالايالامية</string>
+    <string name="jonnysemon_summary">العربيّة</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="ecogaming_summary">المطور</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">الملايوية</string>
+    <string name="chin_housin_summary">الصينية المبسطة</string>
+    <string name="timtcg_summary">الفيتناميّة</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="jonnysemon">جوني سيمون</string>
+    <string name="jean_mareilles_summary">الفرنسيّة</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="dan">دان</string>
 </resources>

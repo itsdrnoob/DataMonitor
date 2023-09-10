@@ -446,4 +446,20 @@
     <string name="daily_quota_alert_title">¡Cuota diaria de datos alcanzada!</string>
     <string name="rezaalmanda">Reza</string>
     <string name="label_days_remaining">%1$s día(s) restante(s)</string>
+    <string name="ecogaming">Eco</string>
+    <string name="dan_summary">Ucraniano</string>
+    <string name="detrimental_god_summary">Malayo</string>
+    <string name="jonnysemon_summary">Árabe</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="ecogaming_summary">Desarrollador</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">Malayo</string>
+    <string name="chin_housin_summary">Chino simplificado</string>
+    <string name="timtcg_summary">Vietnamita</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jean_mareilles_summary">Francés</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="dan">Dan</string>
 </resources>
