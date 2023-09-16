@@ -48,6 +48,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.core.base.Preference;
 import com.drnoob.datamonitor.databinding.ActivityCrashReportBinding;
 import com.drnoob.datamonitor.utils.SharedPreferences;
+import com.drnoob.datamonitor.utils.helpers.ThemeHelperKt;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.snackbar.Snackbar;
@@ -71,7 +72,7 @@ public class CrashReportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.setTheme(CrashReportActivity.this);
+        ThemeHelperKt.setTheme(CrashReportActivity.this);
         String languageCode = SharedPreferences.getUserPrefs(this).getString(APP_LANGUAGE_CODE, "null");
         String countryCode = SharedPreferences.getUserPrefs(this).getString(APP_COUNTRY_CODE, "");
         if (languageCode.equals("null")) {
