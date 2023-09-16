@@ -431,4 +431,24 @@
     <string name="rezaalmanda_summary">Indonesisch</string>
     <string name="label_daily_quota">Tägliches Kontingent: %1$s</string>
     <string name="gnu_ewm_summary">Polnisch</string>
+    <string name="error_data_fetch_failed">Datenabruf ist fehlgeschlagen</string>
+    <string name="ecogaming">Öko-Gaming</string>
+    <string name="dan_summary">Ukrainisch</string>
+    <string name="detrimental_god_summary">Malayalam</string>
+    <string name="rintan">Rintan</string>
+    <string name="jonnysemon_summary">Arabisch</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="ecogaming_summary">Entwickler/innen</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">Malay</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="chin_housin_summary">Vereinfachtes Chinesisch</string>
+    <string name="timtcg_summary">Vietnamesich</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jean_mareilles_summary">Französisch</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="dan">Dan</string>
+    <string name="smart_data_allocation_summary">Ordnen Sie Ihre Daten intelligent zu, indem Sie tägliche Kontingente und Daten-Rollovers nutzen.</string>
 </resources>
