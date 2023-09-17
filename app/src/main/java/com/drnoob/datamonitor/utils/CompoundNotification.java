@@ -517,16 +517,17 @@ public class CompoundNotification extends Service {
         else {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
         }
-        mBuilder.setContent(contentView);
+//        mBuilder.setContent(contentView);
+        mBuilder.setCustomContentView(contentView);
         mBuilder.setCustomBigContentView(bigContentView);
 
         try {
             postNotification(context, managerCompat, mBuilder, NETWORK_SIGNAL_NOTIFICATION_ID);
         }
         catch (Exception e) {
-            e.printStackTrace();
             contentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification);
             bigContentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification_expanded);
+            e.printStackTrace();
         }
 
     }
