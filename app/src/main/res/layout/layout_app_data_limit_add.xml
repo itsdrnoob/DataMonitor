@@ -7,21 +7,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_background">
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="45dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/bottom_sheet_handle_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/drag_handle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_mid_large"
         android:gravity="center"
         android:paddingStart="@dimen/margin_medium"
         android:paddingEnd="@dimen/margin_medium"
@@ -29,7 +24,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view3" />
+        app:layout_constraintTop_toBottomOf="@id/drag_handle" />
 
     <TextView
         android:id="@+id/textView9"
