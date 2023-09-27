@@ -1,4 +1,4 @@
-[![Version](https://shields.io/badge/version-v2.3.2-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor/tree/dev/2.3.2)
+[![Version](https://shields.io/badge/version-v2.4.0-087AFF.svg)](https://github.com/itsdrnoob/DataMonitor/tree/dev/2.4.0)
 [![Platform](https://shields.io/badge/platform-android-green.svg)](https://github.com/itsdrnoob/DataMonitor)
 [![License](https://img.shields.io/badge/license-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Release](https://shields.io/badge/release-v2.3.2-blue.svg)](https://github.com/itsdrnoob/DataMonitor/releases)
@@ -60,7 +60,7 @@ Beta builds for Data Monitor will be available on Play Store and <a href="https:
 Join the Beta program on:<br>
 <a href="https://play.google.com/store/apps/details?id=com.drnoob.datamonitor">Google Play</a><br>
 <a href="https://play.google.com/apps/testing/com.drnoob.datamonitor">Web</a><br>
-Latest Beta: <a href="https://github.com/itsdrnoob/DataMonitor/tree/dev/2.3.0">v2.3.0-Beta4</a>
+Latest Beta: <a href="https://github.com/itsdrnoob/DataMonitor/tree/dev/2.4.0">v2.4.0-Beta1</a>
 
 ## License
 Check app license <a href = "LICENSE">here</a>
