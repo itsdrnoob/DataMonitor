@@ -496,4 +496,14 @@
     <string name="zahiruddinrushdi_summary">Malay</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="jean_mareilles_summary">French</string>
+    <string name="add_custom_session">Add custom session</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="label_select_start_time">Select start time</string>
+    <string name="label_select_end_time">Select end time</string>
+    <string name="error_invalid_session">Invalid session duration.</string>
+    <string name="action_reset">Reset</string>
+    <string name="add_time">Add time</string>
+    <string name="action_apply_filter">Apply Filter</string>
+    <string name="label_select_date">Select date</string>
 </resources>

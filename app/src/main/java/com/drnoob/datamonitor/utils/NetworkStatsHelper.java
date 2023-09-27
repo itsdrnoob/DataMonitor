@@ -33,6 +33,7 @@ import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_LIST;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM_FILTER;
 import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
 import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
@@ -52,11 +53,13 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppModel;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
+import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -846,6 +849,12 @@ public class NetworkStatsHelper {
                 endTimeMillis = endDate.getTime();
                 break;
 
+            case SESSION_CUSTOM_FILTER:
+                Pair<Long, Long> filter = AppDataUsageFragment.customFilter.getValue();
+                resetTimeMillis = filter == null ? 0 : filter.first;
+
+                endTimeMillis = filter == null ? 0 : filter.second;
+                break;
         }
 
         if (resetTimeMillis > System.currentTimeMillis()) {

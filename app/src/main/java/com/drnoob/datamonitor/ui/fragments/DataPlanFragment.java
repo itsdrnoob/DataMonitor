@@ -573,7 +573,7 @@ public class DataPlanFragment extends Fragment {
         dialog.show();
     }
 
-    private String getTime(int hour, int minute, boolean is12HourView) {
+    public static String getTime(int hour, int minute, boolean is12HourView) {
         String time;
         int hourOfDay;
         if (!is12HourView) {
