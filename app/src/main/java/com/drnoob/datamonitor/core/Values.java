@@ -48,6 +48,7 @@ public class Values {
     public static final int SESSION_ALL_TIME = 0x003C;
     public static final int SESSION_MONTHLY = 0x00A9;
     public static final int SESSION_CUSTOM = 0x00AC;
+    public static final int SESSION_CUSTOM_FILTER = 0x00AF;
 
     public static final int TYPE_MOBILE_DATA = 0x0046;
     public static final int TYPE_WIFI = 0x0050;
@@ -77,6 +78,7 @@ public class Values {
     public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
     public static final int DATA_PLAN_FRAGMENT = 0x0118;
     public static final int APP_CONTRIBUTORS_FRAGMENT = 0x0122;
+    public static final int ADD_CUSTOM_SESSION_FRAGMENT = 0x0136;
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
     public static final int BOTTOM_NAVBAR_ITEM_SETUP = 1;
