@@ -451,4 +451,14 @@
     <string name="jean_mareilles_summary">Francouzština</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="dan">Dan</string>
+    <string name="action_reset">Resetovat</string>
+    <string name="label_select_date">Vybrat datum</string>
+    <string name="add_time">Přidat čas</string>
+    <string name="label_select_end_time">Zvolte čas ukončení</string>
+    <string name="date">Datum</string>
+    <string name="add_custom_session">Přidat vlastní relaci</string>
+    <string name="label_select_start_time">Zvolte počáteční čas</string>
+    <string name="action_apply_filter">Použít filtr</string>
+    <string name="error_invalid_session">Neplatná doba trvání relace.</string>
+    <string name="time">Čas</string>
 </resources>
