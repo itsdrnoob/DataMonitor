@@ -455,4 +455,14 @@
     <string name="jean_mareilles_summary">الفرنسيّة</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="dan">دان</string>
+    <string name="action_reset">اعادة تعيين</string>
+    <string name="label_select_date">اختر التاريخ</string>
+    <string name="add_time">إضافة وقت</string>
+    <string name="label_select_end_time">أختر وقت النهاية</string>
+    <string name="date">التاريخ</string>
+    <string name="add_custom_session">اضافة جلسة مخصصة</string>
+    <string name="label_select_start_time">اختيار وقت البدء</string>
+    <string name="action_apply_filter">تطبيق عامل التصفية</string>
+    <string name="error_invalid_session">مدة الجلسة غير صالحة.</string>
+    <string name="time">الوقت</string>
 </resources>
