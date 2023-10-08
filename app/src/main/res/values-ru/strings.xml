@@ -452,4 +452,14 @@
     <string name="jonnysemon">jonnysemon</string>
     <string name="jean_mareilles">Жан Марей</string>
     <string name="dan">Dan</string>
+    <string name="action_reset">Сброс</string>
+    <string name="label_select_date">Выберите дату</string>
+    <string name="add_time">Добавить время</string>
+    <string name="label_select_end_time">Выберите время окончания</string>
+    <string name="date">Дата</string>
+    <string name="add_custom_session">Добавить пользовательскую сессию</string>
+    <string name="label_select_start_time">Выберите время запуска</string>
+    <string name="action_apply_filter">Применить фильтр</string>
+    <string name="error_invalid_session">Недопустимая длительность сессии.</string>
+    <string name="time">Время</string>
 </resources>
