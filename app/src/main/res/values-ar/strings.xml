@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">رصد البيانات</string>
+    <string name="app_name">مراقب البيانات</string>
     <string name="appwidget_text">مثال</string>
     <string name="add_widget">إضافة أداة</string>
     <string name="notification_mobile_data_usage">"بيانات الجوال: %1$s"</string>
@@ -25,7 +25,7 @@
     <string name="action_open_app_settings">"فتح إعدادات التطبيق"</string>
     <string name="action_cancel">"إلغاء"</string>
     <string name="action_ok">"موافق"</string>
-    <string name="title_app_data_usage_session">"حدد الفترة"</string>
+    <string name="title_app_data_usage_session">حدد الجلسة</string>
     <string name="label_today">"اليوم"</string>
     <string name="label_yesterday">"في الامس"</string>
     <string name="label_this_month">"هذا الشهر"</string>
@@ -39,11 +39,11 @@
     <string name="action_update">"تحديث"</string>
     <string name="data_remaining_placeholder">"يتبقى 0.00 جيجا بايت"</string>
     <string name="label_dev">صنع بـ ❤ بواسطة Bitroid</string>
-    <string name="label_loading_apps">"جار تحميل التطبيقات"</string>
-    <string name="label_app_data_usage_session_empty">"لا توجد بيانات متاحة للفترة المختارة"</string>
-    <string name="label_want_to_contribute">"تريد المساهمة في مراقب البيانات انقر هنا لتعرف كيف."</string>
+    <string name="label_loading_apps">جارِ تحميل التطبيقات</string>
+    <string name="label_app_data_usage_session_empty">لا تتوافر بيانات</string>
+    <string name="label_want_to_contribute">انقر هنا لتعرف كيف تساهم في مراقب البيانات.</string>
     <string name="setup_image_footer">يمكن أن توفر الأدوات و / أو الإشعارات وصولاً سهلاً إلى كمية البيانات التي استخدمتها</string>
-    <string name="heading_data_reset">"إعادة تعيين البيانات"</string>
+    <string name="heading_data_reset">إعادة تعيين العداد</string>
     <string name="daily">يوميًا</string>
     <string name="monthly">شهريًا</string>
     <string name="heading_data_limit">"حد البيانات"</string>
@@ -62,7 +62,7 @@
     <string name="widget_setup_step_2">2. اضغط على \"الأدوات\".</string>
     <string name="widget_setup_step_3">3. اسحب وأسقط أداة مراقبة البيانات على شاشتك الرئيسية.</string>
     <string name="heading_data_usage_today">"استخدام البيانات اليوم"</string>
-    <string name="action_add_data_plan_home">"أضف خطة البيانات الخاصة بك لبدء المراقبة"</string>
+    <string name="action_add_data_plan_home">أضِف خطة البيانات الخاصة بك لبدء المراقبة</string>
     <string name="heading_week_overview">نظرة عامة على هذا الأسبوع</string>
     <string name="error_loading_overview">تعذر تحميل نظرة عامة لهذا الأسبوع.
 \nحاول مرة أخرى لاحقا.</string>
@@ -80,7 +80,7 @@
     <string name="setup_notification_refresh_interval">الفاصل الزمني لتحديث الإشعارات</string>
     <string name="setup_show_mobile_usage">"إظهار استخدام بيانات الجوال"</string>
     <string name="setup_show_wifi_usage">"عرض استخدام واي فاي"</string>
-    <string name="monitor_data">"مراقبة استخدام البيانات"</string>
+    <string name="monitor_data">راقب استهلاك البيانات</string>
     <string name="setup_data_alert">"إخطار استخدام البيانات"</string>
     <string name="data_alert_summary">"يتم إخطارك عندما يتم الوصول إلى حد البيانات"</string>
     <string name="settings_general">"عام"</string>
@@ -156,7 +156,7 @@
     <string name="label_data_remaining">"%1$s متبقية"</string>
     <string name="label_data_remaining_used_excess">"تم استخدام %1$s إضافيًا"</string>
     <string name="disable_battery_optimisation">"تعطيل تحسين البطارية"</string>
-    <string name="disable_battery_optimisation_body">يمنع قتل Data Monitor عند التشغيل في الخلفية.
+    <string name="disable_battery_optimisation_body">يمنع قتل مراقب البيانات عند التشغيل في الخلفية.
 \nوإلا فقد تكون القيم غير صحيحة.</string>
     <string name="extra_optimisation_tips">"نصائح التحسين الإضافية"</string>
     <string name="oem_battery_settings">"إعدادات بطارية OEM"</string>
@@ -201,7 +201,7 @@
 \nيرجى التأكد من اتصالك بالإنترنت.</string>
     <string name="app_label_screen_time">"وقت الشاشة: %1$s"</string>
     <string name="app_label_background_time">"استخدام الخلفية: %1$s"</string>
-    <string name="label_loading">جار التحميل…</string>
+    <string name="label_loading">جارِ التحميل…</string>
     <string name="donate_summary">"شراء قهوة لنا ، ما رأيك؟"</string>
     <string name="label_data_usage_reset_time_change">"ستتم إعادة تعيين استخدام البيانات كل %1$s عند %2$s"</string>
     <string name="label_data_usage_reset_date_change">"ستتم إعادة تعيين استخدام البيانات في %1$d%2$s من كل شهر"</string>
@@ -274,7 +274,7 @@
     <string name="crash_logs_warning">سجلات الأعطال; لا تقم بالتعديل</string>
     <string name="title_device_info_contents">محتويات معلومات الجهاز</string>
     <string name="label_mail">البريد</string>
-    <string name="battery_optimisation_enabled_info">تحسين البطاريةمٌفعل. سيتداخل هذا مع عمل مراقب البيانات.</string>
+    <string name="battery_optimisation_enabled_info">تحسين البطارية مٌفعل. سيتداخل هذا مع عمل مراقب البيانات.</string>
     <string name="label_battery_optimisation">تحسينات البطارية</string>
     <string name="error_no_crash_logs">لم يتم العثور على سجلات الأعطال. هل أنت متأكد من حدوث مشكلة؟</string>
     <string name="settings_diagnostics_server">الخادم</string>
@@ -294,7 +294,7 @@
     <string name="disable_haptics_summary">تعطيل ردود الفعل اللمسية عبر التطبيق</string>
     <string name="action_dismiss">تجاهل</string>
     <string name="report_telegram_summary">إرسال تقرير الأعطال في دردشة دعم Telegram</string>
-    <string name="crash_report_body">يبدو أن مراقب البيانات قد تحطم. يمكنك إرسال تقرير الأعطال إلى المطور للمساعدة في تحليل المشكلة وحلها بشكل أسرع. إذا لم يحدث أي عطل ، يرجى تجاهله.</string>
+    <string name="crash_report_body">يبدو أن مراقب البيانات قد تحطم. يمكنك إرسال تقرير الأعطال إلى المطور للمساعدة في تحليل المشكلة وحلها بشكل أسرع. إذا لم يحدث أي عطل، يُرجى تجاهله.</string>
     <string name="heading_data_reset_custom_counter">صلاحية الخطة</string>
     <string name="device_info_body">تتضمن معلومات الجهاز ما يلي:
 \nالشركة المصنعة للجهاز
@@ -419,7 +419,7 @@
     <string name="rintan">رينتان</string>
     <string name="error_data_fetch_failed">فشل في جلب البيانات</string>
     <string name="label_thank_you">شكرًا لك</string>
-    <string name="wall_of_thanks_body">مرصد البيانات قطع شوطا طويلا منذ بدايته ولم نكن لنفعلها بدون دعم من مانحيننا السخاء.</string>
+    <string name="wall_of_thanks_body">مراقب البيانات قطع شوطا طويلا منذ بدايته ولم نكن لنفعلها بدون دعم من مانحيننا السخاء.</string>
     <string name="label_top_donors">كبار المتبرعين</string>
     <string name="app_contributors">المساهمون في التطبيق</string>
     <string name="label_learn_more">تعلم المزيد</string>
@@ -455,4 +455,14 @@
     <string name="jean_mareilles_summary">الفرنسيّة</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="dan">دان</string>
+    <string name="action_reset">اعادة تعيين</string>
+    <string name="label_select_date">اختر التاريخ</string>
+    <string name="add_time">إضافة وقت</string>
+    <string name="label_select_end_time">أختر وقت النهاية</string>
+    <string name="date">التاريخ</string>
+    <string name="add_custom_session">اضافة جلسة مخصصة</string>
+    <string name="label_select_start_time">اختيار وقت البدء</string>
+    <string name="action_apply_filter">تطبيق عامل التصفية</string>
+    <string name="error_invalid_session">مدة الجلسة غير صالحة.</string>
+    <string name="time">الوقت</string>
 </resources>

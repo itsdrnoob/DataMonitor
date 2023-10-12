@@ -462,4 +462,14 @@
     <string name="jean_mareilles_summary">Francés</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="dan">Dan</string>
+    <string name="action_reset">Restablecer</string>
+    <string name="label_select_date">Seleccionar una fecha</string>
+    <string name="add_time">Añadir una hora</string>
+    <string name="label_select_end_time">Seleccionar la hora de finalizacion</string>
+    <string name="date">Fecha</string>
+    <string name="add_custom_session">Añade una sesión personalizada</string>
+    <string name="label_select_start_time">Seleccionar la hora de inicio</string>
+    <string name="action_apply_filter">Aplicar un filtro</string>
+    <string name="error_invalid_session">Duración de sesión no válida.</string>
+    <string name="time">Horario</string>
 </resources>

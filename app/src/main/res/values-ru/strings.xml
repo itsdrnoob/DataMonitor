@@ -21,7 +21,7 @@
     <string name="error_loading_overview">Не удалось загрузить обзор за эту неделю.
 \nПовторите попытку позже.</string>
     <string name="setup_widget">Настройка виджета</string>
-    <string name="title_configure">Настройка</string>
+    <string name="title_configure">Конфигурирование</string>
     <string name="setup_widget_title">Виджет</string>
     <string name="setup_notification_refresh_interval">Интервал обновления уведомлений</string>
     <string name="data_alert_summary">Уведомление о достижении лимита данных</string>
@@ -73,7 +73,7 @@
     <string name="current_connection">Текущее соединение: %1$s</string>
     <string name="network_stats">Сетевая статистика</string>
     <string name="network_speed_mbps">%1$s Мбит/с</string>
-    <string name="max_download_speed">Макс. входящая скорость</string>
+    <string name="max_download_speed">Максимальная скорость загрузки</string>
     <string name="avg_download_speed">Ср. входящая скорость</string>
     <string name="max_upload_speed">Макс. исходящая скорость</string>
     <string name="min_latency">Минимальная задержка</string>
@@ -108,12 +108,12 @@
     <string name="update_fetch_error">Не удалось получить обновление</string>
     <string name="settings_app_theme">Тема</string>
     <string name="app_theme_summary">Выбор темы приложения</string>
-    <string name="theme_system">Как в системе (по умолчанию)</string>
+    <string name="theme_system">Следовать системной теме</string>
     <string name="light_theme_summary">Выбрана светлая тема</string>
     <string name="hudaifa_abdullah_summary">Арабский</string>
     <string name="holydemon_summary">Малаялам</string>
     <string name="liviogasp_summary">Итальянский</string>
-    <string name="system_theme_summary">Как в системе (по умолчанию)</string>
+    <string name="system_theme_summary">Следование системной тематике</string>
     <string name="comradekingu_summary">Поддержка перевода</string>
     <string name="f_droid_page">Просмотр приложения на F-Droid</string>
     <string name="f_droid_page_summary">Проверьте приложение в официальном репозитории F-Droid</string>
@@ -206,7 +206,7 @@
     <string name="setup_app_data_usage_alert">Уведомление об использовании данных приложения</string>
     <string name="run_diagnostics">Выполнить диагностику</string>
     <string name="running_diagnostics">Выполняется диагностика</string>
-    <string name="min_download_speed">Макс. входящая скорость</string>
+    <string name="min_download_speed">Минимальная скорость загрузки</string>
     <string name="testing_latency">Проверка задержки в сети</string>
     <string name="available_languages">Доступно</string>
     <string name="avg_upload_speed">Ср. исходящая скорость</string>
@@ -227,7 +227,7 @@
     <string name="check_for_update">Проверьте наличие обновлений</string>
     <string name="current_version">Текущая версия: %1$s</string>
     <string name="new_version">Новая версия: %1$s</string>
-    <string name="label_update_available">Доступна новая версия!</string>
+    <string name="label_update_available">Новая версия уже доступна!</string>
     <string name="new_update_available">Доступна новая версия!</string>
     <string name="label_changelogs">Узнайте, что нового</string>
     <string name="dark_theme_summary">Выбрана тёмная тема</string>
@@ -238,7 +238,7 @@
     <string name="action_add_data_plan_home">Настройте свой тарифный план, для начала его отслеживания</string>
     <string name="label_monitoring_no_plan">Настроить тарифный план, для начала отслеживания</string>
     <string name="label_system_apps">Системные приложения</string>
-    <string name="setup">Настройка</string>
+    <string name="setup">Установка</string>
     <string name="upi_app_not_found">Сначала установите приложение, которое может это сделать</string>
     <string name="notification_disabled">Уведомление о мониторе данных отключено</string>
     <string name="label_notification_enabled">Уведомление о мониторе данных включено</string>
@@ -404,7 +404,7 @@
     <string name="croxz900">Croxz</string>
     <string name="ngocanhtve_summary">Вьетнамский</string>
     <string name="ngocanhtve">ngocanhtve</string>
-    <string name="bluehomewu">EdwardWu</string>
+    <string name="bluehomewu">ЭдуардВу</string>
     <string name="setup_auto_update_data_plan">Автоматическое обновление плана данных</string>
     <string name="fjuro">Fjuro</string>
     <string name="bluehomewu_summary">Китайский (традиционный)</string>
@@ -429,10 +429,10 @@
     <string name="daily_quota_alert_summary">Получать оповещение, когда ваша дневная норма исчерпана.</string>
     <string name="daily_quota_alert_title">Суточная квота данных достигнута!</string>
     <string name="label_daily_quota">Суточная квота: %1$s</string>
-    <string name="rezaalmanda">Reza</string>
+    <string name="rezaalmanda">Молиться</string>
     <string name="rezaalmanda_summary">Индонезийский</string>
     <string name="gnu_ewm_summary">Польский</string>
-    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="gnu_ewm">Эрик Михалак</string>
     <string name="rintan_summary">Японский</string>
     <string name="rintan">Rintan</string>
     <string name="dan_summary">Украинский</string>
@@ -444,4 +444,22 @@
     <string name="timtcg_summary">Вьетнамский</string>
     <string name="label_days_remaining">осталось %1$s дней</string>
     <string name="jean_mareilles_summary">Французский</string>
+    <string name="ecogaming">Экологические игры</string>
+    <string name="detrimental_god">Губительный Бог</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jean_mareilles">Жан Марей</string>
+    <string name="dan">Dan</string>
+    <string name="action_reset">Сброс</string>
+    <string name="label_select_date">Выберите дату</string>
+    <string name="add_time">Добавить время</string>
+    <string name="label_select_end_time">Выберите время окончания</string>
+    <string name="date">Дата</string>
+    <string name="add_custom_session">Добавить пользовательскую сессию</string>
+    <string name="label_select_start_time">Выберите время запуска</string>
+    <string name="action_apply_filter">Применить фильтр</string>
+    <string name="error_invalid_session">Недопустимая длительность сессии.</string>
+    <string name="time">Время</string>
 </resources>
