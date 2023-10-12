@@ -21,26 +21,6 @@
         android:scaleType="centerInside"
         android:layout_gravity="center"/>
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        app:cardCornerRadius="@dimen/radius_large"-->
-<!--        app:cardElevation="0dp"-->
-<!--        android:gravity="center">-->
-
-<!--        <com.google.android.material.imageview.ShapeableImageView-->
-<!--            android:id="@+id/app_icon"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:src="@mipmap/ic_launcher_round"-->
-<!--            android:scaleType="centerInside"-->
-<!--            android:scaleX="1.045"-->
-<!--            android:scaleY="1.045"-->
-<!--            app:shapeAppearanceOverlay="@style/RoundIconStyle"-->
-<!--            android:layout_gravity="center"/>-->
-
-<!--    </androidx.cardview.widget.CardView>-->
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"

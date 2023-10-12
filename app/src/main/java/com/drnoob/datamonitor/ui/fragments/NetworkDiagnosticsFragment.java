@@ -173,7 +173,6 @@ public class NetworkDiagnosticsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.e(TAG, "onDetach: ");
         this.context = null;
     }
 

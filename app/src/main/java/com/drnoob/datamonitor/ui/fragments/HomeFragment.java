@@ -39,9 +39,6 @@ import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WEEKDAY;
-import static com.drnoob.datamonitor.core.Values.EXTRA_IS_WEEK_DAY_VIEW;
-import static com.drnoob.datamonitor.core.Values.EXTRA_WEEK_DAY;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
@@ -108,7 +105,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements View.OnLongClickListener {

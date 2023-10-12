@@ -21,10 +21,11 @@ package com.drnoob.datamonitor.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import com.drnoob.datamonitor.core.base.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.drnoob.datamonitor.R
-import com.drnoob.datamonitor.core.Values.*
+import com.drnoob.datamonitor.core.Values.APP_CONTRIBUTORS_FRAGMENT
+import com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID
+import com.drnoob.datamonitor.core.base.Preference
 import com.drnoob.datamonitor.ui.activities.ContainerActivity
 import com.drnoob.datamonitor.ui.activities.WallOfThanksActivity
 

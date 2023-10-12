@@ -8,26 +8,6 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView2"-->
-    <!--        android:layout_width="100dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:background="@android:color/transparent"-->
-    <!--        app:cardCornerRadius="@dimen/margin_mid_large"-->
-    <!--        app:cardElevation="@dimen/elevation_default"-->
-    <!--        android:layout_marginStart="@dimen/margin_mid_large"-->
-    <!--        android:layout_marginBottom="@dimen/margin_mid_large"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/textView3"-->
-    <!--        app:layout_constraintStart_toStartOf="parent">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/app_icon"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:src="@drawable/icon" />-->
-
-    <!--    </androidx.cardview.widget.CardView>-->
-
     <ImageView
         android:id="@+id/app_icon"
         android:layout_width="100dp"
@@ -46,7 +26,7 @@
         android:gravity="start"
         android:paddingStart="@dimen/margin_large"
         android:paddingEnd="@dimen/margin_large"
-        android:text="Welcome to Data Monitor"
+        android:text="@string/label_welcome_header"
         android:textAppearance="@style/TextAppearance.Material3.DisplayMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +38,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/margin_large"
         android:paddingEnd="@dimen/margin_large"
-        android:text="Track all your data usage - at one place"
+        android:text="@string/label_welcome_body"
         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
         app:layout_constraintBottom_toTopOf="@+id/skip_setup"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +55,7 @@
         android:gravity="center"
         android:paddingTop="@dimen/margin_medium"
         android:paddingBottom="@dimen/margin_medium"
-        android:text="Get started"
+        android:text="@string/get_started"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,7 +75,7 @@
         android:gravity="center"
         android:paddingStart="@dimen/margin_medium"
         android:paddingEnd="@dimen/margin_medium"
-        android:text="Skip setup"
+        android:text="@string/skip_setup"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         android:textColor="@color/text_primary"

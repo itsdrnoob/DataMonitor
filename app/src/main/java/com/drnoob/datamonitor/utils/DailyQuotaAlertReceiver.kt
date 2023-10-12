@@ -125,7 +125,7 @@ class DailyQuotaAlertReceiver: BroadcastReceiver() {
     open class ResetDataQuotaAlert: BroadcastReceiver() {
 
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.e(TAG, "onReceive: Restarting quota alert")
+            Log.d(TAG, "onReceive: Restarting quota alert")
             PreferenceManager.getDefaultSharedPreferences(context!!).edit()
                 .putBoolean(DATA_QUOTA_WARNING_SHOWN, false).apply()
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager

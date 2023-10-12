@@ -43,9 +43,7 @@ import android.content.IntentFilter;
 import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.os.IBinder;
-import android.service.notification.StatusBarNotification;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -229,7 +227,7 @@ public class NotificationService extends Service {
                             wifiData[2]);
 
                     if (showPercent) {
-                        Log.e(TAG, "onReceive: total: " + Arrays.toString(total) + " mobile: " +
+                        Log.d(TAG, "onReceive: total: " + Arrays.toString(total) + " mobile: " +
                                 Arrays.toString(mobileData));
                         String mobileDataTotal = mobileData[2];
                         if (mobileDataTotal.contains(",")) {
