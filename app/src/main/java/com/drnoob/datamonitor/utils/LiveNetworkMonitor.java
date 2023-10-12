@@ -203,7 +203,12 @@ public class LiveNetworkMonitor extends Service {
             registerNetworkReceiver(mLiveNetworkMonitor);
         }
         try {
-            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+            }
+            else {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            }
             isServiceRunning = true;
         }
         catch (Exception e) {
@@ -467,13 +472,23 @@ public class LiveNetworkMonitor extends Service {
             if (isTaskPaused) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     try {
-                        mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                            mLiveNetworkMonitor.startForeground(
+                                    NETWORK_SIGNAL_NOTIFICATION_ID,
+                                    mBuilder.build(),
+                                    ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+                            );
+                        }
+                        else {
+                            mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                        }
                     } catch (ForegroundServiceStartNotAllowedException e) {
                         e.printStackTrace();
                         Toast.makeText(context, context.getString(R.string.error_network_monitor_start),
                                 Toast.LENGTH_LONG).show();
                     }
-                } else {
+                }
+                else {
                     mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
                 }
                 restartService(context, false, true);
