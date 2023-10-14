@@ -435,4 +435,15 @@
     <string name="github_summary">Xem mã nguồn</string>
     <string name="xda">Chủ đề XDA</string>
     <string name="label_days_remaining">%1$s ngày còn lại</string>
+    <string name="detrimental_god_summary">Tiếng Mã Lai</string>
+    <string name="label_select_end_time">Chọn thời gian kết thúc</string>
+    <string name="date">Ngày</string>
+    <string name="add_custom_session">Thêm phiên tùy chỉnh</string>
+    <string name="ecogaming_summary">Nhà phát triển</string>
+    <string name="chin_housin_summary">Tiếng Trung giản thể</string>
+    <string name="timtcg_summary">Tiếng Việt</string>
+    <string name="label_select_start_time">Chọn thời gian bắt đầu</string>
+    <string name="error_invalid_session">Thời lượng phiên không hợp lệ.</string>
+    <string name="jean_mareilles_summary">Tiếng Pháp</string>
+    <string name="time">Thời gian</string>
 </resources>
