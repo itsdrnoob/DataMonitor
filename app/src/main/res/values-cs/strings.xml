@@ -461,4 +461,8 @@
     <string name="action_apply_filter">Použít filtr</string>
     <string name="error_invalid_session">Neplatná doba trvání relace.</string>
     <string name="time">Čas</string>
+    <string name="label_welcome_body">Sledujte veškeré využití svých dat - na jednom místě</string>
+    <string name="get_started">Začínáme</string>
+    <string name="label_welcome_header">Vítejte v aplikaci Data Monitor</string>
+    <string name="skip_setup">Přeskočit nastavení</string>
 </resources>
