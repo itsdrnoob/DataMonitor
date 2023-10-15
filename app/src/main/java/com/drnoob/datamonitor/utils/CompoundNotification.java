@@ -34,7 +34,6 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 
-import android.app.ForegroundServiceStartNotAllowedException;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -43,6 +42,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ServiceInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -64,7 +64,6 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
-import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -240,7 +239,12 @@ public class CompoundNotification extends Service {
             registerNetworkReceiver(mCompoundNotification);
         }
         try {
-            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+            }
+            else {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            }
             isServiceRunning = true;
         }
         catch (Exception e) {
@@ -754,7 +758,16 @@ public class CompoundNotification extends Service {
             isNetworkConnected = true;
             if (isTaskPaused) {
                 try {
-                    mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                        mCompoundNotification.startForeground(
+                                NETWORK_SIGNAL_NOTIFICATION_ID,
+                                mBuilder.build(),
+                                ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+                        );
+                    }
+                    else {
+                        mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();

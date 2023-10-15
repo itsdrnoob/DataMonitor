@@ -37,47 +37,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/drag_handle" />
 
-        <!--        <RadioGroup-->
-        <!--            android:id="@+id/themes_group"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="vertical"-->
-        <!--            android:layout_marginTop="@dimen/margin_mid_large"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/textView8">-->
-
-        <!--            <RadioButton-->
-        <!--                android:id="@+id/theme_light"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="@dimen/margin_large"-->
-        <!--                android:layout_marginEnd="@dimen/margin_large"-->
-        <!--                android:buttonTint="@color/primary"-->
-        <!--                android:paddingLeft="@dimen/margin_large"-->
-        <!--                android:text="@string/theme_light" />-->
-
-        <!--            <RadioButton-->
-        <!--                android:id="@+id/theme_dark"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="@dimen/margin_large"-->
-        <!--                android:layout_marginEnd="@dimen/margin_large"-->
-        <!--                android:buttonTint="@color/primary"-->
-        <!--                android:paddingLeft="@dimen/margin_large"-->
-        <!--                android:text="@string/theme_dark" />-->
-
-        <!--            <RadioButton-->
-        <!--                android:id="@+id/theme_system"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="@dimen/margin_large"-->
-        <!--                android:layout_marginEnd="@dimen/margin_large"-->
-        <!--                android:buttonTint="@color/primary"-->
-        <!--                android:checked="true"-->
-        <!--                android:paddingLeft="@dimen/margin_large"-->
-        <!--                android:text="@string/theme_system" />-->
-
-        <!--        </RadioGroup>-->
-
         <TextView
             android:id="@+id/session_group_title"
             android:layout_width="wrap_content"

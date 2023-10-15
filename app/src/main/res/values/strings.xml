@@ -506,4 +506,8 @@
     <string name="add_time">Add time</string>
     <string name="action_apply_filter">Apply Filter</string>
     <string name="label_select_date">Select date</string>
+    <string name="label_welcome_header">Welcome to Data Monitor</string>
+    <string name="label_welcome_body">Track all your data usage - at one place</string>
+    <string name="get_started">Get started</string>
+    <string name="skip_setup">Skip setup</string>
 </resources>

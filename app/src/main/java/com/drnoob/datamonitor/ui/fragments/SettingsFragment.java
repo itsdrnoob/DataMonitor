@@ -27,7 +27,6 @@ import static com.drnoob.datamonitor.core.Values.CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DIAGNOSTICS_SETTINGS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DONATE_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
-import static com.drnoob.datamonitor.core.Values.LICENSE_FRAGMENT;
 
 import android.content.Intent;
 import android.os.Bundle;

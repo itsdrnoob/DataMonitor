@@ -21,15 +21,12 @@ package com.drnoob.datamonitor.ui.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
@@ -39,9 +36,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.drnoob.datamonitor.Common
 import com.drnoob.datamonitor.R
-import com.drnoob.datamonitor.Widget.DataUsageWidget
 import com.drnoob.datamonitor.databinding.FragmentCustomSessionBinding
-import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater
 import com.drnoob.datamonitor.utils.VibrationUtils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -143,7 +138,6 @@ class CustomSessionFragment: Fragment() {
             val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
 
             datePicker.addOnPositiveButtonClickListener { pair ->
-                Log.e(TAG, "onViewCreated: $pair")
                 startDateMillis = Common.UTCToLocal(pair.first)
                 endDateMillis = Common.UTCToLocal(pair.second)
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy")

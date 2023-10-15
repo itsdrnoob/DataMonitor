@@ -509,7 +509,7 @@ public class NetworkStatsHelper {
 
             list.add(i, new OverviewModel(totalMobile, totalWifi));
         }
-        Log.e(TAG, "updateOverview: " + list.size());
+        Log.d(TAG, "updateOverview: " + list.size());
         Collections.reverse(list);
 
         return list;

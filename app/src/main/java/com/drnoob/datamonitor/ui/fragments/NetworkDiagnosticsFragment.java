@@ -232,39 +232,41 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-                                            String ip = "",
-                                                    city = "",
-                                                    region = "",
-                                                    org = "";
-                                            try {
-                                                JSONObject result = new JSONObject(response);
-                                                ip = result.getString("ip");
-                                                city = result.getString("city");
-                                                region = result.getString("region");
-                                                org = result.getString("org");
+                                            if (getContext() != null) {
+                                                String ip = "",
+                                                        city = "",
+                                                        region = "",
+                                                        org = "";
+                                                try {
+                                                    JSONObject result = new JSONObject(response);
+                                                    ip = result.getString("ip");
+                                                    city = result.getString("city");
+                                                    region = result.getString("region");
+                                                    org = result.getString("org");
 
-                                            }
-                                            catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                            mIpResponse = new IPResponse(
-                                                    ip, requireContext().getString(R.string.label_unknown),
-                                                    false,
-                                                    city,
-                                                    region,
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    org,
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    null, null, null, null, null, null
-                                            );
-
-                                            if (getActivity() != null) {
-                                                if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
-                                                    speedTest = new SpeedTest(requireActivity());
                                                 }
-                                                speedTest.execute();
+                                                catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                mIpResponse = new IPResponse(
+                                                        ip, requireContext().getString(R.string.label_unknown),
+                                                        false,
+                                                        city,
+                                                        region,
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        org,
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        null, null, null, null, null, null
+                                                );
+
+                                                if (getActivity() != null) {
+                                                    if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
+                                                        speedTest = new SpeedTest(requireActivity());
+                                                    }
+                                                    speedTest.execute();
+                                                }
                                             }
                                         }
                                     },

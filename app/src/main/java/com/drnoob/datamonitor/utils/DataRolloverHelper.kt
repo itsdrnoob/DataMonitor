@@ -24,11 +24,9 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.drnoob.datamonitor.core.Values
 import com.drnoob.datamonitor.core.Values.DATA_QUOTA
 import com.drnoob.datamonitor.core.Values.DATA_QUOTA_PERFORMED_RESET
 import com.drnoob.datamonitor.core.Values.DATA_RESET

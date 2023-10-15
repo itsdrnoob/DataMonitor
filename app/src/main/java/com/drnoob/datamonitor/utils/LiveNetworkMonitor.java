@@ -25,25 +25,21 @@ import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_GRO
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_NOTIFICATION_ID;
 
 import android.app.ForegroundServiceStartNotAllowedException;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ServiceInfo;
-import android.media.AudioAttributes;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.net.TrafficStats;
-import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
@@ -53,11 +49,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.app.Person;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
-import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -203,7 +197,12 @@ public class LiveNetworkMonitor extends Service {
             registerNetworkReceiver(mLiveNetworkMonitor);
         }
         try {
-            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+            }
+            else {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            }
             isServiceRunning = true;
         }
         catch (Exception e) {
@@ -467,13 +466,23 @@ public class LiveNetworkMonitor extends Service {
             if (isTaskPaused) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     try {
-                        mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                            mLiveNetworkMonitor.startForeground(
+                                    NETWORK_SIGNAL_NOTIFICATION_ID,
+                                    mBuilder.build(),
+                                    ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+                            );
+                        }
+                        else {
+                            mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                        }
                     } catch (ForegroundServiceStartNotAllowedException e) {
                         e.printStackTrace();
                         Toast.makeText(context, context.getString(R.string.error_network_monitor_start),
                                 Toast.LENGTH_LONG).show();
                     }
-                } else {
+                }
+                else {
                     mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
                 }
                 restartService(context, false, true);

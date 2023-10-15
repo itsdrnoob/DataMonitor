@@ -46,15 +46,12 @@ import static com.drnoob.datamonitor.ui.activities.MainActivity.mSystemAppsList;
 import static com.drnoob.datamonitor.ui.activities.MainActivity.mUserAppsList;
 import static com.drnoob.datamonitor.ui.activities.MainActivity.setRefreshAppDataUsage;
 
-import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,8 +61,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -194,7 +189,7 @@ public class AppDataUsageFragment extends Fragment {
         setType(type);
         mTotalUsage.setText("...");
 
-        Log.e(TAG, "onCreateView: " + getRefreshAppDataUsage() );
+        Log.d(TAG, "onCreateView: " + getRefreshAppDataUsage() );
         if (getRefreshAppDataUsage()) {
             refreshData();
         }
