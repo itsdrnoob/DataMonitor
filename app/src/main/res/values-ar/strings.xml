@@ -465,4 +465,8 @@
     <string name="action_apply_filter">تطبيق عامل التصفية</string>
     <string name="error_invalid_session">مدة الجلسة غير صالحة.</string>
     <string name="time">الوقت</string>
+    <string name="label_welcome_body">تتبع كل استخدامك للبيانات في مكان واحد</string>
+    <string name="get_started">لنبدأ</string>
+    <string name="label_welcome_header">مرحبا بكم في مراقب البيانات</string>
+    <string name="skip_setup">تخطي الإعداد</string>
 </resources>
