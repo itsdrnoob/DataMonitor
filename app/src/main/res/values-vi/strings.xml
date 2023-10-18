@@ -446,4 +446,5 @@
     <string name="error_invalid_session">Thời lượng phiên không hợp lệ.</string>
     <string name="jean_mareilles_summary">Tiếng Pháp</string>
     <string name="time">Thời gian</string>
+    <string name="dan">Dan</string>
 </resources>
