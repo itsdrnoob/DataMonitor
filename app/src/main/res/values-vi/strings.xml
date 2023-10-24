@@ -447,4 +447,14 @@
     <string name="jean_mareilles_summary">Tiếng Pháp</string>
     <string name="time">Thời gian</string>
     <string name="dan">Dan</string>
+    <string name="label_welcome_body">Theo dõi tất cả việc sử dụng dữ liệu của bạn - tại một nơi</string>
+    <string name="action_reset">Cài lại</string>
+    <string name="dan_summary">Tiếng Ukraina</string>
+    <string name="label_select_date">Chọn ngày</string>
+    <string name="get_started">Bắt đầu</string>
+    <string name="jonnysemon_summary">Tiếng Ả Rập</string>
+    <string name="label_welcome_header">Chào mừng đến với Trình giám sát dữ liệu</string>
+    <string name="add_time">Thêm thời gian</string>
+    <string name="skip_setup">Bỏ qua thiết lập</string>
+    <string name="action_apply_filter">Áp dụng bộ lọc</string>
 </resources>
