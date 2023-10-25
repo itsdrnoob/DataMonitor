@@ -186,4 +186,19 @@
     <string name="network_stats">Statistik jaringan</string>
     <string name="network_speed_mbps">%1$s Mbit/dtk</string>
     <string name="max_download_speed">Kecepatan unduh maksimum</string>
+    <string name="refresh_list">Daftar Refresh</string>
+    <string name="network_latency_ms">%1$s md</string>
+    <string name="min_download_speed">Kecepatan unduhan min</string>
+    <string name="avg_upload_speed">Kecepatan unggah rata-rata</string>
+    <string name="isp">Penyedia Jaringan</string>
+    <string name="swipe_right_to_delete">Geser ke kanan untuk menghapus item</string>
+    <string name="isp_region">Daerah</string>
+    <string name="avg_latency">Latensi rata-rata</string>
+    <string name="network_ip">IP Jaringan</string>
+    <string name="isp_server">Server</string>
+    <string name="avg_download_speed">Kecepatan unduhan rata-rata</string>
+    <string name="min_latency">Latensi min</string>
+    <string name="label_days_remaining">%1$s hari tersisa</string>
+    <string name="max_upload_speed">Kecepatan unggah maks</string>
+    <string name="connected_server">Server tersambung: %1$s</string>
 </resources>
