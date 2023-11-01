@@ -457,4 +457,12 @@
     <string name="add_time">Thêm thời gian</string>
     <string name="skip_setup">Bỏ qua thiết lập</string>
     <string name="action_apply_filter">Áp dụng bộ lọc</string>
+    <string name="ecogaming">Eco-Gaming</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="zahiruddinrushdi_summary">Malay</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
 </resources>
