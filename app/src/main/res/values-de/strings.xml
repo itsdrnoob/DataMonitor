@@ -451,4 +451,8 @@
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="dan">Dan</string>
     <string name="smart_data_allocation_summary">Ordnen Sie Ihre Daten intelligent zu, indem Sie tägliche Kontingente und Daten-Rollovers nutzen.</string>
+    <string name="action_reset">Zurücksetzen</string>
+    <string name="get_started">Loslegen</string>
+    <string name="date">Datum</string>
+    <string name="time">Uhrzeit</string>
 </resources>

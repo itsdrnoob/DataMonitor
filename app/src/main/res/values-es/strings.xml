@@ -472,4 +472,8 @@
     <string name="action_apply_filter">Aplicar un filtro</string>
     <string name="error_invalid_session">Duración de sesión no válida.</string>
     <string name="time">Horario</string>
+    <string name="label_welcome_body">Controla todo el uso de tus datos en un solo sitio</string>
+    <string name="get_started">Empezar</string>
+    <string name="label_welcome_header">Bienvenido a Data Monitor</string>
+    <string name="skip_setup">Omitir la configuración</string>
 </resources>
