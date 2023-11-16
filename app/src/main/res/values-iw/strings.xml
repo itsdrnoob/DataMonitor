@@ -112,7 +112,7 @@
     <string name="settings_dark_mode">מצב כהה</string>
     <string name="settings">הגדרות</string>
     <string name="data_remaining_placeholder">נותרו 0.00 ג\"ב</string>
-    <string name="notification_mobile_data_usage">נתונים סלולריים: %1$s</string>
+    <string name="notification_mobile_data_usage">נתונים ניידים: %1$s</string>
     <string name="option_15_min">15 דקות</string>
     <string name="app_label_package_name">שם החבילה: %1$s</string>
     <string name="app_name">מנטר נתונים</string>
@@ -451,7 +451,7 @@
     <string name="action_apply_filter">החלת מסנן</string>
     <string name="data_plan_updated_summary">החבילה החדשה שלך בתוקף עד %1$s</string>
     <string name="label_learn_more">לקרוא עוד</string>
-    <string name="shailendramaurya_summary">Hindi, Bhojpuri</string>
+    <string name="shailendramaurya_summary">הינדי, Bhojpuri</string>
     <string name="error_invalid_session">משך המופע אינו תקף.</string>
     <string name="jean_mareilles_summary">צרפתית</string>
     <string name="daily_quota_alert_summary">קבלת התראה כאשר מוצתה המיכסה היומית שלך.</string>
