@@ -201,4 +201,28 @@
     <string name="label_days_remaining">%1$s hari tersisa</string>
     <string name="max_upload_speed">Kecepatan unggah maks</string>
     <string name="connected_server">Server tersambung: %1$s</string>
+    <string name="network_speed_upload">Unggah: %1$s</string>
+    <string name="current_language">Saat Ini</string>
+    <string name="app_label_screen_time">Waktu layar: %1$s</string>
+    <string name="action_permission_granted">Izin diberikan</string>
+    <string name="read_phone_state_body">Perangkat yang dengan versi Android 9 dan di bawah ini harus memberikan izin ini secara manual. Tidak ada data pribadi yang dikumpulkan.</string>
+    <string name="network_speed_title">Kecepatan jaringan: %1$s</string>
+    <string name="cracky5322_summary">Cina Tradisional</string>
+    <string name="label_network_signal_notification_enabled">Kecepatan jaringan langsung diaktifkan</string>
+    <string name="read_phone_state_permission">Izin untuk membaca status ponsel</string>
+    <string name="johnsonran_summary">Cina Sederhana</string>
+    <string name="network_speed_download">Unduh: %1$s</string>
+    <string name="label_reset_every_month">%1$s%2$s dari setiap bulan</string>
+    <string name="network_signal_summary">Fitur beta</string>
+    <string name="louis_leblanc_summary">Prancis</string>
+    <string name="label_want_to_contribute_language">Klik di sini untuk membantu menerjemahkan aplikasi ke dalam bahasa Anda.</string>
+    <string name="available_languages">Tersedia</string>
+    <string name="connection_error">Tidak bisa terhubung.
+\nPastikan Anda terhubung ke Internet.</string>
+    <string name="network_signal_notification">Kecepatan jaringan langsung</string>
+    <string name="system_data_usage">Penggunaan data sistem</string>
+    <string name="setup_usage_reset_date">Tanggal ulang penggunaan data</string>
+    <string name="label_network_signal_notification_disabled">Kecepatan jaringan langsung dinonaktifkan</string>
+    <string name="app_label_background_time">Penggunaan latar belakang: %1$s</string>
+    <string name="ygorigor_summary">Rumania</string>
 </resources>
