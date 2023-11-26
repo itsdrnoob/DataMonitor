@@ -510,4 +510,10 @@
     <string name="label_welcome_body">Track all your data usage - at one place</string>
     <string name="get_started">Get started</string>
     <string name="skip_setup">Skip setup</string>
+    <string name="flix">Flix</string>
+    <string name="flix_summary">German</string>
+    <string name="xxx">xXx</string>
+    <string name="xxx_summary">Russian</string>
+    <string name="ofermar">ofermar</string>
+    <string name="ofermar_summary">Hebrew</string>
 </resources>
