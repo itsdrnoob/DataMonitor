@@ -469,4 +469,10 @@
     <string name="get_started">لنبدأ</string>
     <string name="label_welcome_header">مرحبا بكم في مراقب البيانات</string>
     <string name="skip_setup">تخطي الإعداد</string>
+    <string name="ofermar">ofermar</string>
+    <string name="flix">Flix</string>
+    <string name="flix_summary">الألمانيّة</string>
+    <string name="ofermar_summary">العبريّة</string>
+    <string name="xxx">xXx</string>
+    <string name="xxx_summary">الروسيّة</string>
 </resources>
