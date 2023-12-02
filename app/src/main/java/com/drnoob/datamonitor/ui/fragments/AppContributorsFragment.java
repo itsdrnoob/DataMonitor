@@ -313,6 +313,19 @@ public class AppContributorsFragment extends Fragment {
                 getContext().getString(R.string.jonnysemon_summary),
                 R.drawable.ic_person, false));
 
+        translators.add(new TranslatorModel(getContext().getString(R.string.flix),
+                getContext().getString(R.string.flix_summary),
+                R.drawable.ic_person, false));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.xxx),
+                getContext().getString(R.string.xxx_summary),
+                R.drawable.ic_person, false));
+
+        translators.add(new TranslatorModel(getContext().getString(R.string.ofermar),
+                getContext().getString(R.string.ofermar_summary),
+                R.drawable.ersen0, true,
+                getContext().getString(R.string.github_ofermar)));
+
         return translators;
     }
 
