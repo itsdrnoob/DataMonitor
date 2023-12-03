@@ -465,4 +465,10 @@
     <string name="chin_housin">chin housin</string>
     <string name="jonnysemon">jonnysemon</string>
     <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="ofermar">ofermar</string>
+    <string name="flix">Flix</string>
+    <string name="flix_summary">Tiếng Đức</string>
+    <string name="ofermar_summary">Tiếng Hebrew</string>
+    <string name="xxx">xXx</string>
+    <string name="xxx_summary">Tiếng Nga</string>
 </resources>
