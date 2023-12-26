@@ -769,7 +769,9 @@ public class NetworkStatsHelper {
                     startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                     resetDate = dateFormat.parse(startTime);
                     resetTimeMillis = resetDate.getTime();
-                    day = monthlyResetDate;
+
+//                    day = monthlyResetDate;
+                    month += 1; // To restore back the current month.
                     endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                     endDate = dateFormat.parse(endTime);
                     endTimeMillis = endDate.getTime();
