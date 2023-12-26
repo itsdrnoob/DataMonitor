@@ -455,4 +455,15 @@
     <string name="get_started">Loslegen</string>
     <string name="date">Datum</string>
     <string name="time">Uhrzeit</string>
+    <string name="flix_summary">Deutsch</string>
+    <string name="label_select_date">Datum auswählen</string>
+    <string name="ofermar_summary">Hebräisch</string>
+    <string name="label_welcome_header">Willkommen bei Data Monitor</string>
+    <string name="add_time">Zeit hinzufügen</string>
+    <string name="label_select_end_time">Endzeit auswählen</string>
+    <string name="skip_setup">Einrichtung überspringen</string>
+    <string name="label_select_start_time">Startzeit auswählen</string>
+    <string name="action_apply_filter">Filter anwenden</string>
+    <string name="error_invalid_session">Ungültige Sitzungsdauer.</string>
+    <string name="xxx_summary">Russisch</string>
 </resources>

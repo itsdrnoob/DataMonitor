@@ -476,4 +476,10 @@
     <string name="get_started">Empezar</string>
     <string name="label_welcome_header">Bienvenido a Data Monitor</string>
     <string name="skip_setup">Omitir la configuración</string>
+    <string name="flix_summary">Alemán</string>
+    <string name="ofermar_summary">Hebreo</string>
+    <string name="xxx">xXx</string>
+    <string name="xxx_summary">Ruso</string>
+    <string name="ofermar">ofermar</string>
+    <string name="flix">Flix</string>
 </resources>
