@@ -20,6 +20,7 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.getDateSuffix;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
@@ -600,20 +601,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         String remaining = requireContext().getString(R.string.label_days_remaining, Integer.toString(daysRemaining));
         validity = requireContext().getString(R.string.label_plan_validity, end, remaining);
         return validity;
-    }
-
-    private String getDateSuffix(String date) {
-        String suffix;
-        if (date.endsWith("1")) {
-            suffix = "st";
-        } else if (date.endsWith("2")) {
-            suffix = "nd";
-        } else if (date.endsWith("3")) {
-            suffix = "rd";
-        } else {
-            suffix = "th";
-        }
-        return suffix;
     }
 
     @Override

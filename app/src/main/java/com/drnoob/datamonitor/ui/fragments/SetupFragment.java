@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.cancelDataPlanNotification;
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.getDateSuffix;
 import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
@@ -1164,20 +1165,7 @@ public class SetupFragment extends Fragment {
                                 getContext().sendBroadcast(intent);
 
                                 String date = String.valueOf(datePicker.getDayOfMonth());
-                                String suffix;
-
-                                if (date.endsWith("1")) {
-                                    suffix = "st";
-                                }
-                                else if (date.endsWith("2")) {
-                                    suffix = "nd";
-                                }
-                                else if (date.endsWith("3")) {
-                                    suffix = "rd";
-                                }
-                                else {
-                                    suffix = "th";
-                                }
+                                String suffix = getDateSuffix(date);
 
                                 mUsageResetTime.setSummary(getContext().getString(R.string.label_reset_every_month,
                                         date, suffix));
@@ -1714,20 +1702,7 @@ public class SetupFragment extends Fragment {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_date);
                 String date = String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getInt(DATA_RESET_DATE, 1));
-                String suffix;
-
-                if (date.endsWith("1")) {
-                    suffix = "st";
-                }
-                else if (date.endsWith("2")) {
-                    suffix = "nd";
-                }
-                else if (date.endsWith("3")) {
-                    suffix = "rd";
-                }
-                else {
-                    suffix = "th";
-                }
+                String suffix = getDateSuffix(date);
 
                 resetSummary = (getContext().getString(R.string.label_reset_every_month,
                         date, suffix));
