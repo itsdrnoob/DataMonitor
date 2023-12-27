@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
 import static com.drnoob.datamonitor.Common.formatOrdinalNumber;
+import static com.drnoob.datamonitor.Common.getCurrentLocale;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
@@ -542,7 +543,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
      *
      * @return Plan reset date and the number of days remaining as a formatted string.
      */
-    @SuppressLint({"StringFormatMatches", "SimpleDateFormat"})
+    @SuppressLint("StringFormatMatches")
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
@@ -561,7 +562,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             else {
                 daysRemaining = planReset - today;
             }
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(requireContext())).format(calendar.getTime());
             endDate = planReset;
         }
         else {
@@ -585,7 +586,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             calendar.set(Calendar.HOUR, planEndHour);
             calendar.set(Calendar.MINUTE, planEndMin);
 
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(requireContext())).format(calendar.getTime());
             endDate = calendar.get(Calendar.DAY_OF_MONTH);
 
             long currentTimeMillis = System.currentTimeMillis();

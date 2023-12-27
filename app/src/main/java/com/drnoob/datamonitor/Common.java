@@ -396,7 +396,6 @@ public class Common {
         postNotification(context, managerCompat, builder, OTHER_NOTIFICATION_ID);
     }
 
-    @SuppressLint("SimpleDateFormat")
     public static String getPlanValidity(int session, Context context) {
         String validity;
         Calendar calendar = Calendar.getInstance();
@@ -413,7 +412,7 @@ public class Common {
             if (today >= planEnd) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
             }
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(context)).format(calendar.getTime());
             endDate = planEnd;
         }
         else {
@@ -428,7 +427,7 @@ public class Common {
                 planEndDateMillis = ((Number) planEndIntValue).longValue();
             }
             calendar.setTimeInMillis(planEndDateMillis);
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(context)).format(calendar.getTime());
             endDate = calendar.get(Calendar.DAY_OF_MONTH);
         }
         ordinal = formatOrdinalNumber(endDate, context);
