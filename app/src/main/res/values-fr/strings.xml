@@ -45,7 +45,7 @@
     <string name="setup_image_footer">"Les widgets et/ou les notifications peuvent fournir un accès facile à la quantité de données que vous utilisez"</string>
     <string name="heading_data_reset">"Remise à zéro des données"</string>
     <string name="daily">"Quotidiennement"</string>
-    <string name="monthly">"Hebdomadairement"</string>
+    <string name="monthly">Mensuel</string>
     <string name="heading_data_limit">"Limite de données"</string>
     <string name="data_type_mb">"Mo"</string>
     <string name="data_type_gb">"Go"</string>
