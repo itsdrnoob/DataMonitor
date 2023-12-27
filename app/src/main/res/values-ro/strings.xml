@@ -356,4 +356,8 @@
     <string name="MarongHappy">JungHee Lee</string>
     <string name="action_delete">Șterge</string>
     <string name="save_results_summary">Salvează rezultatele diagnosticării rețelei</string>
+    <string name="label_plan_details_title_unknown">Plan necunoscut activ</string>
+    <string name="label_plan_details_title_monthly">Plan lunar activ</string>
+    <string name="label_plan_details_title_daily">Plan zilnic activ</string>
+    <string name="label_plan_details_title_custom">Plan personalizat activ</string>
 </resources>

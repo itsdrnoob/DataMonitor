@@ -330,7 +330,6 @@
     <string name="error_network_monitor_start">Nie udało się uruchomić monitor sieci. Otwórz aplikację, aby go odświeżyć.</string>
     <string name="label_filter_app_usage">Filtruj użycie aplikacji</string>
     <string name="always_show_total">Zawsze pokazuj całość</string>
-    <string name="label_plan_details_title">Plan %1$s jest aktywny</string>
     <string name="home_plan_usage_details">Użyto %1$s | %2$s</string>
     <string name="setup_app_data_usage_alert">Ostrzeżenie o użyciu aplikacji</string>
     <string name="testing_download">Testowanie prędkości pobierania</string>

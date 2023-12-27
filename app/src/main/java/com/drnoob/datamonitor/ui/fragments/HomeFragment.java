@@ -395,22 +395,21 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private void updateDataBalance() {
         Long[] mobileData = null;
         int date = preferences.getInt(DATA_RESET_DATE, 1);
-        String planType = requireContext().getString(R.string.label_unknown),
-                planDetailsTitle;
+        String planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_unknown);
         boolean isSmartAllocationEnabled = preferences.getBoolean("smart_data_allocation", false);
 
         try {
             if (preferences.getString(DATA_RESET, "null")
                     .equals(DATA_RESET_MONTHLY)) {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date);
-                planType = requireContext().getString(R.string.monthly);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_monthly);
             } else if (preferences.getString(DATA_RESET, "null")
                     .equals(DATA_RESET_DAILY)) {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1);
-                planType = requireContext().getString(R.string.daily);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_daily);
             } else {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_CUSTOM, -1);
-                planType = requireContext().getString(R.string.custom);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_custom);
             }
 
         } catch (ParseException | RemoteException e) {
@@ -527,7 +526,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
             mDataRemaining.setVisibility(View.GONE);
             mPlanDetailsView.setVisibility(View.VISIBLE);
-            planDetailsTitle = requireContext().getString(R.string.label_plan_details_title, planType);
             mPlanDetailsTitle.setText(planDetailsTitle);
         } else {
             // No data plan is set. Hide mDataRemaining view.

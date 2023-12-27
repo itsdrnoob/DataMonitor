@@ -156,7 +156,6 @@
     <string name="overview_friday">שישי</string>
     <string name="error_alarm_permission_denied_feature_summary">לא ניתן להשתמש בתכולה זו מבלי להתיר הרשאת SCHEDULE_EXACT_ALARM.</string>
     <string name="rate_app">דרגו את היישום ב-Google Play</string>
-    <string name="label_plan_details_title">%1$s חבילה פעילה</string>
     <string name="holydemon_summary">מלאיאלאם</string>
     <string name="gallegonovato_summary">ספרדית</string>
     <string name="Kefir2105_summary">אוקראינית</string>

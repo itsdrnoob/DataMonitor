@@ -355,7 +355,6 @@
     <string name="error_network_monitor_start">Veri İzleyici başlatılamadı. Yenilemek için uygulamayı açın.</string>
     <string name="label_filter">Filtrele</string>
     <string name="label_current_plan">Mevcut Plan</string>
-    <string name="label_plan_details_title">%1$s planı etkin</string>
     <string name="home_plan_usage_details">%1$s kullanıldı | %2$s</string>
     <string name="label_plan_validity">%1$s tarihine kadar geçerli | %2$s</string>
     <string name="always_show_total">Her zaman toplamı göster</string>

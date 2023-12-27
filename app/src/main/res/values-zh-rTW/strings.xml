@@ -387,7 +387,6 @@
     <string name="label_filter_app_usage">過濾應用程式使用情況</string>
     <string name="label_filter">過濾</string>
     <string name="label_current_plan">目前方案</string>
-    <string name="label_plan_details_title">%1$s 活躍方案</string>
     <string name="home_plan_usage_details">%1$s 已用 | %2$s</string>
     <string name="label_plan_validity">有效期至 %1$s | %2$s</string>
     <string name="always_show_total">總是顯示總額</string>

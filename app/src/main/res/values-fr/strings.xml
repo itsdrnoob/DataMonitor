@@ -345,7 +345,6 @@
     <string name="error_network_monitor_start">Échec du démarrage de Network Monitor. Ouvrez l\'application pour actualiser.</string>
     <string name="label_filter_app_usage">Flitrer l\'Utilisation des Applications</string>
     <string name="label_current_plan">Forfait Actuel</string>
-    <string name="label_plan_details_title">%1$s forfait actif</string>
     <string name="home_plan_usage_details">%1$s consommés |%2$s</string>
     <string name="label_plan_validity">Valable jusqu\'au %1$s | %2$s</string>
     <string name="always_show_total_summary">Toujours afficher le total des données consommées, quelles que soient les options sélectionnées.</string>
@@ -467,4 +466,8 @@
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="time">Horaires</string>
     <string name="dan">Dan</string>
+    <string name="label_plan_details_title_unknown">Forfait inconnu actif</string>
+    <string name="label_plan_details_title_monthly">Forfait mensuel actif</string>
+    <string name="label_plan_details_title_daily">Forfait quotidien actif</string>
+    <string name="label_plan_details_title_custom">Forfait personnalisé actif</string>
 </resources>

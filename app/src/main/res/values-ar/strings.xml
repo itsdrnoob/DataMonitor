@@ -392,7 +392,6 @@
     <string name="error_network_monitor_start">فشل بدء تشغيل \"مراقبة الشبكة\". افتح التطبيق للتحديث.</string>
     <string name="label_filter_app_usage">تصفية استخدام التطبيق</string>
     <string name="label_current_plan">الخطة الحالية</string>
-    <string name="label_plan_details_title">خطة %1$s نشطة</string>
     <string name="label_filter">المرشحات</string>
     <string name="home_plan_usage_details">%1$s مستخدمة | %2$s</string>
     <string name="label_plan_validity">صالح حتى %1$s|%2$s</string>

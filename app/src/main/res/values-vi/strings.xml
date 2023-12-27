@@ -59,7 +59,6 @@
     <string name="MarongHappy_summary">Hàn</string>
     <string name="label_crash_logs_copied">Đã sao chép nhật ký sự cố vào khay nhớ tạm</string>
     <string name="app_contributors">Người đóng góp ứng dụng</string>
-    <string name="label_plan_details_title">gói %1$s đã kích hoạt</string>
     <string name="tadekdudek">tadekdudek</string>
     <string name="home_plan_usage_details">%1$s đã dùng | %2$s</string>
     <string name="label_current_plan">Gói hiện tại</string>

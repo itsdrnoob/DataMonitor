@@ -363,7 +363,6 @@
     <string name="label_filter_app_usage">Фільтрувати використання застосунків</string>
     <string name="label_filter">Фільтр</string>
     <string name="label_current_plan">Поточний план</string>
-    <string name="label_plan_details_title">План %1$s активний</string>
     <string name="app_label_combined_total">Загальне використання даних: %1$s</string>
     <string name="error_alarm_permission_denied_summary">Ви спробували виконати дію, яка вимагає дозволу SCHEDULE_EXACT_ALARM, який не надано застосунку. Натисніть тут, щоб надати дозвіл.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Для належної роботи Data Monitor потрібен дозвіл SCHEDULE_EXACT_ALARM. Ви все ще можете використовувати застосунок, але деякі функції можуть не працювати належним чином.</string>

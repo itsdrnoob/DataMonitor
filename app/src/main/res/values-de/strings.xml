@@ -408,7 +408,6 @@
     <string name="label_upi">BHIM-UPI</string>
     <string name="home_plan_usage_details">%1$s verwendet | %2$s</string>
     <string name="error_alarm_permission_denied_feature_summary">Sie können diese Funktion nur nutzen, wenn Sie das Recht SCHEDULE_EXACT_ALARM haben.</string>
-    <string name="label_plan_details_title">%1$s Plan aktiv</string>
     <string name="error_alarm_permission_denied">Alarmerlaubnis verweigert!</string>
     <string name="error_alarm_permission_denied_summary">Sie haben versucht, eine Aktion auszuführen, für die die Berechtigung SCHEDULE_EXACT_ALARM erforderlich ist, die der App nicht erteilt wurde. Klicken Sie hier, um die Berechtigung zu erteilen.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor benötigt die Berechtigung SCHEDULE_EXACT_ALARM, um richtig zu funktionieren. Sie können die App trotzdem verwenden, aber einige Funktionen funktionieren möglicherweise nicht richtig.</string>
@@ -466,4 +465,8 @@
     <string name="action_apply_filter">Filter anwenden</string>
     <string name="error_invalid_session">Ungültige Sitzungsdauer.</string>
     <string name="xxx_summary">Russisch</string>
+    <string name="label_plan_details_title_unknown">Unbekannter Plan aktiv</string>
+    <string name="label_plan_details_title_monthly">Monatlicher Plan aktiv</string>
+    <string name="label_plan_details_title_daily">Täglicher Plan aktiv</string>
+    <string name="label_plan_details_title_custom">Benutzerdefinierter Plan aktiv</string>
 </resources>

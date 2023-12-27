@@ -434,7 +434,6 @@
     <string name="label_filter_app_usage">Filter App Usage</string>
     <string name="label_filter">Filter</string>
     <string name="label_current_plan">Current Plan</string>
-    <string name="label_plan_details_title">%1$s plan active</string>
     <string name="home_plan_usage_details">%1$s used | %2$s</string>
     <string name="label_plan_validity">Valid till %1$s | %2$s</string>
     <string name="always_show_total">Always show total</string>
@@ -516,4 +515,8 @@
     <string name="xxx_summary">Russian</string>
     <string name="ofermar">ofermar</string>
     <string name="ofermar_summary">Hebrew</string>
+    <string name="label_plan_details_title_unknown">Unknown plan active</string>
+    <string name="label_plan_details_title_monthly">Monthly plan active</string>
+    <string name="label_plan_details_title_daily">Daily plan active</string>
+    <string name="label_plan_details_title_custom">Custom plan active</string>
 </resources>
