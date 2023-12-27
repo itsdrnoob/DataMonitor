@@ -1165,7 +1165,7 @@ public class SetupFragment extends Fragment {
                                 getContext().sendBroadcast(intent);
 
                                 int date = datePicker.getDayOfMonth();
-                                String ordinal = formatOrdinalNumber(date);
+                                String ordinal = formatOrdinalNumber(date, requireContext());
 
                                 mUsageResetTime.setSummary(getContext().getString(R.string.label_reset_every_month,
                                         ordinal));
@@ -1702,7 +1702,7 @@ public class SetupFragment extends Fragment {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_date);
                 int date = PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getInt(DATA_RESET_DATE, 1);
-                String ordinal = formatOrdinalNumber(date);
+                String ordinal = formatOrdinalNumber(date, requireContext());
 
                 resetSummary = (getContext().getString(R.string.label_reset_every_month, ordinal));
             }

@@ -594,7 +594,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             long remainingMillis = endTimeMillis - currentTimeMillis;
             daysRemaining = (int) Math.round((remainingMillis / (24 * 60 * 60 * 1000.0)));
         }
-        ordinal = formatOrdinalNumber(endDate);
+        ordinal = formatOrdinalNumber(endDate, requireContext());
         end = ordinal + " " + month;
         if (daysRemaining < 0) {
             daysRemaining = 0;

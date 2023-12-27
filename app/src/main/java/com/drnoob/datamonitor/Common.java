@@ -47,6 +47,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.icu.text.MessageFormat;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.Spannable;
@@ -430,28 +431,42 @@ public class Common {
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
             endDate = calendar.get(Calendar.DAY_OF_MONTH);
         }
-        ordinal = formatOrdinalNumber(endDate);
+        ordinal = formatOrdinalNumber(endDate, context);
         end = ordinal + " " + month;
         validity = end;
         return validity;
     }
 
-    public static String formatOrdinalNumber(int number) {
-        String numberString = String.valueOf(number);
-        String suffix;
-        if (numberString.endsWith("1")) {
-            suffix = "st";
+    public static String formatOrdinalNumber(int number, Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            final String format = "{0,ordinal}";
+            final Locale locale = getCurrentLocale(context);
+            final MessageFormat formatter = new MessageFormat(format, locale);
+
+            return formatter.format(new Object[] {number});
+        } else {
+            String numberString = String.valueOf(number);
+            String suffix;
+            if (numberString.endsWith("1")) {
+                suffix = "st";
+            } else if (numberString.endsWith("2")) {
+                suffix = "nd";
+            } else if (numberString.endsWith("3")) {
+                suffix = "rd";
+            } else {
+                suffix = "th";
+            }
+            return numberString + suffix;
         }
-        else if (numberString.endsWith("2")) {
-            suffix = "nd";
+    }
+
+    public static Locale getCurrentLocale(Context context) {
+        final Configuration config = context.getResources().getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return config.getLocales().get(0);
+        } else {
+            return config.locale;
         }
-        else if (numberString.endsWith("3")) {
-            suffix = "rd";
-        }
-        else {
-            suffix = "th";
-        }
-        return numberString + suffix;
     }
 
     private static boolean isLiveNetworkServiceRunning(Context context) {
