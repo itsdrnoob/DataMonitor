@@ -20,7 +20,7 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
-import static com.drnoob.datamonitor.Common.getDateSuffix;
+import static com.drnoob.datamonitor.Common.formatOrdinalNumber;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
@@ -546,7 +546,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
-        String month, endDate, suffix, end;
+        String month, ordinal, end;
+        int endDate;
         int daysRemaining;
         if (session == SESSION_MONTHLY) {
             int planReset = preferences.getInt(DATA_RESET_DATE, 1);
@@ -561,7 +562,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 daysRemaining = planReset - today;
             }
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = String.valueOf(planReset);
+            endDate = planReset;
         }
         else {
             calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -585,7 +586,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             calendar.set(Calendar.MINUTE, planEndMin);
 
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = new SimpleDateFormat("d").format(calendar.getTime());
+            endDate = calendar.get(Calendar.DAY_OF_MONTH);
 
             long currentTimeMillis = System.currentTimeMillis();
             long endTimeMillis = calendar.getTimeInMillis();
@@ -593,8 +594,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             long remainingMillis = endTimeMillis - currentTimeMillis;
             daysRemaining = (int) Math.round((remainingMillis / (24 * 60 * 60 * 1000.0)));
         }
-        suffix = getDateSuffix(endDate);
-        end = endDate + suffix + " " + month;
+        ordinal = formatOrdinalNumber(endDate);
+        end = ordinal + " " + month;
         if (daysRemaining < 0) {
             daysRemaining = 0;
         }

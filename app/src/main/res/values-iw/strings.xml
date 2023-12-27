@@ -130,7 +130,7 @@
     <string name="report_summary">שליחת דיווח על באגים או בקשה לתכולות</string>
     <string name="home_wifi_data_received">%1$s
 \nהתקבלו</string>
-    <string name="label_data_usage_reset_date_change">השימוש בנתונים יאופס ב-%1$d%2$s בכל חודש</string>
+    <string name="label_data_usage_reset_date_change">השימוש בנתונים יאופס ב-%1$s בכל חודש</string>
     <string name="action_update">עדכון</string>
     <string name="app_data_usage">השימוש ביישום</string>
     <string name="data_alert_summary">הצגת התראה כאשר מיכסת הנתונים הסתיימה</string>
@@ -304,7 +304,7 @@
     <string name="title_data_warning_notification">אזהרת שימוש בנתונים</string>
     <string name="label_data_remaining">%1$s נותרו</string>
     <string name="always_show_total_summary">הצגת סך הנתונים שנוצלו בהתראה תמיד ללא תלות באפשרויות שנבחרו.</string>
-    <string name="label_reset_every_month">%1$s%2$s בכל חודש</string>
+    <string name="label_reset_every_month">%1$s בכל חודש</string>
     <string name="network_signal_summary">תכולה נסיונית</string>
     <string name="heading_data_reset_custom_counter">תוקף החבילה</string>
     <string name="report_mail_summary">שליחת דו\"ח הקריסה בדוא\"ל</string>

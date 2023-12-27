@@ -159,7 +159,7 @@
     <string name="label_want_to_contribute_language">अपनी भाषा में एप्लिकेशन को अनुवाद करने में मदद करने के लिए यहां क्लिक करें।</string>
     <string name="current_language">वर्तमान</string>
     <string name="available_languages">उपलब्ध</string>
-    <string name="label_reset_every_month">हर महीने का %1$s%2$s</string>
+    <string name="label_reset_every_month">हर महीने का %1$s</string>
     <string name="setup_usage_reset_date">डेटा उपयोग रीसेट दिनांक</string>
     <string name="system_data_usage">सिस्टम डेटा उपयोग</string>
     <string name="cracky5322_summary">पारंपरिक चीनी</string>
@@ -285,7 +285,7 @@
     <string name="upi_unknown_error">अज्ञात त्रुटि।
 \nकृपया पुन: प्रयास करें या कोई अन्य विधि।</string>
     <string name="label_no_additional_lang">एप्लिकेशन का अनुवाद करने में मदद करने के लिए यहां क्लिक करें।</string>
-    <string name="label_data_usage_reset_date_change">डेटा उपयोग हर महीने %1$d%2$s पर रीसेट किया जाएगा</string>
+    <string name="label_data_usage_reset_date_change">डेटा उपयोग हर महीने %1$s पर रीसेट किया जाएगा</string>
     <string name="remaining_data_info_enabled">शेष डेटा जानकारी सक्षम</string>
     <string name="testing_download">डाउनलोड गति का परीक्षण किया जा रहा है</string>
     <string name="overview_thursday">गुरु</string>

@@ -144,7 +144,7 @@
     <string name="label_widget_refresh_interval_change">Widget will be updated every %1$s</string>
     <string name="label_notification_refresh_interval_change">Notification will be updated every %1$s</string>
     <string name="label_data_usage_reset_time_change">Reset data usage every %1$s at %2$s</string>
-    <string name="label_data_usage_reset_date_change">Data usage will be reset on %1$d%2$s of every month</string>
+    <string name="label_data_usage_reset_date_change">Data usage will be reset on %1$s of every month</string>
     <string name="remaining_data_info_enabled">Remaining data info enabled</string>
     <string name="remaining_data_info_disabled">Remaining data info disabled</string>
     <string name="label_monitoring_no_plan">Add a data plan to start monitoring</string>
@@ -222,7 +222,7 @@
     <string name="label_want_to_contribute_language">Click here to help translate the app into your language.</string>
     <string name="current_language">Current</string>
     <string name="available_languages">Available</string>
-    <string name="label_reset_every_month">%1$s%2$s of every month</string>
+    <string name="label_reset_every_month">%1$s of every month</string>
     <string name="setup_usage_reset_date">Data usage reset date</string>
     <string name="system_data_usage">System data usage</string>
     <string name="cracky5322_summary">Traditional Chinese</string>

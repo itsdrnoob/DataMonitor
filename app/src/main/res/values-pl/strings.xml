@@ -97,7 +97,7 @@
     <string name="app_data_usage">Użycie aplikacji</string>
     <string name="settings">Opcje</string>
     <string name="label_system_apps">Aplikacje systemowe</string>
-    <string name="label_data_usage_reset_date_change">Użycie danych będzie resetowane w %1$d%2$s każdego miesiąca</string>
+    <string name="label_data_usage_reset_date_change">Użycie danych będzie resetowane w %1$s każdego miesiąca</string>
     <string name="label_setup_notification_first">Najpierw włącz powiadomienie</string>
     <string name="label_data_plan_saved">Plan danych zapisany</string>
     <string name="month">miesiąc</string>
@@ -216,7 +216,7 @@
     <string name="johnsonran_summary">Chiński uproszczony</string>
     <string name="ygorigor_summary">Rumuński</string>
     <string name="label_want_to_contribute_language">Kliknij, aby pomóc w tłumaczeniu tej aplikacji na twój język.</string>
-    <string name="label_reset_every_month">%1$s%2$s każdego miesiąca</string>
+    <string name="label_reset_every_month">%1$s każdego miesiąca</string>
     <string name="network_speed_download">Pobieranie: %1$s</string>
     <string name="network_signal_summary">Funkcja beta</string>
     <string name="network_speed_title">Prędkość sieci: %1$s</string>

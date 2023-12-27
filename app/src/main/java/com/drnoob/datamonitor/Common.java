@@ -399,7 +399,8 @@ public class Common {
     public static String getPlanValidity(int session, Context context) {
         String validity;
         Calendar calendar = Calendar.getInstance();
-        String month, endDate, suffix, end;
+        String month, ordinal, end;
+        int endDate;
         if (session == SESSION_MONTHLY) {
             int planEnd = PreferenceManager.getDefaultSharedPreferences(context)
                     .getInt(DATA_RESET_DATE, 1);
@@ -412,7 +413,7 @@ public class Common {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
             }
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = String.valueOf(planEnd);
+            endDate = planEnd;
         }
         else {
             long planEndDateMillis;
@@ -427,29 +428,30 @@ public class Common {
             }
             calendar.setTimeInMillis(planEndDateMillis);
             month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = new SimpleDateFormat("d").format(calendar.getTime());
+            endDate = calendar.get(Calendar.DAY_OF_MONTH);
         }
-        suffix = getDateSuffix(endDate);
-        end = endDate + suffix + " " + month;
+        ordinal = formatOrdinalNumber(endDate);
+        end = ordinal + " " + month;
         validity = end;
         return validity;
     }
 
-    public static String getDateSuffix(String date) {
+    public static String formatOrdinalNumber(int number) {
+        String numberString = String.valueOf(number);
         String suffix;
-        if (date.endsWith("1")) {
+        if (numberString.endsWith("1")) {
             suffix = "st";
         }
-        else if (date.endsWith("2")) {
+        else if (numberString.endsWith("2")) {
             suffix = "nd";
         }
-        else if (date.endsWith("3")) {
+        else if (numberString.endsWith("3")) {
             suffix = "rd";
         }
         else {
             suffix = "th";
         }
-        return suffix;
+        return numberString + suffix;
     }
 
     private static boolean isLiveNetworkServiceRunning(Context context) {

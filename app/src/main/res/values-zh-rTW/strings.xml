@@ -140,7 +140,7 @@
     <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新</string>
     <string name="label_notification_refresh_interval_change">通知將每 %1$s 更新</string>
     <string name="label_data_usage_reset_time_change">在每 %1$s %2$s 將會重設數據使用量</string>
-    <string name="label_data_usage_reset_date_change">數據使用量會在每個月 %1$d%2$s 被重設</string>
+    <string name="label_data_usage_reset_date_change">數據使用量會在每個月 %1s 被重設</string>
     <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
     <string name="remaining_data_info_disabled">剩餘流量資訊已停用</string>
     <string name="label_monitoring_no_plan">新增一個流量使用計劃以繼續</string>
@@ -216,7 +216,7 @@
     <string name="label_want_to_contribute_language">未找到您的語言？點此瞭解如何幫助我們！</string>
     <string name="current_language">當前語言</string>
     <string name="available_languages">可用語言</string>
-    <string name="label_reset_every_month">每個月 %1$s%2$s</string>
+    <string name="label_reset_every_month">每個月 %1$s</string>
     <string name="setup_usage_reset_date">數據流量重設日期</string>
     <string name="system_data_usage">系統數據使用</string>
     <string name="cracky5322_summary">繁體中文</string>

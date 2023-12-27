@@ -190,7 +190,7 @@
     <string name="eth_address_copied">Адрес кошелька Ethereum скопирован в буфер обмена</string>
     <string name="app_data_usage">Использование данных приложениями</string>
     <string name="label_notification_refresh_interval_change">Уведомление будет обновляться каждые %1$s</string>
-    <string name="label_data_usage_reset_date_change">Использование данных будет обнуляться %1$d%2$s числа каждого месяца</string>
+    <string name="label_data_usage_reset_date_change">Использование данных будет обнуляться %1$s числа каждого месяца</string>
     <string name="remaining_data_info_enabled">Информация об остатке данных включена</string>
     <string name="label_data_plan_saved">Тарифный план сохранён</string>
     <string name="title_data_usage_notification">Использовано данных за сегодня: %1$s</string>
@@ -214,7 +214,7 @@
     <string name="connection_error">Не удалось подключиться.
 \nПожалуйста, убедитесь, что вы подключены к Интернету.</string>
     <string name="no_network_connection">Не обнаружено сетевое подключение!</string>
-    <string name="label_reset_every_month">%1$s%2$s каждого месяца</string>
+    <string name="label_reset_every_month">%1$s каждого месяца</string>
     <string name="app_label_background_time">Фоновое использование: %1$s</string>
     <string name="ygorigor_summary">Румынский</string>
     <string name="system_data_usage">Использование системных данных</string>

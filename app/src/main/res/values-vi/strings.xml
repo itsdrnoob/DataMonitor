@@ -103,7 +103,7 @@
     <string name="remaining_data_info_enabled">Đã bật thông tin dữ liệu còn lại</string>
     <string name="label_add_data_plan_first">Hãy thiết lập gói dữ liệu trước</string>
     <string name="notification_disabled">Thông báo giám sát dữ liệu đã tắt</string>
-    <string name="label_data_usage_reset_date_change">Dữ liệu sử dụng sẽ được đặt lại vào %1$d%2$s của mỗi tháng</string>
+    <string name="label_data_usage_reset_date_change">Dữ liệu sử dụng sẽ được đặt lại vào %1$s của mỗi tháng</string>
     <string name="day">ngày</string>
     <string name="disable_battery_optimisation">Tắt tối ưu hóa pin</string>
     <string name="title_data_warning_notification">Cảnh báo dữ liệu sử dụng</string>
@@ -123,7 +123,7 @@
     <string name="avg_latency">Độ trễ trung bình</string>
     <string name="louis_leblanc_summary">Pháp</string>
     <string name="network_speed_title">Tốc độ mạng: %1$s</string>
-    <string name="label_reset_every_month">%1$s%2$s mỗi tháng</string>
+    <string name="label_reset_every_month">%1$s mỗi tháng</string>
     <string name="system_data_usage">Dữ liệu sử dụng của hệ thông</string>
     <string name="network_speed_upload">Tải lên: %1$s</string>
     <string name="network_speed_download">Tải xuống: %1$s</string>

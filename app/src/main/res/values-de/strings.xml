@@ -172,7 +172,7 @@
     <string name="remaining_data_info_enabled">Restliche Dateninfo aktiviert</string>
     <string name="body_data_warning_notification">Sie haben %1$d%% Ihres Datenlimits ausgeschöpft</string>
     <string name="extra_optimisation_tips">Zusätzliche Optimierungstipps</string>
-    <string name="label_data_usage_reset_date_change">Die Datennutzung wird am %1$d%2$s eines jeden Monats zurückgesetzt</string>
+    <string name="label_data_usage_reset_date_change">Die Datennutzung wird am %1$s eines jeden Monats zurückgesetzt</string>
     <string name="day">Tag</string>
     <string name="label_translators">Übersetzer</string>
     <string name="label_network_signal_notification_enabled">Live-Netzwerkgeschwindigkeit aktiviert</string>
@@ -225,7 +225,7 @@
     <string name="isp_region">Region</string>
     <string name="app_label_screen_time">Bildschirmzeit: %1$s</string>
     <string name="ygorigor_summary">Rumänisch</string>
-    <string name="label_reset_every_month">%1$s%2$s eines jeden Monats</string>
+    <string name="label_reset_every_month">%1$s eines jeden Monats</string>
     <string name="system_data_usage">Daten-Nutzung von System</string>
     <string name="louis_leblanc_summary">Französisch</string>
     <string name="network_speed_title">Netzwerkgeschwindigkeit: %1$s</string>

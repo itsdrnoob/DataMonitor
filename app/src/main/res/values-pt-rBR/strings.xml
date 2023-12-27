@@ -239,7 +239,7 @@ Perguntas e respostas, ajuda e solução de problemas
 "O uso de dados será redefinido a cada %1$s em %2$s"
 </string>
     <string name="label_data_usage_reset_date_change">
-"O uso de dados será redefinido em %1$d%2$s de cada mês"
+"O uso de dados será redefinido em %1$s de cada mês"
 </string>
     <string name="ygorigor_summary">"Tradutor romeno"</string>
     <string name="johnsonran_summary">"Tradutor chinês simplificado"</string>
@@ -248,7 +248,7 @@ Perguntas e respostas, ajuda e solução de problemas
 </string>
     <string name="current_language">"Idioma atual"</string>
     <string name="available_languages">"Idiomas disponíveis"</string>
-    <string name="label_reset_every_month">"%1$s%2$s de cada mês"</string>
+    <string name="label_reset_every_month">"%1$s de cada mês"</string>
     <string name="setup_usage_reset_date">"Data de redefinição do uso de dados"</string>
     <string name="system_data_usage">"Uso de dados do sistema"</string>
     <string name="cracky5322_summary">"Tradutor de chinês tradicional"</string>

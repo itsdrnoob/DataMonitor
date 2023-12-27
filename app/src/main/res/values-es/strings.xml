@@ -121,7 +121,7 @@
 \nNo se recogen datos personales.</string>
     <string name="upi_unknown_error">Error desconocido.
 \nInténtalo de nuevo o de otro método.</string>
-    <string name="label_data_usage_reset_date_change">El uso de datos se restablecerá el %1$d%2$s de cada mes</string>
+    <string name="label_data_usage_reset_date_change">El uso de datos se restablecerá el %1$s de cada mes</string>
     <string name="remaining_data_info_enabled">Información de datos restantes habilitada</string>
     <string name="title_data_usage_notification">Uso de datos hoy: %1$s</string>
     <string name="label_data_remaining">%1$s restante</string>
@@ -244,7 +244,7 @@
     <string name="swipe_right_to_delete">Desliza el dedo hacia la derecha para eliminar un elemento</string>
     <string name="current_language">Actual</string>
     <string name="available_languages">Disponible</string>
-    <string name="label_reset_every_month">%1$s%2$s de cada mes</string>
+    <string name="label_reset_every_month">%1$s de cada mes</string>
     <string name="setup_usage_reset_date">Fecha de restablecimiento del uso de datos</string>
     <string name="system_data_usage">Uso de datos del sistema</string>
     <string name="cracky5322_summary">Chino tradicional</string>

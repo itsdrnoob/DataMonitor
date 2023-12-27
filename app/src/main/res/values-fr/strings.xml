@@ -204,13 +204,13 @@
     <string name="label_loading">Chargement…</string>
     <string name="donate_summary">"Payez nous un café, peut-être ?"</string>
     <string name="label_data_usage_reset_time_change">"L'utilisation des données sera remise à zéro chaque %1$s à %2$s"</string>
-    <string name="label_data_usage_reset_date_change">"L'utilisation des données sera remise à zéro le %1$d%2$s de chaque mois"</string>
+    <string name="label_data_usage_reset_date_change">L\'utilisation des données sera remise à zéro le %1$s de chaque mois</string>
     <string name="ygorigor_summary">"Traducteur roumain"</string>
     <string name="johnsonran_summary">"Traducteur de chinois simplifié"</string>
     <string name="label_want_to_contribute_language">"Vous ne trouvez pas votre langue ? Aidez-nous en traduisant les contenus vers votre langue. Cliquez pour savoir comment."</string>
     <string name="current_language">"Langue actuelle"</string>
     <string name="available_languages">"Langues disponibles"</string>
-    <string name="label_reset_every_month">"%1$s%2$s de chaque mois"</string>
+    <string name="label_reset_every_month">"%1$s de chaque mois"</string>
     <string name="setup_usage_reset_date">"Remise à zéro de l'utilisation des données"</string>
     <string name="system_data_usage">"Utilisation des données par le système"</string>
     <string name="cracky5322_summary">"Traducteur en chinois traditionnel"</string>
