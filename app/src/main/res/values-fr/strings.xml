@@ -345,7 +345,7 @@
     <string name="error_network_monitor_start">Échec du démarrage de Network Monitor. Ouvrez l\'application pour actualiser.</string>
     <string name="label_filter_app_usage">Flitrer l\'Utilisation des Applications</string>
     <string name="label_current_plan">Forfait Actuel</string>
-    <string name="home_plan_usage_details">%1$s consommés |%2$s</string>
+    <string name="home_plan_usage_details">%1$s consommés | %2$s</string>
     <string name="label_plan_validity">Valable jusqu\'au %1$s | %2$s</string>
     <string name="always_show_total_summary">Toujours afficher le total des données consommées, quelles que soient les options sélectionnées.</string>
     <string name="app_label_combined_total">Total de la consommation des données : %1$s</string>
