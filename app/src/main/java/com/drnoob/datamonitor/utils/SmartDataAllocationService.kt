@@ -35,6 +35,8 @@ import com.drnoob.datamonitor.core.Values.DATA_QUOTA_SCHEDULED_RESET
 import com.drnoob.datamonitor.core.Values.DATA_RESET
 import com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM
 import com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END
+import com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_HOUR
+import com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_MIN
 import com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY
 import com.drnoob.datamonitor.core.Values.DATA_RESET_DATE
 import com.drnoob.datamonitor.core.Values.DATA_RESET_HOUR
@@ -42,6 +44,7 @@ import com.drnoob.datamonitor.core.Values.DATA_RESET_MIN
 import com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY
 import com.drnoob.datamonitor.core.Values.SESSION_CUSTOM
 import com.drnoob.datamonitor.core.Values.SESSION_MONTHLY
+import com.drnoob.datamonitor.core.Values.SESSION_TODAY
 import com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -110,9 +113,17 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
                     dataUsage = round((getDeviceMobileDataUsage(applicationContext,
                         SESSION_MONTHLY, reset.get(Calendar.DAY_OF_MONTH))[2] / 1024f / 1024f) * 100) / 100
 
+                    val usedToday = round((getDeviceMobileDataUsage(applicationContext,
+                        SESSION_TODAY, -1)[2] / 1024f / 1024f) * 100) / 100
+
                     daysRemaining = max(((reset.timeInMillis - today.timeInMillis) / millisPerDay).roundToInt(), 1)
 
-                    dataRemaining = dataLimit - dataUsage
+                    /*
+                    Subtract the current day's usage from the total monthly usage
+                    then subtract it from the data limit. This way the data can be properly split into quotas.
+                    Then the current day's usage will count against that day's quota.
+                     */
+                    dataRemaining = dataLimit - (dataUsage - usedToday)
                     dailyQuota = dataRemaining / daysRemaining
                     dailyQuota = round(dailyQuota * 100) / 100
                     dailyQuota = max(dailyQuota, 0f)
@@ -128,6 +139,10 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
 
                     dataUsage = round((getDeviceMobileDataUsage(applicationContext,
                         SESSION_CUSTOM, -1)[2] / 1024f / 1024f) * 100) / 100
+
+                    val usedToday = round((getDeviceMobileDataUsage(applicationContext,
+                        SESSION_TODAY, -1)[2] / 1024f / 1024f) * 100) / 100
+
                     val planEndDateMillis: Long = try {
                         preferences.getLong(DATA_RESET_CUSTOM_DATE_END, -1)
                     }
@@ -135,11 +150,24 @@ class SmartDataAllocationService(context: Context, workerParams: WorkerParameter
                         val planEndIntValue = preferences.getInt(DATA_RESET_CUSTOM_DATE_END, -1)
                         (planEndIntValue as Number).toLong()
                     }
-//                    daysRemaining = TimeUnit.MILLISECONDS.toDays(planEndDateMillis - System.currentTimeMillis()).toInt()
 
-                    daysRemaining = max(((planEndDateMillis - today.timeInMillis) / millisPerDay).roundToInt(), 1)
+                    val planEndHour = preferences.getInt(DATA_RESET_CUSTOM_DATE_END_HOUR, 23)
+                    val planEndMin = preferences.getInt(DATA_RESET_CUSTOM_DATE_END_MIN, 59)
 
-                    dataRemaining = dataLimit - dataUsage
+                    val reset = Calendar.getInstance()
+                    reset.timeInMillis = planEndDateMillis
+                    reset.set(Calendar.HOUR_OF_DAY, planEndHour)
+                    reset.set(Calendar.MINUTE, planEndMin)
+                    reset.set(Calendar.SECOND, 59)
+
+                    daysRemaining = max(((reset.timeInMillis - today.timeInMillis) / millisPerDay).roundToInt(), 1)
+
+                    /*
+                    Subtract the current day's usage from the total usage for this session
+                    then subtract it from the data limit. This way the data can be properly split into quotas.
+                    Then the current day's usage will count against that day's quota.
+                     */
+                    dataRemaining = dataLimit - (dataUsage - usedToday)
                     dailyQuota = dataRemaining / daysRemaining.toFloat()
                     dailyQuota = round(dailyQuota * 100) / 100
                     dailyQuota = max(dailyQuota, 0f)

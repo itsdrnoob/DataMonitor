@@ -1195,7 +1195,7 @@ public class SetupFragment extends Fragment {
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 dismissOnClick(snackbar);
                                 snackbar.show();
-
+                                updateDailyQuota();
                             }
                         });
 
