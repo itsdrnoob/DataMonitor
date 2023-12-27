@@ -529,18 +529,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             mPlanDetailsView.setVisibility(View.VISIBLE);
             planDetailsTitle = requireContext().getString(R.string.label_plan_details_title, planType);
             mPlanDetailsTitle.setText(planDetailsTitle);
-
-
-//            if (shouldShowDetailsView) {
-//                mDataRemaining.setVisibility(View.GONE);
-//                mPlanDetailsView.setVisibility(View.VISIBLE);
-//                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title, planType);
-//                mPlanDetailsTitle.setText(planDetailsTitle);
-//            }
-//            else {
-//                mDataRemaining.setVisibility(View.VISIBLE);
-//                mPlanDetailsView.setVisibility(View.GONE);
-//            }
         } else {
             // No data plan is set. Hide mDataRemaining view.
             mDataRemaining.setVisibility(View.GONE);
