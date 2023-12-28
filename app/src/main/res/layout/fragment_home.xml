@@ -313,7 +313,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_large"
-                        android:text="@string/label_plan_details_title"
+                        android:text="@string/label_plan_details_title_unknown"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

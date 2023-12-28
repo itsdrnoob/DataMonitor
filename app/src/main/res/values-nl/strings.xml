@@ -162,7 +162,7 @@
     <string name="label_data_usage_reset_time_change">Reset het dataverbruik elke %1$s bij %2$s</string>
     <string name="usage_access_body">Vereist om de app uit te voeren, omdat deze app-gebruiksstatistieken verzamelt. 
 \nEr worden geen persoonsgegevens verzameld.</string>
-    <string name="label_data_usage_reset_date_change">Data gebruik wordt iedere maand op %1$d%2$s opnieuw ingesteld</string>
+    <string name="label_data_usage_reset_date_change">Data gebruik wordt iedere maand op %1$s opnieuw ingesteld</string>
     <string name="remaining_data_info_enabled">Resterende gegevensinformatie ingeschakeld</string>
     <string name="remaining_data_info_disabled">Resterende gegevensinformatie ingeschakeld</string>
     <string name="label_monitoring_no_plan">Data gegevens toevoegen om de monitoring te starten</string>
@@ -221,7 +221,7 @@
     <string name="ygorigor_summary">Romeens</string>
     <string name="current_language">Huidig</string>
     <string name="available_languages">Beschikbaar</string>
-    <string name="label_reset_every_month">%1$s%2$s van iedere maand</string>
+    <string name="label_reset_every_month">%1$s van iedere maand</string>
     <string name="setup_usage_reset_date">Resetdatum voor gegevensgebruik</string>
     <string name="system_data_usage">Gebruik van systeemgegevens</string>
     <string name="cracky5322_summary">Traditioneel Chinees</string>

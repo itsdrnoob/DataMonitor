@@ -204,13 +204,13 @@
     <string name="label_loading">Caricamento…</string>
     <string name="donate_summary">"Vorresti offrirci un caffè?"</string>
     <string name="label_data_usage_reset_time_change">"L'uso dei dati sarà resettato ogni %1$s alle %2$s"</string>
-    <string name="label_data_usage_reset_date_change">L\'uso dei dati sarà resettato il %1$d%2$s di ogni mese</string>
+    <string name="label_data_usage_reset_date_change">L\'uso dei dati sarà resettato il %1$s di ogni mese</string>
     <string name="ygorigor_summary">"Traduttore del romeno"</string>
     <string name="johnsonran_summary">"Traduttore del cinese semplificato"</string>
     <string name="label_want_to_contribute_language">"Non trovi la tua lingua? Aiutaci traducendo i contenuti nella tua lingua. Clicca qui per sapere come."</string>
     <string name="current_language">"Lingua scelta"</string>
     <string name="available_languages">"Lingue disponibili"</string>
-    <string name="label_reset_every_month">"%1$s%2$s di ogni mese"</string>
+    <string name="label_reset_every_month">"%1$s di ogni mese"</string>
     <string name="holydemon_summary">Malayalam</string>
     <string name="liviogasp_summary">Italiano</string>
     <string name="comradekingu_summary">Supporto alla traduzione</string>

@@ -172,7 +172,7 @@
     <string name="remaining_data_info_enabled">Restliche Dateninfo aktiviert</string>
     <string name="body_data_warning_notification">Sie haben %1$d%% Ihres Datenlimits ausgeschöpft</string>
     <string name="extra_optimisation_tips">Zusätzliche Optimierungstipps</string>
-    <string name="label_data_usage_reset_date_change">Die Datennutzung wird am %1$d%2$s eines jeden Monats zurückgesetzt</string>
+    <string name="label_data_usage_reset_date_change">Die Datennutzung wird am %1$s eines jeden Monats zurückgesetzt</string>
     <string name="day">Tag</string>
     <string name="label_translators">Übersetzer</string>
     <string name="label_network_signal_notification_enabled">Live-Netzwerkgeschwindigkeit aktiviert</string>
@@ -225,7 +225,7 @@
     <string name="isp_region">Region</string>
     <string name="app_label_screen_time">Bildschirmzeit: %1$s</string>
     <string name="ygorigor_summary">Rumänisch</string>
-    <string name="label_reset_every_month">%1$s%2$s eines jeden Monats</string>
+    <string name="label_reset_every_month">%1$s eines jeden Monats</string>
     <string name="system_data_usage">Daten-Nutzung von System</string>
     <string name="louis_leblanc_summary">Französisch</string>
     <string name="network_speed_title">Netzwerkgeschwindigkeit: %1$s</string>
@@ -408,7 +408,6 @@
     <string name="label_upi">BHIM-UPI</string>
     <string name="home_plan_usage_details">%1$s verwendet | %2$s</string>
     <string name="error_alarm_permission_denied_feature_summary">Sie können diese Funktion nur nutzen, wenn Sie das Recht SCHEDULE_EXACT_ALARM haben.</string>
-    <string name="label_plan_details_title">%1$s Plan aktiv</string>
     <string name="error_alarm_permission_denied">Alarmerlaubnis verweigert!</string>
     <string name="error_alarm_permission_denied_summary">Sie haben versucht, eine Aktion auszuführen, für die die Berechtigung SCHEDULE_EXACT_ALARM erforderlich ist, die der App nicht erteilt wurde. Klicken Sie hier, um die Berechtigung zu erteilen.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Data Monitor benötigt die Berechtigung SCHEDULE_EXACT_ALARM, um richtig zu funktionieren. Sie können die App trotzdem verwenden, aber einige Funktionen funktionieren möglicherweise nicht richtig.</string>
@@ -466,4 +465,8 @@
     <string name="action_apply_filter">Filter anwenden</string>
     <string name="error_invalid_session">Ungültige Sitzungsdauer.</string>
     <string name="xxx_summary">Russisch</string>
+    <string name="label_plan_details_title_unknown">Unbekannter Plan aktiv</string>
+    <string name="label_plan_details_title_monthly">Monatlicher Plan aktiv</string>
+    <string name="label_plan_details_title_daily">Täglicher Plan aktiv</string>
+    <string name="label_plan_details_title_custom">Benutzerdefinierter Plan aktiv</string>
 </resources>

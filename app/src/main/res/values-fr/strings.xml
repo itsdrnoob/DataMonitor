@@ -45,7 +45,7 @@
     <string name="setup_image_footer">"Les widgets et/ou les notifications peuvent fournir un accès facile à la quantité de données que vous utilisez"</string>
     <string name="heading_data_reset">"Remise à zéro des données"</string>
     <string name="daily">"Quotidiennement"</string>
-    <string name="monthly">"Hebdomadairement"</string>
+    <string name="monthly">Mensuel</string>
     <string name="heading_data_limit">"Limite de données"</string>
     <string name="data_type_mb">"Mo"</string>
     <string name="data_type_gb">"Go"</string>
@@ -204,13 +204,13 @@
     <string name="label_loading">Chargement…</string>
     <string name="donate_summary">"Payez nous un café, peut-être ?"</string>
     <string name="label_data_usage_reset_time_change">"L'utilisation des données sera remise à zéro chaque %1$s à %2$s"</string>
-    <string name="label_data_usage_reset_date_change">"L'utilisation des données sera remise à zéro le %1$d%2$s de chaque mois"</string>
+    <string name="label_data_usage_reset_date_change">L\'utilisation des données sera remise à zéro le %1$s de chaque mois</string>
     <string name="ygorigor_summary">"Traducteur roumain"</string>
     <string name="johnsonran_summary">"Traducteur de chinois simplifié"</string>
     <string name="label_want_to_contribute_language">"Vous ne trouvez pas votre langue ? Aidez-nous en traduisant les contenus vers votre langue. Cliquez pour savoir comment."</string>
     <string name="current_language">"Langue actuelle"</string>
     <string name="available_languages">"Langues disponibles"</string>
-    <string name="label_reset_every_month">"%1$s%2$s de chaque mois"</string>
+    <string name="label_reset_every_month">"%1$s de chaque mois"</string>
     <string name="setup_usage_reset_date">"Remise à zéro de l'utilisation des données"</string>
     <string name="system_data_usage">"Utilisation des données par le système"</string>
     <string name="cracky5322_summary">"Traducteur en chinois traditionnel"</string>
@@ -345,8 +345,7 @@
     <string name="error_network_monitor_start">Échec du démarrage de Network Monitor. Ouvrez l\'application pour actualiser.</string>
     <string name="label_filter_app_usage">Flitrer l\'Utilisation des Applications</string>
     <string name="label_current_plan">Forfait Actuel</string>
-    <string name="label_plan_details_title">%1$s forfait actif</string>
-    <string name="home_plan_usage_details">%1$s consommés |%2$s</string>
+    <string name="home_plan_usage_details">%1$s consommés | %2$s</string>
     <string name="label_plan_validity">Valable jusqu\'au %1$s | %2$s</string>
     <string name="always_show_total_summary">Toujours afficher le total des données consommées, quelles que soient les options sélectionnées.</string>
     <string name="app_label_combined_total">Total de la consommation des données : %1$s</string>
@@ -467,4 +466,8 @@
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="time">Horaires</string>
     <string name="dan">Dan</string>
+    <string name="label_plan_details_title_unknown">Forfait inconnu actif</string>
+    <string name="label_plan_details_title_monthly">Forfait mensuel actif</string>
+    <string name="label_plan_details_title_daily">Forfait quotidien actif</string>
+    <string name="label_plan_details_title_custom">Forfait personnalisé actif</string>
 </resources>

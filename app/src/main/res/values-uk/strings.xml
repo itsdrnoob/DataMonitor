@@ -151,7 +151,7 @@
     <string name="upi_unknown_error">Невідома помилка.
 \nБудь ласка, спробуйте ще раз або використовуйте інший спосіб.</string>
     <string name="label_widget_refresh_interval_change">Віджет буде оновлюватися кожні %1$s</string>
-    <string name="label_data_usage_reset_date_change">Використання даних буде обнулятися %1$d%2$s числа кожного місяця</string>
+    <string name="label_data_usage_reset_date_change">Використання даних буде обнулятися %1$s числа кожного місяця</string>
     <string name="label_data_usage_reset_time_change">Скидання використання даних кожні %1$s при %2$s</string>
     <string name="remaining_data_info_enabled">Інформація про залишок даних увімкнена</string>
     <string name="remaining_data_info_disabled">Інформація про залишок даних відключена</string>
@@ -175,7 +175,7 @@
     <string name="setup_app_data_usage_alert">Повідомлення про використання даних застосунку</string>
     <string name="current_language">Поточний</string>
     <string name="available_languages">Доступне</string>
-    <string name="label_reset_every_month">%1$s%2$s кожного місяця</string>
+    <string name="label_reset_every_month">%1$s кожного місяця</string>
     <string name="setup_usage_reset_date">Дата скидання використання даних</string>
     <string name="system_data_usage">Використання системних даних</string>
     <string name="cracky5322_summary">Китайська (традиційна)</string>
@@ -363,7 +363,6 @@
     <string name="label_filter_app_usage">Фільтрувати використання застосунків</string>
     <string name="label_filter">Фільтр</string>
     <string name="label_current_plan">Поточний план</string>
-    <string name="label_plan_details_title">План %1$s активний</string>
     <string name="app_label_combined_total">Загальне використання даних: %1$s</string>
     <string name="error_alarm_permission_denied_summary">Ви спробували виконати дію, яка вимагає дозволу SCHEDULE_EXACT_ALARM, який не надано застосунку. Натисніть тут, щоб надати дозвіл.</string>
     <string name="error_alarm_permission_denied_dialog_summary">Для належної роботи Data Monitor потрібен дозвіл SCHEDULE_EXACT_ALARM. Ви все ще можете використовувати застосунок, але деякі функції можуть не працювати належним чином.</string>

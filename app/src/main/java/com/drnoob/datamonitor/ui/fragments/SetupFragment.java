@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.cancelDataPlanNotification;
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.formatOrdinalNumber;
 import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
@@ -1163,24 +1164,11 @@ public class SetupFragment extends Fragment {
                                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
                                 getContext().sendBroadcast(intent);
 
-                                String date = String.valueOf(datePicker.getDayOfMonth());
-                                String suffix;
-
-                                if (date.endsWith("1")) {
-                                    suffix = "st";
-                                }
-                                else if (date.endsWith("2")) {
-                                    suffix = "nd";
-                                }
-                                else if (date.endsWith("3")) {
-                                    suffix = "rd";
-                                }
-                                else {
-                                    suffix = "th";
-                                }
+                                int date = datePicker.getDayOfMonth();
+                                String ordinal = formatOrdinalNumber(date, requireContext());
 
                                 mUsageResetTime.setSummary(getContext().getString(R.string.label_reset_every_month,
-                                        date, suffix));
+                                        ordinal));
 
                                 dialog.dismiss();
 
@@ -1190,7 +1178,7 @@ public class SetupFragment extends Fragment {
                                 }
 
                                 snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                        getString(R.string.label_data_usage_reset_date_change, datePicker.getDayOfMonth(), suffix),
+                                        getString(R.string.label_data_usage_reset_date_change, ordinal),
                                         Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 dismissOnClick(snackbar);
@@ -1712,25 +1700,11 @@ public class SetupFragment extends Fragment {
             if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
                     .equals(DATA_RESET_MONTHLY)) {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_date);
-                String date = String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getInt(DATA_RESET_DATE, 1));
-                String suffix;
+                int date = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_DATE, 1);
+                String ordinal = formatOrdinalNumber(date, requireContext());
 
-                if (date.endsWith("1")) {
-                    suffix = "st";
-                }
-                else if (date.endsWith("2")) {
-                    suffix = "nd";
-                }
-                else if (date.endsWith("3")) {
-                    suffix = "rd";
-                }
-                else {
-                    suffix = "th";
-                }
-
-                resetSummary = (getContext().getString(R.string.label_reset_every_month,
-                        date, suffix));
+                resetSummary = (getContext().getString(R.string.label_reset_every_month, ordinal));
             }
             else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
                     .equals(DATA_RESET_CUSTOM)) {

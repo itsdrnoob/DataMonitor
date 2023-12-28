@@ -20,6 +20,8 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.formatOrdinalNumber;
+import static com.drnoob.datamonitor.Common.getCurrentLocale;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
@@ -395,22 +397,21 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private void updateDataBalance() {
         Long[] mobileData = null;
         int date = preferences.getInt(DATA_RESET_DATE, 1);
-        String planType = requireContext().getString(R.string.label_unknown),
-                planDetailsTitle;
+        String planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_unknown);
         boolean isSmartAllocationEnabled = preferences.getBoolean("smart_data_allocation", false);
 
         try {
             if (preferences.getString(DATA_RESET, "null")
                     .equals(DATA_RESET_MONTHLY)) {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date);
-                planType = requireContext().getString(R.string.monthly);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_monthly);
             } else if (preferences.getString(DATA_RESET, "null")
                     .equals(DATA_RESET_DAILY)) {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1);
-                planType = requireContext().getString(R.string.daily);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_daily);
             } else {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_CUSTOM, -1);
-                planType = requireContext().getString(R.string.custom);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_custom);
             }
 
         } catch (ParseException | RemoteException e) {
@@ -527,20 +528,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
             mDataRemaining.setVisibility(View.GONE);
             mPlanDetailsView.setVisibility(View.VISIBLE);
-            planDetailsTitle = requireContext().getString(R.string.label_plan_details_title, planType);
             mPlanDetailsTitle.setText(planDetailsTitle);
-
-
-//            if (shouldShowDetailsView) {
-//                mDataRemaining.setVisibility(View.GONE);
-//                mPlanDetailsView.setVisibility(View.VISIBLE);
-//                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title, planType);
-//                mPlanDetailsTitle.setText(planDetailsTitle);
-//            }
-//            else {
-//                mDataRemaining.setVisibility(View.VISIBLE);
-//                mPlanDetailsView.setVisibility(View.GONE);
-//            }
         } else {
             // No data plan is set. Hide mDataRemaining view.
             mDataRemaining.setVisibility(View.GONE);
@@ -555,11 +543,12 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
      *
      * @return Plan reset date and the number of days remaining as a formatted string.
      */
-    @SuppressLint({"StringFormatMatches", "SimpleDateFormat"})
+    @SuppressLint("StringFormatMatches")
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
-        String month, endDate, suffix, end;
+        String month, ordinal, end;
+        int endDate;
         int daysRemaining;
         if (session == SESSION_MONTHLY) {
             int planReset = preferences.getInt(DATA_RESET_DATE, 1);
@@ -573,8 +562,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             else {
                 daysRemaining = planReset - today;
             }
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = String.valueOf(planReset);
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(requireContext())).format(calendar.getTime());
+            endDate = planReset;
         }
         else {
             calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -597,8 +586,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             calendar.set(Calendar.HOUR, planEndHour);
             calendar.set(Calendar.MINUTE, planEndMin);
 
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = new SimpleDateFormat("d").format(calendar.getTime());
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(requireContext())).format(calendar.getTime());
+            endDate = calendar.get(Calendar.DAY_OF_MONTH);
 
             long currentTimeMillis = System.currentTimeMillis();
             long endTimeMillis = calendar.getTimeInMillis();
@@ -606,28 +595,14 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             long remainingMillis = endTimeMillis - currentTimeMillis;
             daysRemaining = (int) Math.round((remainingMillis / (24 * 60 * 60 * 1000.0)));
         }
-        suffix = getDateSuffix(endDate);
-        end = endDate + suffix + " " + month;
+        ordinal = formatOrdinalNumber(endDate, requireContext());
+        end = ordinal + " " + month;
         if (daysRemaining < 0) {
             daysRemaining = 0;
         }
         String remaining = requireContext().getString(R.string.label_days_remaining, Integer.toString(daysRemaining));
         validity = requireContext().getString(R.string.label_plan_validity, end, remaining);
         return validity;
-    }
-
-    private String getDateSuffix(String date) {
-        String suffix;
-        if (date.endsWith("1")) {
-            suffix = "st";
-        } else if (date.endsWith("2")) {
-            suffix = "nd";
-        } else if (date.endsWith("3")) {
-            suffix = "rd";
-        } else {
-            suffix = "th";
-        }
-        return suffix;
     }
 
     @Override

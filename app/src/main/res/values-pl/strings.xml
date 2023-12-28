@@ -97,7 +97,7 @@
     <string name="app_data_usage">Użycie aplikacji</string>
     <string name="settings">Opcje</string>
     <string name="label_system_apps">Aplikacje systemowe</string>
-    <string name="label_data_usage_reset_date_change">Użycie danych będzie resetowane w %1$d%2$s każdego miesiąca</string>
+    <string name="label_data_usage_reset_date_change">Użycie danych będzie resetowane w %1$s każdego miesiąca</string>
     <string name="label_setup_notification_first">Najpierw włącz powiadomienie</string>
     <string name="label_data_plan_saved">Plan danych zapisany</string>
     <string name="month">miesiąc</string>
@@ -216,7 +216,7 @@
     <string name="johnsonran_summary">Chiński uproszczony</string>
     <string name="ygorigor_summary">Rumuński</string>
     <string name="label_want_to_contribute_language">Kliknij, aby pomóc w tłumaczeniu tej aplikacji na twój język.</string>
-    <string name="label_reset_every_month">%1$s%2$s każdego miesiąca</string>
+    <string name="label_reset_every_month">%1$s każdego miesiąca</string>
     <string name="network_speed_download">Pobieranie: %1$s</string>
     <string name="network_signal_summary">Funkcja beta</string>
     <string name="network_speed_title">Prędkość sieci: %1$s</string>
@@ -330,7 +330,6 @@
     <string name="error_network_monitor_start">Nie udało się uruchomić monitor sieci. Otwórz aplikację, aby go odświeżyć.</string>
     <string name="label_filter_app_usage">Filtruj użycie aplikacji</string>
     <string name="always_show_total">Zawsze pokazuj całość</string>
-    <string name="label_plan_details_title">Plan %1$s jest aktywny</string>
     <string name="home_plan_usage_details">Użyto %1$s | %2$s</string>
     <string name="setup_app_data_usage_alert">Ostrzeżenie o użyciu aplikacji</string>
     <string name="testing_download">Testowanie prędkości pobierania</string>
