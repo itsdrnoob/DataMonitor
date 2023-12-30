@@ -48,6 +48,19 @@
         </com.drnoob.datamonitor.core.base.Preference>
 
         <com.drnoob.datamonitor.core.base.Preference
+            android:key="buttercookie42"
+            android:summary="@string/buttercookie42_summary"
+            android:title="@string/buttercookie42"
+            app:icon="@drawable/buttercookie42"
+            app:widgetLayout="@layout/preference_right_github">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/github_buttercookie42" />
+
+        </com.drnoob.datamonitor.core.base.Preference>
+
+        <com.drnoob.datamonitor.core.base.Preference
             android:key="comradekingu"
             android:summary="@string/comradekingu_summary"
             android:title="@string/comradekingu"

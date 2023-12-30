@@ -190,7 +190,7 @@
     <string name="eth_address_copied">Адрес кошелька Ethereum скопирован в буфер обмена</string>
     <string name="app_data_usage">Использование данных приложениями</string>
     <string name="label_notification_refresh_interval_change">Уведомление будет обновляться каждые %1$s</string>
-    <string name="label_data_usage_reset_date_change">Использование данных будет обнуляться %1$d%2$s числа каждого месяца</string>
+    <string name="label_data_usage_reset_date_change">Использование данных будет обнуляться %1$s числа каждого месяца</string>
     <string name="remaining_data_info_enabled">Информация об остатке данных включена</string>
     <string name="label_data_plan_saved">Тарифный план сохранён</string>
     <string name="title_data_usage_notification">Использовано данных за сегодня: %1$s</string>
@@ -214,7 +214,7 @@
     <string name="connection_error">Не удалось подключиться.
 \nПожалуйста, убедитесь, что вы подключены к Интернету.</string>
     <string name="no_network_connection">Не обнаружено сетевое подключение!</string>
-    <string name="label_reset_every_month">%1$s%2$s каждого месяца</string>
+    <string name="label_reset_every_month">%1$s каждого месяца</string>
     <string name="app_label_background_time">Фоновое использование: %1$s</string>
     <string name="ygorigor_summary">Румынский</string>
     <string name="system_data_usage">Использование системных данных</string>
@@ -369,7 +369,6 @@
     <string name="xmr_address_copied">Адрес кошелька Monero скопирован в буфер обмена</string>
     <string name="tadekdudek_summary">Польский</string>
     <string name="error_network_monitor_start">Не удалось запустить Network Monitor. Откройте приложение для обновления.</string>
-    <string name="label_plan_details_title">План %1$s активен</string>
     <string name="home_plan_usage_details">%1$s использовано | %2$s</string>
     <string name="label_plan_validity">Действует до %1$sb | %2$s</string>
     <string name="always_show_total">Всегда показывать общее количество</string>

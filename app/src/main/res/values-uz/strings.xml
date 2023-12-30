@@ -140,7 +140,7 @@
     <string name="label_widget_refresh_interval_change">Vidjet har %1$s da yangilanadi</string>
     <string name="label_notification_refresh_interval_change">Bildirishnoma har %1$s da yangilanadi</string>
     <string name="label_data_usage_reset_time_change">Trafikni har %1$s %2$s da yangilanadi</string>
-    <string name="label_data_usage_reset_date_change">Trafik har oyning %1$d %2$s sanasida yangilanadi</string>
+    <string name="label_data_usage_reset_date_change">Trafik har oyning %1$s sanasida yangilanadi</string>
     <string name="remaining_data_info_enabled">Qolgan trafik ma\'lumoti yoqildi</string>
     <string name="remaining_data_info_disabled">Qolgan trafik ma\'lumoti o\'chirildi</string>
     <string name="label_monitoring_no_plan">Nazorat qilishni boshlash uchun trafik rejasini qo\'shing</string>
@@ -217,7 +217,7 @@
     <string name="label_want_to_contribute_language">Ilovani o\'z tilingizga tarjima qilish uchun buyerga bosing.</string>
     <string name="current_language">Hozrgi</string>
     <string name="available_languages">Mavjud</string>
-    <string name="label_reset_every_month">Har oy %1$s%2$s</string>
+    <string name="label_reset_every_month">Har oy %1$s</string>
     <string name="setup_usage_reset_date">Trafik yangilanish sanasi</string>
     <string name="system_data_usage">Tizim trafigi</string>
     <string name="cracky5322_summary">Milliy xitoy</string>

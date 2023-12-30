@@ -207,7 +207,7 @@
     <string name="upi_app_not_found">Installer et program som kan gjøre dette først</string>
     <string name="upi_unknown_error">Ukjent feil.
 \nPrøv igjen eller en annen metode.</string>
-    <string name="label_data_usage_reset_date_change">Databruk vil bli tilbakestilt %1$d%2$s hver måned</string>
+    <string name="label_data_usage_reset_date_change">Databruk vil bli tilbakestilt %1$s hver måned</string>
     <string name="error_permission_denied">Tilgang nektet. Innvilg den manuelt.</string>
     <string name="oem_battery_settings">OEM-batteri-innstillinger</string>
     <string name="overview_tuesday">Tir</string>
@@ -231,7 +231,7 @@
     <string name="ygorigor_summary">Rumensk</string>
     <string name="network_speed_upload">Opplasting: %1$s</string>
     <string name="available_languages">Tilgjengelig</string>
-    <string name="label_reset_every_month">%1$s%2$s i hver måned</string>
+    <string name="label_reset_every_month">%1$s i hver måned</string>
     <string name="cracky5322_summary">Tradisjonell kinesisk</string>
     <string name="network_speed_title">Nettverkshastighet: %1$s</string>
     <string name="network_speed_download">Nedlasting: %1$s</string>

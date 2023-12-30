@@ -204,13 +204,13 @@
     <string name="label_loading">جارِ التحميل…</string>
     <string name="donate_summary">"شراء قهوة لنا ، ما رأيك؟"</string>
     <string name="label_data_usage_reset_time_change">"ستتم إعادة تعيين استخدام البيانات كل %1$s عند %2$s"</string>
-    <string name="label_data_usage_reset_date_change">"ستتم إعادة تعيين استخدام البيانات في %1$d%2$s من كل شهر"</string>
+    <string name="label_data_usage_reset_date_change">"ستتم إعادة تعيين استخدام البيانات في %1$s من كل شهر"</string>
     <string name="ygorigor_summary">"المترجم الروماني"</string>
     <string name="johnsonran_summary">"مترجم صيني مبسط"</string>
     <string name="label_want_to_contribute_language">"لا يمكنك العثور على لغتك؟ ساعدنا بترجمة المحتوى إلى لغتك المحلية. انقر لمعرفة كيف."</string>
     <string name="current_language">"اللغة الحالية"</string>
     <string name="available_languages">"اللغات المتوفرة"</string>
-    <string name="label_reset_every_month">"%1$s%2$s من كل شهر"</string>
+    <string name="label_reset_every_month">"%1$s من كل شهر"</string>
     <string name="setup_usage_reset_date">"تاريخ إعادة تعيين استخدام البيانات"</string>
     <string name="system_data_usage">"استخدام بيانات النظام"</string>
     <string name="cracky5322_summary">"مترجم صيني تقليدي"</string>
@@ -392,7 +392,6 @@
     <string name="error_network_monitor_start">فشل بدء تشغيل \"مراقبة الشبكة\". افتح التطبيق للتحديث.</string>
     <string name="label_filter_app_usage">تصفية استخدام التطبيق</string>
     <string name="label_current_plan">الخطة الحالية</string>
-    <string name="label_plan_details_title">خطة %1$s نشطة</string>
     <string name="label_filter">المرشحات</string>
     <string name="home_plan_usage_details">%1$s مستخدمة | %2$s</string>
     <string name="label_plan_validity">صالح حتى %1$s|%2$s</string>

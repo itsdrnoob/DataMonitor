@@ -143,7 +143,7 @@
     <string name="monthly">Měsíčně</string>
     <string name="ltc_address_copied">Adresa peněženky Litecoin zkopírována do schránky</string>
     <string name="eth_address_copied">Adresa peněženky Ethereum zkopírována do schránky</string>
-    <string name="label_data_usage_reset_date_change">Využití dat se resetuje %1$d%2$s každý měsíc</string>
+    <string name="label_data_usage_reset_date_change">Využití dat se resetuje %1$s každý měsíc</string>
     <string name="label_widget_refreshed">Widget aktualizován</string>
     <string name="label_notification_enabled">Oznámení aplikace povolena</string>
     <string name="label_notification_cannot_disable_both">Nelze vypnout oba prvky</string>
@@ -230,7 +230,7 @@
     <string name="f_droid_page">Zobrazit aplikaci na F-Droid</string>
     <string name="f_droid_page_summary">Zobrazit aplikaci v oficiálním repozitáři F-Droid</string>
     <string name="fjuro_summary">Čeština</string>
-    <string name="label_reset_every_month">%1$s%2$s v každém měsíci</string>
+    <string name="label_reset_every_month">%1$s v každém měsíci</string>
     <string name="telegram_support">Podpora na Telegramu</string>
     <string name="system_theme_summary">Podle systému</string>
     <string name="label_update_available">Je dostupná nová verze!</string>
@@ -380,7 +380,6 @@
     <string name="buymeacoffee_summary">Kupte mi kávu :)</string>
     <string name="label_plan_validity">Platí do %1$s | %2$s</string>
     <string name="always_show_total_summary">V oznámení se vždy zobrazí celková použitá data bez ohledu na vybrané možnosti.</string>
-    <string name="label_plan_details_title">Aktivní %1$s plán</string>
     <string name="home_plan_usage_details">%1$s využito | %2$s</string>
     <string name="U1M450W_summary">Uzbečtina</string>
     <string name="atharvshinde">Atharv Shinde</string>

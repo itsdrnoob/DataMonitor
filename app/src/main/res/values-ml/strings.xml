@@ -204,13 +204,13 @@
     <string name="label_loading">ലോഡിംഗ്…</string>
     <string name="donate_summary">"ഞങ്ങൾക്ക് ഒരു കോഫി വാങ്ങിത്തരിക, ഒരുപക്ഷേ?"</string>
     <string name="label_data_usage_reset_time_change">"ഓരോ %1$s സമയത്തും %2$s-ന് ഡാറ്റ ഉപയോഗം പുനഃസജ്ജമാക്കും"</string>
-    <string name="label_data_usage_reset_date_change">"എല്ലാ മാസവും %1$d%2$s-ന് ഡാറ്റ ഉപയോഗം റീസെറ്റ് ചെയ്യും"</string>
+    <string name="label_data_usage_reset_date_change">"എല്ലാ മാസവും %1$s-ന് ഡാറ്റ ഉപയോഗം റീസെറ്റ് ചെയ്യും"</string>
     <string name="ygorigor_summary">"റൊമാനിയൻ പരിഭാഷകൻ"</string>
     <string name="johnsonran_summary">"സിംപ്ളിഫൈഡ് ചൈനീസ് വിവർത്തകൻ"</string>
     <string name="label_want_to_contribute_language">"നിങ്ങളുടെ ഭാഷ കണ്ടെത്താൻ കഴിയുന്നില്ലേ? നിങ്ങളുടെ പ്രാദേശിക ഭാഷയിലേക്ക് ഉള്ളടക്കങ്ങൾ വിവർത്തനം ചെയ്തുകൊണ്ട് ഞങ്ങളെ സഹായിക്കൂ. എങ്ങനെയെന്നറിയാൻ ക്ലിക്ക് ചെയ്യുക."</string>
     <string name="current_language">"നിലവിലെ ഭാഷ"</string>
     <string name="available_languages">"ലഭ്യമായ ഭാഷകൾ"</string>
-    <string name="label_reset_every_month">"എല്ലാ മാസവും %1$s%2$s"</string>
+    <string name="label_reset_every_month">"എല്ലാ മാസവും %1$s"</string>
     <string name="setup_usage_reset_date">"ഡാറ്റ ഉപയോഗ പുനഃസജ്ജീകരണ തീയതി"</string>
     <string name="system_data_usage">"സിസ്റ്റം ഡാറ്റ ഉപയോഗം"</string>
     <string name="cracky5322_summary">"പരമ്പരാഗത ചൈനീസ് വിവർത്തകൻ"</string>
@@ -392,7 +392,6 @@
     <string name="label_filter">ഫിൽറ്റർ</string>
     <string name="label_filter_app_usage">ആപ്പ് ഉപയോഗം ഫിൽറ്റർ ചെയ്യുക</string>
     <string name="label_current_plan">നിലവിലെ പ്ലാൻ</string>
-    <string name="label_plan_details_title">%1$s പ്ലാൻ സജീവമാണ്</string>
     <string name="home_plan_usage_details">%1$s ഉപയോഗിച്ചു | %2$s</string>
     <string name="label_plan_validity">%1$s വരെ സാധുതയുണ്ട്</string>
     <string name="always_show_total">എല്ലായ്‌പ്പോഴും ആകെ കാണിക്കുക</string>

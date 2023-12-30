@@ -217,7 +217,7 @@
     <string name="label_select_app">Selectați aplicația</string>
     <string name="label_copy_logs">Copiere jurnale</string>
     <string name="settings_upload_server">Încărcare server</string>
-    <string name="label_data_usage_reset_date_change">Utilizarea datelor va fi resetată pe %1$d%2$s din fiecare lună</string>
+    <string name="label_data_usage_reset_date_change">Utilizarea datelor va fi resetată pe %1$s din fiecare lună</string>
     <string name="setup_usage_reset_date">Data de resetare a utilizării datelor</string>
     <string name="label_network_signal_notification_disabled">Viteza rețelei live a fost dezactivată</string>
     <string name="network_signal_summary">Caracteristică beta</string>
@@ -292,7 +292,7 @@
     <string name="label_select_start_date">Selectați data de început</string>
     <string name="label_plan_end_date">Selectați data de sfârșit</string>
     <string name="ygorigor_summary">Română</string>
-    <string name="label_reset_every_month">%1$s %2$s din fiecare lună</string>
+    <string name="label_reset_every_month">%1$s din fiecare lună</string>
     <string name="cracky5322_summary">Chineză tradițională</string>
     <string name="network_speed_upload">Încărcare: %1$s</string>
     <string name="network_speed_download">Descărcați: %1$s</string>
@@ -356,4 +356,8 @@
     <string name="MarongHappy">JungHee Lee</string>
     <string name="action_delete">Șterge</string>
     <string name="save_results_summary">Salvează rezultatele diagnosticării rețelei</string>
+    <string name="label_plan_details_title_unknown">Plan necunoscut activ</string>
+    <string name="label_plan_details_title_monthly">Plan lunar activ</string>
+    <string name="label_plan_details_title_daily">Plan zilnic activ</string>
+    <string name="label_plan_details_title_custom">Plan personalizat activ</string>
 </resources>

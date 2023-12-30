@@ -12,10 +12,9 @@ android {
         minSdkVersion 23
         targetSdkVersion 34
         versionCode 29
-        versionName 'v2.4.0-Beta3'
-        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "ja", "ko", "ml", "ms",
-                "mr", "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN",
-                "zh-rTW"
+        versionName 'v2.4.0'
+        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "iw", "ja", "ko", "ml", "mr", "ms",
+                "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN", "zh-rTW"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

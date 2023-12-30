@@ -139,7 +139,7 @@
     <string name="label_widget_refresh_interval_change">Widget akan diperbarui setiap %1$s</string>
     <string name="label_notification_refresh_interval_change">Pemberitahuan akan diperbarui setiap %1$s</string>
     <string name="label_data_usage_reset_time_change">Mengatur ulang penggunaan data setiap %1$s pada %2$s</string>
-    <string name="label_data_usage_reset_date_change">Penggunaan data akan diatur ulang di %1$d%2$s setiap bulannya</string>
+    <string name="label_data_usage_reset_date_change">Penggunaan data akan diatur ulang di %1$s setiap bulannya</string>
     <string name="remaining_data_info_enabled">Info data yang tersisa diaktifkan</string>
     <string name="label_no_additional_lang">Klik di sini untuk membantu menerjemahkan aplikasi.</string>
     <string name="remaining_data_info_disabled">Info data yang tersisa dinonaktifkan</string>
@@ -212,7 +212,7 @@
     <string name="read_phone_state_permission">Izin untuk membaca status ponsel</string>
     <string name="johnsonran_summary">Cina Sederhana</string>
     <string name="network_speed_download">Unduh: %1$s</string>
-    <string name="label_reset_every_month">%1$s%2$s dari setiap bulan</string>
+    <string name="label_reset_every_month">%1$s dari setiap bulan</string>
     <string name="network_signal_summary">Fitur beta</string>
     <string name="louis_leblanc_summary">Prancis</string>
     <string name="label_want_to_contribute_language">Klik di sini untuk membantu menerjemahkan aplikasi ke dalam bahasa Anda.</string>
