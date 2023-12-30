@@ -519,4 +519,6 @@
     <string name="label_plan_details_title_monthly">Monthly plan active</string>
     <string name="label_plan_details_title_daily">Daily plan active</string>
     <string name="label_plan_details_title_custom">Custom plan active</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="buttercookie42_summary">Developer</string>
 </resources>
