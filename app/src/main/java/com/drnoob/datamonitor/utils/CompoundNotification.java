@@ -71,6 +71,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CompoundNotification extends Service {
     private static final String TAG = CompoundNotification.class.getSimpleName();
@@ -92,7 +93,7 @@ public class CompoundNotification extends Service {
             wifiDataUsage,
             totalDataUsage;
     private static IconCompat dataUsageIcon, networkSpeedIcon;
-    private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
+    private static final ConcurrentHashMap<Network, LinkProperties> linkPropertiesHashMap = new ConcurrentHashMap<>();
     private static boolean serviceRestart = true;
     private static CompoundNotification mCompoundNotification;
     private static RemoteViews contentView, bigContentView;
@@ -119,13 +120,15 @@ public class CompoundNotification extends Service {
         previousDownBytes = 0l;
         previousUpBytes = 0l;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                final String iface = linkProperties.getInterfaceName();
-                if (iface == null) {
-                    continue;
+            synchronized (linkPropertiesHashMap) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    previousUpBytes += TrafficStats.getTxBytes(iface);
+                    previousDownBytes += TrafficStats.getRxBytes(iface);
                 }
-                previousUpBytes += TrafficStats.getTxBytes(iface);
-                previousDownBytes += TrafficStats.getRxBytes(iface);
             }
         }
         else {
@@ -384,13 +387,15 @@ public class CompoundNotification extends Service {
 //            Long currentDownBytes = TrafficStats.getTotalRxBytes();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                    final String iface = linkProperties.getInterfaceName();
-                    if (iface == null) {
-                        continue;
+                synchronized (linkPropertiesHashMap) {
+                    for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                        final String iface = linkProperties.getInterfaceName();
+                        if (iface == null) {
+                            continue;
+                        }
+                        currentUpBytes += TrafficStats.getTxBytes(iface);
+                        currentDownBytes += TrafficStats.getRxBytes(iface);
                     }
-                    currentUpBytes += TrafficStats.getTxBytes(iface);
-                    currentDownBytes += TrafficStats.getRxBytes(iface);
                 }
             }
             else {
@@ -538,13 +543,15 @@ public class CompoundNotification extends Service {
 
     private static void updateInitialData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                final String iface = linkProperties.getInterfaceName();
-                if (iface == null) {
-                    continue;
+            synchronized (linkPropertiesHashMap) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    previousUpBytes += TrafficStats.getTxBytes(iface);
+                    previousDownBytes += TrafficStats.getRxBytes(iface);
                 }
-                previousUpBytes += TrafficStats.getTxBytes(iface);
-                previousDownBytes += TrafficStats.getRxBytes(iface);
             }
         }
         else {
