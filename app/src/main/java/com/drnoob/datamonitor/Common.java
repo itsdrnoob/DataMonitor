@@ -76,6 +76,7 @@ import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -522,5 +523,19 @@ public class Common {
                 notificationManager.notify(notificationId, builder.build());
             }
         }
+    }
+
+    public static String parseNumber(String number) {
+        if (number.matches("[0-9.,]+")) {
+            return number.replace(",", ".");
+        }
+        String output = "0.0";
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+        try {
+            output = numberFormat.parse(number).toString();
+        }
+        catch (Exception ignored) {}
+
+        return output;
     }
 }
