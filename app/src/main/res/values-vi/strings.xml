@@ -151,7 +151,7 @@
     <string name="light_theme_summary">Đã chọn chủ đề sáng</string>
     <string name="system_theme_summary">Đã theo chủ đề thiết bị</string>
     <string name="hudaifa_abdullah_summary">Ả-Rập</string>
-    <string name="network_diagnostics_info">Chẩn đoán mạng có thể sử dụng khoảng 20–30 MB dữ liệu. Đảm bảo bạn có sẵn gói này trong gói của mình, nếu không, phí mạng có thể được áp dụng.</string>
+    <string name="network_diagnostics_info">Chẩn đoán mạng có thể sử dụng khoảng 20–30 MB dữ liệu. Đảm bảo bạn có sẵn dung lượng trong gói của mình, nếu không, phí mạng có thể được áp dụng.</string>
     <string name="holydemon_summary">Malayalam</string>
     <string name="gnu_ewm">Eryk Michalak</string>
     <string name="rezaalmanda">Reza</string>
