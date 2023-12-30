@@ -20,23 +20,27 @@
 package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.formatOrdinalNumber;
+import static com.drnoob.datamonitor.Common.getCurrentLocale;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_LIMIT;
 import static com.drnoob.datamonitor.core.Values.DATA_PLAN_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.DATA_QUOTA;
+import static com.drnoob.datamonitor.core.Values.DATA_QUOTA_PERFORMED_RESET;
+import static com.drnoob.datamonitor.core.Values.DATA_QUOTA_SCHEDULED_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_HOUR;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TODAY;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
-import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WEEKDAY;
-import static com.drnoob.datamonitor.core.Values.EXTRA_IS_WEEK_DAY_VIEW;
-import static com.drnoob.datamonitor.core.Values.EXTRA_WEEK_DAY;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
 import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
@@ -52,11 +56,13 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.updateOverview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -79,12 +85,16 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.utils.NotificationService;
+import com.drnoob.datamonitor.utils.SmartDataAllocationService;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -97,7 +107,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements View.OnLongClickListener {
@@ -129,9 +138,10 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
     private TextView mDataRemaining;
     private Long planStartDateMillis, planEndDateMillis;
     private ActivityResultLauncher<Intent> dataPlanLauncher;
-    private boolean shouldShowDetailsView;
     private ConstraintLayout mPlanDetailsView;
-    private TextView mPlanDetailsTitle, mPlanUsage, mPlanValidity;
+    private TextView mPlanDetailsTitle, mPlanUsage, mPlanValidity, mDailyQuota;
+
+    private SharedPreferences preferences;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -161,8 +171,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                                 if (PreferenceManager.getDefaultSharedPreferences(requireContext())
                                         .getBoolean("auto_update_data_plan", false)) {
                                     setRefreshAlarm(requireContext());
-                                }
-                                else {
+                                } else {
                                     setDataPlanNotification(requireContext());
                                 }
                             }
@@ -186,6 +195,8 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                     }
                 }
         );
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
     }
 
     @Override
@@ -217,6 +228,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         mPlanDetailsTitle = view.findViewById(R.id.plan_details_title);
         mPlanUsage = view.findViewById(R.id.plan_usage_details);
         mPlanValidity = view.findViewById(R.id.plan_validity_details);
+        mDailyQuota = view.findViewById(R.id.daily_quota);
 
         mOverview = view.findViewById(R.id.overview);
         mOverviewLoading = view.findViewById(R.id.overview_loading);
@@ -258,18 +270,16 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         updateData();
         updateDataBalance();
         refreshOverview();
+        checkDataQuota();
 
         mMobileDataUsage.setSelected(true);
         mWifiDataUsage.setSelected(true);
 
-        boolean showPlanBanner = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getBoolean(SHOW_ADD_PLAN_BANNER, true);
+        boolean showPlanBanner = preferences.getBoolean(SHOW_ADD_PLAN_BANNER, true);
 
-        if (PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getFloat(DATA_LIMIT, -1) > 0 || !showPlanBanner) {
+        if (preferences.getFloat(DATA_LIMIT, -1) > 0 || !showPlanBanner) {
             mSetupDataPlan.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             mSetupDataPlan.setVisibility(View.VISIBLE);
         }
 
@@ -312,43 +322,43 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             @Override
             public void onClick(View view) {
                 mSetupDataPlan.animate()
-                    .alpha(0f)
-                    .setDuration(200)
-                    .scaleY(0.8f)
-                    .scaleX(0.8f)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                        super.onAnimationStart(animation);
-                        float total = mSetupDataPlan.getHeight() + 28; // just to adjust a bit of distance issue
-                        mGraphView.animate()
-                            .translationY((total * -1))
-                            .setDuration(300)
-                            .setStartDelay(80)
-                            .setListener(new AnimatorListenerAdapter() {
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-
+                        .alpha(0f)
+                        .setDuration(200)
+                        .scaleY(0.8f)
+                        .scaleX(0.8f)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+                                super.onAnimationStart(animation);
+                                float total = mSetupDataPlan.getHeight() + 28; // just to adjust a bit of distance issue
                                 mGraphView.animate()
-                                    .translationY(0)
-                                    .setDuration(0)
-                                    .setListener(new AnimatorListenerAdapter() {
-                                        @Override
-                                        public void onAnimationStart(Animator animation) {
-                                            super.onAnimationStart(animation);
-                                            mSetupDataPlan.setVisibility(View.GONE);
-                                        }
-                                    })
-                                    .start();
-                                }
-                            })
-                            .start();
-                        }
-                    })
-                    .start();
+                                        .translationY((total * -1))
+                                        .setDuration(300)
+                                        .setStartDelay(80)
+                                        .setListener(new AnimatorListenerAdapter() {
+                                            @Override
+                                            public void onAnimationEnd(Animator animation) {
+                                                super.onAnimationEnd(animation);
 
-                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                                mGraphView.animate()
+                                                        .translationY(0)
+                                                        .setDuration(0)
+                                                        .setListener(new AnimatorListenerAdapter() {
+                                                            @Override
+                                                            public void onAnimationStart(Animator animation) {
+                                                                super.onAnimationStart(animation);
+                                                                mSetupDataPlan.setVisibility(View.GONE);
+                                                            }
+                                                        })
+                                                        .start();
+                                            }
+                                        })
+                                        .start();
+                            }
+                        })
+                        .start();
+
+                preferences.edit()
                         .putBoolean(SHOW_ADD_PLAN_BANNER, false)
                         .apply();
             }
@@ -386,57 +396,85 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
     private void updateDataBalance() {
         Long[] mobileData = null;
-        int date = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(DATA_RESET_DATE, 1);
-        String planType = requireContext().getString(R.string.label_unknown),
-                planDetailsTitle;
+        int date = preferences.getInt(DATA_RESET_DATE, 1);
+        String planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_unknown);
+        boolean isSmartAllocationEnabled = preferences.getBoolean("smart_data_allocation", false);
 
         try {
-            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+            if (preferences.getString(DATA_RESET, "null")
                     .equals(DATA_RESET_MONTHLY)) {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date);
-                planType = requireContext().getString(R.string.monthly);
-            }
-            else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_monthly);
+            } else if (preferences.getString(DATA_RESET, "null")
                     .equals(DATA_RESET_DAILY)) {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_TODAY, 1);
-                planType = requireContext().getString(R.string.daily);
-            }
-            else {
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_daily);
+            } else {
                 mobileData = getDeviceMobileDataUsage(getContext(), SESSION_CUSTOM, -1);
-                planType = requireContext().getString(R.string.custom);
+                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title_custom);
             }
 
-        }
-        catch (ParseException | RemoteException e) {
+        } catch (ParseException | RemoteException e) {
             e.printStackTrace();
         }
 
-        Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1);
+        Float dataLimit = preferences.getFloat(DATA_LIMIT, -1);
         if (dataLimit > 0) {
-            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, null)
+            if (preferences.getString(DATA_RESET, null)
                     .equals(DATA_RESET_DAILY)) {
-                shouldShowDetailsView = false;
+//                Long total = (mobileData[2]);
+//                Long limit = dataLimit.longValue() * 1048576;
+//                Long remaining;
+//                String remainingData;
+//                if (limit > total) {
+//                    remaining= limit - total;
+//                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+//                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+//                }
+//                else {
+//                    remaining= total - limit;
+//                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+//                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+//                }
+
                 Long total = (mobileData[2]);
                 Long limit = dataLimit.longValue() * 1048576;
                 Long remaining;
                 String remainingData;
-                if (limit > total) {
-                    remaining= limit - total;
-                    remainingData = formatData(remaining / 2, remaining / 2)[2];
-                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
-                }
-                else {
-                    remaining= total - limit;
-                    remainingData = formatData(remaining / 2, remaining / 2)[2];
-                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                mPlanValidity.setVisibility(View.GONE);
+
+                if (isSmartAllocationEnabled) {
+                    Float quota = preferences.getFloat(DATA_QUOTA, 0F);
+                    String dailyQuota = formatData(0L, (quota.longValue() * 1024 * 1024))[2];
+                    mDailyQuota.setText(getString(R.string.label_daily_quota, dailyQuota));
+                    mDailyQuota.setVisibility(View.VISIBLE);
+                } else {
+                    mDailyQuota.setVisibility(View.GONE);
                 }
 
-            }
-            else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, null)
+                if (limit > total) {
+                    remaining = limit - total;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mPlanUsage.setText(getContext().getString(R.string.label_data_remaining, remainingData));
+                } else {
+                    remaining = total - limit;
+                    remainingData = formatData(remaining / 2, remaining / 2)[2];
+                    mPlanUsage.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
+                }
+
+
+            } else if (preferences.getString(DATA_RESET, null)
                     .equals(DATA_RESET_MONTHLY)) {
-                shouldShowDetailsView = true;
                 String validity = getPlanValidity(SESSION_MONTHLY);
                 mPlanValidity.setText(validity);
+                if (isSmartAllocationEnabled) {
+                    Float quota = preferences.getFloat(DATA_QUOTA, 0F);
+                    String dailyQuota = formatData(0L, (quota.longValue() * 1024 * 1024))[2];
+                    mDailyQuota.setText(getString(R.string.label_daily_quota, dailyQuota));
+                    mDailyQuota.setVisibility(View.VISIBLE);
+                } else {
+                    mDailyQuota.setVisibility(View.GONE);
+                }
 //                Long total = getDeviceMobileDataUsage(getContext(), SESSION_MONTHLY, date)[2];
                 Long total = mobileData[2];
                 Long limit = dataLimit.longValue() * 1048576;
@@ -444,13 +482,12 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 String remainingData;
                 String used = formatData(0l, total)[2];
                 if (limit > total) {
-                    remaining= limit - total;
+                    remaining = limit - total;
                     remainingData = requireContext().getString(R.string.label_data_remaining,
                             formatData(remaining / 2, remaining / 2)[2]);
 //                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
-                }
-                else {
-                    remaining= total - limit;
+                } else {
+                    remaining = total - limit;
                     remainingData = requireContext().getString(R.string.label_data_remaining_used_excess,
                             formatData(remaining / 2, remaining / 2)[2]);
 //                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
@@ -458,24 +495,29 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
 
                 String usageDetails = requireContext().getString(R.string.home_plan_usage_details, used, remainingData);
                 mPlanUsage.setText(usageDetails);
-            }
-            else {
-                shouldShowDetailsView = true;
+            } else {
                 String validity = getPlanValidity(SESSION_CUSTOM);
                 mPlanValidity.setText(validity);
+                if (isSmartAllocationEnabled) {
+                    Float quota = preferences.getFloat(DATA_QUOTA, 0F);
+                    String dailyQuota = formatData(0L, (quota.longValue() * 1024 * 1024))[2];
+                    mDailyQuota.setText(getString(R.string.label_daily_quota, dailyQuota));
+                    mDailyQuota.setVisibility(View.VISIBLE);
+                } else {
+                    mDailyQuota.setVisibility(View.GONE);
+                }
                 Long total = (mobileData[2]);
                 Long limit = dataLimit.longValue() * 1048576;
                 Long remaining;
                 String remainingData;
                 String used = formatData(0l, total)[2];
                 if (limit > total) {
-                    remaining= limit - total;
+                    remaining = limit - total;
                     remainingData = requireContext().getString(R.string.label_data_remaining,
                             formatData(remaining / 2, remaining / 2)[2]);
 //                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining, remainingData));
-                }
-                else {
-                    remaining= total - limit;
+                } else {
+                    remaining = total - limit;
                     remainingData = requireContext().getString(R.string.label_data_remaining_used_excess,
                             formatData(remaining / 2, remaining / 2)[2]);
 //                    mDataRemaining.setText(getContext().getString(R.string.label_data_remaining_used_excess, remainingData));
@@ -483,78 +525,84 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 String usageDetails = requireContext().getString(R.string.home_plan_usage_details, used, remainingData);
                 mPlanUsage.setText(usageDetails);
             }
-            if (shouldShowDetailsView) {
-                mDataRemaining.setVisibility(View.GONE);
-                mPlanDetailsView.setVisibility(View.VISIBLE);
-                planDetailsTitle = requireContext().getString(R.string.label_plan_details_title, planType);
-                mPlanDetailsTitle.setText(planDetailsTitle);
-            }
-            else {
-                mDataRemaining.setVisibility(View.VISIBLE);
-                mPlanDetailsView.setVisibility(View.GONE);
-            }
-        }
-        else {
+
+            mDataRemaining.setVisibility(View.GONE);
+            mPlanDetailsView.setVisibility(View.VISIBLE);
+            mPlanDetailsTitle.setText(planDetailsTitle);
+        } else {
             // No data plan is set. Hide mDataRemaining view.
             mDataRemaining.setVisibility(View.GONE);
             mPlanDetailsView.setVisibility(View.GONE);
         }
     }
 
+    /**
+     * Calculates the plan validity for Monthly/Custom data plans.
+     *
+     * @param session The plan session. One of SESSION_MONTHLY or SESSION_CUSTOM.
+     *
+     * @return Plan reset date and the number of days remaining as a formatted string.
+     */
+    @SuppressLint("StringFormatMatches")
     private String getPlanValidity(int session) {
         String validity;
         Calendar calendar = Calendar.getInstance();
-        String month, endDate, suffix, end;
+        String month, ordinal, end;
+        int endDate;
+        int daysRemaining;
         if (session == SESSION_MONTHLY) {
-            int planEnd = PreferenceManager.getDefaultSharedPreferences(getContext())
-                    .getInt(DATA_RESET_DATE, 1);
+            int planReset = preferences.getInt(DATA_RESET_DATE, 1);
             int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-            if (planEnd > daysInMonth) {
-                planEnd = daysInMonth;
-            }
-            int today = calendar.get(Calendar.DAY_OF_MONTH) + 1;
-            if (today >= planEnd) {
+            int currentReset = Math.min(planReset, daysInMonth);
+            int today = calendar.get(Calendar.DAY_OF_MONTH);
+            if (today >= currentReset) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+                daysRemaining = daysInMonth - today + planReset;
             }
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = String.valueOf(planEnd);
+            else {
+                daysRemaining = planReset - today;
+            }
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(requireContext())).format(calendar.getTime());
+            endDate = planReset;
         }
         else {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+
             long planEndDateMillis;
             try {
-                planEndDateMillis = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        .getLong(DATA_RESET_CUSTOM_DATE_END, -1);
+                planEndDateMillis = preferences.getLong(DATA_RESET_CUSTOM_DATE_END, -1);
             }
             catch (ClassCastException e) {
-                int planEndIntValue = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        .getInt(DATA_RESET_CUSTOM_DATE_END, -1);
+                int planEndIntValue = preferences.getInt(DATA_RESET_CUSTOM_DATE_END, -1);
                 planEndDateMillis = ((Number) planEndIntValue).longValue();
             }
-            calendar.setTimeInMillis(planEndDateMillis);
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = new SimpleDateFormat("d").format(calendar.getTime());
-        }
-        suffix = getDateSuffix(endDate);
-        end = endDate + suffix + " " + month;
-        validity = requireContext().getString(R.string.label_plan_validity, end);
-        return validity;
-    }
 
-    private String getDateSuffix(String date) {
-        String suffix;
-        if (date.endsWith("1")) {
-            suffix = "st";
+            int planEndHour = preferences.getInt(DATA_RESET_CUSTOM_DATE_END_HOUR, 0);
+            int planEndMin = preferences.getInt(DATA_RESET_CUSTOM_DATE_END_MIN, 0);
+
+            calendar.setTimeInMillis(planEndDateMillis);
+            calendar.set(Calendar.HOUR, planEndHour);
+            calendar.set(Calendar.MINUTE, planEndMin);
+
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(requireContext())).format(calendar.getTime());
+            endDate = calendar.get(Calendar.DAY_OF_MONTH);
+
+            long currentTimeMillis = System.currentTimeMillis();
+            long endTimeMillis = calendar.getTimeInMillis();
+
+            long remainingMillis = endTimeMillis - currentTimeMillis;
+            daysRemaining = (int) Math.round((remainingMillis / (24 * 60 * 60 * 1000.0)));
         }
-        else if (date.endsWith("2")) {
-            suffix = "nd";
+        ordinal = formatOrdinalNumber(endDate, requireContext());
+        end = ordinal + " " + month;
+        if (daysRemaining < 0) {
+            daysRemaining = 0;
         }
-        else if (date.endsWith("3")) {
-            suffix = "rd";
-        }
-        else {
-            suffix = "th";
-        }
-        return suffix;
+        String remaining = requireContext().getString(R.string.label_days_remaining, Integer.toString(daysRemaining));
+        validity = requireContext().getString(R.string.label_plan_validity, end, remaining);
+        return validity;
     }
 
     @Override
@@ -602,9 +650,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             mWifiFataReceived.setText(wifiDataReceived);
 
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
+        } catch (ParseException | RemoteException e) {
             e.printStackTrace();
         }
     }
@@ -742,8 +788,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                         break;
                 }
             }
-        }
-        else {
+        } else {
             UpdateOverview updateOverview = new UpdateOverview(MODE_LOAD_OVERVIEW);
             updateOverview.execute();
         }
@@ -768,8 +813,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 true);
         popupWindow.setAnimationStyle(R.style.PopupAnimation);
 
-        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getBoolean("disable_haptics", false)) {
+        if (!preferences.getBoolean("disable_haptics", false)) {
             VibrationUtils.hapticMajor(getContext());
         }
         if (isOverviewAvailable()) {
@@ -780,8 +824,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 popupWindow.setElevation(100);
                 view.setElevation(100);
                 popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
-            }
-            catch (NullPointerException e) {
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }
@@ -791,8 +834,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
                 if (isOpenQuickView()) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_UP ||
                             motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                        if (!PreferenceManager.getDefaultSharedPreferences(getContext())
-                                .getBoolean("disable_haptics", false)) {
+                        if (!preferences.getBoolean("disable_haptics", false)) {
                             VibrationUtils.hapticMinor(getContext());
                         }
                         popupWindow.dismiss();
@@ -856,11 +898,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_mon:
                 if (mMobileMon.getProgress() > 90 || mWifiMon.getProgress() > 90) {
                     translation = 230;
-                }
-                else if (mMobileMon.getProgress() < 20 || mWifiMon.getProgress() > 20) {
+                } else if (mMobileMon.getProgress() < 20 || mWifiMon.getProgress() > 20) {
                     translation = 230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -868,8 +908,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_tue:
                 if (mMobileTue.getProgress() > 90 || mWifiTue.getProgress() > 90) {
                     translation = 230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -877,8 +916,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_wed:
                 if (mMobileWed.getProgress() > 90 || mWifiWed.getProgress() > 90) {
                     translation = -230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -886,8 +924,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_thurs:
                 if (mMobileThurs.getProgress() > 90 || mWifiThurs.getProgress() > 90) {
                     translation = 230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -895,8 +932,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_fri:
                 if (mMobileFri.getProgress() > 90 || mWifiFri.getProgress() > 90) {
                     translation = 230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -904,11 +940,9 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_sat:
                 if (mMobileSat.getProgress() > 90 || mWifiSat.getProgress() > 90) {
                     translation = 230;
-                }
-                else if (mMobileSat.getProgress() < 20 || mWifiSat.getProgress() > 20) {
+                } else if (mMobileSat.getProgress() < 20 || mWifiSat.getProgress() > 20) {
                     translation = -230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -916,8 +950,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             case R.id.view_sun:
                 if (mMobileSun.getProgress() > 90 || mWifiSun.getProgress() > 90) {
                     translation = 230;
-                }
-                else {
+                } else {
                     translation = 100;
                 }
                 break;
@@ -927,42 +960,6 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
         }
         return translation;
     }
-
-//    @Override
-//    public void onClick(View v) {
-//        Intent intent = new Intent(getContext(), ContainerActivity.class);
-//        intent.putExtra(GENERAL_FRAGMENT_ID, DATA_USAGE_WEEKDAY);
-//        intent.putExtra(EXTRA_WEEK_DAY, getWeekDay(v));
-//        intent.putExtra(EXTRA_IS_WEEK_DAY_VIEW, true);
-//        startActivity(intent);
-//    }
-
-//    private String getWeekDay(View vIew) {
-//        String day = "";
-//        if (vIew.getId() == R.id.view_mon) {
-//            day = requireContext().getString(R.string.label_mon);
-//        }
-//        else if (vIew.getId() == R.id.view_tue) {
-//            day = requireContext().getString(R.string.label_tue);
-//        }
-//        else if (vIew.getId() == R.id.view_wed) {
-//            day = requireContext().getString(R.string.label_wed);
-//        }
-//        else if (vIew.getId() == R.id.view_thurs) {
-//            day = requireContext().getString(R.string.label_thurs);
-//        }
-//        else if (vIew.getId() == R.id.view_fri) {
-//            day = requireContext().getString(R.string.label_fri);
-//        }
-//        else if (vIew.getId() == R.id.view_sat) {
-//            day = requireContext().getString(R.string.label_sat);
-//        }
-//        else if (vIew.getId() == R.id.view_sun) {
-//            day = requireContext().getString(R.string.label_sun);
-//        }
-//
-//        return day;
-//    }
 
     private static class UpdateOverview extends AsyncTask<Object, Object, List<OverviewModel>> {
         private int mode;
@@ -978,8 +975,7 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             if (mode == MODE_LOAD_OVERVIEW) {
                 mOverview.animate().alpha(0.0f);
                 mOverviewLoading.setAlpha(1.0f);
-            }
-            else if (mode == MODE_REFRESH_OVERVIEW) {
+            } else if (mode == MODE_REFRESH_OVERVIEW) {
                 mOverviewLoading.setAlpha(0.0f);
                 mOverview.setAlpha(1.0f);
             }
@@ -1049,6 +1045,32 @@ public class HomeFragment extends Fragment implements View.OnLongClickListener {
             mOverview.animate().alpha(1.0f);
             mOverviewLoading.animate().alpha(0.0f);
             refreshOverview();
+        }
+    }
+
+    private void checkDataQuota() {
+        if (preferences.getBoolean("smart_data_allocation", false)) {
+            long scheduledTime = preferences.getLong(DATA_QUOTA_SCHEDULED_RESET, 0);
+            long performedTime = preferences.getLong(DATA_QUOTA_PERFORMED_RESET, 0);
+
+            if (scheduledTime > 0 &&
+                    scheduledTime < System.currentTimeMillis() &&
+                    performedTime < scheduledTime) {
+                Log.d(TAG, "checkDataQuota: Performing a quota reset");
+
+                WorkManager workManager = WorkManager.getInstance(requireContext());
+                workManager.cancelUniqueWork("smart_data_allocation");
+                workManager.cancelUniqueWork("data_rollover");
+                OneTimeWorkRequest smartDataAllocationWorkRequest = new OneTimeWorkRequest
+                        .Builder(SmartDataAllocationService.class)
+                        .build();
+
+                workManager.enqueueUniqueWork(
+                        "smart_data_allocation",
+                        ExistingWorkPolicy.KEEP,
+                        smartDataAllocationWorkRequest
+                );
+            }
         }
     }
 }

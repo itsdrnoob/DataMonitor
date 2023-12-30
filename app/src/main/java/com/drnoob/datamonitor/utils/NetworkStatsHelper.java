@@ -21,16 +21,19 @@ package com.drnoob.datamonitor.utils;
 
 import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
 import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_END_MIN;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START_HOUR;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM_DATE_START_MIN;
+import static com.drnoob.datamonitor.core.Values.DATA_RESET_DAILY;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.EXCLUDE_APPS_LIST;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM_FILTER;
 import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
 import static com.drnoob.datamonitor.core.Values.SESSION_MONTHLY;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
@@ -50,11 +53,13 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 import androidx.preference.PreferenceManager;
 
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.data.AppModel;
 import com.drnoob.datamonitor.adapters.data.OverviewModel;
+import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -504,7 +509,7 @@ public class NetworkStatsHelper {
 
             list.add(i, new OverviewModel(totalMobile, totalWifi));
         }
-        Log.e(TAG, "updateOverview: " + list.size());
+        Log.d(TAG, "updateOverview: " + list.size());
         Collections.reverse(list);
 
         return list;
@@ -644,6 +649,13 @@ public class NetworkStatsHelper {
                 .getInt("reset_hour", 0);
         int resetMin = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt("reset_min", 0);
+
+        if (!PreferenceManager.getDefaultSharedPreferences(context).getString(DATA_RESET, "null")
+                .equals(DATA_RESET_DAILY)) {
+            resetHour = 0;
+            resetMin = 0;
+        }
+
         int customStartHour = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(DATA_RESET_CUSTOM_DATE_START_HOUR,0);
         int customStartMin = PreferenceManager.getDefaultSharedPreferences(context)
@@ -725,7 +737,7 @@ public class NetworkStatsHelper {
 //                endTimeMillis = endDate.getTime();
 
 
-                /**
+                /*
                  * When data reset date is ahead of today's date, reducing 1 from the current month will
                  * only give the month when the current plan started.
                  * So to get the last month's period, 2 has to be subtracted to get the starting month
@@ -757,7 +769,9 @@ public class NetworkStatsHelper {
                     startTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                     resetDate = dateFormat.parse(startTime);
                     resetTimeMillis = resetDate.getTime();
-                    day = monthlyResetDate;
+
+//                    day = monthlyResetDate;
+                    month += 1; // To restore back the current month.
                     endTime = context.getResources().getString(R.string.reset_time, year, month, day, resetHour, resetMin);
                     endDate = dateFormat.parse(endTime);
                     endTimeMillis = endDate.getTime();
@@ -837,6 +851,12 @@ public class NetworkStatsHelper {
                 endTimeMillis = endDate.getTime();
                 break;
 
+            case SESSION_CUSTOM_FILTER:
+                Pair<Long, Long> filter = AppDataUsageFragment.customFilter.getValue();
+                resetTimeMillis = filter == null ? 0 : filter.first;
+
+                endTimeMillis = filter == null ? 0 : filter.second;
+                break;
         }
 
         if (resetTimeMillis > System.currentTimeMillis()) {

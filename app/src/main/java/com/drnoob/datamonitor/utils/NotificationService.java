@@ -40,11 +40,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.os.IBinder;
-import android.service.notification.StatusBarNotification;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -117,7 +116,12 @@ public class NotificationService extends Service {
             builder.setGroup(DATA_USAGE_NOTIFICATION_NOTIFICATION_GROUP);
 
             try {
-                startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+                }
+                else {
+                    startForeground(DATA_USAGE_NOTIFICATION_ID, builder.build());
+                }
                 startUpdater(getApplicationContext());
             }
             catch (Exception e) {
@@ -223,7 +227,7 @@ public class NotificationService extends Service {
                             wifiData[2]);
 
                     if (showPercent) {
-                        Log.e(TAG, "onReceive: total: " + Arrays.toString(total) + " mobile: " +
+                        Log.d(TAG, "onReceive: total: " + Arrays.toString(total) + " mobile: " +
                                 Arrays.toString(mobileData));
                         String mobileDataTotal = mobileData[2];
                         if (mobileDataTotal.contains(",")) {

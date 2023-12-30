@@ -3,6 +3,27 @@
 All notable changes to Data Monitor will be documented in this file.
 
 
+## v2.4.0
+
+Data Monitor v2.4.0 release <br>
+This release features multiple changes and improvements.
+
+### What's new?
+- Added support for Android 14.
+- Introducing Smart data allocation and quota alert (Beta). Manage your data plan with a daily quota, data rollover and usage alert.
+- Updated plan details view. The home screen now features the number of days remaining in your data plan.
+- Added custom filter for app usage. Now you can take control over viewing app data usage for any specific time period.
+
+### Fixes and Improvements
+- Fixed app usage showing incorrect total data usage at times.
+- Fixed notification issues on Android 14.
+- Improved calculations related to data plan and its validity.
+- Localisation fixes and improvements.
+- Fixed certain crashes and improved exception handling.
+- Added Malay and Hebrew translations.
+- Other minor changes and improvements.
+
+
 ## v2.3.2
 
 Data Monitor v2.3.2 release <br>

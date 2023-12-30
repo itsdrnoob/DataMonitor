@@ -136,7 +136,7 @@
     <string name="label_widget_refresh_interval_change">微件将每 %1$s 更新</string>
     <string name="label_notification_refresh_interval_change">通知将每 %1$s 更新</string>
     <string name="label_data_usage_reset_time_change">数据用量将在每 %1$s %2$s 重置</string>
-    <string name="label_data_usage_reset_date_change">数据用量将在每月的 %1$d%2$s 重置</string>
+    <string name="label_data_usage_reset_date_change">数据用量将在每月的 %1$s 重置</string>
     <string name="remaining_data_info_enabled">剩余流量信息已启用</string>
     <string name="remaining_data_info_disabled">剩余流量信息已禁用</string>
     <string name="label_monitoring_no_plan">添加一个流量使用计划以继续</string>
@@ -208,7 +208,7 @@
     <string name="label_want_to_contribute_language">未找到您的语言？点此了解如何帮助我们.</string>
     <string name="current_language">当前语言</string>
     <string name="available_languages">可用语言</string>
-    <string name="label_reset_every_month">每月 %1$s%2$s</string>
+    <string name="label_reset_every_month">每月 %1$s</string>
     <string name="setup_usage_reset_date">用量重置日期</string>
     <string name="system_data_usage">系统数据用量</string>
     <string name="cracky5322_summary">繁体中文 译者</string>
@@ -300,7 +300,7 @@
     <string name="title_data_plan_expired">数据计划已过期！</string>
     <string name="crash_logs_warning">崩溃日志；不要修改</string>
     <string name="error_unknown_telegram_client">未安装电报或存在未知客户端。请尝试其他方法。</string>
-    <string name="battery_optimisation_enabled_info">已启用电池优化。这将干扰数据监视器的工作。单击以禁用。</string>
+    <string name="battery_optimisation_enabled_info">已启用电池优化。这将干扰数据监视器的工作。</string>
     <string name="custom_download_url_hint">输入完整的下载网址</string>
     <string name="label_permission_denied">权限被拒绝！</string>
     <string name="device_info_body">设备信息包括：
@@ -312,4 +312,8 @@
     <string name="label_custom_server">自定义服务器</string>
     <string name="label_send_report">通过以下方式发送报告</string>
     <string name="label_custom_server_save_success">服务器首选项已保存</string>
+    <string name="combine_notifications">合并通知</string>
+    <string name="combined_notification_icon">通知已合并图标</string>
+    <string name="combined_notification_icon_summary">选择显示合并通知的图标</string>
+    <string name="combine_notifications_summary">将数据监视器和网络速度合并为一个通知。</string>
 </resources>

@@ -20,7 +20,7 @@
     <string name="label_changelogs">नवीन काय आहे ते शोधा</string>
     <string name="notification_disabled">डेटा मॉनिटर सूचना अक्षम</string>
     <string name="label_widget_refresh_interval_change">विजेट प्रत्येक %1$s अद्यतनित केले जाईल</string>
-    <string name="label_data_usage_reset_date_change">डेटा वापर दर महिन्याच्या %1$d%2$s रोजी रीसेट केला जाईल</string>
+    <string name="label_data_usage_reset_date_change">डेटा वापर दर महिन्याच्या %1$s रोजी रीसेट केला जाईल</string>
     <string name="label_monitoring_no_plan">देखरेख सुरू करण्यासाठी डेटा योजना जोडा</string>
     <string name="label_widget_refreshed">विजेट ताजेतवाने</string>
     <string name="label_notification_refresh_interval_change">सूचना प्रत्येक %1$s अद्यतनित केली जाईल</string>
@@ -106,7 +106,7 @@
     <string name="system_data_usage">सिस्टम डेटा वापर</string>
     <string name="Kefir2105_summary">युक्रेनियन</string>
     <string name="app_label_screen_time">स्क्रीन वेळ: %1$s</string>
-    <string name="label_reset_every_month">प्रत्येक महिन्याचा %1$s%2$s</string>
+    <string name="label_reset_every_month">प्रत्येक महिन्याचा %1$s</string>
     <string name="Master2050_summary">पारंपारिक चीनी, पोर्तुगीज, फ्रेंच, नॉर्वेजियन बोक्मासेल, स्पॅनिश, जर्मन, रोमानियाई, कोरियन, तुर्की, सरलीकृत चिनी, युक्रेनियन, हिंदी, रशियन, अरबी</string>
     <string name="refresh_list">यादी रिफ्रेश करा</string>
     <string name="network_ip">नेटवर्क आयपी</string>

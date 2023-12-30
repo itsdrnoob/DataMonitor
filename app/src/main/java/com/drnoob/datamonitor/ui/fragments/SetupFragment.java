@@ -21,6 +21,8 @@ package com.drnoob.datamonitor.ui.fragments;
 
 import static com.drnoob.datamonitor.Common.cancelDataPlanNotification;
 import static com.drnoob.datamonitor.Common.dismissOnClick;
+import static com.drnoob.datamonitor.Common.formatOrdinalNumber;
+import static com.drnoob.datamonitor.Common.postNotification;
 import static com.drnoob.datamonitor.Common.setDataPlanNotification;
 import static com.drnoob.datamonitor.Common.setRefreshAlarm;
 import static com.drnoob.datamonitor.Common.showAlarmPermissionDeniedDialog;
@@ -56,6 +58,7 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDat
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -83,10 +86,13 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.core.Values;
@@ -96,10 +102,12 @@ import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.CompoundNotification;
+import com.drnoob.datamonitor.utils.DailyQuotaAlertReceiver;
 import com.drnoob.datamonitor.utils.DataUsageMonitor;
 import com.drnoob.datamonitor.utils.LiveNetworkMonitor;
 import com.drnoob.datamonitor.utils.NotificationService;
 import com.drnoob.datamonitor.utils.NotificationService.NotificationUpdater;
+import com.drnoob.datamonitor.utils.SmartDataAllocationService;
 import com.drnoob.datamonitor.utils.VibrationUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -110,8 +118,10 @@ import com.google.android.material.snackbar.Snackbar;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Calendar;
 
 public class SetupFragment extends Fragment {
+    private static final String TAG = SetupFragment.class.getSimpleName();
     private static Context mContext;
 
     public SetupFragment() {
@@ -120,6 +130,7 @@ public class SetupFragment extends Fragment {
 
     public static class SetupPreference extends PreferenceFragmentCompat {
         private static final String TAG = SetupPreference.class.getSimpleName();
+        private final int CALENDAR_YEAR = 2000;
 
         private Preference mSetupWidget, mWidgetRefreshInterval, mNotificationRefreshInterval,
                 mAddDataPlan, mUsageResetTime, mWidgetRefresh, mDataWarningTrigger, mAppDataLimit,
@@ -127,7 +138,7 @@ public class SetupFragment extends Fragment {
         private SwitchPreferenceCompat mSetupNotification, mRemainingDataInfo, mShowWifiWidget,
                 mShowMobileData, mShowWifi, mShowDataWarning, mNetworkSignalNotification,
                 mAutoHideNetworkSpeed, mCombineNotifications, mLockscreenNotifications, mAlwaysShowTotal,
-                mAutoUpdateDataPlan;
+                mAutoUpdateDataPlan, mSmartDataAllocation, mDailyQuotaAlert;
         private Snackbar snackbar;
         private Long planStartDateMillis, planEndDateMillis;
         private Intent liveNetworkMonitorIntent;
@@ -157,6 +168,8 @@ public class SetupFragment extends Fragment {
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 updateResetData();
                                 refreshDataPlanSettingsVisibility();
+                                refreshQuotaAlertVisibility();
+                                updateDailyQuota();
                                 if (PreferenceManager.getDefaultSharedPreferences(requireContext())
                                         .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
                                     if (PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -215,6 +228,8 @@ public class SetupFragment extends Fragment {
             mLockscreenNotifications = (SwitchPreferenceCompat) findPreference("lockscreen_notification");
             mAlwaysShowTotal = (SwitchPreferenceCompat) findPreference("always_show_total");
             mAutoUpdateDataPlan = (SwitchPreferenceCompat) findPreference("auto_update_data_plan");
+            mSmartDataAllocation = (SwitchPreferenceCompat) findPreference("smart_data_allocation");
+            mDailyQuotaAlert = (SwitchPreferenceCompat) findPreference("daily_quota_alert");
 
             liveNetworkMonitorIntent = new Intent(getContext(), LiveNetworkMonitor.class);
 
@@ -278,6 +293,7 @@ public class SetupFragment extends Fragment {
 
             updateResetData();
             refreshDataPlanSettingsVisibility();
+            refreshQuotaAlertVisibility();
 
             mCombinedNotificationIcon.setVisible(PreferenceManager.getDefaultSharedPreferences(getContext())
                     .getBoolean("combine_notifications", false));
@@ -936,7 +952,8 @@ public class SetupFragment extends Fragment {
                                 builder.setContentIntent(activityPendingIntent);
                                 builder.setAutoCancel(false);
                                 builder.setGroup(NETWORK_SIGNAL_NOTIFICATION_GROUP);
-                                managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+//                                managerCompat.notify(NETWORK_SIGNAL_NOTIFICATION_ID, builder.build());
+                                postNotification(getContext(), managerCompat, builder, NETWORK_SIGNAL_NOTIFICATION_ID);
                             }
                         }
                         else {
@@ -1084,6 +1101,8 @@ public class SetupFragment extends Fragment {
                         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_date_picker, null);
 
                         DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.reset_date_picker);
+                        Calendar calendar = Calendar.getInstance();
+                        datePicker.init(CALENDAR_YEAR, 0, 1, null);
                         ConstraintLayout footer = dialogView.findViewById(R.id.footer);
                         TextView cancel = footer.findViewById(R.id.cancel);
                         TextView ok = footer.findViewById(R.id.ok);
@@ -1105,6 +1124,7 @@ public class SetupFragment extends Fragment {
                                         .getBoolean("disable_haptics", false)) {
                                     VibrationUtils.hapticMinor(getContext());
                                 }
+                                datePicker.updateDate(CALENDAR_YEAR, 0, datePicker.getDayOfMonth());
                             }
                         });
 
@@ -1145,24 +1165,11 @@ public class SetupFragment extends Fragment {
                                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
                                 getContext().sendBroadcast(intent);
 
-                                String date = String.valueOf(datePicker.getDayOfMonth());
-                                String suffix;
-
-                                if (date.endsWith("1")) {
-                                    suffix = "st";
-                                }
-                                else if (date.endsWith("2")) {
-                                    suffix = "nd";
-                                }
-                                else if (date.endsWith("3")) {
-                                    suffix = "rd";
-                                }
-                                else {
-                                    suffix = "th";
-                                }
+                                int date = datePicker.getDayOfMonth();
+                                String ordinal = formatOrdinalNumber(date, requireContext());
 
                                 mUsageResetTime.setSummary(getContext().getString(R.string.label_reset_every_month,
-                                        date, suffix));
+                                        ordinal));
 
                                 dialog.dismiss();
 
@@ -1172,12 +1179,12 @@ public class SetupFragment extends Fragment {
                                 }
 
                                 snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
-                                        getString(R.string.label_data_usage_reset_date_change, datePicker.getDayOfMonth(), suffix),
+                                        getString(R.string.label_data_usage_reset_date_change, ordinal),
                                         Snackbar.LENGTH_SHORT)
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 dismissOnClick(snackbar);
                                 snackbar.show();
-
+                                updateDailyQuota();
                             }
                         });
 
@@ -1313,6 +1320,7 @@ public class SetupFragment extends Fragment {
                                         .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
                                 dismissOnClick(snackbar);
                                 snackbar.show();
+                                updateDailyQuota();
 
                             }
                         });
@@ -1516,12 +1524,14 @@ public class SetupFragment extends Fragment {
                                         totalUsage = totalUsage.replace("٫", ".");
                                     }
 
+                                    totalUsage = Common.parseNumber(totalUsage);
+
                                     if (PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1) * trigger / 100 >
                                             Double.parseDouble(totalUsage)) {
                                         resumeMonitor();
                                     }
                                 }
-                                catch (ParseException | RemoteException e) {
+                                catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -1561,6 +1571,79 @@ public class SetupFragment extends Fragment {
                 }
             });
 
+            mSmartDataAllocation.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("smart_data_allocation", false);
+                    Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getFloat(DATA_LIMIT, -1);
+                    WorkManager workManager = WorkManager.getInstance(requireContext());
+                    if (dataLimit < 0) {
+                        mSmartDataAllocation.setChecked(false);
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                        getString(R.string.label_add_data_plan_first), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        snackbar.show();
+                    }
+                    else {
+                        if (isChecked) {
+                            OneTimeWorkRequest smartDataAllocationWorkRequest = new OneTimeWorkRequest
+                                    .Builder(SmartDataAllocationService.class)
+                                    .build();
+
+                            workManager.enqueueUniqueWork(
+                                    "smart_data_allocation",
+                                    ExistingWorkPolicy.KEEP,
+                                    smartDataAllocationWorkRequest
+                            );
+                        }
+                        else {
+                            workManager.cancelUniqueWork("smart_data_allocation");
+                            workManager.cancelUniqueWork("data_rollover");
+                            workManager.cancelUniqueWork("quota_reset");
+                            mDailyQuotaAlert.setChecked(false);
+
+                        }
+                        refreshQuotaAlertVisibility();
+                    }
+                    return false;
+                }
+            });
+
+            mDailyQuotaAlert.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                    boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getBoolean("daily_quota_alert", false);
+                    Float dataLimit = PreferenceManager.getDefaultSharedPreferences(getContext())
+                            .getFloat(DATA_LIMIT, -1);
+                    if (dataLimit < 0) {
+                        mDailyQuotaAlert.setChecked(false);
+                        snackbar = Snackbar.make(getActivity().findViewById(R.id.main_root),
+                                        getString(R.string.label_add_data_plan_first), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(getActivity().findViewById(R.id.bottomNavigationView));
+                        snackbar.show();
+                    }
+                    else {
+                        Intent intent = new Intent(getContext(), DailyQuotaAlertReceiver.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 1000, intent, PendingIntent.FLAG_IMMUTABLE);
+                        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                        if (isChecked) {
+                            alarmManager.setExactAndAllowWhileIdle(
+                                    AlarmManager.RTC_WAKEUP,
+                                    System.currentTimeMillis(),
+                                    pendingIntent
+                            );
+                        }
+                        else {
+                            alarmManager.cancel(pendingIntent);
+                        }
+                    }
+                    return false;
+                }
+            });
+
         }
 
         @Override
@@ -1584,6 +1667,24 @@ public class SetupFragment extends Fragment {
             }
         }
 
+        private void refreshQuotaAlertVisibility() {
+            if (PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getString(DATA_RESET, "null").equals(DATA_RESET_MONTHLY) ||
+                    PreferenceManager.getDefaultSharedPreferences(requireContext())
+                            .getString(DATA_RESET, "null").equals(DATA_RESET_CUSTOM)) {
+                if (PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getBoolean("smart_data_allocation", false)) {
+                    mDailyQuotaAlert.setVisible(true);
+                }
+                else {
+                    mDailyQuotaAlert.setVisible(false);
+                }
+            }
+            else {
+                mDailyQuotaAlert.setVisible(false);
+            }
+        }
+
         public static void pauseMonitor() {
             try {
                 mContext.stopService(new Intent(mContext, DataUsageMonitor.class));
@@ -1602,25 +1703,11 @@ public class SetupFragment extends Fragment {
             if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
                     .equals(DATA_RESET_MONTHLY)) {
                 resetTitle = getContext().getString(R.string.setup_usage_reset_date);
-                String date = String.valueOf(PreferenceManager.getDefaultSharedPreferences(getContext())
-                        .getInt(DATA_RESET_DATE, 1));
-                String suffix;
+                int date = PreferenceManager.getDefaultSharedPreferences(getContext())
+                        .getInt(DATA_RESET_DATE, 1);
+                String ordinal = formatOrdinalNumber(date, requireContext());
 
-                if (date.endsWith("1")) {
-                    suffix = "st";
-                }
-                else if (date.endsWith("2")) {
-                    suffix = "nd";
-                }
-                else if (date.endsWith("3")) {
-                    suffix = "rd";
-                }
-                else {
-                    suffix = "th";
-                }
-
-                resetSummary = (getContext().getString(R.string.label_reset_every_month,
-                        date, suffix));
+                resetSummary = (getContext().getString(R.string.label_reset_every_month, ordinal));
             }
             else if (PreferenceManager.getDefaultSharedPreferences(getContext()).getString(DATA_RESET, "null")
                     .equals(DATA_RESET_CUSTOM)) {
@@ -1680,6 +1767,23 @@ public class SetupFragment extends Fragment {
 
             mUsageResetTime.setTitle(resetTitle);
             mUsageResetTime.setSummary(resetSummary);
+        }
+
+        private void updateDailyQuota() {
+            if (mSmartDataAllocation.isChecked()) {
+                WorkManager workManager = WorkManager.getInstance(requireContext());
+                workManager.cancelUniqueWork("smart_data_allocation");
+                workManager.cancelUniqueWork("data_rollover");
+                OneTimeWorkRequest smartDataAllocationWorkRequest = new OneTimeWorkRequest
+                        .Builder(SmartDataAllocationService.class)
+                        .build();
+
+                workManager.enqueueUniqueWork(
+                        "smart_data_allocation",
+                        ExistingWorkPolicy.KEEP,
+                        smartDataAllocationWorkRequest
+                );
+            }
         }
     }
 

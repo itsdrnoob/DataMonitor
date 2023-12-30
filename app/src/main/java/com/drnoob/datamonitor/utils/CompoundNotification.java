@@ -34,7 +34,6 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.formatData;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceMobileDataUsage;
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataUsage;
 
-import android.app.ForegroundServiceStartNotAllowedException;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -43,6 +42,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ServiceInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -64,7 +64,6 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.PreferenceManager;
 
-import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 
@@ -72,6 +71,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CompoundNotification extends Service {
     private static final String TAG = CompoundNotification.class.getSimpleName();
@@ -93,7 +93,7 @@ public class CompoundNotification extends Service {
             wifiDataUsage,
             totalDataUsage;
     private static IconCompat dataUsageIcon, networkSpeedIcon;
-    private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
+    private static final ConcurrentHashMap<Network, LinkProperties> linkPropertiesHashMap = new ConcurrentHashMap<>();
     private static boolean serviceRestart = true;
     private static CompoundNotification mCompoundNotification;
     private static RemoteViews contentView, bigContentView;
@@ -120,13 +120,15 @@ public class CompoundNotification extends Service {
         previousDownBytes = 0l;
         previousUpBytes = 0l;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                final String iface = linkProperties.getInterfaceName();
-                if (iface == null) {
-                    continue;
+            synchronized (linkPropertiesHashMap) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    previousUpBytes += TrafficStats.getTxBytes(iface);
+                    previousDownBytes += TrafficStats.getRxBytes(iface);
                 }
-                previousUpBytes += TrafficStats.getTxBytes(iface);
-                previousDownBytes += TrafficStats.getRxBytes(iface);
             }
         }
         else {
@@ -240,7 +242,12 @@ public class CompoundNotification extends Service {
             registerNetworkReceiver(mCompoundNotification);
         }
         try {
-            startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+            }
+            else {
+                startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+            }
             isServiceRunning = true;
         }
         catch (Exception e) {
@@ -380,13 +387,15 @@ public class CompoundNotification extends Service {
 //            Long currentDownBytes = TrafficStats.getTotalRxBytes();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                    final String iface = linkProperties.getInterfaceName();
-                    if (iface == null) {
-                        continue;
+                synchronized (linkPropertiesHashMap) {
+                    for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                        final String iface = linkProperties.getInterfaceName();
+                        if (iface == null) {
+                            continue;
+                        }
+                        currentUpBytes += TrafficStats.getTxBytes(iface);
+                        currentDownBytes += TrafficStats.getRxBytes(iface);
                     }
-                    currentUpBytes += TrafficStats.getTxBytes(iface);
-                    currentDownBytes += TrafficStats.getRxBytes(iface);
                 }
             }
             else {
@@ -517,29 +526,32 @@ public class CompoundNotification extends Service {
         else {
             mBuilder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
         }
-        mBuilder.setContent(contentView);
+//        mBuilder.setContent(contentView);
+        mBuilder.setCustomContentView(contentView);
         mBuilder.setCustomBigContentView(bigContentView);
 
         try {
             postNotification(context, managerCompat, mBuilder, NETWORK_SIGNAL_NOTIFICATION_ID);
         }
         catch (Exception e) {
-            e.printStackTrace();
             contentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification);
             bigContentView = new RemoteViews(context.getPackageName(), R.layout.layout_data_usage_notification_expanded);
+            e.printStackTrace();
         }
 
     }
 
     private static void updateInitialData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                final String iface = linkProperties.getInterfaceName();
-                if (iface == null) {
-                    continue;
+            synchronized (linkPropertiesHashMap) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    previousUpBytes += TrafficStats.getTxBytes(iface);
+                    previousDownBytes += TrafficStats.getRxBytes(iface);
                 }
-                previousUpBytes += TrafficStats.getTxBytes(iface);
-                previousDownBytes += TrafficStats.getRxBytes(iface);
             }
         }
         else {
@@ -753,7 +765,16 @@ public class CompoundNotification extends Service {
             isNetworkConnected = true;
             if (isTaskPaused) {
                 try {
-                    mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                        mCompoundNotification.startForeground(
+                                NETWORK_SIGNAL_NOTIFICATION_ID,
+                                mBuilder.build(),
+                                ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
+                        );
+                    }
+                    else {
+                        mCompoundNotification.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();

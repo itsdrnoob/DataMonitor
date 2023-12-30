@@ -152,7 +152,7 @@
     <string name="available_languages">利用可能</string>
     <string name="error_permission_denied">権限が拒否されました。手動で許可してください。</string>
     <string name="current_language">現在</string>
-    <string name="label_reset_every_month">毎月%1$s%2$s</string>
+    <string name="label_reset_every_month">毎月%1$s</string>
     <string name="setup_usage_reset_date">データ使用量のリセット日</string>
     <string name="system_data_usage">システムのデータ使用量</string>
     <string name="cracky5322_summary">中国語(繁体字)</string>
@@ -200,7 +200,7 @@
     <string name="remaining_data_info_enabled">データ残量情報が有効です</string>
     <string name="remaining_data_info_disabled">データ残量情報が無効です</string>
     <string name="label_notification_enabled">データ使用量モニターの通知は有効です</string>
-    <string name="label_data_usage_reset_date_change">データ使用量は毎月%1$d%2$sにリセットされます</string>
+    <string name="label_data_usage_reset_date_change">データ使用量は毎月%1$sにリセットされます</string>
     <string name="label_monitoring_no_plan">監視を始めるにはデータプランを追加してください</string>
     <string name="label_add_data_plan_first">最初にデータプランを追加してください</string>
     <string name="label_data_remaining_used_excess">超過%1$s</string>

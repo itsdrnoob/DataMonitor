@@ -19,6 +19,8 @@
 
 package com.drnoob.datamonitor.ui.fragments;
 
+import static android.app.Activity.RESULT_OK;
+import static com.drnoob.datamonitor.core.Values.ADD_CUSTOM_SESSION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.DAILY_DATA_HOME_ACTION;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_CUSTOM;
@@ -27,8 +29,10 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_SESSION;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_TYPE;
 import static com.drnoob.datamonitor.core.Values.EXTRA_IS_WEEK_DAY_VIEW;
 import static com.drnoob.datamonitor.core.Values.EXTRA_WEEK_DAY;
+import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
 import static com.drnoob.datamonitor.core.Values.SESSION_ALL_TIME;
 import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM;
+import static com.drnoob.datamonitor.core.Values.SESSION_CUSTOM_FILTER;
 import static com.drnoob.datamonitor.core.Values.SESSION_LAST_MONTH;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_MONTH;
 import static com.drnoob.datamonitor.core.Values.SESSION_THIS_YEAR;
@@ -46,6 +50,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -56,10 +61,15 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -70,6 +80,7 @@ import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.adapters.AppDataUsageAdapter;
 import com.drnoob.datamonitor.adapters.data.AppDataUsageModel;
 import com.drnoob.datamonitor.adapters.data.FragmentViewModel;
+import com.drnoob.datamonitor.ui.activities.ContainerActivity;
 import com.drnoob.datamonitor.ui.activities.MainActivity;
 import com.drnoob.datamonitor.utils.NetworkStatsHelper;
 import com.drnoob.datamonitor.utils.VibrationUtils;
@@ -82,6 +93,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AppDataUsageFragment extends Fragment {
     private static final String TAG = AppDataUsageFragment.class.getSimpleName();
@@ -101,6 +113,13 @@ public class AppDataUsageFragment extends Fragment {
     private static boolean isWeekDayView;
     private static String totalDataUsage;
     private static int selectedSession, selectedType;
+    private ActivityResultLauncher<Intent> customSessionLauncher;
+
+    public static MutableLiveData<Pair<Long, Long>> customFilter = new MutableLiveData<>();
+    public static MutableLiveData<String> customFilterDate = new MutableLiveData<>();
+    public static MutableLiveData<Pair<Long, Long>> customFilterDateMillis = new MutableLiveData<>();
+    public static MutableLiveData<Map<String, Integer>> customFilterTime = new MutableLiveData<>();
+    public static Boolean shouldShowTime = false;
 
     public AppDataUsageFragment() {
 
@@ -109,6 +128,18 @@ public class AppDataUsageFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        customSessionLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Long startMillis = result.getData().getLongExtra("start", 0);
+                        Long endMillis = result.getData().getLongExtra("end", 0);
+                        String date = result.getData().getStringExtra("date");
+                        customFilter.postValue(new Pair<>(startMillis, endMillis));
+                        customFilterDate.postValue(date);
+                    }
+                }
+        );
     }
 
     @Override
@@ -158,7 +189,7 @@ public class AppDataUsageFragment extends Fragment {
         setType(type);
         mTotalUsage.setText("...");
 
-        Log.e(TAG, "onCreateView: " + getRefreshAppDataUsage() );
+        Log.d(TAG, "onCreateView: " + getRefreshAppDataUsage() );
         if (getRefreshAppDataUsage()) {
             refreshData();
         }
@@ -192,6 +223,7 @@ public class AppDataUsageFragment extends Fragment {
                 TextView ok = footer.findViewById(R.id.ok);
 
                 Chip sessionCurrentPlan = sessionGroup.findViewById(R.id.session_current_plan);
+                Chip sessionCustom = sessionGroup.findViewById(R.id.session_custom);
 
                 if (PreferenceManager.getDefaultSharedPreferences(getContext())
                         .getString(DATA_RESET, "null")
@@ -201,6 +233,27 @@ public class AppDataUsageFragment extends Fragment {
                 else {
                     sessionCurrentPlan.setVisibility(View.GONE);
                 }
+
+                String sessionText = customFilterDate.getValue() == null ? getString(R.string.add_custom_session)
+                        : customFilterDate.getValue();
+                sessionCustom.setText(sessionText);
+
+                customFilterDate.observe(getActivity(), new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        String sessionText = s == null ? getString(R.string.add_custom_session) : s;
+                        sessionCustom.setText(sessionText);
+                    }
+                });
+
+                sessionCustom.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sessionCustom.setChecked(true);
+                        customSessionLauncher.launch(new Intent(requireActivity(), ContainerActivity.class)
+                                .putExtra(GENERAL_FRAGMENT_ID, ADD_CUSTOM_SESSION_FRAGMENT));
+                    }
+                });
 
                 sessionGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
                     @Override
@@ -251,6 +304,9 @@ public class AppDataUsageFragment extends Fragment {
                         sessionGroup.check(R.id.session_current_plan);
                         break;
 
+                    case SESSION_CUSTOM_FILTER:
+                        sessionGroup.check(R.id.session_custom);
+
                 }
 
                 switch (getType()) {
@@ -298,6 +354,11 @@ public class AppDataUsageFragment extends Fragment {
                             case R.id.session_current_plan:
                                 selectedSession = SESSION_CUSTOM;
                                 break;
+
+                            case R.id.session_custom:
+                                selectedSession = SESSION_CUSTOM_FILTER;
+                                break;
+
                             case R.id.session_today:
 
                             default:
@@ -344,170 +405,6 @@ public class AppDataUsageFragment extends Fragment {
                 refreshData();
             }
         });
-
-//        mSession.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (isDataLoading()) {
-//                    return;
-//                }
-//                BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
-//                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_session, null);
-//
-//                RadioGroup sessions = dialogView.findViewById(R.id.session_group);
-//                ConstraintLayout footer = dialogView.findViewById(R.id.footer);
-//                TextView cancel = footer.findViewById(R.id.cancel);
-//                TextView ok = footer.findViewById(R.id.ok);
-//
-//                switch (getSession(getContext())) {
-//                    case SESSION_TODAY:
-//                        sessions.check(R.id.session_today);
-//                        break;
-//
-//                    case SESSION_YESTERDAY:
-//                        sessions.check(R.id.session_yesterday);
-//                        break;
-//
-//                    case SESSION_THIS_MONTH:
-//                        sessions.check(R.id.session_this_month);
-//                        break;
-//
-//                    case SESSION_LAST_MONTH:
-//                        sessions.check(R.id.session_last_month);
-//                        break;
-//
-//                    case SESSION_THIS_YEAR:
-//                        sessions.check(R.id.session_this_year);
-//                        break;
-//
-//                    case SESSION_ALL_TIME:
-//                        sessions.check(R.id.session_all_time);
-//                        break;
-//
-//                }
-//
-//                cancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                ok.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        String session = null;
-//                        switch (sessions.getCheckedRadioButtonId()) {
-//                            case R.id.session_today:
-//                                session = getString(R.string.label_today);
-//                                break;
-//
-//                            case R.id.session_yesterday:
-//                                session = getString(R.string.label_yesterday);
-//                                break;
-//
-//                            case R.id.session_this_month:
-//                                session = getString(R.string.label_this_month);
-//                                break;
-//
-//                            case R.id.session_last_month:
-//                                session = getString(R.string.label_last_month);
-//                                break;
-//
-//                            case R.id.session_this_year:
-//                                session = getString(R.string.label_this_year);
-//                                break;
-//
-//                            case R.id.session_all_time:
-//                                session = getString(R.string.label_all_time);
-//                                break;
-//                        }
-//                        mSession.setText(session);
-//                        if (!MainActivity.isDataLoading()) {
-//                            refreshData();
-//                        }
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                dialog.setContentView(dialogView);
-//                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                    @Override
-//                    public void onShow(DialogInterface dialogInterface) {
-//                        BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
-//                        FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-//                        BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
-//                    }
-//                });
-//                dialog.show();
-//            }
-//        });
-//
-//        mType.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (isDataLoading()) {
-//                    return;
-//                }
-//                BottomSheetDialog dialog = new BottomSheetDialog(getContext(), R.style.BottomSheet);
-//                View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.data_usage_type, null);
-//
-//                RadioGroup types = dialogView.findViewById(R.id.type_group);
-//                ConstraintLayout footer = dialogView.findViewById(R.id.footer);
-//                TextView cancel = footer.findViewById(R.id.cancel);
-//                TextView ok = footer.findViewById(R.id.ok);
-//
-//                switch (getType(getContext())) {
-//                    case TYPE_MOBILE_DATA:
-//                        types.check(R.id.type_mobile);
-//                        break;
-//
-//                    case TYPE_WIFI:
-//                        types.check(R.id.type_wifi);
-//                        break;
-//                }
-//
-//                cancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                ok.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        String type = null;
-//                        switch (types.getCheckedRadioButtonId()) {
-//                            case R.id.type_mobile:
-//                                type = getString(R.string.label_mobile_data);
-//                                break;
-//
-//                            case R.id.type_wifi:
-//                                type = getString(R.string.label_wifi);
-//                                break;
-//                        }
-//                        mType.setText(type);
-//
-//                        if (!MainActivity.isDataLoading()) {
-//                            refreshData();
-//                        }
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                dialog.setContentView(dialogView);
-//                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                    @Override
-//                    public void onShow(DialogInterface dialogInterface) {
-//                        BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
-//                        FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-//                        BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
-//                    }
-//                });
-//                dialog.show();
-//            }
-//        });
 
          /*
         Shrink or expand the FAB according to user scroll
@@ -589,9 +486,7 @@ public class AppDataUsageFragment extends Fragment {
 
     public static void onDataLoaded(Context context) {
         try {
-            if (totalDataUsage == null || totalDataUsage.isEmpty()) {
-                totalDataUsage = getTotalDataUsage(context);
-            }
+            totalDataUsage = getTotalDataUsage(context);
             mTotalUsage.setText(context.getString(R.string.total_usage, totalDataUsage));
 
         }

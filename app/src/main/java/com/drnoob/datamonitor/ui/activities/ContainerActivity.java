@@ -21,6 +21,7 @@ package com.drnoob.datamonitor.ui.activities;
 
 import static com.drnoob.datamonitor.Common.setLanguage;
 import static com.drnoob.datamonitor.core.Values.ABOUT_FRAGMENT;
+import static com.drnoob.datamonitor.core.Values.ADD_CUSTOM_SESSION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_CONTRIBUTORS_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_LIMIT_FRAGMENT;
@@ -66,6 +67,7 @@ import com.drnoob.datamonitor.ui.fragments.AppContributorsFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataLimitFragment;
 import com.drnoob.datamonitor.ui.fragments.AppDataUsageFragment;
 import com.drnoob.datamonitor.ui.fragments.ContributorsFragment;
+import com.drnoob.datamonitor.ui.fragments.CustomSessionFragment;
 import com.drnoob.datamonitor.ui.fragments.DataPlanFragment;
 import com.drnoob.datamonitor.ui.fragments.DiagnosticsHistoryFragment;
 import com.drnoob.datamonitor.ui.fragments.DiagnosticsSettingsFragment;
@@ -236,6 +238,12 @@ public class ContainerActivity extends AppCompatActivity {
             case APP_CONTRIBUTORS_FRAGMENT:
                 fragment = new AppContributorsFragment();
                 title = getString(R.string.app_contributors);
+                break;
+
+            case ADD_CUSTOM_SESSION_FRAGMENT:
+                fragment = new CustomSessionFragment();
+                title = getString(R.string.add_custom_session);
+                getSupportActionBar().hide();
                 break;
         }
 

@@ -47,6 +47,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.icu.text.MessageFormat;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.Spannable;
@@ -56,7 +57,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -76,6 +76,7 @@ import com.drnoob.datamonitor.utils.NotificationService;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -188,7 +189,6 @@ public class Common {
         list.add(new LanguageModel("Portuguese", "pt", "rBR"));
         list.add(new LanguageModel("Spanish", "es", ""));
         list.add(new LanguageModel("Ukrainian", "uk", ""));
-//        list.add(new LanguageModel("Bhojpuri", "bho", ""));
         list.add(new LanguageModel("Hindi", "hi", ""));
         list.add(new LanguageModel("Indonesian", "in", ""));
         list.add(new LanguageModel("Korean", "ko", ""));
@@ -199,6 +199,8 @@ public class Common {
         list.add(new LanguageModel("Czech", "cs", ""));
         list.add(new LanguageModel("Vietnamese", "vi", ""));
         list.add(new LanguageModel("Japanese", "ja", ""));
+        list.add(new LanguageModel("Hebrew", "iw", ""));
+        list.add(new LanguageModel("Malay", "ms", ""));
 
         Collections.sort(list, new Comparator<LanguageModel>() {
             @Override
@@ -395,11 +397,11 @@ public class Common {
         postNotification(context, managerCompat, builder, OTHER_NOTIFICATION_ID);
     }
 
-    @SuppressLint("SimpleDateFormat")
     public static String getPlanValidity(int session, Context context) {
         String validity;
         Calendar calendar = Calendar.getInstance();
-        String month, endDate, suffix, end;
+        String month, ordinal, end;
+        int endDate;
         if (session == SESSION_MONTHLY) {
             int planEnd = PreferenceManager.getDefaultSharedPreferences(context)
                     .getInt(DATA_RESET_DATE, 1);
@@ -411,8 +413,8 @@ public class Common {
             if (today >= planEnd) {
                 calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
             }
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = String.valueOf(planEnd);
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(context)).format(calendar.getTime());
+            endDate = planEnd;
         }
         else {
             long planEndDateMillis;
@@ -426,30 +428,45 @@ public class Common {
                 planEndDateMillis = ((Number) planEndIntValue).longValue();
             }
             calendar.setTimeInMillis(planEndDateMillis);
-            month = new SimpleDateFormat("MMMM").format(calendar.getTime());
-            endDate = new SimpleDateFormat("d").format(calendar.getTime());
+            month = new SimpleDateFormat("MMMM", getCurrentLocale(context)).format(calendar.getTime());
+            endDate = calendar.get(Calendar.DAY_OF_MONTH);
         }
-        suffix = getDateSuffix(endDate);
-        end = endDate + suffix + " " + month;
+        ordinal = formatOrdinalNumber(endDate, context);
+        end = ordinal + " " + month;
         validity = end;
         return validity;
     }
 
-    public static String getDateSuffix(String date) {
-        String suffix;
-        if (date.endsWith("1")) {
-            suffix = "st";
+    public static String formatOrdinalNumber(int number, Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            final String format = "{0,ordinal}";
+            final Locale locale = getCurrentLocale(context);
+            final MessageFormat formatter = new MessageFormat(format, locale);
+
+            return formatter.format(new Object[] {number});
+        } else {
+            String numberString = String.valueOf(number);
+            String suffix;
+            if (numberString.endsWith("1")) {
+                suffix = "st";
+            } else if (numberString.endsWith("2")) {
+                suffix = "nd";
+            } else if (numberString.endsWith("3")) {
+                suffix = "rd";
+            } else {
+                suffix = "th";
+            }
+            return numberString + suffix;
         }
-        else if (date.endsWith("2")) {
-            suffix = "nd";
+    }
+
+    public static Locale getCurrentLocale(Context context) {
+        final Configuration config = context.getResources().getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return config.getLocales().get(0);
+        } else {
+            return config.locale;
         }
-        else if (date.endsWith("3")) {
-            suffix = "rd";
-        }
-        else {
-            suffix = "th";
-        }
-        return suffix;
     }
 
     private static boolean isLiveNetworkServiceRunning(Context context) {
@@ -506,5 +523,19 @@ public class Common {
                 notificationManager.notify(notificationId, builder.build());
             }
         }
+    }
+
+    public static String parseNumber(String number) {
+        if (number.matches("[0-9.,]+")) {
+            return number.replace(",", ".");
+        }
+        String output = "0.0";
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+        try {
+            output = numberFormat.parse(number).toString();
+        }
+        catch (Exception ignored) {}
+
+        return output;
     }
 }

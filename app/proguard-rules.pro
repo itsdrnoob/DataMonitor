@@ -21,3 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class io.ipinfo.api.** { *; }
+-keepattributes SourceFile,LineNumberTable

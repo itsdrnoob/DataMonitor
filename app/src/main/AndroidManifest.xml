@@ -11,6 +11,7 @@
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" -->
     <!-- tools:ignore="QueryAllPackagesPermission" /> -->
@@ -91,7 +92,12 @@
         <service
             android:name=".utils.NotificationService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Service used to measure and show the data usage"/>
+        </service>
+
         <service
             android:name=".utils.DataUsageMonitor"
             android:enabled="true"
@@ -144,11 +150,19 @@
         <service
             android:name=".utils.LiveNetworkMonitor"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Service used to measure and show the network connection speed"/>
+        </service>
         <service
             android:name=".utils.CompoundNotification"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Service used to measure and show the network connection speed as well as the data usage"/>
+        </service>
 
         <activity
             android:name=".ui.activities.MainActivity"
@@ -176,6 +190,12 @@
             android:name=".utils.DataPlanRefreshReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <receiver android:name=".utils.DailyQuotaAlertReceiver"
+            android:exported="true"/>
+
+        <receiver android:name=".utils.DailyQuotaAlertReceiver$ResetDataQuotaAlert"
+            android:exported="true"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

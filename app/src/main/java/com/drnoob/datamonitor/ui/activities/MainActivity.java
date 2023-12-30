@@ -24,7 +24,6 @@ import static com.drnoob.datamonitor.Common.isReadPhoneStateGranted;
 import static com.drnoob.datamonitor.Common.isUsageAccessGranted;
 import static com.drnoob.datamonitor.Common.refreshService;
 import static com.drnoob.datamonitor.Common.setLanguage;
-import static com.drnoob.datamonitor.Common.showAlarmPermissionDeniedDialog;
 import static com.drnoob.datamonitor.core.Values.ALARM_PERMISSION_DENIED;
 import static com.drnoob.datamonitor.core.Values.APP_COUNTRY_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_ID;
@@ -66,8 +65,6 @@ import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getDeviceWifiDataU
 import static com.drnoob.datamonitor.utils.NetworkStatsHelper.getTetheringDataUsage;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -94,14 +91,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;

@@ -116,7 +116,7 @@
 \n다시 시도하거나 다른 방법을 시도하십시오.</string>
     <string name="notification_disabled">데이터 모니터 알림 사용 안 함</string>
     <string name="label_notification_refresh_interval_change">알림은 %1$s마다 업데이트됩니다</string>
-    <string name="label_data_usage_reset_date_change">매월 %1$d%2$s에서 데이터 사용량이 재설정됩니다.</string>
+    <string name="label_data_usage_reset_date_change">매월 %1$s에서 데이터 사용량이 재설정됩니다.</string>
     <string name="remaining_data_info_enabled">나머지 데이터 정보 사용</string>
     <string name="remaining_data_info_disabled">나머지 데이터 정보 사용 안 함</string>
     <string name="label_widget_refreshed">위젯 새로 고침</string>

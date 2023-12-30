@@ -25,8 +25,7 @@
         <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
             android:icon="@drawable/ic_mobile_data"
             android:key="network_signal_notification"
-            android:title="@string/network_signal_notification"
-            android:summary="@string/network_signal_summary"/>
+            android:title="@string/network_signal_notification"/>
 
     </com.drnoob.datamonitor.core.base.PreferenceHeader>
 
@@ -186,6 +185,21 @@
                 android:key="auto_update_data_plan"
                 app:iconSpaceReserved="false"
                 app:summary="@string/auto_update_data_plan_summary"
+                android:defaultValue="false"
+                app:isPreferenceVisible="false"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_smart_data_allocation"
+                android:key="smart_data_allocation"
+                app:iconSpaceReserved="false"
+                app:summary="@string/smart_data_allocation_summary"
+                android:defaultValue="false"/>
+
+            <com.drnoob.datamonitor.core.base.SwitchPreferenceCompat
+                android:title="@string/setup_daily_quota_alert"
+                android:key="daily_quota_alert"
+                app:iconSpaceReserved="false"
+                app:summary="@string/daily_quota_alert_summary"
                 android:defaultValue="false"
                 app:isPreferenceVisible="false"/>
 

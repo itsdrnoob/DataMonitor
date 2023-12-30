@@ -48,6 +48,7 @@ public class Values {
     public static final int SESSION_ALL_TIME = 0x003C;
     public static final int SESSION_MONTHLY = 0x00A9;
     public static final int SESSION_CUSTOM = 0x00AC;
+    public static final int SESSION_CUSTOM_FILTER = 0x00AF;
 
     public static final int TYPE_MOBILE_DATA = 0x0046;
     public static final int TYPE_WIFI = 0x0050;
@@ -77,6 +78,7 @@ public class Values {
     public static final int DIAGNOSTICS_HISTORY_FRAGMENT = 0x010E;
     public static final int DATA_PLAN_FRAGMENT = 0x0118;
     public static final int APP_CONTRIBUTORS_FRAGMENT = 0x0122;
+    public static final int ADD_CUSTOM_SESSION_FRAGMENT = 0x0136;
 
     public static final int BOTTOM_NAVBAR_ITEM_HOME = 0;
     public static final int BOTTOM_NAVBAR_ITEM_SETUP = 1;
@@ -91,6 +93,7 @@ public class Values {
 
     public static final String SETUP_COMPLETED = "is_setup_complete";
     public static final String DATA_LIMIT = "data_limit";
+    public static final String DATA_QUOTA = "data_quota";
     public static final String DATA_TYPE = "data_type";
     public static final String LIMIT = "limit";
     public static final String DATA_RESET = "data_reset";
@@ -109,6 +112,7 @@ public class Values {
     public static final String DATA_RESET_CUSTOM_DATE_RESTART = "custom_reset_date_restart";
     public static final String DATA_WARNING_TRIGGER_LEVEL = "data_warning_trigger_level";
     public static final String DATA_USAGE_WARNING_SHOWN = "data_usage_warning_shown";
+    public static final String DATA_QUOTA_WARNING_SHOWN = "data_quota_warning_shown";
     public static final String DATA_USAGE_ALERT = "data_usage_alert";
     public static final String WIDGET_REFRESH_INTERVAL_SUMMARY = "widget_refresh_interval_summary";
     public static final String WIDGET_REFRESH_INTERVAL = "widget_refresh_interval";
@@ -184,5 +188,9 @@ public class Values {
     public static final String WALL_OF_THANKS_LAST_UPDATE = "wall_of_thanks_last_update";
     public static final String WALL_OF_THANKS_FEATURED_DONORS = "wall_of_thanks_featured_donors";
     public static final String WALL_OF_THANKS_ALL_DONORS = "wall_of_thanks_all_donors";
+
+
+    public static final String DATA_QUOTA_SCHEDULED_RESET = "quota_scheduled_reset";
+    public static final String DATA_QUOTA_PERFORMED_RESET = "quota_performed_reset";
 
 }

@@ -224,7 +224,7 @@ public class NetworkDiagnosticsFragment extends Fragment {
                     rippleView.setVisibility(View.INVISIBLE);
 //                currentConnectionType.setVisibility(View.GONE);
 
-                    String ipLookupUrl = context.getString(R.string.api_ip_lookup);
+                    String ipLookupUrl = requireContext().getString(R.string.api_ip_lookup);
                     Volley.newRequestQueue(requireContext()).add(
                             new StringRequest(
                                     Request.Method.GET,
@@ -232,46 +232,48 @@ public class NetworkDiagnosticsFragment extends Fragment {
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-                                            String ip = "",
-                                                    city = "",
-                                                    region = "",
-                                                    org = "";
-                                            try {
-                                                JSONObject result = new JSONObject(response);
-                                                ip = result.getString("ip");
-                                                city = result.getString("city");
-                                                region = result.getString("region");
-                                                org = result.getString("org");
+                                            if (getContext() != null) {
+                                                String ip = "",
+                                                        city = "",
+                                                        region = "",
+                                                        org = "";
+                                                try {
+                                                    JSONObject result = new JSONObject(response);
+                                                    ip = result.getString("ip");
+                                                    city = result.getString("city");
+                                                    region = result.getString("region");
+                                                    org = result.getString("org");
 
-                                            }
-                                            catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                            mIpResponse = new IPResponse(
-                                                    ip, requireContext().getString(R.string.label_unknown),
-                                                    false,
-                                                    city,
-                                                    region,
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    org,
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    requireContext().getString(R.string.label_unknown),
-                                                    null, null, null, null, null, null
-                                            );
-
-                                            if (getActivity() != null) {
-                                                if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
-                                                    speedTest = new SpeedTest(requireActivity());
                                                 }
-                                                speedTest.execute();
+                                                catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                mIpResponse = new IPResponse(
+                                                        ip, requireContext().getString(R.string.label_unknown),
+                                                        false,
+                                                        city,
+                                                        region,
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        org,
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        requireContext().getString(R.string.label_unknown),
+                                                        null, null, null, null, null, null
+                                                );
+
+                                                if (getActivity() != null) {
+                                                    if (speedTest.getStatus() == AsyncTask.Status.FINISHED) {
+                                                        speedTest = new SpeedTest(requireActivity());
+                                                    }
+                                                    speedTest.execute();
+                                                }
                                             }
                                         }
                                     },
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            String errorMessage = context.getString(R.string.error_unknown);
+                                            String errorMessage = requireContext().getString(R.string.error_unknown);
                                             try {
                                                 errorMessage = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                                                 runDiagnostics.setClickable(true);
