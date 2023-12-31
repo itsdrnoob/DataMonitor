@@ -474,4 +474,10 @@
     <string name="ofermar_summary">العبريّة</string>
     <string name="xxx">xXx</string>
     <string name="xxx_summary">الروسيّة</string>
+    <string name="label_plan_details_title_unknown">خطة غير معروفة نشطة</string>
+    <string name="label_plan_details_title_monthly">الخطة الشهرية النشطة</string>
+    <string name="buttercookie42_summary">المطور</string>
+    <string name="label_plan_details_title_daily">الخطة اليومية نشطة</string>
+    <string name="buttercookie42">بتركوكي42</string>
+    <string name="label_plan_details_title_custom">خطة مخصصة نشطة</string>
 </resources>
