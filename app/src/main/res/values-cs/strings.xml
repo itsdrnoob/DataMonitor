@@ -470,4 +470,10 @@
     <string name="ofermar_summary">Hebrejština</string>
     <string name="xxx">xXx</string>
     <string name="xxx_summary">Ruština</string>
+    <string name="label_plan_details_title_unknown">Aktivní neznámý plán</string>
+    <string name="label_plan_details_title_monthly">Aktivní měsíční plán</string>
+    <string name="buttercookie42_summary">Vývojář</string>
+    <string name="label_plan_details_title_daily">Aktivní denní plán</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="label_plan_details_title_custom">Aktivní vlastní plán</string>
 </resources>
