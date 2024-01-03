@@ -483,7 +483,7 @@ public class LiveNetworkMonitor extends Service {
                         else {
                             mLiveNetworkMonitor.startForeground(NETWORK_SIGNAL_NOTIFICATION_ID, mBuilder.build());
                         }
-                    } catch (ForegroundServiceStartNotAllowedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Toast.makeText(context, context.getString(R.string.error_network_monitor_start),
                                 Toast.LENGTH_LONG).show();
