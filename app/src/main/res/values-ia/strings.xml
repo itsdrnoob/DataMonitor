@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="add_widget">Adder widget</string>
+    <string name="home_mobile_data_sent">%1$s
+\nInviate</string>
+</resources>
