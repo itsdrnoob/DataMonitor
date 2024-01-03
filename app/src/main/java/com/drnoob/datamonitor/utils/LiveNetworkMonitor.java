@@ -59,6 +59,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LiveNetworkMonitor extends Service {
     private static final String TAG = LiveNetworkMonitor.class.getSimpleName();
@@ -77,7 +78,7 @@ public class LiveNetworkMonitor extends Service {
     private static boolean isLiveNetworkReceiverRegistered = false;
     public static boolean isServiceRunning;
     private static LiveNetworkMonitor mLiveNetworkMonitor;
-    private static HashMap<Network, LinkProperties> linkPropertiesHashMap = new HashMap<>();
+    private static final ConcurrentHashMap<Network, LinkProperties> linkPropertiesHashMap = new ConcurrentHashMap<>();
     private static boolean serviceRestart = true;
     private static ConnectivityManager connectivityManager;
 
@@ -106,13 +107,15 @@ public class LiveNetworkMonitor extends Service {
             previousDownBytes = TrafficStats.getTotalRxBytes();
         }
         else {
-            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                final String iface = linkProperties.getInterfaceName();
-                if (iface == null) {
-                    continue;
+            synchronized (linkPropertiesHashMap) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    previousUpBytes += TrafficStats.getTxBytes(iface);
+                    previousDownBytes += TrafficStats.getRxBytes(iface);
                 }
-                previousUpBytes += TrafficStats.getTxBytes(iface);
-                previousDownBytes += TrafficStats.getRxBytes(iface);
             }
         }
 
@@ -284,13 +287,15 @@ public class LiveNetworkMonitor extends Service {
                 currentDownBytes = TrafficStats.getTotalRxBytes();
             }
             else {
-                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                    final String iface = linkProperties.getInterfaceName();
-                    if (iface == null) {
-                        continue;
+                synchronized (linkPropertiesHashMap) {
+                    for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                        final String iface = linkProperties.getInterfaceName();
+                        if (iface == null) {
+                            continue;
+                        }
+                        currentUpBytes += TrafficStats.getTxBytes(iface);
+                        currentDownBytes += TrafficStats.getRxBytes(iface);
                     }
-                    currentUpBytes += TrafficStats.getTxBytes(iface);
-                    currentDownBytes += TrafficStats.getRxBytes(iface);
                 }
             }
 
@@ -400,13 +405,15 @@ public class LiveNetworkMonitor extends Service {
 
     private static void updateInitialData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
-                final String iface = linkProperties.getInterfaceName();
-                if (iface == null) {
-                    continue;
+            synchronized (linkPropertiesHashMap) {
+                for (LinkProperties linkProperties : linkPropertiesHashMap.values()) {
+                    final String iface = linkProperties.getInterfaceName();
+                    if (iface == null) {
+                        continue;
+                    }
+                    previousUpBytes += TrafficStats.getTxBytes(iface);
+                    previousDownBytes += TrafficStats.getRxBytes(iface);
                 }
-                previousUpBytes += TrafficStats.getTxBytes(iface);
-                previousDownBytes += TrafficStats.getRxBytes(iface);
             }
         } else {
             previousDownBytes = TrafficStats.getTotalRxBytes();

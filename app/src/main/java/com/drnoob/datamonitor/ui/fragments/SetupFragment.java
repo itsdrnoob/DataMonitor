@@ -92,6 +92,7 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.drnoob.datamonitor.Common;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.Widget.DataUsageWidget;
 import com.drnoob.datamonitor.core.Values;
@@ -1523,12 +1524,14 @@ public class SetupFragment extends Fragment {
                                         totalUsage = totalUsage.replace("٫", ".");
                                     }
 
+                                    totalUsage = Common.parseNumber(totalUsage);
+
                                     if (PreferenceManager.getDefaultSharedPreferences(getContext()).getFloat(DATA_LIMIT, -1) * trigger / 100 >
                                             Double.parseDouble(totalUsage)) {
                                         resumeMonitor();
                                     }
                                 }
-                                catch (ParseException | RemoteException e) {
+                                catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }

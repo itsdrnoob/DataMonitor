@@ -1,0 +1,5 @@
+• Added support for Android 14.
+• Introducing Smart data allocation and quota alert (Beta). Manage your data plan with a daily quota, data rollover and usage alert.
+• Updated plan details view. The home screen now features the number of days remaining in your data plan.
+• Added custom filter for app usage. Now you can take control over viewing app data usage for any specific time period.
+Checkout full changelog here: https://github.com/itsdrnoob/DataMonitor/blob/HEAD/CHANGELOG.md#v240
