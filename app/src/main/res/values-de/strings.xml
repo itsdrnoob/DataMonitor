@@ -6,11 +6,11 @@
 \nEmpfangen</string>
     <string name="app_label_package_name">Paketname: %1$s</string>
     <string name="app_label_uid">UID: %1$d</string>
-    <string name="app_name_placeholder">App-Name</string>
+    <string name="app_name_placeholder">App Name</string>
     <string name="app_data_usage_placeholder">0 MB</string>
     <string name="label_sent">gesendet</string>
     <string name="label_received">empfangen</string>
-    <string name="action_open_app_settings">Die App-Einstellungen öffnen</string>
+    <string name="action_open_app_settings">App Einstellungen öffnen</string>
     <string name="label_all_time">Der komplette Zeitraum</string>
     <string name="title_app_data_usage_type">Typ auswählen</string>
     <string name="label_mobile_data">Mobile Daten</string>
@@ -100,7 +100,7 @@
     <string name="read_phone_state_body">Geräte mit Android-Version 9 und darunter müssen diese Genehmigung manuell erteilen. Es werden keine persönlichen Daten gesammelt.</string>
     <string name="action_permission_granted">Erlaubnis erteilt</string>
     <string name="error_permission_denied">Berechtigung verweigert. Bitte gewähren Sie sie manuell.</string>
-    <string name="app_name">Daten-Monitor</string>
+    <string name="app_name">Daten Monitor</string>
     <string name="appwidget_text">Beispiel</string>
     <string name="add_widget">Widget hinzufügen</string>
     <string name="app_theme_summary">Auswählen des App-Designs</string>
@@ -311,7 +311,7 @@
     <string name="notification_permission_denied_body">Funktionen wie Datenmonitorbenachrichtigung, Live-Netzwerkgeschwindigkeit und Datennutzungswarnung funktionieren ohne Benachrichtigungsberechtigung nicht ordnungsgemäß. Bitte gewähren Sie es manuell.</string>
     <string name="label_device_info">Geräteinformationen</string>
     <string name="heading_data_reset_custom_counter">Gültigkeit des Plans</string>
-    <string name="battery_optimisation_enabled_info">Die Batterieoptimierung ist aktiviert. Dies beeinträchtigt die Arbeit von Data Monitor. Klicken Sie hier, um es zu deaktivieren.</string>
+    <string name="battery_optimisation_enabled_info">Die Batterieoptimierung ist aktiviert. Dies beeinträchtigt die Arbeit von Data Monitor. Klicke hier, um sie zu deaktivieren.</string>
     <string name="error_unknown_telegram_client">Telegramm nicht installiert oder unbekannter Client vorhanden. Bitte versuchen Sie es mit einer anderen Methode.</string>
     <string name="error_no_crash_logs">Keine Absturzprotokolle gefunden. Sind Sie sicher, dass ein Absturz aufgetreten ist\?</string>
     <string name="label_select_start_date">Startdatum auswählen</string>
@@ -469,4 +469,12 @@
     <string name="label_plan_details_title_monthly">Monatlicher Plan aktiv</string>
     <string name="label_plan_details_title_daily">Täglicher Plan aktiv</string>
     <string name="label_plan_details_title_custom">Benutzerdefinierter Plan aktiv</string>
+    <string name="add_custom_session">Benutzerdefinierte Sitzung hinzufügen</string>
+    <string name="label_welcome_body">Verfolgen Sie Ihren gesamten Datenverbrauch - an einem Ort</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="buttercookie42_summary">Entwickler</string>
+    <string name="flix">Flix</string>
+    <string name="xxx">xXx</string>
+    <string name="ofermar">ofermar</string>
+    <string name="detrimental_god">Detrimental God</string>
 </resources>
