@@ -3,4 +3,19 @@
     <string name="add_widget">Adder widget</string>
     <string name="home_mobile_data_sent">%1$s
 \nInviate</string>
+    <string name="app_name_placeholder">Nomine del application</string>
+    <string name="label_sent">inviate</string>
+    <string name="action_cancel">Cancellar</string>
+    <string name="action_ok">OK</string>
+    <string name="title_app_data_usage_session">Seliger le session</string>
+    <string name="label_today">Hodie</string>
+    <string name="label_this_month">Iste mense</string>
+    <string name="label_this_year">Iste anno</string>
+    <string name="title_app_data_usage_type">Seliger le typo</string>
+    <string name="action_update">Actualisar</string>
+    <string name="label_dev">Facite con ❤ per Bitroid</string>
+    <string name="daily">Quotidian</string>
+    <string name="option_5_min">5 minutas</string>
+    <string name="option_10_min">10 minutas</string>
+    <string name="option_15_min">15 minutas</string>
 </resources>
