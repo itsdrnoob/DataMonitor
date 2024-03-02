@@ -470,4 +470,10 @@
     <string name="ofermar_summary">Tiếng Hebrew</string>
     <string name="xxx">xXx</string>
     <string name="xxx_summary">Tiếng Nga</string>
+    <string name="label_plan_details_title_unknown">Gói không rõ đã kích hoạt</string>
+    <string name="label_plan_details_title_monthly">Gói hàng tháng đã kích hoạt</string>
+    <string name="label_plan_details_title_daily">Gói hằng ngày đã kích hoạt</string>
+    <string name="label_plan_details_title_custom">Gói tùy chỉnh đã kích hoạt</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="buttercookie42_summary">Nhà phát triển</string>
 </resources>

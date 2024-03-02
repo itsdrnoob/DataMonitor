@@ -225,4 +225,27 @@
     <string name="label_network_signal_notification_disabled">Kecepatan jaringan langsung dinonaktifkan</string>
     <string name="app_label_background_time">Penggunaan latar belakang: %1$s</string>
     <string name="ygorigor_summary">Rumania</string>
+    <string name="error_permission_denied">Izin ditolak. Mohon berikan izin secara manual.</string>
+    <string name="theme_light">Terang</string>
+    <string name="rate_app">Beri nilai aplikasi di Google Play</string>
+    <string name="update_fetch_error">Tidak dapat mengambil pembaruan</string>
+    <string name="label_update_available">Versi baru telah tersedia!</string>
+    <string name="no_update_available">Anda menjalankan versi terbaru.</string>
+    <string name="check_for_update">Periksa pembaruan</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="settings_app_theme">Tema</string>
+    <string name="new_update_available">Versi baru telah tersedia!</string>
+    <string name="telegram_summary">Bergabunglah dengan kelompok bantuan</string>
+    <string name="theme_system">Ikuti sistem</string>
+    <string name="checking_for_update">Memeriksa pembaruan…</string>
+    <string name="current_version">Versi saat ini: %1$s</string>
+    <string name="light_theme_summary">Tema terang dipilih</string>
+    <string name="rate_app_summary">Umpan balik Anda sangat kami hargai</string>
+    <string name="label_download_update">Unduh pembaruan</string>
+    <string name="app_theme_summary">Pilih tema aplikasi</string>
+    <string name="label_changelogs">Apa yang baru</string>
+    <string name="dark_theme_summary">Tema gelap dipilih</string>
+    <string name="telegram_support">Bantuan telegram</string>
+    <string name="new_version">Versi terbaru: %1$s</string>
+    <string name="no_network_connection">Tidak ada koneksi internet yang terdeteksi!</string>
 </resources>

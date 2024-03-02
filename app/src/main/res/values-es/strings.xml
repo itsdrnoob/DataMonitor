@@ -481,4 +481,10 @@
     <string name="xxx_summary">Ruso</string>
     <string name="ofermar">ofermar</string>
     <string name="flix">Flix</string>
+    <string name="label_plan_details_title_unknown">Plan desconocido activo</string>
+    <string name="label_plan_details_title_monthly">Plan mensual activo</string>
+    <string name="buttercookie42_summary">Desarrollador</string>
+    <string name="label_plan_details_title_daily">Plan diario activo</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="label_plan_details_title_custom">Plan personalizado activo</string>
 </resources>

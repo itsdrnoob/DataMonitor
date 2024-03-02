@@ -6,11 +6,11 @@
 \nEmpfangen</string>
     <string name="app_label_package_name">Paketname: %1$s</string>
     <string name="app_label_uid">UID: %1$d</string>
-    <string name="app_name_placeholder">App-Name</string>
+    <string name="app_name_placeholder">App Name</string>
     <string name="app_data_usage_placeholder">0 MB</string>
     <string name="label_sent">gesendet</string>
     <string name="label_received">empfangen</string>
-    <string name="action_open_app_settings">Die App-Einstellungen öffnen</string>
+    <string name="action_open_app_settings">App Einstellungen öffnen</string>
     <string name="label_all_time">Der komplette Zeitraum</string>
     <string name="title_app_data_usage_type">Typ auswählen</string>
     <string name="label_mobile_data">Mobile Daten</string>
@@ -57,7 +57,7 @@
     <string name="report">Fehler melden</string>
     <string name="report_summary">Fehler melden oder Funktionen anfordern</string>
     <string name="setup">Einrichtung</string>
-    <string name="app_data_usage">App-Datennutzung</string>
+    <string name="app_data_usage">App Nutzung</string>
     <string name="settings">Einstellungen</string>
     <string name="btc_address_copied">Bitcoin-Wallet-Adresse in Zwischenablage kopiert</string>
     <string name="eth_address_copied">Ethereum-Wallet-Adresse in Zwischenablage kopiert</string>
@@ -90,7 +90,7 @@
     <string name="label_data_remaining_used_excess">%1$s zusätzlich verwendet</string>
     <string name="label_days_remaining">%1$s Tag(e) verbleibend</string>
     <string name="overview_tuesday">Di</string>
-    <string name="running_diagnostics">Ausführen der Diagnose</string>
+    <string name="running_diagnostics">Laufende Diagnose</string>
     <string name="connecting">Verbinden</string>
     <string name="testing_download">Testen der Download-Geschwindigkeit</string>
     <string name="testing_upload">Testen der Upload-Geschwindigkeiten</string>
@@ -100,7 +100,7 @@
     <string name="read_phone_state_body">Geräte mit Android-Version 9 und darunter müssen diese Genehmigung manuell erteilen. Es werden keine persönlichen Daten gesammelt.</string>
     <string name="action_permission_granted">Erlaubnis erteilt</string>
     <string name="error_permission_denied">Berechtigung verweigert. Bitte gewähren Sie sie manuell.</string>
-    <string name="app_name">Daten-Monitor</string>
+    <string name="app_name">Daten Monitor</string>
     <string name="appwidget_text">Beispiel</string>
     <string name="add_widget">Widget hinzufügen</string>
     <string name="app_theme_summary">Auswählen des App-Designs</string>
@@ -181,7 +181,7 @@
     <string name="overview_monday">Mon</string>
     <string name="overview_wednesday">Mi</string>
     <string name="overview_saturday">Sa</string>
-    <string name="network_diagnostics">Netzwerk-Diagnose</string>
+    <string name="network_diagnostics">Diagnose</string>
     <string name="johnsonran_summary">Vereinfachtes Chinesisch</string>
     <string name="battery_optimisation_disabled">Batterieoptimierung deaktiviert</string>
     <string name="refresh_list">Liste aktualisieren</string>
@@ -254,7 +254,7 @@
     <string name="liviogasp_summary">Italienisch</string>
     <string name="holydemon_summary">Malayalam</string>
     <string name="f_droid_page">App auf F-Droid anzeigen</string>
-    <string name="network_diagnostics_info">Die Netzdiagnose kann etwa 20-30 MB Daten verbrauchen. Vergewissern Sie sich, dass dies in Ihrem Tarif verfügbar ist, da sonst Netzgebühren anfallen können.</string>
+    <string name="network_diagnostics_info">Die Netzerkdiagnose kann etwa 20-30 MB Daten verbrauchen. Vergewissern Sie sich, dass dies in Ihrem Tarif verfügbar ist, da sonst Gebühren anfallen können.</string>
     <string name="comradekingu_summary">Unterstützung bei der Übersetzung</string>
     <string name="f_droid_page_summary">Die App im offiziellen F-Droid Repository ansehen</string>
     <string name="report_github_summary">Öffnen Sie ein neues Problem auf Github</string>
@@ -298,7 +298,7 @@
     <string name="label_crash_logs_copied">Absturzprotokolle in die Zwischenablage kopiert</string>
     <string name="label_mail">E-Mail</string>
     <string name="label_copy_logs">Protokolle kopieren</string>
-    <string name="settings_network_diagnostics">Netzwerk-Diagnose</string>
+    <string name="settings_network_diagnostics">Netzwerk Diagnose</string>
     <string name="network_diagnostics_summary">Diagnostik-Server wechseln</string>
     <string name="settings_diagnostics_server">Server</string>
     <string name="settings_upload_server">Upload-Server</string>
@@ -311,7 +311,7 @@
     <string name="notification_permission_denied_body">Funktionen wie Datenmonitorbenachrichtigung, Live-Netzwerkgeschwindigkeit und Datennutzungswarnung funktionieren ohne Benachrichtigungsberechtigung nicht ordnungsgemäß. Bitte gewähren Sie es manuell.</string>
     <string name="label_device_info">Geräteinformationen</string>
     <string name="heading_data_reset_custom_counter">Gültigkeit des Plans</string>
-    <string name="battery_optimisation_enabled_info">Die Batterieoptimierung ist aktiviert. Dies beeinträchtigt die Arbeit von Data Monitor. Klicken Sie hier, um es zu deaktivieren.</string>
+    <string name="battery_optimisation_enabled_info">Die Batterieoptimierung ist aktiviert. Dies beeinträchtigt die Arbeit von Data Monitor. Klicke hier, um sie zu deaktivieren.</string>
     <string name="error_unknown_telegram_client">Telegramm nicht installiert oder unbekannter Client vorhanden. Bitte versuchen Sie es mit einer anderen Methode.</string>
     <string name="error_no_crash_logs">Keine Absturzprotokolle gefunden. Sind Sie sicher, dass ein Absturz aufgetreten ist\?</string>
     <string name="label_select_start_date">Startdatum auswählen</string>
@@ -352,7 +352,7 @@
     <string name="action_select_all">Alles auswählen</string>
     <string name="diagnostics_history">Ergebnis-Archiv</string>
     <string name="settings_save_results">Speichere Ergebnisse</string>
-    <string name="save_results_summary">Speichere Netzwerk-Diagnose-Ergebnisse</string>
+    <string name="save_results_summary">Netzwerk Diagnose Ergebnisse speichern</string>
     <string name="title_delete_results">Lösche ausgewählte Ergebnisse\?</string>
     <string name="Atalanttore_summary">Deutsch</string>
     <string name="Atalanttore">Ettore Atalan</string>
@@ -469,4 +469,12 @@
     <string name="label_plan_details_title_monthly">Monatlicher Plan aktiv</string>
     <string name="label_plan_details_title_daily">Täglicher Plan aktiv</string>
     <string name="label_plan_details_title_custom">Benutzerdefinierter Plan aktiv</string>
+    <string name="add_custom_session">Benutzerdefinierte Sitzung hinzufügen</string>
+    <string name="label_welcome_body">Track deine gesamte Datennutzung - an einem Ort</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="buttercookie42_summary">Entwickler</string>
+    <string name="flix">Flix</string>
+    <string name="xxx">xXx</string>
+    <string name="ofermar">ofermar</string>
+    <string name="detrimental_god">Detrimental God</string>
 </resources>

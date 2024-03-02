@@ -113,7 +113,7 @@
     <string name="setup">配置</string>
     <string name="app_data_usage">应用数据用量</string>
     <string name="settings">设置</string>
-    <string name="btc_address_copied">Bitcoin 钱包地址已复制到剪切板</string>
+    <string name="btc_address_copied">比特币钱包地址已复制到剪切板</string>
     <string name="eth_address_copied">Ethereum 钱包地址已复制到剪切板</string>
     <string name="ltc_address_copied">Litecoin 钱包地址已复制到剪切板</string>
     <string name="label_system_apps">系统应用</string>
