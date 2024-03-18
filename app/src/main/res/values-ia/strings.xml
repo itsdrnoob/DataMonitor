@@ -18,4 +18,13 @@
     <string name="option_5_min">5 minutas</string>
     <string name="option_10_min">10 minutas</string>
     <string name="option_15_min">15 minutas</string>
+    <string name="appwidget_text">Exemplo</string>
+    <string name="label_yesterday">Heri</string>
+    <string name="label_last_month">Ultime mense</string>
+    <string name="label_all_time">Omne tempore</string>
+    <string name="label_wifi">Wi-Fi</string>
+    <string name="data_remaining_placeholder">0.00 GB remanente</string>
+    <string name="label_loading_apps">Cargamento del applicationes</string>
+    <string name="label_loading">Cargante…</string>
+    <string name="label_app_data_usage_session_empty">Nulle datos disponibile</string>
 </resources>
