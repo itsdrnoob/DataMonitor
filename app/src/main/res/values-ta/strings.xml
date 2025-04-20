@@ -26,7 +26,7 @@
     <string name="title_data_usage">தரவு பயன்பாடு</string>
     <string name="action_update">புதுப்பிப்பு</string>
     <string name="data_remaining_placeholder">0.00 சிபி மீதமுள்ளது</string>
-    <string name="label_dev">துணுக்கு துணுக்கு துணுக்கு by by உடன்</string>
+    <string name="label_dev">❤ உடன் இருமம்உரு</string>
     <string name="label_loading_apps">பயன்பாடுகளை ஏற்றுகிறது</string>
     <string name="label_loading">ஏற்றுகிறது…</string>
     <string name="label_app_data_usage_session_empty">தரவு எதுவும் கிடைக்கவில்லை</string>
@@ -84,7 +84,7 @@
     <string name="label_system_apps">கணினி பயன்பாடுகள்</string>
     <string name="home">வீடு</string>
     <string name="usage_access_permission">பயன்பாட்டு அணுகல் இசைவு</string>
-    <string name="usage_access_body">பயன்பாட்டு பயன்பாட்டு புள்ளிவிவரங்களை சேகரிப்பதால், பயன்பாட்டை இயக்க வேண்டும்.\n தனிப்பட்ட தரவு எதுவும் சேகரிக்கப்படவில்லை.</string>
+    <string name="usage_access_body">பயன்பாட்டு புள்ளிவிவரங்களை சேகரிப்பதால், பயன்பாட்டை இயக்க வேண்டும்.\n தனிப்பட்ட தரவு எதுவும் சேகரிக்கப்படவில்லை.</string>
     <string name="ltc_address_copied">லிட்காயின் பணப்பை முகவரி கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது</string>
     <string name="action_grant">இசைவு வழங்கவும்</string>
     <string name="label_tethering">மொபைல் ஆட்ச்பாட்</string>
@@ -186,7 +186,7 @@
     <string name="get_started">தொடங்கவும்</string>
     <string name="label_data_usage_reset_date_change">தரவு பயன்பாடு ஒவ்வொரு மாதமும் %1$s இல் மீட்டமைக்கப்படும்</string>
     <string name="label_do_not_show_again">மீண்டும் காட்ட வேண்டாம்</string>
-    <string name="fjuro">Fjuro</string>
+    <string name="fjuro">ப்சுரோ</string>
     <string name="fjuro_summary">செக்</string>
     <string name="rintan_summary">சப்பானியர்கள்</string>
     <string name="chin_housin_summary">எளிமைப்படுத்தப்பட்ட சீன</string>
@@ -200,7 +200,7 @@
     <string name="xxx_summary">ரச்ய</string>
     <string name="always_show_total">எப்போதும் மொத்தத்தைக் காட்டு</string>
     <string name="paypal_summary">பேபால் வழியாக நன்கொடை</string>
-    <string name="label_upi">பீம்-பி.ஐ.</string>
+    <string name="label_upi">பீம்-யுபிஐ</string>
     <string name="home_mobile_data_sent">%1$s\n அனுப்பப்பட்டது</string>
     <string name="home_mobile_data_received">%1$s\n பெறப்பட்டது</string>
     <string name="action_open_app_settings">பயன்பாட்டு அமைப்புகளைத் திறக்கவும்</string>
@@ -291,7 +291,7 @@
     <string name="error_combine_notifications_enabled">ஒருங்கிணைந்த அறிவிப்பு இயக்கப்பட்டது. தனிப்பட்ட அறிவிப்பை முடக்க முடியாது.</string>
     <string name="lockscreen_notification">பூட்டுத் திரையில் அறிவிப்பை இயக்கவும்</string>
     <string name="exclude_apps_summary">தரவு பயன்பாட்டிலிருந்து பயன்பாட்டு போக்குவரத்தை விலக்கவும்</string>
-    <string name="title_app_picker">பயன்பாட்டைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="title_app_picker">பயன்பாட்டைத் தேர்ந்தெடு</string>
     <string name="save_results_summary">பிணையம் கண்டறிதல் முடிவுகளைச் சேமிக்கவும்</string>
     <string name="action_select_all">அனைத்தையும் தெரிவுசெய்</string>
     <string name="Kefir2105_summary">உக்ரேனிய</string>
@@ -325,7 +325,7 @@
     <string name="label_data_plan_updated">தரவு திட்டம் புதுப்பிக்கப்பட்டது!</string>
     <string name="setup_auto_update_data_plan">தானாக புதுப்பித்தல் தரவு திட்டம்</string>
     <string name="auto_update_data_plan_summary">உங்கள் தரவுத் திட்டத்தை தானாகவே இதேபோன்ற ஒன்றோடு புதுப்பிக்கவும்.</string>
-    <string name="notification_wifi_data_usage">மற்றும் இல்: $ 1 %ப</string>
+    <string name="notification_wifi_data_usage">கம்பிஇல்: %1$s</string>
     <string name="label_top_donors">சிறந்த நன்கொடையாளர்கள்</string>
     <string name="wall_of_thanks_body">தரவு மானிட்டர் அதன் தொடக்கத்திலிருந்து வெகுதூரம் வந்துவிட்டது, எங்கள் தாராளமான நன்கொடையாளர்களின் உதவி இல்லாமல் அதைச் செய்ய முடியாது.</string>
     <string name="label_all_donors">அனைத்து நன்கொடையாளர்களும்</string>
@@ -375,7 +375,7 @@
     <string name="running_diagnostics">கண்டறியும் இயங்கும்</string>
     <string name="testing_download">பதிவிறக்க வேகத்தை சோதிக்கிறது</string>
     <string name="testing_upload">பதிவேற்ற வேகத்தை சோதித்தல்</string>
-    <string name="network_speed_mbps">%1$s Mbit/s</string>
+    <string name="network_speed_mbps">%1$s மெஇருமம்/நொ</string>
     <string name="max_download_speed">அதிகபட்ச பதிவிறக்க விரைவு</string>
     <string name="min_download_speed">நிமிட பதிவிறக்க விரைவு</string>
     <string name="avg_download_speed">AVG பதிவிறக்க விரைவு</string>
@@ -423,7 +423,7 @@
     <string name="label_custom_end_date">இறுதி தேதி: %1$s</string>
     <string name="setup_usage_reset_date_custom_selected">தனிப்பயன் தரவு திட்டம் செயலில் உள்ளது</string>
     <string name="crash_logs_extra_text">தரவு கண்காணிப்பு செயலிழப்பு பதிவுகள்</string>
-    <string name="label_select_app">பயன்பாட்டைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="label_select_app">பயன்பாட்டைத் தேர்ந்தெடு</string>
     <string name="label_crash_logs_share_chat">அரட்டைக்கு பகிரவும்: atadatamonitor</string>
     <string name="crash_logs_warning">செயலிழப்பு பதிவுகள்; மாற்ற வேண்டாம்</string>
     <string name="label_mail">அஞ்சல்</string>
