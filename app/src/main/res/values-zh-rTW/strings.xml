@@ -4,15 +4,15 @@
     <string name="appwidget_text">範例</string>
     <string name="add_widget">新增小工具</string>
     <string name="widget_mobile_data_usage" translatable="false">%1$s %2$s</string>
-    <string name="notification_mobile_data_usage">行動資料 ：%1$s</string>
-    <string name="notification_wifi_data_usage">WiFi ：%1$s</string>
+    <string name="notification_mobile_data_usage">行動數據：%1$s</string>
+    <string name="notification_wifi_data_usage">WiFi：%1$s</string>
     <string name="home_mobile_data_sent">%1$s \n已傳送</string>
     <string name="home_mobile_data_received">%1$s \n已接收</string>
     <string name="home_wifi_data_sent">%1$s \n已傳送</string>
     <string name="home_wifi_data_received">%1$s \n已接收</string>
     <string name="label_current_data_warning_trigger_level_limit_set">目前觸發閾值 ：%1$s%% (%2$s)</string>
     <string name="label_current_data_warning_trigger_level_limit_not_set">目前觸發閾值 ：%1$s%%</string>
-    <string name="label_data_trigger_level">目前使用 %1$s%% 流量</string>
+    <string name="label_data_trigger_level">當使用了 %1$s%% 的流量</string>
     <string name="app_label_package_name">安裝包名稱 ：%1$s</string>
     <string name="app_label_uid">UID ：%1$d</string>
     <string name="app_name_placeholder">軟體名稱</string>
@@ -29,10 +29,10 @@
     <string name="label_last_month">上週</string>
     <string name="label_this_year">今年</string>
     <string name="label_all_time">全部</string>
-    <string name="title_app_data_usage_type">選擇型別</string>
-    <string name="label_mobile_data">行動資料</string>
+    <string name="title_app_data_usage_type">選擇類別</string>
+    <string name="label_mobile_data">行動數據</string>
     <string name="label_wifi">Wifi</string>
-    <string name="title_data_usage">已使用流量</string>
+    <string name="title_data_usage">數據使用量</string>
     <string name="action_update">更新</string>
     <string name="data_remaining_placeholder">剩餘 0.00 GB</string>
     <string name="app_version_placeholder" translatable="false">v1.0</string>
@@ -40,17 +40,17 @@
     <string name="label_loading_apps">載入應用程式中</string>
     <string name="label_loading">載入中……</string>
     <string name="label_app_data_usage_session_empty">此時間段未使用流量</string>
-    <string name="label_want_to_contribute">想為這個軟體提供貢獻嗎？點選這裡瞭解貢獻的方法</string>
-    <string name="setup_image_footer">小工具或通知可以讓你輕鬆瞭解資料使用量</string>
-    <string name="heading_data_reset">資料重設間隔</string>
+    <string name="label_want_to_contribute">點擊這裡了解如何為這個軟體作出貢獻。</string>
+    <string name="setup_image_footer">小工具或通知可以讓你輕鬆了解數據使用量</string>
+    <string name="heading_data_reset">數據重設間隔</string>
     <string name="daily">每天</string>
     <string name="monthly">每月</string>
     <string name="heading_data_limit">流量限制</string>
     <string name="data_limit_placeholder" translatable="false">00.00</string>
     <string name="data_type_mb">MB</string>
     <string name="data_type_gb">GB</string>
-    <string name="title_data_warning_trigger">資料用量警告閾值</string>
-    <string name="title_add_data_plan">新增流量使用計劃</string>
+    <string name="title_data_warning_trigger">數據使用量警告閾值</string>
+    <string name="title_add_data_plan">新增數據方案</string>
     <string name="title_refresh_interval">更新間隔</string>
     <string name="option_1_min">1 分鐘</string>
     <string name="option_2_min">2 分鐘</string>
@@ -58,13 +58,13 @@
     <string name="option_10_min">10 分鐘</string>
     <string name="option_15_min">15 分鐘</string>
     <string name="title_widget_setup">設定小工具</string>
-    <string name="widget_setup_step_1">1. 在主螢幕上長按空白處</string>
-    <string name="widget_setup_step_2">2. 點選「小工具」</string>
-    <string name="widget_setup_step_3">3. 將 Data Monitor 提供的小工具拖動到桌面上</string>
-    <string name="heading_data_usage_today">今日資料用量</string>
-    <string name="action_add_data_plan_home">新增一個流量使用計劃以繼續</string>
+    <string name="widget_setup_step_1">1. 在主螢幕上長按空白處。</string>
+    <string name="widget_setup_step_2">2. 點選「小工具」。</string>
+    <string name="widget_setup_step_3">3. 將 Data Monitor 提供的小工具拖動到桌面上。</string>
+    <string name="heading_data_usage_today">今日數據使用量</string>
+    <string name="action_add_data_plan_home">新增一個數據計劃以繼續</string>
     <string name="heading_week_overview">本週總覽</string>
-    <string name="error_loading_overview">糟糕... 無法載入本週總覽\n請稍後再試</string>
+    <string name="error_loading_overview">糟糕... 無法載入本週總覽。\n請稍後再試。</string>
     <string name="title_setup">設定 Data Monitor</string>
     <string name="setup_widget">設定小工具</string>
     <string name="setup_notification">設定通知</string>
@@ -77,15 +77,15 @@
     <string name="refresh_widget_summary">若小工具出現問題，請手動更新它</string>
     <string name="setup_notification_title">通知</string>
     <string name="setup_notification_refresh_interval">通知更新間隔</string>
-    <string name="setup_show_mobile_usage">顯示移動資料使用量</string>
+    <string name="setup_show_mobile_usage">顯示流動數據使用量</string>
     <string name="setup_show_wifi_usage">顯示 WiFi 使用量</string>
-    <string name="monitor_data">監測資料用量</string>
-    <string name="setup_data_alert">資料用量警報</string>
+    <string name="monitor_data">監測數據用量</string>
+    <string name="setup_data_alert">數據用量警報</string>
     <string name="data_alert_summary">達到用量限制時通知你</string>
     <string name="settings_general">通用</string>
-    <string name="setup_add_data_plan">新增流量使用計劃</string>
-    <string name="add_data_plan_summary">新增或更新使用計劃</string>
-    <string name="setup_usage_reset_time">資料用量重設時間</string>
+    <string name="setup_add_data_plan">新增數據方案</string>
+    <string name="add_data_plan_summary">新增或更新數據方案</string>
+    <string name="setup_usage_reset_time">數據用量重設時間</string>
     <string name="usage_reset_time_placeholder" translatable="false">12：00 AM</string>
     <string name="app_license_header">應用程式許可證</string>
     <string name="oss_licenses">開源許可證</string>
@@ -104,8 +104,8 @@
     <string name="contributors_summary">那些陪伴著我的人</string>
     <string name="donate">捐贈</string>
     <string name="donate_summary">也許，為我們買杯咖啡？</string>
-    <string name="data_reset">資料重設</string>
-    <string name="data_limit">資料限制</string>
+    <string name="data_reset">數據重設</string>
+    <string name="data_limit">數據限制</string>
     <string name="support_and_development">開發者</string>
     <string name="github">GitHub</string>
     <string name="github_summary">檢視原始碼</string>
@@ -114,7 +114,7 @@
     <string name="report">回報問題</string>
     <string name="report_summary">回報問題或請求新功能</string>
     <string name="setup">設定</string>
-    <string name="app_data_usage">應用程式使用</string>
+    <string name="app_data_usage">應用程式使用量</string>
     <string name="settings">設定</string>
     <string name="btc_address_copied">Bitcoin 錢包地址已複製到剪貼簿</string>
     <string name="eth_address_copied">Ethereum 錢包地址已複製到剪貼簿</string>
@@ -123,18 +123,18 @@
     <string name="package_system" translatable="false">com.android.systemui</string>
     <string name="home">首頁</string>
     <string name="usage_access_permission">使用紀錄存取權</string>
-    <string name="usage_access_body">需要使用紀錄存取權才能使用此軟體。此權限將只用來收集資料用量，不會做其他用途</string>
+    <string name="usage_access_body">使用量數據存取權提供使用量資料，需要這項權限才能使用此應用程式。\n此權限不會收集個人資料。</string>
     <string name="action_grant">授予權限</string>
     <string name="label_tethering">手機熱點</string>
     <string name="package_tethering" translatable="false">com.android.tethering</string>
     <string name="label_removed">已刪除的應用程式</string>
     <string name="package_removed" translatable="false">com.android.removed</string>
     <string name="oem_skin_warning">%1$s 請檢視額外的最佳化建議，以保證應用程式的正常執行。</string>
-    <string name="oem_skin_miui">偵測到 MIUI！</string>
+    <string name="oem_skin_miui">偵測到 MIUI。</string>
     <string name="battery_optimisation_disabled">電池最佳化已關閉</string>
-    <string name="data_plan_saved">使用計劃已儲存</string>
+    <string name="data_plan_saved">數據方案已儲存</string>
     <string name="upi_app_not_found">未找到可以處理此請求的應用程式</string>
-    <string name="upi_unknown_error">發生了一個未知的錯誤。請再試一次或嘗試其他方法。</string>
+    <string name="upi_unknown_error">發生了一個未知的錯誤。\n請再試一次或嘗試其他方法。</string>
     <string name="label_no_additional_lang">更多語言即將到來。想幫助我們？點選瞭解詳情。</string>
     <string name="notification_disabled">Data monitor 通知已關閉</string>
     <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新</string>
@@ -143,24 +143,24 @@
     <string name="label_data_usage_reset_date_change">數據使用量會在每個月%1$s日被重設</string>
     <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
     <string name="remaining_data_info_disabled">剩餘流量資訊已停用</string>
-    <string name="label_monitoring_no_plan">新增一個流量使用計劃以繼續</string>
+    <string name="label_monitoring_no_plan">新增一個數據方案以繼續</string>
     <string name="label_widget_refreshed">小工具已更新</string>
-    <string name="label_notification_enabled">資料監測通知已啟用</string>
+    <string name="label_notification_enabled">數據監測通知已啟用</string>
     <string name="label_notification_cannot_disable_both">無法同時停用兩個元素</string>
     <string name="label_setup_notification_first">請先設定通知</string>
-    <string name="label_data_plan_saved">使用計劃已儲存</string>
+    <string name="label_data_plan_saved">數據方案已儲存</string>
     <string name="month">月</string>
     <string name="day">天</string>
-    <string name="label_add_data_plan_first">新增一個流量使用計劃以繼續</string>
-    <string name="title_data_warning_notification">資料用量警告</string>
-    <string name="body_data_warning_notification">您已超過 %1$d%% 資料限制</string>
-    <string name="body_app_data_warning_notification">%1$s 已用完資料配額</string>
-    <string name="title_data_usage_notification">今日資料用量 ：%1$s</string>
+    <string name="label_add_data_plan_first">新增一個數據方案以繼續</string>
+    <string name="title_data_warning_notification">數據用量警告</string>
+    <string name="body_data_warning_notification">您已超過 %1$d%% 數據限制</string>
+    <string name="body_app_data_warning_notification">%1$s 已用完數據配額</string>
+    <string name="title_data_usage_notification">今日數據用量 ：%1$s</string>
     <string name="body_data_usage_notification_loading">載入中…</string>
     <string name="label_data_remaining">剩餘 %1$s</string>
     <string name="label_data_remaining_used_excess">超出 %1$s</string>
     <string name="disable_battery_optimisation">關閉電池最佳化</string>
-    <string name="disable_battery_optimisation_body">停用對 Data Monitor 的電池最佳化，以防止系統殺死後臺服務。若啟用將阻止應用程式程式的正常工作，並可能顯示不正確的數值。</string>
+    <string name="disable_battery_optimisation_body">停用對 Data Monitor 的電池最佳化，以防止系統殺死後臺服務。\n啟用將阻止應用程式程式的正常工作，並可能顯示不正確的數值。</string>
     <string name="extra_optimisation_tips">更多最佳化建議</string>
     <string name="oem_battery_settings">製造商電池設定</string>
     <string name="action_next">下一個</string>
@@ -178,8 +178,8 @@
     <string name="overview_0_5gb" translatable="false">0.5 GB</string>
     <string name="overview_0gb" translatable="false">0 GB</string>
     <string name="label_translators">譯者們</string>
-    <string name="setup_app_data_usage_alert">資料用量警報</string>
-    <string name="title_app_data_limit">資料用量限制</string>
+    <string name="setup_app_data_usage_alert">數據用量警報</string>
+    <string name="title_app_data_limit">數據用量限制</string>
     <string name="network_diagnostics">網路診斷</string>
     <string name="run_diagnostics">開始診斷</string>
     <string name="running_diagnostics">診斷中</string>
@@ -206,19 +206,19 @@
     <string name="swipe_right_to_delete">向右滑動以刪除一個專案</string>
     <string name="refresh_list">重新整理列表</string>
     <string name="no_network_connection">未偵測到網路連線！</string>
-    <string name="connection_error">連線錯誤，請檢查你的網路。</string>
+    <string name="connection_error">無法連線。\n請檢查你的網路。</string>
     <string name="app_label_screen_time">螢幕時間：%1$s</string>
     <string name="app_label_background_time">後臺時間：%1$s</string>
     <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
     <string name="ygorigor_summary">羅馬尼亞語譯者</string>
     <string name="ygorigor" translatable="false">Igor Sorocean</string>
     <string name="johnsonran_summary">簡體中文</string>
-    <string name="label_want_to_contribute_language">未找到您的語言？點此瞭解如何幫助我們！</string>
+    <string name="label_want_to_contribute_language">未找到您的語言？點此幫助將應用程式翻譯成您的語言。</string>
     <string name="current_language">當前語言</string>
     <string name="available_languages">可用語言</string>
-    <string name="label_reset_every_month">每個月 %1$s</string>
-    <string name="setup_usage_reset_date">數據流量重設日期</string>
-    <string name="system_data_usage">系統數據使用</string>
+    <string name="label_reset_every_month">每個月 %1$s 天</string>
+    <string name="setup_usage_reset_date">數據使用量重設日期</string>
+    <string name="system_data_usage">系統數據使用量</string>
     <string name="cracky5322_summary">繁體中文</string>
     <string name="louis_leblanc_summary">法文</string>
     <string name="network_speed_title">網路速度：%1$s</string>
@@ -229,7 +229,7 @@
     <string name="label_network_signal_notification_disabled">即時網路速度已關閉</string>
     <string name="network_signal_summary">Beta 功能</string>
     <string name="read_phone_state_permission">讀取電話狀態的權限</string>
-    <string name="read_phone_state_body">執行 Android 9 及以下版本的設備必須手動授予此權限。不會收集任何個人資料。</string>
+    <string name="read_phone_state_body">使用 Android 9 及以下版本的設備必須手動授予此權限。不會收集任何個人資料。</string>
     <string name="action_permission_granted">授予權限</string>
     <string name="error_permission_denied">權限遭拒。請手動授權它。</string>
     <string name="telegram_support">Telegram 支援</string>
@@ -279,8 +279,8 @@
     <string name="heading_data_reset_custom_counter">方案有效期</string>
     <string name="label_custom_start_date">開始日期：%1$s</string>
     <string name="label_custom_end_date">結束日期：%1$s</string>
-    <string name="setup_usage_reset_date_custom_selected">自訂流量方案處於活躍狀態</string>
-    <string name="title_data_plan_expired">流量方案已過期！</string>
+    <string name="setup_usage_reset_date_custom_selected">自訂數據方案已啟用</string>
+    <string name="title_data_plan_expired">數據方案已過期！</string>
     <string name="summary_data_plan_expired">您可能想更新您的方案</string>
     <string name="error_unknown_telegram_client">Telegram 未安裝或存在未知用戶端。請嘗試其他方法。</string>
     <string name="crash_logs_extra_text">Data Monitor 錯誤日誌</string>
@@ -312,12 +312,12 @@
     <string name="notification_permission_denied_body">包括數據監控通知在內的功能，即時網路速度，未取得通知權限，數據使用警報將無法正常工作。請手動授予它。</string>
     <string name="settings_disable_haptics">停用震動</string>
     <string name="disable_haptics_summary">停用整個應用程式的震動回饋</string>
-    <string name="action_dismiss">Dismiss</string>
-    <string name="action_add_data_plan_home_summary">沒有找到流量方案！增加流量方案以開始追蹤它</string>
+    <string name="action_dismiss">關閉</string>
+    <string name="action_add_data_plan_home_summary">沒有找到數據方案！增加數據方案以開始追蹤它。</string>
     <string name="label_select_start_date">選擇開始日期</string>
     <string name="label_plan_end_date">選擇結束日期</string>
     <string name="combine_notifications">合併通知</string>
-    <string name="combine_notifications_summary">合併 Data monitor 和網路速度至一條通知。</string>
+    <string name="combine_notifications_summary">合併數據使用量和網路速度至一條通知。</string>
     <string name="combined_notification_icon">組合通知圖示</string>
     <string name="combined_notification_icon_summary">選擇要為組合通知顯示的圖示</string>
     <string name="error_combine_notifications_enabled">啟用組合通知。無法停用個別通知。</string>
@@ -388,14 +388,14 @@
     <string name="label_filter">過濾</string>
     <string name="label_current_plan">目前方案</string>
     <string name="home_plan_usage_details">%1$s 已用 | %2$s</string>
-    <string name="label_plan_validity">有效期至 %1$s | %2$s</string>
+    <string name="label_plan_validity">有效期至 %2$s | %1$s 天</string>
     <string name="always_show_total">總是顯示總額</string>
     <string name="always_show_total_summary">無論選擇的選項如何，始終顯示通知中使用的總數據。</string>
     <string name="app_label_combined_total">總數據使用量：%1$s</string>
     <string name="error_alarm_permission_denied">警示權限被拒絕！</string>
-    <string name="error_alarm_permission_denied_summary">您嘗試執行需要 SCHEDULE_EXACT_ALARM 權限的操作，該權限未授予該應用程式。單擊此處授予權限。</string>
-    <string name="error_alarm_permission_denied_dialog_summary">Data Monitor 需要 SCHEDULE_EXACT_ALARM 權限才能正常工作。您仍然可以使用該應用程式，但某些功能可能無法正常使用。</string>
-    <string name="error_alarm_permission_denied_feature_summary">在未授予 SCHEDULE_EXACT_ALARM 權限的情況下，您無法使用此功能。</string>
+    <string name="error_alarm_permission_denied_summary">您嘗試執行了需要「鬧鐘與提醒」權限的操作，該權限未授予該應用程式。單擊此處授予權限。</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Data Monitor 需要「鬧鐘與提醒」權限才能正常工作。您仍然可以使用該應用程式，但某些功能可能無法正常使用。</string>
+    <string name="error_alarm_permission_denied_feature_summary">在未授予「鬧鐘與提醒」權限的情況下，您無法使用此功能。</string>
     <string name="label_do_not_show_again">不再顯示</string>
     <string name="fjuro">Fjuro</string>
     <string name="fjuro_summary">捷克語</string>
@@ -405,7 +405,7 @@
     <string name="ngocanhtve_summary">越南文</string>
     <string name="bluehomewu">EdwardWu</string>
     <string name="bluehomewu_summary">繁體中文</string>
-    <string name="label_data_plan_updated">行動數據方案已更新！</string>
+    <string name="label_data_plan_updated">數據方案已更新！</string>
     <string name="data_plan_updated_summary">您的新方案有效期至 %1$s</string>
     <string name="setup_auto_update_data_plan">自動更新數據方案</string>
     <string name="auto_update_data_plan_summary">自動使用類似的數據方案更新您的數據方案。</string>
@@ -416,11 +416,11 @@
     <string name="wall_of_thanks_body">Data Monitor 自成立以來已經取得了相當大的進步，如果沒有慷慨捐助者的支持，我們不可能做到這一點。</string>
     <string name="label_top_donors">頂級贊助者</string>
     <string name="label_all_donors">所有贊助者</string>
-    <string name="error_data_fetch_failed">取得數據失敗</string>
+    <string name="error_data_fetch_failed">擷取資料失敗</string>
     <string name="wall_of_thanks_summary">一個向該應用程式的支持者表示感謝的地方。</string>
     <string name="app_contributors_summary">支援應用程式開發的貢獻者清單。</string>
-    <string name="setup_smart_data_allocation">智慧行動數據分配</string>
-    <string name="smart_data_allocation_summary">使用每日配額和行動數據滾動智慧分配您的行動數據。</string>
+    <string name="setup_smart_data_allocation">智能分配行動數據</string>
+    <string name="smart_data_allocation_summary">使用每日配額和行動數據滾動智能地分配您的行動數據。</string>
     <string name="setup_daily_quota_alert">每日配額提醒</string>
     <string name="daily_quota_alert_summary">當您的每日配額用完時收到警告。</string>
     <string name="daily_quota_alert_title">每日數據限額已達！</string>
@@ -453,13 +453,13 @@
     <string name="time">時間</string>
     <string name="label_select_start_time">選擇開始時間</string>
     <string name="label_select_end_time">選擇結束時間</string>
-    <string name="error_invalid_session">會話持續時間無效</string>
+    <string name="error_invalid_session">會話持續時間無效。</string>
     <string name="action_reset">重設</string>
     <string name="add_time">增加時間</string>
     <string name="action_apply_filter">套用篩選器</string>
     <string name="label_select_date">選擇日期</string>
     <string name="label_welcome_header">歡迎來到 Data Monitor 的世界</string>
-    <string name="label_welcome_body">在同一個地方一起追蹤流量使用</string>
+    <string name="label_welcome_body">在同一個地方一起追蹤流量使用量</string>
     <string name="get_started">開始使用</string>
     <string name="skip_setup">跳過設定</string>
     <string name="flix">Flix</string>
@@ -474,4 +474,5 @@
     <string name="label_plan_details_title_custom">活躍的自訂方案</string>
     <string name="buttercookie42">buttercookie42</string>
     <string name="buttercookie42_summary">開發者</string>
+    <string name="label_days_remaining">剩下%1$s天</string>
 </resources>

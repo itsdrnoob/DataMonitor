@@ -378,9 +378,9 @@
     <string name="error_alarm_permission_denied">Разрешение к уведомлениям отклонено!</string>
     <string name="always_show_total_summary">Всегда показывать общее количество использованных данных в уведомлении независимо от выбранных опций.</string>
     <string name="app_label_combined_total">Всего использовано данных: %1$s</string>
-    <string name="error_alarm_permission_denied_summary">Вы пытались выполнить действие, требующее разрешения SCHEDULE_EXACT_ALARM, которое не предоставлено приложению. Нажмите здесь, чтобы предоставить разрешение.</string>
-    <string name="error_alarm_permission_denied_dialog_summary">Для правильной работы Монитора данных требуется разрешение SCHEDULE_EXACT_ALARM. Вы можете продолжать пользоваться приложением, но некоторые функции могут работать некорректно.</string>
-    <string name="error_alarm_permission_denied_feature_summary">Вы не можете использовать эту функцию без предоставления разрешения SCHEDULE_EXACT_ALARM.</string>
+    <string name="error_alarm_permission_denied_summary">Вы попытались выполнить действие, для которого требуется разрешение «Будильники и напоминания», но оно не предоставлено приложению. Нажмите здесь, чтобы выдать разрешение.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Для корректной работы Data Monitor требуется разрешение \"Будильники и напоминания\". Приложение можно использовать без него, но некоторые функции могут работать некорректно.</string>
+    <string name="error_alarm_permission_denied_feature_summary">Эта функция недоступна без разрешения «Будильники и напоминания».</string>
     <string name="atharvshinde">Atharv Shinde</string>
     <string name="graphixmedia">Graphixx</string>
     <string name="hinamechan">HinameChan</string>
@@ -461,4 +461,20 @@
     <string name="action_apply_filter">Применить фильтр</string>
     <string name="error_invalid_session">Недопустимая длительность сессии.</string>
     <string name="time">Время</string>
+    <string name="label_welcome_body">Отслеживайте использование всех ваших данных - в одном месте</string>
+    <string name="get_started">Начать</string>
+    <string name="skip_setup">Пропустить настройку</string>
+    <string name="label_plan_details_title_unknown">Неизвестный план активен</string>
+    <string name="label_plan_details_title_monthly">Ежемесячный план активен</string>
+    <string name="label_plan_details_title_custom">Активен пользовательский план</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="buttercookie42_summary">Разработчик</string>
+    <string name="xxx_summary">Русский</string>
+    <string name="ofermar">ofermar</string>
+    <string name="ofermar_summary">Еврей</string>
+    <string name="flix">Flix</string>
+    <string name="flix_summary">Немецкий</string>
+    <string name="xxx">xXx</string>
+    <string name="label_welcome_header">Добро пожаловать в Data Monitor</string>
+    <string name="label_plan_details_title_daily">Ежедневный план активен</string>
 </resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appwidget_text">Näidis</string>
+    <string name="add_widget">Lisa vidin</string>
+    <string name="notification_mobile_data_usage">Mobiilne andmeside: %1$s</string>
+    <string name="notification_wifi_data_usage">WiFi: %1$s</string>
+    <string name="action_open_app_settings">Ava rakenduse seadistused</string>
+    <string name="action_ok">Sobib</string>
+    <string name="label_yesterday">Eile</string>
+    <string name="label_all_time">Läbi aegade</string>
+    <string name="title_app_data_usage_type">Vali tüüp</string>
+    <string name="label_wifi">WiFi</string>
+    <string name="title_data_usage">Andmekasutus</string>
+    <string name="action_update">Uuenda</string>
+    <string name="label_mobile_data">Mobiilne andmeside</string>
+    <string name="home_mobile_data_received">%1$s\nvastuvõetud</string>
+    <string name="action_cancel">Katkesta</string>
+    <string name="home_mobile_data_sent">%1$s\nsaadetud</string>
+    <string name="home_wifi_data_sent">%1$s\nsaadetud</string>
+    <string name="home_wifi_data_received">%1$s\nvastuvõetud</string>
+    <string name="title_app_data_usage_session">Vali sessioon</string>
+    <string name="label_today">Täna</string>
+    <string name="label_this_month">Sel kuul</string>
+    <string name="label_this_year">Sel aastal</string>
+    <string name="label_last_month">Eelmisel kuul</string>
+</resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">डाटा मॉनिटर</string>
-    <string name="appwidget_text">जइसन की</string>
+    <string name="appwidget_text">उदाहरण</string>
     <string name="notification_mobile_data_usage">मोबाइल डाटा : %1$s</string>
     <string name="notification_wifi_data_usage">वाई-फाई: %1$s</string>
     <string name="home_mobile_data_sent">%1$s
@@ -32,4 +32,10 @@
     <string name="label_this_month">इ महीना</string>
     <string name="label_last_month">पिछला महीना</string>
     <string name="label_this_year">एह साल</string>
+    <string name="add_widget">विजेट जोड़ल जाला</string>
+    <string name="label_mobile_data">मोबाइल के डाटा के</string>
+    <string name="label_dev">बिटरॉइड के ❤ के</string>
+    <string name="data_remaining_placeholder">0.00 जीबी बाचल बा</string>
+    <string name="label_loading_apps">लोड हो रहल</string>
+    <string name="label_loading">लोड हो रहल बा…</string>
 </resources>

@@ -269,7 +269,7 @@
     <string name="eth_address_copied">Адреса гаманця Ethereum скопійована в буфер обміну</string>
     <string name="btc_address_copied">Адреса гаманця Bitcoin скопійована в буфер обміну</string>
     <string name="oem_skin_warning">%1$s Будь ласка, перевірте додаткові поради щодо оптимізації, щоб застосунок працював правильно.</string>
-    <string name="label_removed">Віддалені застосунки</string>
+    <string name="label_removed">Видалені застосунки</string>
     <string name="label_no_additional_lang">Натисніть тут, щоб допомогти перекласти застосунок.</string>
     <string name="label_notification_refresh_interval_change">Повідомлення буде оновлюватися кожні %1$s</string>
     <string name="ygorigor_summary">Румунська</string>
@@ -356,7 +356,7 @@
 \n
 \nЯкщо ви хочете підтримати розвиток застосунку, ми будемо вдячні за пожертву.</string>
     <string name="action_save">Зберегти</string>
-    <string name="error_alarm_permission_denied_feature_summary">Ви не можете використовувати цю функцію без надання дозволу SCHEDULE_EXACT_ALARM.</string>
+    <string name="error_alarm_permission_denied_feature_summary">Ви не можете використовувати цю функцію, не надавши дозвіл на будильники та нагадування.</string>
     <string name="error_alarm_permission_denied">У дозволі на будильник відмовлено!</string>
     <string name="label_do_not_show_again">Більше не показувати</string>
     <string name="error_network_monitor_start">Не вдалося запустити Network Monitor. Відкрийте застосунок для оновлення.</string>
@@ -364,8 +364,8 @@
     <string name="label_filter">Фільтр</string>
     <string name="label_current_plan">Поточний план</string>
     <string name="app_label_combined_total">Загальне використання даних: %1$s</string>
-    <string name="error_alarm_permission_denied_summary">Ви спробували виконати дію, яка вимагає дозволу SCHEDULE_EXACT_ALARM, який не надано застосунку. Натисніть тут, щоб надати дозвіл.</string>
-    <string name="error_alarm_permission_denied_dialog_summary">Для належної роботи Data Monitor потрібен дозвіл SCHEDULE_EXACT_ALARM. Ви все ще можете використовувати застосунок, але деякі функції можуть не працювати належним чином.</string>
+    <string name="error_alarm_permission_denied_summary">Ви намагалися виконати дію, для якої потрібен дозвіл на будильники та нагадування, який не надано програмі. Натисніть тут, щоб надати дозвіл.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Для належної роботи Data Monitor потрібен дозвіл на сигнали тривоги та нагадування. Ви все ще можете використовувати програму, але деякі функції можуть не працювати належним чином.</string>
     <string name="home_plan_usage_details">%1$s використано | %2$s</string>
     <string name="label_plan_validity">Дійсний до %1$s | %2$s</string>
     <string name="always_show_total">Завжди показувати загальну кількість</string>
@@ -451,4 +451,30 @@
     <string name="jean_mareilles_summary">Французька</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="dan">Dan</string>
+    <string name="time">час</string>
+    <string name="get_started">Почніть роботу</string>
+    <string name="skip_setup">Пропустити налаштування</string>
+    <string name="add_custom_session">Додати спеціальний сеанс</string>
+    <string name="date">Дата</string>
+    <string name="label_select_start_time">Виберіть час початку</string>
+    <string name="label_select_end_time">Виберіть час завершення</string>
+    <string name="error_invalid_session">Недійсна тривалість сеансу.</string>
+    <string name="add_time">Додайте час</string>
+    <string name="action_apply_filter">Застосувати фільтр</string>
+    <string name="label_select_date">Виберіть дату</string>
+    <string name="label_welcome_header">Ласкаво просимо до Data Monitor</string>
+    <string name="label_plan_details_title_unknown">Невідомий план активний</string>
+    <string name="label_plan_details_title_monthly">Місячний план активний</string>
+    <string name="label_plan_details_title_daily">Щоденний план активний</string>
+    <string name="label_plan_details_title_custom">Спеціальний план активний</string>
+    <string name="buttercookie42">buttercookie42</string>
+    <string name="buttercookie42_summary">Розробник</string>
+    <string name="flix">Флікс</string>
+    <string name="xxx_summary">російська</string>
+    <string name="flix_summary">Німецький</string>
+    <string name="xxx">xXx</string>
+    <string name="ofermar">пропозиція</string>
+    <string name="ofermar_summary">іврит</string>
+    <string name="action_reset">Скинути</string>
+    <string name="label_welcome_body">Відстежуйте використання даних в одному місці</string>
 </resources>
