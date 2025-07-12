@@ -11,10 +11,9 @@ android {
         applicationId "com.drnoob.datamonitor"
         minSdkVersion 23
         targetSdkVersion 34
-        versionCode 30
-        versionName 'v2.4.0'
-        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "in", "it", "iw", "ja", "ko", "ml", "mr", "ms",
-                "nb-rNO", "nl", "pl", "pt-rBR", "ro", "ru", "tr", "uk", "uz", "vi", "zh-rCN", "zh-rTW"
+        versionCode 31
+        versionName 'v2.5.0-Beta-1'
+        resConfigs 'en', 'ar', 'cs', 'de', 'es', 'fr', 'hi', 'in', 'it', 'iw', 'ja', 'ko', 'ml', 'mr', 'ms', 'nb-rNO', 'nl', 'pl', 'pt-rBR', 'ro', 'ru', 'tr', 'uk', 'uz', 'vi', 'zh-rCN', 'zh-rTW'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,12 +35,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.drnoob.datamonitor'
 }
 
 
