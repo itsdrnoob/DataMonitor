@@ -63,7 +63,7 @@
     <string name="widget_setup_step_3">3. Arraste e solte o widget Data Monitor na tela inicial.</string>
     <string name="heading_data_usage_today">Consumo de dados hoje</string>
     <string name="action_add_data_plan_home">Coloque seu plano de dados para começar o monitoramento</string>
-    <string name="heading_week_overview">"Visão Geral  de consumo essa semana"</string>
+    <string name="heading_week_overview">"Visão Geral  de consumo dessa semana"</string>
     <string name="error_loading_overview">Não foi possível carregar a visão geral desta semana.
 \nTente novamente mais tarde.</string>
     <string name="title_setup">Configure o Monitor de Dados</string>
@@ -433,7 +433,7 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="diagnostics_history">Histórico de Diagnósticos</string>
     <string name="settings_save_results">Salvar resultados</string>
     <string name="error_alarm_permission_denied">Permissão de alarme negada!</string>
-    <string name="error_alarm_permission_denied_summary">Você tentou executar uma ação que requer a permissão SCHEDULE_EXACT_ALARM, que não foi concedida ao aplicativo. Clique aqui para conceder a permissão.</string>
+    <string name="error_alarm_permission_denied_summary">Você tentou executar uma ação que requer a permissão SCHEDULE_EXACT_ALARM, que não foi concedida para o aplicativo. Clique aqui para conceder a permissão.</string>
     <string name="error_alarm_permission_denied_feature_summary">Você não pode usar esse recurso sem conceder a permissão SCHEDULE_EXACT_ALARM.</string>
     <string name="label_plan_details_title_monthly">Plano mensal ativo</string>
     <string name="buttercookie42_summary">Desenvolvedor</string>
@@ -452,4 +452,6 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="label_custom_start_time">Hora de início: %1$s</string>
     <string name="label_filter">Filtro</string>
     <string name="jean_mareilles_summary">Francês</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato">gallegonovato</string>
 </resources>
