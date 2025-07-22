@@ -41,17 +41,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.drnoob.datamonitor.BuildConfig;
 import com.drnoob.datamonitor.R;
 import com.drnoob.datamonitor.core.base.Preference;
+import com.drnoob.datamonitor.core.base.PreferenceCategory;
 import com.drnoob.datamonitor.core.base.SwitchPreferenceCompat;
 import com.drnoob.datamonitor.ui.activities.ContainerActivity;
+import com.drnoob.datamonitor.ui.activities.DebugActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsFragment.class.getSimpleName();
     private Preference mAppThemePicker, mLanguagePicker, mDiagnosticsSettings,
-            mAbout, mContributors, mDonate;
+            mAbout, mContributors, mDonate, mDebug;
     private SwitchPreferenceCompat mDisableHaptics;
     private Snackbar snackbar;
 
@@ -75,10 +78,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mAbout = (Preference) findPreference("about");
         mContributors = (Preference) findPreference("contributors");
         mDonate = (Preference) findPreference("donate");
+        mDebug = findPreference("debug");
 
         String themeSummary = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getString(APP_THEME_SUMMARY, getString(R.string.system_theme_summary));
         mAppThemePicker.setSummary(themeSummary);
+
+        // Advanced preference category with debug options only shown in debug builds
+        PreferenceCategory advancedPreferences = findPreference("settings_advanced");
+
+        if (!BuildConfig.DEBUG) {
+            if (advancedPreferences != null) {
+                advancedPreferences.setVisible(false);
+            }
+        }
 
         mAppThemePicker.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
             @Override
@@ -239,6 +252,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(androidx.preference.Preference preference) {
                 startActivity(new Intent(getContext(), ContainerActivity.class)
                         .putExtra(GENERAL_FRAGMENT_ID, DONATE_FRAGMENT));
+                return false;
+            }
+        });
+
+        mDebug.setOnPreferenceClickListener(new androidx.preference.Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull androidx.preference.Preference preference) {
+                startActivity(new Intent(getContext(), DebugActivity.class));
                 return false;
             }
         });

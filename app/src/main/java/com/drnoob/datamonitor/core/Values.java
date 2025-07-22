@@ -39,6 +39,12 @@ public class Values {
     public static final String OTHER_NOTIFICATION_CHANNEL_NAME = "Other";
     public static final String DEFAULT_NOTIFICATION_GROUP = "Default";
     public static final int ALARM_PERMISSION_NOTIFICATION_ID = 0x00FA; // 250
+    public static final String LOGGING_NOTIFICATION_CHANNEL_ID = "Debug.Logging";
+    public static final String LOGGING_NOTIFICATION_CHANNEL_NAME = "Logging";
+    public static final int LOGGING_NOTIFICATION_ID = 0x014A;
+    public static final String CAPTURED_LOGS_NOTIFICATION_CHANNEL_ID = "Debug.CapturedLogs";
+    public static final String CAPTURED_LOGS_NOTIFICATION_CHANNEL_NAME = "Captured Logs";
+    public static final int CAPTURED_LOGS_NOTIFICATION_ID = 0x0172;
 
 
     public static final int SESSION_TODAY = 0x000A;

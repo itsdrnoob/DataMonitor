@@ -521,4 +521,25 @@
     <string name="label_plan_details_title_custom">Custom plan active</string>
     <string name="buttercookie42">buttercookie42</string>
     <string name="buttercookie42_summary">Developer</string>
+    <string name="settings_advanced">Advanced</string>
+    <string name="debug">Debug</string>
+    <string name="logging_complete">Logging complete</string>
+    <string name="label_previous_logs">Previous Logs</string>
+    <string name="clear_logs_success">Logs cleared successfully</string>
+    <string name="clear_logs_failure">Failed to clear logs</string>
+    <string name="label_capture_logs">Capture runtime logs</string>
+    <string name="capture_logs_desc">Record application logs to help debug an issue. Logs will be saved to you device.</string>
+    <string name="start_logging">Start Logging</string>
+    <string name="capture_logs_warning">Logging for extensively long periods of time may have unwanted effects. Make sure to Stop Logging once the issue has been captured.</string>
+    <string name="label_clear_logs">Clear log files</string>
+    <string name="clear_logs_desc">Delete old log files saved on this device.</string>
+    <string name="label_logs_captured">Logs captured</string>
+    <string name="label_view_logs">View logs</string>
+    <string name="save_and_close">Save and close</string>
+    <string name="label_log_file">Log file</string>
+    <string name="log_ext">.log</string>
+    <string name="stop_logging">Stop Logging</string>
+    <string name="logging_complete_body">Click here to share or save to device.</string>
+    <string name="label_capturing_logs">Capturing Logs</string>
+    <string name="capturing_logs_body">Capturing Logs by Data Monitor. %1$s</string>
 </resources>

@@ -38,4 +38,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="user_image">80dip</dimen>
     <dimen name="user_image_featured">64dp</dimen>
+    <dimen name="logs_dropdown_fixed_height">300dp</dimen>
 </resources>

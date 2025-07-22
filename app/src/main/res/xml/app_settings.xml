@@ -80,4 +80,19 @@
 
     </com.drnoob.datamonitor.core.base.PreferenceCategory>
 
+    <com.drnoob.datamonitor.core.base.PreferenceCategory
+        android:title="@string/settings_advanced"
+        app:iconSpaceReserved="false"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false"
+        android:key="settings_advanced">
+
+        <com.drnoob.datamonitor.core.base.Preference
+            android:title="@string/debug"
+            app:icon="@drawable/ic_debug_menu"
+            android:key="debug"
+            android:widgetLayout="@layout/preference_right_arrow" />
+
+    </com.drnoob.datamonitor.core.base.PreferenceCategory>
+
 </PreferenceScreen>

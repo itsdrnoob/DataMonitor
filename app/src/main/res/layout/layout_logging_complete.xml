@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_mid_large"
+        android:paddingBottom="@dimen/margin_extra_large"
+        android:background="@drawable/bottom_sheet_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+            android:id="@+id/drag_handle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/logging_complete_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
+            android:text="@string/logging_complete"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+
+        <TextView
+            android:id="@+id/log_file_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_log_file"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logging_complete_title"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/log_name_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/log_name_ext"
+            app:layout_constraintTop_toBottomOf="@id/log_file_name_title">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/log_file_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:inputType="text"
+                android:imeOptions="actionNext"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/log_name_ext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_ext"
+            android:textSize="@dimen/text_mid_large"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/margin_medium"
+            app:layout_constraintStart_toEndOf="@id/log_name_input"
+            app:layout_constraintBottom_toBottomOf="@id/log_name_input"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/log_name_ext">
+
+            <fragment
+                android:id="@+id/send_report_view"
+                class="com.drnoob.datamonitor.ui.activities.CrashReportActivity$SendReportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
