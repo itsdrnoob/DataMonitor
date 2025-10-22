@@ -75,4 +75,14 @@ public class SharedPreferences {
 
         return preferences;
     }
+
+    public static android.content.SharedPreferences getPreviousLogsPrefs(Context context) {
+        android.content.SharedPreferences preferences = null;
+        if (context != null) {
+            preferences = context.getSharedPreferences("prev_logs",
+                    Context.MODE_PRIVATE);
+        }
+
+        return preferences;
+    }
 }

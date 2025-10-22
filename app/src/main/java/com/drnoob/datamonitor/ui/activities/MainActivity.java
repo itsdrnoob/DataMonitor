@@ -31,6 +31,8 @@ import static com.drnoob.datamonitor.core.Values.APP_DATA_USAGE_WARNING_CHANNEL_
 import static com.drnoob.datamonitor.core.Values.APP_LANGUAGE_CODE;
 import static com.drnoob.datamonitor.core.Values.APP_THEME;
 import static com.drnoob.datamonitor.core.Values.BOTTOM_NAVBAR_ITEM_SETTINGS;
+import static com.drnoob.datamonitor.core.Values.CAPTURED_LOGS_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.CAPTURED_LOGS_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.DATA_RESET_DATE;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_NOTIFICATION_CHANNEL_NAME;
@@ -40,6 +42,8 @@ import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.DATA_USAGE_WARNING_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.DISABLE_BATTERY_OPTIMISATION_FRAGMENT;
 import static com.drnoob.datamonitor.core.Values.GENERAL_FRAGMENT_ID;
+import static com.drnoob.datamonitor.core.Values.LOGGING_NOTIFICATION_CHANNEL_ID;
+import static com.drnoob.datamonitor.core.Values.LOGGING_NOTIFICATION_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_ID;
 import static com.drnoob.datamonitor.core.Values.NETWORK_SIGNAL_CHANNEL_NAME;
 import static com.drnoob.datamonitor.core.Values.OTHER_NOTIFICATION_CHANNEL_ID;
@@ -485,8 +489,12 @@ public class MainActivity extends AppCompatActivity {
                 NotificationManager.IMPORTANCE_HIGH);
         NotificationChannel networkSignalChannel = new NotificationChannel(NETWORK_SIGNAL_CHANNEL_ID, NETWORK_SIGNAL_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
-        NotificationChannel otherChannel = new NotificationChannel(OTHER_NOTIFICATION_CHANNEL_ID, OTHER_NOTIFICATION_CHANNEL_NAME,
+        NotificationChannel loggingChannel = new NotificationChannel(LOGGING_NOTIFICATION_CHANNEL_ID, LOGGING_NOTIFICATION_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_LOW);
+        NotificationChannel capturedLogsChannel = new NotificationChannel(CAPTURED_LOGS_NOTIFICATION_CHANNEL_ID, CAPTURED_LOGS_NOTIFICATION_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel otherChannel = new NotificationChannel(OTHER_NOTIFICATION_CHANNEL_ID, OTHER_NOTIFICATION_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_LOW);
         warningChannel.enableVibration(true);
         warningChannel.enableLights(true);
         appWarningChannel.enableVibration(true);
@@ -501,6 +509,9 @@ public class MainActivity extends AppCompatActivity {
         networkSignalChannel.enableVibration(false);
         networkSignalChannel.enableLights(false);
         networkSignalChannel.setBypassDnd(true);
+        loggingChannel.enableVibration(false);
+        loggingChannel.setSound(null, null);
+        capturedLogsChannel.enableVibration(false);
         otherChannel.enableVibration(true);
         otherChannel.enableLights(true);
 
@@ -509,6 +520,8 @@ public class MainActivity extends AppCompatActivity {
         channels.add(warningChannel);
         channels.add(appWarningChannel);
         channels.add(networkSignalChannel);
+        channels.add(loggingChannel);
+        channels.add(capturedLogsChannel);
         channels.add(otherChannel);
 
 
