@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="appwidget_text">اورنك</string>
+    <string name="label_sent">گوندریلەن</string>
+    <string name="label_received">آلینەن</string>
+    <string name="action_cancel">ایپتال</string>
+    <string name="action_ok">تمام</string>
+    <string name="label_today">بوگون</string>
+    <string name="label_yesterday">دون</string>
 </resources>
