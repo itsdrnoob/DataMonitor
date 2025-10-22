@@ -130,7 +130,7 @@
     <string name="setup_add_data_plan">Додати тарифний план</string>
     <string name="add_data_plan_summary">Додавання або оновлення плану передачі даних</string>
     <string name="setup_show_mobile_usage">Показати використання мобільних даних</string>
-    <string name="title_configure">Налаштування</string>
+    <string name="title_configure">Конфігурація</string>
     <string name="setup_usage_reset_time">Час для скидання про використання даних</string>
     <string name="oss_licenses">Ліцензії з відкритим вихідним кодом</string>
     <string name="dark_mode_summary">Увімкнення/вимкнення темного режиму</string>
@@ -264,8 +264,8 @@
 \nПовторіть спробу пізніше.</string>
     <string name="setup_widget_refresh_interval">Інтервал оновлення віджета</string>
     <string name="data_limit">Ліміт даних</string>
-    <string name="itsdrnoob_summary">Провідний розробник і дизайнер</string>
-    <string name="about_summary">Джерела, допомога та багато іншого</string>
+    <string name="itsdrnoob_summary"><![CDATA[Провідний розробник та дизайнер]]></string>
+    <string name="about_summary"><![CDATA[Джерело, допомога та інше]]></string>
     <string name="eth_address_copied">Адреса гаманця Ethereum скопійована в буфер обміну</string>
     <string name="btc_address_copied">Адреса гаманця Bitcoin скопійована в буфер обміну</string>
     <string name="oem_skin_warning">%1$s Будь ласка, перевірте додаткові поради щодо оптимізації, щоб застосунок працював правильно.</string>
