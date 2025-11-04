@@ -423,7 +423,7 @@
     <string name="smart_data_allocation_summary">聰明地分配你的數據使用量，將使用每日流量配額與剩餘流量結轉功能。</string>
     <string name="setup_daily_quota_alert">每日配額提醒</string>
     <string name="daily_quota_alert_summary">當您的每日配額用完時收到警告。</string>
-    <string name="daily_quota_alert_title">每日數據限額已達！</string>
+    <string name="daily_quota_alert_title">已達每日數據額度！</string>
     <string name="daily_quota_alert_body">您已用完每日數據配額。</string>
     <string name="label_daily_quota">每日配額： %1$s</string>
     <string name="rezaalmanda">Reza</string>
