@@ -435,4 +435,6 @@
     <string name="action_add_application">添加应用</string>
     <string name="label_no_apps_added">未添加任何应用，单击下面的按钮添加应用。</string>
     <string name="title_app_picker">选择应用</string>
+    <string name="action_save">保存</string>
+    <string name="home_plan_usage_details">已使用 %1$s | %2$s</string>
 </resources>
