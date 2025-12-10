@@ -58,7 +58,7 @@
     <string name="widget_setup_step_2">2. 点击 微件.</string>
     <string name="widget_setup_step_3">3. 将 Data Monitor 提供的微件拖动到桌面上.</string>
     <string name="heading_data_usage_today">今日数据用量</string>
-    <string name="action_add_data_plan_home">添加一个流量使用计划以继续</string>
+    <string name="action_add_data_plan_home">添加流量使用计划以继续</string>
     <string name="heading_week_overview">本周总览</string>
     <string name="error_loading_overview">无法加载本周概览。
 \n稍后再试。</string>
