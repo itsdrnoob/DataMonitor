@@ -88,7 +88,7 @@
     <string name="oss_licenses">开源许可证</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">贡献者</string>
-    <string name="itsdrnoob_summary"><![CDATA[首席开发者 & 设计师]]></string>
+    <string name="itsdrnoob_summary"><![CDATA[首席开发者和设计师]]></string>
     <string name="settings_appearance">外观</string>
     <string name="settings_dark_mode">深色模式</string>
     <string name="dark_mode_summary">启用深色模式</string>
@@ -437,4 +437,5 @@
     <string name="title_app_picker">选择应用</string>
     <string name="action_save">保存</string>
     <string name="home_plan_usage_details">已使用 %1$s | %2$s</string>
+    <string name="Atalanttore">Ettore Atalan</string>
 </resources>
