@@ -214,7 +214,7 @@
     <string name="cracky5322_summary">繁体中文 译者</string>
     <string name="louis_leblanc_summary">法语 译者</string>
     <string name="network_speed_title">网络速度: %1$s</string>
-    <string name="network_speed_upload">上床速度: %1$s</string>
+    <string name="network_speed_upload">上传速度: %1$s</string>
     <string name="network_speed_download">下载速度: %1$s</string>
     <string name="network_signal_notification">实时网络速度</string>
     <string name="label_network_signal_notification_enabled">实时网络速度已启用</string>
