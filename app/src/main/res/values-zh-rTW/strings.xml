@@ -58,11 +58,11 @@
     <string name="option_10_min">10 分鐘</string>
     <string name="option_15_min">15 分鐘</string>
     <string name="title_widget_setup">設定小工具</string>
-    <string name="widget_setup_step_1">1. 在主螢幕上長按空白處。</string>
+    <string name="widget_setup_step_1">1. 在主畫面上長按空白處。</string>
     <string name="widget_setup_step_2">2. 點選「小工具」。</string>
     <string name="widget_setup_step_3">3. 將 Data Monitor 提供的小工具拖曳到桌面上。</string>
     <string name="heading_data_usage_today">今日數據使用量</string>
-    <string name="action_add_data_plan_home">新增一個數據計劃以繼續</string>
+    <string name="action_add_data_plan_home">新增一個數據方案以繼續</string>
     <string name="heading_week_overview">本週總覽</string>
     <string name="error_loading_overview">糟糕... 無法載入本週總覽。\n請稍後再試。</string>
     <string name="title_setup">設定 Data Monitor</string>
@@ -80,7 +80,7 @@
     <string name="setup_show_mobile_usage">顯示行動數據使用量</string>
     <string name="setup_show_wifi_usage">顯示 Wi-Fi 使用量</string>
     <string name="monitor_data">監測數據用量</string>
-    <string name="setup_data_alert">數據用量警報</string>
+    <string name="setup_data_alert">數據用量警告</string>
     <string name="data_alert_summary">達到用量限制時通知你</string>
     <string name="settings_general">通用</string>
     <string name="setup_add_data_plan">新增數據方案</string>
@@ -178,7 +178,7 @@
     <string name="overview_0_5gb" translatable="false">0.5 GB</string>
     <string name="overview_0gb" translatable="false">0 GB</string>
     <string name="label_translators">譯者們</string>
-    <string name="setup_app_data_usage_alert">數據用量警報</string>
+    <string name="setup_app_data_usage_alert">數據用量警告</string>
     <string name="title_app_data_limit">數據用量限制</string>
     <string name="network_diagnostics">網路診斷</string>
     <string name="run_diagnostics">開始診斷</string>
@@ -207,8 +207,8 @@
     <string name="refresh_list">重新整理清單</string>
     <string name="no_network_connection">未偵測到網路連線！</string>
     <string name="connection_error">無法連線。\n請檢查你的網路。</string>
-    <string name="app_label_screen_time">螢幕時間：%1$s</string>
-    <string name="app_label_background_time">背景時間：%1$s</string>
+    <string name="app_label_screen_time">螢幕使用時間：%1$s</string>
+    <string name="app_label_background_time">背景執行時間：%1$s</string>
     <string name="usage_time_label" translatable="false">%1$d %2$s %3$d %4$s</string>
     <string name="ygorigor_summary">羅馬尼亞語譯者</string>
     <string name="ygorigor" translatable="false">Igor Sorocean</string>
@@ -274,7 +274,7 @@
     <string name="total_usage">總共使用：%1$s</string>
     <string name="label_unknown">未知</string>
     <string name="auto_hide_live_network">自動隱藏網路速度</string>
-    <string name="auto_hide_live_network_summary">當未連接網路時停止網路速度通知</string>
+    <string name="auto_hide_live_network_summary">當未連線至網路時停止網路速度通知</string>
     <string name="custom">自訂</string>
     <string name="heading_data_reset_custom_counter">方案有效期</string>
     <string name="label_custom_start_date">開始日期：%1$s</string>
@@ -303,13 +303,13 @@
     <string name="custom_upload_url_hint">輸入完整的上傳網址</string>
     <string name="label_custom_server">自訂伺服器</string>
     <string name="custom_download_url_hint">輸入完整的下載網址</string>
-    <string name="label_custom_server_save_success">伺服器首選項已儲存</string>
+    <string name="label_custom_server_save_success">伺服器偏好設定已儲存</string>
     <string name="error_invaliid_url">下載網址無效！</string>
     <string name="error_url_verification_failed">無法驗證 URL！請重試或使用不同的。</string>
     <string name="error_invalid_plan">方案無效！</string>
     <string name="label_send_report">透過以下方式傳送報告</string>
     <string name="label_permission_denied">沒有權限！</string>
-    <string name="notification_permission_denied_body">包括數據監控通知在內的功能，即時網路速度，未取得通知權限，數據使用警報將無法正常工作。請手動授予它。</string>
+    <string name="notification_permission_denied_body">若未取得通知權限，包含數據監測通知、即時網路速度與數據用量警告等功能將無法正常運作。請手動授予權限。</string>
     <string name="settings_disable_haptics">停用震動</string>
     <string name="disable_haptics_summary">停用整個應用程式的震動回饋</string>
     <string name="action_dismiss">關閉</string>
@@ -324,13 +324,13 @@
     <string name="option_1_sec">每秒</string>
     <string name="option_15_sec">15 秒</string>
     <string name="option_30_sec">30 秒</string>
-    <string name="lockscreen_notification">在鎖定螢幕上啟用通知</string>
+    <string name="lockscreen_notification">在鎖定畫面上啟用通知</string>
     <string name="exclude_apps">排除應用程式</string>
     <string name="exclude_apps_summary">從數據使用量中排除應用程式流量</string>
     <string name="action_add_application">新增應用程式</string>
-    <string name="label_no_apps_added">沒有增加任何應用程式。點擊下面的按鈕增加一個應用程式。</string>
+    <string name="label_no_apps_added">沒有新增任何應用程式。點擊下方按鈕新增應用程式。</string>
     <string name="title_app_picker">選擇一個應用程式</string>
-    <string name="app_search_hint">尋找應用程式</string>
+    <string name="app_search_hint">搜尋應用程式</string>
     <string name="label_show_system_apps">顯示系統應用程式</string>
     <string name="label_hide_system_apps">隱藏系統應用程式</string>
     <string name="app_already_present">應用程式已預設在清單中。</string>
@@ -373,7 +373,7 @@
     <string name="action_save">儲存</string>
     <string name="label_custom_end_time">結束時間：%1$s</string>
     <string name="error_invalid_plan_duration">方案持續時間無效</string>
-    <string name="donate_info">Data Monitor 是一個免費的開源應用程式，並將始終保持這種狀態:)\n\n如果您願意該應用程式的開發，我們將不勝感激。</string>
+    <string name="donate_info">Data Monitor 是一個免費的開源應用程式，並將始終保持這種狀態:)\n\n如果您願意贊助該應用程式的開發，我們將不勝感激。</string>
     <string name="label_paypal">PayPal</string>
     <string name="paypal_summary">透過 PayPal 贊助</string>
     <string name="label_upi">BHIM-UPI</string>
@@ -394,7 +394,7 @@
     <string name="app_label_combined_total">總數據使用量：%1$s</string>
     <string name="error_alarm_permission_denied">警示權限被拒絕！</string>
     <string name="error_alarm_permission_denied_summary">您嘗試執行了需要「鬧鐘與提醒」權限的操作，該權限未授予該應用程式。點擊此處授予權限。</string>
-    <string name="error_alarm_permission_denied_dialog_summary">Data Monitor 需要「鬧鐘與提醒」權限才能正常工作。您仍然可以使用該應用程式，但某些功能可能無法正常使用。</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Data Monitor 需要「鬧鐘與提醒」權限才能正常運作。您仍然可以使用該應用程式，但某些功能可能無法正常使用。</string>
     <string name="error_alarm_permission_denied_feature_summary">在未授予「鬧鐘與提醒」權限的情況下，您無法使用此功能。</string>
     <string name="label_do_not_show_again">不再顯示</string>
     <string name="fjuro">Fjuro</string>
@@ -419,7 +419,7 @@
     <string name="error_data_fetch_failed">擷取資料失敗</string>
     <string name="wall_of_thanks_summary">一個向該應用程式的支持者表示感謝的地方。</string>
     <string name="app_contributors_summary">支援應用程式開發的貢獻者清單。</string>
-    <string name="setup_smart_data_allocation">智能分配行動數據</string>
+    <string name="setup_smart_data_allocation">智慧分配行動數據</string>
     <string name="smart_data_allocation_summary">聰明地分配你的數據使用量，將使用每日流量配額與剩餘流量結轉功能。</string>
     <string name="setup_daily_quota_alert">每日配額提醒</string>
     <string name="daily_quota_alert_summary">當您的每日配額用完時收到警告。</string>
@@ -448,7 +448,7 @@
     <string name="zahiruddinrushdi_summary">馬來語</string>
     <string name="jean_mareilles">Jean Mareilles</string>
     <string name="jean_mareilles_summary">法語</string>
-    <string name="add_custom_session">增加一個自訂時段</string>
+    <string name="add_custom_session">新增自訂時段</string>
     <string name="date">日期</string>
     <string name="time">時間</string>
     <string name="label_select_start_time">選擇開始時間</string>
