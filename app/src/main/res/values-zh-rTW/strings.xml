@@ -10,10 +10,10 @@
     <string name="home_mobile_data_received">%1$s \n已接收</string>
     <string name="home_wifi_data_sent">%1$s \n已傳送</string>
     <string name="home_wifi_data_received">%1$s \n已接收</string>
-    <string name="label_current_data_warning_trigger_level_limit_set">目前觸發閾值 ：%1$s%% (%2$s)</string>
-    <string name="label_current_data_warning_trigger_level_limit_not_set">目前觸發閾值 ：%1$s%%</string>
+    <string name="label_current_data_warning_trigger_level_limit_set">目前觸發門檻 ：%1$s%% (%2$s)</string>
+    <string name="label_current_data_warning_trigger_level_limit_not_set">目前觸發門檻 ：%1$s%%</string>
     <string name="label_data_trigger_level">當使用了 %1$s%% 的流量</string>
-    <string name="app_label_package_name">安裝包名稱 ：%1$s</string>
+    <string name="app_label_package_name">套件名稱 ：%1$s</string>
     <string name="app_label_uid">UID ：%1$d</string>
     <string name="app_name_placeholder">軟體名稱</string>
     <string name="app_data_usage_placeholder">0 MB</string>
@@ -49,7 +49,7 @@
     <string name="data_limit_placeholder" translatable="false">00.00</string>
     <string name="data_type_mb">MB</string>
     <string name="data_type_gb">GB</string>
-    <string name="title_data_warning_trigger">數據使用量警告閾值</string>
+    <string name="title_data_warning_trigger">數據使用量警告門檻</string>
     <string name="title_add_data_plan">新增數據方案</string>
     <string name="title_refresh_interval">更新間隔</string>
     <string name="option_1_min">1 分鐘</string>
@@ -87,8 +87,8 @@
     <string name="add_data_plan_summary">新增或更新數據方案</string>
     <string name="setup_usage_reset_time">數據用量重設時間</string>
     <string name="usage_reset_time_placeholder" translatable="false">12：00 AM</string>
-    <string name="app_license_header">應用程式許可證</string>
-    <string name="oss_licenses">開源許可證</string>
+    <string name="app_license_header">應用程式授權條款</string>
+    <string name="oss_licenses">開放原始碼授權</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">貢獻者</string>
     <string name="itsdrnoob_summary"><![CDATA[Lead Developer and Designer]]></string>
@@ -100,9 +100,9 @@
     <string name="language_summary">切換軟體語言</string>
     <string name="about">關於</string>
     <string name="about_summary"><![CDATA[Source, help and more]]></string>
-    <string name="license">許可</string>
+    <string name="license">授權</string>
     <string name="contributors_summary">那些陪伴著我的人</string>
-    <string name="donate">捐贈</string>
+    <string name="donate">贊助</string>
     <string name="donate_summary">也許，為我們買杯咖啡？</string>
     <string name="data_reset">數據重設</string>
     <string name="data_limit">數據限制</string>
@@ -160,7 +160,7 @@
     <string name="label_data_remaining">剩餘 %1$s</string>
     <string name="label_data_remaining_used_excess">超出 %1$s</string>
     <string name="disable_battery_optimisation">關閉電池最佳化</string>
-    <string name="disable_battery_optimisation_body">停用對 Data Monitor 的電池最佳化，以防止系統強制停止背景服務。\n啟用將阻止應用程式程式的正常工作，並可能顯示不正確的數值。</string>
+    <string name="disable_battery_optimisation_body">停用對 Data Monitor 的電池最佳化，以防止系統強制停止背景服務。\n啟用將阻止應用程式的正常運作，並可能顯示不正確的數值。</string>
     <string name="extra_optimisation_tips">更多最佳化建議</string>
     <string name="oem_battery_settings">製造商電池設定</string>
     <string name="action_next">下一個</string>
@@ -187,7 +187,7 @@
     <string name="testing_download">測試下載速度中</string>
     <string name="testing_upload">測試上傳速度中</string>
     <string name="testing_latency">測試網路延遲中</string>
-    <string name="current_connection">連線型別：%1$s</string>
+    <string name="current_connection">連線類型：%1$s</string>
     <string name="network_stats">網路統計</string>
     <string name="network_speed_mbps">%1$s Mbps</string>
     <string name="max_download_speed">最大下載速度</string>
@@ -229,7 +229,7 @@
     <string name="label_network_signal_notification_disabled">即時網路速度已關閉</string>
     <string name="network_signal_summary">Beta 功能</string>
     <string name="read_phone_state_permission">讀取電話狀態的權限</string>
-    <string name="read_phone_state_body">使用 Android 9 及以下版本的設備必須手動授予此權限。不會收集任何個人資料。</string>
+    <string name="read_phone_state_body">使用 Android 9 及以下版本的裝置必須手動授予此權限。不會收集任何個人資料。</string>
     <string name="action_permission_granted">授予權限</string>
     <string name="error_permission_denied">權限遭拒。請手動授權它。</string>
     <string name="telegram_support">Telegram 支援</string>
@@ -243,19 +243,19 @@
     <string name="no_update_available">您正在執行最新版本。</string>
     <string name="label_update_available">新版本已經推出！</string>
     <string name="label_download_update">下載新版本</string>
-    <string name="checking_for_update">查詢更新…</string>
+    <string name="checking_for_update">檢查更新…</string>
     <string name="new_update_available">有新版本推出！</string>
     <string name="update_fetch_error">無法接收更新</string>
     <string name="settings_app_theme">主題</string>
     <string name="app_theme_summary">選擇程式主題</string>
-    <string name="theme_light">明亮</string>
-    <string name="theme_dark">黑暗</string>
+    <string name="theme_light">淺色</string>
+    <string name="theme_dark">深色</string>
     <string name="theme_system">跟隨系統主題</string>
     <string name="light_theme_summary">已選擇亮色主題</string>
     <string name="dark_theme_summary">已選擇深色主題</string>
     <string name="system_theme_summary">跟隨系統主題</string>
     <string name="hudaifa_abdullah_summary">阿拉伯語</string>
-    <string name="license_summary">瀏覽應用程式許可證</string>
+    <string name="license_summary">瀏覽應用程式授權條款</string>
     <string name="network_diagnostics_info">網路診斷可能會使用大約 20-30 MB 的流量。請確認你的方案中有足夠的可用流量，否則可能會產生額外的網路費用。</string>
     <string name="holydemon_summary">馬拉雅拉姆語</string>
     <string name="liviogasp_summary">義大利語</string>
@@ -373,7 +373,7 @@
     <string name="action_save">儲存</string>
     <string name="label_custom_end_time">結束時間：%1$s</string>
     <string name="error_invalid_plan_duration">方案持續時間無效</string>
-    <string name="donate_info">Data Monitor 是一個免費的開源應用程式，並將始終保持這種狀態:)\n\n如果您願意支持該應用程式的開發，我們將不勝感激。</string>
+    <string name="donate_info">Data Monitor 是一個免費的開源應用程式，並將始終保持這種狀態:)\n\n如果您願意該應用程式的開發，我們將不勝感激。</string>
     <string name="label_paypal">PayPal</string>
     <string name="paypal_summary">透過 PayPal 贊助</string>
     <string name="label_upi">BHIM-UPI</string>
