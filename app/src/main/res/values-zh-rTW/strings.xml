@@ -91,7 +91,7 @@
     <string name="oss_licenses">開源許可證</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">貢獻者</string>
-    <string name="itsdrnoob_summary"><![CDATA[Lead Developer & Designer]]></string>
+    <string name="itsdrnoob_summary"><![CDATA[Lead Developer and Designer]]></string>
     <string name="settings_appearance">外觀</string>
     <string name="settings_dark_mode">深色模式</string>
     <string name="dark_mode_summary">啟用深色模式</string>
@@ -99,7 +99,7 @@
     <string name="settings_language">語言</string>
     <string name="language_summary">切換軟體語言</string>
     <string name="about">關於</string>
-    <string name="about_summary"><![CDATA[Source, Help & More]]></string>
+    <string name="about_summary"><![CDATA[Source, help and more]]></string>
     <string name="license">許可</string>
     <string name="contributors_summary">那些陪伴著我的人</string>
     <string name="donate">捐贈</string>
@@ -110,7 +110,7 @@
     <string name="github">GitHub</string>
     <string name="github_summary">檢視原始碼</string>
     <string name="xda">XDA 討論區</string>
-    <string name="xda_summary"><![CDATA[Q&A, Help & Troubleshooting]]></string>
+    <string name="xda_summary"><![CDATA[FAQ, help and troubleshooting]]></string>
     <string name="report">回報問題</string>
     <string name="report_summary">回報問題或請求新功能</string>
     <string name="setup">設定</string>
