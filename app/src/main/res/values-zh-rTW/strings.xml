@@ -25,8 +25,8 @@
     <string name="title_app_data_usage_session">選擇時段</string>
     <string name="label_today">今天</string>
     <string name="label_yesterday">昨天</string>
-    <string name="label_this_month">本週</string>
-    <string name="label_last_month">上週</string>
+    <string name="label_this_month">本月</string>
+    <string name="label_last_month">上個月</string>
     <string name="label_this_year">今年</string>
     <string name="label_all_time">全部</string>
     <string name="title_app_data_usage_type">選擇類別</string>
@@ -116,9 +116,9 @@
     <string name="setup">設定</string>
     <string name="app_data_usage">應用程式使用量</string>
     <string name="settings">設定</string>
-    <string name="btc_address_copied">Bitcoin 錢包地址已複製到剪貼簿</string>
-    <string name="eth_address_copied">Ethereum 錢包地址已複製到剪貼簿</string>
-    <string name="ltc_address_copied">Litecoin 錢包地址已複製到剪貼簿</string>
+    <string name="btc_address_copied">比特幣錢包地址已複製到剪貼簿</string>
+    <string name="eth_address_copied">以太坊錢包地址已複製到剪貼簿</string>
+    <string name="ltc_address_copied">萊特幣錢包地址已複製到剪貼簿</string>
     <string name="label_system_apps">系統應用程式</string>
     <string name="package_system" translatable="false">com.android.systemui</string>
     <string name="home">首頁</string>
@@ -137,10 +137,10 @@
     <string name="upi_unknown_error">發生了一個未知的錯誤。\n請再試一次或嘗試其他方法。</string>
     <string name="label_no_additional_lang">更多語言即將到來。想幫助我們？點選瞭解詳情。</string>
     <string name="notification_disabled">Data monitor 通知已關閉</string>
-    <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新</string>
+    <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新一次</string>
     <string name="label_notification_refresh_interval_change">通知將每 %1$s 更新</string>
     <string name="label_data_usage_reset_time_change">在每 %1$s %2$s 將會重設數據使用量</string>
-    <string name="label_data_usage_reset_date_change">數據使用量會在每個月%1$s日被重設</string>
+    <string name="label_data_usage_reset_date_change">數據使用量將於每月%1$s日重設</string>
     <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
     <string name="remaining_data_info_disabled">剩餘流量資訊已停用</string>
     <string name="label_monitoring_no_plan">新增一個數據方案以繼續</string>
@@ -192,12 +192,12 @@
     <string name="network_speed_mbps">%1$s Mbps</string>
     <string name="max_download_speed">最大下載速度</string>
     <string name="min_download_speed">最小下載速度</string>
-    <string name="avg_download_speed">下載速度峰值</string>
+    <string name="avg_download_speed">平均下載速度</string>
     <string name="max_upload_speed">最大上傳速度</string>
-    <string name="avg_upload_speed">上傳速度峰值</string>
+    <string name="avg_upload_speed">平均上傳速度</string>
     <string name="min_latency">最小延遲</string>
     <string name="network_latency_ms">%1$s ms</string>
-    <string name="avg_latency">峰值延遲</string>
+    <string name="avg_latency">平均延遲</string>
     <string name="network_ip">網路 IP</string>
     <string name="isp">網路供應商</string>
     <string name="connected_server">已連線到：%1$s</string>
@@ -291,7 +291,7 @@
     <string name="device_info_body">裝置資訊包括：\n裝置製造商\n裝置品牌\n裝置型號\n裝置代號\nAndroid 版本</string>
     <string name="label_crash_logs_copied">錯誤日誌複製到剪貼簿</string>
     <string name="label_mail">郵件</string>
-    <string name="battery_optimisation_enabled_info">電池最佳化已啟用。這將干擾 Data Monitor 的工作。點擊以停用。</string>
+    <string name="battery_optimisation_enabled_info">電池最佳化已啟用。這將干擾 Data Monitor 的運作。點擊以停用。</string>
     <string name="label_battery_optimisation">電池最佳化</string>
     <string name="error_no_crash_logs">找不到錯誤日誌。你確定發生了錯誤？</string>
     <string name="label_copy_logs">複製日誌</string>
@@ -413,7 +413,7 @@
     <string name="app_contributors">App 貢獻者</string>
     <string name="label_thank_you">謝謝你</string>
     <string name="label_learn_more">了解更多</string>
-    <string name="wall_of_thanks_body">Data Monitor 自成立以來已經取得了相當大的進步，如果沒有慷慨捐助者的支持，我們不可能做到這一點。</string>
+    <string name="wall_of_thanks_body">Data Monitor 自推出以來已經取得了相當大的進步，如果沒有慷慨贊助者的支持，我們不可能做到這一點。</string>
     <string name="label_top_donors">頂級贊助者</string>
     <string name="label_all_donors">所有贊助者</string>
     <string name="error_data_fetch_failed">擷取資料失敗</string>
