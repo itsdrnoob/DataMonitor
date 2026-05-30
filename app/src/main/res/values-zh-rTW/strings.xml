@@ -82,7 +82,7 @@
     <string name="monitor_data">監測數據用量</string>
     <string name="setup_data_alert">數據用量警告</string>
     <string name="data_alert_summary">達到用量限制時通知你</string>
-    <string name="settings_general">通用</string>
+    <string name="settings_general">一般</string>
     <string name="setup_add_data_plan">新增數據方案</string>
     <string name="add_data_plan_summary">新增或更新數據方案</string>
     <string name="setup_usage_reset_time">數據用量重設時間</string>
@@ -333,10 +333,10 @@
     <string name="app_search_hint">搜尋應用程式</string>
     <string name="label_show_system_apps">顯示系統應用程式</string>
     <string name="label_hide_system_apps">隱藏系統應用程式</string>
-    <string name="app_already_present">應用程式已預設在清單中。</string>
+    <string name="app_already_present">應用程式已經在清單中。</string>
     <string name="title_remove_apps">刪除選定的應用程式？</string>
     <string name="action_delete">刪除</string>
-    <string name="error_unknown">出現未知錯誤。請再試一次。</string>
+    <string name="error_unknown">發生未知錯誤。請再試一次。</string>
     <string name="diagnostics_history">診斷紀錄</string>
     <string name="settings_save_results">儲存結果</string>
     <string name="save_results_summary">儲存網路診斷結果</string>
@@ -474,5 +474,5 @@
     <string name="label_plan_details_title_custom">啟用中的自訂方案</string>
     <string name="buttercookie42">buttercookie42</string>
     <string name="buttercookie42_summary">開發者</string>
-    <string name="label_days_remaining">剩下%1$s天</string>
+    <string name="label_days_remaining">剩下 %1$s 天</string>
 </resources>
