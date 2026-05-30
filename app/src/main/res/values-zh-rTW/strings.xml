@@ -140,7 +140,7 @@
     <string name="label_widget_refresh_interval_change">小工具將每 %1$s 更新一次</string>
     <string name="label_notification_refresh_interval_change">通知將每 %1$s 更新一次</string>
     <string name="label_data_usage_reset_time_change">數據使用量將於每 %1$s %2$s 重設</string>
-    <string name="label_data_usage_reset_date_change">數據使用量將於每月%1$s日重設</string>
+    <string name="label_data_usage_reset_date_change">數據使用量將於每月 %1$s 日重設</string>
     <string name="remaining_data_info_enabled">剩餘流量資訊已啟用</string>
     <string name="remaining_data_info_disabled">剩餘流量資訊已停用</string>
     <string name="label_monitoring_no_plan">新增數據方案來開始監測</string>
@@ -286,10 +286,10 @@
     <string name="crash_logs_extra_text">Data Monitor 錯誤日誌</string>
     <string name="label_select_app">選擇應用程式</string>
     <string name="label_crash_logs_share_chat">分享至聊天室：@datamonitor</string>
-    <string name="crash_logs_warning">錯誤日誌; 請勿更改</string>
+    <string name="crash_logs_warning">錯誤日誌；請勿更改</string>
     <string name="title_device_info_contents">裝置資訊內容</string>
     <string name="device_info_body">裝置資訊包括：\n裝置製造商\n裝置品牌\n裝置型號\n裝置代號\nAndroid 版本</string>
-    <string name="label_crash_logs_copied">錯誤日誌複製到剪貼簿</string>
+    <string name="label_crash_logs_copied">錯誤日誌已複製到剪貼簿</string>
     <string name="label_mail">郵件</string>
     <string name="battery_optimisation_enabled_info">電池最佳化已啟用。這將干擾 Data Monitor 的運作。點擊以停用。</string>
     <string name="label_battery_optimisation">電池最佳化</string>
@@ -383,14 +383,14 @@
     <string name="xmr_address_copied">門羅幣錢包地址已複製到剪貼簿</string>
     <string name="tadekdudek">tadekdudek</string>
     <string name="tadekdudek_summary">波蘭語</string>
-    <string name="error_network_monitor_start">無法啟動網路監視器。開啟應用程式進行更新。</string>
+    <string name="error_network_monitor_start">無法啟動網路監測。開啟應用程式進行更新。</string>
     <string name="label_filter_app_usage">篩選應用程式傳輸量</string>
     <string name="label_filter">篩選器</string>
     <string name="label_current_plan">目前方案</string>
     <string name="home_plan_usage_details">%1$s 已用 | %2$s</string>
     <string name="label_plan_validity">有效期至 %1$s | %2$s</string>
     <string name="always_show_total">總是顯示總額</string>
-    <string name="always_show_total_summary">無論選擇的選項如何，始終顯示通知中使用的總數據。</string>
+    <string name="always_show_total_summary">無論選擇何種設定，始終在通知中顯示總數據使用量。</string>
     <string name="app_label_combined_total">總數據使用量：%1$s</string>
     <string name="error_alarm_permission_denied">警示權限被拒絕！</string>
     <string name="error_alarm_permission_denied_summary">您嘗試執行了需要「鬧鐘與提醒」權限的操作，該權限未授予該應用程式。點擊此處授予權限。</string>
@@ -420,7 +420,7 @@
     <string name="wall_of_thanks_summary">一個向該應用程式的支持者表示感謝的地方。</string>
     <string name="app_contributors_summary">支援應用程式開發的貢獻者清單。</string>
     <string name="setup_smart_data_allocation">智慧分配行動數據</string>
-    <string name="smart_data_allocation_summary">聰明地分配你的數據使用量，將使用每日流量配額與剩餘流量結轉功能。</string>
+    <string name="smart_data_allocation_summary">智慧分配您的數據使用量，結合每日配額與剩餘流量結轉功能。</string>
     <string name="setup_daily_quota_alert">每日配額提醒</string>
     <string name="daily_quota_alert_summary">當您的每日配額用完時收到警告。</string>
     <string name="daily_quota_alert_title">已達每日數據額度！</string>
