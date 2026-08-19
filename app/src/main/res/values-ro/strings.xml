@@ -360,4 +360,8 @@
     <string name="label_plan_details_title_monthly">Plan lunar activ</string>
     <string name="label_plan_details_title_daily">Plan zilnic activ</string>
     <string name="label_plan_details_title_custom">Plan personalizat activ</string>
+    <string name="label_days_remaining">%1$s zi(le) rămasă/e</string>
+    <string name="atharvshinde_summary">Dezvoltator</string>
+    <string name="hinamechan_summary">Turcă</string>
+    <string name="action_save">Salvează</string>
 </resources>
