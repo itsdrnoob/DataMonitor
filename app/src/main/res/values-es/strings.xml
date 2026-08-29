@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">"Monitor de datos"</string>
-    <string name="appwidget_text">"EJEMPLO"</string>
+    <string name="appwidget_text">Ejemplo</string>
     <string name="add_widget">"Agregar widget"</string>
     <string name="notification_mobile_data_usage">"Datos móviles : %1$s"</string>
     <string name="notification_wifi_data_usage">"Wifi : %1$s"</string>
@@ -166,13 +166,13 @@
     <string name="title_setup">Configuración Monitor de datos</string>
     <string name="setup_widget">Configurar el widget</string>
     <string name="setup_usage_reset_time">Restablecer el tiempo de uso de los datos</string>
-    <string name="itsdrnoob_summary">Desarrollador y diseñador líder</string>
+    <string name="itsdrnoob_summary"><![CDATA[Desarrollador y diseñador líder]]></string>
     <string name="settings_preferences">Preferencias</string>
-    <string name="about_summary">Fuente, ayuda y más</string>
+    <string name="about_summary"><![CDATA[Fuente, ayuda y más]]></string>
     <string name="donate_summary">¿Invitarnos a un café, tal vez\?</string>
     <string name="data_reset">Restablecimiento de datos</string>
     <string name="data_limit">Límite de datos</string>
-    <string name="xda_summary">Preguntas frecuentes, ayuda y solución de problemas</string>
+    <string name="xda_summary"><![CDATA[Preguntas frecuentes, ayuda y solución de problemas]]></string>
     <string name="report">Informar errores</string>
     <string name="report_summary">Informar errores o solicitar funciones</string>
     <string name="setup">Configuración</string>
@@ -449,11 +449,11 @@
     <string name="dan_summary">Ucraniano</string>
     <string name="detrimental_god_summary">Malayo</string>
     <string name="jonnysemon_summary">Árabe</string>
-    <string name="detrimental_god">Detrimental God</string>
+    <string name="detrimental_god">Dios perjudicial</string>
     <string name="timtcg">Cong Phuc Nguyen</string>
     <string name="ecogaming_summary">Desarrollador</string>
     <string name="zahiruddinrushdi">zahiruddin rushdi</string>
-    <string name="zahiruddinrushdi_summary">Malayo</string>
+    <string name="zahiruddinrushdi_summary">Malay</string>
     <string name="chin_housin_summary">Chino simplificado</string>
     <string name="timtcg_summary">Vietnamita</string>
     <string name="chin_housin">chin housin</string>
@@ -487,4 +487,25 @@
     <string name="label_plan_details_title_daily">Plan diario activo</string>
     <string name="buttercookie42">buttercookie42</string>
     <string name="label_plan_details_title_custom">Plan personalizado activo</string>
+    <string name="settings_advanced">Avanzado</string>
+    <string name="debug">Depurar</string>
+    <string name="logging_complete">Registro completado</string>
+    <string name="label_previous_logs">Registros anteriores</string>
+    <string name="clear_logs_success">Registros vaciados correctamente</string>
+    <string name="clear_logs_failure">No es posible purgar bitácoras</string>
+    <string name="label_capture_logs">Captura de bitácoras en tiempo de ejecución</string>
+    <string name="capture_logs_desc">Registra las bitácoras de la aplicación para ayudarte a solucionar una incidencia. Las bitácoras se guardarán en tu dispositivo.</string>
+    <string name="start_logging">Iniciar bitácora</string>
+    <string name="capture_logs_warning">La espera de períodos de tiempo largos puede tener efectos no deseados. Asegúrate de dejar de registrar una vez que la incidencia haya sido capturada.</string>
+    <string name="label_clear_logs">Purgar archivos de bitácora</string>
+    <string name="clear_logs_desc">Elimina archivos de bitácora antiguos guardados en este dispositivo.</string>
+    <string name="label_logs_captured">Bitácoras capturadas</string>
+    <string name="label_view_logs">Vista de bitácoras</string>
+    <string name="save_and_close">Guardar y cerrar</string>
+    <string name="label_log_file">Archivo de bitácora</string>
+    <string name="log_ext">.log</string>
+    <string name="stop_logging">Detener bitácora</string>
+    <string name="logging_complete_body">Pulse aquí para compartir o guardar al dispositivo.</string>
+    <string name="label_capturing_logs">Capturar bitácoras</string>
+    <string name="capturing_logs_body">Capturando bitácoras por Monitor de Datos. %1$s</string>
 </resources>

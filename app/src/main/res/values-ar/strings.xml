@@ -91,7 +91,7 @@
     <string name="oss_licenses">"تراخيص مفتوحة المصدر"</string>
     <string name="itsdrnoob">"دكتور نوب"</string>
     <string name="contributors">"المساهمون"</string>
-    <string name="itsdrnoob_summary">المطور الرئيسي والمصمم</string>
+    <string name="itsdrnoob_summary"><![CDATA[المطور الرئيسي والمصمم]]></string>
     <string name="settings_appearance">"المظهر"</string>
     <string name="settings_dark_mode">"الوضع الداكن"</string>
     <string name="dark_mode_summary">قم بتشغيل / إيقاف الوضع الداكن</string>
@@ -99,7 +99,7 @@
     <string name="settings_language">"اللغة"</string>
     <string name="language_summary">"قم بتغيير لغة التطبيق"</string>
     <string name="about">"حول"</string>
-    <string name="about_summary">المصدر، المساعدة والمزيد</string>
+    <string name="about_summary"><![CDATA[المصدر، المساعدة والمزيد]]></string>
     <string name="license">"الرخصة"</string>
     <string name="contributors_summary">"أولئك الذين هم دائما هناك"</string>
     <string name="donate">"تبرع"</string>
@@ -109,7 +109,7 @@
     <string name="github">"جيت هب"</string>
     <string name="github_summary">"عرض برمجية المصدر"</string>
     <string name="xda">"ثريد XDA"</string>
-    <string name="xda_summary">الأسئلة المتداولة والمساعدة واستكشاف الأخطاء وإصلاحها</string>
+    <string name="xda_summary"><![CDATA[الأسئلة المتداولة والمساعدة واستكشاف الأخطاء وإصلاحها]]></string>
     <string name="report">التبليغ عن علة</string>
     <string name="report_summary">الإبلاغ عن علل أو طلب ميزة جديدة</string>
     <string name="setup">"إعداد"</string>
@@ -363,7 +363,7 @@
     <string name="Kefir2105_summary">الأوكرانية</string>
     <string name="MarongHappy_summary">الكورية</string>
     <string name="shailendramaurya">شايليندرا موريا</string>
-    <string name="iqb4lsp">IQB4LSP</string>
+    <string name="iqb4lsp">iqb4lsp</string>
     <string name="Master2050_summary">الصينية التقليدية والبرتغالية والفرنسية والنرويجية البوكمال والإسبانية والألمانية والرومانية والكورية والتركية والصينية المبسطة والأوكرانية والهندية والروسية والعربية</string>
     <string name="graphixmedia">جرافكسكس</string>
     <string name="hinamechan_summary">التركيّة</string>
@@ -480,4 +480,25 @@
     <string name="label_plan_details_title_daily">الخطة اليومية نشطة</string>
     <string name="buttercookie42">بتركوكي42</string>
     <string name="label_plan_details_title_custom">خطة مخصصة نشطة</string>
+    <string name="settings_advanced">متقدم</string>
+    <string name="debug">تنقيح اﻷخطاء</string>
+    <string name="logging_complete">اكتمل التسجيل</string>
+    <string name="label_previous_logs">السجلات السابقة</string>
+    <string name="clear_logs_success">مُسحت السجلات بنجاح</string>
+    <string name="clear_logs_failure">فشل مسح السجلات</string>
+    <string name="label_capture_logs">التقط سجلات وقت التشغيل</string>
+    <string name="capture_logs_desc">سجّل سجلات التطبيق للمساعدة في تنقيح اﻷخطاء. سيتم حفظ السجلات على جهازك.</string>
+    <string name="start_logging">ابدأ التسجيل</string>
+    <string name="capture_logs_warning">قد يؤدي التسجيل لفترات طويلة جدًا إلى آثار غير مرغوبة. تأكد من إيقاف التسجيل بمجرد التقاط المشكلة.</string>
+    <string name="label_clear_logs">امسح ملفات السجلّ</string>
+    <string name="clear_logs_desc">احذف ملفات السجل القديمة المحفوظة على هذا الجهاز.</string>
+    <string name="label_logs_captured">التقطت السجلات</string>
+    <string name="label_view_logs">اعرض السجلات</string>
+    <string name="save_and_close">احفظ وأغلق</string>
+    <string name="label_log_file">ملف السجل</string>
+    <string name="log_ext">.log</string>
+    <string name="stop_logging">أوقف التسجيل</string>
+    <string name="logging_complete_body">انقر هنا للمشاركة أو الحفظ على الجهاز.</string>
+    <string name="label_capturing_logs">التقاط السجلات</string>
+    <string name="capturing_logs_body">التقاط السجلات بواسطة مراقب البيانات. %1$s</string>
 </resources>

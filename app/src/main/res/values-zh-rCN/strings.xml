@@ -58,7 +58,7 @@
     <string name="widget_setup_step_2">2. 点击 微件.</string>
     <string name="widget_setup_step_3">3. 将 Data Monitor 提供的微件拖动到桌面上.</string>
     <string name="heading_data_usage_today">今日数据用量</string>
-    <string name="action_add_data_plan_home">添加一个流量使用计划以继续</string>
+    <string name="action_add_data_plan_home">添加流量使用计划以继续</string>
     <string name="heading_week_overview">本周总览</string>
     <string name="error_loading_overview">无法加载本周概览。
 \n稍后再试。</string>
@@ -88,7 +88,7 @@
     <string name="oss_licenses">开源许可证</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">贡献者</string>
-    <string name="itsdrnoob_summary"><![CDATA[首席开发者 & 设计师]]></string>
+    <string name="itsdrnoob_summary"><![CDATA[首席开发者和设计师]]></string>
     <string name="settings_appearance">外观</string>
     <string name="settings_dark_mode">深色模式</string>
     <string name="dark_mode_summary">启用深色模式</string>
@@ -214,7 +214,7 @@
     <string name="cracky5322_summary">繁体中文 译者</string>
     <string name="louis_leblanc_summary">法语 译者</string>
     <string name="network_speed_title">网络速度: %1$s</string>
-    <string name="network_speed_upload">上床速度: %1$s</string>
+    <string name="network_speed_upload">上传速度: %1$s</string>
     <string name="network_speed_download">下载速度: %1$s</string>
     <string name="network_signal_notification">实时网络速度</string>
     <string name="label_network_signal_notification_enabled">实时网络速度已启用</string>
@@ -435,4 +435,7 @@
     <string name="action_add_application">添加应用</string>
     <string name="label_no_apps_added">未添加任何应用，单击下面的按钮添加应用。</string>
     <string name="title_app_picker">选择应用</string>
+    <string name="action_save">保存</string>
+    <string name="home_plan_usage_details">已使用 %1$s | %2$s</string>
+    <string name="Atalanttore">Ettore Atalan</string>
 </resources>

@@ -63,7 +63,7 @@
     <string name="app_license_header">பயன்பாட்டு உரிமம்</string>
     <string name="oss_licenses">திறந்த மூல உரிமங்கள்</string>
     <string name="itsdrnoob">டாக்டர்</string>
-    <string name="itsdrnoob_summary">முன்னணி உருவாக்குபவர் மற்றும் வடிவமைப்பாளர்</string>
+    <string name="itsdrnoob_summary"><![CDATA[முன்னணி உருவாக்குபவர் மற்றும் வடிவமைப்பாளர்]]></string>
     <string name="dark_mode_summary">இருண்ட பயன்முறையை இயக்கவும்/அணைக்கவும்</string>
     <string name="settings_preferences">விருப்பத்தேர்வுகள்</string>
     <string name="settings_language">மொழி</string>
@@ -75,7 +75,7 @@
     <string name="github">கிரப்</string>
     <string name="github_summary">மூலக் குறியீட்டைக் காண்க</string>
     <string name="xda">எக்ச்.டி.ஏ நூல்</string>
-    <string name="xda_summary">கேள்விகள், உதவி மற்றும் சரிசெய்தல்</string>
+    <string name="xda_summary"><![CDATA[கேள்விகள், உதவி மற்றும் சரிசெய்தல்]]></string>
     <string name="setup">அமைவு</string>
     <string name="app_data_usage">பயன்பாட்டு பயன்பாடு</string>
     <string name="settings">அமைப்புகள்</string>
@@ -226,7 +226,7 @@
     <string name="add_data_plan_summary">உங்கள் தரவுத் திட்டத்தைச் சேர்க்கவும் அல்லது புதுப்பிக்கவும்</string>
     <string name="settings_appearance">தோற்றம்</string>
     <string name="settings_dark_mode">இருண்ட முறை</string>
-    <string name="about_summary">சான்று, உதவி மற்றும் பல</string>
+    <string name="about_summary"><![CDATA[ஆதாரம், உதவி மற்றும் பல]]></string>
     <string name="license">உரிமம்</string>
     <string name="contributors_summary">எப்போதும் இருப்பவர்கள்</string>
     <string name="donate">நன்கொடை</string>
@@ -272,7 +272,7 @@
     <string name="summary_data_plan_expired">உங்கள் திட்டத்தை புதுப்பிக்க விரும்பலாம்</string>
     <string name="error_unknown_telegram_client">தந்தி நிறுவப்படவில்லை அல்லது அறியப்படாத வாங்கி இல்லை. மற்றொரு முறையை முயற்சிக்கவும்.</string>
     <string name="title_device_info_contents">சாதன செய்தி உள்ளடக்கங்கள்</string>
-    <string name="device_info_body">சாதனத் செய்தி பின்வருமாறு:\n சாதன உற்பத்தியாளர்\n சாதன சூட்டுக்குறி\n சாதன மாதிரி\n சாதன குறியீட்டு பெயர்\n ஆண்ட்ராய்டு பதிப்பு</string>
+    <string name="device_info_body">சாதனத் செய்தி அடங்கும்: \nசாதன உற்பத்தியாளர் \nசாதன சூட்டுக்குறி \nசாதன மாதிரி \nசாதனத்தின் குறியீட்டு பெயர் \nஆண்ட்ராய்டு பதிப்பு</string>
     <string name="label_crash_logs_copied">கிளிப்போர்டுக்கு நகலெடுக்கப்பட்ட செயலிழப்பு பதிவுகள்</string>
     <string name="settings_network_diagnostics">பிணையம் கண்டறிதல்</string>
     <string name="network_diagnostics_summary">கண்டறியும் சேவையகத்தை மாற்றவும்</string>
@@ -378,10 +378,10 @@
     <string name="network_speed_mbps">%1$s மெஇருமம்/நொ</string>
     <string name="max_download_speed">அதிகபட்ச பதிவிறக்க விரைவு</string>
     <string name="min_download_speed">நிமிட பதிவிறக்க விரைவு</string>
-    <string name="avg_download_speed">AVG பதிவிறக்க விரைவு</string>
-    <string name="avg_upload_speed">AVG பதிவேற்ற விரைவு</string>
+    <string name="avg_download_speed">சராசரி பதிவிறக்க விரைவு</string>
+    <string name="avg_upload_speed">சராசரி பதிவேற்ற விரைவு</string>
     <string name="min_latency">குறைந்தபட்ச நேரந்தவறுகை</string>
-    <string name="network_latency_ms">%1$s MS</string>
+    <string name="network_latency_ms">%1$s மிநொ</string>
     <string name="avg_latency">ஏ.வி.சி நேரந்தவறுகை</string>
     <string name="network_ip">பிணையம் ஐபி</string>
     <string name="isp">பிணைய வழங்குநர்</string>
@@ -437,7 +437,7 @@
     <string name="label_no_apps_added">பயன்பாடுகள் எதுவும் சேர்க்கப்படவில்லை. பயன்பாட்டைச் சேர்க்க கீழே உள்ள பொத்தானைக் சொடுக்கு செய்க.</string>
     <string name="label_show_system_apps">கணினி பயன்பாடுகளைக் காட்டு</string>
     <string name="diagnostics_history">கண்டறிதல் வரலாறு</string>
-    <string name="iqb4lsp">IQB4LSP</string>
+    <string name="iqb4lsp">iqb4lsp</string>
     <string name="hinamechan">இனமெச்சன்</string>
     <string name="hinamechan_summary">துருக்கிய</string>
     <string name="atharvshinde_translation_summary">மராத்தி</string>
