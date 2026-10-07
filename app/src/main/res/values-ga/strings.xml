@@ -460,4 +460,25 @@
     <string name="label_plan_details_title_custom">Plean saincheaptha gníomhach</string>
     <string name="buttercookie42">buttercookie42</string>
     <string name="buttercookie42_summary">Forbróir</string>
+    <string name="settings_advanced">Ardleibhéil</string>
+    <string name="debug">Dífhabhtú</string>
+    <string name="logging_complete">Logáil críochnaithe</string>
+    <string name="label_previous_logs">Logaí Roimhe Seo</string>
+    <string name="clear_logs_success">Glanadh na logaí go rathúil</string>
+    <string name="clear_logs_failure">Theip ar na logaí a ghlanadh</string>
+    <string name="label_capture_logs">Gabháil logaí rith-ama</string>
+    <string name="capture_logs_desc">Taifead logaí feidhmchláir chun cabhrú le fadhb a dhífhabhtú. Sábhálfar na logaí ar do ghléas.</string>
+    <string name="start_logging">Tosaigh ag Logáil</string>
+    <string name="capture_logs_warning">D’fhéadfadh iarmhairtí neamh-inmhianaithe a bheith ag logáil ar feadh tréimhsí fada ama. Déan cinnte deireadh a chur leis an logáil a luaithe a bheidh an cheist gafa.</string>
+    <string name="label_clear_logs">Glan comhaid loga</string>
+    <string name="clear_logs_desc">Scrios seanchomhaid loga atá sábháilte ar an ngléas seo.</string>
+    <string name="label_logs_captured">Logaí gafa</string>
+    <string name="label_view_logs">Féach ar logaí</string>
+    <string name="save_and_close">Sábháil agus dún</string>
+    <string name="label_log_file">Comhad loga</string>
+    <string name="log_ext">.log</string>
+    <string name="stop_logging">Stop Logáil</string>
+    <string name="logging_complete_body">Cliceáil anseo chun é a roinnt nó a shábháil chuig gléas.</string>
+    <string name="label_capturing_logs">Logaí a Ghabháil</string>
+    <string name="capturing_logs_body">Ag gabháil logaí le Monatóir Sonraí. %1$s</string>
 </resources>

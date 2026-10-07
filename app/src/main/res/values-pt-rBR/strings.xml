@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"Data Monitor"</string>
+    <string name="app_name">Monitor de Dados</string>
     <string name="appwidget_text">Exemplo</string>
     <string name="add_widget">"Adicionar widget"</string>
     <string name="notification_mobile_data_usage">"Dados móveis: %1$s"</string>
@@ -32,7 +32,7 @@
     <string name="label_last_month">"Mês Passado"</string>
     <string name="label_this_year">"Esse Ano"</string>
     <string name="label_all_time">"Tempo todo"</string>
-    <string name="title_app_data_usage_type">"Selecione o tipo"</string>
+    <string name="title_app_data_usage_type">Selecione o tipo de Conexão</string>
     <string name="label_mobile_data">"Dados Móveis"</string>
     <string name="label_wifi">"Wifi"</string>
     <string name="title_data_usage">"Uso de dados"</string>
@@ -43,14 +43,14 @@
     <string name="label_app_data_usage_session_empty">"Nenhum dado disponível para a sessão selecionada"</string>
     <string name="label_want_to_contribute">Clique aqui para saber como contribuir com o Data Monitor.</string>
     <string name="setup_image_footer">Widgets e/ou notificações fornecem acesso fácil à quantidade de dados usados</string>
-    <string name="heading_data_reset">Redefinir contador</string>
+    <string name="heading_data_reset">Reiniciar Contador de Dados</string>
     <string name="daily">"Diário"</string>
     <string name="monthly">"Mensalmente"</string>
     <string name="heading_data_limit">"Limite de dados"</string>
     <string name="data_type_mb">"MB"</string>
     <string name="data_type_gb">"GB"</string>
     <string name="title_data_warning_trigger">"Nível de acionamento de aviso de dados"</string>
-    <string name="title_add_data_plan">"Adicionar plano de dados"</string>
+    <string name="title_add_data_plan">Adicionar plano de dados móveis</string>
     <string name="title_refresh_interval">"Selecione o intervalo de atualização"</string>
     <string name="option_1_min">"1 minuto"</string>
     <string name="option_2_min">"2 minutos"</string>
@@ -61,14 +61,14 @@
     <string name="widget_setup_step_1">1. Toque e mantenha pressionado um espaço vazio na tela inicial.</string>
     <string name="widget_setup_step_2">"2. Toque em Widgets."</string>
     <string name="widget_setup_step_3">3. Arraste e solte o widget Data Monitor na tela inicial.</string>
-    <string name="heading_data_usage_today">"Uso de dados de hoje"</string>
-    <string name="action_add_data_plan_home">Adicione seu plano de dados para começar a monitorá-lo</string>
-    <string name="heading_week_overview">"Visão geral desta semana"</string>
+    <string name="heading_data_usage_today">Consumo de dados hoje</string>
+    <string name="action_add_data_plan_home">Coloque seu plano de dados para começar o monitoramento</string>
+    <string name="heading_week_overview">Visão Geral de consumo dessa semana</string>
     <string name="error_loading_overview">Não foi possível carregar a visão geral desta semana.
 \nTente novamente mais tarde.</string>
-    <string name="title_setup">"Configure o Data monitor"</string>
+    <string name="title_setup">Configure o Monitor de Dados</string>
     <string name="setup_widget">"Configure o widget"</string>
-    <string name="setup_notification">"Configure a notificação"</string>
+    <string name="setup_notification">Configure as notificações</string>
     <string name="title_configure">Configurar</string>
     <string name="setup_widget_title">"Widget"</string>
     <string name="setup_widget_refresh_interval">"Intervalo de atualização do widget"</string>
@@ -237,14 +237,14 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="telegram_support">"Suporte no Telegram"</string>
     <string name="telegram_summary">"Junte-se ao grupo de Suporte do Telegram"</string>
     <string name="rate_app">"Avalie o aplicativo no Google Play"</string>
-    <string name="rate_app_summary">"Agradeceríamos seu feedback"</string>
+    <string name="rate_app_summary">Agradecemos seu feedback</string>
     <string name="check_for_update">"Verificar atualizações"</string>
     <string name="current_version">"Versão atual: %1$s"</string>
     <string name="new_version">"Nova versão: %1$s"</string>
     <string name="label_changelogs">"Veja o que há de novo"</string>
     <string name="no_update_available">Você está utilizando a versão mais recente.</string>
     <string name="label_update_available">"Atualização disponível!"</string>
-    <string name="label_download_update">"Baixar atualização"</string>
+    <string name="label_download_update">Baixar atualização</string>
     <string name="checking_for_update">Verificando por atualizações…</string>
     <string name="new_update_available">"Uma nova atualização está disponível!"</string>
     <string name="update_fetch_error">"Não foi possível buscar por atualizações"</string>
@@ -433,7 +433,7 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="diagnostics_history">Histórico de Diagnósticos</string>
     <string name="settings_save_results">Salvar resultados</string>
     <string name="error_alarm_permission_denied">Permissão de alarme negada!</string>
-    <string name="error_alarm_permission_denied_summary">Você tentou executar uma ação que requer a permissão SCHEDULE_EXACT_ALARM, que não foi concedida ao aplicativo. Clique aqui para conceder a permissão.</string>
+    <string name="error_alarm_permission_denied_summary">Você tentou executar uma ação que requer a permissão SCHEDULE_EXACT_ALARM, que não foi concedida para o aplicativo. Clique aqui para conceder a permissão.</string>
     <string name="error_alarm_permission_denied_feature_summary">Você não pode usar esse recurso sem conceder a permissão SCHEDULE_EXACT_ALARM.</string>
     <string name="label_plan_details_title_monthly">Plano mensal ativo</string>
     <string name="buttercookie42_summary">Desenvolvedor</string>
@@ -452,4 +452,36 @@ Perguntas e respostas, ajuda e solução de problemas
     <string name="label_custom_start_time">Hora de início: %1$s</string>
     <string name="label_filter">Filtro</string>
     <string name="jean_mareilles_summary">Francês</string>
+    <string name="Atalanttore">Ettore Atalan</string>
+    <string name="gallegonovato">gallegonovato</string>
+    <string name="Kefir2105">Kefir2105</string>
+    <string name="rex07">Rex_sa</string>
+    <string name="shailendramaurya">Shailendra Maurya</string>
+    <string name="iqb4lsp">iqb4lsp</string>
+    <string name="Master2050">Master2050</string>
+    <string name="bonbonboi">bonbonboi</string>
+    <string name="MarongHappy">JungHee Lee</string>
+    <string name="U1M450W">U1M450W</string>
+    <string name="atharvshinde">Atharv Shinde</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="hinamechan">HinameChan</string>
+    <string name="tadekdudek">tadekdudek</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="croxz900">Croxz</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="dan">Dan</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="detrimental_god">Detrimental God</string>
+    <string name="ecogaming">Eco-Gaming</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="flix">Flix</string>
+    <string name="ofermar">ofermar</string>
+    <string name="buttercookie42">buttercookie42</string>
 </resources>

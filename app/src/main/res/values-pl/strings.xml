@@ -384,4 +384,6 @@
     <string name="label_learn_more">Dowiedz się więcej</string>
     <string name="gnu_ewm_summary">Polski</string>
     <string name="ofermar_summary">Hebrajski</string>
+    <string name="label_days_remaining">%1$s day(s) remaining</string>
+    <string name="disable_battery_optimisation_body">Zapobiega wyłączaniu Data Monitora, gdy działa w tle.\nW innym wypadku dane mogą być niedokładne.</string>
 </resources>

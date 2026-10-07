@@ -77,7 +77,7 @@
     <string name="oss_licenses">Nyílt forráskódú licencek</string>
     <string name="itsdrnoob">Dr.NooB</string>
     <string name="contributors">Közreműködők</string>
-    <string name="itsdrnoob_summary">Vezető fejlesztő és tervező</string>
+    <string name="itsdrnoob_summary"><![CDATA[Vezető fejlesztő és tervező]]></string>
     <string name="settings_appearance">Megjelenés</string>
     <string name="settings_dark_mode">Sötét mód</string>
     <string name="dark_mode_summary">Sötét mód be/kikapcsolása</string>

@@ -89,7 +89,7 @@
     <string name="license">Lisans</string>
     <string name="data_alert_summary">Veri sınırına ulaşıldığında bildirimde bulunur</string>
     <string name="github">GitHub</string>
-    <string name="xda_summary">SSS, yardım ve sorun giderme</string>
+    <string name="xda_summary"><![CDATA[SSS, yardım ve sorun giderme]]></string>
     <string name="report">Hataları bildir</string>
     <string name="settings_general">Genel</string>
     <string name="setup_add_data_plan">Veri planı ekle</string>
@@ -105,12 +105,12 @@
     <string name="contributors">Katkıda Bulunanlar</string>
     <string name="dark_mode_summary">Koyu modu açma/kapatma</string>
     <string name="language_summary">Uygulama dilini değiştir</string>
-    <string name="about_summary">Kaynak, yardım ve daha fazlası</string>
+    <string name="about_summary"><![CDATA[Kaynak, yardım ve daha fazlası]]></string>
     <string name="donate_summary">Bize bir kahve ısmarlar mısın\?</string>
     <string name="data_reset">Veri sıfırlama</string>
     <string name="support_and_development">Destek ve geliştirme</string>
     <string name="label_data_usage_reset_time_change">Veri kullanımını her %1$s öğesinde %2$s konumunda sıfırla</string>
-    <string name="itsdrnoob_summary">Baş Geliştirici ve Tasarımcı</string>
+    <string name="itsdrnoob_summary"><![CDATA[Baş Geliştirici ve Tasarımcı]]></string>
     <string name="settings_preferences">Tercihler</string>
     <string name="settings_language">Dil</string>
     <string name="report_summary">Hata bildirme veya özellik talep etme</string>
@@ -361,9 +361,9 @@
     <string name="always_show_total_summary">Yapılan tüm ayarları göz ardı edip toplam kullanılan veriyi bildirimde her zaman göster.</string>
     <string name="app_label_combined_total">Toplam veri kullanımı: %1$s</string>
     <string name="error_alarm_permission_denied">Alarm izni reddedildi!</string>
-    <string name="error_alarm_permission_denied_summary">Uygulamanın sahip olmadığı SCHEDULE_EXACT_ALARM iznini gerektiren bir işlemi gerçekleştirmeyi denediniz. İzin vermek için buraya tıklayın.</string>
-    <string name="error_alarm_permission_denied_dialog_summary">Veri İzleyici’nin düzgün çalışabilmesi için SCHEDULE_EXACT_ALARM izni gerekir. Uygulamayı kullanmaya devam edebilirsiniz ancak bazı özellikler düzgün çalışmayabilir.</string>
-    <string name="error_alarm_permission_denied_feature_summary">SCHEDULE_EXACT_ALARM izni verilmeden bu özellik kullanılamaz.</string>
+    <string name="error_alarm_permission_denied_summary">Uygulamanın sahip olmadığı Alarmlar ve Hatırlatıcılar iznini gerektiren bir işlemi gerçekleştirmeyi denediniz. İzin vermek için buraya tıklayın.</string>
+    <string name="error_alarm_permission_denied_dialog_summary">Veri İzleyici’nin düzgün çalışabilmesi için Alarmlar ve Hatırlatıcılar izni gerekir. Uygulamayı kullanmaya devam edebilirsiniz ancak bazı özellikler düzgün çalışmayabilir.</string>
+    <string name="error_alarm_permission_denied_feature_summary">Alarmlar ve Hatırlatıcılar izni verilmeden bu özellik kullanılamaz.</string>
     <string name="graphixmedia_summary">Flemenkçe</string>
     <string name="atharvshinde_summary">Geliştirici</string>
     <string name="atharvshinde">Atharv Shinde</string>
@@ -461,4 +461,20 @@
     <string name="ecogaming_summary">Geliştirici</string>
     <string name="zahiruddinrushdi_summary">Malayca</string>
     <string name="jean_mareilles_summary">Fransızca</string>
+    <string name="graphixmedia">Graphixx</string>
+    <string name="fjuro">Fjuro</string>
+    <string name="croxz900">Croxz</string>
+    <string name="ngocanhtve">ngocanhtve</string>
+    <string name="bluehomewu">EdwardWu</string>
+    <string name="rezaalmanda">Reza</string>
+    <string name="gnu_ewm">Eryk Michalak</string>
+    <string name="rintan">Rintan</string>
+    <string name="jonnysemon">jonnysemon</string>
+    <string name="timtcg">Cong Phuc Nguyen</string>
+    <string name="chin_housin">chin housin</string>
+    <string name="zahiruddinrushdi">zahiruddin rushdi</string>
+    <string name="jean_mareilles">Jean Mareilles</string>
+    <string name="flix">Flix</string>
+    <string name="xxx">xXx</string>
+    <string name="buttercookie42">buttercookie42</string>
 </resources>

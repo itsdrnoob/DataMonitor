@@ -27,14 +27,14 @@
     <string name="data_alert_summary">Уведомление о достижении лимита данных</string>
     <string name="setup_add_data_plan">Настроить тарифный план</string>
     <string name="setup_usage_reset_time">Время для сброса об использовании данных</string>
-    <string name="itsdrnoob_summary">Ведущий разработчик и дизайнер</string>
+    <string name="itsdrnoob_summary"><![CDATA[Ведущий разработчик и дизайнер]]></string>
     <string name="contributors">Участники проекта</string>
     <string name="license">Лицензия</string>
     <string name="donate">Пожертвование</string>
     <string name="data_reset">Сброс данных</string>
     <string name="data_limit">Лимит данных</string>
     <string name="support_and_development">Поддержка и разработка</string>
-    <string name="about_summary">Источники, помощь и многое другое</string>
+    <string name="about_summary"><![CDATA[Источники, помощь и многое другое]]></string>
     <string name="xda">Тема на XDA</string>
     <string name="report_summary">Сообщение об ошибках или запрос функции</string>
     <string name="report">Сообщение об ошибках</string>
@@ -186,7 +186,7 @@
     <string name="contributors_summary">Те, кто всегда рядом</string>
     <string name="donate_summary">Может, угостите нас кофе\?</string>
     <string name="github_summary">Просмотр исходного кода</string>
-    <string name="xda_summary">ЧАВО, помощь и устранение неполадок</string>
+    <string name="xda_summary"><![CDATA[ЧАВО, помощь и устранение неполадок]]></string>
     <string name="eth_address_copied">Адрес кошелька Ethereum скопирован в буфер обмена</string>
     <string name="app_data_usage">Использование данных приложениями</string>
     <string name="label_notification_refresh_interval_change">Уведомление будет обновляться каждые %1$s</string>
